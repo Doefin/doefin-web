@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build)",
+      "Bash(npm run dev)",
+      "Bash(npm run typecheck)",
+      "Bash(npm run check:crawlable)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(node scripts/check-crawlable.mjs)",
+      "Bash(npm run check:seo)",
+      "Bash(node scripts/check-seo.mjs)",
+      "Bash(npm run audit:*)",
+      "Bash(node scripts/audit.mjs:*)",
+      "Bash(npm run check:tools)",
+      "Bash(node --experimental-strip-types --no-warnings scripts/check-tools.mjs)"
+    ]
+  }
+}
