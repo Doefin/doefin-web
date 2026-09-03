@@ -1,0 +1,32 @@
+# Doefin
+
+> Open Bitcoin mining difficulty data. Forward forecasts with fitted confidence
+> intervals, a public accuracy scoreboard scoring every estimator including our own,
+> and the research behind both. Published by Predexyo UK Ltd.
+
+Doefin publishes difficulty forecasts as reproducible arithmetic over public chain
+data. The method is versioned and every restatement is logged. Figures are HTML text
+with their date and units, never chart-only.
+
+## Data
+
+- [Difficulty forecast](https://doefin.com/data/difficulty): current forward forecast with its 95% interval and the probability the sign is wrong
+- [Accuracy scoreboard](https://doefin.com/data/scoreboard): every public estimator scored on realised error and interval coverage
+- [Epoch archive](https://doefin.com/data/difficulty): one permanent dated page per adjustment — forecast, band, and realised outcome
+- [Methodology](https://doefin.com/methodology/difficulty-index): the arithmetic, the fit window, the restatement log
+
+## Reference
+
+- [Glossary](https://doefin.com/glossary): every term in mining difficulty and hashrate economics, defined once
+- [Learn](https://doefin.com/academy): how difficulty adjustment works, what hashprice measures, why forecasts need error bars
+- [Research](https://doefin.com/research): original analysis, published in full and free
+
+## Attribution
+
+Data is free to use. We ask for a link back and that the metric is named as published,
+so unlinked mentions stay attributable.
+
+## Note
+
+Doefin is a venue for Bitcoin difficulty derivatives, available to professional
+investors only. Nothing published is investment advice.
