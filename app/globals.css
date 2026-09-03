@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ink text-body antialiased;
+  }
+  ::selection {
+    @apply bg-brand/30 text-white;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand ring-offset-2 ring-offset-ink;
+  }
+  /* Figures line up in columns wherever they appear. */
+  table, .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  /* Long-form body copy. Applied by <Prose>. */
+  .prose-doefin > p {
+    @apply mb-5 max-w-prose text-[17px] leading-[1.72] text-subtle;
+  }
+  .prose-doefin > p > strong {
+    @apply font-semibold text-body;
+  }
+  .prose-doefin > ul {
+    @apply mb-5 max-w-prose list-disc space-y-2 pl-5 text-[17px] leading-[1.7] text-subtle marker:text-brand;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
