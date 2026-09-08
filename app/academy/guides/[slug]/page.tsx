@@ -4,7 +4,7 @@ import { Container } from '@/components/layout/Container'
 import { GuideArticle } from '@/components/tools/GuideArticle'
 import { allGuides, guideFor, TOOLS } from '@/content'
 import { dateLong } from '@/lib/format'
-import { jsonLd, seo } from '@/lib/seo'
+import { jsonLd, seo, publisherRef } from '@/lib/seo'
 import { site } from '@/lib/site'
 import { Subscribe } from '@/components/content/Subscribe'
 import { NextLinks, Reviewed } from '@/components/content/NextLinks'
@@ -43,7 +43,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
           description: g.article.summary,
           datePublished: g.article.publishedAt,
           author: { '@type': 'Organization', name: 'Doefin Research' },
-          publisher: { '@type': 'Organization', name: site.name, url: site.url },
+          publisher: publisherRef,
           about: { '@type': 'Thing', name: tool.title },
           mainEntityOfPage: `${site.url}/academy/guides/${slug}`,
         })}

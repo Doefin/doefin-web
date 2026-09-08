@@ -9,7 +9,7 @@ import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { SourceList } from '@/components/content/SourceList'
 import { allPosts, getPost } from '@/content'
 import { dateLong, readingMinutes } from '@/lib/format'
-import { jsonLd, seo } from '@/lib/seo'
+import { jsonLd, seo, publisherRef } from '@/lib/seo'
 import { site } from '@/lib/site'
 import { NextLinks, Reviewed } from '@/components/content/NextLinks'
 
@@ -47,7 +47,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     datePublished: post.publishedAt,
     dateModified: post.updatedAt ?? post.publishedAt,
     author: { '@type': 'Organization', name: post.author },
-    publisher: { '@type': 'Organization', name: site.name, url: site.url },
+    publisher: publisherRef,
     mainEntityOfPage: `${site.url}/blog/${post.slug}`,
   }
 

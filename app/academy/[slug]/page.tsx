@@ -7,7 +7,7 @@ import { nextLinksFor, refFor } from '@/content/graph'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { allAcademy, getAcademy, getGlossary } from '@/content'
 import { dateLong } from '@/lib/format'
-import { jsonLd, seo } from '@/lib/seo'
+import { jsonLd, seo, publisherRef } from '@/lib/seo'
 import { site } from '@/lib/site'
 import { Subscribe } from '@/components/content/Subscribe'
 import { NextLinks, Reviewed } from '@/components/content/NextLinks'
@@ -43,7 +43,7 @@ export default async function AcademyPage({ params }: { params: Promise<{ slug: 
           description: post.summary,
           datePublished: post.publishedAt,
           author: { '@type': 'Organization', name: post.author },
-          publisher: { '@type': 'Organization', name: site.name, url: site.url },
+          publisher: publisherRef,
         })}
       />
       <Breadcrumbs items={[{ name: 'Learn', href: '/academy' }, { name: post.title, href: `/academy/${post.slug}` }]} />

@@ -6,6 +6,8 @@ export const site = {
   description:
     'Forward difficulty forecasts with published confidence intervals, a public accuracy scoreboard, and the research behind them. For Bitcoin miners, funds and desks.',
   entity: 'Doefin',
+  /** The registered legal name, as it must appear in Terms and in schema. */
+  legalName: 'Doefin',
   registeredIn: 'Port Louis, Mauritius',
   contactEmail: 'matteo@doefin.com',
   sameAs: [

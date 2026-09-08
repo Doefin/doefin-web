@@ -9,7 +9,7 @@ import { nextLinksFor, refFor } from '@/content/graph'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { allReports, getReport } from '@/content'
 import { dateLong } from '@/lib/format'
-import { jsonLd, seo } from '@/lib/seo'
+import { jsonLd, seo, publisherRef } from '@/lib/seo'
 import { site } from '@/lib/site'
 import { NextLinks, Reviewed } from '@/components/content/NextLinks'
 
@@ -48,7 +48,7 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
           description: report.summary,
           datePublished: report.publishedAt,
           author: { '@type': 'Organization', name: report.author },
-          publisher: { '@type': 'Organization', name: site.name, url: site.url },
+          publisher: publisherRef,
         })}
       />
       <Breadcrumbs items={[{ name: 'Research', href: '/research' }, { name: report.title, href: `/research/${report.slug}` }]} />

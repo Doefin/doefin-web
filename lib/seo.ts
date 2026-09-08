@@ -1,6 +1,22 @@
 import type { Metadata } from 'next'
 import { site } from './site'
 
+/**
+ * Stable node identifiers for the entity graph.
+ *
+ * Every page previously minted its own inline `publisher: { '@type':
+ * 'Organization', ... }`, so a crawler saw a fresh, unrelated Organization on
+ * every URL instead of one company publishing many documents. Referencing a
+ * single @id is how the pages resolve to one entity.
+ */
+export const ID = {
+  org: `${site.url}/#organization`,
+  website: `${site.url}/#website`,
+} as const
+
+/** A reference to the canonical Organization node, never a fresh copy of it. */
+export const publisherRef = { '@id': ID.org } as const
+
 type SeoInput = {
   title: string
   description: string

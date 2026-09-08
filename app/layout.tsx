@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Manrope } from 'next/font/google'
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
-import { jsonLd } from '@/lib/seo'
+import { jsonLd, ID, publisherRef } from '@/lib/seo'
 import { site } from '@/lib/site'
 import './globals.css'
 
@@ -37,10 +37,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const org = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': ID.org,
     name: site.name,
     url: site.url,
     description: site.description,
-    legalName: site.entity,
+    legalName: site.legalName,
+    address: { '@type': 'PostalAddress', addressLocality: 'Port Louis', addressCountry: 'MU' },
     ...(site.sameAs.length ? { sameAs: site.sameAs } : {}),
   }
 
@@ -48,10 +50,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const website = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': ID.website,
     name: site.name,
     url: site.url,
     description: site.description,
-    publisher: { '@type': 'Organization', name: site.name, url: site.url },
+    publisher: publisherRef,
     inLanguage: 'en-GB',
   }
 
