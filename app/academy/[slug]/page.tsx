@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Container } from '@/components/layout/Container'
 import { AutoLinkedProse } from '@/components/content/AutoLinkedProse'
+import { OnThisPage } from '@/components/content/OnThisPage'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { allAcademy, getAcademy, getGlossary } from '@/content'
 import { dateLong } from '@/lib/format'
@@ -53,6 +54,7 @@ export default async function AcademyPage({ params }: { params: Promise<{ slug: 
           {post.author} · {dateLong(post.publishedAt)}
         </p>
         <div className="mt-8">
+          <OnThisPage body={post.body} />
           <AutoLinkedProse paragraphs={post.body} />
         </div>
       </article>

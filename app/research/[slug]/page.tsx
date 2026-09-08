@@ -4,6 +4,7 @@ import { Container } from '@/components/layout/Container'
 import { Callout, Tag } from '@/components/ui'
 import { Subscribe } from '@/components/content/Subscribe'
 import { AutoLinkedProse } from '@/components/content/AutoLinkedProse'
+import { OnThisPage } from '@/components/content/OnThisPage'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { allReports, getReport } from '@/content'
 import { dateLong } from '@/lib/format'
@@ -75,6 +76,7 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
         </section>
 
         <div className="mt-10">
+          <OnThisPage body={report.body} />
           <AutoLinkedProse paragraphs={report.body} />
         </div>
 
