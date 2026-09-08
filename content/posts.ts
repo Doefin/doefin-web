@@ -7,7 +7,7 @@ export const posts: Post[] = [
     summary:
       'The calculator most miners use assumes difficulty grows at a fixed rate forever. Here is what that assumption does to a payback estimate.',
     publishedAt: '2026-08-19',
-    author: 'Doefin Research',
+    author: 'doefin-research',
     tags: ['difficulty', 'mining economics'],
     sources: [
       { label: 'Bitcoin difficulty history, all epochs', accessedAt: '2026-08-19', confidence: 'measured' },
@@ -30,7 +30,7 @@ export const posts: Post[] = [
     summary:
       'Network hashrate is never measured. It is inferred — and the error bars on a one-day figure are wider than most people assume.',
     publishedAt: '2026-08-22',
-    author: 'Doefin Research',
+    author: 'doefin-research',
     tags: ['hashrate', 'methodology'],
     sources: [
       { label: 'Difficulty and block-interval series, computed', accessedAt: '2026-08-22', confidence: 'measured' },

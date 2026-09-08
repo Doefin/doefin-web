@@ -46,6 +46,7 @@ type Base = {
   summary: string
   publishedAt: string
   updatedAt?: string
+  /** A slug in content/authors.ts, not a display name. Resolved by getAuthor(). */
   author: string
   sources?: Source[]
   draft?: boolean

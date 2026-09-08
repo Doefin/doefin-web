@@ -8,7 +8,7 @@ export const academy: AcademyPost[] = [
       'Every 2,016 blocks the network resets how hard mining is. Here is the arithmetic, and the off-by-one that catches most implementations.',
     level: 'intro',
     publishedAt: '2026-08-12',
-    author: 'Doefin Research',
+    author: 'doefin-research',
     glossaryTerms: ['mining-difficulty', 'difficulty-adjustment', 'epoch'],
     body: [
       { heading: 'The feedback loop' },
@@ -28,7 +28,7 @@ export const academy: AcademyPost[] = [
       'One number tells a miner whether the machines are worth running. It is also computed differently by everyone who publishes it.',
     level: 'intro',
     publishedAt: '2026-08-14',
-    author: 'Doefin Research',
+    author: 'doefin-research',
     glossaryTerms: ['hashprice', 'hashrate', 'mining-difficulty'],
     body: [
       { heading: 'What hashprice is' },
@@ -49,7 +49,7 @@ export const academy: AcademyPost[] = [
       'Every public estimator publishes a single number. Early in an epoch that number can be wrong by enough to flip its sign.',
     level: 'working',
     publishedAt: '2026-08-18',
-    author: 'Doefin Research',
+    author: 'doefin-research',
     glossaryTerms: ['confidence-interval', 'calibration', 'difficulty-adjustment'],
     body: [
       { heading: 'How a forecast firms up across an epoch' },

@@ -17,6 +17,36 @@ export const ID = {
 /** A reference to the canonical Organization node, never a fresh copy of it. */
 export const publisherRef = { '@id': ID.org } as const
 
+/**
+ * The author node for a piece of content.
+ *
+ * Previously every article emitted `{'@type':'Organization', name:'Doefin
+ * Research'}` — a second, unrelated company with no url and no stated
+ * relationship to the publisher. This gives the research desk a resolving url and
+ * names its parent, so the two nodes describe one organisation and its desk
+ * rather than two strangers.
+ */
+export function authorNode(a: {
+  slug: string
+  kind: 'organization' | 'person'
+  name: string
+  url: string
+  description: string
+  sameAs?: string[]
+}) {
+  return {
+    '@type': a.kind === 'person' ? 'Person' : 'Organization',
+    '@id': `${site.url}/#${a.slug}`,
+    name: a.name,
+    url: `${site.url}${a.url}`,
+    description: a.description,
+    ...(a.kind === 'person'
+      ? { worksFor: { '@id': ID.org } }
+      : { parentOrganization: { '@id': ID.org } }),
+    ...(a.sameAs?.length ? { sameAs: a.sameAs } : {}),
+  }
+}
+
 type SeoInput = {
   title: string
   description: string

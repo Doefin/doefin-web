@@ -9,7 +9,7 @@ export const reports: Report[] = [
     summary:
       'Four widely used estimators, scored against what actually happened. They disagree with each other more than any of them admits.',
     publishedAt: '2026-08-21',
-    author: 'Doefin Research',
+    author: 'doefin-research',
     findings: [
       'For the same adjustment, published estimates from three major sources spanned more than three percentage points.',
       'None of the four publishes a confidence interval alongside its live figure.',

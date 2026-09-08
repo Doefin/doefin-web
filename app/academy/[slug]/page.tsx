@@ -5,9 +5,9 @@ import { AutoLinkedProse } from '@/components/content/AutoLinkedProse'
 import { OnThisPage } from '@/components/content/OnThisPage'
 import { nextLinksFor, refFor } from '@/content/graph'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
-import { allAcademy, getAcademy, getGlossary } from '@/content'
+import { allAcademy, getAcademy, getGlossary, getAuthor } from '@/content'
 import { dateLong } from '@/lib/format'
-import { jsonLd, seo, publisherRef } from '@/lib/seo'
+import { jsonLd, seo, publisherRef, authorNode } from '@/lib/seo'
 import { site } from '@/lib/site'
 import { Subscribe } from '@/components/content/Subscribe'
 import { NextLinks, Reviewed } from '@/components/content/NextLinks'
@@ -42,7 +42,7 @@ export default async function AcademyPage({ params }: { params: Promise<{ slug: 
           headline: post.title,
           description: post.summary,
           datePublished: post.publishedAt,
-          author: { '@type': 'Organization', name: post.author },
+          author: authorNode(getAuthor(post.author)),
           publisher: publisherRef,
         })}
       />
@@ -53,7 +53,7 @@ export default async function AcademyPage({ params }: { params: Promise<{ slug: 
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-muted">{post.summary}</p>
         <p className="mt-5 border-b border-white/[0.07] pb-6 text-sm text-muted/80">
-          {post.author} · {dateLong(post.publishedAt)}
+          {getAuthor(post.author).name} · {dateLong(post.publishedAt)}
         </p>
         <div className="mt-8">
           <OnThisPage body={post.body} />

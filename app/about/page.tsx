@@ -3,6 +3,7 @@ import { Callout, PageHeader } from '@/components/ui'
 import { FAQ } from '@/components/content/FAQ'
 import { seo } from '@/lib/seo'
 import { site } from '@/lib/site'
+import { getAuthor } from '@/content'
 import { Subscribe } from '@/components/content/Subscribe'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { NextLinks, Reviewed } from '@/components/content/NextLinks'
@@ -14,6 +15,8 @@ export const metadata = seo({
 })
 
 export default function AboutPage() {
+  const research = getAuthor('doefin-research')
+
   return (
     <Container size="narrow" className="py-16">
       <Breadcrumbs items={[{ name: 'About', href: '/about' }]} />
@@ -34,6 +37,21 @@ export default function AboutPage() {
           is a judgement rather than a measurement, we label it as one.
         </p>
       </div>
+
+      {/* The target of every article's author node. An author url that 404s is
+          worse than no author node, so this section and content/authors.ts have
+          to move together. */}
+      <section id="doefin-research" className="mt-14 scroll-mt-24 border-t border-white/[0.07] pt-10">
+        <h2 className="text-2xl font-extrabold tracking-[-0.02em]">{research.name}</h2>
+        <p className="mt-4 max-w-prose text-[17px] leading-[1.72] text-subtle">
+          {research.description}
+        </p>
+        <p className="mt-4 max-w-prose text-[17px] leading-[1.72] text-subtle">
+          Everything published under this byline is the work of one research desk rather than a
+          named individual. We would rather say that plainly than attach a person&rsquo;s name to a
+          figure they did not personally compute.
+        </p>
+      </section>
 
       <FAQ
         items={[

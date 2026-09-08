@@ -2,9 +2,9 @@ import { notFound } from 'next/navigation'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { Container } from '@/components/layout/Container'
 import { GuideArticle } from '@/components/tools/GuideArticle'
-import { allGuides, guideFor, TOOLS } from '@/content'
+import { allGuides, guideFor, TOOLS, getAuthor } from '@/content'
 import { dateLong } from '@/lib/format'
-import { jsonLd, seo, publisherRef } from '@/lib/seo'
+import { jsonLd, seo, publisherRef, authorNode } from '@/lib/seo'
 import { site } from '@/lib/site'
 import { Subscribe } from '@/components/content/Subscribe'
 import { NextLinks, Reviewed } from '@/components/content/NextLinks'
@@ -42,7 +42,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
           headline: g.article.title,
           description: g.article.summary,
           datePublished: g.article.publishedAt,
-          author: { '@type': 'Organization', name: 'Doefin Research' },
+          author: authorNode(getAuthor('doefin-research')),
           publisher: publisherRef,
           about: { '@type': 'Thing', name: tool.title },
           mainEntityOfPage: `${site.url}/academy/guides/${slug}`,

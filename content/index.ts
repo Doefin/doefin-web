@@ -57,3 +57,6 @@ export type { Doc } from './docs'
 
 export { difficulty, hashrate, scoreboard, epochs, epochsIsLive, networkSeries, networkSeriesIsLive } from './sample-data'
 export type { Epoch, NetworkPoint } from './sample-data'
+
+export { authors, getAuthor } from './authors'
+export type { Author } from './authors'

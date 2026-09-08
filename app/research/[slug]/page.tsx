@@ -7,9 +7,9 @@ import { AutoLinkedProse } from '@/components/content/AutoLinkedProse'
 import { OnThisPage } from '@/components/content/OnThisPage'
 import { nextLinksFor, refFor } from '@/content/graph'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
-import { allReports, getReport } from '@/content'
+import { allReports, getReport, getAuthor } from '@/content'
 import { dateLong } from '@/lib/format'
-import { jsonLd, seo, publisherRef } from '@/lib/seo'
+import { jsonLd, seo, publisherRef, authorNode } from '@/lib/seo'
 import { site } from '@/lib/site'
 import { NextLinks, Reviewed } from '@/components/content/NextLinks'
 
@@ -47,7 +47,7 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
           headline: report.title,
           description: report.summary,
           datePublished: report.publishedAt,
-          author: { '@type': 'Organization', name: report.author },
+          author: authorNode(getAuthor(report.author)),
           publisher: publisherRef,
         })}
       />
@@ -59,7 +59,7 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-muted">{report.summary}</p>
         <p className="mt-5 border-b border-white/[0.07] pb-6 text-sm text-muted/80">
-          {report.author} · {dateLong(report.publishedAt)}
+          {getAuthor(report.author).name} · {dateLong(report.publishedAt)}
         </p>
 
         {/* Findings sit in the first third of the document, deliberately. */}

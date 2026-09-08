@@ -7,9 +7,9 @@ import { OnThisPage } from '@/components/content/OnThisPage'
 import { nextLinksFor, refFor } from '@/content/graph'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { SourceList } from '@/components/content/SourceList'
-import { allPosts, getPost } from '@/content'
+import { allPosts, getPost, getAuthor } from '@/content'
 import { dateLong, readingMinutes } from '@/lib/format'
-import { jsonLd, seo, publisherRef } from '@/lib/seo'
+import { jsonLd, seo, publisherRef, authorNode } from '@/lib/seo'
 import { site } from '@/lib/site'
 import { NextLinks, Reviewed } from '@/components/content/NextLinks'
 
@@ -46,7 +46,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     description: post.summary,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt ?? post.publishedAt,
-    author: { '@type': 'Organization', name: post.author },
+    author: authorNode(getAuthor(post.author)),
     publisher: publisherRef,
     mainEntityOfPage: `${site.url}/blog/${post.slug}`,
   }
@@ -66,7 +66,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-muted">{post.summary}</p>
         <p className="mt-5 border-b border-white/[0.07] pb-6 text-sm text-muted/80">
-          {post.author} · {dateLong(post.publishedAt)} · {readingMinutes(post.body)} min read
+          {getAuthor(post.author).name} · {dateLong(post.publishedAt)} · {readingMinutes(post.body)} min read
         </p>
         <div className="mt-8">
           <OnThisPage body={post.body} />
