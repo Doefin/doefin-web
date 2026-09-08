@@ -7,6 +7,7 @@ import { AutoLinkedProse } from '@/components/content/AutoLinkedProse'
 import { OnThisPage } from '@/components/content/OnThisPage'
 import { Masthead } from '@/components/content/Masthead'
 import { KeyFigures } from '@/components/content/KeyFigures'
+import { FAQ } from '@/components/content/FAQ'
 import { nextLinksFor, refFor } from '@/content/graph'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { allReports, getReport, getAuthor } from '@/content'
@@ -89,6 +90,9 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
           <OnThisPage body={report.body} />
           <AutoLinkedProse paragraphs={report.body} />
         </div>
+
+
+      <FAQ items={report.faq} />
 
       <NextLinks items={nextLinks} />
 

@@ -13,6 +13,16 @@ export const posts: Post[] = [
       { label: 'Bitcoin difficulty history, all epochs', accessedAt: '2026-08-19', confidence: 'measured' },
       { label: 'Community calculator assumptions, r/BitcoinMining threads', accessedAt: '2026-08-11', confidence: 'single-source' },
     ],
+    faq: [
+      {
+        q: 'What is wrong with assuming a fixed difficulty growth rate?',
+        a: 'A fixed rate is not a forecast. It is a guess that happened to be roughly right over some past window, applied to a future with no obligation to match it — and the error compounds, moving a two-year payback date by months.',
+      },
+      {
+        q: 'When is a difficulty move too small to be worth hedging?',
+        a: 'For an operation running a few petahash, a ten-point difficulty surprise is worth a few hundred to a few thousand dollars. That is real money, and it is below the size at which hedging makes sense.',
+      },
+    ],
     body: [
       { heading: 'What the common calculators assume' },
       'Most mining return calculators either ignore difficulty growth entirely or hard-code a fixed monthly rate. The most-recommended community tool uses a flat assumption applied indefinitely.',
@@ -38,6 +48,16 @@ export const posts: Post[] = [
     ],
     sources: [
       { label: 'Difficulty and block-interval series, computed', accessedAt: '2026-08-22', confidence: 'measured' },
+    ],
+    faq: [
+      {
+        q: 'Why does a hashrate chart move so much from day to day?',
+        a: "Most short-window movement is block-time noise rather than capacity changing. A two-day 'sharp drop' is usually inside the error bar, which means publishing it as a trend is publishing randomness with a headline attached.",
+      },
+      {
+        q: 'How should a hashrate chart be published honestly?',
+        a: 'Show the band. A hashrate chart with error bars is less dramatic and considerably more useful, and it stops readers drawing conclusions the data cannot support.',
+      },
     ],
     body: [
       { heading: 'Hashrate is inferred, never measured' },

@@ -110,18 +110,11 @@ export default async function TermPage({ params }: { params: Promise<{ slug: str
         </aside>
       ) : null}
 
-      <FAQ
-        title="Quick answers"
-        items={[
-          { q: `What is ${term.term.toLowerCase()}?`, a: term.shortDef },
-          ...(term.aliases?.length
-            ? [{
-                q: `What else is ${term.term.toLowerCase()} called?`,
-                a: `${term.term} is also referred to as ${term.aliases.join(', ')}.`,
-              }]
-            : []),
-        ]}
-      />
+      {/* Authored questions, not a template. The two generated pairs this
+          replaces restated the short definition rendered directly above and the
+          aliases rendered directly above that — the same text three times, which
+          is the shape a near-duplicate assessment picks up. */}
+      <FAQ title="Quick answers" items={term.faq} />
 
       <p className="mt-10 text-xs text-muted/70">Last reviewed {term.updatedAt}</p>
 

@@ -5,6 +5,7 @@ import { AutoLinkedProse } from '@/components/content/AutoLinkedProse'
 import { OnThisPage } from '@/components/content/OnThisPage'
 import { Masthead } from '@/components/content/Masthead'
 import { KeyFigures } from '@/components/content/KeyFigures'
+import { FAQ } from '@/components/content/FAQ'
 import { nextLinksFor, refFor } from '@/content/graph'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { allAcademy, getAcademy, getGlossary, getAuthor } from '@/content'
@@ -88,6 +89,9 @@ export default async function AcademyPage({ params }: { params: Promise<{ slug: 
           </dl>
         </aside>
       ) : null}
+
+
+      <FAQ items={post.faq} />
 
       <NextLinks items={nextLinks} />
 

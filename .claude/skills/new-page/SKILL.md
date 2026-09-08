@@ -63,12 +63,49 @@ If the figure is a placeholder, render `<IllustrativeBadge>` beside it.
 Use `jsonLd()` from `lib/seo.ts`. Do not add more types than this — the measured lift
 beyond entity clarity is nil.
 
-## 7 · Register it in the sitemap
+## 7 · Answer the questions the page is for
+
+Every page that answers a typed question carries an `<FAQ>` block. This is the single
+highest-value block on the site: a question with a self-contained answer is the unit a
+retrieval system lifts, and it is the mechanism behind being cited at all.
+
+```tsx
+import { FAQ } from '@/components/content/FAQ'
+<FAQ items={[{ q: '…', a: '…' }]} />
+```
+
+Never hand-write `FAQPage` schema. The component builds the visible list and the
+structured data from one array, so the two cannot drift — and marking up questions a
+visitor cannot see is a spam signal that can earn a manual penalty.
+
+**Minimum questions by route type:**
+
+| Route | Minimum |
+|---|---|
+| `/for/*` | 5 |
+| `/data/*`, `/tools/[tool]` | 4 |
+| `/glossary/[slug]`, `/academy/[slug]`, `/research/[slug]`, `/methodology/[metric]` | 3 |
+| `/blog/[slug]`, `/tools/[tool]/example/[case]` | 2 |
+
+**The rule that stops this becoming filler: a question ships only if its answer already
+exists as a published claim on this site.** Three legal sources — a glossary
+`shortDef` or body sentence, a `tool-guides.ts` `mistakes[]` or `limits[]` entry, or a
+`research.ts` `findings[]` line. If you have to invent the answer to ask the question,
+the question does not belong on this page yet.
+
+**Answer shape:** the first sentence is a direct, complete answer — never "it depends"
+or "there are several factors". Two to five sentences total. If a proper answer needs
+more, give the direct two and link to the page where the full explanation lives. An FAQ
+answer is an entry point, not the destination.
+
+Phrase the question the way a reader would type it, not the way the org describes it.
+
+## 8 · Register it in the sitemap
 
 Add the route to `app/sitemap.ts`. Collections map automatically; standalone pages do
 not.
 
-## 8 · Verify
+## 9 · Verify
 
 ```
 npm run build && npm run check:crawlable

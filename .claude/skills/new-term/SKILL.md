@@ -51,8 +51,22 @@ and its basis.
   slug silently disappears.
 - Prefer adding a cross-reference over repeating an explanation.
 
+## Questions
+
+Three per term, in an `<FAQ>` block. They are what an assistant matches against, and
+they are the only content on a term page unique enough to keep it out of a
+near-duplicate assessment.
+
+Do not restate the definition. The page already renders it under a heading reading
+"What is X?", so a question asking the same thing in the same words adds nothing, and
+neither does "What else is X called?" — the aliases render directly above.
+
+Ask what a reader actually wonders next: how it is computed, what it is confused with,
+what a typical value looks like, what changes it. Each answer must come from a claim
+the term's own body already makes.
+
 ## Verify
 
 ```
-npm run build && npm run check:crawlable
+npm run build && npm run check:crawlable && npm run check:links
 ```

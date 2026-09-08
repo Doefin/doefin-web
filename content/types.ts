@@ -4,6 +4,9 @@
  * arrives it becomes the only module that changes.
  */
 
+/** One question and its self-contained answer. */
+export type QA = { q: string; a: string }
+
 export type Confidence = 'measured' | 'single-source' | 'judgement'
 
 /**
@@ -77,6 +80,11 @@ type Base = {
   sources?: Source[]
   /** Two to five. More than five is a table, not a summary. */
   keyFigures?: KeyFigure[]
+  /**
+   * Questions this piece answers, each answer self-contained enough to be lifted
+   * out on its own. Every answer must restate a claim the piece already makes.
+   */
+  faq?: QA[]
   draft?: boolean
 }
 
@@ -95,6 +103,15 @@ export type GlossaryTerm = {
   aliases?: string[]
   body: string[]
   seeAlso?: string[]
+  /**
+   * Questions a reader asks NEXT, never a restatement of the definition.
+   *
+   * The page already renders the short definition under a heading reading
+   * "What is X?", so asking that again in the same words adds nothing, and the
+   * aliases render directly above it. Every answer must come from a claim the
+   * term's own body already makes.
+   */
+  faq?: QA[]
   updatedAt: string
 }
 

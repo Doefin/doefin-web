@@ -1,6 +1,5 @@
 import { jsonLd } from '@/lib/seo'
-
-export type QA = { q: string; a: string }
+import type { QA } from '@/content/types'
 
 /**
  * Renders a visible question-and-answer section AND the FAQPage schema from the
@@ -14,8 +13,8 @@ export type QA = { q: string; a: string }
  * states a question and answers it in one self-contained block is directly
  * retrievable as an answer, which is the whole mechanism behind being cited.
  */
-export function FAQ({ items, title = 'Common questions' }: { items: QA[]; title?: string }) {
-  if (!items.length) return null
+export function FAQ({ items, title = 'Common questions' }: { items?: QA[]; title?: string }) {
+  if (!items?.length) return null
   return (
     <section className="mt-14">
       <script

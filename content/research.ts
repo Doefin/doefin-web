@@ -45,6 +45,20 @@ export const reports: Report[] = [
       { label: 'All difficulty epochs, computed from chain data', accessedAt: '2026-08-21', confidence: 'measured' },
       { label: 'Published estimates captured at time of reading', accessedAt: '2026-08-21', confidence: 'measured' },
     ],
+    faq: [
+      {
+        q: 'How much do published Bitcoin difficulty forecasts disagree?',
+        a: 'For the same adjustment, published estimates from three major sources spanned more than three percentage points. A reader consulting only one of them has no way to see that disagreement exists.',
+      },
+      {
+        q: 'Do difficulty forecasters publish confidence intervals?',
+        a: 'None of the four estimators reviewed publishes a confidence interval alongside its live figure. Each presents a single confident number with no range attached.',
+      },
+      {
+        q: 'How volatile is a Bitcoin difficulty adjustment?',
+        a: 'Empirical adjustment volatility in the current era is 4.67 percentage points, which is wider than most readers assume.',
+      },
+    ],
     body: [
       { heading: 'What we measured' },
       'We took every public source that publishes a forward difficulty estimate and recorded what each said, when, and what the adjustment turned out to be.',

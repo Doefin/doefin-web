@@ -11,9 +11,12 @@ description: Pre-merge verification for doefin-web — typecheck, build, crawlab
 npm run typecheck
 npm run build
 npm run check:crawlable
+npm run check:seo
+npm run check:tools
+npm run check:links
 ```
 
-All three must pass. The crawlability guard fails a page that returns fewer than 120
+All six must pass. The crawlability guard fails a page that returns fewer than 120
 words to a crawler, or is missing an `<h1>`, `<title>` or canonical link.
 
 ## Read the build output
@@ -25,6 +28,13 @@ per request.
 
 ## Manual, because automation cannot see it
 
+- **Every page that answers a typed question has an FAQ block**, at or above the
+  minimum in `new-page` step 7. A page that plainly answers a question and carries no
+  FAQ is the most common gap on this site, and no script can judge whether a page is
+  question-shaped.
+- **Every FAQ answer traces to a published claim** — a glossary definition, a guide's
+  mistakes or limits, or a report finding. An answer invented to fill the block is
+  worse than a shorter block.
 - **Placeholder figures carry the badge.** Any number sourced from
   `content/sample-data.ts` renders `<IllustrativeBadge>` beside it.
 - **Every chart has its numbers as text nearby**, in a `<DataTable>` or in prose.

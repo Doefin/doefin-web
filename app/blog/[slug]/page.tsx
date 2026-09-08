@@ -6,6 +6,7 @@ import { AutoLinkedProse } from '@/components/content/AutoLinkedProse'
 import { OnThisPage } from '@/components/content/OnThisPage'
 import { Masthead } from '@/components/content/Masthead'
 import { KeyFigures } from '@/components/content/KeyFigures'
+import { FAQ } from '@/components/content/FAQ'
 import { nextLinksFor, refFor } from '@/content/graph'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { SourceList } from '@/components/content/SourceList'
@@ -81,6 +82,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <AutoLinkedProse paragraphs={post.body} />
         </div>
         <SourceList sources={post.sources} />
+
+      <FAQ items={post.faq} />
       <NextLinks items={nextLinks} />
 
         <div className="mt-12">
