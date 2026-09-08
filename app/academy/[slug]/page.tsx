@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { Container } from '@/components/layout/Container'
 import { AutoLinkedProse } from '@/components/content/AutoLinkedProse'
 import { OnThisPage } from '@/components/content/OnThisPage'
+import { nextLinksFor, refFor } from '@/content/graph'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { allAcademy, getAcademy, getGlossary } from '@/content'
 import { dateLong } from '@/lib/format'
@@ -27,6 +28,7 @@ export default async function AcademyPage({ params }: { params: Promise<{ slug: 
   const { slug } = await params
   const post = getAcademy(slug)
   if (!post) notFound()
+  const nextLinks = nextLinksFor(refFor(`/academy/${post.slug}`))
 
   const related = (post.glossaryTerms ?? []).map(getGlossary).filter(Boolean)
 
@@ -79,13 +81,7 @@ export default async function AcademyPage({ params }: { params: Promise<{ slug: 
         </aside>
       ) : null}
 
-      <NextLinks
-        items={[
-          { href: '/glossary', label: 'Glossary', note: 'Plain definitions of every term used here.' },
-          { href: '/tools', label: 'Calculators', note: 'Work out your hosting cost, exposure or payback.' },
-          { href: '/data/difficulty', label: 'Difficulty forecast', note: 'The current epoch, with its confidence interval.' },
-        ]}
-      />
+      <NextLinks items={nextLinks} />
 
       <div className="mt-16">
         <Subscribe compact />

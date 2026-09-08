@@ -5,6 +5,7 @@ import { Callout, Tag } from '@/components/ui'
 import { Subscribe } from '@/components/content/Subscribe'
 import { AutoLinkedProse } from '@/components/content/AutoLinkedProse'
 import { OnThisPage } from '@/components/content/OnThisPage'
+import { nextLinksFor, refFor } from '@/content/graph'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { allReports, getReport } from '@/content'
 import { dateLong } from '@/lib/format'
@@ -34,6 +35,7 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
   const { slug } = await params
   const report = getReport(slug)
   if (!report) notFound()
+  const nextLinks = nextLinksFor(refFor(`/research/${report.slug}`))
 
   return (
     <Container size="narrow" className="py-16">
@@ -80,13 +82,7 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
           <AutoLinkedProse paragraphs={report.body} />
         </div>
 
-      <NextLinks
-        items={[
-          { href: '/data/scoreboard', label: 'Accuracy scoreboard', note: 'Every past forecast, scored against what happened.' },
-          { href: '/methodology/difficulty-index', label: 'Methodology', note: 'How the forecast is built, and its known limits.' },
-          { href: '/data/difficulty', label: 'Difficulty forecast', note: 'The current epoch, with its confidence interval.' },
-        ]}
-      />
+      <NextLinks items={nextLinks} />
 
         <div className="mt-12">
           <Subscribe

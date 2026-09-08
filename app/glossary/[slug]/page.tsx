@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Container } from '@/components/layout/Container'
-import { Prose } from '@/components/ui'
 import { FAQ } from '@/components/content/FAQ'
+import { AutoLinkedProse } from '@/components/content/AutoLinkedProse'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
+import { nextLinksForTerm, usedBy } from '@/content/graph'
 import { allGlossary, getGlossary } from '@/content'
 import { jsonLd, seo } from '@/lib/seo'
 import { site } from '@/lib/site'
@@ -30,6 +31,10 @@ export default async function TermPage({ params }: { params: Promise<{ slug: str
   const term = getGlossary(slug)
   if (!term) notFound()
   const seeAlso = (term.seeAlso ?? []).map(getGlossary).filter(Boolean)
+  // The return leg. Prose has always linked down into the glossary; nothing linked
+  // back out. This also gives each of the 19 otherwise near-identical term pages a
+  // block of content unique to it.
+  const uses = usedBy(term.slug)
 
   return (
     <Container size="narrow" className="py-16">
@@ -62,8 +67,30 @@ export default async function TermPage({ params }: { params: Promise<{ slug: str
       ) : null}
 
       <div className="mt-8">
-        <Prose paragraphs={term.body} />
+        <AutoLinkedProse paragraphs={term.body} skip={[term.slug]} />
       </div>
+
+      {uses.length ? (
+        <aside className="mt-12 border-t border-white/[0.07] pt-8">
+          <h2 className="text-xs font-bold uppercase tracking-[0.12em] text-muted">
+            Where this term is used
+          </h2>
+          <ul className="mt-4 space-y-3">
+            {uses.slice(0, 5).map((u) => (
+              <li key={u.href}>
+                <Link href={u.href} className="group block">
+                  <span className="font-semibold leading-snug tracking-[-0.015em] group-hover:text-brand">
+                    {u.title}
+                  </span>
+                  <span className="mt-0.5 block text-[14px] leading-relaxed text-muted">
+                    {u.summary}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      ) : null}
 
       {seeAlso.length ? (
         <aside className="mt-12 border-t border-white/[0.07] pt-8">
@@ -98,13 +125,7 @@ export default async function TermPage({ params }: { params: Promise<{ slug: str
 
       <p className="mt-10 text-xs text-muted/70">Last reviewed {term.updatedAt}</p>
 
-      <NextLinks
-        items={[
-          { href: '/academy', label: 'Learn', note: 'How difficulty works, from first principles.' },
-          { href: '/tools', label: 'Calculators', note: 'Work out your hosting cost, exposure or payback.' },
-          { href: '/data/difficulty', label: 'Difficulty forecast', note: 'The current epoch, with its confidence interval.' },
-        ]}
-      />
+      <NextLinks items={nextLinksForTerm(term.slug)} />
 
       <Reviewed />
     </Container>

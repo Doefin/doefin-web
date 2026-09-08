@@ -4,6 +4,7 @@ import { Tag } from '@/components/ui'
 import { Subscribe } from '@/components/content/Subscribe'
 import { AutoLinkedProse } from '@/components/content/AutoLinkedProse'
 import { OnThisPage } from '@/components/content/OnThisPage'
+import { nextLinksFor, refFor } from '@/content/graph'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { SourceList } from '@/components/content/SourceList'
 import { allPosts, getPost } from '@/content'
@@ -36,6 +37,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const post = getPost(slug)
   if (!post) notFound()
+  const nextLinks = nextLinksFor(refFor(`/blog/${post.slug}`))
 
   const article = {
     '@context': 'https://schema.org',
@@ -71,13 +73,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <AutoLinkedProse paragraphs={post.body} />
         </div>
         <SourceList sources={post.sources} />
-      <NextLinks
-        items={[
-          { href: '/research', label: 'Research', note: 'Dated reports with the data behind them.' },
-          { href: '/data/difficulty', label: 'Difficulty forecast', note: 'The current epoch, with its confidence interval.' },
-          { href: '/glossary', label: 'Glossary', note: 'Plain definitions of every term used here.' },
-        ]}
-      />
+      <NextLinks items={nextLinks} />
 
         <div className="mt-12">
           <Subscribe compact />
