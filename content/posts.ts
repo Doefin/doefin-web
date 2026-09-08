@@ -32,6 +32,10 @@ export const posts: Post[] = [
     publishedAt: '2026-08-22',
     author: 'doefin-research',
     tags: ['hashrate', 'methodology'],
+    keyFigures: [
+      { value: '±16%', label: '95% band, one-day hashrate', asOf: '2026-08-22', confidence: 'measured', href: '/data/hashrate' },
+      { value: '±6%', label: '95% band, seven-day hashrate', asOf: '2026-08-22', confidence: 'measured', href: '/data/hashrate' },
+    ],
     sources: [
       { label: 'Difficulty and block-interval series, computed', accessedAt: '2026-08-22', confidence: 'measured' },
     ],

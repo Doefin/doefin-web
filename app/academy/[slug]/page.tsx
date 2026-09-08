@@ -4,6 +4,7 @@ import { Container } from '@/components/layout/Container'
 import { AutoLinkedProse } from '@/components/content/AutoLinkedProse'
 import { OnThisPage } from '@/components/content/OnThisPage'
 import { Masthead } from '@/components/content/Masthead'
+import { KeyFigures } from '@/components/content/KeyFigures'
 import { nextLinksFor, refFor } from '@/content/graph'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { allAcademy, getAcademy, getGlossary, getAuthor } from '@/content'
@@ -60,6 +61,8 @@ export default async function AcademyPage({ params }: { params: Promise<{ slug: 
           sources={post.sources}
           body={post.body}
         />
+
+        <KeyFigures figures={post.keyFigures} />
         <div className="mt-8">
           <OnThisPage body={post.body} />
           <AutoLinkedProse paragraphs={post.body} />

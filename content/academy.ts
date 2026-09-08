@@ -10,6 +10,12 @@ export const academy: AcademyPost[] = [
     publishedAt: '2026-08-12',
     author: 'doefin-research',
     glossaryTerms: ['mining-difficulty', 'difficulty-adjustment', 'epoch'],
+    keyFigures: [
+      { value: '2,016', label: 'Blocks per adjustment', asOf: '2026-08-14', confidence: 'measured', href: '/glossary/epoch' },
+      { value: '2,015', label: 'Intervals in that timespan', asOf: '2026-08-14', confidence: 'measured', href: '/methodology/difficulty-index' },
+      { value: '0.05 pp', label: 'Bias from dividing by 2,016', asOf: '2026-08-14', confidence: 'measured' },
+      { value: '4x', label: 'Maximum move per adjustment', asOf: '2026-08-14', confidence: 'measured' },
+    ],
     body: [
       { heading: 'The feedback loop' },
       'Bitcoin aims to produce one block every ten minutes. It has no clock and no coordinator, so it uses a feedback loop instead: every 2,016 blocks, the network looks at how long those blocks actually took and adjusts how hard the next 2,016 will be.',
@@ -30,6 +36,10 @@ export const academy: AcademyPost[] = [
     publishedAt: '2026-08-14',
     author: 'doefin-research',
     glossaryTerms: ['hashprice', 'hashrate', 'mining-difficulty'],
+    keyFigures: [
+      { value: '< 1%', label: 'Fee share of the block reward', asOf: '2026-08-16', confidence: 'measured', href: '/glossary/hashprice' },
+      { value: '3', label: 'Inputs rolled into one figure', asOf: '2026-08-16', confidence: 'measured', href: '/glossary/hashprice' },
+    ],
     body: [
       { heading: 'What hashprice is' },
       'Hashprice is the revenue a miner earns per terahash per day. It rolls three moving parts into one figure: the bitcoin price, the network difficulty, and transaction fees.',
@@ -51,6 +61,10 @@ export const academy: AcademyPost[] = [
     publishedAt: '2026-08-18',
     author: 'doefin-research',
     glossaryTerms: ['confidence-interval', 'calibration', 'difficulty-adjustment'],
+    keyFigures: [
+      { value: '2-3x', label: 'How far Poisson bands understate error', asOf: '2026-08-18', confidence: 'measured', href: '/methodology/difficulty-index' },
+      { value: '95%', label: 'Band a calibrated forecaster must hit', asOf: '2026-08-18', confidence: 'measured', href: '/data/scoreboard' },
+    ],
     body: [
       { heading: 'How a forecast firms up across an epoch' },
       'A difficulty forecast is a projection from the blocks mined so far in the current epoch. At block 50 of 2,015 it rests on almost no evidence. By block 1,800 it is nearly settled. The number moves the entire way, and the honest uncertainty around it shrinks as it goes.',

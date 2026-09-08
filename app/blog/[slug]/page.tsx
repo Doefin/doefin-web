@@ -5,6 +5,7 @@ import { Subscribe } from '@/components/content/Subscribe'
 import { AutoLinkedProse } from '@/components/content/AutoLinkedProse'
 import { OnThisPage } from '@/components/content/OnThisPage'
 import { Masthead } from '@/components/content/Masthead'
+import { KeyFigures } from '@/components/content/KeyFigures'
 import { nextLinksFor, refFor } from '@/content/graph'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { SourceList } from '@/components/content/SourceList'
@@ -73,6 +74,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           sources={post.sources}
           body={post.body}
         />
+
+        <KeyFigures figures={post.keyFigures} />
         <div className="mt-8">
           <OnThisPage body={post.body} />
           <AutoLinkedProse paragraphs={post.body} />

@@ -38,6 +38,32 @@ export type Source = {
   confidence: Confidence
 }
 
+/**
+ * A number the piece establishes, pulled out so it can be read — and quoted —
+ * without reading the prose.
+ *
+ * `value` is pre-formatted on purpose: the string is what gets cited, so the
+ * author controls the units and precision rather than a formatter guessing.
+ *
+ * `asOf` is not optional. An undated figure is a rumour, and this site's whole
+ * argument is that a published number needs a date and a basis attached.
+ *
+ * A figure must come from a claim the piece already makes and supports — its own
+ * findings or its own sources. Lifting a plausible number out of
+ * content/sample-data.ts and grading it `measured` is exactly the failure the
+ * illustrative badge exists to prevent.
+ */
+export type KeyFigure = {
+  /** Pre-formatted, with units. '4.67 pp', not 4.67. */
+  value: string
+  /** Under 60 characters, no product language. */
+  label: string
+  asOf: string
+  confidence: Confidence
+  /** Where a reader checks it. Expected whenever confidence is 'measured'. */
+  href?: string
+}
+
 type Base = {
   slug: string
   title: string
@@ -49,6 +75,8 @@ type Base = {
   /** A slug in content/authors.ts, not a display name. Resolved by getAuthor(). */
   author: string
   sources?: Source[]
+  /** Two to five. More than five is a table, not a summary. */
+  keyFigures?: KeyFigure[]
   draft?: boolean
 }
 

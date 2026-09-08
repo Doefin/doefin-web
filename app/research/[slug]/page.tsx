@@ -6,6 +6,7 @@ import { Subscribe } from '@/components/content/Subscribe'
 import { AutoLinkedProse } from '@/components/content/AutoLinkedProse'
 import { OnThisPage } from '@/components/content/OnThisPage'
 import { Masthead } from '@/components/content/Masthead'
+import { KeyFigures } from '@/components/content/KeyFigures'
 import { nextLinksFor, refFor } from '@/content/graph'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { allReports, getReport, getAuthor } from '@/content'
@@ -66,6 +67,8 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
           sources={report.sources}
           body={report.body}
         />
+
+        <KeyFigures figures={report.keyFigures} />
 
         {/* Findings sit in the first third of the document, deliberately. */}
         <section className="mt-8">

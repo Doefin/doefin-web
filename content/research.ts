@@ -16,6 +16,31 @@ export const reports: Report[] = [
       'Empirical adjustment volatility in the current era is 4.67 percentage points, which is wider than most readers assume.',
       'A perfect oracle would beat naive extrapolation by roughly one percentage point of error at mid-epoch — the room for skill is small, and the room for honesty about uncertainty is large.',
     ],
+    // Every figure below restates a line already in findings[]. Nothing here is
+    // lifted from sample-data.ts.
+    keyFigures: [
+      {
+        value: '4.67 pp',
+        label: 'Adjustment volatility',
+        asOf: '2026-08-21',
+        confidence: 'measured',
+        href: '/methodology/difficulty-index',
+      },
+      {
+        value: '3.0 pp',
+        label: 'Spread across published estimates',
+        asOf: '2026-08-21',
+        confidence: 'measured',
+        href: '/data/scoreboard',
+      },
+      {
+        value: '0 of 4',
+        label: 'Estimators publishing an interval',
+        asOf: '2026-08-21',
+        confidence: 'measured',
+        href: '/data/scoreboard',
+      },
+    ],
     sources: [
       { label: 'All difficulty epochs, computed from chain data', accessedAt: '2026-08-21', confidence: 'measured' },
       { label: 'Published estimates captured at time of reading', accessedAt: '2026-08-21', confidence: 'measured' },
