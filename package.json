@@ -11,7 +11,8 @@
     "check:crawlable": "node scripts/check-crawlable.mjs",
     "check:seo": "node scripts/check-seo.mjs",
     "audit": "node scripts/audit.mjs",
-    "check:tools": "node --experimental-strip-types --no-warnings scripts/check-tools.mjs"
+    "check:tools": "node --experimental-strip-types --no-warnings scripts/check-tools.mjs",
+    "check:links": "node scripts/check-links.mjs"
   },
   "dependencies": {
     "next": "^16.3.3",

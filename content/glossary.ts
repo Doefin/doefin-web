@@ -13,7 +13,7 @@ export const glossary: GlossaryTerm[] = [
       'A number expressing how hard it is to find a valid Bitcoin block. It rises when more hashrate joins the network and falls when hashrate leaves.',
     aliases: ['difficulty'],
     updatedAt: '2026-08-20',
-    seeAlso: ['difficulty-adjustment', 'epoch', 'hashrate'],
+    seeAlso: ['difficulty-adjustment', 'epoch', 'hashrate', 'hashprice'],
     body: [
       'Bitcoin targets one block every ten minutes on average. Difficulty is the dial that holds that average steady as the total computing power pointed at the network changes.',
       'For a miner, difficulty is the denominator of their revenue. The same machines earn less bitcoin as difficulty rises, which is why an unhedged operation carries an exposure it did not choose.',
@@ -26,7 +26,7 @@ export const glossary: GlossaryTerm[] = [
       'The recalculation of mining difficulty that happens every 2,016 blocks — roughly every two weeks — based on how quickly the previous 2,016 blocks were mined.',
     aliases: ['retarget'],
     updatedAt: '2026-08-20',
-    seeAlso: ['mining-difficulty', 'epoch'],
+    seeAlso: ['mining-difficulty', 'epoch', 'confidence-interval'],
     body: [
       'The network compares how long the last 2,016 blocks actually took against the 20,160 minutes they should have taken, and scales difficulty by the ratio. A single adjustment is clamped to a factor of four in either direction.',
       'One subtlety trips up most implementations: the timespan spans 2,015 intervals between 2,016 blocks, not 2,016. Dividing by the wrong number biases every forecast by roughly 0.05 percentage points.',
@@ -39,7 +39,7 @@ export const glossary: GlossaryTerm[] = [
       'A run of 2,016 Bitcoin blocks between two difficulty adjustments, lasting about two weeks.',
     aliases: ['difficulty epoch', 'retarget period'],
     updatedAt: '2026-08-20',
-    seeAlso: ['difficulty-adjustment', 'block-height'],
+    seeAlso: ['difficulty-adjustment', 'block-height', 'mining-difficulty'],
     body: [
       'Epochs are the natural unit of time for anyone managing difficulty risk. Production, forecasts and settlement all align to epoch boundaries rather than to calendar dates.',
       'Because block times vary, an epoch is identified by block height rather than by date. A date is an estimate until the block actually lands.',
@@ -52,7 +52,7 @@ export const glossary: GlossaryTerm[] = [
       'The total computing power securing the Bitcoin network, measured in hashes per second. It is estimated from difficulty and block times, never measured directly.',
     aliases: ['hash rate', 'network hashrate'],
     updatedAt: '2026-08-20',
-    seeAlso: ['mining-difficulty', 'exahash'],
+    seeAlso: ['mining-difficulty', 'exahash', 'hashprice'],
     body: [
       'No one can observe the network hashrate. What is published is a restatement of difficulty and how fast blocks arrived, which means short-window figures carry wide error bars.',
       'A one-day hashrate estimate has an uncertainty band of roughly plus or minus sixteen percent. A seven-day estimate narrows to about six. Reporting a daily move as a trend is reporting noise.',
@@ -64,7 +64,7 @@ export const glossary: GlossaryTerm[] = [
     shortDef:
       'The revenue a miner earns per unit of hashrate per day, usually in dollars per terahash. It combines the bitcoin price, difficulty and transaction fees.',
     updatedAt: '2026-08-20',
-    seeAlso: ['hashrate', 'mining-difficulty'],
+    seeAlso: ['hashrate', 'mining-difficulty', 'terahash'],
     body: [
       'Hashprice is the single number that tells a miner whether the machines are worth running. It falls when difficulty rises, when the bitcoin price falls, or when fees dry up.',
       'The term was coined by Luxor in 2019 and is now the industry standard. Different publishers compute it differently — mostly in which exchange prices they use and when they sample — and few disclose the basket.',
