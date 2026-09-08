@@ -96,7 +96,7 @@ Three adjudications to know, because a spec you may be handed says otherwise:
 
 ## 4 · The compliance boundary
 
-Predexyo UK Ltd is **not FCA-authorised** (`app/terms/page.tsx`). Under s21 FSMA an
+Doefin is **not FCA-authorised** (`app/terms/page.tsx`). Under s21 FSMA an
 invitation or inducement to engage in investment activity is restricted unless the
 communicator is authorised, approved by an authorised person, or exempt. The exemption the
 site relies on — FPO 2005 art.19 (investment professionals), art.49 (high-net-worth
@@ -112,7 +112,7 @@ and names the limbs.*
    has produced a quantified position on that page.
 2. **Adjacency.** Three limbs sit in the **same visual block** as the link, never the footer
    alone: (a) directed at persons with professional experience in investments; (b) persons
-   without it must not act on or rely on it; (c) Predexyo UK Ltd is not authorised by the
+   without it must not act on or rely on it; (c) Doefin is not authorised by the
    FCA. FPO art.19(4)(a)–(b) requires the indication to accompany the invitation.
 3. **Order.** It sits below the page's proof band, never in the first screen.
 4. **Register.** Non-retail wording only (§5).
@@ -126,7 +126,7 @@ and names the limbs.*
 **None of the three limbs exists in the repo yet.** What ships today at
 `app/terms/page.tsx:19`, `app/privacy/page.tsx:19`, `components/layout/Footer.tsx:15`,
 `app/about/page.tsx:37` and `app/for/institutions/page.tsx:62` is one sentence —
-*Predexyo UK Ltd is not authorised by the Financial Conduct Authority; Doefin is made
+*Doefin is not authorised by the Financial Conduct Authority; Doefin is made
 available to professional investors only.* That is limb (c). Limbs (a) and (b) — directed
 at, and must not act or rely on — appear nowhere. Until counsel supplies them, **no app
 link can pass test 2**, and the correct output is an open item, not drafted wording.

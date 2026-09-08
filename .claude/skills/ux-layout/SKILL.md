@@ -37,7 +37,7 @@ diverges.**
 | S2 | Trail | `<Breadcrumbs>` — every route except `/` and `not-found`. Sole source of `BreadcrumbList`; never hand-written |
 | S3 | Head | `<Eyebrow>` naming the kind of object → one `<h1>` carrying the page's distinctive fact → a lede of at most two sentences that is **the answer, not a tease** |
 | S4 | Provenance strip ○ | `<IllustrativeBadge isLive>` + `<AsOf height builtAt>` wherever a figure comes from `content/sample-data.ts`. Omit only on a page with no figures |
-| S5 | Eligibility line | One line of static HTML text, always served: who this is directed at, that others must not act on or rely on it, that Predexyo UK Ltd is not FCA-authorised. `text-sm text-muted`; a `<Callout tone="caution">` on any page carrying an app link |
+| S5 | Eligibility line | One line of static HTML text, always served: who this is directed at, that others must not act on or rely on it, that Doefin is not FCA-authorised. `text-sm text-muted`; a `<Callout tone="caution">` on any page carrying an app link |
 | S6 | Answer-first block ○ | 2–4 self-contained sentences, each with its own figure, units and date, in the brand-dot bullet idiom from `app/research/[slug]/page.tsx`. The heading varies by type ("What we found" / "In short" / "What this says"); the markup does not. Omit only where the page *is* the answer |
 | S7 | The type's own middle | **§6.** All variation lives here |
 | S8 | Common questions ○ | `<FAQ items>` — visible questions phrased as typed. Omit only when the page answers no question a reader types |
