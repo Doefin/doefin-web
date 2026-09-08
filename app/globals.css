@@ -35,6 +35,21 @@
   }
 }
 
+/* Near-instant rather than `none`. The difference matters: `transition: none`
+   deletes the transition, so any pattern whose resting style is hidden — the
+   common `opacity: 0` + reveal-on-scroll idiom — stays hidden forever for a
+   reduced-motion visitor. Collapsing the duration instead lets every transition
+   run and land on its final computed value, imperceptibly. Content can never be
+   stranded mid-animation, and the page looks identical to the reader. */
 @media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
 }
