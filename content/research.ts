@@ -21,9 +21,13 @@ export const reports: Report[] = [
       { label: 'Published estimates captured at time of reading', accessedAt: '2026-08-21', confidence: 'measured' },
     ],
     body: [
+      { heading: 'What we measured' },
       'We took every public source that publishes a forward difficulty estimate and recorded what each said, when, and what the adjustment turned out to be.',
+      { heading: 'They disagree more than any of them admits' },
       'The headline is not that any one of them is bad. It is that they disagree — sometimes by more than three percentage points on the same adjustment — while each presents its figure as a single confident number with no range attached.',
+      { heading: 'What a reader cannot see' },
       'A reader consulting one source has no way to know how much disagreement exists, or how much uncertainty is genuinely present at that point in the epoch. Both are knowable, and both are omitted.',
+      { heading: 'Scoring ourselves too' },
       'This report accompanies a public scoreboard that scores every estimator, including ours, on every adjustment from here on. We expect to be wrong sometimes, and we intend to publish it when we are.',
     ],
   },

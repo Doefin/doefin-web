@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { allGlossary } from '@/content'
+import { blockId, isHeading, type Block } from '@/content/types'
 
 /**
  * Links the first mention of each glossary term in a body of prose.
@@ -10,7 +11,7 @@ import { allGlossary } from '@/content'
  *
  * Only the first occurrence is linked, so paragraphs stay readable.
  */
-export function AutoLinkedProse({ paragraphs, skip = [] }: { paragraphs: string[]; skip?: string[] }) {
+export function AutoLinkedProse({ paragraphs, skip = [] }: { paragraphs: Block[]; skip?: string[] }) {
   const terms = allGlossary()
     .filter((t) => !skip.includes(t.slug))
     .flatMap((t) => [t.term, ...(t.aliases ?? [])].map((label) => ({ label, slug: t.slug, def: t.shortDef })))
@@ -21,7 +22,19 @@ export function AutoLinkedProse({ paragraphs, skip = [] }: { paragraphs: string[
 
   return (
     <div className="prose-doefin">
-      {paragraphs.map((para, pi) => {
+      {paragraphs.map((block, pi) => {
+        // A heading is a link TARGET, so it is never auto-linked: burying an anchor
+        // inside a glossary link would make the section harder to cite, not easier.
+        // scroll-mt clears the sticky header when a reader arrives on the anchor.
+        if (isHeading(block)) {
+          return (
+            <h2 key={pi} id={blockId(block)} className="scroll-mt-24">
+              {block.heading}
+            </h2>
+          )
+        }
+
+        const para = block
         const nodes: React.ReactNode[] = []
         let rest = para
         let guard = 0

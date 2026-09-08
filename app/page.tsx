@@ -4,7 +4,7 @@ import { Container } from '@/components/layout/Container'
 import { Button, Callout, Eyebrow, Panel, Stat, Tag } from '@/components/ui'
 import { Subscribe } from '@/components/content/Subscribe'
 import { allPosts, allReports, difficulty } from '@/content'
-import { dateShort, int, pct, tera } from '@/lib/format'
+import { dateShort, int, pct, tera, readingMinutes } from '@/lib/format'
 import { NextLinks, Reviewed } from '@/components/content/NextLinks'
 
 export default function HomePage() {
@@ -215,7 +215,7 @@ export default function HomePage() {
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{p.summary}</p>
                 <p className="mt-4 text-xs text-muted/70">
-                  {dateShort(p.publishedAt)} · {p.readingMinutes} min read
+                  {dateShort(p.publishedAt)} · {readingMinutes(p.body)} min read
                 </p>
               </Panel>
             </Link>

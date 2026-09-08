@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { clsx } from '@/lib/clsx'
+import { blockId, isHeading, type Block } from '@/content/types'
 
 /* ── Section heading ────────────────────────────────────────────────────── */
 
@@ -192,12 +193,18 @@ export function Tag({ children }: { children: React.ReactNode }) {
 
 /* ── Long-form ──────────────────────────────────────────────────────────── */
 
-export function Prose({ paragraphs }: { paragraphs: string[] }) {
+export function Prose({ paragraphs }: { paragraphs: Block[] }) {
   return (
     <div className="prose-doefin">
-      {paragraphs.map((p, i) => (
-        <p key={i}>{p}</p>
-      ))}
+      {paragraphs.map((b, i) =>
+        isHeading(b) ? (
+          <h2 key={i} id={blockId(b)} className="scroll-mt-24">
+            {b.heading}
+          </h2>
+        ) : (
+          <p key={i}>{b}</p>
+        ),
+      )}
     </div>
   )
 }

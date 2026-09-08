@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Container } from '@/components/layout/Container'
 import { PageHeader, Panel, Tag } from '@/components/ui'
 import { allPosts } from '@/content'
-import { dateShort } from '@/lib/format'
+import { dateShort, readingMinutes } from '@/lib/format'
 import { jsonLd, seo } from '@/lib/seo'
 import { site } from '@/lib/site'
 import { Subscribe } from '@/components/content/Subscribe'
@@ -52,7 +52,7 @@ export default function BlogIndex() {
               <h2 className="mt-4 text-xl font-bold leading-snug tracking-[-0.015em]">{p.title}</h2>
               <p className="mt-2 text-[15px] leading-relaxed text-muted">{p.summary}</p>
               <p className="mt-4 text-xs text-muted/70">
-                {dateShort(p.publishedAt)} · {p.readingMinutes} min read
+                {dateShort(p.publishedAt)} · {readingMinutes(p.body)} min read
               </p>
             </Panel>
           </Link>

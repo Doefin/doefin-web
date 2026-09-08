@@ -3,10 +3,11 @@ import { Container } from '@/components/layout/Container'
 import { Tag } from '@/components/ui'
 import { Subscribe } from '@/components/content/Subscribe'
 import { AutoLinkedProse } from '@/components/content/AutoLinkedProse'
+import { OnThisPage } from '@/components/content/OnThisPage'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { SourceList } from '@/components/content/SourceList'
 import { allPosts, getPost } from '@/content'
-import { dateLong } from '@/lib/format'
+import { dateLong, readingMinutes } from '@/lib/format'
 import { jsonLd, seo } from '@/lib/seo'
 import { site } from '@/lib/site'
 import { NextLinks, Reviewed } from '@/components/content/NextLinks'
@@ -63,9 +64,10 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-muted">{post.summary}</p>
         <p className="mt-5 border-b border-white/[0.07] pb-6 text-sm text-muted/80">
-          {post.author} · {dateLong(post.publishedAt)} · {post.readingMinutes} min read
+          {post.author} · {dateLong(post.publishedAt)} · {readingMinutes(post.body)} min read
         </p>
         <div className="mt-8">
+          <OnThisPage body={post.body} />
           <AutoLinkedProse paragraphs={post.body} />
         </div>
         <SourceList sources={post.sources} />
