@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { Container } from '@/components/layout/Container'
 import { AutoLinkedProse } from '@/components/content/AutoLinkedProse'
 import { OnThisPage } from '@/components/content/OnThisPage'
+import { Masthead } from '@/components/content/Masthead'
 import { nextLinksFor, refFor } from '@/content/graph'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { allAcademy, getAcademy, getGlossary, getAuthor } from '@/content'
@@ -52,9 +53,13 @@ export default async function AcademyPage({ params }: { params: Promise<{ slug: 
           {post.title}
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-muted">{post.summary}</p>
-        <p className="mt-5 border-b border-white/[0.07] pb-6 text-sm text-muted/80">
-          {getAuthor(post.author).name} · {dateLong(post.publishedAt)}
-        </p>
+        <Masthead
+          eyebrow={post.level}
+          author={post.author}
+          publishedAt={post.publishedAt}
+          sources={post.sources}
+          body={post.body}
+        />
         <div className="mt-8">
           <OnThisPage body={post.body} />
           <AutoLinkedProse paragraphs={post.body} />

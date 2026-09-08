@@ -4,6 +4,7 @@ import { Tag } from '@/components/ui'
 import { Subscribe } from '@/components/content/Subscribe'
 import { AutoLinkedProse } from '@/components/content/AutoLinkedProse'
 import { OnThisPage } from '@/components/content/OnThisPage'
+import { Masthead } from '@/components/content/Masthead'
 import { nextLinksFor, refFor } from '@/content/graph'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { SourceList } from '@/components/content/SourceList'
@@ -65,9 +66,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           {post.title}
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-muted">{post.summary}</p>
-        <p className="mt-5 border-b border-white/[0.07] pb-6 text-sm text-muted/80">
-          {getAuthor(post.author).name} · {dateLong(post.publishedAt)} · {readingMinutes(post.body)} min read
-        </p>
+        <Masthead
+          eyebrow={post.tags[0]}
+          author={post.author}
+          publishedAt={post.publishedAt}
+          sources={post.sources}
+          body={post.body}
+        />
         <div className="mt-8">
           <OnThisPage body={post.body} />
           <AutoLinkedProse paragraphs={post.body} />

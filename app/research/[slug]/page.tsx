@@ -5,6 +5,7 @@ import { Callout, Tag } from '@/components/ui'
 import { Subscribe } from '@/components/content/Subscribe'
 import { AutoLinkedProse } from '@/components/content/AutoLinkedProse'
 import { OnThisPage } from '@/components/content/OnThisPage'
+import { Masthead } from '@/components/content/Masthead'
 import { nextLinksFor, refFor } from '@/content/graph'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { allReports, getReport, getAuthor } from '@/content'
@@ -58,9 +59,13 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
           {report.title}
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-muted">{report.summary}</p>
-        <p className="mt-5 border-b border-white/[0.07] pb-6 text-sm text-muted/80">
-          {getAuthor(report.author).name} · {dateLong(report.publishedAt)}
-        </p>
+        <Masthead
+          eyebrow={report.reportId}
+          author={report.author}
+          publishedAt={report.publishedAt}
+          sources={report.sources}
+          body={report.body}
+        />
 
         {/* Findings sit in the first third of the document, deliberately. */}
         <section className="mt-8">
