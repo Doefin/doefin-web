@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from '@/components/routing/SiteLink'
 import { Container } from './Container'
 import { Logo } from './Logo'
 import { nav, site } from '@/lib/site'

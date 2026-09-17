@@ -1,17 +1,23 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
 /* Shared pieces so every tool reads as one family. */
 
-export function ToolShell({ inputs, summary }: { inputs: React.ReactNode; summary: React.ReactNode }) {
+const PreciseInputs = createContext(false)
+
+export function ToolShell({ inputs, summary, preciseInputs = false }: {
+  inputs: React.ReactNode; summary: React.ReactNode; preciseInputs?: boolean
+}) {
   return (
+    <PreciseInputs.Provider value={preciseInputs}>
     <div className="grid gap-6 lg:grid-cols-[1fr_20rem]">
-      <div className="rounded-panel border border-white/[0.07] bg-surface p-6">{inputs}</div>
-      <div className="rounded-panel border border-white/[0.07] bg-gradient-to-br from-surface to-surfaceAlt p-6">
+      <div className="min-w-0 rounded-panel border border-white/[0.07] bg-surface p-6">{inputs}</div>
+      <div className="min-w-0 rounded-panel border border-white/[0.07] bg-gradient-to-br from-surface to-surfaceAlt p-6">
         {summary}
       </div>
     </div>
+    </PreciseInputs.Provider>
   )
 }
 
@@ -70,9 +76,10 @@ export function Slider({
   format?: (n: number) => string
   hint?: InputHint
 }) {
+  const precise = useContext(PreciseInputs)
   return (
     <div>
-      <div className="flex items-baseline justify-between gap-4">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
         <label htmlFor={id} className="text-sm font-medium text-subtle">{label}</label>
         <span className="tabular text-sm font-bold text-body">
           {format ? format(value) : value} <span className="font-normal text-muted">{unit}</span>
@@ -83,6 +90,17 @@ export function Slider({
         onChange={(e) => onChange(Number(e.target.value))}
         className="mt-2 w-full accent-brand"
       />
+      {precise ? <div className="mt-1 flex items-center gap-2 text-xs text-subtle">
+        <input aria-label={label + ' — exact value'} type="number" min={min} max={max} step={step}
+          key={value} defaultValue={value} onBlur={e => {
+            const n = e.target.valueAsNumber
+            const next = Number.isFinite(n) ? Math.min(max, Math.max(min, n)) : value
+            e.target.value = String(next)
+            onChange(next)
+          }} onKeyDown={e => { if (e.key === 'Enter') e.currentTarget.blur() }}
+          className="tabular w-28 rounded-lg border border-white/15 bg-ink px-3 py-2 text-sm text-body" />
+        <span>{unit}</span>
+      </div> : null}
       {hint ? <SliderHint hint={hint} /> : null}
     </div>
   )
@@ -195,7 +213,7 @@ export function PreviewNote({ children }: { children: React.ReactNode }) {
 }
 
 /** Keeps tool state in the URL so a scenario can be pasted into a conversation. */
-export function useUrlState<T extends Record<string, number>>(defaults: T) {
+export function useUrlState<T extends Record<string, number>>(defaults: T, bounds?: Partial<Record<keyof T, readonly [number, number]>>) {
   const [v, setV] = useState<T>(defaults)
   const [ready, setReady] = useState(false)
 
@@ -205,8 +223,9 @@ export function useUrlState<T extends Record<string, number>>(defaults: T) {
     let found = false
     for (const k of Object.keys(defaults) as (keyof T)[]) {
       const raw = p.get(String(k))
-      if (raw !== null && !Number.isNaN(Number(raw))) {
-        next[k] = Number(raw) as T[keyof T]
+      if (raw !== null && raw.trim() !== '' && Number.isFinite(Number(raw))) {
+        const range = bounds?.[k]
+        next[k] = (range ? Math.min(range[1], Math.max(range[0], Number(raw))) : Number(raw)) as T[keyof T]
         found = true
       }
     }
@@ -230,7 +249,7 @@ export function useUrlState<T extends Record<string, number>>(defaults: T) {
 }
 
 /** Network hashrate implied by difficulty, assuming the 10-minute target. */
-export const networkEHFromDifficulty = (diffT: number) => (diffT * 1e12 * 2 ** 32) / 600 / 1e18
+export { networkEHFromDifficulty } from '@/lib/exposure'
 
 /** Which named scenario, if any, the sliders are currently sitting on. */
 export function matchPreset<T extends Record<string, number>>(

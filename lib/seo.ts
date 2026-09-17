@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { site } from './site'
+import { versionedPath } from './versioning'
 
 /**
  * Stable node identifiers for the entity graph.
@@ -38,7 +39,7 @@ export function authorNode(a: {
     '@type': a.kind === 'person' ? 'Person' : 'Organization',
     '@id': `${site.url}/#${a.slug}`,
     name: a.name,
-    url: `${site.url}${a.url}`,
+    url: `${site.url}${versionedPath(a.url)}`,
     description: a.description,
     ...(a.kind === 'person'
       ? { worksFor: { '@id': ID.org } }
@@ -63,7 +64,7 @@ type SeoInput = {
 
 /** Every page builds its metadata through here, so nothing ships without a canonical. */
 export function seo({ title, description, path, type = 'website', publishedTime, modifiedTime, absoluteTitle }: SeoInput): Metadata {
-  const url = `${site.url}${path}`
+  const url = `${site.url}${versionedPath(path)}`
   return {
     title: absoluteTitle ? { absolute: title } : title,
     description,
@@ -82,5 +83,11 @@ export function seo({ title, description, path, type = 'website', publishedTime,
 }
 
 export function jsonLd(data: Record<string, unknown>) {
-  return { __html: JSON.stringify(data) }
+  return { __html: JSON.stringify(data, (_key, value: unknown) => {
+    // Keep stable organisation IDs; page URLs follow the versioned routes.
+    if (typeof value === 'string' && value.startsWith(site.url + '/') && !value.startsWith(site.url + '/#')) {
+      return site.url + versionedPath(value.slice(site.url.length))
+    }
+    return value
+  }) }
 }

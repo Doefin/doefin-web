@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
+import { calculateExposure, exposureDefaults } from '@/lib/exposure'
 import {
   CompareBars,
   Hint,
@@ -10,7 +11,6 @@ import {
   SummaryRows,
   ToolShell,
   matchPreset,
-  networkEHFromDifficulty,
   useUrlState,
 } from './toolkit'
 import { hintFor, presetsFor, resultHintFor } from '@/content/tool-micro'
@@ -24,35 +24,13 @@ import { hintFor, presetsFor, resultHintFor } from '@/content/tool-micro'
  * data pipeline is connected.
  */
 const SLUG = 'difficulty-exposure'
-const DEFAULTS = { eh: 1, epochs: 4, diffT: 127.48, low: -2.4, high: 7.0, fees: 0.05, price: 64000 }
-const SUBSIDY = 3.125
-const BLOCKS = 2016
+const DEFAULTS = exposureDefaults
+const BOUNDS = { eh: [0.01, 30], epochs: [1, 13], diffT: [1, 1000], low: [-15, 0], high: [0, 15], fees: [0, 0.5], price: [20000, 200000] } as const
 
-export function ExposureSizer() {
-  const [v, setV] = useUrlState(DEFAULTS)
+export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boolean; nextStep?: React.ReactNode }) {
+  const [v, setV] = useUrlState(DEFAULTS, enhanced ? BOUNDS : undefined)
   const presets = presetsFor(SLUG)
-
-  const out = useMemo(() => {
-    const net = networkEHFromDifficulty(v.diffT)
-    const prod = (changePct: number) => {
-      const share = v.eh / (net * (1 + changePct / 100))
-      return share * BLOCKS * (SUBSIDY + v.fees) * v.epochs
-    }
-    const base = prod(0)
-    const atLow = prod(v.low)
-    const atHigh = prod(v.high)
-    return {
-      net,
-      base,
-      atLow,
-      atHigh,
-      lossHigh: base - atHigh,
-      gainLow: atLow - base,
-      spreadBtc: atLow - atHigh,
-      spreadUsd: (atLow - atHigh) * v.price,
-      weeks: Math.round(v.epochs * 2),
-    }
-  }, [v])
+  const out = useMemo(() => calculateExposure(v), [v])
 
   const btc = (n: number) => `${n.toFixed(3)} BTC`
   const usd = (n: number) => `$${Math.round(n).toLocaleString('en-US')}`
@@ -60,6 +38,7 @@ export function ExposureSizer() {
   return (
     <>
       <ToolShell
+        preciseInputs={enhanced}
         inputs={
           <>
             {presets.length ? (
@@ -90,6 +69,8 @@ export function ExposureSizer() {
                   Difficulty scenario
                 </p>
                 <div className="space-y-5">
+                  {enhanced ? <Slider id="diffT" label="Starting difficulty" unit="T" value={v.diffT} min={1} max={1000} step={0.01}
+                    onChange={n => setV({ ...v, diffT: n })} /> : null}
                   <Slider id="low" label="Best case: difficulty falls by" unit="%" value={v.low} min={-15} max={0} step={0.1}
                     onChange={(n) => setV({ ...v, low: n })} format={(n) => Math.abs(n).toFixed(1)}
                 hint={hintFor(SLUG, "Best case: difficulty falls by")} />
@@ -122,6 +103,7 @@ export function ExposureSizer() {
               mining gets {v.high.toFixed(1)}% harder you get {btc(out.atHigh)} instead —{' '}
               <strong>{out.lossHigh.toFixed(3)} BTC less</strong>, around {usd(out.lossHigh * v.price)}.
             </Readout>
+            {nextStep}
 
             <CompareBars
               items={[

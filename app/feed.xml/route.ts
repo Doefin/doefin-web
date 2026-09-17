@@ -8,8 +8,8 @@ const esc = (s: string) =>
 
 export function GET() {
   const items = [
-    ...allPosts().map((p) => ({ ...p, path: `/blog/${p.slug}` })),
-    ...allReports().map((r) => ({ ...r, path: `/research/${r.slug}` })),
+    ...allPosts().map((p) => ({ ...p, path: `/v1/blog/${p.slug}` })),
+    ...allReports().map((r) => ({ ...r, path: `/v1/research/${r.slug}` })),
   ].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from '@/components/routing/SiteLink'
 import { Button } from '@/components/ui'
 import { site } from '@/lib/site'
 

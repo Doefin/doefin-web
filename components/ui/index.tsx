@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from '@/components/routing/SiteLink'
 import { clsx } from '@/lib/clsx'
 import { blockId, isHeading, type Block } from '@/content/types'
 

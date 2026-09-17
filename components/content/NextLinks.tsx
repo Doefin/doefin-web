@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from '@/components/routing/SiteLink'
 
 /**
  * Slot S10 — where to go next.

@@ -16,7 +16,7 @@ export const dynamic = 'force-static'
  * is expected to arrive through it.
  */
 export function GET() {
-  const u = (path: string) => `${site.url}${path}`
+  const u = (path: string) => `${site.url}/v1${path}`
 
   const glossary = allGlossary()
     .map((t) => `- [${t.term}](${u(`/glossary/${t.slug}`)}): ${t.shortDef}`)

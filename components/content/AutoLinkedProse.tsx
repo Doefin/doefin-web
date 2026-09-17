@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from '@/components/routing/SiteLink'
 import { allGlossary } from '@/content'
 import { blockId, isHeading, type Block } from '@/content/types'
 

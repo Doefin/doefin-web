@@ -42,8 +42,12 @@ type State = Record<Key, number>
 
 const DEFAULTS = Object.fromEntries(FIELDS.map((f) => [f.key, f.def])) as State
 
-export function HostingCalculator() {
-  const [v, setV] = useUrlState(DEFAULTS)
+const BOUNDS = Object.fromEntries(FIELDS.map(f => [f.key, [0, f.max] as const]))
+
+export function HostingCalculator({ enhanced = false, nextStep }: {
+  enhanced?: boolean; nextStep?: (rate: number) => React.ReactNode
+}) {
+  const [v, setV] = useUrlState(DEFAULTS, enhanced ? BOUNDS : undefined)
   const presets = presetsFor(SLUG)
 
   const out = useMemo(() => {
@@ -56,7 +60,7 @@ export function HostingCalculator() {
       billed,
       effective,
       afterPool,
-      upliftPct: ((afterPool - v.rate) / v.rate) * 100,
+      upliftPct: v.rate === 0 ? 0 : ((afterPool - v.rate) / v.rate) * 100,
       // The three things standing between the quote and the real number.
       fromFees: billed - v.rate,
       fromLostHours: effective - billed,
@@ -69,6 +73,7 @@ export function HostingCalculator() {
 
   return (
     <ToolShell
+      preciseInputs={enhanced}
       inputs={
         <>
           {presets.length ? (
@@ -137,6 +142,7 @@ export function HostingCalculator() {
               </>
             )}
           </Readout>
+          {nextStep?.(out.afterPool)}
 
           <Bars
             items={[

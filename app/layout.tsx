@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Manrope } from 'next/font/google'
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
+import { SiteChrome } from '@/components/layout/SiteChrome'
 import { jsonLd, ID, publisherRef } from '@/lib/seo'
 import { site } from '@/lib/site'
 import './globals.css'
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description: site.description,
-  alternates: { canonical: '/' },
+  alternates: { canonical: '/v1' },
   openGraph: { siteName: site.name, type: 'website', locale: 'en_GB' },
   robots: { index: true, follow: true },
   icons: { icon: '/images/favicon.png', shortcut: '/favicon.ico' },
@@ -69,11 +70,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
-        <Header />
-        <main id="main" className="flex-1">
+        <SiteChrome header={<Header />} footer={<Footer />}>
           {children}
-        </main>
-        <Footer />
+        </SiteChrome>
       </body>
     </html>
   )

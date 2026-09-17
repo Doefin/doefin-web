@@ -56,8 +56,10 @@ function simulate(v: typeof DEFAULTS, monthlyGrowthPct: number) {
   return { paybackMonth, series, final: cum, powerDay }
 }
 
-export function PaybackModel() {
-  const [v, setV] = useUrlState(DEFAULTS)
+const BOUNDS = { th: [100, 20000], jPerTh: [12, 40], power: [0.02, 0.15], capex: [5000, 2000000], price: [20000, 200000], diffT: [1, 1000], growth: [0, 8], months: [2, 120] } as const
+
+export function PaybackModel({ enhanced = false, nextStep }: { enhanced?: boolean; nextStep?: React.ReactNode }) {
+  const [v, setV] = useUrlState(DEFAULTS, enhanced ? BOUNDS : undefined)
   const presets = presetsFor(SLUG)
 
   const runs = useMemo(() => {
@@ -80,6 +82,7 @@ export function PaybackModel() {
   return (
     <>
       <ToolShell
+        preciseInputs={enhanced}
         inputs={
           <>
             {presets.length ? (
@@ -137,7 +140,11 @@ export function PaybackModel() {
             </svg>
 
             <Readout>
-              {runs.mid.paybackMonth === null ? (
+              {enhanced ? (
+                <>With these assumptions, the central case {runs.mid.paybackMonth === null
+                  ? `does not recover the initial outlay within ${v.months} months`
+                  : `recovers the initial outlay in month ${runs.mid.paybackMonth}`}. Compare the other difficulty paths below before changing your inputs.</>
+              ) : runs.mid.paybackMonth === null ? (
                 <>
                   At {v.growth.toFixed(1)}% a month this fleet never pays back the {usd(v.capex)} inside{' '}
                   {v.months} months. Cheaper power or a lower price paid is the only fix.
@@ -157,6 +164,7 @@ export function PaybackModel() {
                 </>
               )}
             </Readout>
+            {nextStep}
 
             <SummaryRows
               rows={[

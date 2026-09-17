@@ -12,11 +12,14 @@ const ROOT = join(process.cwd(), '.next', 'server', 'app')
 const MIN_WORDS = 120
 
 const PAGES = [
-  ['index.html', 'Home'],
-  ['data/difficulty.html', 'Difficulty forecast'],
-  ['glossary/hashprice.html', 'Glossary term'],
-  ['research/difficulty-forecast-accuracy-2026.html', 'Research report'],
-  ['for/miners.html', 'For miners'],
+  ['v2.html', 'V2 home'],
+  ['v2/learn/difficulty-exposure.html', 'V2 tutorial'],
+  ['v2/research/evaluating-a-forecast.html', 'V2 sample report'],
+  ['v1.html', 'V1 home'],
+  ['v1/data/difficulty.html', 'Difficulty forecast'],
+  ['v1/glossary/hashprice.html', 'Glossary term'],
+  ['v1/research/difficulty-forecast-accuracy-2026.html', 'Research report'],
+  ['v1/for/miners.html', 'For miners'],
 ]
 
 const text = (html) =>

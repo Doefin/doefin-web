@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from '@/components/routing/SiteLink'
 import type { KeyFigure } from '@/content/types'
 import { dateShort } from '@/lib/format'
 import { GRADE_LABEL } from '@/lib/masthead'

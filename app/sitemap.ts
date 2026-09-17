@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { allAcademy, allGlossary, allGuides, allPosts, allReports, allTags, epochs, EXAMPLES, publishedDocs, TOOLS } from '@/content'
 import { site } from '@/lib/site'
+import { versionedPath } from '@/lib/versioning'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Static pages carry a stable date. Using `new Date()` would change lastmod on
@@ -8,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const STATIC_LASTMOD = '2026-08-24'
 
   const at = (path: string, lastModified?: string, priority = 0.6) => ({
-    url: `${site.url}${path}`,
+    url: `${site.url}${versionedPath(path)}`,
     lastModified: new Date(lastModified ?? STATIC_LASTMOD),
     priority,
   })

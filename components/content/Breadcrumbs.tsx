@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from '@/components/routing/SiteLink'
 import { jsonLd } from '@/lib/seo'
 import { site } from '@/lib/site'
 
