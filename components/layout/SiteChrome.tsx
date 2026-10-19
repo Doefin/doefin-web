@@ -7,6 +7,7 @@ import { Container } from './Container'
 import { Logo } from './Logo'
 import { preview, previewNav, originalForPreview, previewForOriginal } from '@/lib/preview'
 import { site } from '@/lib/site'
+import { V3Chrome } from '@/components/v3/Chrome'
 
 /** Route-aware chrome only. Page content and the original chrome are server-rendered slots. */
 export function SiteChrome({ children, header, footer }: {
@@ -14,6 +15,7 @@ export function SiteChrome({ children, header, footer }: {
 }) {
   const pathname = usePathname().replace(/\/+$/, '') || '/'
   const isPreview = pathname === preview.home || pathname.startsWith(preview.home + '/')
+  if (pathname === '/v3' || pathname.startsWith('/v3/')) return <V3Chrome>{children}</V3Chrome>
   const versionBar = <div className="border-b border-white/[0.07] bg-surface/40">
     <Container className="flex flex-wrap items-center justify-between gap-3 py-3 text-xs">
       <p className="text-subtle"><span className="font-bold text-body">{isPreview ? 'Version 2' : 'Version 1'}</span><span className="mx-2" aria-hidden="true">/</span>{isPreview ? 'Product acquisition' : 'Research-led website'}</p>
@@ -21,6 +23,7 @@ export function SiteChrome({ children, header, footer }: {
         {[
           { label: 'V1', href: isPreview ? originalForPreview(pathname) : pathname, active: !isPreview },
           { label: 'V2', href: isPreview ? pathname : previewForOriginal(pathname), active: isPreview },
+          { label: 'V3', href: '/v3', active: false },
         ].map(version => <Link key={version.label} href={version.href} aria-current={version.active ? 'page' : undefined}
           className={'rounded-lg border px-3 py-1.5 font-bold ' + (version.active ? 'border-brand/40 bg-brand/15 text-highlight' : 'border-white/10 text-subtle hover:text-body')}>{version.label}</Link>)}
       </nav>

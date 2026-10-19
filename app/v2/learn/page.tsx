@@ -1,4 +1,4 @@
-import Link from '@/components/routing/SiteLink'
+import { LibraryLinks } from '@/components/v3/LibraryLinks'
 import { Container } from '@/components/layout/Container'
 import { Button, Eyebrow } from '@/components/ui'
 import { PageIntro, LinkCards, panelClass, headingClass, previewSeo } from '@/components/preview/Primitives'
@@ -20,7 +20,7 @@ export default function LearnPreview() {
         { title: 'Evaluate the evidence', href: preview.report, text: 'Inspect a sample research table and reproduce its error calculation.' },
         { title: 'Use your own numbers', href: preview.tools, text: 'Compare operating costs, explore production and test payback assumptions.' },
       ]} /></div></section>
-      <section className={'mt-12 ' + panelClass}><h2 className="text-xl font-bold">Explore the existing library</h2><p className="mt-3 text-sm leading-relaxed text-subtle">The broader article library remains available while these new content formats are being reviewed.</p><div className="mt-5 flex flex-wrap gap-6 text-sm font-semibold text-highlight">{[['Academy', '/academy'], ['Blog', '/blog'], ['Glossary', '/glossary'], ['Product documentation', '/docs']].map(([label, href]) => <Link key={href} href={href} target="_blank" rel="noopener noreferrer" className="hover:underline">{label} ↗<span className="sr-only"> (original website, opens a new tab)</span></Link>)}</div></section>
+      <LibraryLinks className={'mt-12 ' + panelClass} />
     </Container>
   </>
 }

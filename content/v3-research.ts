@@ -1,0 +1,28 @@
+export type V3ResearchSection = { heading: string; paragraphs: string[] }
+export const v3ContentReviewedAt = '2026-10-19'
+export const v3Reports = [{
+  slug: 'difficulty-forecast-accuracy-2026',
+  title: 'Comparing difficulty forecasts',
+  summary: 'A worked approach to comparing forecasts and outcomes, using a synthetic dataset rather than measured estimator performance.',
+  publishedAt: '2026-10-19',
+  sections: [
+    { heading: 'Compare the same question', paragraphs: ['A fair comparison starts with the same target block, difficulty-change definition and forecast time. Comparing an early-epoch forecast with a later forecast gives the later one information the earlier one did not have.', 'Record the forecast as it was issued, the input block height, source, model version and outcome definition. Preserve failed and missing forecasts in the evaluation record rather than selecting only successful predictions.'] },
+    { heading: 'Measure error and uncertainty separately', paragraphs: ['Absolute error is the distance between a forecast and its outcome. Mean absolute error averages that distance over the selected observations. It describes that evaluation set; it does not establish how a model will perform in another period.', 'An interval needs a separate check: how often did outcomes fall inside the stated range, and how wide was it? Wide intervals can cover many outcomes without being useful. Calibration needs enough independent observations and an explicit evaluation window.'] },
+    { heading: 'What this example establishes', paragraphs: ['The example below makes the arithmetic inspectable. Its forecast/outcome pairs were authored for an educational exercise. They are not captured predictions, network observations or results for Doefin or another estimator.', 'There is no verified comparison of public forecasters on this page. It cannot support a ranking, an accuracy advantage, a volatility estimate or a claim about which forecasters publish intervals.'] },
+  ] satisfies V3ResearchSection[],
+}]
+export const allV3Reports = () => v3Reports
+export const getV3Report = (slug: string) => v3Reports.find(report => report.slug === slug)
+
+export const v3Methodology: V3ResearchSection[] = [
+  { heading: 'Start with the observable inputs', paragraphs: ['A difficulty projection can use the current difficulty, the adjustment boundary and the elapsed time between observed Bitcoin blocks. The method must say which blocks it includes and when those inputs were captured.', 'Blocks arrive irregularly. Extrapolating the pace observed so far makes an assumption about the rest of the epoch; it is not a reading of a future network value. Calendar timing is also an estimate.'] },
+  { heading: 'Make the calculation reproducible', paragraphs: ['Publish the input block heights and timestamps, target adjustment height, formula, protocol constraints and rounding rules. Identify the method version so another reader can reproduce that particular output.', 'Keep the projected percentage change distinct from the observed difficulty level and from any market-implied probability. They answer different questions.'] },
+  { heading: 'Validate any uncertainty interval', paragraphs: ['An uncertainty range needs a documented construction method and an evaluation against outcomes. State the fitting period, forecast timing and held-out evaluation window; report interval width together with observed coverage.', 'The ranges displayed in this website’s examples are authored illustrations. They have not been fitted or calibrated, and no claimed coverage level or probability of a direction change should be inferred from them.'] },
+  { heading: 'Read the status of the evidence', paragraphs: ['This page explains the information required to evaluate a forecast. It does not document a verified running forecast service, publish a measured accuracy history or promise an immutable archive.', 'For the example data, use the sample report and CSV to reproduce the arithmetic. A measured report would also need time-stamped source captures, an explicit evaluation period, baseline results and a correction history.'] },
+]
+
+export const v3AboutSections: V3ResearchSection[] = [
+  { heading: 'A market and a place to understand it', paragraphs: ['Doefin’s product is a market on Bitcoin mining difficulty. This website introduces the product for mining operators, funds and trading desks. The documentation explains its mechanics, operating steps and limitations.', 'The trading application is separate. Its current market specification, available liquidity and transaction confirmations are the information to review before acting.'] },
+  { heading: 'Research you can inspect', paragraphs: ['The research pages demonstrate a format with an explanation, assumptions and an inspectable dataset. The current reports and data examples are synthetic; they do not establish forecasting performance or a historical track record.', 'Doefin operates a product linked to the same underlying discussed in its research. Readers should evaluate methods, inputs and conflicts of interest alongside any future performance claims.'] },
+  { heading: 'Information for an organisational review', paragraphs: ['Ask the team for the current legal entity, contractual terms, access requirements and any authorisation relevant to your organisation and jurisdiction. Company registration alone does not establish regulatory authorisation.', 'This website does not provide a verified regulatory register, deployment registry or audit certification. The technical-review guide lists the evidence to request and match to the actual deployment.'] },
+]

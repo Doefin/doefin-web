@@ -1,0 +1,224 @@
+.figure {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  color: #cceafb;
+}
+
+.caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 3px;
+  color: #b7c6e2;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.unit {
+  color: #a2afc9;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.diagram {
+  position: relative;
+  height: 268px;
+  margin-top: 6px;
+  isolation: isolate;
+}
+
+.desktopVector,
+.mobileVector {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.mobileVector {
+  display: none;
+}
+
+.observation,
+.comparison {
+  position: absolute;
+  margin: 0;
+  text-align: center;
+}
+
+.observation {
+  top: 146px;
+  left: 0;
+  width: 31%;
+}
+
+.comparison {
+  top: 50px;
+  left: 35.1%;
+  width: 35.2%;
+}
+
+.label {
+  display: block;
+  color: #b7c6e2;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+  white-space: nowrap;
+}
+
+.value {
+  display: block;
+  margin-top: 4px;
+  color: #e3edff;
+  font-size: 22px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.035em;
+  line-height: 28px;
+  white-space: nowrap;
+}
+
+.comparison .value {
+  margin-top: 58px;
+  color: #cceafb;
+  font-size: 25px;
+}
+
+.outcomes {
+  margin: 0;
+}
+
+.above,
+.below {
+  position: absolute;
+  left: 77%;
+  width: 23%;
+  text-align: center;
+}
+
+.above { top: 50px; }
+.below { top: 176px; }
+
+.outcomes dt {
+  color: #b7c6e2;
+  font-size: 13px;
+  line-height: 19px;
+  white-space: nowrap;
+}
+
+.outcomes dd {
+  margin: 3px 0 0;
+  color: #c4d9ff;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 22px;
+  white-space: nowrap;
+}
+
+.below dd {
+  color: #d1c7f6;
+}
+
+.observationStroke,
+.thresholdStroke {
+  opacity: 0.7;
+}
+
+.branchTrace {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  opacity: 0.65;
+}
+
+/* After the diagram enters view, allow time to read before following the rule. */
+@media (prefers-reduced-motion: no-preference) {
+  .figure[data-motion='play'] .observationStroke {
+    animation: emphasize 900ms 1200ms ease-out both;
+  }
+
+  .figure[data-motion='play'] .thresholdStroke {
+    animation: emphasize 900ms 2100ms ease-out both;
+  }
+
+  .figure[data-motion='play'] .branchTrace {
+    animation: connect 1200ms 3000ms ease-out both;
+  }
+}
+
+@media (max-width: 639px) {
+  .figure {
+    max-width: none;
+  }
+
+  .caption {
+    padding: 0;
+    gap: 8px;
+  }
+
+  .diagram {
+    height: 170px;
+    margin-top: 8px;
+  }
+
+  .desktopVector { display: none; }
+  .mobileVector { display: block; }
+
+  .observation {
+    top: 15px;
+    left: 0;
+    width: 42%;
+  }
+
+  .comparison {
+    top: 15px;
+    right: 0;
+    left: auto;
+    width: 50%;
+  }
+
+  .label {
+    font-size: 12px;
+  }
+
+  .value,
+  .comparison .value {
+    margin-top: 3px;
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .above,
+  .below {
+    top: 122px;
+    width: 50%;
+  }
+
+  .above { left: 0; }
+  .below { left: 50%; }
+
+  .outcomes dt {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .outcomes dd {
+    margin-top: 1px;
+    font-size: 15px;
+    line-height: 21px;
+  }
+}
+
+@keyframes emphasize {
+  0%, 100% { opacity: 0.7; }
+  45% { opacity: 1; filter: drop-shadow(0 0 5px #5b73e8); }
+}
+
+@keyframes connect {
+  from { stroke-dashoffset: 1; opacity: 0; }
+  to { stroke-dashoffset: 0; opacity: 0.65; }
+}

@@ -1,6 +1,7 @@
 import Link from '@/components/routing/SiteLink'
 import { jsonLd } from '@/lib/seo'
 import { site } from '@/lib/site'
+import type { SiteVersion } from '@/lib/versioning'
 
 export type Crumb = { name: string; href: string }
 
@@ -8,8 +9,9 @@ export type Crumb = { name: string; href: string }
  * Renders the visible trail and the BreadcrumbList schema together, so the two can
  * never drift apart.
  */
-export function Breadcrumbs({ items }: { items: Crumb[] }) {
-  const all: Crumb[] = [{ name: 'Home', href: '/' }, ...items]
+export function Breadcrumbs({ items, schemaVersion }: { items: Crumb[]; schemaVersion?: SiteVersion }) {
+  const version = schemaVersion ?? (items.some(item => /^\/v3(?:\/|$)/.test(item.href)) ? 'v3' : 'v1')
+  const all: Crumb[] = [{ name: 'Home', href: version === 'v3' ? '/v3' : '/' }, ...items]
   return (
     <>
       <script
@@ -23,7 +25,7 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
             name: c.name,
             item: `${site.url}${c.href === '/' ? '' : c.href}`,
           })),
-        })}
+        }, version)}
       />
       <nav aria-label="Breadcrumb">
         <ol className="flex flex-wrap items-center gap-2 text-sm text-muted">

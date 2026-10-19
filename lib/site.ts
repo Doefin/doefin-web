@@ -4,9 +4,9 @@ export const site = {
   appUrl: 'https://app.doefin.com',
   tagline: 'Bitcoin mining difficulty, forecast honestly.',
   description:
-    'Forward difficulty forecasts with published confidence intervals, a public accuracy scoreboard, and the research behind them. For Bitcoin miners, funds and desks.',
+    'Educational documentation, calculators and illustrative examples for understanding Bitcoin mining difficulty and evaluating related markets.',
   entity: 'Doefin',
-  /** The registered legal name, as it must appear in Terms and in schema. */
+  /** Retained legal-page prototype values; unverified and excluded from shared metadata. */
   legalName: 'Doefin',
   registeredIn: 'Port Louis, Mauritius',
   contactEmail: 'matteo@doefin.com',

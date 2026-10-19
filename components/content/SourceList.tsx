@@ -1,4 +1,5 @@
 import type { Source } from '@/content'
+import SiteLink from '@/components/routing/SiteLink'
 
 const label: Record<Source['confidence'], string> = {
   measured: 'Measured',
@@ -29,9 +30,9 @@ export function SourceList({ sources }: { sources?: Source[] }) {
             </span>
             <span className="text-subtle">
               {s.url ? (
-                <a href={s.url} className="text-brand hover:underline">
+                <SiteLink href={s.url} className="text-brand hover:underline">
                   {s.label}
-                </a>
+                </SiteLink>
               ) : (
                 s.label
               )}

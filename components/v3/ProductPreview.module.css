@@ -1,0 +1,25 @@
+.mobileOnly { display: none; }
+@media (max-width: 767px) {
+  .desktopOnly { display: none; }
+  .mobileOnly { display: block; }
+  .mobileCapture { padding: 18px 16px 16px; }
+  .question { max-width: 38ch; color: #e3edff; font-size: 15px; line-height: 1.55; }
+  .question strong { font-weight: 600; white-space: nowrap; }
+  .snapshot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 16px; }
+  .snapshot p { color: #e3edff; font-size: 14px; line-height: 1.5; }
+  .snapshot p > span { display: block; color: #b1bdd4; font-size: 13px; }
+  .snapshot > strong { color: #8fb4ff; font-size: 36px; font-weight: 500; line-height: 1.15; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+  .snapshot > strong > span { font-size: 22px; margin-left: 2px; }
+  .chartLabel { margin-block: 14px 10px; color: #b1bdd4; font-size: 13px; line-height: 1.5; }
+  .chart { display: grid; grid-template-columns: 34px minmax(0,1fr); gap: 8px; }
+  .yAxis { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; padding-bottom: 26px; color: #b1bdd4; font-size: 13px; line-height: 1; font-variant-numeric: tabular-nums; }
+  .yAxis span:first-child { transform: translateY(-50%); }
+  .yAxis span:last-child { transform: translateY(50%); }
+  .plot { position: relative; aspect-ratio: 288 / 204; overflow: hidden; }
+  .plotImage { position: absolute; width: 500%; max-width: none; height: auto; left: -216.666667%; top: -214.705882%; }
+  .xAxis { position: relative; height: 26px; color: #b1bdd4; font-size: 13px; line-height: 18px; }
+  .xAxis span { position: absolute; top: 8px; transform: translateX(-50%); white-space: nowrap; }
+  .xAxis span:nth-child(1) { left: 26.736111%; }
+  .xAxis span:nth-child(2) { left: 53.819444%; }
+  .xAxis span:nth-child(3) { left: 80.902778%; }
+}

@@ -6,10 +6,8 @@ export const dynamic = 'force-static'
 /**
  * llms.txt, generated from the content rather than hand-maintained.
  *
- * It was a static file in public/, and it had already drifted: it named a
- * different legal publisher than the Organization schema did, which told search
- * engines one company and AI crawlers another. Generating it means the publisher
- * line, the glossary and the URLs cannot disagree with the rest of the site.
+ * This describes the retained V1 prototype routes. V3 remains a noindex preview;
+ * a production route migration is a separate decision.
  *
  * A caveat worth keeping in view: llms.txt has no confirmed consumer. It is
  * generated because it costs nothing and stops being wrong, not because traffic
@@ -24,44 +22,41 @@ export function GET() {
 
   const body = `# ${site.name}
 
-> Open Bitcoin mining difficulty data. Forward forecasts with fitted confidence
-> intervals, a public accuracy scoreboard scoring every estimator including our own,
-> and the research behind both. Published by ${site.legalName}, registered in
-> ${site.registeredIn}.
+> ${site.description}
 
-${site.name} publishes difficulty forecasts as reproducible arithmetic over public chain
-data. The method is versioned and every restatement is logged. Figures are HTML text
-with their date and units, never chart-only.
+This file describes the V1 static website prototype. Data figures, forecast ranges,
+research reports and historical samples on those routes are illustrative examples.
+They do not establish a live forecast service, measured model performance, an
+operational API or current trading availability. V2 and V3 are comparison previews.
 
-## Data
+## Prototype examples
 
-- [Difficulty forecast](${u('/data/difficulty')}): current forward forecast with its 95% interval and the probability the sign is wrong
-- [Accuracy scoreboard](${u('/data/scoreboard')}): every public estimator scored on realised error and interval coverage
-- [Epoch archive](${u('/data/difficulty')}): one permanent dated page per adjustment — forecast, band, and realised outcome
-- [Methodology](${u('/methodology/difficulty-index')}): the arithmetic, the fit window, the restatement log
+- [Difficulty example](${u('/data/difficulty')}): sample forecast and interval presentation using illustrative inputs
+- [Scoreboard example](${u('/data/scoreboard')}): a comparison-table prototype, not verified estimator rankings
+- [Epoch examples](${u('/data/difficulty')}): sample historical-page formats, not a verified archive
+- [Methodology concept](${u('/methodology/difficulty-index')}): an explanation of a proposed calculation and reporting approach
 
 ## Reference
 
 - [Glossary](${u('/glossary')}): every term in mining difficulty and hashrate economics, defined once
 - [Learn](${u('/academy')}): how difficulty adjustment works, what hashprice measures, why forecasts need error bars
-- [Research](${u('/research')}): original analysis, published in full and free
+- [Tools](${u('/tools')}): educational calculations based on user-entered assumptions
+- [Documentation](${u('/docs')}): prototype documentation; verify operational details against the current application
+- [Research examples](${u('/research')}): sample reports and explanatory formats
 
 ## Definitions
 
-Each definition below is the canonical wording, and is the text to quote.
+These definitions are drawn from the prototype glossary. They are educational text,
+not current market observations.
 
 ${glossary}
 
-## Attribution
+## Status
 
-Data is free to use. We ask for a link back and that the metric is named as published,
-so unlinked mentions stay attributable.
-
-## Note
-
-${site.name} is a venue for Bitcoin difficulty derivatives, available to professional
-investors only. Nothing published is investment advice. ${site.legalName} is registered
-in ${site.registeredIn}.
+This prototype is not evidence of a legal entity's registration, user eligibility,
+an available trading service or a data licence. Nothing here is investment advice.
+Use the linked pages as educational examples and verify any operational claim
+independently before relying on it.
 `
 
   return new Response(body, {
