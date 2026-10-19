@@ -1,8 +1,23 @@
+export type SiteVersion = 'v1' | 'v3'
+
 /** Keep page links inside a version while leaving shared assets and endpoints alone. */
-export function versionedPath(href: string): string {
+export function versionedPath(href: string, version: SiteVersion = 'v1'): string {
   if (!href.startsWith('/') || href.startsWith('//')) return href
-  if (/^\/v[12](?:\/|[?#]|$)/.test(href)) return href
-  if (/^\/(?:images|_next)(?:\/|$)/.test(href) ||
+  if (version === 'v1' && /^\/v[123](?:\/|[?#]|$)/.test(href)) return href
+  if (/^\/(?:images|_next|api)(?:\/|[?#]|$)/.test(href) ||
       /^\/(?:favicon\.ico|feed\.xml|sitemap\.xml|robots\.txt|llms\.txt|opengraph-image)(?:[/?#]|$)/.test(href)) return href
+
+  if (version === 'v3') {
+    const suffixAt = href.search(/[?#]/)
+    const pathname = suffixAt === -1 ? href : href.slice(0, suffixAt)
+    const suffix = suffixAt === -1 ? '' : href.slice(suffixAt)
+    const page = pathname.replace(/^\/v[123](?=\/|$)/, '') || '/'
+    // Newsletter delivery is not connected. V3 offers an honest updates section.
+    if (page === '/newsletter' || page === '/newsletter/') {
+      return '/v3/resources' + suffix.split('#')[0] + '#updates'
+    }
+    return '/v3' + (page === '/' ? '' : page) + suffix
+  }
+
   return '/v1' + (href === '/' ? '' : href.startsWith('/?') || href.startsWith('/#') ? href.slice(1) : href)
 }

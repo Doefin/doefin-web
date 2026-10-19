@@ -42,8 +42,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     name: site.name,
     url: site.url,
     description: site.description,
-    legalName: site.legalName,
-    address: { '@type': 'PostalAddress', addressLocality: 'Port Louis', addressCountry: 'MU' },
     ...(site.sameAs.length ? { sameAs: site.sameAs } : {}),
   }
 

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { site } from './site'
-import { versionedPath } from './versioning'
+import { versionedPath, type SiteVersion } from './versioning'
 
 /**
  * Stable node identifiers for the entity graph.
@@ -18,6 +18,14 @@ export const ID = {
 /** A reference to the canonical Organization node, never a fresh copy of it. */
 export const publisherRef = { '@id': ID.org } as const
 
+/** Explicitly shared: Next.js replaces nested Open Graph metadata between layouts/pages. */
+export const v3SocialImage = {
+  url: `${site.url}/v3/social-image`,
+  width: 1200,
+  height: 630,
+  alt: 'Doefin — Bitcoin difficulty markets. Understand the market and review the details. Educational prototype.',
+} as const
+
 /**
  * The author node for a piece of content.
  *
@@ -33,6 +41,7 @@ export function authorNode(a: {
   name: string
   url: string
   description: string
+  metadataDescription?: string
   sameAs?: string[]
 }) {
   return {
@@ -40,7 +49,7 @@ export function authorNode(a: {
     '@id': `${site.url}/#${a.slug}`,
     name: a.name,
     url: `${site.url}${versionedPath(a.url)}`,
-    description: a.description,
+    description: a.metadataDescription ?? a.description,
     ...(a.kind === 'person'
       ? { worksFor: { '@id': ID.org } }
       : { parentOrganization: { '@id': ID.org } }),
@@ -65,6 +74,7 @@ type SeoInput = {
 /** Every page builds its metadata through here, so nothing ships without a canonical. */
 export function seo({ title, description, path, type = 'website', publishedTime, modifiedTime, absoluteTitle }: SeoInput): Metadata {
   const url = `${site.url}${versionedPath(path)}`
+  const isV3 = /^\/v3(?:\/|$)/.test(path)
   return {
     title: absoluteTitle ? { absolute: title } : title,
     description,
@@ -75,18 +85,19 @@ export function seo({ title, description, path, type = 'website', publishedTime,
       url,
       siteName: site.name,
       type,
+      ...(isV3 ? { images: [v3SocialImage] } : {}),
       ...(publishedTime ? { publishedTime } : {}),
       ...(modifiedTime ? { modifiedTime } : {}),
     },
-    twitter: { card: 'summary_large_image', title, description },
+    twitter: { card: 'summary_large_image', title, description, ...(isV3 ? { images: [v3SocialImage] } : {}) },
   }
 }
 
-export function jsonLd(data: Record<string, unknown>) {
+export function jsonLd(data: Record<string, unknown>, version: SiteVersion = 'v1') {
   return { __html: JSON.stringify(data, (_key, value: unknown) => {
     // Keep stable organisation IDs; page URLs follow the versioned routes.
     if (typeof value === 'string' && value.startsWith(site.url + '/') && !value.startsWith(site.url + '/#')) {
-      return site.url + versionedPath(value.slice(site.url.length))
+      return site.url + versionedPath(value.slice(site.url.length), version)
     }
     return value
   }) }

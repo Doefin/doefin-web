@@ -66,13 +66,20 @@ for (const file of files) {
   const title = one(html, /<title>([^<]*)<\/title>/)
   const desc = one(html, /<meta name="description" content="([^"]*)"/)
   const words = strip(html).split(' ').filter(Boolean).length
+  // V2/V3 deliberately reuse source content for comparison. Enforce unique
+  // titles on indexable pages; still check every preview's metadata and HTML.
+  const isPreview = /^v[23](?:\.html|\/)/.test(rel)
+  const noindex = /<meta name="robots" content="[^"]*noindex/.test(html)
+  if (isPreview && !noindex) add('comparison preview must remain noindex')
 
   if (!title) add('no <title>')
   else {
     if (title.length > MAX_TITLE + 12) add(`title ${title.length} chars — trim toward ${MAX_TITLE}`)
-    const seen = titles.get(title)
-    if (seen) add(`duplicate title, also on ${seen}`)
-    else titles.set(title, rel)
+    if (!isPreview || !noindex) {
+      const seen = titles.get(title)
+      if (seen) add(`duplicate title, also on ${seen}`)
+      else titles.set(title, rel)
+    }
   }
 
   if (!desc) add('no meta description')

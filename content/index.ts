@@ -63,3 +63,10 @@ export type { Author } from './authors'
 
 export { previewTools, getPreviewTool, getExposureTutorial, getForecastReport } from './preview'
 export type { PreviewTool, EvidenceRow } from './preview'
+
+export { allV3Docs, getV3Doc, v3DocGroups, v3DocReviewedAt } from './v3-docs'
+export type { V3Doc } from './v3-docs'
+export { allV3Reports, getV3Report, v3Methodology, v3AboutSections, v3ContentReviewedAt } from './v3-research'
+export type { V3ResearchSection } from './v3-research'
+export { allV3Editorial, getV3Editorial, allV3EditorialTags } from './v3-editorial'
+export type { V3EditorialArticle } from './v3-editorial'

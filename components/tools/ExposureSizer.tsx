@@ -1,7 +1,9 @@
 'use client'
 
 import { useMemo } from 'react'
-import { calculateExposure, exposureDefaults } from '@/lib/exposure'
+import { calculateExposure, exposureBounds, exposureDefaults } from '@/lib/exposure'
+import { useSiteVersion } from '@/components/routing/SiteVersionContext'
+import { ScenarioBrief } from '@/components/v3/ScenarioBrief'
 import {
   CompareBars,
   Hint,
@@ -25,10 +27,11 @@ import { hintFor, presetsFor, resultHintFor } from '@/content/tool-micro'
  */
 const SLUG = 'difficulty-exposure'
 const DEFAULTS = exposureDefaults
-const BOUNDS = { eh: [0.01, 30], epochs: [1, 13], diffT: [1, 1000], low: [-15, 0], high: [0, 15], fees: [0, 0.5], price: [20000, 200000] } as const
+const BOUNDS = exposureBounds
 
 export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boolean; nextStep?: React.ReactNode }) {
-  const [v, setV] = useUrlState(DEFAULTS, enhanced ? BOUNDS : undefined)
+  const isV3 = useSiteVersion() === 'v3'
+  const [v, setV] = useUrlState(DEFAULTS, enhanced || isV3 ? BOUNDS : undefined)
   const presets = presetsFor(SLUG)
   const out = useMemo(() => calculateExposure(v), [v])
 
@@ -176,6 +179,7 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
           </tbody>
         </table>
       </div>
+      {isV3 ? <ScenarioBrief inputs={v} /> : null}
     </>
   )
 }

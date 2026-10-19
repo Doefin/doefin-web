@@ -23,6 +23,8 @@ export type Author = {
   /** Must resolve — the anchor exists in app/about/page.tsx. */
   url: string
   description: string
+  /** Factual schema summary; legacy comparison-page prose remains unchanged. */
+  metadataDescription?: string
   sameAs?: string[]
 }
 
@@ -34,6 +36,8 @@ export const authors: Author[] = [
     url: '/about#doefin-research',
     description:
       'The research desk at Doefin. Publishes difficulty forecasts as reproducible arithmetic over public chain data, with the method versioned and every restatement logged.',
+    metadataDescription:
+      'Doefin educational content and illustrative research examples on Bitcoin mining difficulty. Examples are not measured forecasting performance.',
   },
 ]
 

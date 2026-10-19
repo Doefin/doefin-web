@@ -4,6 +4,7 @@ import { ResearchUpdates } from '@/components/preview/ResearchUpdates'
 import { PageIntro, RelatedContent, panelClass, headingClass, previewSeo } from '@/components/preview/Primitives'
 import { getForecastReport } from '@/content'
 import { preview } from '@/lib/preview'
+import SiteLink from '@/components/routing/SiteLink'
 
 export const metadata = previewSeo('How to evaluate a difficulty forecast', 'Inspect a synthetic evidence table, reproduce the error calculation and download the sample dataset.', preview.report)
 
@@ -22,7 +23,7 @@ export default function ReportPreview() {
       </section>
       <section className="mt-14"><h2 className={headingClass}>What to look for in a report.</h2><div className="mt-7 grid gap-5 md:grid-cols-3">{report.findings.map((item, i) => <article key={item.title} className={panelClass}><span className="tabular text-sm font-bold text-highlight">0{i + 1}</span><h3 className="mt-4 text-lg font-bold">{item.title}</h3><p className="mt-3 text-sm leading-[1.75] text-subtle">{item.body}</p></article>)}</div></section>
       <section id="evidence" className="mt-14 scroll-mt-36">
-        <div className="mb-6 flex flex-wrap items-end justify-between gap-5"><div><Eyebrow>The evidence</Eyebrow><h2 className={headingClass}>Every row behind the result.</h2></div><a href={preview.report + '/sample.csv'} download="doefin-synthetic-forecast-sample.csv" className="rounded-lg border border-white/15 px-5 py-3 text-sm font-semibold text-highlight hover:border-brand/50">Download sample CSV ↓</a></div>
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-5"><div><Eyebrow>The evidence</Eyebrow><h2 className={headingClass}>Every row behind the result.</h2></div><SiteLink href={preview.report + '/sample.csv'} prefetch={false} download="doefin-synthetic-forecast-sample.csv" className="rounded-lg border border-white/15 px-5 py-3 text-sm font-semibold text-highlight hover:border-brand/50">Download sample CSV ↓</SiteLink></div>
         <DataTable caption="Synthetic difficulty changes · sample prepared 17 September 2026" head={['Observation', 'Forecast change (%)', 'Example outcome (%)', 'Absolute error (pp)']} rows={report.rows.map(row => [row.sample, row.forecast.toFixed(1), row.observed.toFixed(1), Math.abs(row.observed - row.forecast).toFixed(1)])} />
       </section>
       <div className="mt-10 grid gap-6 md:grid-cols-2">

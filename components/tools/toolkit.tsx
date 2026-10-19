@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState } from 'react'
+import { readToolQuery, toolQuery, type ToolBounds } from '@/lib/tool-url-state'
 
 /* Shared pieces so every tool reads as one family. */
 
@@ -213,34 +214,20 @@ export function PreviewNote({ children }: { children: React.ReactNode }) {
 }
 
 /** Keeps tool state in the URL so a scenario can be pasted into a conversation. */
-export function useUrlState<T extends Record<string, number>>(defaults: T, bounds?: Partial<Record<keyof T, readonly [number, number]>>) {
+export function useUrlState<T extends Record<string, number>>(defaults: T, bounds?: ToolBounds<T>) {
   const [v, setV] = useState<T>(defaults)
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    const p = new URLSearchParams(window.location.search)
-    const next = { ...defaults }
-    let found = false
-    for (const k of Object.keys(defaults) as (keyof T)[]) {
-      const raw = p.get(String(k))
-      if (raw !== null && raw.trim() !== '' && Number.isFinite(Number(raw))) {
-        const range = bounds?.[k]
-        next[k] = (range ? Math.min(range[1], Math.max(range[0], Number(raw))) : Number(raw)) as T[keyof T]
-        found = true
-      }
-    }
-    if (found) setV(next)
+    const { values, found } = readToolQuery(defaults, new URLSearchParams(window.location.search), bounds)
+    if (found) setV(values)
     setReady(true)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
     if (!ready) return
-    const p = new URLSearchParams()
-    for (const k of Object.keys(defaults) as (keyof T)[]) {
-      if (v[k] !== defaults[k]) p.set(String(k), String(v[k]))
-    }
-    const qs = p.toString()
+    const qs = toolQuery(defaults, v)
     window.history.replaceState(null, '', qs ? `?${qs}` : window.location.pathname)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [v, ready])
