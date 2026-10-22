@@ -61,7 +61,7 @@ export function V3Chrome({ children }: { children: ReactNode }) {
         </div>
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-white/[0.07] pt-4 text-xs text-subtle sm:mt-7 sm:pt-5">
           <p>Preview <span className="mx-2 text-muted" aria-hidden="true">/</span> {previewVersion}</p>
-          <nav aria-label="Website version" className="flex items-center gap-2"><span className="mr-2">Compare</span>{['v1', 'v2', 'v3'].map(v => <Link key={v} href={'/' + v} aria-current={v === 'v3' ? 'page' : undefined} className={'rounded-md border px-3 py-2 uppercase ' + (v === 'v3' ? 'border-brand/40 bg-brand/10 text-highlight' : 'border-white/10 hover:border-white/30')}>{v}</Link>)}</nav>
+          <nav aria-label="Website version" className="flex items-center gap-2"><span className="mr-2">Compare</span>{['v1', 'v2', 'v3', 'v4'].map(v => <Link key={v} href={'/' + v} aria-current={v === 'v3' ? 'page' : undefined} className={'rounded-md border px-3 py-2 uppercase ' + (v === 'v3' ? 'border-brand/40 bg-brand/10 text-highlight' : 'border-white/10 hover:border-white/30')}>{v}</Link>)}</nav>
         </div>
       </Container>
     </footer>

@@ -12,6 +12,7 @@ const ROOT = join(process.cwd(), '.next', 'server', 'app')
 const MIN_WORDS = 120
 
 const PAGES = [
+  ['v4.html', 'V4 home'],
   ['v3.html', 'V3 home'],
   ['v3/resources.html', 'V3 resources'],
   ['v3/tools/difficulty-exposure.html', 'V3 enhanced tool'],

@@ -3,6 +3,8 @@ export type SiteVersion = 'v1' | 'v3'
 /** Keep page links inside a version while leaving shared assets and endpoints alone. */
 export function versionedPath(href: string, version: SiteVersion = 'v1'): string {
   if (!href.startsWith('/') || href.startsWith('//')) return href
+  // V4 is an explicit standalone landing; shared documentation stays on V3.
+  if (/^\/v4(?:\/|[?#]|$)/.test(href)) return href
   if (version === 'v1' && /^\/v[123](?:\/|[?#]|$)/.test(href)) return href
   if (/^\/(?:images|_next|api)(?:\/|[?#]|$)/.test(href) ||
       /^\/(?:favicon\.ico|feed\.xml|sitemap\.xml|robots\.txt|llms\.txt|opengraph-image)(?:[/?#]|$)/.test(href)) return href
