@@ -8,7 +8,7 @@ import { seo } from '@/lib/seo'
 import { site } from '@/lib/site'
 
 export const metadata: Metadata = {
-  ...seo({ title: 'Resources: guides, tools and mining glossary', description: 'Understand Bitcoin difficulty, compare mining scenarios and explore guides, articles, definitions and clearly labelled research examples.', path: '/v3/resources' }),
+  ...seo({ title: 'Resources: guides, tools and mining glossary', description: 'Understand Bitcoin difficulty, compare mining scenarios and explore guides, articles, definitions, captured retarget observations and clearly labelled synthetic exercises.', path: '/v3/resources' }),
   robots: { index: false, follow: false },
 }
 
@@ -33,13 +33,13 @@ export default function Resources() {
     <nav aria-label="Resource sections" className="mt-7 flex flex-wrap gap-x-6 gap-y-1 border-b border-white/10 pb-5">
       {[
         ['Calculators', '#tools'], ['Guides & articles', '#learn'],
-        ['Glossary', '#glossary'], ['Research examples', '#research'],
+        ['Glossary', '#glossary'], ['Research & data', '#research'],
       ].map(([label, href]) => <Link key={href} href={href} className="inline-flex min-h-11 items-center text-sm font-semibold text-highlight underline-offset-4 hover:underline">{label}</Link>)}
     </nav>
 
     <section id="docs" aria-label="Choose a starting point" className="mt-8 grid scroll-mt-28 gap-4 md:grid-cols-3">
       {[
-        { icon: 'block' as const, title: 'Understand the market', description: 'Build a clear picture of YES/NO positions, observation blocks, settlement and risks.', href: '/v3/docs/overview', action: 'Start with the overview' },
+        { icon: 'block' as const, title: 'Understand the market', description: 'Start with the contract’s underlying, observation block and binary outcome; use Docs for task-specific detail.', href: '/v3/product', action: 'Read the product introduction' },
         { icon: 'mining' as const, title: 'Explore your production', description: 'Connect difficulty to a fleet’s expected production, then try the calculation yourself.', href: '/v3/for/miners#planning-example', action: 'Follow the miner example' },
         { icon: 'market' as const, title: 'Prepare a market review', description: 'Work through execution, collateral, evidence and the questions to discuss with your team.', href: '/v3/for/institutions#review-checklist', action: 'Open the review checklist' },
       ].map((item, index) => <Link key={item.href} href={item.href} className={'group flex flex-col rounded-panel border p-6 transition-colors hover:border-brand/50 ' + (index === 0 ? 'border-brand/30 bg-gradient-to-br from-brand/10 to-surface/60' : 'border-white/10 bg-surface/40')}>
@@ -86,7 +86,7 @@ export default function Resources() {
           <Link href={group.href} className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">{group.href.endsWith('academy') ? 'Academy & written guides' : 'All articles'} <Arrow /></Link>
         </div>)}
       </div>
-      <Link href="/v3/learn/difficulty-exposure" className="mt-7 flex flex-wrap items-center justify-between gap-3 rounded-panel border border-white/10 bg-surface/40 px-6 py-5 hover:border-brand/40">
+      <Link href="/v3/learn/difficulty-exposure" data-v3-cta="tutorial" data-v3-placement="resources" className="mt-7 flex flex-wrap items-center justify-between gap-3 rounded-panel border border-white/10 bg-surface/40 px-6 py-5 hover:border-brand/40">
         <span><span className="block text-xs font-semibold text-subtle">Prefer a practical walkthrough?</span><span className="mt-2 block font-semibold">Measure your fleet’s difficulty exposure</span></span><span className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight">Follow the four steps <Arrow /></span>
       </Link>
     </section>
@@ -107,25 +107,25 @@ export default function Resources() {
 
     <section id="research" aria-labelledby="resources-research" className="mt-16 scroll-mt-28 border-t border-white/10 pt-9">
       <div className="max-w-2xl">
-        <p className="text-xs font-bold uppercase tracking-[0.12em] text-subtle">Research &amp; data examples</p>
-        <h2 id="resources-research" className="mt-3 text-3xl font-bold tracking-[-0.03em]">See how to examine the evidence.</h2>
-        <p className="mt-4 text-[15px] leading-relaxed text-subtle">Work through a comparison, inspect its assumptions and reproduce the arithmetic from the sample CSV.</p>
-        <p className="mt-4 border-l-2 border-caution/60 pl-4 text-sm leading-relaxed text-subtle"><strong className="font-semibold text-caution">Synthetic examples.</strong> These pages do not establish live forecasts, measured estimator performance or a verified historical record.</p>
+        <p className="text-xs font-bold uppercase tracking-[0.12em] text-subtle">Research &amp; data</p>
+        <h2 id="resources-research" className="mt-3 text-3xl font-bold tracking-[-0.03em]">Inspect the observations. Understand the methods.</h2>
+        <p className="mt-4 text-[15px] leading-relaxed text-subtle">Explore a frozen capture of observed difficulty retargets, inspect its provenance and reuse its dataset. Separate teaching exercises show how forecast-error arithmetic works.</p>
+        <p className="mt-4 border-l-2 border-caution/60 pl-4 text-sm leading-relaxed text-subtle"><strong className="font-semibold text-caution">Different evidence, clearly labelled.</strong> The observed-retarget report uses captured network data. Forecast comparisons and error exercises use authored synthetic values. Neither establishes live forecasts, measured estimator performance or a verified prediction track record.</p>
       </div>
       <ul className="mt-7 divide-y divide-white/10 border-y border-white/10">
         {[
-          ...reports.map(report => ({ title: report.title, summary: report.summary, href: '/v3/research/' + report.slug })),
-          { title: 'Evaluate a difficulty forecast', summary: 'Inspect every sample observation, follow the error calculation and download the synthetic dataset.', href: '/v3/research/evaluating-a-forecast' },
-        ].map(report => <li key={report.href}><Link href={report.href} className="group flex items-start justify-between gap-5 py-6"><div><h3 className="text-lg font-semibold group-hover:text-highlight">{report.title}</h3><p className="mt-2 max-w-3xl text-sm leading-relaxed text-subtle">{report.summary}</p></div><Arrow className="mt-1" /></Link></li>)}
+          ...reports.map(report => ({ title: report.title, summary: report.summary, href: '/v3/research/' + report.slug, provenance: report.slug === 'observed-difficulty-adjustments' ? 'Observed network data · Frozen source capture' : 'Synthetic teaching exercise · Authored values' })),
+          { title: 'Evaluate a difficulty forecast', summary: 'Inspect every sample observation, follow the error calculation and download the synthetic dataset.', href: '/v3/research/evaluating-a-forecast', provenance: 'Synthetic teaching exercise · Authored values' },
+        ].map(report => <li key={report.href}><Link href={report.href} className="group flex items-start justify-between gap-5 py-6"><div><p className="mb-2 text-xs font-semibold text-subtle">{report.provenance}</p><h3 className="text-lg font-semibold group-hover:text-highlight">{report.title}</h3><p className="mt-2 max-w-3xl text-sm leading-relaxed text-subtle">{report.summary}</p></div><Arrow className="mt-1" /></Link></li>)}
       </ul>
       <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1">{[
-        ['All research examples', '/v3/research'], ['Data examples', '/v3/data'], ['Methodology & assumptions', '/v3/methodology/difficulty-index'],
+        ['All research', '/v3/research'], ['Data & archive status', '/v3/data'], ['Methodology & assumptions', '/v3/methodology/difficulty-index'],
       ].map(([label, href]) => <Link key={href} href={href} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">{label} <Arrow /></Link>)}</div>
     </section>
 
     <section id="updates" aria-labelledby="resources-contact" className="mt-14 flex scroll-mt-28 flex-wrap items-center justify-between gap-5 border-t border-white/10 pt-7">
-      <div className="max-w-2xl"><h2 id="resources-contact" className="text-xl font-bold">Need a detail you cannot find?</h2><p className="mt-3 text-sm leading-relaxed text-subtle">Ask the team about the product or the evidence your review needs.</p><p className="mt-2 text-xs leading-relaxed text-subtle">Newsletter delivery and automatic alerts are not connected in this prototype.</p></div>
-      <a href={'mailto:' + site.contactEmail} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">Contact the team <Arrow diagonal /></a>
+      <div className="max-w-2xl"><h2 id="resources-contact" className="text-xl font-bold">Need a detail you cannot find?</h2><p className="mt-3 text-sm leading-relaxed text-subtle">Ask the team about the product or the evidence your review needs.</p><p className="mt-2 text-xs leading-relaxed text-subtle">Preview research email preferences, publication alerts or a requested report email. This demo does not send emails or save personal details.</p></div>
+      <div className="flex flex-wrap gap-x-6 gap-y-2"><a href={'mailto:' + site.contactEmail} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">Ask the team <Arrow diagonal /></a><Link href="/v3/newsletter" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">Explore research emails <Arrow /></Link></div>
     </section>
   </Container>
 }

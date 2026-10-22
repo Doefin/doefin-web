@@ -1,0 +1,1534 @@
+{
+  "active": false,
+  "generatedFrom": ".next/prerender-manifest.json",
+  "purpose": "Reviewable canonical migration proposal. Current version previews, robots and routes are unchanged.",
+  "sourceHtmlPageCount": 87,
+  "sourcePageCount": 86,
+  "canonicalPublicPageCount": 86,
+  "retainedInternalPreviews": [
+    {
+      "path": "/v3/prototype-review",
+      "indexable": false,
+      "redirect": null,
+      "reason": "Internal controlled-QA surface. Retain only as a noindex preview; exclude from public canonical routes, sitemap and public navigation."
+    }
+  ],
+  "prerequisites": [
+    "Approved publication and content review",
+    "Documented email/data/measurement readiness",
+    "Implemented canonical route hosting and link adapter",
+    "Reviewed legacy paths absent from these matching aliases",
+    "Staging redirect, metadata and rollback verification"
+  ],
+  "mappings": [
+    {
+      "preview": "/v3",
+      "canonical": "/",
+      "canonicalUrl": "https://doefin.com/",
+      "proposedRedirects": [
+        {
+          "source": "/v3",
+          "destination": "/",
+          "status": 308
+        },
+        {
+          "source": "/v1",
+          "destination": "/",
+          "status": 308
+        },
+        {
+          "source": "/v2",
+          "destination": "/",
+          "status": 308
+        },
+        {
+          "source": "/v4",
+          "destination": "/",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/about",
+      "canonical": "/about",
+      "canonicalUrl": "https://doefin.com/about",
+      "proposedRedirects": [
+        {
+          "source": "/v3/about",
+          "destination": "/about",
+          "status": 308
+        },
+        {
+          "source": "/v1/about",
+          "destination": "/about",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/academy",
+      "canonical": "/academy",
+      "canonicalUrl": "https://doefin.com/academy",
+      "proposedRedirects": [
+        {
+          "source": "/v3/academy",
+          "destination": "/academy",
+          "status": 308
+        },
+        {
+          "source": "/v1/academy",
+          "destination": "/academy",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/academy/guides/difficulty-exposure",
+      "canonical": "/academy/guides/difficulty-exposure",
+      "canonicalUrl": "https://doefin.com/academy/guides/difficulty-exposure",
+      "proposedRedirects": [
+        {
+          "source": "/v3/academy/guides/difficulty-exposure",
+          "destination": "/academy/guides/difficulty-exposure",
+          "status": 308
+        },
+        {
+          "source": "/v1/academy/guides/difficulty-exposure",
+          "destination": "/academy/guides/difficulty-exposure",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/academy/guides/fleet-payback",
+      "canonical": "/academy/guides/fleet-payback",
+      "canonicalUrl": "https://doefin.com/academy/guides/fleet-payback",
+      "proposedRedirects": [
+        {
+          "source": "/v3/academy/guides/fleet-payback",
+          "destination": "/academy/guides/fleet-payback",
+          "status": 308
+        },
+        {
+          "source": "/v1/academy/guides/fleet-payback",
+          "destination": "/academy/guides/fleet-payback",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/academy/guides/hosting-effective-rate",
+      "canonical": "/academy/guides/hosting-effective-rate",
+      "canonicalUrl": "https://doefin.com/academy/guides/hosting-effective-rate",
+      "proposedRedirects": [
+        {
+          "source": "/v3/academy/guides/hosting-effective-rate",
+          "destination": "/academy/guides/hosting-effective-rate",
+          "status": 308
+        },
+        {
+          "source": "/v1/academy/guides/hosting-effective-rate",
+          "destination": "/academy/guides/hosting-effective-rate",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/academy/how-difficulty-adjustment-works",
+      "canonical": "/academy/how-difficulty-adjustment-works",
+      "canonicalUrl": "https://doefin.com/academy/how-difficulty-adjustment-works",
+      "proposedRedirects": [
+        {
+          "source": "/v3/academy/how-difficulty-adjustment-works",
+          "destination": "/academy/how-difficulty-adjustment-works",
+          "status": 308
+        },
+        {
+          "source": "/v1/academy/how-difficulty-adjustment-works",
+          "destination": "/academy/how-difficulty-adjustment-works",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/academy/what-hashprice-means",
+      "canonical": "/academy/what-hashprice-means",
+      "canonicalUrl": "https://doefin.com/academy/what-hashprice-means",
+      "proposedRedirects": [
+        {
+          "source": "/v3/academy/what-hashprice-means",
+          "destination": "/academy/what-hashprice-means",
+          "status": 308
+        },
+        {
+          "source": "/v1/academy/what-hashprice-means",
+          "destination": "/academy/what-hashprice-means",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/academy/why-forecasts-need-error-bars",
+      "canonical": "/academy/why-forecasts-need-error-bars",
+      "canonicalUrl": "https://doefin.com/academy/why-forecasts-need-error-bars",
+      "proposedRedirects": [
+        {
+          "source": "/v3/academy/why-forecasts-need-error-bars",
+          "destination": "/academy/why-forecasts-need-error-bars",
+          "status": 308
+        },
+        {
+          "source": "/v1/academy/why-forecasts-need-error-bars",
+          "destination": "/academy/why-forecasts-need-error-bars",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/blog",
+      "canonical": "/blog",
+      "canonicalUrl": "https://doefin.com/blog",
+      "proposedRedirects": [
+        {
+          "source": "/v3/blog",
+          "destination": "/blog",
+          "status": 308
+        },
+        {
+          "source": "/v1/blog",
+          "destination": "/blog",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/blog/reading-a-hashrate-chart-honestly",
+      "canonical": "/blog/reading-a-hashrate-chart-honestly",
+      "canonicalUrl": "https://doefin.com/blog/reading-a-hashrate-chart-honestly",
+      "proposedRedirects": [
+        {
+          "source": "/v3/blog/reading-a-hashrate-chart-honestly",
+          "destination": "/blog/reading-a-hashrate-chart-honestly",
+          "status": 308
+        },
+        {
+          "source": "/v1/blog/reading-a-hashrate-chart-honestly",
+          "destination": "/blog/reading-a-hashrate-chart-honestly",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/blog/tag/difficulty",
+      "canonical": "/blog/tag/difficulty",
+      "canonicalUrl": "https://doefin.com/blog/tag/difficulty",
+      "proposedRedirects": [
+        {
+          "source": "/v3/blog/tag/difficulty",
+          "destination": "/blog/tag/difficulty",
+          "status": 308
+        },
+        {
+          "source": "/v1/blog/tag/difficulty",
+          "destination": "/blog/tag/difficulty",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/blog/tag/hashrate",
+      "canonical": "/blog/tag/hashrate",
+      "canonicalUrl": "https://doefin.com/blog/tag/hashrate",
+      "proposedRedirects": [
+        {
+          "source": "/v3/blog/tag/hashrate",
+          "destination": "/blog/tag/hashrate",
+          "status": 308
+        },
+        {
+          "source": "/v1/blog/tag/hashrate",
+          "destination": "/blog/tag/hashrate",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/blog/tag/methodology",
+      "canonical": "/blog/tag/methodology",
+      "canonicalUrl": "https://doefin.com/blog/tag/methodology",
+      "proposedRedirects": [
+        {
+          "source": "/v3/blog/tag/methodology",
+          "destination": "/blog/tag/methodology",
+          "status": 308
+        },
+        {
+          "source": "/v1/blog/tag/methodology",
+          "destination": "/blog/tag/methodology",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/blog/tag/mining-economics",
+      "canonical": "/blog/tag/mining-economics",
+      "canonicalUrl": "https://doefin.com/blog/tag/mining-economics",
+      "proposedRedirects": [
+        {
+          "source": "/v3/blog/tag/mining-economics",
+          "destination": "/blog/tag/mining-economics",
+          "status": 308
+        },
+        {
+          "source": "/v1/blog/tag/mining-economics",
+          "destination": "/blog/tag/mining-economics",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/blog/what-a-static-growth-assumption-costs-you",
+      "canonical": "/blog/what-a-static-growth-assumption-costs-you",
+      "canonicalUrl": "https://doefin.com/blog/what-a-static-growth-assumption-costs-you",
+      "proposedRedirects": [
+        {
+          "source": "/v3/blog/what-a-static-growth-assumption-costs-you",
+          "destination": "/blog/what-a-static-growth-assumption-costs-you",
+          "status": 308
+        },
+        {
+          "source": "/v1/blog/what-a-static-growth-assumption-costs-you",
+          "destination": "/blog/what-a-static-growth-assumption-costs-you",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/data",
+      "canonical": "/data",
+      "canonicalUrl": "https://doefin.com/data",
+      "proposedRedirects": [
+        {
+          "source": "/v3/data",
+          "destination": "/data",
+          "status": 308
+        },
+        {
+          "source": "/v1/data",
+          "destination": "/data",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/data/difficulty",
+      "canonical": "/data/difficulty",
+      "canonicalUrl": "https://doefin.com/data/difficulty",
+      "proposedRedirects": [
+        {
+          "source": "/v3/data/difficulty",
+          "destination": "/data/difficulty",
+          "status": 308
+        },
+        {
+          "source": "/v1/data/difficulty",
+          "destination": "/data/difficulty",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/data/difficulty/epoch/909216",
+      "canonical": "/data/difficulty/epoch/909216",
+      "canonicalUrl": "https://doefin.com/data/difficulty/epoch/909216",
+      "proposedRedirects": [
+        {
+          "source": "/v3/data/difficulty/epoch/909216",
+          "destination": "/data/difficulty/epoch/909216",
+          "status": 308
+        },
+        {
+          "source": "/v1/data/difficulty/epoch/909216",
+          "destination": "/data/difficulty/epoch/909216",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/data/difficulty/epoch/911232",
+      "canonical": "/data/difficulty/epoch/911232",
+      "canonicalUrl": "https://doefin.com/data/difficulty/epoch/911232",
+      "proposedRedirects": [
+        {
+          "source": "/v3/data/difficulty/epoch/911232",
+          "destination": "/data/difficulty/epoch/911232",
+          "status": 308
+        },
+        {
+          "source": "/v1/data/difficulty/epoch/911232",
+          "destination": "/data/difficulty/epoch/911232",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/data/difficulty/epoch/913248",
+      "canonical": "/data/difficulty/epoch/913248",
+      "canonicalUrl": "https://doefin.com/data/difficulty/epoch/913248",
+      "proposedRedirects": [
+        {
+          "source": "/v3/data/difficulty/epoch/913248",
+          "destination": "/data/difficulty/epoch/913248",
+          "status": 308
+        },
+        {
+          "source": "/v1/data/difficulty/epoch/913248",
+          "destination": "/data/difficulty/epoch/913248",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/data/hashrate",
+      "canonical": "/data/hashrate",
+      "canonicalUrl": "https://doefin.com/data/hashrate",
+      "proposedRedirects": [
+        {
+          "source": "/v3/data/hashrate",
+          "destination": "/data/hashrate",
+          "status": 308
+        },
+        {
+          "source": "/v1/data/hashrate",
+          "destination": "/data/hashrate",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/data/scoreboard",
+      "canonical": "/data/scoreboard",
+      "canonicalUrl": "https://doefin.com/data/scoreboard",
+      "proposedRedirects": [
+        {
+          "source": "/v3/data/scoreboard",
+          "destination": "/data/scoreboard",
+          "status": 308
+        },
+        {
+          "source": "/v1/data/scoreboard",
+          "destination": "/data/scoreboard",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/docs",
+      "canonical": "/docs",
+      "canonicalUrl": "https://doefin.com/docs",
+      "proposedRedirects": [
+        {
+          "source": "/v3/docs",
+          "destination": "/docs",
+          "status": 308
+        },
+        {
+          "source": "/v1/docs",
+          "destination": "/docs",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/docs/bitcoin-mining-difficulty",
+      "canonical": "/docs/bitcoin-mining-difficulty",
+      "canonicalUrl": "https://doefin.com/docs/bitcoin-mining-difficulty",
+      "proposedRedirects": [
+        {
+          "source": "/v3/docs/bitcoin-mining-difficulty",
+          "destination": "/docs/bitcoin-mining-difficulty",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/docs/collateral-tokens",
+      "canonical": "/docs/collateral-tokens",
+      "canonicalUrl": "https://doefin.com/docs/collateral-tokens",
+      "proposedRedirects": [
+        {
+          "source": "/v3/docs/collateral-tokens",
+          "destination": "/docs/collateral-tokens",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/docs/connecting-a-wallet",
+      "canonical": "/docs/connecting-a-wallet",
+      "canonicalUrl": "https://doefin.com/docs/connecting-a-wallet",
+      "proposedRedirects": [
+        {
+          "source": "/v3/docs/connecting-a-wallet",
+          "destination": "/docs/connecting-a-wallet",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/docs/getting-collateral",
+      "canonical": "/docs/getting-collateral",
+      "canonicalUrl": "https://doefin.com/docs/getting-collateral",
+      "proposedRedirects": [
+        {
+          "source": "/v3/docs/getting-collateral",
+          "destination": "/docs/getting-collateral",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/docs/how-settlement-works",
+      "canonical": "/docs/how-settlement-works",
+      "canonicalUrl": "https://doefin.com/docs/how-settlement-works",
+      "proposedRedirects": [
+        {
+          "source": "/v3/docs/how-settlement-works",
+          "destination": "/docs/how-settlement-works",
+          "status": 308
+        },
+        {
+          "source": "/v1/docs/how-settlement-works",
+          "destination": "/docs/how-settlement-works",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/docs/key-terms",
+      "canonical": "/docs/key-terms",
+      "canonicalUrl": "https://doefin.com/docs/key-terms",
+      "proposedRedirects": [
+        {
+          "source": "/v3/docs/key-terms",
+          "destination": "/docs/key-terms",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/docs/managing-positions",
+      "canonical": "/docs/managing-positions",
+      "canonicalUrl": "https://doefin.com/docs/managing-positions",
+      "proposedRedirects": [
+        {
+          "source": "/v3/docs/managing-positions",
+          "destination": "/docs/managing-positions",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/docs/market-vs-limit-orders",
+      "canonical": "/docs/market-vs-limit-orders",
+      "canonicalUrl": "https://doefin.com/docs/market-vs-limit-orders",
+      "proposedRedirects": [
+        {
+          "source": "/v3/docs/market-vs-limit-orders",
+          "destination": "/docs/market-vs-limit-orders",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/docs/methodology-and-evidence",
+      "canonical": "/docs/methodology-and-evidence",
+      "canonicalUrl": "https://doefin.com/docs/methodology-and-evidence",
+      "proposedRedirects": [
+        {
+          "source": "/v3/docs/methodology-and-evidence",
+          "destination": "/docs/methodology-and-evidence",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/docs/order-management",
+      "canonical": "/docs/order-management",
+      "canonicalUrl": "https://doefin.com/docs/order-management",
+      "proposedRedirects": [
+        {
+          "source": "/v3/docs/order-management",
+          "destination": "/docs/order-management",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/docs/overview",
+      "canonical": "/docs/overview",
+      "canonicalUrl": "https://doefin.com/docs/overview",
+      "proposedRedirects": [
+        {
+          "source": "/v3/docs/overview",
+          "destination": "/docs/overview",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/docs/prices-and-probability",
+      "canonical": "/docs/prices-and-probability",
+      "canonicalUrl": "https://doefin.com/docs/prices-and-probability",
+      "proposedRedirects": [
+        {
+          "source": "/v3/docs/prices-and-probability",
+          "destination": "/docs/prices-and-probability",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/docs/redeeming-positions",
+      "canonical": "/docs/redeeming-positions",
+      "canonicalUrl": "https://doefin.com/docs/redeeming-positions",
+      "proposedRedirects": [
+        {
+          "source": "/v3/docs/redeeming-positions",
+          "destination": "/docs/redeeming-positions",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/docs/risks-and-limitations",
+      "canonical": "/docs/risks-and-limitations",
+      "canonicalUrl": "https://doefin.com/docs/risks-and-limitations",
+      "proposedRedirects": [
+        {
+          "source": "/v3/docs/risks-and-limitations",
+          "destination": "/docs/risks-and-limitations",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/docs/smart-contracts",
+      "canonical": "/docs/smart-contracts",
+      "canonicalUrl": "https://doefin.com/docs/smart-contracts",
+      "proposedRedirects": [
+        {
+          "source": "/v3/docs/smart-contracts",
+          "destination": "/docs/smart-contracts",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/docs/what-doefin-settles-on",
+      "canonical": "/docs/what-doefin-settles-on",
+      "canonicalUrl": "https://doefin.com/docs/what-doefin-settles-on",
+      "proposedRedirects": [
+        {
+          "source": "/v3/docs/what-doefin-settles-on",
+          "destination": "/docs/what-doefin-settles-on",
+          "status": 308
+        },
+        {
+          "source": "/v1/docs/what-doefin-settles-on",
+          "destination": "/docs/what-doefin-settles-on",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/docs/withdrawing-funds",
+      "canonical": "/docs/withdrawing-funds",
+      "canonicalUrl": "https://doefin.com/docs/withdrawing-funds",
+      "proposedRedirects": [
+        {
+          "source": "/v3/docs/withdrawing-funds",
+          "destination": "/docs/withdrawing-funds",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/docs/your-first-trade",
+      "canonical": "/docs/your-first-trade",
+      "canonicalUrl": "https://doefin.com/docs/your-first-trade",
+      "proposedRedirects": [
+        {
+          "source": "/v3/docs/your-first-trade",
+          "destination": "/docs/your-first-trade",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/for/institutions",
+      "canonical": "/for/institutions",
+      "canonicalUrl": "https://doefin.com/for/institutions",
+      "proposedRedirects": [
+        {
+          "source": "/v3/for/institutions",
+          "destination": "/for/institutions",
+          "status": 308
+        },
+        {
+          "source": "/v1/for/institutions",
+          "destination": "/for/institutions",
+          "status": 308
+        },
+        {
+          "source": "/v2/for/institutions",
+          "destination": "/for/institutions",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/for/miners",
+      "canonical": "/for/miners",
+      "canonicalUrl": "https://doefin.com/for/miners",
+      "proposedRedirects": [
+        {
+          "source": "/v3/for/miners",
+          "destination": "/for/miners",
+          "status": 308
+        },
+        {
+          "source": "/v1/for/miners",
+          "destination": "/for/miners",
+          "status": 308
+        },
+        {
+          "source": "/v2/for/miners",
+          "destination": "/for/miners",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/glossary",
+      "canonical": "/glossary",
+      "canonicalUrl": "https://doefin.com/glossary",
+      "proposedRedirects": [
+        {
+          "source": "/v3/glossary",
+          "destination": "/glossary",
+          "status": 308
+        },
+        {
+          "source": "/v1/glossary",
+          "destination": "/glossary",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/glossary/block-height",
+      "canonical": "/glossary/block-height",
+      "canonicalUrl": "https://doefin.com/glossary/block-height",
+      "proposedRedirects": [
+        {
+          "source": "/v3/glossary/block-height",
+          "destination": "/glossary/block-height",
+          "status": 308
+        },
+        {
+          "source": "/v1/glossary/block-height",
+          "destination": "/glossary/block-height",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/glossary/block-subsidy",
+      "canonical": "/glossary/block-subsidy",
+      "canonicalUrl": "https://doefin.com/glossary/block-subsidy",
+      "proposedRedirects": [
+        {
+          "source": "/v3/glossary/block-subsidy",
+          "destination": "/glossary/block-subsidy",
+          "status": 308
+        },
+        {
+          "source": "/v1/glossary/block-subsidy",
+          "destination": "/glossary/block-subsidy",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/glossary/calibration",
+      "canonical": "/glossary/calibration",
+      "canonicalUrl": "https://doefin.com/glossary/calibration",
+      "proposedRedirects": [
+        {
+          "source": "/v3/glossary/calibration",
+          "destination": "/glossary/calibration",
+          "status": 308
+        },
+        {
+          "source": "/v1/glossary/calibration",
+          "destination": "/glossary/calibration",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/glossary/confidence-interval",
+      "canonical": "/glossary/confidence-interval",
+      "canonicalUrl": "https://doefin.com/glossary/confidence-interval",
+      "proposedRedirects": [
+        {
+          "source": "/v3/glossary/confidence-interval",
+          "destination": "/glossary/confidence-interval",
+          "status": 308
+        },
+        {
+          "source": "/v1/glossary/confidence-interval",
+          "destination": "/glossary/confidence-interval",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/glossary/curtailment",
+      "canonical": "/glossary/curtailment",
+      "canonicalUrl": "https://doefin.com/glossary/curtailment",
+      "proposedRedirects": [
+        {
+          "source": "/v3/glossary/curtailment",
+          "destination": "/glossary/curtailment",
+          "status": 308
+        },
+        {
+          "source": "/v1/glossary/curtailment",
+          "destination": "/glossary/curtailment",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/glossary/difficulty-adjustment",
+      "canonical": "/glossary/difficulty-adjustment",
+      "canonicalUrl": "https://doefin.com/glossary/difficulty-adjustment",
+      "proposedRedirects": [
+        {
+          "source": "/v3/glossary/difficulty-adjustment",
+          "destination": "/glossary/difficulty-adjustment",
+          "status": 308
+        },
+        {
+          "source": "/v1/glossary/difficulty-adjustment",
+          "destination": "/glossary/difficulty-adjustment",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/glossary/epoch",
+      "canonical": "/glossary/epoch",
+      "canonicalUrl": "https://doefin.com/glossary/epoch",
+      "proposedRedirects": [
+        {
+          "source": "/v3/glossary/epoch",
+          "destination": "/glossary/epoch",
+          "status": 308
+        },
+        {
+          "source": "/v1/glossary/epoch",
+          "destination": "/glossary/epoch",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/glossary/exahash",
+      "canonical": "/glossary/exahash",
+      "canonicalUrl": "https://doefin.com/glossary/exahash",
+      "proposedRedirects": [
+        {
+          "source": "/v3/glossary/exahash",
+          "destination": "/glossary/exahash",
+          "status": 308
+        },
+        {
+          "source": "/v1/glossary/exahash",
+          "destination": "/glossary/exahash",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/glossary/fpps",
+      "canonical": "/glossary/fpps",
+      "canonicalUrl": "https://doefin.com/glossary/fpps",
+      "proposedRedirects": [
+        {
+          "source": "/v3/glossary/fpps",
+          "destination": "/glossary/fpps",
+          "status": 308
+        },
+        {
+          "source": "/v1/glossary/fpps",
+          "destination": "/glossary/fpps",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/glossary/halving",
+      "canonical": "/glossary/halving",
+      "canonicalUrl": "https://doefin.com/glossary/halving",
+      "proposedRedirects": [
+        {
+          "source": "/v3/glossary/halving",
+          "destination": "/glossary/halving",
+          "status": 308
+        },
+        {
+          "source": "/v1/glossary/halving",
+          "destination": "/glossary/halving",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/glossary/hashprice",
+      "canonical": "/glossary/hashprice",
+      "canonicalUrl": "https://doefin.com/glossary/hashprice",
+      "proposedRedirects": [
+        {
+          "source": "/v3/glossary/hashprice",
+          "destination": "/glossary/hashprice",
+          "status": 308
+        },
+        {
+          "source": "/v1/glossary/hashprice",
+          "destination": "/glossary/hashprice",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/glossary/hashrate",
+      "canonical": "/glossary/hashrate",
+      "canonicalUrl": "https://doefin.com/glossary/hashrate",
+      "proposedRedirects": [
+        {
+          "source": "/v3/glossary/hashrate",
+          "destination": "/glossary/hashrate",
+          "status": 308
+        },
+        {
+          "source": "/v1/glossary/hashrate",
+          "destination": "/glossary/hashrate",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/glossary/hosting",
+      "canonical": "/glossary/hosting",
+      "canonicalUrl": "https://doefin.com/glossary/hosting",
+      "proposedRedirects": [
+        {
+          "source": "/v3/glossary/hosting",
+          "destination": "/glossary/hosting",
+          "status": 308
+        },
+        {
+          "source": "/v1/glossary/hosting",
+          "destination": "/glossary/hosting",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/glossary/mining-difficulty",
+      "canonical": "/glossary/mining-difficulty",
+      "canonicalUrl": "https://doefin.com/glossary/mining-difficulty",
+      "proposedRedirects": [
+        {
+          "source": "/v3/glossary/mining-difficulty",
+          "destination": "/glossary/mining-difficulty",
+          "status": 308
+        },
+        {
+          "source": "/v1/glossary/mining-difficulty",
+          "destination": "/glossary/mining-difficulty",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/glossary/mining-pool",
+      "canonical": "/glossary/mining-pool",
+      "canonicalUrl": "https://doefin.com/glossary/mining-pool",
+      "proposedRedirects": [
+        {
+          "source": "/v3/glossary/mining-pool",
+          "destination": "/glossary/mining-pool",
+          "status": 308
+        },
+        {
+          "source": "/v1/glossary/mining-pool",
+          "destination": "/glossary/mining-pool",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/glossary/pool-luck",
+      "canonical": "/glossary/pool-luck",
+      "canonicalUrl": "https://doefin.com/glossary/pool-luck",
+      "proposedRedirects": [
+        {
+          "source": "/v3/glossary/pool-luck",
+          "destination": "/glossary/pool-luck",
+          "status": 308
+        },
+        {
+          "source": "/v1/glossary/pool-luck",
+          "destination": "/glossary/pool-luck",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/glossary/terahash",
+      "canonical": "/glossary/terahash",
+      "canonicalUrl": "https://doefin.com/glossary/terahash",
+      "proposedRedirects": [
+        {
+          "source": "/v3/glossary/terahash",
+          "destination": "/glossary/terahash",
+          "status": 308
+        },
+        {
+          "source": "/v1/glossary/terahash",
+          "destination": "/glossary/terahash",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/glossary/transaction-fees",
+      "canonical": "/glossary/transaction-fees",
+      "canonicalUrl": "https://doefin.com/glossary/transaction-fees",
+      "proposedRedirects": [
+        {
+          "source": "/v3/glossary/transaction-fees",
+          "destination": "/glossary/transaction-fees",
+          "status": 308
+        },
+        {
+          "source": "/v1/glossary/transaction-fees",
+          "destination": "/glossary/transaction-fees",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/glossary/uptime",
+      "canonical": "/glossary/uptime",
+      "canonicalUrl": "https://doefin.com/glossary/uptime",
+      "proposedRedirects": [
+        {
+          "source": "/v3/glossary/uptime",
+          "destination": "/glossary/uptime",
+          "status": 308
+        },
+        {
+          "source": "/v1/glossary/uptime",
+          "destination": "/glossary/uptime",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/learn",
+      "canonical": "/learn",
+      "canonicalUrl": "https://doefin.com/learn",
+      "proposedRedirects": [
+        {
+          "source": "/v3/learn",
+          "destination": "/learn",
+          "status": 308
+        },
+        {
+          "source": "/v2/learn",
+          "destination": "/learn",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/learn/difficulty-exposure",
+      "canonical": "/learn/difficulty-exposure",
+      "canonicalUrl": "https://doefin.com/learn/difficulty-exposure",
+      "proposedRedirects": [
+        {
+          "source": "/v3/learn/difficulty-exposure",
+          "destination": "/learn/difficulty-exposure",
+          "status": 308
+        },
+        {
+          "source": "/v2/learn/difficulty-exposure",
+          "destination": "/learn/difficulty-exposure",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/methodology/difficulty-index",
+      "canonical": "/methodology/difficulty-index",
+      "canonicalUrl": "https://doefin.com/methodology/difficulty-index",
+      "proposedRedirects": [
+        {
+          "source": "/v3/methodology/difficulty-index",
+          "destination": "/methodology/difficulty-index",
+          "status": 308
+        },
+        {
+          "source": "/v1/methodology/difficulty-index",
+          "destination": "/methodology/difficulty-index",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/newsletter",
+      "canonical": "/newsletter",
+      "canonicalUrl": "https://doefin.com/newsletter",
+      "proposedRedirects": [
+        {
+          "source": "/v3/newsletter",
+          "destination": "/newsletter",
+          "status": 308
+        },
+        {
+          "source": "/v1/newsletter",
+          "destination": "/newsletter",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/privacy",
+      "canonical": "/privacy",
+      "canonicalUrl": "https://doefin.com/privacy",
+      "proposedRedirects": [
+        {
+          "source": "/v3/privacy",
+          "destination": "/privacy",
+          "status": 308
+        },
+        {
+          "source": "/v1/privacy",
+          "destination": "/privacy",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/product",
+      "canonical": "/product",
+      "canonicalUrl": "https://doefin.com/product",
+      "proposedRedirects": [
+        {
+          "source": "/v3/product",
+          "destination": "/product",
+          "status": 308
+        },
+        {
+          "source": "/v2/product",
+          "destination": "/product",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/product/settlement",
+      "canonical": "/product/settlement",
+      "canonicalUrl": "https://doefin.com/product/settlement",
+      "proposedRedirects": [
+        {
+          "source": "/v3/product/settlement",
+          "destination": "/product/settlement",
+          "status": 308
+        },
+        {
+          "source": "/v2/product/settlement",
+          "destination": "/product/settlement",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/research",
+      "canonical": "/research",
+      "canonicalUrl": "https://doefin.com/research",
+      "proposedRedirects": [
+        {
+          "source": "/v3/research",
+          "destination": "/research",
+          "status": 308
+        },
+        {
+          "source": "/v1/research",
+          "destination": "/research",
+          "status": 308
+        },
+        {
+          "source": "/v2/research",
+          "destination": "/research",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/research/difficulty-forecast-accuracy-2026",
+      "canonical": "/research/difficulty-forecast-accuracy-2026",
+      "canonicalUrl": "https://doefin.com/research/difficulty-forecast-accuracy-2026",
+      "proposedRedirects": [
+        {
+          "source": "/v3/research/difficulty-forecast-accuracy-2026",
+          "destination": "/research/difficulty-forecast-accuracy-2026",
+          "status": 308
+        },
+        {
+          "source": "/v1/research/difficulty-forecast-accuracy-2026",
+          "destination": "/research/difficulty-forecast-accuracy-2026",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/research/evaluating-a-forecast",
+      "canonical": "/research/evaluating-a-forecast",
+      "canonicalUrl": "https://doefin.com/research/evaluating-a-forecast",
+      "proposedRedirects": [
+        {
+          "source": "/v3/research/evaluating-a-forecast",
+          "destination": "/research/evaluating-a-forecast",
+          "status": 308
+        },
+        {
+          "source": "/v2/research/evaluating-a-forecast",
+          "destination": "/research/evaluating-a-forecast",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/research/observed-difficulty-adjustments",
+      "canonical": "/research/observed-difficulty-adjustments",
+      "canonicalUrl": "https://doefin.com/research/observed-difficulty-adjustments",
+      "proposedRedirects": [
+        {
+          "source": "/v3/research/observed-difficulty-adjustments",
+          "destination": "/research/observed-difficulty-adjustments",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/resources",
+      "canonical": "/resources",
+      "canonicalUrl": "https://doefin.com/resources",
+      "proposedRedirects": [
+        {
+          "source": "/v3/resources",
+          "destination": "/resources",
+          "status": 308
+        },
+        {
+          "source": "/v1/resources",
+          "destination": "/resources",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/terms",
+      "canonical": "/terms",
+      "canonicalUrl": "https://doefin.com/terms",
+      "proposedRedirects": [
+        {
+          "source": "/v3/terms",
+          "destination": "/terms",
+          "status": 308
+        },
+        {
+          "source": "/v1/terms",
+          "destination": "/terms",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/tools",
+      "canonical": "/tools",
+      "canonicalUrl": "https://doefin.com/tools",
+      "proposedRedirects": [
+        {
+          "source": "/v3/tools",
+          "destination": "/tools",
+          "status": 308
+        },
+        {
+          "source": "/v1/tools",
+          "destination": "/tools",
+          "status": 308
+        },
+        {
+          "source": "/v2/tools",
+          "destination": "/tools",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/tools/difficulty-exposure",
+      "canonical": "/tools/difficulty-exposure",
+      "canonicalUrl": "https://doefin.com/tools/difficulty-exposure",
+      "proposedRedirects": [
+        {
+          "source": "/v3/tools/difficulty-exposure",
+          "destination": "/tools/difficulty-exposure",
+          "status": 308
+        },
+        {
+          "source": "/v1/tools/difficulty-exposure",
+          "destination": "/tools/difficulty-exposure",
+          "status": 308
+        },
+        {
+          "source": "/v2/tools/difficulty-exposure",
+          "destination": "/tools/difficulty-exposure",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/tools/difficulty-exposure/example/one-exahash-four-epochs",
+      "canonical": "/tools/difficulty-exposure/example/one-exahash-four-epochs",
+      "canonicalUrl": "https://doefin.com/tools/difficulty-exposure/example/one-exahash-four-epochs",
+      "proposedRedirects": [
+        {
+          "source": "/v3/tools/difficulty-exposure/example/one-exahash-four-epochs",
+          "destination": "/tools/difficulty-exposure/example/one-exahash-four-epochs",
+          "status": 308
+        },
+        {
+          "source": "/v1/tools/difficulty-exposure/example/one-exahash-four-epochs",
+          "destination": "/tools/difficulty-exposure/example/one-exahash-four-epochs",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/tools/fleet-payback",
+      "canonical": "/tools/fleet-payback",
+      "canonicalUrl": "https://doefin.com/tools/fleet-payback",
+      "proposedRedirects": [
+        {
+          "source": "/v3/tools/fleet-payback",
+          "destination": "/tools/fleet-payback",
+          "status": 308
+        },
+        {
+          "source": "/v1/tools/fleet-payback",
+          "destination": "/tools/fleet-payback",
+          "status": 308
+        },
+        {
+          "source": "/v2/tools/fleet-payback",
+          "destination": "/tools/fleet-payback",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/tools/fleet-payback/example/static-versus-range",
+      "canonical": "/tools/fleet-payback/example/static-versus-range",
+      "canonicalUrl": "https://doefin.com/tools/fleet-payback/example/static-versus-range",
+      "proposedRedirects": [
+        {
+          "source": "/v3/tools/fleet-payback/example/static-versus-range",
+          "destination": "/tools/fleet-payback/example/static-versus-range",
+          "status": 308
+        },
+        {
+          "source": "/v1/tools/fleet-payback/example/static-versus-range",
+          "destination": "/tools/fleet-payback/example/static-versus-range",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/tools/hosting-effective-rate",
+      "canonical": "/tools/hosting-effective-rate",
+      "canonicalUrl": "https://doefin.com/tools/hosting-effective-rate",
+      "proposedRedirects": [
+        {
+          "source": "/v3/tools/hosting-effective-rate",
+          "destination": "/tools/hosting-effective-rate",
+          "status": 308
+        },
+        {
+          "source": "/v1/tools/hosting-effective-rate",
+          "destination": "/tools/hosting-effective-rate",
+          "status": 308
+        },
+        {
+          "source": "/v2/tools/hosting-effective-rate",
+          "destination": "/tools/hosting-effective-rate",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/tools/hosting-effective-rate/example/advertised-6-5-cents",
+      "canonical": "/tools/hosting-effective-rate/example/advertised-6-5-cents",
+      "canonicalUrl": "https://doefin.com/tools/hosting-effective-rate/example/advertised-6-5-cents",
+      "proposedRedirects": [
+        {
+          "source": "/v3/tools/hosting-effective-rate/example/advertised-6-5-cents",
+          "destination": "/tools/hosting-effective-rate/example/advertised-6-5-cents",
+          "status": 308
+        },
+        {
+          "source": "/v1/tools/hosting-effective-rate/example/advertised-6-5-cents",
+          "destination": "/tools/hosting-effective-rate/example/advertised-6-5-cents",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/tools/hosting-effective-rate/example/high-curtailment",
+      "canonical": "/tools/hosting-effective-rate/example/high-curtailment",
+      "canonicalUrl": "https://doefin.com/tools/hosting-effective-rate/example/high-curtailment",
+      "proposedRedirects": [
+        {
+          "source": "/v3/tools/hosting-effective-rate/example/high-curtailment",
+          "destination": "/tools/hosting-effective-rate/example/high-curtailment",
+          "status": 308
+        },
+        {
+          "source": "/v1/tools/hosting-effective-rate/example/high-curtailment",
+          "destination": "/tools/hosting-effective-rate/example/high-curtailment",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    },
+    {
+      "preview": "/v3/tools/hosting-effective-rate/example/well-run-site",
+      "canonical": "/tools/hosting-effective-rate/example/well-run-site",
+      "canonicalUrl": "https://doefin.com/tools/hosting-effective-rate/example/well-run-site",
+      "proposedRedirects": [
+        {
+          "source": "/v3/tools/hosting-effective-rate/example/well-run-site",
+          "destination": "/tools/hosting-effective-rate/example/well-run-site",
+          "status": 308
+        },
+        {
+          "source": "/v1/tools/hosting-effective-rate/example/well-run-site",
+          "destination": "/tools/hosting-effective-rate/example/well-run-site",
+          "status": 308
+        }
+      ],
+      "state": "proposal-only"
+    }
+  ],
+  "unmatchedLegacyPages": []
+}

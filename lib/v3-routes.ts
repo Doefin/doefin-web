@@ -11,7 +11,7 @@ import * as Miners from '@/components/v3/MinersPage'
 import * as Institutions from '@/components/v3/InstitutionsPage'
 import * as Tools from '@/components/v3/V3ToolsIndex'
 import * as Tool from '@/components/v3/V3ToolPage'
-import * as Learn from '@/app/v2/learn/page'
+import * as Learn from '@/components/v3/V3Learn'
 import * as Tutorial from '@/app/v2/learn/difficulty-exposure/page'
 import * as SampleReport from '@/components/v3/V3ForecastExample'
 import * as Research from '@/components/v3/ResearchIndex'
@@ -31,7 +31,7 @@ import { V3Academy as Academy, V3Lesson as Lesson, V3Blog as Blog, V3Post as Pos
 import * as Guide from '@/app/v1/academy/guides/[slug]/page'
 import * as Example from '@/app/v1/tools/[tool]/example/[case]/page'
 import * as About from '@/components/v3/V3About'
-import * as Privacy from '@/app/v1/privacy/page'
+import * as Privacy from '@/components/v3/V3Privacy'
 import * as Terms from '@/app/v1/terms/page'
 
 type PageResult = ReactNode | Promise<ReactNode>
@@ -70,8 +70,7 @@ function dynamicRoutes<P extends Record<string, string>>(
 
 /**
  * The V2 product journey, retained reference routes and V3-specific content.
- * Home/resources have dedicated V3 pages. Newsletter intentionally has no route:
- * SiteLink sends those calls to the resources hub's honest updates section.
+ * Home, resources, newsletter and internal prototype review have dedicated V3 pages.
  */
 export const v3Routes: readonly V3Route[] = [
   staticRoute('product', Product),

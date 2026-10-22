@@ -1,5 +1,6 @@
 'use client'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { publicPlannerDataState } from '@/lib/public-planner-state'
 import { isPublicSnapshot, PUBLIC_MARKET_STALE_MS, type PublicMarketSnapshot } from '@/lib/public-markets'
 
 export async function fetchPublicMarkets(): Promise<PublicMarketSnapshot> {
@@ -35,5 +36,5 @@ export function usePublicMarkets() {
     window.addEventListener('focus', update)
     return () => { sequence.current++; clearInterval(interval); clearInterval(tick); window.removeEventListener('focus', update) }
   }, [refresh])
-  return { snapshot, loading, error, stale: !!snapshot && now - Date.parse(snapshot.fetchedAt) > PUBLIC_MARKET_STALE_MS, refresh }
+  return { snapshot, loading, error, ...publicPlannerDataState(snapshot, loading, error, now), refresh }
 }

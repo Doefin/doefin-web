@@ -2,6 +2,7 @@
 
 import { useMemo } from 'react'
 import { CashPositionChart } from './CashPositionChart'
+import { useCalculatorMeasurement } from '@/components/v3/Measurement'
 import { useSiteVersion } from '@/components/routing/SiteVersionContext'
 import {
   Hint,
@@ -63,7 +64,7 @@ const BOUNDS = { th: [100, 20000], jPerTh: [12, 40], power: [0.02, 0.15], capex:
 
 export function PaybackModel({ enhanced = false, nextStep }: { enhanced?: boolean; nextStep?: React.ReactNode }) {
   const isV3 = useSiteVersion() === 'v3'
-  const [v, setV] = useUrlState(DEFAULTS, enhanced ? BOUNDS : undefined)
+  const [v, writeV] = useUrlState(DEFAULTS, enhanced ? BOUNDS : undefined)
   const presets = presetsFor(SLUG)
 
   const runs = useMemo(() => {
@@ -72,6 +73,13 @@ export function PaybackModel({ enhanced = false, nextStep }: { enhanced?: boolea
     const high = simulate(v, v.growth + 3)
     return { low, mid, high }
   }, [v])
+
+  const measurement = useCalculatorMeasurement(SLUG, Object.values(v).every(Number.isFinite) && v.diffT > 0 && [runs.low, runs.mid, runs.high].every(run => Number.isFinite(run.final) && Number.isFinite(run.powerDay)), isV3)
+  const setV = (next: typeof v) => {
+    if (Object.keys(v).some(key => next[key as keyof typeof v] !== v[key as keyof typeof v])) measurement.markInputChange()
+    writeV(next)
+  }
+  const sampleV = (next: typeof v, source: 'sample' | 'example' = 'sample') => { measurement.markSample(source); writeV(next) }
 
   const label = (m: number | null) => (m === null ? `beyond ${v.months} months` : `${m} months`)
   const usd = (n: number) => `$${Math.round(n).toLocaleString('en-US')}`
@@ -87,14 +95,14 @@ export function PaybackModel({ enhanced = false, nextStep }: { enhanced?: boolea
     <>
       <ToolShell
         preciseInputs={enhanced}
-        onReset={() => setV(DEFAULTS)}
+        onReset={() => sampleV(DEFAULTS)}
         mobileResult={<span><strong>{label(runs.mid.paybackMonth)}</strong> <small>central payback</small></span>}
         inputs={
           <>
             {presets.length ? (
               <Presets
                 items={presets}
-                onPick={(vals) => setV({ ...DEFAULTS, ...vals } as typeof DEFAULTS)}
+                onPick={(vals) => sampleV({ ...DEFAULTS, ...vals } as typeof DEFAULTS, 'example')}
                 activeName={matchPreset(v, DEFAULTS, presets)}
               />
             ) : null}
@@ -156,7 +164,7 @@ export function PaybackModel({ enhanced = false, nextStep }: { enhanced?: boolea
         summary={
           <>
             <h2 className="text-xs font-bold uppercase tracking-[0.12em] text-muted">Payback</h2>
-            <p className="tabular mt-3 text-4xl font-extrabold tracking-[-0.03em] text-brand">
+            <p ref={measurement.resultRef} className="tabular mt-3 text-4xl font-extrabold tracking-[-0.03em] text-brand">
               {label(runs.mid.paybackMonth)}
             </p>
             <p className="tabular mt-1 text-sm text-muted">

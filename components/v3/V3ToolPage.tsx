@@ -3,7 +3,7 @@ import Link from '@/components/routing/SiteLink'
 import { Container } from '@/components/layout/Container'
 import { PreviewCalculator } from '@/components/preview/PreviewCalculator'
 import { RelatedContent } from '@/components/preview/Primitives'
-import { previewTools, getPreviewTool } from '@/content'
+import { previewTools, getPreviewTool, examplesFor, guideFor } from '@/content'
 import { preview } from '@/lib/preview'
 export { generateStaticParams, generateMetadata } from '@/app/v2/tools/[slug]/page'
 
@@ -17,6 +17,8 @@ export default async function V3ToolPage({ params }: { params: Promise<{ slug: s
   const { slug } = await params
   const tool = getPreviewTool(slug)
   if (!tool || !previewTools().some(t => t.slug === slug)) notFound()
+  const examples = examplesFor(slug)
+  const guide = guideFor(slug)
   const active = tools.find(t => t.slug === slug)!
   return <Container className="pb-14 pt-8 sm:pt-10">
     <div className="mb-6 flex flex-wrap items-center justify-between gap-3 text-xs text-subtle">
@@ -42,6 +44,14 @@ export default async function V3ToolPage({ params }: { params: Promise<{ slug: s
       <summary className="cursor-pointer text-sm font-bold">Assumptions and limits</summary>
       <p className="mt-4 max-w-3xl text-sm leading-[1.75] text-subtle">{tool.assumptions}</p>
     </details>
+    <section className="mt-7 border-t border-white/10 pt-6" aria-labelledby="tool-worked-examples">
+      <h2 id="tool-worked-examples" className="text-lg font-bold">Check the working</h2>
+      <p className="mt-2 text-sm leading-relaxed text-subtle">Educational scenarios with stated assumptions. Compare the working, then return to the calculator.</p>
+      <ul className="mt-3 space-y-2 text-sm">
+        {examples.map(example => <li key={example.slug}><Link href={`/v3/tools/${slug}/example/${example.slug}`} className="inline-flex min-h-11 items-center text-highlight underline underline-offset-4">{example.title}</Link></li>)}
+        {guide && <li><Link href={`/v3/academy/guides/${slug}`} className="inline-flex min-h-11 items-center text-highlight underline underline-offset-4">Read the input guide: {guide.article.title}</Link></li>}
+      </ul>
+    </section>
     <RelatedContent learning={tool.learning} action={slug === 'difficulty-exposure'
       ? { href: preview.payback, title: 'Test the wider payback picture', text: 'Explore power costs and capital recovery separately.' }
       : { href: preview.exposure, title: 'Isolate difficulty exposure', text: 'Compare BTC production across two difficulty scenarios.' }} />

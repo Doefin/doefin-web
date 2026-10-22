@@ -83,7 +83,7 @@ export const glossary: GlossaryTerm[] = [
     slug: 'hashrate',
     term: 'Hashrate',
     shortDef:
-      'The total computing power securing the Bitcoin network, measured in hashes per second. It is estimated from difficulty and block times, never measured directly.',
+      'The computing power securing Bitcoin, expressed in hashes per second. Network hashrate is estimated from difficulty and block times, not measured directly.',
     aliases: ['hash rate', 'network hashrate'],
     faq: [
       {

@@ -7,8 +7,9 @@ import { seo } from '@/lib/seo'
 import { Arrow } from './Arrow'
 import { DifficultyReadingPanel } from './data-reading'
 import styles from './data-reading.module.css'
+import { ResearchArchiveSummary } from './ResearchArchiveSummary'
 
-export const metadata = seo({ title: 'Bitcoin mining data, explained', description: 'Read difficulty forecasts, hashrate estimates and dated records using clearly labelled synthetic examples.', path: '/v3/data' })
+export const metadata = seo({ title: 'Bitcoin mining data, explained', description: 'Inspect a sourced historical adjustment dataset alongside clearly labelled synthetic difficulty forecasts, hashrate examples and dated records.', path: '/v3/data' })
 
 export default function V3DataIndex() {
   return <Container className="pb-16 pt-5 sm:pb-20 sm:pt-10">
@@ -20,13 +21,15 @@ export default function V3DataIndex() {
         <p className="mt-3 max-w-xl text-[15px] leading-[1.75] text-subtle sm:mt-5 sm:text-base">Read difficulty, hashrate and forecast accuracy in context.</p>
       </div>
       <div className="border-l-2 border-caution/50 pl-4 lg:mb-1">
-        <p className="max-w-sm text-xs leading-[1.8] text-subtle"><strong className="font-bold text-caution">Synthetic learning dataset.</strong> Values and records are authored examples, not current network data or measured performance.</p>
+        <p className="max-w-sm text-xs leading-[1.8] text-subtle"><strong className="font-bold text-caution">Two distinct datasets.</strong> The observed research capture has public provenance. Forecast, hashrate and dated learning examples remain synthetic; none establishes forecasting performance.</p>
       </div>
     </header>
 
     <nav aria-label="On this page" className="mb-6 mt-5 flex flex-wrap gap-2 sm:mb-8 sm:mt-9">
       {[['Difficulty guide', '/v3/data/difficulty'], ['Hashrate guide', '/v3/data/hashrate'], ['Dated records', '#sample-records']].map(([label, href]) => <a key={href} href={href} className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-white/10 px-3 text-xs font-semibold text-subtle hover:border-brand/40 hover:text-highlight">{label}<span aria-hidden="true">{href.startsWith('#') ? '↓' : '→'}</span></a>)}
     </nav>
+
+    <ResearchArchiveSummary />
 
     <section id="read-the-numbers" aria-label="Read the example numbers" className="grid scroll-mt-28 gap-5 lg:grid-cols-[1.75fr_1fr]">
       <DifficultyReadingPanel />

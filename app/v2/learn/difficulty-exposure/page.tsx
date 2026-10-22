@@ -1,7 +1,8 @@
 import Link from '@/components/routing/SiteLink'
 import { Container } from '@/components/layout/Container'
 import { Button, Eyebrow } from '@/components/ui'
-import { PageIntro, RelatedContent, panelClass, headingClass, previewSeo } from '@/components/preview/Primitives'
+import { PageIntro, panelClass, headingClass, previewSeo } from '@/components/preview/Primitives'
+import { TutorialRelatedContent } from '@/components/v3/TutorialRelatedContent'
 import { getExposureTutorial } from '@/content'
 import { preview } from '@/lib/preview'
 
@@ -21,7 +22,7 @@ export default function TutorialPreview() {
         </aside>
         <article className="min-w-0">
           <section className={panelClass}><Eyebrow>The outcome</Eyebrow><h2 className="text-xl font-bold">{tutorial.objective}</h2><h3 className="mt-6 text-sm font-bold">Before you start</h3><ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-subtle">{tutorial.prerequisites.map(text => <li key={text}>{text}</li>)}</ul></section>
-          <ol className="mt-10 space-y-12">{tutorial.steps.map((step, i) => <li key={step.id} id={step.id} className="scroll-mt-36">
+          <ol className="mt-10 space-y-12">{tutorial.steps.map((step, i) => <li key={step.id} id={step.id} data-v3-tutorial-step={i + 1} className="scroll-mt-36">
             <div className="flex items-start gap-4"><span className="tabular grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-brand/30 bg-brand/10 text-sm font-bold text-highlight">{i + 1}</span><h2 className={headingClass}>{step.title}</h2></div>
             <p className="mt-5 text-[17px] leading-[1.8] text-subtle">{step.body}</p>
             {i === 1 ? <figure className="mt-7 overflow-hidden rounded-panel border border-white/10 bg-surface">
@@ -40,7 +41,7 @@ export default function TutorialPreview() {
           <section className={'mt-12 ' + panelClass}><h2 className="text-xl font-bold">What this exercise leaves out</h2><p className="mt-4 text-sm leading-[1.75] text-subtle">Uptime, pool fees, changing transaction fees and changes in your fleet are not modelled here. The sample assumes a constant 3.125 BTC subsidy and a fixed time window. The calculator does not forecast difficulty or determine a position size.</p><div className="mt-6"><Button href={tutorial.calculatorHref}>Try the worked example →</Button></div></section>
         </article>
       </div>
-      <RelatedContent {...tutorial.related} />
+      <TutorialRelatedContent {...tutorial.related} />
     </Container>
   </>
 }

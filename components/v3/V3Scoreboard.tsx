@@ -2,6 +2,8 @@ import Link from '@/components/routing/SiteLink'
 import { epochs, getForecastReport, scoreboard } from '@/content'
 import { dateLong, int, pct } from '@/lib/format'
 import { seo } from '@/lib/seo'
+import { IllustrativeComparison } from './IllustrativeComparison'
+import { ResearchArchiveSummary } from './ResearchArchiveSummary'
 import { DataDetail, DataFields, DataNext, DataSection, dataCopy, dataPanel } from './DataDetail'
 
 export const metadata = seo({ title: 'How to read forecast accuracy metrics', description: 'Inspect a synthetic error profile, understand average error and interval coverage, and see which evidence a measured forecast comparison needs.', path: '/v3/data/scoreboard' })
@@ -19,7 +21,8 @@ export default function V3Scoreboard() {
   const errors = report.rows.map(row => ({ sample: row.sample, error: Math.abs(row.observed - row.forecast) }))
   const mae = errors.reduce((total, row) => total + row.error, 0) / errors.length
   const max = Math.max(...errors.map(row => row.error))
-  return <DataDetail title="Read accuracy beyond the headline." summary="See what an average error summarizes, what it hides, and which evidence you need before comparing forecasts." category="Accuracy" current="scoreboard" crumbs={[{ name: 'Accuracy metrics', href: '/v3/data/scoreboard' }]}>
+  return <DataDetail title="Read accuracy beyond the headline." summary="See what an average error summarizes, what it hides, and which evidence you need before comparing forecasts." category="Accuracy" current="scoreboard" datasetNotice={<><strong className="font-semibold text-caution">Forecast examples are synthetic.</strong> Scores and ranges use authored forecasts and outcomes. The separate observed-network report below is historical data, not scored forecasting performance.</>} crumbs={[{ name: 'Accuracy metrics', href: '/v3/data/scoreboard' }]}>
+    <ResearchArchiveSummary />
     <div className="grid items-start gap-5 lg:grid-cols-[1.4fr_1fr]">
       <section className="rounded-panel border border-chart/25 bg-gradient-to-br from-surfaceAlt/70 to-surface/20 p-5 sm:p-7" aria-labelledby="sample-error-title">
         <div className="flex flex-wrap items-center justify-between gap-3"><h2 id="sample-error-title" className="text-lg font-bold">An authored error profile</h2><span className="text-[10px] font-bold uppercase tracking-wider text-caution">Synthetic arithmetic</span></div>
@@ -30,6 +33,7 @@ export default function V3Scoreboard() {
       <section className={dataPanel}><p className="text-[10px] font-bold uppercase tracking-wider text-caution">Measured comparison unavailable</p><h2 className="mt-3 text-xl font-bold tracking-tight">This sample does not rank providers.</h2><p className={'mt-4 ' + dataCopy}>The synthetic error profile demonstrates a metric. The site has no measured comparison of Doefin and other estimators, and no evidence of a forecasting advantage.</p><div className="mt-6 border-y border-white/10 py-5"><DataFields rows={[{ label: 'Measured epochs scored', value: scoreboard.epochsScored }, { label: 'Measured provider errors', value: 'Not available' }, { label: 'Measured interval coverage', value: 'Not available', note: 'The five-pair arithmetic sample does not publish interval endpoints.' }]} /></div><p className={'mt-5 ' + dataCopy}>The measured count and the synthetic sample count describe different things. Five authored rows do not become five observed epochs.</p></section>
     </div>
 
+    <IllustrativeComparison />
     <DataSection title="Four readings, one comparison." description="Accuracy is more than one small number. Read these measures together and keep their units explicit.">
       <div className="grid gap-4 sm:grid-cols-2">{metrics.map(metric => <article key={metric.name} className={dataPanel}><div className="flex items-baseline justify-between gap-4"><h3 className="text-base font-bold">{metric.name}</h3><span className="tabular text-xl font-bold text-highlight" aria-label={metric.unitName}>{metric.unit}</span></div><p className={'mt-4 ' + dataCopy}>{metric.meaning}</p><p className="mt-4 border-t border-white/10 pt-4 text-xs leading-[1.8] text-subtle"><span className="font-bold text-body">Read it with context. </span>{metric.check}</p></article>)}</div>
     </DataSection>

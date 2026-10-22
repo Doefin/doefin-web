@@ -10,9 +10,9 @@ import styles from './data-detail.module.css'
 export const dataPanel = 'rounded-panel border border-white/10 bg-surface/25 p-5 sm:p-7'
 export const dataCopy = 'text-sm leading-[1.85] text-subtle'
 
-export function DataDetail({ title, summary, category, current, crumbs = [], children }: {
+export function DataDetail({ title, summary, category, current, crumbs = [], children, datasetNotice }: {
   title: string; summary: string; category: string; current: 'difficulty' | 'hashrate' | 'scoreboard';
-  crumbs?: { name: string; href: string }[]; children: ReactNode
+  crumbs?: { name: string; href: string }[]; children: ReactNode; datasetNotice?: ReactNode
 }) {
   return <Container className="pb-16 pt-5 sm:pb-20 sm:pt-9">
     <div className="hidden sm:block"><Breadcrumbs items={[{ name: 'Data', href: '/v3/data' }, ...crumbs]} /></div>
@@ -20,7 +20,7 @@ export function DataDetail({ title, summary, category, current, crumbs = [], chi
       <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-highlight">Data field guide / {category}</p>
       <h1 className="tabular mt-3 max-w-4xl text-balance text-[32px] font-extrabold leading-[1.13] tracking-[-0.035em] sm:text-[46px]">{title}</h1>
       <p className="mt-4 max-w-2xl text-[15px] leading-[1.8] text-subtle">{summary}</p>
-      <p className="mt-4 max-w-2xl border-l-2 border-caution/50 pl-3 text-xs leading-[1.8] text-subtle"><strong className="font-semibold text-caution">Synthetic learning dataset.</strong> Figures, dates and outcomes are authored examples, not current network data or measured performance.</p>
+      <p className="mt-4 max-w-2xl border-l-2 border-caution/50 pl-3 text-xs leading-[1.8] text-subtle">{datasetNotice ?? <><strong className="font-semibold text-caution">Synthetic learning dataset.</strong> Figures, dates and outcomes are authored examples, not current network data or measured performance.</>}</p>
     </header>
     <nav aria-label="Data guides" className="mb-6 mt-6 flex flex-wrap gap-2 sm:mb-8">
       <Link href="/v3/data" className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-white/10 px-3 text-xs font-semibold text-subtle hover:border-brand/40 hover:text-highlight">← Data library</Link>

@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
+import { useCalculatorMeasurement } from '@/components/v3/Measurement'
 import { useSiteVersion } from '@/components/routing/SiteVersionContext'
 import {
   Bars,
@@ -50,7 +51,7 @@ export function HostingCalculator({ enhanced = false, nextStep }: {
   enhanced?: boolean; nextStep?: (rate: number) => React.ReactNode
 }) {
   const isV3 = useSiteVersion() === 'v3'
-  const [v, setV] = useUrlState(DEFAULTS, enhanced ? BOUNDS : undefined)
+  const [v, writeV] = useUrlState(DEFAULTS, enhanced ? BOUNDS : undefined)
   const presets = presetsFor(SLUG)
 
   const out = useMemo(() => {
@@ -72,19 +73,26 @@ export function HostingCalculator({ enhanced = false, nextStep }: {
     }
   }, [v])
 
+  const measurement = useCalculatorMeasurement(SLUG, Object.values(out).every(Number.isFinite) && v.down + v.curt < 100 && v.pool < 100 && v.rate >= 0, isV3)
+  const setV = (next: typeof v) => {
+    if (Object.keys(v).some(key => next[key as keyof typeof v] !== v[key as keyof typeof v])) measurement.markInputChange()
+    writeV(next)
+  }
+  const sampleV = (next: typeof v, source: 'sample' | 'example' = 'sample') => { measurement.markSample(source); writeV(next) }
+
   const num = (n: number, d = 4) => n.toFixed(d)
 
   return (
     <ToolShell
       preciseInputs={enhanced}
-        onReset={() => setV(DEFAULTS)}
+        onReset={() => sampleV(DEFAULTS)}
       mobileResult={<span><strong>${num(out.afterPool)}</strong> <small>/ kWh effective</small></span>}
       inputs={
         <>
           {presets.length ? (
             <Presets
               items={presets}
-              onPick={(vals) => setV({ ...DEFAULTS, ...vals } as State)}
+              onPick={(vals) => sampleV({ ...DEFAULTS, ...vals } as State, 'example')}
               activeName={matchPreset(v, DEFAULTS, presets)}
             />
           ) : null}
@@ -138,7 +146,7 @@ export function HostingCalculator({ enhanced = false, nextStep }: {
 
           {!isV3 ? <button
             type="button"
-            onClick={() => setV(DEFAULTS)}
+            onClick={() => sampleV(DEFAULTS)}
             className="mt-6 rounded-lg border border-white/[0.12] px-4 py-2 text-sm text-muted hover:border-white/25 hover:text-body"
           >
             Reset
@@ -148,7 +156,7 @@ export function HostingCalculator({ enhanced = false, nextStep }: {
       summary={
         <>
           <h2 className="text-xs font-bold uppercase tracking-[0.12em] text-muted">Effective rate</h2>
-          <p className="tabular mt-3 text-4xl font-extrabold tracking-[-0.03em] text-down">
+          <p ref={measurement.resultRef} className="tabular mt-3 text-4xl font-extrabold tracking-[-0.03em] text-down">
             ${num(out.afterPool)}
           </p>
           <p className="tabular mt-1 text-sm text-muted">

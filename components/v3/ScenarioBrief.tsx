@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { ExposureInputs } from '@/lib/exposure'
 import { site } from '@/lib/site'
+import { NewsletterDelivery } from './NewsletterDelivery'
 import {
   createScenarioBrief,
   formatScenarioBtc,
@@ -12,6 +13,7 @@ import {
   scenarioContextFields,
   type ScenarioContext,
   scenarioBriefHtml,
+  scenarioBriefConciseHtml,
   scenarioDiscussionHref,
   scenarioUrl,
 } from '@/lib/scenario-brief'
@@ -51,13 +53,13 @@ export function ScenarioBrief({ inputs }: { inputs: ExposureInputs }) {
     }
   }
 
-  function downloadBrief() {
+  function downloadBrief(concise = false) {
     try {
       const snapshot = createScenarioBrief(inputs, new Date().toISOString(), scenarioUrl(inputs, window.location.origin), context)
-      const blobUrl = URL.createObjectURL(new Blob([scenarioBriefHtml(snapshot)], { type: 'text/html;charset=utf-8' }))
+      const blobUrl = URL.createObjectURL(new Blob([concise ? scenarioBriefConciseHtml(snapshot) : scenarioBriefHtml(snapshot)], { type: 'text/html;charset=utf-8' }))
       const link = document.createElement('a')
       link.href = blobUrl
-      link.download = `doefin-difficulty-scenario-${snapshot.preparedDate}.html`
+      link.download = `doefin-difficulty-scenario-${concise ? "concise-" : ""}${snapshot.preparedDate}.html`
       document.body.appendChild(link)
       link.click()
       link.remove()
@@ -98,14 +100,16 @@ export function ScenarioBrief({ inputs }: { inputs: ExposureInputs }) {
       </div>
 
       <div className="min-w-0 self-center">
-        <button type="button" onClick={downloadBrief} disabled={!brief.scenarioUrl} className={actionClass + ' border-brand bg-brand text-white hover:bg-brandDeep'}>
+        <button type="button" onClick={() => downloadBrief()} disabled={!brief.scenarioUrl} className={actionClass + ' border-brand bg-brand text-white hover:bg-brandDeep'}>
           <BriefIcon kind="download" /><span className="min-w-0 flex-1"><span className="block text-sm font-bold">Download brief</span><span className="mt-1 block text-xs text-white/80">HTML document · print or save as PDF</span></span><span aria-hidden>↓</span>
         </button>
+        <button type="button" onClick={() => downloadBrief(true)} disabled={!brief.scenarioUrl} className={actionClass + ' mt-3 border-white/15 bg-ink/20 text-body hover:border-brand/50 hover:bg-brand/5'}><BriefIcon kind="document" className="text-highlight" /><span className="min-w-0 flex-1"><span className="block text-sm font-semibold">Download concise review</span><span className="mt-1 block text-xs text-subtle">Condensed inputs, results and approval questions</span></span><span aria-hidden>↓</span></button>
         <button type="button" onClick={copyScenario} disabled={!brief.scenarioUrl} className={actionClass + ' mt-3 border-white/15 bg-ink/20 text-body hover:border-brand/50 hover:bg-brand/5'}>
           <BriefIcon kind="link" className="text-highlight" /><span className="min-w-0 flex-1"><span className="block text-sm font-semibold">{copyStatus === 'copied' ? 'Scenario link copied' : 'Copy scenario link'}</span><span className="mt-1 block text-xs text-subtle">Reopen these calculator inputs</span></span><span aria-hidden className="text-highlight">{copyStatus === 'copied' ? '✓' : '↗'}</span>
         </button>
         {brief.scenarioUrl ? <a href={scenarioDiscussionHref(brief, site.contactEmail)} className="mt-4 flex min-h-11 items-center gap-2 rounded-lg px-1 text-sm font-semibold text-highlight hover:underline"><BriefIcon kind="mail" />Draft an email to Doefin <span aria-hidden>↗</span></a> : <span className="mt-4 flex min-h-11 items-center gap-2 px-1 text-sm text-subtle"><BriefIcon kind="mail" />Preparing email draft…</span>}
         <p className="mt-1 text-xs leading-relaxed text-subtle">Opens your email app. You review and send.</p>
+        <NewsletterDelivery kind="scenario" inputs={inputs} />
         {isLocalScenarioUrl(brief.scenarioUrl) ? <p className="mt-4 border-t border-white/[0.07] pt-3 text-xs leading-relaxed text-subtle">{localScenarioNotice}</p> : null}
       </div>
     </div>
