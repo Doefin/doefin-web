@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { useSiteVersion } from '@/components/routing/SiteVersionContext'
 import Link from '@/components/routing/SiteLink'
-import { site } from '@/lib/site'
 
 /**
  * The signup form, rendered exactly as it will ship — including the audience-type
@@ -38,8 +37,8 @@ export function Subscribe({
 
   if (version === 'v3') return <section className={`rounded-panel border border-white/10 bg-surface/50 ${compact ? 'p-6' : 'p-8'}`}>
     <h2 className="text-xl font-bold tracking-[-0.02em]">Continue exploring</h2>
-    <p className="mt-3 max-w-2xl text-sm leading-relaxed text-subtle">The research and reference library are open to read. Email subscriptions and report delivery are not connected in this prototype.</p>
-    <div className="mt-5 flex flex-wrap gap-6 text-sm font-semibold text-highlight"><Link href="/v3/resources" className="hover:underline">Browse the library →</Link><a href={'mailto:' + site.contactEmail} className="hover:underline">Talk to the team ↗</a></div>
+    <p className="mt-3 max-w-2xl text-sm leading-relaxed text-subtle">The research and reference library are open to read. Preview research email preferences and report delivery; this demo sends no emails and saves no personal details.</p>
+    <div className="mt-5 flex flex-wrap gap-6 text-sm font-semibold text-highlight"><Link href="/v3/resources" className="hover:underline">Browse the library →</Link><Link href="/v3/newsletter#signup" className="hover:underline">Preview research emails →</Link></div>
   </section>
 
   return (

@@ -29,5 +29,16 @@ export default function V3DocsIndex() {
         </Link>
       </li>)}</ul>
     </section>)}</div>
+    <aside className="mt-12 rounded-panel border border-white/10 bg-surface/40 p-6" aria-labelledby="docs-resources">
+      <h2 id="docs-resources" className="text-xl font-bold">Explore the mining context</h2>
+      <p className="mt-3 text-sm leading-relaxed text-subtle">The resource library connects mining fundamentals, calculators and worked examples. Look up a network term in the mining glossary, or compare production with your own assumptions.</p>
+      <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1">
+        {[
+          ['Browse resources', '/v3/resources'],
+          ['Mining glossary', '/v3/glossary'],
+          ['Compare production scenarios', '/v3/tools/difficulty-exposure'],
+        ].map(([label, href]) => <Link key={href} href={href} className="inline-flex min-h-11 items-center text-sm font-semibold text-highlight hover:underline">{label} <span aria-hidden="true" className="ml-2">→</span></Link>)}
+      </div>
+    </aside>
   </V3DocsLayout>
 }

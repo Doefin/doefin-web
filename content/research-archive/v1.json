@@ -1,0 +1,232 @@
+{
+  "schemaVersion": "1.0.0",
+  "datasetId": "doefin-observed-adjustments-2026-10-22",
+  "version": "1.0.0",
+  "capturedAt": "2026-10-22T18:53:21.949669Z",
+  "title": "Observed Bitcoin difficulty adjustments: an inspectable one-year capture",
+  "sourceUrl": "https://mempool.space/api/v1/mining/difficulty-adjustments/1y",
+  "sourcePublisher": "mempool.space",
+  "sourceRaw": "[[1792154251,971712,140577680051919.6,1.05924],[1791011796,969696,132716002350731.3,0.999691],[1789801745,967680,132757073449487.5,1.04163],[1788640367,965664,127450789715843.1,1.01306],[1787446127,963648,125807076547197.5,0.986878],[1786217755,961632,127479855693691.4,1.00989],[1785019866,959616,126231507121868.2,0.992616],[1783800551,957600,127170500429035.2,0.949956],[1782525607,955584,133869853540305.4,1.07153],[1781396637,953568,124932866006548.2,0.899086],[1780050586,951552,138955357012247.3,1.01719],[1778860884,949536,136607070854775.1,1.03121],[1777687605,947520,132472011079030.5,0.976969],[1776448537,945504,135594876535256.6,0.975735],[1775208520,943488,138966872071213.2,1.03867],[1774043659,941472,133793147307542.8,0.922443],[1772731727,939456,145042165424853.3,1.00446],[1771527275,937440,144398401518100.9,1.14725],[1770472605,935424,125864590119494.3,0.888447],[1769110282,933408,141668107417558.2,0.967199],[1767859543,931392,146472570619930.8,0.987954],[1766634486,929376,148258433855481.3,1.00043],[1765424862,927360,148195306640204.7,0.992593],[1764206208,925344,149301205959699.9,0.980494],[1762972230,923328,152271405447597.4,0.976268],[1761732893,921312,155973032196071.9,1.06309]]",
+  "sourceSha256": "1c742b14a713bf5ee911e4c59fe5cad3ec3ac6eac6c01fd440727560e1dda2e4",
+  "sourceBlockChecks": [
+    {
+      "height": 923328,
+      "blockHashUrl": "https://mempool.space/api/block-height/923328",
+      "blockUrl": "https://mempool.space/api/block/00000000000000000000007179565665757ca89c84456ec0c16bb7eb8771f21c",
+      "rawBlock": "{\"id\":\"00000000000000000000007179565665757ca89c84456ec0c16bb7eb8771f21c\",\"height\":923328,\"version\":1073676288,\"timestamp\":1762972230,\"tx_count\":5398,\"size\":1655220,\"weight\":3993885,\"merkle_root\":\"6b10eed84fc6bfee6bf1fccd0f220ed5de9de9328069c118321dbb27a1fcc69e\",\"previousblockhash\":\"000000000000000000014b809628248ecd176df547224411fedafd577041929d\",\"mediantime\":1762970336,\"nonce\":1364530105,\"bits\":385997110,\"difficulty\":152271405447597.38}",
+      "rawBlockSha256": "3a7550a807aa0b635ce302f4d5fbb2be0683e351b148bfbee3d722a1fc95b892"
+    },
+    {
+      "height": 971712,
+      "blockHashUrl": "https://mempool.space/api/block-height/971712",
+      "blockUrl": "https://mempool.space/api/block/00000000000000000000c185f0906690a08d62d6fe842682a888d5560217e467",
+      "rawBlock": "{\"id\":\"00000000000000000000c185f0906690a08d62d6fe842682a888d5560217e467\",\"height\":971712,\"version\":537223168,\"timestamp\":1792154251,\"tx_count\":4541,\"size\":1607121,\"weight\":3993933,\"merkle_root\":\"df944d8fe0040e400661faac423410921d1df45818a92ee7433beb900ef2633d\",\"previousblockhash\":\"0000000000000000000051aed6d87a76a4f2387ce41455b61f3cd64cd7a95e2e\",\"mediantime\":1792152382,\"nonce\":3894702701,\"bits\":386007187,\"difficulty\":140577680051919.62}",
+      "rawBlockSha256": "24fa3cbb0bd2b7f07410ea4c8df073997322b85913059f1f047100752d85d964"
+    }
+  ],
+  "rows": [
+    {
+      "height": 923328,
+      "timestamp": 1762972230,
+      "date": "2025-11-12T18:30:30Z",
+      "previousDifficulty": 155973032196071.9,
+      "difficulty": 152271405447597.4,
+      "changePct": -2.373247923923938
+    },
+    {
+      "height": 925344,
+      "timestamp": 1764206208,
+      "date": "2025-11-27T01:16:48Z",
+      "previousDifficulty": 152271405447597.4,
+      "difficulty": 149301205959699.9,
+      "changePct": -1.9505957005957142
+    },
+    {
+      "height": 927360,
+      "timestamp": 1765424862,
+      "date": "2025-12-11T03:47:42Z",
+      "previousDifficulty": 149301205959699.9,
+      "difficulty": 148195306640204.7,
+      "changePct": -0.7407169368703781
+    },
+    {
+      "height": 929376,
+      "timestamp": 1766634486,
+      "date": "2025-12-25T03:48:06Z",
+      "previousDifficulty": 148195306640204.7,
+      "difficulty": 148258433855481.3,
+      "changePct": 0.04259731074336415
+    },
+    {
+      "height": 931392,
+      "timestamp": 1767859543,
+      "date": "2026-01-08T08:05:43Z",
+      "previousDifficulty": 148258433855481.3,
+      "difficulty": 146472570619930.8,
+      "changePct": -1.2045609744477104
+    },
+    {
+      "height": 933408,
+      "timestamp": 1769110282,
+      "date": "2026-01-22T19:31:22Z",
+      "previousDifficulty": 146472570619930.8,
+      "difficulty": 141668107417558.2,
+      "changePct": -3.2801112058306936
+    },
+    {
+      "height": 935424,
+      "timestamp": 1770472605,
+      "date": "2026-02-07T13:56:45Z",
+      "previousDifficulty": 141668107417558.2,
+      "difficulty": 125864590119494.3,
+      "changePct": -11.155310525525675
+    },
+    {
+      "height": 937440,
+      "timestamp": 1771527275,
+      "date": "2026-02-19T18:54:35Z",
+      "previousDifficulty": 125864590119494.3,
+      "difficulty": 144398401518100.9,
+      "changePct": 14.725199026200176
+    },
+    {
+      "height": 939456,
+      "timestamp": 1772731727,
+      "date": "2026-03-05T17:28:47Z",
+      "previousDifficulty": 144398401518100.9,
+      "difficulty": 145042165424853.3,
+      "changePct": 0.4458248152225508
+    },
+    {
+      "height": 941472,
+      "timestamp": 1774043659,
+      "date": "2026-03-20T21:54:19Z",
+      "previousDifficulty": 145042165424853.3,
+      "difficulty": 133793147307542.8,
+      "changePct": -7.755688205812572
+    },
+    {
+      "height": 943488,
+      "timestamp": 1775208520,
+      "date": "2026-04-03T09:28:40Z",
+      "previousDifficulty": 133793147307542.8,
+      "difficulty": 138966872071213.2,
+      "changePct": 3.8669579629350137
+    },
+    {
+      "height": 945504,
+      "timestamp": 1776448537,
+      "date": "2026-04-17T17:55:37Z",
+      "previousDifficulty": 138966872071213.2,
+      "difficulty": 135594876535256.6,
+      "changePct": -2.426474371696763
+    },
+    {
+      "height": 947520,
+      "timestamp": 1777687605,
+      "date": "2026-05-02T02:06:45Z",
+      "previousDifficulty": 135594876535256.6,
+      "difficulty": 132472011079030.5,
+      "changePct": -2.30308514305414
+    },
+    {
+      "height": 949536,
+      "timestamp": 1778860884,
+      "date": "2026-05-15T16:01:24Z",
+      "previousDifficulty": 132472011079030.5,
+      "difficulty": 136607070854775.1,
+      "changePct": 3.1214591988625306
+    },
+    {
+      "height": 951552,
+      "timestamp": 1780050586,
+      "date": "2026-05-29T10:29:46Z",
+      "previousDifficulty": 136607070854775.1,
+      "difficulty": 138955357012247.3,
+      "changePct": 1.7190077664198222
+    },
+    {
+      "height": 953568,
+      "timestamp": 1781396637,
+      "date": "2026-06-14T00:23:57Z",
+      "previousDifficulty": 138955357012247.3,
+      "difficulty": 124932866006548.2,
+      "changePct": -10.09136409506196
+    },
+    {
+      "height": 955584,
+      "timestamp": 1782525607,
+      "date": "2026-06-27T02:00:07Z",
+      "previousDifficulty": 124932866006548.2,
+      "difficulty": 133869853540305.4,
+      "changePct": 7.15343193462703
+    },
+    {
+      "height": 957600,
+      "timestamp": 1783800551,
+      "date": "2026-07-11T20:09:11Z",
+      "previousDifficulty": 133869853540305.4,
+      "difficulty": 127170500429035.2,
+      "changePct": -5.004377710216268
+    },
+    {
+      "height": 959616,
+      "timestamp": 1785019866,
+      "date": "2026-07-25T22:51:06Z",
+      "previousDifficulty": 127170500429035.2,
+      "difficulty": 126231507121868.2,
+      "changePct": -0.7383735253058799
+    },
+    {
+      "height": 961632,
+      "timestamp": 1786217755,
+      "date": "2026-08-08T19:35:55Z",
+      "previousDifficulty": 126231507121868.2,
+      "difficulty": 127479855693691.4,
+      "changePct": 0.9889358055576558
+    },
+    {
+      "height": 963648,
+      "timestamp": 1787446127,
+      "date": "2026-08-23T00:48:47Z",
+      "previousDifficulty": 127479855693691.4,
+      "difficulty": 125807076547197.5,
+      "changePct": -1.312190963341897
+    },
+    {
+      "height": 965664,
+      "timestamp": 1788640367,
+      "date": "2026-09-05T20:32:47Z",
+      "previousDifficulty": 125807076547197.5,
+      "difficulty": 127450789715843.1,
+      "changePct": 1.3065347465004873
+    },
+    {
+      "height": 967680,
+      "timestamp": 1789801745,
+      "date": "2026-09-19T07:09:05Z",
+      "previousDifficulty": 127450789715843.1,
+      "difficulty": 132757073449487.5,
+      "changePct": 4.163398081310432
+    },
+    {
+      "height": 969696,
+      "timestamp": 1791011796,
+      "date": "2026-10-03T07:16:36Z",
+      "previousDifficulty": 132757073449487.5,
+      "difficulty": 132716002350731.3,
+      "changePct": -0.030937032347155835
+    },
+    {
+      "height": 971712,
+      "timestamp": 1792154251,
+      "date": "2026-10-16T12:37:31Z",
+      "previousDifficulty": 132716002350731.3,
+      "difficulty": 140577680051919.6,
+      "changePct": 5.923684832227005
+    }
+  ],
+  "forecasts": [],
+  "doi": null,
+  "doiStatus": "Not registered; no deposit submitted"
+}

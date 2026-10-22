@@ -1,8 +1,12 @@
 'use client'
 
 import { useMemo } from 'react'
+import { CashPositionChart } from './CashPositionChart'
+import { useCalculatorMeasurement } from '@/components/v3/Measurement'
+import { useSiteVersion } from '@/components/routing/SiteVersionContext'
 import {
   Hint,
+  InputSection,
   Presets,
   Readout,
   Slider,
@@ -59,7 +63,8 @@ function simulate(v: typeof DEFAULTS, monthlyGrowthPct: number) {
 const BOUNDS = { th: [100, 20000], jPerTh: [12, 40], power: [0.02, 0.15], capex: [5000, 2000000], price: [20000, 200000], diffT: [1, 1000], growth: [0, 8], months: [2, 120] } as const
 
 export function PaybackModel({ enhanced = false, nextStep }: { enhanced?: boolean; nextStep?: React.ReactNode }) {
-  const [v, setV] = useUrlState(DEFAULTS, enhanced ? BOUNDS : undefined)
+  const isV3 = useSiteVersion() === 'v3'
+  const [v, writeV] = useUrlState(DEFAULTS, enhanced ? BOUNDS : undefined)
   const presets = presetsFor(SLUG)
 
   const runs = useMemo(() => {
@@ -68,6 +73,13 @@ export function PaybackModel({ enhanced = false, nextStep }: { enhanced?: boolea
     const high = simulate(v, v.growth + 3)
     return { low, mid, high }
   }, [v])
+
+  const measurement = useCalculatorMeasurement(SLUG, Object.values(v).every(Number.isFinite) && v.diffT > 0 && [runs.low, runs.mid, runs.high].every(run => Number.isFinite(run.final) && Number.isFinite(run.powerDay)), isV3)
+  const setV = (next: typeof v) => {
+    if (Object.keys(v).some(key => next[key as keyof typeof v] !== v[key as keyof typeof v])) measurement.markInputChange()
+    writeV(next)
+  }
+  const sampleV = (next: typeof v, source: 'sample' | 'example' = 'sample') => { measurement.markSample(source); writeV(next) }
 
   const label = (m: number | null) => (m === null ? `beyond ${v.months} months` : `${m} months`)
   const usd = (n: number) => `$${Math.round(n).toLocaleString('en-US')}`
@@ -83,16 +95,46 @@ export function PaybackModel({ enhanced = false, nextStep }: { enhanced?: boolea
     <>
       <ToolShell
         preciseInputs={enhanced}
+        onReset={() => sampleV(DEFAULTS)}
+        mobileResult={<span><strong>{label(runs.mid.paybackMonth)}</strong> <small>central payback</small></span>}
         inputs={
           <>
             {presets.length ? (
               <Presets
                 items={presets}
-                onPick={(vals) => setV({ ...DEFAULTS, ...vals } as typeof DEFAULTS)}
+                onPick={(vals) => sampleV({ ...DEFAULTS, ...vals } as typeof DEFAULTS, 'example')}
                 activeName={matchPreset(v, DEFAULTS, presets)}
               />
             ) : null}
 
+            {isV3 ? <>
+              <InputSection number="01" title="Fleet specifications" description="Size your fleet and its energy demand.">
+<Slider id="th" label="Fleet hashrate" unit="TH/s" value={v.th} min={100} max={20000} step={50}
+                onChange={(n) => setV({ ...v, th: n })} format={(n) => n.toLocaleString('en-US')}
+                  hint={hintFor(SLUG, "Fleet hashrate")} />
+<Slider id="jPerTh" label="Efficiency" unit="J/TH" value={v.jPerTh} min={12} max={40} step={0.5}
+                onChange={(n) => setV({ ...v, jPerTh: n })} format={(n) => n.toFixed(1)}
+                  hint={hintFor(SLUG, "Efficiency")} />
+              </InputSection>
+              <InputSection number="02" title="Cost assumptions" description="Separate operating cost from the initial investment.">
+<Slider id="power" label="All-in power cost" unit="$/kWh" value={v.power} min={0.02} max={0.15} step={0.001}
+                onChange={(n) => setV({ ...v, power: n })} format={(n) => n.toFixed(3)}
+                  hint={hintFor(SLUG, "All-in power cost")} />
+<Slider id="capex" label="What you paid up front" unit="USD" value={v.capex} min={5000} max={2000000} step={1000}
+                onChange={(n) => setV({ ...v, capex: n })} format={(n) => `$${(n / 1000).toFixed(0)}k`}
+                  hint={hintFor(SLUG, "What you paid up front")} />
+              </InputSection>
+              <InputSection number="03" title="Market & model horizon" description="Set the starting point and the period you want to test.">
+<Slider id="price" label="Bitcoin price" unit="USD" value={v.price} min={20000} max={200000} step={1000}
+                onChange={(n) => setV({ ...v, price: n })} format={(n) => `$${(n / 1000).toFixed(0)}k`}
+                  hint={hintFor(SLUG, "Bitcoin price")} />
+<Slider id="growth" label="Difficulty growth guess" unit="% per month" value={v.growth} min={0} max={8} step={0.1}
+                  onChange={(n) => setV({ ...v, growth: n })} format={(n) => n.toFixed(1)}
+                  hint={hintFor(SLUG, "Difficulty growth guess")} />
+<Slider id="diffT" label="Starting difficulty" unit="T" value={v.diffT} min={1} max={1000} step={0.01} onChange={n => setV({ ...v, diffT: n })} />
+<Slider id="months" label="Model horizon" unit="months" value={v.months} min={2} max={120} step={1} onChange={n => setV({ ...v, months: n })} />
+              </InputSection>
+            </> : <>
             <h2 className="text-lg font-bold tracking-[-0.015em]">Your fleet</h2>
             <div className="mt-5 space-y-5">
               <Slider id="th" label="Fleet hashrate" unit="TH/s" value={v.th} min={100} max={20000} step={50}
@@ -116,12 +158,13 @@ export function PaybackModel({ enhanced = false, nextStep }: { enhanced?: boolea
                   hint={hintFor(SLUG, "Difficulty growth guess")} />
               </div>
             </div>
+            </>}
           </>
         }
         summary={
           <>
             <h2 className="text-xs font-bold uppercase tracking-[0.12em] text-muted">Payback</h2>
-            <p className="tabular mt-3 text-4xl font-extrabold tracking-[-0.03em] text-brand">
+            <p ref={measurement.resultRef} className="tabular mt-3 text-4xl font-extrabold tracking-[-0.03em] text-brand">
               {label(runs.mid.paybackMonth)}
             </p>
             <p className="tabular mt-1 text-sm text-muted">
@@ -133,11 +176,11 @@ export function PaybackModel({ enhanced = false, nextStep }: { enhanced?: boolea
               </Hint>
             ) : null}
 
-            <svg viewBox="0 0 300 70" className="mt-5 w-full" role="img"
+            {isV3 ? <CashPositionChart series={pts} capex={v.capex} months={v.months} /> : (            <svg viewBox="0 0 300 70" className="mt-5 w-full" role="img"
               aria-label={`Cumulative cash position over ${v.months} months, crossing zero at ${label(runs.mid.paybackMonth)}`}>
               <line x1="0" y1="60" x2="300" y2="60" stroke="currentColor" className="text-white/10" strokeWidth="1" />
               <polyline points={path} fill="none" stroke="currentColor" className="text-brand" strokeWidth="2" />
-            </svg>
+            </svg>)}
 
             <Readout>
               {enhanced ? (
@@ -164,7 +207,7 @@ export function PaybackModel({ enhanced = false, nextStep }: { enhanced?: boolea
                 </>
               )}
             </Readout>
-            {nextStep}
+            {!isV3 ? nextStep : null}
 
             <SummaryRows
               rows={[
@@ -193,6 +236,7 @@ export function PaybackModel({ enhanced = false, nextStep }: { enhanced?: boolea
                 },
               ]}
             />
+            {isV3 ? nextStep : null}
           </>
         }
       />

@@ -14,10 +14,6 @@ export function versionedPath(href: string, version: SiteVersion = 'v1'): string
     const pathname = suffixAt === -1 ? href : href.slice(0, suffixAt)
     const suffix = suffixAt === -1 ? '' : href.slice(suffixAt)
     const page = pathname.replace(/^\/v[123](?=\/|$)/, '') || '/'
-    // Newsletter delivery is not connected. V3 offers an honest updates section.
-    if (page === '/newsletter' || page === '/newsletter/') {
-      return '/v3/resources' + suffix.split('#')[0] + '#updates'
-    }
     return '/v3' + (page === '/' ? '' : page) + suffix
   }
 

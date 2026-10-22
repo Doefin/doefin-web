@@ -1,0 +1,36 @@
+.workspace { @apply relative grid items-start gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]; }
+.inputs { @apply min-w-0 overflow-hidden rounded-panel border border-white/10 bg-surface/70; }
+.result { @apply min-w-0 rounded-panel border border-brand/25 bg-gradient-to-br from-surfaceAlt to-surface p-5 shadow-2xl shadow-ink/20 sm:p-7; }
+.result > p:nth-of-type(1) { @apply text-[2.5rem] leading-[1.15] sm:text-[2.75rem]; overflow-wrap: anywhere; }
+.result > dl > div { @apply border-b border-white/[0.05] pb-3 last:border-0; }
+.section { @apply border-t border-white/[0.07] p-5 first:border-0 sm:p-6; }
+.fields { @apply grid gap-3 sm:grid-cols-2; }
+.field { @apply min-w-0 self-start rounded-xl border border-white/[0.07] bg-ink/50 px-4 py-3 transition-colors focus-within:border-brand/60 hover:border-white/20; }
+.valueControl { @apply mt-2 flex items-center gap-3 border-b border-white/10; }
+.valueControl input { appearance: textfield; }
+.valueControl input::-webkit-inner-spin-button, .valueControl input::-webkit-outer-spin-button { appearance: none; margin: 0; }
+.range { @apply my-1 block h-8 w-full cursor-pointer bg-transparent; appearance: none; }
+.range::-webkit-slider-runnable-track { @apply h-1 rounded-full; background: linear-gradient(to right, theme('colors.brand') var(--fill), theme('colors.active') var(--fill)); }
+.range::-moz-range-track { @apply h-1 rounded-full; background: linear-gradient(to right, theme('colors.brand') var(--fill), theme('colors.active') var(--fill)); }
+.range::-webkit-slider-thumb { @apply h-3.5 w-3.5 rounded-full border-[3px] border-highlight bg-brand shadow-md; appearance: none; margin-top: -5px; }
+.range::-moz-range-thumb { @apply h-2 w-2 rounded-full border-[3px] border-highlight bg-brand shadow-md; }
+.guide { @apply mt-3 border-t border-white/[0.06] pt-2; }
+.presets { @apply px-5 pb-5 pt-5 sm:px-6; }
+.preset { @apply min-w-0 rounded-xl border border-white/10 bg-ink/30 p-3 text-left transition-colors hover:border-brand/50; }
+.preset[aria-pressed='true'] { @apply border-brand/70 bg-brand/10; }
+.radio { @apply h-3 w-3 shrink-0 rounded-full border border-subtle/50; }
+.preset[aria-pressed='true'] .radio { @apply border-[3px] border-brand bg-highlight; }
+.resultStrip { @apply sticky top-[5.5rem] z-20 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 rounded-xl border border-brand/40 bg-ink/95 px-4 py-3 shadow-lg backdrop-blur-md lg:col-span-2; }
+.resultStrip strong { @apply tabular-nums text-lg font-bold text-body; }
+.resultStrip small { @apply text-xs text-subtle; }
+@media (max-width: 639px) { .field { @apply px-4 py-3; } }
+
+@media (min-width: 640px) {
+  .fields > :last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .wideFirst > :first-child { grid-column: 1 / -1; }
+  .wideFirst > :last-child:nth-child(odd) { grid-column: auto; }
+}
+@media (max-width: 639px) {
+  .preset { min-height: 44px; }
+  .preset[aria-pressed='false'] > span:last-child { display: none; }
+}

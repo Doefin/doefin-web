@@ -221,7 +221,9 @@ export async function ReferenceGuidePage({ params, schemaVersion = 'v1' }: { par
         items={[
           { href: '/glossary', label: 'Glossary', note: 'Plain definitions of every term used here.' },
           { href: '/data/difficulty', label: 'Difficulty forecast', note: 'The current epoch, with its confidence interval.' },
-          { href: '/for/miners', label: 'For miners', note: 'What difficulty risk looks like on a real site.' },
+          schemaVersion === 'v3'
+            ? { href: '/tools', label: 'Mining calculators', note: 'Reproduce the method with your own assumptions.' }
+            : { href: '/for/miners', label: 'For miners', note: 'What difficulty risk looks like on a real site.' },
         ]}
       />
 

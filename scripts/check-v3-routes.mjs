@@ -27,9 +27,9 @@ const cases = [
   ['/v2/product/settlement', 'v3', '/v3/product/settlement'],
   ['/v2/tools/difficulty-exposure?hashrate=240#result', 'v3', '/v3/tools/difficulty-exposure?hashrate=240#result'],
   ['/v2/research/evaluating-a-forecast/sample.csv', 'v3', '/v3/research/evaluating-a-forecast/sample.csv'],
-  ['/newsletter', 'v3', '/v3/resources#updates'],
-  ['/v1/newsletter?ref=article', 'v3', '/v3/resources?ref=article#updates'],
-  ['/v3/newsletter#signup', 'v3', '/v3/resources#updates'],
+  ['/newsletter', 'v3', '/v3/newsletter'],
+  ['/v1/newsletter?ref=article', 'v3', '/v3/newsletter?ref=article'],
+  ['/v3/newsletter#signup', 'v3', '/v3/newsletter#signup'],
   ['#evidence', 'v3', '#evidence'],
   ['?hashrate=240', 'v3', '?hashrate=240'],
   ['https://app.doefin.com', 'v3', 'https://app.doefin.com'],
@@ -62,7 +62,8 @@ if (process.argv.includes('--built')) {
   ).map(path => path.replace(/^\/v[12]/, '/v3'))
   assert(expected.length > 20, 'Build must include the existing supporting library')
   for (const path of expected) assert(routeSet.has(path), `Missing V3 route: ${path}`)
-  assert(!routeSet.has('/v3/newsletter'), 'V3 must not expose the unconnected newsletter signup')
+  assert(routeSet.has('/v3/newsletter'), 'V3 must expose the explicitly labelled newsletter demo')
+  assert(routeSet.has('/v3/prototype-review'), 'V3 must expose the internal journey review')
   assert.equal(manifest.dynamicRoutes['/v3/[...path]']?.fallback, false, 'Unknown V3 routes must return 404')
 
   const pages = routes.filter(path => /^\/v3(?:\/|$)/.test(path) && !path.endsWith('.csv') && path !== '/v3/social-image')

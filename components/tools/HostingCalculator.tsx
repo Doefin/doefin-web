@@ -1,9 +1,12 @@
 'use client'
 
 import { useMemo } from 'react'
+import { useCalculatorMeasurement } from '@/components/v3/Measurement'
+import { useSiteVersion } from '@/components/routing/SiteVersionContext'
 import {
   Bars,
   Hint,
+  InputSection,
   Presets,
   Readout,
   Slider,
@@ -47,7 +50,8 @@ const BOUNDS = Object.fromEntries(FIELDS.map(f => [f.key, [0, f.max] as const]))
 export function HostingCalculator({ enhanced = false, nextStep }: {
   enhanced?: boolean; nextStep?: (rate: number) => React.ReactNode
 }) {
-  const [v, setV] = useUrlState(DEFAULTS, enhanced ? BOUNDS : undefined)
+  const isV3 = useSiteVersion() === 'v3'
+  const [v, writeV] = useUrlState(DEFAULTS, enhanced ? BOUNDS : undefined)
   const presets = presetsFor(SLUG)
 
   const out = useMemo(() => {
@@ -69,22 +73,60 @@ export function HostingCalculator({ enhanced = false, nextStep }: {
     }
   }, [v])
 
+  const measurement = useCalculatorMeasurement(SLUG, Object.values(out).every(Number.isFinite) && v.down + v.curt < 100 && v.pool < 100 && v.rate >= 0, isV3)
+  const setV = (next: typeof v) => {
+    if (Object.keys(v).some(key => next[key as keyof typeof v] !== v[key as keyof typeof v])) measurement.markInputChange()
+    writeV(next)
+  }
+  const sampleV = (next: typeof v, source: 'sample' | 'example' = 'sample') => { measurement.markSample(source); writeV(next) }
+
   const num = (n: number, d = 4) => n.toFixed(d)
 
   return (
     <ToolShell
       preciseInputs={enhanced}
+        onReset={() => sampleV(DEFAULTS)}
+      mobileResult={<span><strong>${num(out.afterPool)}</strong> <small>/ kWh effective</small></span>}
       inputs={
         <>
           {presets.length ? (
             <Presets
               items={presets}
-              onPick={(vals) => setV({ ...DEFAULTS, ...vals } as State)}
+              onPick={(vals) => sampleV({ ...DEFAULTS, ...vals } as State, 'example')}
               activeName={matchPreset(v, DEFAULTS, presets)}
             />
           ) : null}
 
-          <h2 className="text-lg font-bold tracking-[-0.015em]">Your contract</h2>
+          {isV3 ? <>
+            <InputSection wideFirst number="01" title="Contract & billing" description="Start with the quote and charges on top of power.">
+              {FIELDS.slice(0, 3).map(f => (<Slider
+                key={f.key}
+                id={f.key}
+                label={f.label}
+                unit={f.unit}
+                value={v[f.key]}
+                min={0}
+                max={f.max}
+                step={f.step}
+                onChange={(n) => setV({ ...v, [f.key]: n })}
+                hint={hintFor(SLUG, f.label)}
+              />))}
+            </InputSection>
+            <InputSection number="02" title="Availability & pool" description="Account for lost hours and the share of revenue retained.">
+              {FIELDS.slice(3).map(f => (<Slider
+                key={f.key}
+                id={f.key}
+                label={f.label}
+                unit={f.unit}
+                value={v[f.key]}
+                min={0}
+                max={f.max}
+                step={f.step}
+                onChange={(n) => setV({ ...v, [f.key]: n })}
+                hint={hintFor(SLUG, f.label)}
+              />))}
+            </InputSection>
+          </> : <>          <h2 className="text-lg font-bold tracking-[-0.015em]">Your contract</h2>
           <div className="mt-5 space-y-5">
             {FIELDS.map((f) => (
               <Slider
@@ -100,21 +142,21 @@ export function HostingCalculator({ enhanced = false, nextStep }: {
                 hint={hintFor(SLUG, f.label)}
               />
             ))}
-          </div>
+          </div></>}
 
-          <button
+          {!isV3 ? <button
             type="button"
-            onClick={() => setV(DEFAULTS)}
+            onClick={() => sampleV(DEFAULTS)}
             className="mt-6 rounded-lg border border-white/[0.12] px-4 py-2 text-sm text-muted hover:border-white/25 hover:text-body"
           >
             Reset
-          </button>
+          </button> : null}
         </>
       }
       summary={
         <>
           <h2 className="text-xs font-bold uppercase tracking-[0.12em] text-muted">Effective rate</h2>
-          <p className="tabular mt-3 text-4xl font-extrabold tracking-[-0.03em] text-down">
+          <p ref={measurement.resultRef} className="tabular mt-3 text-4xl font-extrabold tracking-[-0.03em] text-down">
             ${num(out.afterPool)}
           </p>
           <p className="tabular mt-1 text-sm text-muted">

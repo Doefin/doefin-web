@@ -6,6 +6,8 @@ export type ToolExample = {
   seoTitle: string
   summary: string
   headline: string
+  /** Inputs that reproduce this educational scenario in the calculator. */
+  calculatorInputs: Record<string, number>
   inputs: [string, string][]
   steps: [string, string][]
   body: string[]
@@ -27,20 +29,20 @@ export const TOOLS: Tool[] = [
     summary:
       'What your advertised price per kilowatt-hour actually costs once fees, downtime and curtailment are counted.',
     lede:
-      'The advertised power price is rarely the price you pay. Management fees, power-factor charges, unplanned downtime, curtailment and pool fees all sit between the quoted rate and the number that lands in your wallet.',
+      'Compare a stated power rate with management fees, power-factor adjustments and paid lost hours. The pool-fee adjustment is an equivalent comparison cost, not an electricity charge or a profit result.',
     status: 'live',
     faq: [
       {
         q: 'Why is my effective hosting rate higher than the advertised rate?',
-        a: 'Because you are typically billed for contracted capacity whether or not the machines run, while you only earn while they do. Every hour lost to downtime or curtailment raises the cost of the hours that remain, on top of management fees and any power-factor uplift.',
+        a: 'This model assumes booked capacity stays payable during lost hours. Under that assumption, fees and fewer productive hours raise the equivalent cost. Check whether your actual billing terms fit the model.',
       },
       {
         q: 'What is curtailment in Bitcoin mining?',
-        a: 'Deliberately switching machines off, usually because power is expensive at that moment or the grid needs the capacity back. It reduces revenue, and under most contracts it does not proportionally reduce what you are billed.',
+        a: 'Deliberately stopping mining, for example in response to power conditions. Billing treatment and compensation depend on the agreement; this model assumes the affected capacity remains payable and includes no curtailment income.',
       },
       {
         q: 'Can I verify my hosting provider’s uptime claims?',
-        a: 'Generally not independently. Providers advertise uptime targets that operators cannot audit, and the gap between advertised and realised uptime is one of the most common sources of dispute in hosting contracts. Track your own pool-side hashrate and compare.',
+        a: 'Compare your pool-side and site records with the contract’s definition and the relevant invoices. Use the same period, and establish whether downtime and curtailment overlap. The calculator does not verify provider claims.',
       },
     ],
   },
@@ -49,12 +51,12 @@ export const TOOLS: Tool[] = [
     title: 'Difficulty exposure sizer',
     summary: 'What a difficulty move is worth to your fleet over a horizon you choose.',
     lede:
-      'Size the exposure you already carry: how much bitcoin production a difficulty move costs you, across the current forecast interval rather than a single point estimate.',
+      'Size the exposure you already carry: how much bitcoin production a difficulty move costs you, under difficulty scenarios you choose, rather than a forecast supplied by this site.',
     status: 'preview',
     faq: [
       {
         q: 'How do I calculate my difficulty exposure?',
-        a: 'Take your hashrate as a share of network hashrate, multiply by network issuance over the period you care about, then recompute at the top and bottom of the current forecast interval. The gap between those two production figures is the exposure.',
+        a: 'Take your hashrate as a share of network hashrate, multiply by network issuance over the period you care about, then recompute at the two difficulty scenarios you choose. The gap between those two production figures is the exposure.',
       },
     ],
   },
@@ -63,12 +65,12 @@ export const TOOLS: Tool[] = [
     title: 'Fleet payback model',
     summary: 'Payback under a range of difficulty paths rather than one fixed growth assumption.',
     lede:
-      'Most return calculators assume difficulty grows at a fixed rate forever. This one runs a range and shows what the assumption is costing you.',
+      'Compare three assumed monthly difficulty-growth rates over a finite horizon. Results depend on the inputs and excluded costs.',
     status: 'preview',
     faq: [
       {
         q: 'Why do mining calculators get payback wrong?',
-        a: 'Most either ignore difficulty growth or hard-code a fixed monthly rate. A fixed rate is a guess that happened to fit some past window, and over a two-year payback horizon a small error in it moves the payback date by months.',
+        a: 'A payback estimate changes when assumptions change. This simplified model compares three constant monthly difficulty-growth rates, holds the subsidy and price fixed, and excludes several real-world costs. It is not a forecast or complete investment valuation.',
       },
     ],
   },
@@ -80,8 +82,9 @@ export const EXAMPLES: ToolExample[] = [
     toolSlug: 'hosting-effective-rate',
     seoTitle: 'Hosting at $0.065/kWh — the real cost',
     title: 'An advertised $0.065/kWh contract',
-    summary: 'Typical fees, 4% downtime and 6% curtailment.',
+    summary: 'Illustrative fees, 4% downtime and 6% curtailment.',
     headline: '$0.0796/kWh effective — 22% above advertised',
+    calculatorInputs: { rate: 0.065, mgmt: 5, pf: 3, down: 4, curt: 6, pool: 2 },
     inputs: [
       ['Advertised power rate', '$0.065 / kWh'],
       ['Management fee', '5% of power'],
@@ -95,13 +98,13 @@ export const EXAMPLES: ToolExample[] = [
       ['Plus management fee and power-factor uplift (8%)', '$0.0702'],
       ['Effective uptime after 10% lost hours', '90.0%'],
       ['Cost per productive kWh', '$0.0780'],
-      ['After a 2% pool fee on revenue', '$0.0796'],
+      ['Equivalent pool-fee adjustment: divide by 0.98', '$0.0796'],
     ],
     body: [
-      'An advertised rate of $0.065 per kilowatt-hour ends up costing $0.0796 per productive kilowatt-hour once fees and lost hours are counted — roughly 22% above the headline figure.',
-      'The largest single contributor is not the management fee. It is the ten percent of hours the machines are not earning, because under most contracts capacity is billed regardless. Downtime and curtailment do not reduce the bill proportionally; they raise the cost of every hour that remains.',
-      'This is why comparing hosting providers on advertised rate alone is misleading. A provider quoting $0.070 with genuinely higher uptime can be cheaper than one quoting $0.065 with aggressive curtailment terms.',
-    ],
+      "Educational inputs, not a quoted offer. The model assumes booked capacity stays payable during lost hours. The $0.065 rate is multiplied by 1.08 for the two added fees, divided by 0.90 for productive hours and divided by 0.98 for an equivalent pool-fee adjustment.",
+      "The result is $0.0796 per productive kWh, an uplift of approximately 22% over the sample advertised rate. This equivalent cost is not an electricity invoice, revenue, profit or contract payout.",
+      "Compare another offer using the same treatment of paid hours, fees and tax. The calculator cannot verify a provider’s terms or performance."
+],
   },
   {
     slug: 'high-curtailment',
@@ -110,6 +113,7 @@ export const EXAMPLES: ToolExample[] = [
     title: 'A cheap rate with heavy curtailment',
     summary: 'Advertised $0.045/kWh but 20% of hours curtailed.',
     headline: '$0.0653/kWh effective — 45% above advertised',
+    calculatorInputs: { rate: 0.045, mgmt: 5, pf: 3, down: 4, curt: 20, pool: 2 },
     inputs: [
       ['Advertised power rate', '$0.045 / kWh'],
       ['Management fee', '5% of power'],
@@ -123,13 +127,13 @@ export const EXAMPLES: ToolExample[] = [
       ['Plus fees (8%)', '$0.0486'],
       ['Effective uptime after 24% lost hours', '76.0%'],
       ['Cost per productive kWh', '$0.0639'],
-      ['After a 2% pool fee', '$0.0653'],
+      ['Equivalent pool-fee adjustment: divide by 0.98', '$0.0653'],
     ],
     body: [
-      'A headline rate of $0.045 per kilowatt-hour looks like a substantial saving until curtailment is counted. At twenty percent curtailed hours, the effective cost reaches $0.0653 — 45% above the advertised figure. That is more than the $0.065 the pricier contract merely advertises, and it wipes out most of the apparent saving.',
-      'Curtailment terms are among the least visible line items in a hosting agreement, and among the largest determinants of what a quoted price actually costs. A contract that permits unlimited curtailment at the host’s discretion is a different product from one that caps it.',
-      'Ask for the curtailment history of the specific site, not the contractual maximum. The two are frequently far apart in both directions.',
-    ],
+      "Educational inputs, not a quoted offer. A $0.045 rate with 8% combined added fees gives $0.0486/kWh. With 4% downtime and 20% separate curtailment, the productive-hours fraction is 0.76.",
+      "Dividing $0.0486 by 0.76 and then 0.98 gives an equivalent $0.0653 per productive kWh, approximately 45% above the sample rate. This assumes booked capacity stays payable during lost hours and represents pool fees as a comparison adjustment.",
+      "Absolute equivalent costs and billing assumptions determine this model’s comparison; the percentage uplift alone cannot rank providers or establish profitability."
+],
   },
   {
     slug: 'well-run-site',
@@ -138,6 +142,7 @@ export const EXAMPLES: ToolExample[] = [
     title: 'A well-run site',
     summary: 'Higher advertised rate, minimal downtime, no curtailment.',
     headline: '$0.0832/kWh effective — 7% above advertised',
+    calculatorInputs: { rate: 0.078, mgmt: 3, pf: 0, down: 1.5, curt: 0, pool: 2 },
     inputs: [
       ['Advertised power rate', '$0.078 / kWh'],
       ['Management fee', '3% of power'],
@@ -151,12 +156,13 @@ export const EXAMPLES: ToolExample[] = [
       ['Plus management fee (3%)', '$0.0803'],
       ['Effective uptime', '98.5%'],
       ['Cost per productive kWh', '$0.0816'],
-      ['After a 2% pool fee', '$0.0832'],
+      ['Equivalent pool-fee adjustment: divide by 0.98', '$0.0832'],
     ],
     body: [
-      'The most expensive advertised rate in these three examples produces the smallest gap between headline and reality — 7% rather than 22% or 45%.',
-      'That is the point of running the calculation. The gap between headline and reality is not the same size for every contract — 7% here against 45% at the cheap, heavily curtailed site. That gap, not the advertised rate, is what a comparison has to be made on; raise curtailment at the cheap site much further and it stops being the cheap site at all.',
-    ],
+      "Educational inputs, not a provider assessment. The formula is $0.078 × 1.03 ÷ 0.985 ÷ 0.98 = $0.083228/kWh. It assumes booked capacity stays payable during lost hours and converts pool fees into an equivalent cost adjustment.",
+      "The result displays as $0.0832/kWh, approximately 7% above the illustrative starting rate. It is the highest absolute effective rate among these three samples despite having the smallest percentage uplift.",
+      "The retained scenario title is descriptive of its chosen lost-hours assumptions. It supplies no evidence about a real provider’s quality, profitability or contract performance."
+],
   },
 ]
 
@@ -167,26 +173,30 @@ EXAMPLES.push(
     toolSlug: 'difficulty-exposure',
     seoTitle: '1 EH/s over four epochs — difficulty exposure',
     title: 'One exahash over four epochs',
-    summary: 'A mid-size operator across the current forecast interval.',
-    headline: '2.53 BTC across the interval',
+    summary: 'An illustrative fleet compared under two constant-difficulty scenarios.',
+    headline: '2.525 BTC between the two scenarios',
+    calculatorInputs: { eh: 1, epochs: 4, diffT: 127.48, low: -2.4, high: 7, fees: 0.05, price: 64000 },
     inputs: [
       ['Fleet hashrate', '1.00 EH/s'],
       ['Horizon', '4 epochs · about 8 weeks'],
-      ['Current difficulty', '127.48 T'],
-      ['Forecast interval', '−2.4% to +7.0%'],
-      ['Expected fees', '0.05 BTC / block'],
+      ['Illustrative starting difficulty', '127.48 T'],
+      ['Illustrative difficulty scenarios', '−2.4% and +7.0%'],
+      ['Assumed transaction fees', '0.05 BTC / block'],
+      ['Fixed subsidy', '3.125 BTC / block'],
+      ['USD conversion assumption', '$64,000 / BTC'],
     ],
     steps: [
-      ['Implied network hashrate', '913 EH/s'],
-      ['Production at current difficulty', '28.06 BTC'],
-      ['If difficulty falls 2.4%', '28.75 BTC'],
-      ['If difficulty rises 7.0%', '26.22 BTC'],
-      ['Spread across the interval', '2.53 BTC'],
+      ['Implied target-interval network hashrate', '912.537 EH/s'],
+      ['Production at unchanged starting difficulty', '28.057 BTC'],
+      ['If difficulty is 2.4% lower throughout', '28.747 BTC'],
+      ['If difficulty is 7.0% higher throughout', '26.222 BTC'],
+      ['Spread between the two scenarios', '2.525 BTC'],
+      ['Harder scenario vs unchanged baseline', '−1.836 BTC'],
     ],
     body: [
-      'A one-exahash operator produces roughly 28 BTC over four epochs at current difficulty. Across the current forecast interval that figure ranges from 26.2 to 28.8 BTC — a spread of about 2.5 BTC, or roughly 9% of production.',
-      'That spread, not the point forecast, is what a hedge is priced against. A contract sized to the top of the interval covers the case that actually hurts.',
-      'Scale matters here more than anything else on the page. The same calculation at 10 PH/s produces a spread of about 0.025 BTC — a few hundred dollars, and below the size at which any hedge covers its own costs.',
+      'At the sample baseline, 1 EH/s produces 28.057 BTC over four modeled epochs. Applying each scenario difficulty throughout the whole horizon gives 28.747 BTC at −2.4% and 26.222 BTC at +7.0%. These are sensitivity assumptions, not a forecast or a confidence interval.',
+      'The 2.525 BTC spread includes both the gain in the easier case and the reduction in the harder case. The harder case produces 1.836 BTC less than the unchanged baseline. The calculator excludes operating costs and pool fees, so neither number is a net-profit or cash-flow result.',
+      'A binary difficulty contract observes difficulty at one block and has a separate fixed payout, entry cost and trading fees. The full entry cost can be lost. This production example supplies no executable price, position size or conclusion about whether a hedge would cover its costs at any fleet size.',
     ],
   },
   {
@@ -195,13 +205,17 @@ EXAMPLES.push(
     seoTitle: 'What a static difficulty assumption costs',
     title: 'A static assumption versus a range',
     summary: '1,000 TH/s at $20k outlay, run at three difficulty growth rates.',
-    headline: 'Payback moves from 24 months to never',
+    headline: '24 months, 38 months, or no payback within 48 months',
+    calculatorInputs: { th: 1000, jPerTh: 15, power: 0.045, capex: 20000, price: 90000, diffT: 127.48, growth: 1.5, months: 48 },
     inputs: [
       ['Fleet hashrate', '1,000 TH/s — about five modern machines'],
       ['Efficiency', '15 J/TH'],
       ['All-in power', '$0.045 / kWh'],
       ['Capital outlay', '$20,000'],
       ['Bitcoin price', '$90,000'],
+      ['Illustrative starting difficulty', '127.48 T'],
+      ['Fixed subsidy', '3.125 BTC / block'],
+      ['Horizon', '48 modeled months · 30.4 days per month'],
     ],
     steps: [
       ['Power cost per day', '$16.20'],
@@ -211,10 +225,9 @@ EXAMPLES.push(
       ['Position at 48 months, 4.5% growth', '−$17,282'],
     ],
     body: [
-      'The same fleet, the same outlay and the same bitcoin price produce payback at 24 months, at 38 months, or never — depending only on what difficulty does. Most return calculators pick one of those and present it as the answer.',
-      'A fixed growth assumption is not a forecast. It is a rate that happened to fit some past window, applied to a future under no obligation to match it — and the error compounds over a payback horizon.',
-      'The honest version shows the range. At the pessimistic end this fleet never returns its capital and finishes 48 months down $17,000 — the difference between a sound investment and a loss, turning entirely on a variable the operator does not control.',
-      'That is the exposure a difficulty hedge addresses. It is also why the answer for a small operator is often that the exposure is real but too small to hedge economically; the arithmetic should say so rather than manufacture a reason to trade.',
+      'Using these illustrative inputs, the model first reaches non-negative cumulative cash flow at month 24 with 0% monthly difficulty growth and month 38 with 1.5% growth. At 4.5%, it has not reached payback by month 48 and ends approximately $17,282 below the initial outlay. The finite horizon cannot establish that payback will never occur.',
+      'The model starts difficulty growth in month one, uses 30.4 days per month and holds BTC price, hashrate, efficiency, power rate and the 3.125 BTC subsidy constant. It does not model a subsidy halving, transaction fees, pool fees, downtime, tax, financing, resale value or a contract position. Actual costs and production can differ materially.',
+      'These three paths are assumptions for comparison, not predictions, investment ratings or proof of a hedge’s economics. A difficulty contract observes one block; its payout, entry cost, fees and possible full entry-cost loss must be evaluated separately.',
     ],
   },
 )

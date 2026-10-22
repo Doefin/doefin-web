@@ -5,7 +5,6 @@ import { Container } from '@/components/layout/Container'
 import { Callout, DataTable, Eyebrow, Prose } from '@/components/ui'
 import { EXAMPLES, guideFor, TOOLS } from '@/content'
 import { seo } from '@/lib/seo'
-import { Subscribe } from '@/components/content/Subscribe'
 import { NextLinks, Reviewed } from '@/components/content/NextLinks'
 
 export function generateStaticParams() {
@@ -33,6 +32,7 @@ export default async function ExamplePage({ params }: { params: Promise<{ tool: 
   const t = TOOLS.find((x) => x.slug === tool)
   if (!e || !t) notFound()
   const guide = guideFor(t.slug)
+  const calculatorQuery = new URLSearchParams(Object.entries(e.calculatorInputs).map(([key, value]) => [key, String(value)])).toString()
 
   return (
     <Container size="narrow" className="py-16">
@@ -44,7 +44,7 @@ export default async function ExamplePage({ params }: { params: Promise<{ tool: 
         ]}
       />
       <div className="mt-6">
-        <Eyebrow>Worked example</Eyebrow>
+        <Eyebrow>Educational worked example · sample inputs</Eyebrow>
         <h1 className="text-balance text-4xl font-extrabold leading-[1.06] tracking-[-0.03em]">
           {e.title}
         </h1>
@@ -55,7 +55,7 @@ export default async function ExamplePage({ params }: { params: Promise<{ tool: 
       </div>
 
       <section className="mt-10">
-        <h2 className="mb-4 text-xl font-bold tracking-[-0.02em]">The contract</h2>
+        <h2 className="mb-4 text-xl font-bold tracking-[-0.02em]">Illustrative inputs</h2>
         <DataTable head={['Term', 'Value']} rows={e.inputs.map(([k, v]) => [k, <span key={k} className="tabular">{v}</span>])} />
       </section>
 
@@ -71,11 +71,10 @@ export default async function ExamplePage({ params }: { params: Promise<{ tool: 
       <div className="mt-10">
         <Callout title="Run it with your own numbers">
           <p>
-            <Link href={`/tools/${t.slug}`} className="text-brand hover:underline">
-              Open the calculator
+            <Link href={`/tools/${t.slug}?${calculatorQuery}`} className="text-brand hover:underline">
+              Load these inputs in the calculator
             </Link>{' '}
-            and change any input. Your scenario is encoded in the URL, so you can paste it into a
-            conversation.
+            and change any input. The URL includes the assumptions for this example. Sharing it exposes those inputs; it sends no order or contract amount.
           </p>
           {guide ? (
             <p>
@@ -96,10 +95,6 @@ export default async function ExamplePage({ params }: { params: Promise<{ tool: 
           { href: '/for/miners', label: 'For miners', note: 'What difficulty risk looks like on a real site.' },
         ]}
       />
-
-      <div className="mt-16">
-        <Subscribe compact />
-      </div>
 
       <Reviewed />
     </Container>

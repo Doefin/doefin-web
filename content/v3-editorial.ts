@@ -1,5 +1,9 @@
+/** Review date for the existing educational articles; not a publication date. */
+export const v3EditorialReviewedAt = '2026-10-19'
+
 export type V3EditorialArticle = {
   kind: 'blog' | 'academy'
+  reviewedAt?: string
   slug: string
   title: string
   summary: string
@@ -8,12 +12,12 @@ export type V3EditorialArticle = {
 }
 
 const articles: V3EditorialArticle[] = [
-  { kind: 'blog', slug: 'what-a-static-growth-assumption-costs-you', title: 'Testing a difficulty-growth assumption', summary: 'Compare production and payback across assumptions instead of treating one growth rate as a forecast.', tags: ['difficulty', 'mining economics'], sections: [
+  { kind: 'blog', reviewedAt: v3EditorialReviewedAt, slug: 'what-a-static-growth-assumption-costs-you', title: 'Testing a difficulty-growth assumption', summary: 'Compare production and payback across assumptions instead of treating one growth rate as a forecast.', tags: ['difficulty', 'mining economics'], sections: [
     { heading: 'State the assumption', paragraphs: ['A fixed difficulty-growth rate is an input to a scenario. It is not evidence of what the network will do. Label its time period and keep it separate from measured historical data or a dated forecast.'] },
     { heading: 'Compare the result, not only the input', paragraphs: ['Run the same fleet assumptions with different difficulty paths. Compare the resulting production and payback alongside power cost, uptime, capital cost and Bitcoin price. Holding the other inputs constant helps show which change drives the difference.'] },
     { heading: 'Keep the decision proportional to the evidence', paragraphs: ['A simplified calculator exposes sensitivity; it does not determine whether a position is suitable or economical. That assessment also needs timing, transaction costs, available liquidity, operational constraints and the decision-maker’s objectives. This article provides no measured threshold at which an operation should hedge.'] },
   ] },
-  { kind: 'blog', slug: 'reading-a-hashrate-chart-honestly', title: 'Reading a hashrate chart', summary: 'Check the observation window and uncertainty before interpreting a change in estimated network hashrate.', tags: ['hashrate', 'methodology'], sections: [
+  { kind: 'blog', reviewedAt: v3EditorialReviewedAt, slug: 'reading-a-hashrate-chart-honestly', title: 'Reading a hashrate chart', summary: 'Check the observation window and uncertainty before interpreting a change in estimated network hashrate.', tags: ['hashrate', 'methodology'], sections: [
     { heading: 'An estimate from observable inputs', paragraphs: ['Network hashrate is inferred from difficulty and block timing, rather than read from a register of mining machines. The reported value depends on the chosen observation window and calculation.'] },
     { heading: 'Compare like with like', paragraphs: ['Short and long windows can produce different estimates because blocks arrive irregularly. Before comparing two charts, check the timestamps, units, averaging window and difficulty inputs. A chart alone does not establish that mining capacity has changed.'] },
     { heading: 'Ask how uncertainty was estimated', paragraphs: ['An error band should have a stated construction method and assumptions. This guide does not report measured error-band widths or classify a recent network movement as noise. Use the methodology and source observations to assess the particular chart.'] },

@@ -2,11 +2,13 @@
 
 import { useMemo } from 'react'
 import { calculateExposure, exposureBounds, exposureDefaults } from '@/lib/exposure'
+import { useCalculatorMeasurement } from '@/components/v3/Measurement'
 import { useSiteVersion } from '@/components/routing/SiteVersionContext'
 import { ScenarioBrief } from '@/components/v3/ScenarioBrief'
 import {
   CompareBars,
   Hint,
+  InputSection,
   Presets,
   Readout,
   Slider,
@@ -31,9 +33,16 @@ const BOUNDS = exposureBounds
 
 export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boolean; nextStep?: React.ReactNode }) {
   const isV3 = useSiteVersion() === 'v3'
-  const [v, setV] = useUrlState(DEFAULTS, enhanced || isV3 ? BOUNDS : undefined)
+  const [v, writeV] = useUrlState(DEFAULTS, enhanced || isV3 ? BOUNDS : undefined)
   const presets = presetsFor(SLUG)
   const out = useMemo(() => calculateExposure(v), [v])
+
+  const measurement = useCalculatorMeasurement(SLUG, Object.values(out).every(Number.isFinite) && out.base >= 0 && v.diffT > 0, isV3)
+  const setV = (next: typeof v) => {
+    if (Object.keys(v).some(key => next[key as keyof typeof v] !== v[key as keyof typeof v])) measurement.markInputChange()
+    writeV(next)
+  }
+  const sampleV = (next: typeof v, source: 'sample' | 'example' = 'sample') => { measurement.markSample(source); writeV(next) }
 
   const btc = (n: number) => `${n.toFixed(3)} BTC`
   const usd = (n: number) => `$${Math.round(n).toLocaleString('en-US')}`
@@ -42,16 +51,48 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
     <>
       <ToolShell
         preciseInputs={enhanced}
+        onReset={() => sampleV(DEFAULTS)}
+        mobileResult={<span><strong>{btc(out.spreadBtc)}</strong> <small>spread · {out.weeks} weeks</small></span>}
         inputs={
           <>
             {presets.length ? (
               <Presets
                 items={presets}
-                onPick={(vals) => setV({ ...DEFAULTS, ...vals } as typeof DEFAULTS)}
+                onPick={(vals) => sampleV({ ...DEFAULTS, ...vals } as typeof DEFAULTS, 'example')}
                 activeName={matchPreset(v, DEFAULTS, presets)}
               />
             ) : null}
 
+            {isV3 ? <>
+              <InputSection number="01" title="Fleet & horizon" description="Set the scale and period of your production.">
+<Slider id="eh" label="Hashrate" unit="EH/s" value={v.eh} min={0.01} max={30} step={0.01}
+                onChange={(n) => setV({ ...v, eh: n })} format={(n) => n.toFixed(2)}
+                hint={hintFor(SLUG, "Hashrate")} />
+<Slider id="epochs" label="How far ahead" unit={`epochs · ~${out.weeks} weeks`} value={v.epochs} min={1} max={13} step={1}
+                onChange={(n) => setV({ ...v, epochs: n })}
+                hint={hintFor(SLUG, "How far ahead")} />
+              </InputSection>
+              <InputSection number="02" title="Market assumptions" description="Use your own price and fee expectations.">
+<Slider id="fees" label="Expected fees" unit="BTC / block" value={v.fees} min={0} max={0.5} step={0.01}
+                onChange={(n) => setV({ ...v, fees: n })} format={(n) => n.toFixed(2)}
+                hint={hintFor(SLUG, "Expected fees")} />
+<Slider id="price" label="Bitcoin price" unit="USD" value={v.price} min={20000} max={200000} step={1000}
+                onChange={(n) => setV({ ...v, price: n })} format={(n) => `$${(n / 1000).toFixed(0)}k`}
+                hint={hintFor(SLUG, "Bitcoin price")} />
+              </InputSection>
+              <InputSection wideFirst number="03" title="Difficulty range" description="Compare production around the same starting difficulty.">
+                <div><Slider id="diffT" label="Starting difficulty" unit="T" value={v.diffT} min={1} max={1000} step={0.01}
+                    onChange={n => setV({ ...v, diffT: n })} />
+                  <p className="mt-2 text-xs leading-relaxed text-subtle">Your chosen model input. The 127.48 T sample default is not live difficulty.</p>
+                </div>
+<Slider id="low" label="Difficulty change · easier case" unit="%" value={v.low} min={-15} max={0} step={0.1}
+                    onChange={(n) => setV({ ...v, low: n })} format={(n) => Math.abs(n).toFixed(1)}
+                hint={hintFor(SLUG, "Best case: difficulty falls by")} />
+<Slider id="high" label="Difficulty change · harder case" unit="%" value={v.high} min={0} max={15} step={0.1}
+                    onChange={(n) => setV({ ...v, high: n })} format={(n) => n.toFixed(1)}
+                hint={hintFor(SLUG, "Worst case: difficulty rises by")} />
+              </InputSection>
+            </> : <>
             <h2 className="text-lg font-bold tracking-[-0.015em]">Your fleet</h2>
             <div className="mt-5 space-y-5">
               <Slider id="eh" label="Hashrate" unit="EH/s" value={v.eh} min={0.01} max={30} step={0.01}
@@ -72,8 +113,10 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
                   Difficulty scenario
                 </p>
                 <div className="space-y-5">
-                  {enhanced ? <Slider id="diffT" label="Starting difficulty" unit="T" value={v.diffT} min={1} max={1000} step={0.01}
-                    onChange={n => setV({ ...v, diffT: n })} /> : null}
+                  {enhanced ? <div><Slider id="diffT" label="Starting difficulty" unit="T" value={v.diffT} min={1} max={1000} step={0.01}
+                    onChange={n => setV({ ...v, diffT: n })} />
+                    <p className="mt-2 text-xs leading-relaxed text-subtle">Your chosen model input. The 127.48 T sample default is not live difficulty.</p>
+                  </div> : null}
                   <Slider id="low" label="Best case: difficulty falls by" unit="%" value={v.low} min={-15} max={0} step={0.1}
                     onChange={(n) => setV({ ...v, low: n })} format={(n) => Math.abs(n).toFixed(1)}
                 hint={hintFor(SLUG, "Best case: difficulty falls by")} />
@@ -83,6 +126,7 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
                 </div>
               </div>
             </div>
+            </>}
           </>
         }
         summary={
@@ -90,7 +134,7 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
             <h2 className="text-xs font-bold uppercase tracking-[0.12em] text-muted">
               Your exposure
             </h2>
-            <p className="tabular mt-3 text-4xl font-extrabold tracking-[-0.03em] text-caution">
+            <p ref={measurement.resultRef} className="tabular mt-3 text-4xl font-extrabold tracking-[-0.03em] text-caution">
               {btc(out.spreadBtc)}
             </p>
             <p className="tabular mt-1 text-sm text-muted">
@@ -102,11 +146,11 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
               </Hint>
             ) : null}
             <Readout>
-              Over the next {out.weeks} weeks you mine about {btc(out.base)} if nothing changes. If
-              mining gets {v.high.toFixed(1)}% harder you get {btc(out.atHigh)} instead —{' '}
+              For your selected {out.weeks}-week target-time horizon, the model gives {btc(out.base)} at starting difficulty.
+              At {v.high.toFixed(1)}% higher difficulty it gives {btc(out.atHigh)} instead —{' '}
               <strong>{out.lossHigh.toFixed(3)} BTC less</strong>, around {usd(out.lossHigh * v.price)}.
             </Readout>
-            {nextStep}
+            {!isV3 ? nextStep : null}
 
             <CompareBars
               items={[
@@ -134,17 +178,18 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
                   hint: resultHintFor(SLUG, 'Network hashrate'),
                 },
                 {
-                  k: 'Production at current difficulty',
+                  k: 'Production at starting difficulty',
                   v: btc(out.base),
                   hint: resultHintFor(SLUG, 'Production at current difficulty'),
                 },
                 {
-                  k: 'Worst case vs today',
+                  k: 'Harder case vs starting case',
                   v: btc(-out.lossHigh),
                   hint: resultHintFor(SLUG, 'Worst case vs today'),
                 },
               ]}
             />
+            {isV3 ? nextStep : null}
           </>
         }
       />
@@ -157,7 +202,7 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
           </caption>
           <thead>
             <tr className="bg-surface/60">
-              {['Difficulty settles at', 'Production', 'Versus today'].map((h) => (
+              {['Selected difficulty', 'Production', 'Versus starting case'].map((h) => (
                 <th key={h} scope="col" className="border-b border-white/[0.07] px-4 py-3 text-left text-xs font-bold uppercase tracking-[0.1em] text-muted">{h}</th>
               ))}
             </tr>

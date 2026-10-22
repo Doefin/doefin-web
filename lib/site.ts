@@ -1,7 +1,7 @@
 export const site = {
   name: 'Doefin',
   url: 'https://doefin.com',
-  appUrl: 'https://app.doefin.com',
+  appUrl: 'https://www.doefin.com/app/markets',
   tagline: 'Bitcoin mining difficulty, forecast honestly.',
   description:
     'Educational documentation, calculators and illustrative examples for understanding Bitcoin mining difficulty and evaluating related markets.',

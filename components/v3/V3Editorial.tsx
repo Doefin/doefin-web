@@ -1,10 +1,14 @@
 import { notFound } from 'next/navigation'
 import Link from '@/components/routing/SiteLink'
 import { AutoLinkedProse } from '@/components/content/AutoLinkedProse'
-import { allGuides, allV3Editorial, getV3Editorial, allV3EditorialTags, type V3EditorialArticle } from '@/content'
+import { allGuides, allV3Editorial, getV3Editorial, allV3EditorialTags, v3EditorialReviewedAt, type V3EditorialArticle } from '@/content'
 import { seo, jsonLd, publisherRef } from '@/lib/seo'
 import { site } from '@/lib/site'
+import { dateLong } from '@/lib/format'
 import { ContentLinks, ContentPage } from './ContentPage'
+import { V3BlogIndex } from './V3BlogIndex'
+import { V3BlogPost } from './V3BlogPost'
+import { V3AcademyIndex } from './V3AcademyIndex'
 
 type Kind = V3EditorialArticle['kind']
 const label = (kind: Kind) => kind === 'academy' ? 'Academy' : 'Articles'
@@ -37,9 +41,10 @@ function article(kind: Kind) {
     default: async function Article({ params }: { params: Promise<{ slug: string }> }) {
       const item = getV3Editorial(kind, (await params).slug)
       if (!item) notFound()
+      if (kind === 'blog') return <V3BlogPost article={item} />
       return <ContentPage title={item.title} summary={item.summary} eyebrow="Educational guide" crumbs={[{ name: label(kind), href: path(kind) }, { name: item.title, href: path(kind, item.slug) }]}>
-        <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd({ '@context': 'https://schema.org', '@type': 'Article', headline: item.title, description: item.summary, publisher: publisherRef, mainEntityOfPage: site.url + path(kind, item.slug), dateModified: '2026-10-19' })} />
-        <p className="mb-8 text-xs text-subtle">Guide reviewed <time dateTime="2026-10-19">19 October 2026</time></p>
+        <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd({ '@context': 'https://schema.org', '@type': 'Article', headline: item.title, description: item.summary, publisher: publisherRef, mainEntityOfPage: site.url + path(kind, item.slug), dateModified: v3EditorialReviewedAt })} />
+        <p className="mb-8 text-xs text-subtle">Guide reviewed <time dateTime={v3EditorialReviewedAt}>{dateLong(v3EditorialReviewedAt)}</time></p>
         <AutoLinkedProse paragraphs={item.sections.flatMap(section => [{ heading: section.heading }, ...section.paragraphs])} />
         <ContentLinks links={[{ href: '/v3/methodology/difficulty-index', label: 'Evaluate a forecast’s method' }, { href: '/v3/tools/difficulty-exposure', label: 'Compare your production scenarios' }, { href: '/v3/data', label: 'Read the data examples' }]} />
       </ContentPage>
@@ -47,8 +52,8 @@ function article(kind: Kind) {
   }
 }
 
-export const V3Blog = collection('blog')
-export const V3Academy = collection('academy')
+export const V3Blog = { ...collection('blog'), default: V3BlogIndex }
+export const V3Academy = { ...collection('academy'), default: V3AcademyIndex }
 export const V3Post = article('blog')
 export const V3Lesson = article('academy')
 const tagSlug = (tag: string) => tag.replace(/\s+/g, '-')
@@ -63,9 +68,6 @@ export const V3Tag = {
     const slug = (await params).tag
     const tag = allV3EditorialTags().find(item => tagSlug(item) === slug)
     if (!tag) notFound()
-    return <ContentPage title={tag} summary={`Educational articles on ${tag}.`} eyebrow="Article topic" crumbs={[{ name: 'Articles', href: '/v3/blog' }, { name: tag, href: '/v3/blog/tag/' + slug }]}>
-      <ArticleList articles={allV3Editorial('blog').filter(item => item.tags.includes(tag))} />
-      <ContentLinks links={[{ href: '/v3/docs/methodology-and-evidence', label: 'Read the methodology and evidence guide' }, { href: '/v3/docs/key-terms', label: 'Find definitions in the documentation' }]} />
-    </ContentPage>
+    return <V3BlogIndex topic={tag} />
   },
 }
