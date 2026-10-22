@@ -7,10 +7,11 @@ import { HeroVisual } from '@/components/v3/HeroVisual'
 import { LandingMotion } from '@/components/v3/LandingMotion'
 import { MarketExample } from '@/components/v3/MarketExample'
 import { ProductPreview } from '@/components/v3/ProductPreview'
-import { ProductUpdates } from '@/components/v3/ProductUpdates'
+import { HomeResources } from '@/components/v3/HomeResources'
 import { HomeFaq } from '@/components/v3/HomeFaq'
 import { seo } from '@/lib/seo'
 import { site } from '@/lib/site'
+import audienceStyles from '@/components/v3/audience.module.css'
 import './home.css'
 
 export const metadata: Metadata = {
@@ -25,9 +26,13 @@ export default function V3Home() {
         <div className="v37-hero-copy">
           <p className="v37-eyebrow v37-hero-eyebrow"><span aria-hidden="true" />For mining operators, funds &amp; trading desks</p>
           <h1 id="v3-title">Trade Bitcoin<br /><span>mining difficulty.</span></h1>
-          <p className="v37-lede">Buy <span className="whitespace-nowrap">YES or NO</span> position tokens on whether difficulty will be at or above a set level at a specified Bitcoin block.</p>
+          <p className="v37-lede">Buy <span className="whitespace-nowrap">YES or NO</span> position tokens on whether <Link href="/v3/glossary/mining-difficulty" className="underline decoration-white/30 underline-offset-4 hover:decoration-white">difficulty</Link> will be at or above a set level at a specified Bitcoin block.</p>
           <div className="v37-actions"><a href={site.appUrl} className="v37-button">Open app <Arrow diagonal /></a><Link href="/v3#how-it-works" className="v37-link">How it works <Arrow /></Link></div>
           <p className="v37-risk">Positions involve risk and can lose value.</p>
+          <nav aria-label="Choose your starting point" className={audienceStyles.homeEntries}>
+            <Link href="/v3/for/miners"><BrandIcon name="mining" /><span>For miners</span><Arrow /></Link>
+            <Link href="/v3/for/institutions"><BrandIcon name="market" /><span>For funds &amp; desks</span><Arrow /></Link>
+          </nav>
         </div>
         <HeroVisual />
       </Container>
@@ -55,22 +60,22 @@ export default function V3Home() {
             <div className="v37-audience-top"><span className="v37-icon-tile"><BrandIcon name="mining" /></span><p className="v37-eyebrow">Mining operators</p></div>
             <h3>Manage difficulty exposure.</h3>
             <p className="v37-copy">Higher difficulty reduces expected BTC production at a fixed hashrate. A winning YES payout may offset part of that loss, depending on the position’s cost, size and timing.</p>
-            <Link href="/v3/for/miners#planning-example" className="v37-link">See a miner planning example <Arrow /></Link>
+            <div className="mt-auto flex flex-col items-start gap-1"><Link href="/v3/for/miners" className="v37-link">For miners: plan your position <Arrow /></Link><Link href="/v3/tools/difficulty-exposure" className="v37-link">Calculate your exposure <Arrow /></Link></div>
           </article>
           <article className="v37-audience-card v37-audience-trading">
             <div className="v37-audience-top"><span className="v37-icon-tile"><BrandIcon name="market" /></span><p className="v37-eyebrow">Funds &amp; trading desks</p></div>
             <h3>Trade your view on difficulty.</h3>
             <p className="v37-copy">Take a position on future network difficulty. Compare your view with market prices, timing and available liquidity.</p>
-            <Link href="/v3/for/institutions" className="v37-link">Explore the trading use case <Arrow /></Link>
+            <Link href="/v3/for/institutions" className="v37-link">For funds &amp; desks: explore markets <Arrow /></Link>
           </article>
         </div>
         <p className="v37-note">A difficulty position does not cover every mining risk. Bitcoin price, power costs and downtime remain separate considerations.</p>
       </Container>
     </section>
 
-    <section id="product-updates" aria-labelledby="updates-title" className="v320-updates v37-section">
+    <section id="tools-and-learning" aria-labelledby="learning-title" className="v320-updates v37-section">
       <Container>
-        <ProductUpdates />
+        <HomeResources />
       </Container>
     </section>
 

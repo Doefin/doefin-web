@@ -22,6 +22,7 @@ export default {
 
         // Brand
         brand: '#3475FE',         // primary CTA / links
+        brandAction: '#2C63D6',   // high-contrast filled audience actions (white text: 5.44:1)
         brandDeep: '#5B73E8',
         chart: '#4F85F6',
         highlight: '#CCEAFB',

@@ -1,20 +1,42 @@
-import { hashrate } from '@/content'
-import { DataTable } from '@/components/ui'
+import { difficulty, hashrate, networkSeries } from '@/content'
+import { dateLong, int } from '@/lib/format'
+import { networkEHFromDifficulty } from '@/lib/exposure'
 import { seo } from '@/lib/seo'
-import { ContentLinks, ContentPage } from './ContentPage'
+import { DataDetail, DataFields, DataNext, DataSection, DataSeries, dataCopy, dataPanel } from './DataDetail'
 
-export const metadata = seo({ title: 'Understanding network hashrate estimates', description: 'Read an inferred hashrate estimate and its observation window using a clearly labelled synthetic example.', path: '/v3/data/hashrate' })
+export const metadata = seo({ title: 'Understanding network hashrate estimates', description: 'Inspect a synthetic hashrate estimate, compare authored window spreads and read a separate implied-hashrate series with all source values.', path: '/v3/data/hashrate' })
 
 export default function V3Hashrate() {
-  return <ContentPage title="Hashrate is an estimate." summary="Network hashrate is inferred from mining difficulty and observed block timing. The observation window affects the result." eyebrow="Synthetic data example" crumbs={[{ name: 'Data', href: '/v3/data' }, { name: 'Hashrate example', href: '/v3/data/hashrate' }]}>
-    <p className="text-sm font-semibold leading-relaxed text-caution">Illustrative only · sample reference date: 24 August 2026. This page does not report current network hashrate.</p>
-    <div className="mt-6"><DataTable caption="Synthetic hashrate example · 24 August 2026 · EH/s = exahashes per second" head={['Field', 'Sample value']} rows={[
-      ['Inferred hashrate', `${hashrate.currentEH.toLocaleString('en-US')} EH/s`],
-      ['Reference block in the example', hashrate.asOfHeight.toLocaleString('en-US')],
-      ['Measured uncertainty', 'Not available for this synthetic value'],
-    ]} /></div>
-    <section className="mt-9"><h2 className="text-2xl font-bold">Check the window before comparing</h2><p className="mt-4 text-[16px] leading-relaxed text-subtle">Blocks arrive irregularly. A short observation window can produce a different estimate from a longer one even without a corresponding change in the fleet of mining machines. Compare estimates that use the same definition and window.</p></section>
-    <section className="mt-9"><h2 className="text-2xl font-bold">Ask for the uncertainty method</h2><p className="mt-4 text-[16px] leading-relaxed text-subtle">An error band needs a stated method and assumptions. This page publishes no calibrated confidence interval and makes no claim about whether a recent network move is signal or noise.</p></section>
-    <ContentLinks links={[{ href: '/v3/data/difficulty', label: 'Read the difficulty example' }, { href: '/v3/methodology/difficulty-index', label: 'Review inputs and uncertainty' }, { href: '/v3/tools/difficulty-exposure', label: 'Use your fleet’s hashrate in a scenario' }]} />
-  </ContentPage>
+  const windows = [{ name: 'One-day example', spread: hashrate.band1dPct }, { name: 'Seven-day example', spread: hashrate.band7dPct }]
+  const seriesEnd = networkSeries[networkSeries.length - 1]
+  const targetImplied = networkEHFromDifficulty(difficulty.currentT)
+  return <DataDetail title="Hashrate is inferred, not counted." summary="Read the rate, check the observation window, and separate an estimate of network work from the machines in your fleet." category="Hashrate" current="hashrate" crumbs={[{ name: 'Hashrate example', href: '/v3/data/hashrate' }]}>
+    <div className="grid items-start gap-5 lg:grid-cols-[1fr_1.3fr]">
+      <section className="rounded-panel border border-chart/25 bg-gradient-to-br from-surfaceAlt/70 to-surface/20 p-5 sm:p-7"><p className="text-[10px] font-bold uppercase tracking-wider text-caution">Synthetic snapshot</p><h2 className="mt-4 text-base font-bold">Estimated network hashrate</h2><p className="tabular mt-4 text-[54px] font-extrabold leading-none tracking-[-0.05em] text-highlight">{int(hashrate.currentEH)} <span className="text-xl font-semibold">EH/s</span></p><p className="mt-3 text-xs leading-[1.8] text-subtle">EH/s means exahashes per second: a rate of hashing work, not a number of mining machines.</p><div className="mt-6 border-t border-white/10 pt-5"><DataFields rows={[{ label: 'Reference block', value: int(hashrate.asOfHeight) }, { label: 'Timestamp for this value', value: 'Not supplied', note: 'The adjacent difficulty fixture is stamped 24 August 2026; the hashrate object has no timestamp of its own.' }, { label: 'Observed block-time window', value: 'Not supplied', note: 'The authored spread examples below do not identify the observations used to create this value.' }]} /></div></section>
+      <section className={dataPanel}><p className="text-[10px] font-bold uppercase tracking-wider text-highlight">Read the mechanism</p><h2 className="mt-3 text-xl font-bold tracking-tight">Difficulty and block timing become a rate.</h2><ol className="mt-6 space-y-5">{[
+        ['Start with difficulty', 'Difficulty describes the expected work needed to find a block.'],
+        ['Choose an observation window', 'Use block timestamps to estimate how quickly blocks arrived over that window.'],
+        ['Infer the network’s work rate', 'More expected work per block, or faster arrivals at the same difficulty, implies a higher rate.'],
+      ].map(([title, text], i) => <li key={title} className="flex gap-4"><span className="tabular mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-chart/25 text-[11px] font-bold text-highlight">{i + 1}</span><div><h3 className="text-sm font-bold">{title}</h3><p className="mt-2 text-sm leading-[1.8] text-subtle">{text}</p></div></li>)}</ol><div className="mt-6 border-t border-white/10 pt-5"><h3 className="text-sm font-bold">The window changes the answer.</h3><p className={'mt-3 ' + dataCopy}>Blocks arrive irregularly. A shorter window reacts sooner but is more sensitive to that variation. A longer window smooths more of it and can respond more slowly to a real change. Compare estimates using the same definition and window.</p></div></section>
+    </div>
+
+    <DataSection title="Same center. Different authored spreads." eyebrow="Window illustration" description="These one-day and seven-day spread values use the same synthetic center. They demonstrate interval arithmetic, not measured uncertainty or a calibrated confidence level.">
+      <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
+        <section className={dataPanel} aria-label="Authored hashrate window spreads">{windows.map((window, i) => {
+          const low = Math.round(hashrate.currentEH * (1 - window.spread / 100))
+          const high = Math.round(hashrate.currentEH * (1 + window.spread / 100))
+          return <div key={window.name} className={i ? 'mt-7 border-t border-white/10 pt-6' : ''}><div className="flex flex-wrap items-baseline justify-between gap-3"><h3 className="text-sm font-bold">{window.name}</h3><p className="tabular text-sm font-semibold text-highlight">±{window.spread.toFixed(1)}%</p></div><div className="relative mt-4 h-8" role="img" aria-label={`${window.name}: authored center ${int(hashrate.currentEH)} EH/s with spread plus or minus ${window.spread}%, giving rounded endpoints ${int(low)} to ${int(high)} EH/s. No measured confidence level.`}><div className="absolute inset-x-0 top-1/2 h-px bg-white/10" /><div className="absolute left-1/2 top-1/2 h-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-chart/40" style={{ width: `${window.spread / hashrate.band1dPct * 100}%` }} /><span className="absolute inset-y-0 left-1/2 border-l border-dashed border-subtle" /></div><p className="tabular mt-2 flex flex-wrap justify-between gap-2 text-xs text-body"><span>{int(low)} EH/s</span><span className="text-subtle">Center {int(hashrate.currentEH)}</span><span>{int(high)} EH/s</span></p></div>
+        })}<p className="mt-6 text-xs leading-[1.8] text-subtle">Both bars share the same scale and center. Endpoints are rounded to the nearest EH/s.</p></section>
+        <section className={dataPanel}><h3 className="text-base font-bold">Check the arithmetic, then the evidence.</h3><p className="tabular mt-4 rounded-lg bg-ink/45 p-4 text-sm leading-[1.9]">Endpoint = {int(hashrate.currentEH)} × (1 ± spread ÷ 100)</p><p className={'mt-4 ' + dataCopy}>The wider one-day example shows how a different spread changes the endpoints. It does not prove that an observed network move is noise or establish the probability that true hashrate lies within the range.</p><p className={'mt-3 ' + dataCopy}>A measured interval would need the source block timestamps, estimation method, window definition and evidence for its stated coverage. Those inputs are not supplied here.</p></section>
+      </div>
+    </DataSection>
+
+    <DataSection title="An implied rate across the sample series." eyebrow="A separate authored series" description="Each supplied point links an authored difficulty level to an implied rate under the ten-minute target. The relationship is built into this dataset; it is not independent evidence that the two moved together in the real network.">
+      <DataSeries metric="hashrateEH" />
+      <details className="mt-5 rounded-lg border border-white/10 px-5 py-1"><summary className="cursor-pointer py-3 text-sm font-semibold text-highlight">Why the snapshot and series endpoint differ</summary><div className="pb-4 text-xs leading-[1.9] text-subtle"><p>The snapshot is <span className="tabular">{int(hashrate.currentEH)} EH/s</span> at block <span className="tabular">{int(hashrate.asOfHeight)}</span>. The separate series ends at <span className="tabular">{int(seriesEnd.hashrateEH)} EH/s</span> and block <span className="tabular">{int(seriesEnd.height)}</span> on <time dateTime={seriesEnd.date}>{dateLong(seriesEnd.date)}</time>. They are independent authored fixtures, not two observations in one live feed.</p><p className="mt-3">For context, the site’s target-time calculation converts <span className="tabular">{difficulty.currentT.toFixed(2)} T</span> into <span className="tabular">{targetImplied.toFixed(2)} EH/s</span>: difficulty × 2³² ÷ 600 seconds, with the trillion/exahash unit conversions. The snapshot does not supply the observed timing needed to explain its separate value.</p></div></details>
+    </DataSection>
+
+    <DataSection title="Use the right hashrate for the question."><div className="grid gap-5 sm:grid-cols-2"><section className={dataPanel}><h3 className="text-base font-bold">For reading the network</h3><p className={'mt-3 ' + dataCopy}>Check the reference height, observation window and interval method before comparing two published estimates. A fast change on a short chart alone cannot tell you how many machines were switched on or off.</p></section><section className={dataPanel}><h3 className="text-base font-bold">For modelling your production</h3><p className={'mt-3 ' + dataCopy}>Use your fleet’s hashrate as the fleet input, not the total network estimate. Keep units explicit and match the average to the operating period you want to model.</p></section></div></DataSection>
+    <DataNext items={[{ href: '/v3/data/difficulty', label: 'Read the difficulty example', note: 'Distinguish the starting level, projected change and authored range.' }, { href: '/v3/tools/difficulty-exposure', label: 'Model your fleet’s sensitivity', note: 'Explore chosen difficulty scenarios with your own fleet’s hashrate.' }]} />
+  </DataDetail>
 }

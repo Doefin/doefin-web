@@ -1,0 +1,36 @@
+.seriesTable th,
+.seriesTable td {
+  padding: 13px 24px;
+}
+.seriesTable tbody tr {
+  border-top: 1px solid rgb(255 255 255 / 0.07);
+}
+.seriesTable tbody th { font-weight: 500; }
+.mobileLabel { display: none; }
+@media (max-width: 639px) {
+  .seriesTable,
+  .seriesTable tbody { display: block; }
+  .seriesTable thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .seriesTable tbody tr {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 16px;
+    padding: 16px 20px;
+  }
+  .seriesTable th,
+  .seriesTable td { padding: 0; }
+  .seriesTable tbody th { grid-column: 1 / -1; }
+  .mobileLabel {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 11px;
+    opacity: 0.75;
+  }
+}

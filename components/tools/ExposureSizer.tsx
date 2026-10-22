@@ -7,6 +7,7 @@ import { ScenarioBrief } from '@/components/v3/ScenarioBrief'
 import {
   CompareBars,
   Hint,
+  InputSection,
   Presets,
   Readout,
   Slider,
@@ -42,6 +43,8 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
     <>
       <ToolShell
         preciseInputs={enhanced}
+        onReset={() => setV(DEFAULTS)}
+        mobileResult={<span><strong>{btc(out.spreadBtc)}</strong> <small>spread · {out.weeks} weeks</small></span>}
         inputs={
           <>
             {presets.length ? (
@@ -52,6 +55,34 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
               />
             ) : null}
 
+            {isV3 ? <>
+              <InputSection number="01" title="Fleet & horizon" description="Set the scale and period of your production.">
+<Slider id="eh" label="Hashrate" unit="EH/s" value={v.eh} min={0.01} max={30} step={0.01}
+                onChange={(n) => setV({ ...v, eh: n })} format={(n) => n.toFixed(2)}
+                hint={hintFor(SLUG, "Hashrate")} />
+<Slider id="epochs" label="How far ahead" unit={`epochs · ~${out.weeks} weeks`} value={v.epochs} min={1} max={13} step={1}
+                onChange={(n) => setV({ ...v, epochs: n })}
+                hint={hintFor(SLUG, "How far ahead")} />
+              </InputSection>
+              <InputSection number="02" title="Market assumptions" description="Use your own price and fee expectations.">
+<Slider id="fees" label="Expected fees" unit="BTC / block" value={v.fees} min={0} max={0.5} step={0.01}
+                onChange={(n) => setV({ ...v, fees: n })} format={(n) => n.toFixed(2)}
+                hint={hintFor(SLUG, "Expected fees")} />
+<Slider id="price" label="Bitcoin price" unit="USD" value={v.price} min={20000} max={200000} step={1000}
+                onChange={(n) => setV({ ...v, price: n })} format={(n) => `$${(n / 1000).toFixed(0)}k`}
+                hint={hintFor(SLUG, "Bitcoin price")} />
+              </InputSection>
+              <InputSection wideFirst number="03" title="Difficulty range" description="Compare production around the same starting difficulty.">
+<Slider id="diffT" label="Starting difficulty" unit="T" value={v.diffT} min={1} max={1000} step={0.01}
+                    onChange={n => setV({ ...v, diffT: n })} />
+<Slider id="low" label="Difficulty change · easier case" unit="%" value={v.low} min={-15} max={0} step={0.1}
+                    onChange={(n) => setV({ ...v, low: n })} format={(n) => Math.abs(n).toFixed(1)}
+                hint={hintFor(SLUG, "Best case: difficulty falls by")} />
+<Slider id="high" label="Difficulty change · harder case" unit="%" value={v.high} min={0} max={15} step={0.1}
+                    onChange={(n) => setV({ ...v, high: n })} format={(n) => n.toFixed(1)}
+                hint={hintFor(SLUG, "Worst case: difficulty rises by")} />
+              </InputSection>
+            </> : <>
             <h2 className="text-lg font-bold tracking-[-0.015em]">Your fleet</h2>
             <div className="mt-5 space-y-5">
               <Slider id="eh" label="Hashrate" unit="EH/s" value={v.eh} min={0.01} max={30} step={0.01}
@@ -83,6 +114,7 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
                 </div>
               </div>
             </div>
+            </>}
           </>
         }
         summary={
@@ -106,7 +138,7 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
               mining gets {v.high.toFixed(1)}% harder you get {btc(out.atHigh)} instead —{' '}
               <strong>{out.lossHigh.toFixed(3)} BTC less</strong>, around {usd(out.lossHigh * v.price)}.
             </Readout>
-            {nextStep}
+            {!isV3 ? nextStep : null}
 
             <CompareBars
               items={[
@@ -145,6 +177,7 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
                 },
               ]}
             />
+            {isV3 ? nextStep : null}
           </>
         }
       />

@@ -1,15 +1,33 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState } from 'react'
+import { useSiteVersion } from '@/components/routing/SiteVersionContext'
+import styles from './workbench.module.css'
 import { readToolQuery, toolQuery, type ToolBounds } from '@/lib/tool-url-state'
 
 /* Shared pieces so every tool reads as one family. */
 
 const PreciseInputs = createContext(false)
 
-export function ToolShell({ inputs, summary, preciseInputs = false }: {
-  inputs: React.ReactNode; summary: React.ReactNode; preciseInputs?: boolean
+export function ToolShell({ inputs, summary, mobileResult, onReset, preciseInputs = false }: {
+  inputs: React.ReactNode; summary: React.ReactNode; mobileResult?: React.ReactNode; onReset?: () => void; preciseInputs?: boolean
 }) {
+  const isV3 = useSiteVersion() === 'v3'
+  if (isV3) return <PreciseInputs.Provider value={preciseInputs}>
+    <div className={styles.workspace} data-calculator-workspace>
+      {mobileResult ? <div className={styles.resultStrip}><span className="text-[11px] font-semibold uppercase tracking-wider text-subtle">Current result</span>{mobileResult}</div> : null}
+      <div className={styles.inputs} data-assumptions>
+        <div className="flex items-center justify-between gap-4 border-b border-white/[0.07] px-5 py-4 sm:px-6">
+          <span className="text-sm font-bold">Scenario inputs</span>{onReset ? <button type="button" onClick={onReset} className="min-h-9 rounded-lg px-2 text-xs font-semibold text-highlight hover:bg-white/5">Reset inputs <span aria-hidden>↺</span></button> : null}
+        </div>
+        {inputs}
+      </div>
+      <aside className={styles.result} aria-label="Scenario results" data-results>
+        <div className="mb-6 flex items-center justify-between border-b border-white/10 pb-4 text-[11px] font-bold uppercase tracking-[0.12em] text-subtle"><span>Scenario analysis</span><span className="rounded-full border border-caution/30 bg-caution/5 px-2.5 py-1 text-caution">Illustrative</span></div>
+        {summary}
+      </aside>
+    </div>
+  </PreciseInputs.Provider>
   return (
     <PreciseInputs.Provider value={preciseInputs}>
     <div className="grid gap-6 lg:grid-cols-[1fr_20rem]">
@@ -20,6 +38,18 @@ export function ToolShell({ inputs, summary, preciseInputs = false }: {
     </div>
     </PreciseInputs.Provider>
   )
+}
+
+export function InputSection({ number, title, description, wideFirst = false, children }: {
+  number: string; title: string; description: string; wideFirst?: boolean; children: React.ReactNode
+}) {
+  return <section className={styles.section}>
+    <div className="mb-5 flex items-start gap-3">
+      <span className="tabular mt-0.5 text-xs font-bold text-highlight">{number}</span>
+      <div><h2 className="text-sm font-bold">{title}</h2><p className="mt-1 text-xs leading-relaxed text-subtle">{description}</p></div>
+    </div>
+    <div className={styles.fields + (wideFirst ? " " + styles.wideFirst : "")}>{children}</div>
+  </section>
 }
 
 export type InputHint = { means: string; whereToFind: string; typical: string }
@@ -78,6 +108,29 @@ export function Slider({
   hint?: InputHint
 }) {
   const precise = useContext(PreciseInputs)
+  const isV3 = useSiteVersion() === 'v3'
+  if (isV3) return <div className={styles.field}>
+    <label htmlFor={id} className="block text-xs font-semibold leading-relaxed text-subtle">{label}</label>
+    <div className={styles.valueControl}>
+      <input aria-label={label + ' — exact value'} type="number" min={min} max={max} step={step}
+        key={value} defaultValue={value} onBlur={e => {
+          const n = e.target.valueAsNumber
+          const next = Number.isFinite(n) ? Math.min(max, Math.max(min, n)) : value
+          e.target.value = String(next)
+          onChange(next)
+        }} onKeyDown={e => { if (e.key === 'Enter') e.currentTarget.blur() }}
+        className="tabular min-w-0 flex-1 bg-transparent py-2 text-2xl font-bold tracking-tight text-body" />
+      <span className="max-w-[45%] text-right text-[11px] leading-snug text-subtle">{unit}</span>
+    </div>
+    <input id={id} aria-label={label} type="range" min={min} max={max} step={step} value={value}
+      onChange={e => onChange(Number(e.target.value))} className={styles.range}
+      style={{ '--fill': `${(value - min) / (max - min) * 100}%` } as React.CSSProperties} />
+    <div className="tabular flex justify-between gap-3 text-[10px] text-subtle"><span>{min.toLocaleString('en-US')}</span><span>{max.toLocaleString('en-US')}</span></div>
+    {hint ? <details className={styles.guide}>
+      <summary className="cursor-pointer text-[11px] font-semibold text-highlight">Input guide</summary>
+      <div className="mt-2 space-y-2 text-xs leading-relaxed text-subtle"><p>{hint.means}</p><p><strong className="text-body">Where to find yours: </strong>{hint.whereToFind}</p><p><strong className="text-body">Typical: </strong>{hint.typical}</p></div>
+    </details> : null}
+  </div>
   return (
     <div>
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
@@ -150,6 +203,14 @@ export function Presets({
   onPick: (values: Record<string, number>) => void
   activeName: string | null
 }) {
+  const isV3 = useSiteVersion() === 'v3'
+  if (isV3) return <div className={styles.presets}>
+    <div className="mb-3 flex flex-wrap items-center justify-between gap-2"><p className="text-[11px] font-bold uppercase tracking-[0.1em] text-subtle">Sample starting points</p><span className="text-xs font-semibold text-highlight">{activeName ?? 'Custom scenario'}</span></div>
+    <div className="grid gap-2 sm:grid-cols-3">{items.map(p => <button key={p.name} type="button" aria-pressed={p.name === activeName} onClick={() => onPick(p.values)} className={styles.preset}>
+      <span className="flex items-center justify-between gap-2 text-xs font-bold"><span>{p.name}</span><span aria-hidden className={styles.radio} /></span>
+      <span className="mt-2 block text-[11px] leading-relaxed text-subtle">{p.note}</span>
+    </button>)}</div>
+  </div>
   return (
     <div className="mb-6 border-b border-white/[0.07] pb-6">
       <p className="text-xs font-bold uppercase tracking-[0.1em] text-muted">Try a scenario</p>

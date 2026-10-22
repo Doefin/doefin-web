@@ -16,7 +16,18 @@ import {
   scenarioUrl,
 } from '@/lib/scenario-brief'
 
-const actionClass = 'inline-flex min-h-11 items-center justify-center rounded-lg border border-white/15 px-4 py-3 text-sm font-semibold text-body transition-colors hover:border-brand/50 hover:bg-brand/10 disabled:cursor-wait disabled:opacity-50'
+function BriefIcon({ kind, className = '' }: { kind: 'document' | 'download' | 'link' | 'mail'; className?: string }) {
+  const paths = {
+    document: 'M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8l-5-5Zm0 0v5h5M8 12h8m-8 4h6',
+    download: 'M12 3v12m-4-4 4 4 4-4M4 16v4h16v-4',
+    link: 'm10 13 4-4m-6 7-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0',
+    mail: 'M3 5h18v14H3V5Zm0 1 9 7 9-7',
+  }
+  return <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className={'h-5 w-5 shrink-0 ' + className}><path d={paths[kind]} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+}
+
+const actionClass = 'group flex min-h-16 w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-colors disabled:cursor-wait disabled:opacity-50'
+
 
 export function ScenarioBrief({ inputs }: { inputs: ExposureInputs }) {
   const [origin, setOrigin] = useState<string | null>(null)
@@ -61,14 +72,60 @@ export function ScenarioBrief({ inputs }: { inputs: ExposureInputs }) {
   const copyStatus = copy?.key === brief.inputKey ? copy.status : null
   const downloadMessage = download?.key === brief.briefKey ? download.message : null
 
-  return <section id="scenario-brief" aria-labelledby="scenario-brief-heading" className="mt-8 scroll-mt-32 rounded-panel border border-brand/30 bg-surface/50 p-5 sm:p-7">
-    <h2 id="scenario-brief-heading" className="text-xl font-bold tracking-[-0.02em]">Share this scenario</h2>
-    <p className="mt-3 max-w-2xl text-sm leading-relaxed text-subtle">Take your current inputs, production scenarios and assumptions into a team discussion. The brief updates as you change the calculator.</p>
+  return <section id="scenario-brief" aria-labelledby="scenario-brief-heading" className="mt-8 scroll-mt-32 overflow-hidden rounded-panel border border-white/10 bg-surface/50">
+    <div className="flex flex-wrap items-start justify-between gap-4 px-5 py-6 sm:px-7">
+      <div className="flex items-start gap-3">
+        <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-brand/25 bg-brand/10 text-highlight"><BriefIcon kind="document" /></span>
+        <div><h2 id="scenario-brief-heading" className="text-xl font-bold tracking-[-0.02em]">Scenario brief</h2><p className="mt-1.5 max-w-xl text-sm leading-relaxed text-subtle">Your inputs and results, ready for a team review.</p></div>
+      </div>
+      <span className="self-center rounded-full border border-white/10 px-3 py-1.5 text-[11px] text-subtle">Updates with your inputs</span>
+    </div>
 
-    <details className="mt-5 rounded-lg border border-white/10 bg-ink/30 p-4">
-      <summary className="cursor-pointer text-sm font-semibold text-highlight">Add discussion context (optional)</summary>
+    <div className="grid gap-6 px-5 pb-6 sm:px-7 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-8">
+      <div className="min-w-0 rounded-xl border border-white/10 bg-ink/50 p-5 sm:p-6" aria-label="Brief snapshot">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-4">
+          <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-subtle">Doefin / Mining analysis</span>
+          <span className="text-[10px] font-semibold text-caution">Illustrative</span>
+        </div>
+        <h3 className="mt-4 text-base font-bold tracking-tight">Difficulty &amp; fleet production</h3>
+        <p className="tabular mt-1 text-xs leading-relaxed text-subtle">{inputs.eh} EH/s fleet <span aria-hidden>·</span> {brief.results.weeks}-week horizon</p>
+        <div className="mt-5 border-l-2 border-brand pl-3">
+          <p className="text-xs text-subtle">Difference between selected cases</p>
+          <p className="tabular mt-1 text-2xl font-extrabold tracking-tight">{formatScenarioBtc(brief.results.spreadBtc)}</p>
+          <p className="tabular mt-1 text-xs text-subtle">{formatScenarioUsd(brief.results.spreadUsd)} at your chosen BTC price</p>
+        </div>
+        <p className="mt-5 text-[11px] leading-relaxed text-subtle">Includes all seven inputs, three production cases, assumptions{brief.contextRows.length ? ', your discussion notes' : ''} and model limitations.</p>
+      </div>
+
+      <div className="min-w-0 self-center">
+        <button type="button" onClick={downloadBrief} disabled={!brief.scenarioUrl} className={actionClass + ' border-brand bg-brand text-white hover:bg-brandDeep'}>
+          <BriefIcon kind="download" /><span className="min-w-0 flex-1"><span className="block text-sm font-bold">Download brief</span><span className="mt-1 block text-xs text-white/80">HTML document · print or save as PDF</span></span><span aria-hidden>↓</span>
+        </button>
+        <button type="button" onClick={copyScenario} disabled={!brief.scenarioUrl} className={actionClass + ' mt-3 border-white/15 bg-ink/20 text-body hover:border-brand/50 hover:bg-brand/5'}>
+          <BriefIcon kind="link" className="text-highlight" /><span className="min-w-0 flex-1"><span className="block text-sm font-semibold">{copyStatus === 'copied' ? 'Scenario link copied' : 'Copy scenario link'}</span><span className="mt-1 block text-xs text-subtle">Reopen these calculator inputs</span></span><span aria-hidden className="text-highlight">{copyStatus === 'copied' ? '✓' : '↗'}</span>
+        </button>
+        {brief.scenarioUrl ? <a href={scenarioDiscussionHref(brief, site.contactEmail)} className="mt-4 flex min-h-11 items-center gap-2 rounded-lg px-1 text-sm font-semibold text-highlight hover:underline"><BriefIcon kind="mail" />Draft an email to Doefin <span aria-hidden>↗</span></a> : <span className="mt-4 flex min-h-11 items-center gap-2 px-1 text-sm text-subtle"><BriefIcon kind="mail" />Preparing email draft…</span>}
+        <p className="mt-1 text-xs leading-relaxed text-subtle">Opens your email app. You review and send.</p>
+        {isLocalScenarioUrl(brief.scenarioUrl) ? <p className="mt-4 border-t border-white/[0.07] pt-3 text-xs leading-relaxed text-subtle">{localScenarioNotice}</p> : null}
+      </div>
+    </div>
+
+    <div role="status" aria-live="polite" className="px-5 text-sm leading-relaxed text-highlight sm:px-7">
+      {copyStatus === 'copied' ? <p className="pb-5">Scenario link copied.</p> : null}
+      {copyStatus === 'fallback' ? <p className="pb-3">Automatic copying is unavailable. Select and copy the link below.</p> : null}
+      {downloadMessage ? <p className="pb-5">{downloadMessage}</p> : null}
+    </div>
+    {copyStatus === 'fallback' ? <div className="px-5 pb-5 sm:px-7">
+      <label htmlFor="scenario-copy-link" className="block text-xs font-semibold text-subtle">Scenario link — select and copy</label>
+      <textarea id="scenario-copy-link" readOnly value={brief.scenarioUrl ?? ''} rows={3} onFocus={event => event.currentTarget.select()}
+        className="mt-2 w-full resize-y rounded-lg border border-white/20 bg-ink p-3 text-sm text-body" />
+    </div> : null}
+    <noscript><p className="px-5 pb-5 text-sm text-subtle sm:px-7">Enable JavaScript to prepare a dated download or share the calculator inputs.</p></noscript>
+
+    <details className="group border-t border-white/[0.07] px-5 py-4 sm:px-7" data-brief-context>
+      <summary className="flex min-h-8 cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold [&::-webkit-details-marker]:hidden"><span>Add discussion notes <span className="ml-1 text-xs font-normal text-subtle">{brief.contextRows.length ? `${brief.contextRows.length} added` : 'Optional'}</span></span><span aria-hidden className="text-lg text-highlight group-open:rotate-45">+</span></summary>
       <p id="scenario-context-disclosure" className="mt-3 max-w-2xl text-xs leading-relaxed text-subtle">Context stays in this browser session and clears when you reload or leave this page. It is included in downloads and email drafts you choose to create, but never in the copied scenario link.</p>
-      <div className="mt-4 space-y-4">
+      <div className="mt-5 grid items-start gap-4 sm:grid-cols-2">
         {scenarioContextFields.map(field => {
           const id = `scenario-context-${field.key}`
           const shared = {
@@ -77,9 +134,9 @@ export function ScenarioBrief({ inputs }: { inputs: ExposureInputs }) {
             maxLength: field.maxLength,
             autoComplete: 'off',
             'aria-describedby': `${id}-limit scenario-context-disclosure`,
-            className: 'mt-2 w-full rounded-lg border border-white/20 bg-ink px-3 py-2 text-sm text-body',
+            className: 'mt-2 w-full rounded-xl border border-white/15 bg-ink/60 px-4 py-3 text-sm text-body placeholder:text-muted',
           }
-          return <div key={field.key}>
+          return <div key={field.key} className={field.key === "preparedFor" ? "sm:col-span-2 sm:max-w-sm" : ""}>
             <label htmlFor={id} className="block text-sm font-semibold">{field.label}</label>
             {field.multiline
               ? <textarea {...shared} rows={2} onChange={event => setContext(current => ({ ...current, [field.key]: event.target.value }))} />
@@ -90,30 +147,9 @@ export function ScenarioBrief({ inputs }: { inputs: ExposureInputs }) {
       </div>
     </details>
 
-    <div className="mt-5 flex flex-wrap gap-3">
-      <button type="button" onClick={copyScenario} disabled={!brief.scenarioUrl} className={actionClass}>Copy scenario link</button>
-      <button type="button" onClick={downloadBrief} disabled={!brief.scenarioUrl} className={actionClass}>Download brief (.html)</button>
-      {brief.scenarioUrl
-        ? <a href={scenarioDiscussionHref(brief, site.contactEmail)} className={actionClass}>Discuss this scenario</a>
-        : <button type="button" disabled className={actionClass}>Discuss this scenario</button>}
-    </div>
-    {isLocalScenarioUrl(brief.scenarioUrl) ? <p className="mt-3 text-sm leading-relaxed text-subtle">{localScenarioNotice}</p> : null}
-    <p className="mt-3 text-xs leading-relaxed text-subtle">The HTML file opens in a browser and is formatted for printing; optional notes may add a page. “Discuss” opens an email draft to the Doefin team; you review and send it.</p>
-    <div role="status" aria-live="polite" className="text-sm leading-relaxed text-highlight">
-      {copyStatus === 'copied' ? <p className="mt-3">Scenario link copied.</p> : null}
-      {copyStatus === 'fallback' ? <p className="mt-3">Automatic copying is unavailable. Select and copy the link below.</p> : null}
-      {downloadMessage ? <p className="mt-3">{downloadMessage}</p> : null}
-    </div>
-    {copyStatus === 'fallback' ? <div className="mt-3">
-      <label htmlFor="scenario-copy-link" className="block text-xs font-semibold text-subtle">Scenario link — select and copy</label>
-      <textarea id="scenario-copy-link" readOnly value={brief.scenarioUrl ?? ''} rows={3} onFocus={event => event.currentTarget.select()}
-        className="mt-2 w-full resize-y rounded-lg border border-white/20 bg-ink p-3 text-sm text-body" />
-    </div> : null}
-    <noscript><p className="mt-3 text-sm text-subtle">Enable JavaScript to prepare a dated download or share the calculator inputs.</p></noscript>
-
-    <details className="group mt-6 border-t border-white/10 pt-5">
-      <summary className="cursor-pointer text-sm font-bold text-highlight">{brief.contextRows.length ? 'Review the scenario brief' : 'Review the one-page brief'}</summary>
-      <article aria-label="Current scenario brief" className="mt-5 rounded-lg border border-white/10 bg-ink/40 p-4 sm:p-6">
+    <details className="group border-t border-white/[0.07] px-5 py-4 sm:px-7" data-brief-full>
+      <summary className="flex min-h-8 cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold [&::-webkit-details-marker]:hidden"><span>Read the complete brief</span><span aria-hidden className="text-lg text-highlight group-open:rotate-45">+</span></summary>
+      <article aria-label="Current scenario brief" className="mt-4 rounded-xl border border-white/10 bg-ink/40 p-4 sm:p-6">
         <h3 className="text-lg font-bold">Bitcoin difficulty and fleet production</h3>
         <p className="mt-2 text-xs leading-relaxed text-subtle">{brief.preparedDate ? <>Prepared <time dateTime={brief.preparedDate}>{brief.preparedDate}</time> UTC</> : 'Preparation date added when the calculator opens'} · Illustrative — not live data</p>
 

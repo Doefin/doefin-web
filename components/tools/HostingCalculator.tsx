@@ -1,9 +1,11 @@
 'use client'
 
 import { useMemo } from 'react'
+import { useSiteVersion } from '@/components/routing/SiteVersionContext'
 import {
   Bars,
   Hint,
+  InputSection,
   Presets,
   Readout,
   Slider,
@@ -47,6 +49,7 @@ const BOUNDS = Object.fromEntries(FIELDS.map(f => [f.key, [0, f.max] as const]))
 export function HostingCalculator({ enhanced = false, nextStep }: {
   enhanced?: boolean; nextStep?: (rate: number) => React.ReactNode
 }) {
+  const isV3 = useSiteVersion() === 'v3'
   const [v, setV] = useUrlState(DEFAULTS, enhanced ? BOUNDS : undefined)
   const presets = presetsFor(SLUG)
 
@@ -74,6 +77,8 @@ export function HostingCalculator({ enhanced = false, nextStep }: {
   return (
     <ToolShell
       preciseInputs={enhanced}
+        onReset={() => setV(DEFAULTS)}
+      mobileResult={<span><strong>${num(out.afterPool)}</strong> <small>/ kWh effective</small></span>}
       inputs={
         <>
           {presets.length ? (
@@ -84,7 +89,36 @@ export function HostingCalculator({ enhanced = false, nextStep }: {
             />
           ) : null}
 
-          <h2 className="text-lg font-bold tracking-[-0.015em]">Your contract</h2>
+          {isV3 ? <>
+            <InputSection wideFirst number="01" title="Contract & billing" description="Start with the quote and charges on top of power.">
+              {FIELDS.slice(0, 3).map(f => (<Slider
+                key={f.key}
+                id={f.key}
+                label={f.label}
+                unit={f.unit}
+                value={v[f.key]}
+                min={0}
+                max={f.max}
+                step={f.step}
+                onChange={(n) => setV({ ...v, [f.key]: n })}
+                hint={hintFor(SLUG, f.label)}
+              />))}
+            </InputSection>
+            <InputSection number="02" title="Availability & pool" description="Account for lost hours and the share of revenue retained.">
+              {FIELDS.slice(3).map(f => (<Slider
+                key={f.key}
+                id={f.key}
+                label={f.label}
+                unit={f.unit}
+                value={v[f.key]}
+                min={0}
+                max={f.max}
+                step={f.step}
+                onChange={(n) => setV({ ...v, [f.key]: n })}
+                hint={hintFor(SLUG, f.label)}
+              />))}
+            </InputSection>
+          </> : <>          <h2 className="text-lg font-bold tracking-[-0.015em]">Your contract</h2>
           <div className="mt-5 space-y-5">
             {FIELDS.map((f) => (
               <Slider
@@ -100,15 +134,15 @@ export function HostingCalculator({ enhanced = false, nextStep }: {
                 hint={hintFor(SLUG, f.label)}
               />
             ))}
-          </div>
+          </div></>}
 
-          <button
+          {!isV3 ? <button
             type="button"
             onClick={() => setV(DEFAULTS)}
             className="mt-6 rounded-lg border border-white/[0.12] px-4 py-2 text-sm text-muted hover:border-white/25 hover:text-body"
           >
             Reset
-          </button>
+          </button> : null}
         </>
       }
       summary={

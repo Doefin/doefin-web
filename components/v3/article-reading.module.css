@@ -1,0 +1,5 @@
+.reading { counter-reset: section; }
+.reading :global(.prose-doefin) > h2 { @apply mt-9 flex scroll-mt-28 items-baseline gap-3 border-t border-white/10 pt-7 text-xl font-bold leading-snug tracking-tight text-body sm:text-2xl; }
+.reading :global(.prose-doefin) > h2:first-child { @apply mt-0 border-0 pt-0; }
+.reading :global(.prose-doefin) > h2::before { counter-increment: section; content: counter(section, decimal-leading-zero); @apply shrink-0 text-xs font-semibold text-highlight; font-variant-numeric: tabular-nums; }
+.reading :global(.prose-doefin) > p { @apply mb-0 mt-4 max-w-none text-[17px] leading-[1.85] text-body/90; }

@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from '@/components/routing/SiteLink'
 import { Arrow } from './Arrow'
 import styles from './ProductPreview.module.css'
 
@@ -43,6 +44,7 @@ export function ProductPreview() {
           <p className="mt-2 max-w-3xl text-sm leading-relaxed text-subtle">The chart shows hourly order-book midpoints as an implied chance of YES. This is market pricing, not a Doefin forecast, trade quote or Bitcoin difficulty.</p>
         </div>
         <p className={`${styles.mobileOnly} text-sm leading-relaxed text-subtle`}>Market pricing, not a Doefin forecast or trade quote. The line shows hourly order-book midpoints—not Bitcoin difficulty.</p>
+        <Link href="/v3/docs/prices-and-probability" className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">Understand market prices and probability <Arrow /></Link>
       </div>
     </div>
     <figcaption className="mt-4 flex flex-wrap items-start justify-between gap-x-6 gap-y-2 text-xs leading-relaxed text-subtle">
