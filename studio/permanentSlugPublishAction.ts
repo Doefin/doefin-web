@@ -18,7 +18,7 @@ export function permanentSlugPublishAction(original: DocumentActionComponent, co
         await stampPermanentSlug(client, props.id)
         result.onHandle?.()
       } catch (error) {
-        toast.push({ status: 'error', title: 'Could not publish glossary term', description: error instanceof Error ? error.message : 'Please retry after the draft has saved.' })
+        toast.push({ status: 'error', title: 'Could not publish content', description: error instanceof Error ? error.message : 'Please retry after the draft has saved.' })
       } finally { setBusy(false) }
     } }
   }

@@ -39,8 +39,8 @@ const HUB: Record<RefKind, { href: string; label: string; note: string }> = {
 }
 
 /** Every editorial item, with the glossary terms it actually mentions. */
-export function allRefs(terms: GlossaryTerm[]): Ref[] {
-  const editorial: Ref[] = [...allV3Editorial('blog'), ...allV3Editorial('academy')].map(p => ({
+export async function allRefs(terms: GlossaryTerm[]): Promise<Ref[]> {
+  const editorial: Ref[] = [...await allV3Editorial('blog'), ...await allV3Editorial('academy')].map(p => ({
     kind: p.kind === 'blog' ? 'post' : 'academy',
     slug: p.slug,
     href: `/${p.kind}/${p.slug}`,
@@ -65,8 +65,8 @@ export function allRefs(terms: GlossaryTerm[]): Ref[] {
  * glossary pages a block of content unique to it, which is the real thin-content
  * exposure today.
  */
-export function usedBy(slug: string, terms: GlossaryTerm[]): Ref[] {
-  return allRefs(terms)
+export async function usedBy(slug: string, terms: GlossaryTerm[]): Promise<Ref[]> {
+  return (await allRefs(terms))
     .filter((r) => r.terms.includes(slug))
     .sort((a, b) => (b.publishedAt ?? '').localeCompare(a.publishedAt ?? ''))
 }
@@ -83,8 +83,8 @@ export function usedBy(slug: string, terms: GlossaryTerm[]): Ref[] {
  * which means a block labelled "related" routinely is not — a credibility cost on
  * a research site, for no gain. Two honest links beat three padded ones.
  */
-export function siblings(ref: Ref, terms: GlossaryTerm[], n = 2): Ref[] {
-  const scored = allRefs(terms)
+export async function siblings(ref: Ref, terms: GlossaryTerm[], n = 2): Promise<Ref[]> {
+  const scored = (await allRefs(terms))
     .filter((r) => !(r.kind === ref.kind && r.slug === ref.slug))
     .map((r) => {
       const sharedTerms = r.terms.filter((t) => ref.terms.includes(t)).length
@@ -114,7 +114,7 @@ export function siblings(ref: Ref, terms: GlossaryTerm[], n = 2): Ref[] {
 }
 
 /** Find a ref by href, so a route can look itself up without rebuilding one. */
-export const refFor = (href: string, terms: GlossaryTerm[]): Ref | undefined => allRefs(terms).find((r) => r.href === href)
+export const refFor = async (href: string, terms: GlossaryTerm[]): Promise<Ref | undefined> => (await allRefs(terms)).find((r) => r.href === href)
 
 /**
  * "Where to go next": one hub upward, then real siblings.
@@ -122,24 +122,24 @@ export const refFor = (href: string, terms: GlossaryTerm[]): Ref | undefined => 
  * Replaces the hardcoded arrays. The hub link is kept because a reader who wants
  * breadth still needs it, but it no longer occupies all three slots.
  */
-export function nextLinksFor(
+export async function nextLinksFor(
   ref: Ref | undefined,
   terms: GlossaryTerm[],
   fallback: RefKind = 'research',
-): { href: string; label: string; note: string }[] {
+): Promise<{ href: string; label: string; note: string }[]> {
   // A ref can be missing for a draft or a route not yet in the graph. Degrade to
   // the hub rather than throwing during the build.
   if (!ref) return [HUB[fallback]]
   const hub = HUB[ref.kind]
   return [
-    ...siblings(ref, terms, 2).map((s) => ({ href: s.href, label: s.title, note: s.summary })),
+    ...(await siblings(ref, terms, 2)).map((s) => ({ href: s.href, label: s.title, note: s.summary })),
     { href: hub.href, label: hub.label, note: hub.note },
   ]
 }
 
 /** The same, for a glossary term: pages that use it, then the glossary hub. */
-export function nextLinksForTerm(slug: string, terms: GlossaryTerm[]): { href: string; label: string; note: string }[] {
-  const uses = usedBy(slug, terms).slice(0, 2)
+export async function nextLinksForTerm(slug: string, terms: GlossaryTerm[]): Promise<{ href: string; label: string; note: string }[]> {
+  const uses = (await usedBy(slug, terms)).slice(0, 2)
   const seeAlso = terms.find((t) => t.slug === slug)?.seeAlso ?? []
   const related = seeAlso
     .map((s) => terms.find((t) => t.slug === s))

@@ -2,6 +2,8 @@ import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { permanentSlugPublishAction } from './permanentSlugPublishAction'
 import { glossaryTerm } from './schemaTypes/glossaryTerm'
+import { topic } from './schemaTypes/topic'
+import { editorialArticle } from './schemaTypes/editorialArticle'
 
 export default defineConfig({
   name: 'doefin-marketing',
@@ -11,9 +13,9 @@ export default defineConfig({
   plugins: [structureTool()],
   releases: { enabled: false },
   scheduledDrafts: { enabled: false },
-  schema: { types: [glossaryTerm] },
+  schema: { types: [glossaryTerm, topic, editorialArticle] },
   document: {
-    actions: (previous, context) => context.schemaType === 'glossaryTerm'
+    actions: (previous, context) => ['glossaryTerm', 'topic', 'editorialArticle'].includes(context.schemaType)
       ? previous.filter(action => !['duplicate', 'restore'].includes(String(action.action))).map(action => action.action === 'publish' ? permanentSlugPublishAction(action, context) : action)
       : previous,
   },

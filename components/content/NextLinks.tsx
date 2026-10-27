@@ -7,10 +7,10 @@ import Link from '@/components/routing/SiteLink'
  * sibling, forward to the tool or dataset. It sits ABOVE the ask (S11) on purpose —
  * a reader who is not converting should still leave with somewhere to go.
  */
-export function NextLinks({ items }: { items: { href: string; label: string; note: string }[] }) {
+export function NextLinks({ items, className = '' }: { items: { href: string; label: string; note: string }[]; className?: string }) {
   if (!items.length) return null
   return (
-    <nav aria-labelledby="next-links" className="mt-16 border-t border-white/[0.07] pt-8">
+    <nav aria-labelledby="next-links" className={'mt-16 border-t border-white/[0.07] pt-8 ' + className}>
       <h2 id="next-links" className="text-xs font-bold uppercase tracking-[0.12em] text-muted">
         Where to go next
       </h2>

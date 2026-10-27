@@ -24,7 +24,6 @@ import * as Epoch from '@/components/v3/V3EpochPage'
 import * as Methodology from '@/components/v3/V3Methodology'
 import * as Docs from '@/components/v3/V3DocsIndex'
 import * as Doc from '@/components/v3/V3DocPage'
-import { V3Academy as Academy, V3Lesson as Lesson, V3Blog as Blog, V3Post as Post, V3Tag as Tag } from '@/components/v3/V3Editorial'
 import * as Guide from '@/components/v3/pages/GuidePage'
 import * as Example from '@/components/v3/pages/WorkedExamplePage'
 import * as About from '@/components/v3/V3About'
@@ -89,13 +88,8 @@ export const v3Routes: readonly V3Route[] = [
   ...dynamicRoutes(Methodology, ({ metric }) => `methodology/${metric}`),
   staticRoute('docs', Docs),
   ...dynamicRoutes(Doc, ({ slug }) => `docs/${slug}`),
-  staticRoute('academy', Academy),
-  ...dynamicRoutes(Lesson, ({ slug }) => `academy/${slug}`),
   ...dynamicRoutes({ ...Guide, default: (props) => createElement(ReferenceGuidePage, { ...props, schemaVersion: 'v3' }) }, ({ slug }) => `academy/guides/${slug}`),
   ...dynamicRoutes(Example, ({ tool, case: example }) => `tools/${tool}/example/${example}`),
-  staticRoute('blog', Blog),
-  ...dynamicRoutes(Post, ({ slug }) => `blog/${slug}`),
-  ...dynamicRoutes(Tag, ({ tag }) => `blog/tag/${tag}`),
   staticRoute('about', About),
   staticRoute('privacy', Privacy),
   staticRoute('terms', Terms),

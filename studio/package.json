@@ -8,7 +8,9 @@
     "typecheck": "tsc --noEmit",
     "login": "sanity login",
     "import:glossary": "sanity exec ./scripts/glossary-import.mjs --with-user-token -- --apply",
-    "reconcile:glossary": "sanity exec ./scripts/glossary-import.mjs --with-user-token"
+    "reconcile:glossary": "sanity exec ./scripts/glossary-import.mjs --with-user-token",
+    "import:editorial": "sanity exec ./scripts/editorial-import.mjs --with-user-token -- --apply",
+    "reconcile:editorial": "sanity exec ./scripts/editorial-import.mjs --with-user-token"
   },
   "dependencies": {
     "sanity": "6.20.0",

@@ -83,7 +83,7 @@ export async function ReferenceTermPage({ params, schemaVersion = 'v3' }: { para
   // The return leg. Prose has always linked down into the glossary; nothing linked
   // back out. This also gives each of the 19 otherwise near-identical term pages a
   // block of content unique to it.
-  const uses = usedBy(term.slug, terms)
+  const uses = await usedBy(term.slug, terms)
 
   return (
     <><GlossaryPreviewNotice /><Container size="narrow" className="py-16">
@@ -120,7 +120,7 @@ export async function ReferenceTermPage({ params, schemaVersion = 'v3' }: { para
       </div>
 
       {uses.length ? (
-        <aside className="mt-12 border-t border-white/[0.07] pt-8">
+        <aside className="mt-12 border-t border-white/[0.07] pt-8 [overflow-wrap:anywhere]">
           <h2 className="text-xs font-bold uppercase tracking-[0.12em] text-muted">
             Where this term is used
           </h2>
@@ -167,7 +167,7 @@ export async function ReferenceTermPage({ params, schemaVersion = 'v3' }: { para
 
       <p className="mt-10 text-xs text-muted/70">Last reviewed {term.updatedAt}</p>
 
-      <NextLinks items={nextLinksForTerm(term.slug, terms)} />
+      <NextLinks className="[overflow-wrap:anywhere]" items={await nextLinksForTerm(term.slug, terms)} />
 
       <Reviewed date={term.updatedAt} />
     </Container></>

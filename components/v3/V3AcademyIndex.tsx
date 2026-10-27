@@ -19,8 +19,8 @@ const guideThemes: Record<string, { label: string; inputs: string; outcome: stri
 }
 
 /** Suggested reading order only: no tracked progress, fabricated lessons or enrolment. */
-export function V3AcademyIndex() {
-  const lessons = allV3Editorial('academy')
+export async function V3AcademyIndex() {
+  const lessons = await allV3Editorial('academy')
   const guides = allGuides()
   const [first, ...following] = lessons
 
@@ -40,11 +40,12 @@ export function V3AcademyIndex() {
       <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-subtle">Understand difficulty, mining revenue and uncertainty. Then put the concepts to work with a calculator guide.</p>
     </header>
 
-    <section id="foundations" aria-labelledby="foundations-title" className="scroll-mt-28">
+    <section id="foundations" aria-labelledby="foundations-title" className="scroll-mt-28 [overflow-wrap:anywhere]">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-x-5 gap-y-2">
         <h2 id="foundations-title" className="text-lg font-bold tracking-tight">Build the foundations</h2>
         <Link href="#guides" className="inline-flex min-h-10 items-center gap-2 text-xs font-semibold text-highlight underline-offset-4 hover:underline">Here for the calculators? <span aria-hidden="true">↓</span></Link>
       </div>
+      {!lessons.length && <p role="status" className="py-5 text-subtle">No Academy lessons have been published yet.</p>}
       <div className="grid gap-4 lg:grid-cols-[1.1fr_1fr]">
         {first && <Link href={`/v3/academy/${first.slug}`} className="group flex min-w-0 flex-col overflow-hidden rounded-panel border border-brand/30 bg-gradient-to-br from-active/45 via-surfaceAlt/60 to-surface/60 p-5 transition-colors hover:border-brand/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-highlight sm:p-7">
           <div className="flex items-center justify-between gap-4"><p className="text-[11px] font-bold uppercase tracking-[0.12em] text-highlight"><span className="tabular mr-3">01</span>Start here</p><span className="text-xs text-subtle">{lessonThemes[first.slug]?.label ?? 'Foundations'}</span></div>

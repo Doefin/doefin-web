@@ -1,13 +1,14 @@
 import { GlossaryPreviewNotice } from '@/components/content/GlossaryPreviewNotice'
 import { Container } from '@/components/layout/Container'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
-import { allGlossary } from '@/content'
+import { allGlossary, getV3Editorial } from '@/content'
 import { jsonLd } from '@/lib/seo'
 import { site } from '@/lib/site'
 import { GlossaryBrowser, type GlossaryEntry } from './GlossaryBrowser'
 
 export async function V3GlossaryIndex() {
   const terms = await allGlossary()
+  const startLesson = await getV3Editorial('academy', 'how-difficulty-adjustment-works')
   const entries: GlossaryEntry[] = terms.map(({ slug, term, shortDef, aliases, browseTopic }) =>
     ({ slug, term, shortDef, aliases: aliases ?? [], topic: browseTopic }))
   return <><GlossaryPreviewNotice /><Container className="pb-14 pt-8 sm:pt-10">
@@ -23,6 +24,6 @@ export async function V3GlossaryIndex() {
       <h1 className="max-w-3xl text-balance text-3xl font-extrabold leading-[1.15] tracking-[-0.035em] sm:text-4xl">Bitcoin mining glossary</h1>
       <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-subtle">Clear definitions for mining difficulty, revenue and operations.</p>
     </header>
-    {terms.length ? <GlossaryBrowser entries={entries} /> : <p role="status" className="py-8 text-subtle">No glossary terms have been published yet.</p>}
+    {terms.length ? <GlossaryBrowser entries={entries} academyHref={startLesson ? '/v3/academy/' + startLesson.slug : '/v3/academy'} /> : <p role="status" className="py-8 text-subtle">No glossary terms have been published yet.</p>}
   </Container></>
 }

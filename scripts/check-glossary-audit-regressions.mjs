@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
 import { loadTypescript } from './lib/load-typescript.mjs'
+import { editorialMigrationDocuments } from './lib/editorial-migration.mjs'
 import { migrationDocuments, planGlossaryImport, runGlossaryImport } from './lib/glossary-migration.mjs'
 
 const { jsonLd } = loadTypescript('lib/seo.ts', { './site': { site: { url: 'https://doefin.com' } }, './versioning': { versionedPath: p => p } })
@@ -41,6 +42,41 @@ assert(committed)
 assert.equal(rawConfig.perspective, 'raw')
 assert.equal(rawConfig.useCdn, false)
 assert.equal(rawOptions.perspective, 'raw')
+// Run the actual SDK reconciliation path with the completed mixed CMS corpus.
+const editorialDocuments = editorialMigrationDocuments()
+const internalRecords = Array.from({ length: 12 }, (_, index) => ({ _id: `_.internal-${index}`, _type: index === 11 ? 'system.retention' : 'system.group' }))
+const mixedCorpus = [...docs, ...editorialDocuments.topics, ...editorialDocuments.articles, ...internalRecords]
+assert.equal(mixedCorpus.length, 40)
+let mixedRows = mixedCorpus, namespaceMutations = 0
+const mixedSDK = { ...client,
+  withConfig(config) { assert.equal(config.perspective, 'raw'); assert.equal(config.useCdn, false); return mixedSDK },
+  async fetch(query, _params, options) {
+    assert(query.trimStart().startsWith('*[]'), 'Preflight must retain other-type canonical-ID conflicts')
+    assert.equal(options.perspective, 'raw'); return structuredClone(mixedRows)
+  },
+  transaction() { namespaceMutations++; throw new Error('Read-only verify must never mutate') },
+}
+const mixedResult = await runGlossaryImport(mixedSDK, { verify: true })
+assert.deepEqual(mixedResult.missing, []); assert.deepEqual(mixedResult.changed, []); assert.equal(mixedResult.created, 0)
+assert.equal(mixedResult.additional, 21, 'Four topics, five articles and twelve internal records remain unrelated')
+const hashrate = docs.find(doc => doc.slug.current === 'hashrate')
+// A valid arbitrary-ID Blog article may use the same slug in its own route namespace.
+mixedRows = mixedCorpus.map(row => row._id === editorialDocuments.articles[0]._id
+  ? { ...row, _id: 'independent-blog-hashrate', canonicalSlug: 'hashrate', slug: { current: 'hashrate' } } : row)
+await runGlossaryImport(mixedSDK, { verify: true })
+for (const id of ['other-glossary-hashrate', 'drafts.other-glossary-hashrate', 'versions.release.other-glossary-hashrate']) {
+  mixedRows = [...mixedCorpus, { ...hashrate, _id: id }]
+  await assert.rejects(runGlossaryImport(mixedSDK, { verify: true }), /Import blocked:.*glossary slug/, `Real glossary duplicate ${id} must still block`)
+}
+for (const id of [hashrate._id, `drafts.${hashrate._id}`, `versions.release.${hashrate._id}`]) {
+  mixedRows = [...mixedCorpus.filter(row => row._id !== id), { ...hashrate, _id: id, _type: 'topic' }]
+  await assert.rejects(runGlossaryImport(mixedSDK, { verify: true }), /Import blocked:.*another document type/, `Other type occupying canonical family ${id} must block`)
+}
+for (const id of [`drafts.${hashrate._id}`, `versions.release.${hashrate._id}`]) {
+  mixedRows = [...mixedCorpus.filter(row => row._id !== hashrate._id), { ...hashrate, _id: id }]
+  await assert.rejects(runGlossaryImport(mixedSDK, { verify: true }), /Import blocked:.*draft\/version-only/, 'Draft/version-only glossary counterpart must still block')
+}
+assert.equal(namespaceMutations, 0, 'All mixed-corpus verification paths are read-only')
 const now = Date.now
 let clock = 0
 Date.now = () => clock
@@ -74,6 +110,7 @@ assert.equal(await validator({ current: 'first-url' }, context(draft)), true, 'U
 const studioConfig = loadTypescript('studio/sanity.config.ts', {
   sanity: { defineConfig: value => value }, 'sanity/structure': { structureTool: () => ({}) },
   './permanentSlugPublishAction': { permanentSlugPublishAction: actionFactory }, './schemaTypes/glossaryTerm': { glossaryTerm: schema },
+  './schemaTypes/topic': { topic: { name: 'topic' } }, './schemaTypes/editorialArticle': { editorialArticle: { name: 'editorialArticle' } },
 }).default
 const defaultActions = ['publish', 'duplicate', 'restore', 'unpublish'].map(name => Object.assign(() => ({ label: name }), { action: name }))
 assert.deepEqual(studioConfig.document.actions(defaultActions, { schemaType: 'glossaryTerm', getClient: () => identityClient }).map(action => action.action), ['publish', 'unpublish'], 'Actual Studio config disables duplicate and restore paths that could erase permanent identity')

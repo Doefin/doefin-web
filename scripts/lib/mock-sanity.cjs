@@ -6,7 +6,11 @@ const realFetch = globalThis.fetch
 globalThis.fetch = async (input, init) => {
   const url = new URL(typeof input === 'string' || input instanceof URL ? input : input.url)
   if (url.hostname === 'yzvr33lo.api.sanity.io' && url.pathname === '/v2025-02-19/data/query/production') {
-    return new Response(JSON.stringify({result:JSON.parse(fs.readFileSync(file, 'utf8'))}), {status:200,headers:{'content-type':'application/json'}})
+    const fixture = JSON.parse(fs.readFileSync(file, 'utf8'))
+    const editorial = url.searchParams.get('query')?.includes('editorialArticle')
+    const result = Array.isArray(fixture) ? (editorial ? { topics: [], articles: [] } : fixture) : (editorial ? fixture.editorial : fixture.glossary)
+    if (fixture.status) return new Response('Fixture API failure', { status: fixture.status })
+    return new Response(JSON.stringify({result}), {status:200,headers:{'content-type':'application/json'}})
   }
   return realFetch(input, init)
 }

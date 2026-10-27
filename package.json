@@ -15,7 +15,11 @@
     "check:links": "node scripts/check-links.mjs",
     "glossary:migrate": "node scripts/migrate-glossary.mjs",
     "check:glossary": "node scripts/check-sanity-glossary.mjs && node scripts/check-glossary-audit-regressions.mjs",
-    "check:glossary:runtime": "node scripts/check-glossary-runtime.mjs"
+    "check:glossary:runtime": "node scripts/check-glossary-runtime.mjs",
+    "editorial:migrate": "node scripts/migrate-editorial.mjs",
+    "check:editorial:schema": "node scripts/check-editorial-schema-import.mjs",
+    "check:editorial": "node scripts/check-editorial.mjs",
+    "check:editorial:runtime": "node scripts/check-editorial-runtime.mjs"
   },
   "dependencies": {
     "@phosphor-icons/react": "2.1.10",

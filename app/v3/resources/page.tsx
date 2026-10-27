@@ -18,9 +18,9 @@ const calculators = [
   { slug: 'fleet-payback', title: 'Fleet payback', question: 'Which assumptions change capital recovery?', description: 'Compare simplified cash flows across difficulty paths, power costs and fleet inputs.' },
 ]
 
-export default function Resources() {
-  const lessons = allV3Editorial('academy')
-  const articles = allV3Editorial('blog')
+export default async function Resources() {
+  const lessons = await allV3Editorial('academy')
+  const articles = await allV3Editorial('blog')
   const reports = allV3Reports()
 
   return <Container className="py-12 sm:py-16">
@@ -68,7 +68,7 @@ export default function Resources() {
       </div>
     </section>
 
-    <section id="learn" aria-labelledby="resources-learn" className="mt-16 scroll-mt-28 border-t border-white/10 pt-9">
+    <section id="learn" aria-labelledby="resources-learn" className="mt-16 scroll-mt-28 border-t border-white/10 pt-9 [overflow-wrap:anywhere]">
       <p className="text-xs font-bold uppercase tracking-[0.12em] text-subtle">Guides &amp; articles</p>
       <h2 id="resources-learn" className="mt-3 text-3xl font-bold tracking-[-0.03em]">Build the context behind a decision.</h2>
       <div className="mt-8 grid gap-10 md:grid-cols-2 md:gap-14">

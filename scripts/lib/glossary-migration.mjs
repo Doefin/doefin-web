@@ -31,8 +31,8 @@ export function planGlossaryImport(snapshot, docs = migrationDocuments()) {
     const canonical = family.find(row => row._id === doc._id)
     if (family.some(row => row._type !== 'glossaryTerm')) conflicts.push(`${doc._id}: ID is occupied by another document type`)
     if (!canonical && family.length) conflicts.push(`${doc._id}: draft/version-only editor work exists; do not create a published counterpart`)
-    const collisions = snapshot.filter(row => row.slug?.current === doc.slug.current && normalizedId(row._id) !== doc._id)
-    if (collisions.length) conflicts.push(`${doc.slug.current}: slug exists under another ID (including draft/version)`)
+    const collisions = snapshot.filter(row => row._type === 'glossaryTerm' && row.slug?.current === doc.slug.current && normalizedId(row._id) !== doc._id)
+    if (collisions.length) conflicts.push(`${doc.slug.current}: glossary slug exists under another glossary ID (including draft/version)`)
     if (canonical) {
       if (JSON.stringify(comparison(canonical)) !== JSON.stringify(comparison(doc))) changed.push(doc.slug.current)
       if (family.some(row => row._id !== doc._id)) preservedDrafts.push(doc.slug.current)

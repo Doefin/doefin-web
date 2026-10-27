@@ -1,7 +1,8 @@
+import type { V3EditorialArticle } from '@/content/editorial-types'
 import type { GlossaryTerm } from '@/content/types'
 import { site } from './site'
 
-export function renderLlms(terms: GlossaryTerm[]) {
+export function renderLlms(terms: GlossaryTerm[], articles: V3EditorialArticle[] = []) {
   const u = (path: string) => `${site.url}/v3${path}`
 
   const glossary = terms
@@ -31,6 +32,10 @@ operational API or current trading availability. V3 remains a noindex preview.
 - [Tools](${u('/tools')}): educational calculations based on user-entered assumptions
 - [Documentation](${u('/docs')}): prototype documentation; verify operational details against the current application
 - [Research examples](${u('/research')}): sample reports and explanatory formats
+
+## Educational articles
+
+${articles.map(article => `- [${article.title}](${u(`/${article.kind}/${article.slug}`)}): ${article.summary}`).join('\n')}
 
 ## Definitions
 

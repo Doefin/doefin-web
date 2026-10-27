@@ -17,7 +17,7 @@ export type GlossaryEntry = { slug: string; term: string; shortDef: string; alia
 const bands = [{ id: 'bc', label: 'B–C', from: 'A', to: 'C' }, { id: 'dh', label: 'D–H', from: 'D', to: 'H' }, { id: 'mp', label: 'M–P', from: 'I', to: 'P' }, { id: 'tu', label: 'T–U', from: 'Q', to: 'Z' }]
 const normalize = (s: string) => s.normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim()
 
-export function GlossaryBrowser({ entries }: { entries: GlossaryEntry[] }) {
+export function GlossaryBrowser({ entries, academyHref = '/v3/academy' }: { entries: GlossaryEntry[]; academyHref?: string }) {
   const [query, setQuery] = useState('')
   const [topic, setTopic] = useState<Topic>('all')
   const search = useRef<HTMLInputElement>(null)
@@ -50,7 +50,7 @@ export function GlossaryBrowser({ entries }: { entries: GlossaryEntry[] }) {
             <span>{t.label}</span><span className="tabular text-[11px] text-subtle">{counts[t.id]}</span>
           </button>)}
         </nav>
-        <div className="mt-7 hidden border-t border-white/10 pt-5 lg:block"><p className="text-sm font-bold">New to mining?</p><p className="mt-2 text-xs leading-relaxed text-subtle">Build the foundations with a short explanation of how difficulty works.</p><Link href="/v3/academy/how-difficulty-adjustment-works" className="mt-3 inline-flex min-h-11 items-center gap-2 text-xs font-semibold text-highlight hover:underline">Start with the Academy <Arrow className="h-4 w-4" /></Link></div>
+        <div className="mt-7 hidden border-t border-white/10 pt-5 lg:block"><p className="text-sm font-bold">New to mining?</p><p className="mt-2 text-xs leading-relaxed text-subtle">Build the foundations with a short explanation of how difficulty works.</p><Link href={academyHref} className="mt-3 inline-flex min-h-11 items-center gap-2 text-xs font-semibold text-highlight hover:underline">Start with the Academy <Arrow className="h-4 w-4" /></Link></div>
       </aside>
 
       <div id="glossary-results" className="min-w-0 scroll-mt-48">
