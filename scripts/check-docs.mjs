@@ -49,7 +49,7 @@ assert.equal(docsLinkState('/v3/docs/overview',null),'unavailable');assert.equal
 let publication=[]
 const module={exports:{}}
 const componentCode=ts.transpileModule(readFileSync('components/routing/SiteLink.tsx','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText
-const dependencies={'next/link':{default:NextLink},'react/jsx-runtime':jsxRuntime,'@/lib/versioning':loadTypescript('lib/versioning.ts'),'./SiteVersionContext':{useSiteVersion:()=> 'v3'},'./DocsPublicationContext':{usePublishedDocs:()=>publication},'@/lib/docs-links':{docsLinkState}}
+const dependencies={'@/lib/tool-guide-links':{toolGuideLinkState:()=>undefined},'./GuidesPublicationContext':{usePublishedGuides:()=>undefined},'next/link':{default:NextLink},'react/jsx-runtime':jsxRuntime,'@/lib/versioning':loadTypescript('lib/versioning.ts'),'./SiteVersionContext':{useSiteVersion:()=> 'v3'},'./DocsPublicationContext':{usePublishedDocs:()=>publication},'@/lib/docs-links':{docsLinkState}}
 new Function('require','module','exports',componentCode)(name=>{assert(Object.hasOwn(dependencies,name),name);return dependencies[name]},module,module.exports)
 const actualSiteLink=module.exports.default
 const destinations=[

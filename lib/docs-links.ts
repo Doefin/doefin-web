@@ -5,7 +5,7 @@ const unsafe = (value: string) => /[\u0000-\u0020\u007f\\]/.test(value)
 /** Only a root path or an explicit HTTP(S) URL on the configured canonical
  * origin belongs to this site's Docs namespace. External/ambiguous URLs are
  * never normalized into local navigation by the availability policy. */
-function docsPath(href: DocsHref): string | undefined {
+export function contentPath(href: DocsHref): string | undefined {
   const canonical = new URL(site.url)
   if (typeof href === 'string') {
     if (unsafe(href)) return
@@ -18,7 +18,7 @@ function docsPath(href: DocsHref): string | undefined {
   }
   const pathname = href.pathname ?? ''
   if (unsafe(pathname) || href.auth || href.username || href.password) return
-  if (!href.host && !href.hostname && !href.protocol && !href.slashes && /^https?:\/\/[^/]/i.test(pathname)) return docsPath(pathname)
+  if (!href.host && !href.hostname && !href.protocol && !href.slashes && /^https?:\/\/[^/]/i.test(pathname)) return contentPath(pathname)
   if (!pathname.startsWith('/') || pathname.startsWith('//')) return
   if (href.host || href.hostname || href.protocol || href.slashes) {
     // Require an explicit protocol/authority; don't reinterpret partial objects
@@ -34,7 +34,7 @@ function docsPath(href: DocsHref): string | undefined {
 /** Missing or unknown individual guides have a clearly labeled hub fallback.
  * Published destinations remain untouched, including their original query/hash. */
 export function docsLinkState(href: DocsHref, slugs: readonly string[] | null | undefined): 'published' | 'missing' | 'unavailable' | undefined {
-  const path = docsPath(href)
+  const path = contentPath(href)
   if (!path?.startsWith('/v3/docs/') || slugs === undefined) return undefined
   if (slugs === null) return 'unavailable'
   let slug: string

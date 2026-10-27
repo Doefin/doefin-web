@@ -1,9 +1,10 @@
+import type { ToolGuide } from '@/content/tool-guide-types'
 import type { V3Doc } from '@/content/docs-types'
 import type { V3EditorialArticle } from '@/content/editorial-types'
 import type { GlossaryTerm } from '@/content/types'
 import { site } from './site'
 
-export function renderLlms(terms: GlossaryTerm[], articles: V3EditorialArticle[] = [], docs: V3Doc[] = []) {
+export function renderLlms(terms: GlossaryTerm[], articles: V3EditorialArticle[] = [], docs: V3Doc[] = [], guides: ToolGuide[] = []) {
   const u = (path: string) => `${site.url}/v3${path}`
 
   const glossary = terms
@@ -42,6 +43,10 @@ ${articles.map(article => `- [${article.title}](${u(`/${article.kind}/${article.
 ## Documentation pages
 
 ${docs.map(doc => `- [${markdownText(doc.title)}](${u(`/docs/${doc.slug}`)}): ${markdownText(doc.summary)}`).join('\n')}
+
+## Calculator guides
+
+${guides.map(({slug,guide}) => `- [${markdownText(guide.article.title)}](${u(`/academy/guides/${slug}`)}): ${markdownText(guide.article.summary)}`).join('\n')}
 
 ## Definitions
 

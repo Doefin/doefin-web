@@ -110,7 +110,7 @@ assert.equal(await validator({ current: 'first-url' }, context(draft)), true, 'U
 const studioConfig = loadTypescript('studio/sanity.config.ts', {
   sanity: { defineConfig: value => value }, 'sanity/structure': { structureTool: () => ({}) },
   './permanentSlugPublishAction': { permanentSlugPublishAction: actionFactory }, './schemaTypes/glossaryTerm': { glossaryTerm: schema },
-  './schemaTypes/docPage': { docPage: {name:'docPage'} },
+  './schemaTypes/toolGuide': { toolGuide: {} }, './schemaTypes/docPage': { docPage: {name:'docPage'} },
   './schemaTypes/topic': { topic: { name: 'topic' } }, './schemaTypes/editorialArticle': { editorialArticle: { name: 'editorialArticle' } },
 }).default
 const defaultActions = ['publish', 'duplicate', 'restore', 'unpublish'].map(name => Object.assign(() => ({ label: name }), { action: name }))

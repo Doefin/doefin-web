@@ -1,9 +1,10 @@
+import { GuidesPublicationProvider } from '@/components/routing/GuidesPublicationContext'
 import type { Metadata } from 'next'
 import Link from '@/components/routing/SiteLink'
 import { Container } from '@/components/layout/Container'
 import { Arrow } from '@/components/v3/Arrow'
 import { BrandIcon } from '@/components/v3/BrandIcon'
-import { allV3Editorial, allV3Reports, guideFor } from '@/content'
+import { allV3Editorial, allV3Reports, guideDiscovery } from '@/content'
 import { seo } from '@/lib/seo'
 import { site } from '@/lib/site'
 
@@ -22,8 +23,9 @@ export default async function Resources() {
   const lessons = await allV3Editorial('academy')
   const articles = await allV3Editorial('blog')
   const reports = allV3Reports()
+  const {guides,unavailable} = await guideDiscovery()
 
-  return <Container className="py-12 sm:py-16">
+  return <GuidesPublicationProvider slugs={unavailable ? null : guides.map(row=>row.slug)}><Container className="py-12 sm:py-16 [overflow-wrap:anywhere]">
     <header className="max-w-3xl">
       <p className="text-xs font-bold uppercase tracking-[0.14em] text-highlight">Resources</p>
       <h1 className="mt-4 text-balance text-4xl font-bold leading-[1.1] tracking-[-0.04em] sm:text-5xl">Understand difficulty.<br />Work with your own numbers.</h1>
@@ -63,7 +65,7 @@ export default async function Resources() {
           <p className="text-xs font-semibold text-subtle">{tool.title}</p>
           <h3 className="mt-2 text-lg font-semibold leading-snug"><Link href={'/v3/tools/' + tool.slug} className="group inline-flex items-start justify-between gap-5 hover:text-highlight">{tool.question}<Arrow className="mt-1" /></Link></h3>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-subtle">{tool.description}</p>
-          <Link href={'/v3/academy/guides/' + tool.slug} className="mt-2 inline-flex min-h-11 items-center text-sm font-semibold text-highlight hover:underline">Guide: {guideFor(tool.slug)?.article.title} <span aria-hidden="true" className="ml-2">→</span></Link>
+          <Link href={'/v3/academy/guides/' + tool.slug} className="mt-2 inline-flex min-h-11 items-center text-sm font-semibold text-highlight hover:underline">Guide: {guides.find(row => row.slug === tool.slug)?.guide.article.title ?? 'Browse calculator guides'} <span aria-hidden="true" className="ml-2">→</span></Link>
         </article>)}
       </div>
     </section>
@@ -127,5 +129,5 @@ export default async function Resources() {
       <div className="max-w-2xl"><h2 id="resources-contact" className="text-xl font-bold">Need a detail you cannot find?</h2><p className="mt-3 text-sm leading-relaxed text-subtle">Ask the team about the product or the evidence your review needs.</p><p className="mt-2 text-xs leading-relaxed text-subtle">Preview research email preferences, publication alerts or a requested report email. This demo does not send emails or save personal details.</p></div>
       <div className="flex flex-wrap gap-x-6 gap-y-2"><a href={'mailto:' + site.contactEmail} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">Ask the team <Arrow diagonal /></a><Link href="/v3/newsletter" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">Explore research emails <Arrow /></Link></div>
     </section>
-  </Container>
+  </Container></GuidesPublicationProvider>
 }

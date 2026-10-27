@@ -7,11 +7,13 @@ globalThis.fetch = async (input, init) => {
   const url = new URL(typeof input === 'string' || input instanceof URL ? input : input.url)
   if (url.hostname === 'yzvr33lo.api.sanity.io' && url.pathname === '/v2025-02-19/data/query/production') {
     const fixture = JSON.parse(fs.readFileSync(file, 'utf8'))
+    const guides = url.searchParams.get('query')?.includes('toolGuide')
     const editorial = url.searchParams.get('query')?.includes('editorialArticle')
     const docs = url.searchParams.get('query')?.includes('docPage')
     const manifest = docs && !url.searchParams.get('query')?.includes('sections')
-    const result = docs ? (manifest && Object.hasOwn(fixture,'docsManifest') ? fixture.docsManifest : fixture.docs ?? []) : Array.isArray(fixture) ? (editorial ? { topics: [], articles: [] } : fixture) : (editorial ? fixture.editorial : fixture.glossary)
-    const status = manifest ? fixture.docsManifestStatus ?? fixture.docsStatus ?? fixture.status : docs ? fixture.docsStatus ?? fixture.status : fixture.status
+    const guideManifest = guides && !url.searchParams.get('query')?.includes('article')
+    const result = guides ? (guideManifest && Object.hasOwn(fixture,'guidesManifest') ? fixture.guidesManifest : fixture.guides ?? []) : docs ? (manifest && Object.hasOwn(fixture,'docsManifest') ? fixture.docsManifest : fixture.docs ?? []) : Array.isArray(fixture) ? (editorial ? { topics: [], articles: [] } : fixture) : (editorial ? fixture.editorial : fixture.glossary)
+    const status = guides ? (guideManifest ? fixture.guidesManifestStatus ?? fixture.guidesStatus ?? fixture.status : fixture.guidesStatus ?? fixture.status) : manifest ? fixture.docsManifestStatus ?? fixture.docsStatus ?? fixture.status : docs ? fixture.docsStatus ?? fixture.status : fixture.status
     if (status) return new Response('Fixture API failure', { status })
     return new Response(JSON.stringify({result}), {status:200,headers:{'content-type':'application/json'}})
   }

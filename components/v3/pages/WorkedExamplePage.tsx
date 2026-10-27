@@ -1,9 +1,10 @@
+import { GuidesPublicationProvider } from '@/components/routing/GuidesPublicationContext'
 import Link from '@/components/routing/SiteLink'
 import { notFound } from 'next/navigation'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { Container } from '@/components/layout/Container'
 import { Callout, DataTable, Eyebrow, Prose } from '@/components/ui'
-import { EXAMPLES, guideFor, TOOLS } from '@/content'
+import { EXAMPLES, guideDiscovery, TOOLS } from '@/content'
 import { seo } from '@/lib/seo'
 import { NextLinks, Reviewed } from '@/components/content/NextLinks'
 
@@ -31,11 +32,12 @@ export default async function ExamplePage({ params }: { params: Promise<{ tool: 
   const e = find(tool, c)
   const t = TOOLS.find((x) => x.slug === tool)
   if (!e || !t) notFound()
-  const guide = guideFor(t.slug)
+  const {guides} = await guideDiscovery()
+  const guide = guides.find(row=>row.slug===t.slug)?.guide
   const calculatorQuery = new URLSearchParams(Object.entries(e.calculatorInputs).map(([key, value]) => [key, String(value)])).toString()
 
   return (
-    <Container size="narrow" className="py-16">
+    <GuidesPublicationProvider slugs={guides.map(row=>row.slug)}><Container size="narrow" className="py-16">
       <Breadcrumbs
         items={[
           { name: 'Tools', href: '/tools' },
@@ -97,6 +99,6 @@ export default async function ExamplePage({ params }: { params: Promise<{ tool: 
       />
 
       <Reviewed />
-    </Container>
+    </Container></GuidesPublicationProvider>
   )
 }

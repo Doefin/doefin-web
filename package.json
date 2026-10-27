@@ -23,7 +23,10 @@
     "docs:migrate": "node scripts/migrate-docs.mjs",
     "check:docs": "node scripts/check-docs.mjs",
     "check:docs:schema": "node scripts/check-docs-schema-import.mjs",
-    "check:docs:runtime": "node scripts/check-docs-runtime.mjs"
+    "check:docs:runtime": "node scripts/check-docs-runtime.mjs",
+    "guides:migrate": "node scripts/migrate-tool-guides.mjs",
+    "check:guides": "node scripts/check-tool-guides.mjs",
+    "check:guides:runtime": "node scripts/check-tool-guides-runtime.mjs"
   },
   "dependencies": {
     "@phosphor-icons/react": "2.1.10",

@@ -180,7 +180,7 @@ const failedPublish = actionFactory(() => ({ label: 'Publish', onHandle() { dele
 await failedPublish({ id: 'new-doc-id' }).onHandle()
 assert.equal(delegated, 1, 'Stamp failure must not delegate publish')
 assert.equal(failed.length, 2)
-const config = loadTypescript('studio/sanity.config.ts', { sanity: { defineConfig: value => value }, 'sanity/structure': { structureTool: () => ({}) }, './permanentSlugPublishAction': { permanentSlugPublishAction: actionFactory }, './schemaTypes/glossaryTerm': { glossaryTerm: {} }, './schemaTypes/topic': { topic: {} }, './schemaTypes/editorialArticle': { editorialArticle: {} }, './schemaTypes/docPage': { docPage: schema } }).default
+const config = loadTypescript('studio/sanity.config.ts', { sanity: { defineConfig: value => value }, 'sanity/structure': { structureTool: () => ({}) }, './permanentSlugPublishAction': { permanentSlugPublishAction: actionFactory }, './schemaTypes/glossaryTerm': { glossaryTerm: {} }, './schemaTypes/topic': { topic: {} }, './schemaTypes/editorialArticle': { editorialArticle: {} }, './schemaTypes/toolGuide': { toolGuide: {} }, './schemaTypes/docPage': { docPage: schema } }).default
 const actions = ['publish', 'duplicate', 'restore', 'unpublish'].map(name => Object.assign(() => ({ label: name }), { action: name }))
 assert.deepEqual(config.document.actions(actions, { schemaType: 'docPage', getClient: () => actionClient }).map(action => action.action), ['publish', 'unpublish'])
 console.log('Passed 18 Docs seed fidelity/order/anchors/dates/definitions/steps, weak related identity safety, raw draft-aware create-only import and preservation of 40 existing records, idempotence, and actual Studio validators/publish failure guards.')

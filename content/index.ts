@@ -43,8 +43,8 @@ export type { Post, AcademyPost, GlossaryTerm, Report, Source, Confidence } from
 export { TOOLS, EXAMPLES, examplesFor } from './tools'
 export type { Tool, ToolExample } from './tools'
 
-export { TOOL_GUIDES, guideFor, allGuides } from './tool-guides'
-export type { ToolGuideContent } from './tool-guides'
+export { guideFor, allGuides, guidesNavigation, guideDiscovery } from './sanity/tool-guides'
+export type { ToolGuideContent, ToolGuide } from './tool-guide-types'
 
 export { TOOL_MICRO, microFor, hintFor, resultHintFor, presetsFor } from './tool-micro'
 export type { ToolMicro } from './tool-micro'

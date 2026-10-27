@@ -14,6 +14,7 @@ const base = process.argv.find(a => a.startsWith('--base='))?.slice(7)
 
 const PAGES = [
   ['v3.html', 'V3 home'],
+  ['v3/academy/guides/hosting-effective-rate.html', 'V3 calculator guide'],
   ['v3/docs.html', 'V3 Docs index'],
   ['v3/docs/key-terms.html', 'V3 Docs definitions'],
   ['v3/resources.html', 'V3 resources'],

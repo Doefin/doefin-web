@@ -2,7 +2,7 @@ import type { SanityClient, SanityDocument } from '@sanity/client'
 
 type IdentityDocument = Pick<SanityDocument, '_id'> & {
   _type?: string; _rev?: string; slug?: { current?: string }; canonicalSlug?: string
-  kind?: string; canonicalKind?: string; label?: string
+  kind?: string; canonicalKind?: string; label?: string; toolSlug?: string; canonicalToolSlug?: string
 }
 type IdentityContext = { document?: IdentityDocument; getClient: (options: { apiVersion: string }) => SanityClient }
 const validSlug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
@@ -12,6 +12,7 @@ export function fixedSlug(document: IdentityDocument): string | undefined {
   const id = publishedIdentity(document._id)
   if (id.startsWith('glossary-')) return id.slice('glossary-'.length)
   if (id.startsWith('topic-')) return id.slice('topic-'.length)
+  if (id.startsWith('tool-guide-')) return id.slice('tool-guide-'.length)
   if (id.startsWith('docs-')) return id.slice('docs-'.length)
   return importedEditorialIdentity(id)?.[2] ?? document.canonicalSlug
 }
@@ -21,7 +22,7 @@ export function fixedKind(document: IdentityDocument): string | undefined {
 const identityRows = (context: IdentityContext) => {
   const id = publishedIdentity(context.document!._id)
   return context.getClient({ apiVersion: '2025-02-19' }).withConfig({ perspective: 'raw', useCdn: false })
-    .fetch<IdentityDocument[]>('*[_id in $ids]{_id,_type,slug,kind,canonicalSlug,canonicalKind}', { ids: [id, `drafts.${id}`] })
+    .fetch<IdentityDocument[]>('*[_id in $ids]{_id,_type,slug,kind,canonicalSlug,canonicalKind,toolSlug,canonicalToolSlug}', { ids: [id, `drafts.${id}`] })
 }
 
 /** The stored stamp survives unpublish; imported IDs independently encode identity. */
@@ -52,6 +53,22 @@ export async function validatePermanentKind(value: unknown, context: IdentityCon
   return !locked || locked === value || 'The published article kind is permanent because it is part of the public URL.'
 }
 
+export function fixedTool(document: IdentityDocument): string | undefined {
+  const id=publishedIdentity(document._id)
+  return ['hosting-effective-rate','difficulty-exposure','fleet-payback'].map(slug=>`tool-guide-${slug}`).includes(id) ? id.slice('tool-guide-'.length) : document.canonicalToolSlug
+}
+export async function validatePermanentTool(value: unknown, context: IdentityContext): Promise<true | string> {
+  if (!['hosting-effective-rate','difficulty-exposure','fleet-payback'].includes(String(value))) return 'Choose a supported calculator.'
+  if(!context.document) return true
+  if (['hosting-effective-rate','difficulty-exposure','fleet-payback'].includes(context.document.slug?.current ?? '') && value !== context.document.slug?.current) return 'Canonical calculator guides must keep the matching calculator.'
+  let locked=fixedTool(context.document)
+  if(!locked) {
+    const id=publishedIdentity(context.document._id),rows=await identityRows(context)
+    locked=rows.map(row=>row.canonicalToolSlug).find(Boolean) ?? rows.find(row=>row._id===id)?.toolSlug
+  }
+  return !locked || locked === value || 'Keep the original calculator identity after publication.'
+}
+
 /** Sanity's default slug uniqueness is type-wide; article routes are kind-scoped. */
 export async function isUniqueContentSlug(slug: string, context: IdentityContext): Promise<boolean> {
   const doc = context.document
@@ -78,7 +95,7 @@ export async function validateUniqueTopicLabel(value: unknown, context: Identity
 export async function stampPermanentSlug(client: SanityClient, documentId: string): Promise<void> {
   const id = publishedIdentity(documentId)
   const rows = await client.withConfig({ perspective: 'raw', useCdn: false }).fetch<IdentityDocument[]>(
-    '*[_id in $ids]{_id,_type,_rev,slug,kind,canonicalSlug,canonicalKind}', { ids: [id, `drafts.${id}`] },
+    '*[_id in $ids]{_id,_type,_rev,slug,kind,canonicalSlug,canonicalKind,toolSlug,canonicalToolSlug}', { ids: [id, `drafts.${id}`] },
   )
   const draft = rows.find(row => row._id === `drafts.${id}`)
   if (!draft?._rev || !draft.slug?.current) throw new Error('Wait for the draft to finish saving before publishing.')
@@ -87,6 +104,9 @@ export async function stampPermanentSlug(client: SanityClient, documentId: strin
   if (draft.slug.current !== locked) throw new Error('Restore the permanent slug before publishing.')
   const kind = draft._type === 'editorialArticle' ? fixedKind(draft) ?? (published && (fixedKind(published) ?? published.kind)) ?? draft.kind : undefined
   if (draft._type === 'editorialArticle' && (!['blog', 'academy'].includes(kind ?? '') || draft.kind !== kind)) throw new Error('Restore the permanent article kind before publishing.')
-  if (draft.canonicalSlug === locked && (!kind || draft.canonicalKind === kind)) return
-  await client.patch(draft._id).ifRevisionId(draft._rev).setIfMissing({ canonicalSlug: locked, ...(kind ? { canonicalKind: kind } : {}) }).commit()
+  const tool = draft._type === 'toolGuide' ? fixedTool(draft) ?? (published && (fixedTool(published) ?? published.toolSlug)) ?? draft.toolSlug : undefined
+  if (draft._type === 'toolGuide' && ['hosting-effective-rate','difficulty-exposure','fleet-payback'].includes(draft.slug.current) && draft.toolSlug !== draft.slug.current) throw new Error('Canonical calculator guides must keep the matching calculator.')
+  if (draft._type === 'toolGuide' && (!['hosting-effective-rate','difficulty-exposure','fleet-payback'].includes(tool ?? '') || draft.toolSlug !== tool)) throw new Error('Restore the permanent calculator identity before publishing.')
+  if (draft.canonicalSlug === locked && (!kind || draft.canonicalKind === kind) && (!tool || draft.canonicalToolSlug === tool)) return
+  await client.patch(draft._id).ifRevisionId(draft._rev).setIfMissing({ canonicalSlug: locked, ...(kind ? { canonicalKind: kind } : {}), ...(tool ? { canonicalToolSlug: tool } : {}) }).commit()
 }

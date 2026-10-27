@@ -4,6 +4,8 @@ import { V3Chrome } from '@/components/v3/Chrome'
 import { SiteVersionProvider } from '@/components/routing/SiteVersionContext'
 import { jsonLd, ID, publisherRef } from '@/lib/seo'
 import { site } from '@/lib/site'
+import { guidesNavigation } from '@/content'
+import { GuidesPublicationProvider } from '@/components/routing/GuidesPublicationContext'
 import { docsNavigation } from '@/content'
 import { DocsPublicationProvider } from '@/components/routing/DocsPublicationContext'
 import './globals.css'
@@ -36,7 +38,7 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const docSlugs = await docsNavigation()
+  const [docSlugs,guideSlugs] = await Promise.all([docsNavigation(),guidesNavigation()])
   const org = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -71,7 +73,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           Skip to content
         </a>
         <SiteVersionProvider version="v3">
-          <DocsPublicationProvider slugs={docSlugs}><V3Chrome>{children}</V3Chrome></DocsPublicationProvider>
+          <DocsPublicationProvider slugs={docSlugs}><GuidesPublicationProvider slugs={guideSlugs}><V3Chrome>{children}</V3Chrome></GuidesPublicationProvider></DocsPublicationProvider>
         </SiteVersionProvider>
       </body>
     </html>

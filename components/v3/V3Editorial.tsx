@@ -24,7 +24,7 @@ function collection(kind: Kind) {
     default: async function Collection() {
       return <ContentPage title={kind === 'academy' ? 'Understand the moving parts.' : 'Read the assumptions behind the number.'} summary={kind === 'academy' ? 'Start with difficulty, hashprice and uncertainty, then use a guide to apply the concepts.' : 'Educational articles about mining scenarios and how to interpret data. These are not reports of measured market performance.'} eyebrow={label(kind)} crumbs={[{ name: label(kind), href: path(kind) }]}>
         <ArticleList articles={await allV3Editorial(kind)} />
-        {kind === 'academy' && <section id="guides" className="mt-10 scroll-mt-28"><h2 className="text-2xl font-bold">Calculator guides</h2><ul className="mt-5 space-y-4">{allGuides().map(({ slug, guide }) => <li key={slug}><Link href={'/v3/academy/guides/' + slug} className="text-sm font-semibold text-highlight hover:underline">{guide.article.title} →</Link></li>)}</ul></section>}
+        {kind === 'academy' && <section id="guides" className="mt-10 scroll-mt-28"><h2 className="text-2xl font-bold">Calculator guides</h2><ul className="mt-5 space-y-4">{(await allGuides()).map(({ slug, guide }) => <li key={slug}><Link href={'/v3/academy/guides/' + slug} className="text-sm font-semibold text-highlight hover:underline">{guide.article.title} →</Link></li>)}</ul></section>}
         <ContentLinks links={[{ href: '/v3/tools', label: 'Work with your own assumptions' }, { href: '/v3/research', label: 'Inspect a worked research example' }, { href: '/v3/glossary', label: 'Look up a term' }]} />
       </ContentPage>
     },

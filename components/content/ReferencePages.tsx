@@ -10,7 +10,7 @@ import { NextLinks, Reviewed } from '@/components/content/NextLinks'
 import { Subscribe } from '@/components/content/Subscribe'
 import { GuideArticle } from '@/components/tools/GuideArticle'
 import { nextLinksForTerm, usedBy } from '@/content/graph'
-import { allGlossary, getGlossary, guideFor, TOOLS, getAuthor } from '@/content'
+import { allGlossary, getGlossary, allGuides, TOOLS, getAuthor } from '@/content'
 import { dateLong } from '@/lib/format'
 import { jsonLd, publisherRef, authorNode } from '@/lib/seo'
 import { site } from '@/lib/site'
@@ -177,12 +177,13 @@ export async function ReferenceTermPage({ params, schemaVersion = 'v3' }: { para
 
 export async function ReferenceGuidePage({ params, schemaVersion = 'v3' }: { params: Promise<{ slug: string }>; schemaVersion?: SiteVersion }) {
   const { slug } = await params
-  const g = guideFor(slug)
-  const tool = TOOLS.find((t) => t.slug === slug)
+  const row = (await allGuides()).find(row => row.slug === slug)
+  const g = row?.guide
+  const tool = TOOLS.find((t) => t.slug === row?.toolSlug)
   if (!g || !tool) notFound()
 
   return (
-    <Container size="narrow" className="py-16">
+    <Container size="narrow" className="py-16 [overflow-wrap:anywhere] [&_li>span:last-child]:min-w-0">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd({
@@ -190,7 +191,7 @@ export async function ReferenceGuidePage({ params, schemaVersion = 'v3' }: { par
           '@type': 'Article',
           headline: g.article.title,
           description: g.article.summary,
-          datePublished: g.article.publishedAt,
+          ...(g.article.publishedAt ? {datePublished: g.article.publishedAt} : {}),
           author: authorNode(getAuthor('doefin-research')),
           publisher: publisherRef,
           about: { '@type': 'Thing', name: tool.title },
@@ -213,10 +214,10 @@ export async function ReferenceGuidePage({ params, schemaVersion = 'v3' }: { par
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-muted">{g.article.summary}</p>
         <p className="mt-5 border-b border-white/[0.07] pb-6 text-sm text-muted/80">
-          Doefin Research · {dateLong(g.article.publishedAt)}
+          Doefin Research{g.article.publishedAt && <> · <time dateTime={g.article.publishedAt}>{dateLong(g.article.publishedAt)}</time></>}
         </p>
 
-        <GuideArticle g={g} slug={slug} toolTitle={tool.title} />
+        <GuideArticle g={g} slug={tool.slug} toolTitle={tool.title} />
       </article>
 
       <NextLinks
@@ -233,7 +234,7 @@ export async function ReferenceGuidePage({ params, schemaVersion = 'v3' }: { par
         <Subscribe compact />
       </div>
 
-      <Reviewed />
+      {row?.reviewedAt && <Reviewed date={row.reviewedAt} />}
     </Container>
   )
 }

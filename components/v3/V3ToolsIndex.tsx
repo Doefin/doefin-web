@@ -1,6 +1,7 @@
+import { GuidesPublicationProvider } from '@/components/routing/GuidesPublicationContext'
 import Link from '@/components/routing/SiteLink'
 import { Container } from '@/components/layout/Container'
-import { allGuides, getExposureTutorial, previewTools } from '@/content'
+import { guideDiscovery, getExposureTutorial, previewTools } from '@/content'
 import { seo } from '@/lib/seo'
 import { Arrow } from './Arrow'
 
@@ -25,7 +26,7 @@ function StartLink({ slug, children }: { slug: string; children: React.ReactNode
 }
 
 function GuideLink({ slug, title }: { slug: string; title: string }) {
-  return <Link href={`/v3/academy/guides/${slug}`} className={`group flex min-h-12 items-center justify-between gap-5 border-t border-white/10 pt-4 text-xs leading-relaxed text-subtle hover:text-highlight ${focus}`}><span><span className="mr-2 text-body">Worked guide</span>{title}</span><Arrow className="h-4 w-4" /></Link>
+  return <Link href={`/v3/academy/guides/${slug}`} className={`group flex min-h-12 items-center justify-between gap-5 border-t border-white/10 pt-4 text-xs leading-relaxed text-subtle hover:text-highlight ${focus}`}><span className="min-w-0"><span className="mr-2 text-body">Worked guide</span>{title}</span><Arrow className="h-4 w-4" /></Link>
 }
 
 function Inputs({ children }: { children: React.ReactNode }) {
@@ -33,10 +34,10 @@ function Inputs({ children }: { children: React.ReactNode }) {
 }
 
 /** Static decision aid: all destinations and specimen values are present without JavaScript. */
-export default function V3ToolsIndex() {
+export default async function V3ToolsIndex() {
   const tools = previewTools()
-  const guides = allGuides()
-  const guideTitle = (slug: string) => guides.find(item => item.slug === slug)!.guide.article.title
+  const {guides,unavailable} = await guideDiscovery()
+  const guideTitle = (slug: string) => guides.find(item => item.slug === slug)?.guide.article.title ?? 'Browse calculator guides'
   const hosting = tools.find(tool => tool.slug === 'hosting-effective-rate')!
   const exposure = tools.find(tool => tool.slug === 'difficulty-exposure')!
   const payback = tools.find(tool => tool.slug === 'fleet-payback')!
@@ -47,7 +48,7 @@ export default function V3ToolsIndex() {
   const productive = billed / (1 - (hostingSample.downtime + hostingSample.curtailment) / 100)
   const effective = productive / (1 - hostingSample.pool / 100)
 
-  return <Container className="pb-14 pt-7 sm:pb-20 sm:pt-10">
+  return <GuidesPublicationProvider slugs={unavailable ? null : guides.map(row=>row.slug)}><Container className="pb-14 pt-7 sm:pb-20 sm:pt-10 [overflow-wrap:anywhere]">
     <header className="grid gap-4 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:gap-14">
       <div><p className="text-[11px] font-bold uppercase tracking-[0.14em] text-highlight">Doefin / Mining calculators</p><h1 className="mt-3 max-w-2xl text-balance text-[34px] font-extrabold leading-[1.12] tracking-[-0.04em] sm:text-[50px]">Work through the numbers.</h1></div>
       <p className="max-w-lg text-[15px] leading-[1.8] text-subtle">Compare a hosting quote, size a production change or test when a fleet could recover its cost.</p>
@@ -136,5 +137,5 @@ export default function V3ToolsIndex() {
       <div><h2 id="tools-note-title" className="text-sm font-bold">Your assumptions. An inspectable result.</h2><p className="mt-2 max-w-xl text-xs leading-[1.9] text-subtle">Each calculator starts with illustrative inputs, not live data. Replace them with your own numbers; the page URL keeps the scenario so you can return to it or share it.</p></div>
       <div><p className="text-sm font-bold">Production and contract settlement are different.</p><p className="mt-2 text-xs leading-[1.9] text-subtle">A BTC production change is not a contract payout or an order size.</p><Link href="/v3/product/settlement" className={`mt-2 inline-flex min-h-10 items-center gap-3 text-xs font-semibold text-highlight hover:underline ${focus}`}>Read how settlement works<Arrow className="h-4 w-4" /></Link></div>
     </aside>
-  </Container>
+  </Container></GuidesPublicationProvider>
 }

@@ -1,7 +1,6 @@
 import { createElement, type ReactNode } from 'react'
 import type { Metadata } from 'next'
 import { seo } from '@/lib/seo'
-import { ReferenceGuidePage } from '@/components/content/ReferencePages'
 
 // Explicit imports make the complete preview graph visible to the Next.js build.
 // Shared pages live under V3 and remain Server Components.
@@ -22,7 +21,6 @@ import * as Hashrate from '@/components/v3/V3Hashrate'
 import * as Scoreboard from '@/components/v3/V3Scoreboard'
 import * as Epoch from '@/components/v3/V3EpochPage'
 import * as Methodology from '@/components/v3/V3Methodology'
-import * as Guide from '@/components/v3/pages/GuidePage'
 import * as Example from '@/components/v3/pages/WorkedExamplePage'
 import * as About from '@/components/v3/V3About'
 import * as Privacy from '@/components/v3/V3Privacy'
@@ -84,7 +82,6 @@ export const v3Routes: readonly V3Route[] = [
   staticRoute('data/scoreboard', Scoreboard),
   ...dynamicRoutes(Epoch, ({ height }) => `data/difficulty/epoch/${height}`),
   ...dynamicRoutes(Methodology, ({ metric }) => `methodology/${metric}`),
-  ...dynamicRoutes({ ...Guide, default: (props) => createElement(ReferenceGuidePage, { ...props, schemaVersion: 'v3' }) }, ({ slug }) => `academy/guides/${slug}`),
   ...dynamicRoutes(Example, ({ tool, case: example }) => `tools/${tool}/example/${example}`),
   staticRoute('about', About),
   staticRoute('privacy', Privacy),
