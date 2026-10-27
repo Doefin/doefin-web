@@ -29,7 +29,7 @@ export default function ResearchIndex() {
 
     <ResearchArchiveSummary />
     <div className="grid items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
-      <div className="min-w-0 space-y-6">{reports.map(report => <article key={report.slug} className="flex h-full flex-col overflow-hidden rounded-panel border border-white/10 bg-surface/30">
+      <div className="min-w-0 space-y-6">{reports.map(report => <article key={report.slug} className="flex flex-col overflow-hidden rounded-panel border border-white/10 bg-surface/30">
         <div className="p-5 sm:p-7">
           <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2"><p className="text-[10px] font-bold uppercase tracking-[0.12em] text-highlight">{report.slug === 'observed-difficulty-adjustments' ? 'Observed network analysis' : 'Comparison criteria'}</p><p className="text-[11px] text-subtle">Published <time dateTime={report.publishedAt}>{dateShort(report.publishedAt)}</time></p></div>
           <h2 className="mt-5 text-balance text-[25px] font-extrabold leading-tight tracking-[-0.03em] sm:text-3xl"><Link href={'/v3/research/' + report.slug} className="hover:text-highlight">{report.title}</Link></h2>
