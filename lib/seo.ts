@@ -74,7 +74,6 @@ type SeoInput = {
 /** Every page builds its metadata through here, so nothing ships without a canonical. */
 export function seo({ title, description, path, type = 'website', publishedTime, modifiedTime, absoluteTitle }: SeoInput): Metadata {
   const url = `${site.url}${versionedPath(path)}`
-  const isV3 = /^\/v3(?:\/|$)/.test(path)
   return {
     title: absoluteTitle ? { absolute: title } : title,
     description,
@@ -85,15 +84,15 @@ export function seo({ title, description, path, type = 'website', publishedTime,
       url,
       siteName: site.name,
       type,
-      ...(isV3 ? { images: [v3SocialImage] } : {}),
+      images: [v3SocialImage],
       ...(publishedTime ? { publishedTime } : {}),
       ...(modifiedTime ? { modifiedTime } : {}),
     },
-    twitter: { card: 'summary_large_image', title, description, ...(isV3 ? { images: [v3SocialImage] } : {}) },
+    twitter: { card: 'summary_large_image', title, description, images: [v3SocialImage] },
   }
 }
 
-export function jsonLd(data: Record<string, unknown>, version: SiteVersion = 'v1') {
+export function jsonLd(data: Record<string, unknown>, version: SiteVersion = 'v3') {
   return { __html: JSON.stringify(data, (_key, value: unknown) => {
     // Keep stable organisation IDs; page URLs follow the versioned routes.
     if (typeof value === 'string' && value.startsWith(site.url + '/') && !value.startsWith(site.url + '/#')) {

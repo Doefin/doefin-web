@@ -6,7 +6,7 @@ export const dynamic = 'force-static'
 /**
  * llms.txt, generated from the content rather than hand-maintained.
  *
- * This describes the retained V1 prototype routes. V3 remains a noindex preview;
+ * This describes the selected V3 prototype routes. V3 remains a noindex preview;
  * a production route migration is a separate decision.
  *
  * A caveat worth keeping in view: llms.txt has no confirmed consumer. It is
@@ -14,7 +14,7 @@ export const dynamic = 'force-static'
  * is expected to arrive through it.
  */
 export function GET() {
-  const u = (path: string) => `${site.url}/v1${path}`
+  const u = (path: string) => `${site.url}/v3${path}`
 
   const glossary = allGlossary()
     .map((t) => `- [${t.term}](${u(`/glossary/${t.slug}`)}): ${t.shortDef}`)
@@ -24,10 +24,10 @@ export function GET() {
 
 > ${site.description}
 
-This file describes the V1 static website prototype. Data figures, forecast ranges,
+This file describes the V3 website prototype. Data figures, forecast ranges,
 research reports and historical samples on those routes are illustrative examples.
 They do not establish a live forecast service, measured model performance, an
-operational API or current trading availability. V2 and V3 are comparison previews.
+operational API or current trading availability. V3 remains a noindex preview.
 
 ## Prototype examples
 

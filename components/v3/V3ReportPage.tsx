@@ -17,7 +17,7 @@ import { researchBase } from '@/lib/research-data'
 export const generateStaticParams = () => allV3Reports().map(report => ({ slug: report.slug }))
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const report = getV3Report((await params).slug)
-  return report ? seo({ title: report.title, description: report.summary, path: '/v3/research/' + report.slug, type: 'article', publishedTime: report.publishedAt }) : {}
+  return report ? seo({ title: report.title, description: report.seoSummary ?? report.summary, path: '/v3/research/' + report.slug, type: 'article', publishedTime: report.publishedAt }) : {}
 }
 
 export default async function V3ReportPage({ params }: { params: Promise<{ slug: string }> }) {

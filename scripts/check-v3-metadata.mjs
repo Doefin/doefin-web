@@ -35,27 +35,27 @@ truthful(site.description)
 truthful(authorNode(getAuthor('doefin-research')).description)
 
 const sampleSchema = { '@id': ID.org, url: `${site.url}/glossary/mining-difficulty`, author: authorNode(getAuthor('doefin-research')), external: 'https://bitcoin.org/en/' }
-const v1Schema = JSON.parse(jsonLd(sampleSchema).__html)
+const defaultSchema = JSON.parse(jsonLd(sampleSchema).__html)
 const v3Schema = JSON.parse(jsonLd(sampleSchema, 'v3').__html)
-assert.equal(v1Schema.url, `${site.url}/v1/glossary/mining-difficulty`)
+assert.equal(defaultSchema.url, `${site.url}/v3/glossary/mining-difficulty`)
 assert.equal(v3Schema.url, `${site.url}/v3/glossary/mining-difficulty`)
 assert.equal(v3Schema.author.url, `${site.url}/v3/about#doefin-research`)
 assert.equal(v3Schema['@id'], ID.org, 'Organization identity must remain stable')
-assert.equal(v3Schema.author['@id'], v1Schema.author['@id'], 'Author identity must remain stable')
+assert.equal(v3Schema.author['@id'], defaultSchema.author['@id'], 'Author identity must remain stable')
 assert.equal(v3Schema.external, sampleSchema.external)
-const legacy = seo({ title: 'Example', description: 'Example', path: '/docs' })
-assert.equal(legacy.alternates.canonical, `${site.url}/v1/docs`)
-assert.equal(legacy.openGraph.images, undefined, 'Keep legacy image inheritance unchanged')
+const defaultMetadata = seo({ title: 'Example', description: 'Example', path: '/docs' })
+assert.equal(defaultMetadata.alternates.canonical, `${site.url}/v3/docs`)
+assert.deepEqual(defaultMetadata.openGraph.images, [v3SocialImage], 'Default metadata must use V3 social imagery')
 const preview = seo({ title: 'Example', description: 'Example', path: '/v3/docs' })
 assert.equal(preview.alternates.canonical, `${site.url}/v3/docs`)
 assert.deepEqual(preview.openGraph.images, [v3SocialImage])
 assert.deepEqual(preview.twitter.images, [v3SocialImage])
 const llms = await load('app/llms.txt/route.ts').GET().text()
 truthful(llms)
-assert(llms.includes('V1 static website prototype'))
+assert(llms.includes('V3 website prototype'))
 assert(llms.includes('illustrative examples'))
-assert(llms.includes(`${site.url}/v1/glossary/mining-difficulty`))
-assert(!llms.includes(`${site.url}/v3/`), 'Preview must not silently replace root discovery routes')
+assert(llms.includes(`${site.url}/v3/glossary/mining-difficulty`))
+assert(!/\/v[124](?:\/|[)\s])/.test(llms), 'Discovery must not point to removed versions')
 
 function schemas(html) {
   return [...html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].map(match => JSON.parse(match[1]))
@@ -75,7 +75,7 @@ function checkPage(html, path) {
   // These retained reference pages opt into explicit server schema versions.
   if (/^\/v3\/(?:glossary|academy\/guides)(?:\/|$)/.test(path)) {
     for (const entity of data) {
-      assert(!JSON.stringify(entity).includes(`${site.url}/v1`), `${path}: inherited V1 schema URL`)
+      assert(!JSON.stringify(entity).includes(`${site.url}/v1`), `${path}: removed-version schema URL`)
       if (entity.author?.description) truthful(entity.author.description)
     }
     const breadcrumbs = data.find(value => value['@type'] === 'BreadcrumbList')
@@ -101,9 +101,6 @@ if (base) {
     checkPage(await response.text(), path)
     checked++
   }
-  const legacyHtml = await (await fetch(base + '/v1/glossary/mining-difficulty')).text()
-  const legacyTerm = schemas(legacyHtml).find(value => value['@type'] === 'DefinedTerm')
-  assert.equal(legacyTerm.url, `${site.url}/v1/glossary/mining-difficulty`, 'V1 term schema changed')
   const image = await fetch(base + '/v3/social-image')
   assert.equal(image.status, 200)
   assert(image.headers.get('content-type')?.startsWith('image/png'))
@@ -113,4 +110,4 @@ if (base) {
   assert.equal(png.readUInt32BE(20), 630)
   truthful(await (await fetch(base + '/llms.txt')).text())
 }
-console.log(`Passed shared claims, author identity, V1 defaults, V3 schema URLs and social metadata; checked ${checked} rendered pages.`)
+console.log(`Passed shared claims, author identity, V3 defaults, V3 schema URLs and social metadata; checked ${checked} rendered pages.`)

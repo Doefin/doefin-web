@@ -1,8 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // A missing route has no version context. Use a standalone 404 instead of
-  // hydrating the prerendered V1 chrome against a requested V3 pathname.
+  // Render unmatched URLs with a standalone 404.
   experimental: { globalNotFound: true },
   // PostHog is proxied through our own origin so ad-blockers — heavy on a crypto
   // audience — do not drop analytics. Mirrors the trading app's configuration.
@@ -13,11 +12,10 @@ const nextConfig = {
       'newsletter', 'privacy', 'research', 'resources', 'terms', 'tools',
     ]
     return [
-      { source: '/', destination: '/v1', permanent: false },
-      { source: '/home-v2/:path*', destination: '/v2/:path*', permanent: false },
+      { source: '/', destination: '/v3', permanent: false },
       ...originalSections.map(section => ({
         source: '/' + section + '/:path*',
-        destination: '/v1/' + section + '/:path*',
+        destination: '/v3/' + section + '/:path*',
         permanent: false,
       })),
     ]

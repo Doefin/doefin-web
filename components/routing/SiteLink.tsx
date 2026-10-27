@@ -5,7 +5,7 @@ import type { ComponentProps } from 'react'
 import { versionedPath } from '@/lib/versioning'
 import { useSiteVersion } from './SiteVersionContext'
 
-/** V3 keeps reused page links together; outside its provider legacy routing stays intact. */
+/** Keep every internal page link in the selected V3 application. */
 export default function SiteLink({ href, ...props }: ComponentProps<typeof NextLink>) {
   const version = useSiteVersion()
   const destination = typeof href === 'string'

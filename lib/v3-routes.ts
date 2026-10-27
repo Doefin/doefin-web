@@ -4,15 +4,15 @@ import { seo } from '@/lib/seo'
 import { ReferenceTermPage, ReferenceGuidePage } from '@/components/content/ReferencePages'
 
 // Explicit imports make the complete preview graph visible to the Next.js build.
-// Source page modules remain Server Components; no page body is duplicated here.
-import * as Product from '@/app/v2/product/page'
-import * as Settlement from '@/app/v2/product/settlement/page'
+// Shared pages live under V3 and remain Server Components.
+import * as Product from '@/components/v3/pages/ProductPage'
+import * as Settlement from '@/components/v3/pages/SettlementPage'
 import * as Miners from '@/components/v3/MinersPage'
 import * as Institutions from '@/components/v3/InstitutionsPage'
 import * as Tools from '@/components/v3/V3ToolsIndex'
 import * as Tool from '@/components/v3/V3ToolPage'
 import * as Learn from '@/components/v3/V3Learn'
-import * as Tutorial from '@/app/v2/learn/difficulty-exposure/page'
+import * as Tutorial from '@/components/v3/pages/TutorialPage'
 import * as SampleReport from '@/components/v3/V3ForecastExample'
 import * as Research from '@/components/v3/ResearchIndex'
 import * as Report from '@/components/v3/V3ReportPage'
@@ -24,15 +24,15 @@ import * as Epoch from '@/components/v3/V3EpochPage'
 import * as Methodology from '@/components/v3/V3Methodology'
 import * as Docs from '@/components/v3/V3DocsIndex'
 import * as Doc from '@/components/v3/V3DocPage'
-import * as Glossary from '@/app/v1/glossary/page'
+import * as Glossary from '@/components/v3/pages/GlossaryPage'
 import { V3GlossaryIndex } from '@/components/v3/V3GlossaryIndex'
-import * as Term from '@/app/v1/glossary/[slug]/page'
+import * as Term from '@/components/v3/pages/GlossaryTermPage'
 import { V3Academy as Academy, V3Lesson as Lesson, V3Blog as Blog, V3Post as Post, V3Tag as Tag } from '@/components/v3/V3Editorial'
-import * as Guide from '@/app/v1/academy/guides/[slug]/page'
-import * as Example from '@/app/v1/tools/[tool]/example/[case]/page'
+import * as Guide from '@/components/v3/pages/GuidePage'
+import * as Example from '@/components/v3/pages/WorkedExamplePage'
 import * as About from '@/components/v3/V3About'
 import * as Privacy from '@/components/v3/V3Privacy'
-import * as Terms from '@/app/v1/terms/page'
+import * as Terms from '@/components/v3/pages/TermsPage'
 
 type PageResult = ReactNode | Promise<ReactNode>
 type StaticPage = { default: () => PageResult; metadata: Metadata }
@@ -69,7 +69,7 @@ function dynamicRoutes<P extends Record<string, string>>(
 }
 
 /**
- * The V2 product journey, retained reference routes and V3-specific content.
+ * The complete V3 product journey, reference routes and supporting content.
  * Home, resources, newsletter and internal prototype review have dedicated V3 pages.
  */
 export const v3Routes: readonly V3Route[] = [

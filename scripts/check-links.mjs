@@ -57,8 +57,8 @@ function walk(dir) {
 // Only editorial routes belong in the graph. A hub page such as /data or /about
 // is not a content item, so a hand-written list there is correct — warning about
 // it forever would only teach people to ignore this script.
-const EDITORIAL = /^app\/v1\/(blog|research|academy|glossary)\/\[/
-const routes = walk('app').filter((f) => f.endsWith('.tsx'))
+const EDITORIAL = /^(?:components\/v3\/(?:V3Editorial|V3BlogPost|V3ReportPage))\.tsx$/
+const routes = [...walk('app'), ...walk('components')].filter((f) => f.endsWith('.tsx'))
 for (const f of routes.filter((f) => EDITORIAL.test(f))) {
   if (/<NextLinks[\s\S]{0,120}items=\{\[/.test(read(f))) {
     fails.push(`${f} passes a literal array to <NextLinks> — derive it from content/graph.ts`)

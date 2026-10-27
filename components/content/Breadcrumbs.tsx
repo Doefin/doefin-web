@@ -10,8 +10,8 @@ export type Crumb = { name: string; href: string }
  * never drift apart.
  */
 export function Breadcrumbs({ items, schemaVersion }: { items: Crumb[]; schemaVersion?: SiteVersion }) {
-  const version = schemaVersion ?? (items.some(item => /^\/v3(?:\/|$)/.test(item.href)) ? 'v3' : 'v1')
-  const all: Crumb[] = [{ name: 'Home', href: version === 'v3' ? '/v3' : '/' }, ...items]
+  const version = schemaVersion ?? 'v3'
+  const all: Crumb[] = [{ name: 'Home', href: '/v3' }, ...items]
   return (
     <>
       <script

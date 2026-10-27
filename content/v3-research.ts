@@ -4,6 +4,7 @@ export const v3Reports = [{
   "slug": "observed-difficulty-adjustments",
   "title": "What changed across 25 observed retargets?",
   "summary": "A reproducible analysis of a frozen mempool.space network-data capture, with public findings, CSV, source payload and version metadata. Observed changes are not forecasting performance.",
+  "seoSummary": "Reproduce 25 observed difficulty changes from a frozen mempool.space capture. Inspect findings, CSV and sources; this is not forecast performance.",
   "publishedAt": "2026-10-22",
   "sections": [
     {

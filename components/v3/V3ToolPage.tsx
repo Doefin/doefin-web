@@ -2,10 +2,16 @@ import { notFound } from 'next/navigation'
 import Link from '@/components/routing/SiteLink'
 import { Container } from '@/components/layout/Container'
 import { PreviewCalculator } from '@/components/preview/PreviewCalculator'
-import { RelatedContent } from '@/components/preview/Primitives'
+import { previewSeo, RelatedContent } from '@/components/preview/Primitives'
 import { previewTools, getPreviewTool, examplesFor, guideFor } from '@/content'
 import { preview } from '@/lib/preview'
-export { generateStaticParams, generateMetadata } from '@/app/v2/tools/[slug]/page'
+export const generateStaticParams = () => previewTools().map(({ slug }) => ({ slug }))
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const tool = getPreviewTool(slug)
+  if (!tool) notFound()
+  return previewSeo(tool.title, tool.description, preview.tools + '/' + slug)
+}
 
 const tools = [
   { slug: 'difficulty-exposure', name: 'Difficulty exposure', detail: 'Production sensitivity' },

@@ -16,8 +16,8 @@ import { site } from '@/lib/site'
 import type { SiteVersion } from '@/lib/versioning'
 
 // Shared server renderers accept an explicit schema version. Next page wrappers
-// keep their normal PageProps, and V1 remains the default for retained content.
-export function ReferenceGlossaryIndex({ schemaVersion = 'v1' }: { schemaVersion?: SiteVersion }) {
+// keep their normal PageProps, and all retained content uses V3 URLs.
+export function ReferenceGlossaryIndex({ schemaVersion = 'v3' }: { schemaVersion?: SiteVersion }) {
   const terms = allGlossary()
   return (
     <Container className="py-16">
@@ -73,7 +73,7 @@ export function ReferenceGlossaryIndex({ schemaVersion = 'v1' }: { schemaVersion
 }
 
 
-export async function ReferenceTermPage({ params, schemaVersion = 'v1' }: { params: Promise<{ slug: string }>; schemaVersion?: SiteVersion }) {
+export async function ReferenceTermPage({ params, schemaVersion = 'v3' }: { params: Promise<{ slug: string }>; schemaVersion?: SiteVersion }) {
   const { slug } = await params
   const term = getGlossary(slug)
   if (!term) notFound()
@@ -173,7 +173,7 @@ export async function ReferenceTermPage({ params, schemaVersion = 'v1' }: { para
 }
 
 
-export async function ReferenceGuidePage({ params, schemaVersion = 'v1' }: { params: Promise<{ slug: string }>; schemaVersion?: SiteVersion }) {
+export async function ReferenceGuidePage({ params, schemaVersion = 'v3' }: { params: Promise<{ slug: string }>; schemaVersion?: SiteVersion }) {
   const { slug } = await params
   const g = guideFor(slug)
   const tool = TOOLS.find((t) => t.slug === slug)

@@ -8,15 +8,15 @@ const esc = (s: string) =>
 
 export function GET() {
   const items = [
-    ...allPosts().map((p) => ({ ...p, path: `/v1/blog/${p.slug}` })),
-    ...allReports().map((r) => ({ ...r, path: `/v1/research/${r.slug}` })),
+    ...allPosts().map((p) => ({ ...p, path: `/v3/blog/${p.slug}` })),
+    ...allReports().map((r) => ({ ...r, path: `/v3/research/${r.slug}` })),
   ].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${esc(site.name)}</title>
-    <link>${site.url}</link>
+    <link>${site.url}/v3</link>
     <description>${esc(site.description)}</description>
     <language>en-GB</language>
     <atom:link href="${site.url}/feed.xml" rel="self" type="application/rss+xml"/>
