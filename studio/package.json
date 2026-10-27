@@ -15,7 +15,9 @@
     "reconcile:docs": "sanity exec ./scripts/docs-import.mjs --with-user-token",
     "reconcile:guides": "sanity exec ./scripts/tool-guides-import.mjs --with-user-token",
     "import:guides": "sanity exec ./scripts/tool-guides-import.mjs --with-user-token -- --apply",
-    "preflight:guides": "sanity exec ./scripts/tool-guides-preflight.mjs --with-user-token"
+    "preflight:guides": "sanity exec ./scripts/tool-guides-preflight.mjs --with-user-token",
+    "reconcile:faqs": "sanity exec ./scripts/home-faq-import.mjs --with-user-token",
+    "import:faqs": "sanity exec ./scripts/home-faq-import.mjs --with-user-token -- --apply"
   },
   "dependencies": {
     "sanity": "6.20.0",

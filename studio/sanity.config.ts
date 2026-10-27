@@ -6,6 +6,8 @@ import { topic } from './schemaTypes/topic'
 import { editorialArticle } from './schemaTypes/editorialArticle'
 import { docPage } from './schemaTypes/docPage'
 import { toolGuide } from './schemaTypes/toolGuide'
+import { faqItem } from './schemaTypes/faqItem'
+import { homeFaqPlacement } from './schemaTypes/homeFaqPlacement'
 
 export default defineConfig({
   name: 'doefin-marketing',
@@ -15,10 +17,10 @@ export default defineConfig({
   plugins: [structureTool()],
   releases: { enabled: false },
   scheduledDrafts: { enabled: false },
-  schema: { types: [glossaryTerm, topic, editorialArticle, docPage, toolGuide] },
+  schema: { types: [glossaryTerm, topic, editorialArticle, docPage, toolGuide, faqItem, homeFaqPlacement] },
   document: {
-    actions: (previous, context) => ['glossaryTerm', 'topic', 'editorialArticle', 'docPage', 'toolGuide'].includes(context.schemaType)
-      ? previous.filter(action => !['duplicate', 'restore'].includes(String(action.action))).map(action => action.action === 'publish' ? permanentSlugPublishAction(action, context) : action)
+    actions: (previous, context) => ['glossaryTerm', 'topic', 'editorialArticle', 'docPage', 'toolGuide', 'faqItem', 'homeFaqPlacement'].includes(context.schemaType)
+      ? previous.filter(action => !['duplicate', 'restore'].includes(String(action.action))).map(action => ['glossaryTerm', 'topic', 'editorialArticle', 'docPage', 'toolGuide'].includes(context.schemaType) && action.action === 'publish' ? permanentSlugPublishAction(action, context) : action)
       : previous,
   },
 })
