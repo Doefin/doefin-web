@@ -8,8 +8,11 @@ globalThis.fetch = async (input, init) => {
   if (url.hostname === 'yzvr33lo.api.sanity.io' && url.pathname === '/v2025-02-19/data/query/production') {
     const fixture = JSON.parse(fs.readFileSync(file, 'utf8'))
     const editorial = url.searchParams.get('query')?.includes('editorialArticle')
-    const result = Array.isArray(fixture) ? (editorial ? { topics: [], articles: [] } : fixture) : (editorial ? fixture.editorial : fixture.glossary)
-    if (fixture.status) return new Response('Fixture API failure', { status: fixture.status })
+    const docs = url.searchParams.get('query')?.includes('docPage')
+    const manifest = docs && !url.searchParams.get('query')?.includes('sections')
+    const result = docs ? (manifest && Object.hasOwn(fixture,'docsManifest') ? fixture.docsManifest : fixture.docs ?? []) : Array.isArray(fixture) ? (editorial ? { topics: [], articles: [] } : fixture) : (editorial ? fixture.editorial : fixture.glossary)
+    const status = manifest ? fixture.docsManifestStatus ?? fixture.docsStatus ?? fixture.status : docs ? fixture.docsStatus ?? fixture.status : fixture.status
+    if (status) return new Response('Fixture API failure', { status })
     return new Response(JSON.stringify({result}), {status:200,headers:{'content-type':'application/json'}})
   }
   return realFetch(input, init)

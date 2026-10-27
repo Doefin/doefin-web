@@ -4,6 +4,8 @@ import { V3Chrome } from '@/components/v3/Chrome'
 import { SiteVersionProvider } from '@/components/routing/SiteVersionContext'
 import { jsonLd, ID, publisherRef } from '@/lib/seo'
 import { site } from '@/lib/site'
+import { docsNavigation } from '@/content'
+import { DocsPublicationProvider } from '@/components/routing/DocsPublicationContext'
 import './globals.css'
 
 // Manrope is the brand typeface, carried over from the trading app.
@@ -33,7 +35,8 @@ export const metadata: Metadata = {
   icons: { icon: '/images/favicon.png', shortcut: '/favicon.ico' },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const docSlugs = await docsNavigation()
   const org = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -68,7 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <SiteVersionProvider version="v3">
-          <V3Chrome>{children}</V3Chrome>
+          <DocsPublicationProvider slugs={docSlugs}><V3Chrome>{children}</V3Chrome></DocsPublicationProvider>
         </SiteVersionProvider>
       </body>
     </html>

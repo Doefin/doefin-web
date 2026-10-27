@@ -10,7 +10,9 @@
     "import:glossary": "sanity exec ./scripts/glossary-import.mjs --with-user-token -- --apply",
     "reconcile:glossary": "sanity exec ./scripts/glossary-import.mjs --with-user-token",
     "import:editorial": "sanity exec ./scripts/editorial-import.mjs --with-user-token -- --apply",
-    "reconcile:editorial": "sanity exec ./scripts/editorial-import.mjs --with-user-token"
+    "reconcile:editorial": "sanity exec ./scripts/editorial-import.mjs --with-user-token",
+    "import:docs": "sanity exec ./scripts/docs-import.mjs --with-user-token -- --apply",
+    "reconcile:docs": "sanity exec ./scripts/docs-import.mjs --with-user-token"
   },
   "dependencies": {
     "sanity": "6.20.0",

@@ -95,7 +95,7 @@ if (process.argv.includes('--built')) {
 
 const base = process.argv.find(arg => arg.startsWith('--base='))?.slice(7)
 if (base) {
-  for (const path of ['/v3', '/v3/product', '/v3/glossary', '/v3/glossary/mining-difficulty', '/v3/academy/guides/difficulty-exposure']) {
+  for (const path of ['/v3', '/v3/product', '/v3/docs', '/v3/docs/overview', '/v3/glossary', '/v3/glossary/mining-difficulty', '/v3/academy/guides/difficulty-exposure']) {
     const response = await fetch(base + path)
     assert.equal(response.status, 200, path)
     checkPage(await response.text(), path)

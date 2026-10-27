@@ -4,11 +4,13 @@ The public site at **doefin.com** — research, open mining data, tools and docu
 Separate from the trading application, which lives at `app.doefin.com` in
 `../doefin-frontend`.
 
-The glossary now reads published content from Sanity (`yzvr33lo/production`) on
-the server. Other editorial content remains typed data in `content/`; data-service
+Glossary, V3 Blog/Academy topics and articles, and V3 Docs read published content
+from Sanity (`yzvr33lo/production`) on the server. Other content remains typed
+data in `content/`; data-service
 status and illustrative figures retain their existing boundaries. See
 [`docs/sanity-glossary.md`](docs/sanity-glossary.md) for Studio, safe migration and
-runtime validation instructions.
+runtime validation instructions. See `docs/sanity-editorial.md` and
+`docs/sanity-docs.md` for the subsequent scoped migrations.
 
 ```
 npm run dev          # local
@@ -79,13 +81,14 @@ staying collapsed for readers. Never swap that for conditional rendering on stat
 ## Content
 
 All reads go through `content/index.ts`. **Nothing else touches the content files
-directly** — that discipline is what makes swapping in a CMS later a one-file change
-rather than a refactor.
+directly**; the async published CMS readers and retained local categories share
+that access boundary.
 
 Glossary edits and new terms belong in the standalone `studio/` package. Its
 published slugs are permanent; unpublishing does not permit renaming.
 `content/glossary.ts` is the initial migration seed, never a runtime fallback.
-Other editorial content still uses the typed arrays in `content/`. Types are in
+`content/v3-editorial.ts` and `content/v3-docs.ts` are migration seeds, not runtime
+fallbacks. Other categories still use typed arrays in `content/`. Types are in
 `content/types.ts`.
 
 **One exception, and only this one.** The three calculators in `components/tools/` are
@@ -119,7 +122,7 @@ backend arrives, replace that module with a fetch and set `isLive: true`.
 
 ## What this project deliberately does not have
 
-Sanity is integrated for the glossary only, with existing project roles and an
+Sanity is integrated for glossary, V3 topics/articles and Docs, with existing project roles and an
 optional server-only draft preview that remains disabled without credentials.
 Do not add other CMS migrations, databases, end-user authentication, email capture
 or analytics backends speculatively.

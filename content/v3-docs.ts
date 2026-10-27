@@ -68,11 +68,11 @@ const docs: V3Doc[] = [
   },
   {
     slug: 'methodology-and-evidence', title: 'Methodology and evidence',
-    summary: 'Distinguish observed difficulty, a forecast, a market price and an illustrative calculation.', group: 'Reference', reviewedAt: '2026-10-19',
+    summary: 'Distinguish observed difficulty, a forecast, a market price and an illustrative calculation.', group: 'Reference', reviewedAt: '2026-10-27',
     sections: [
       { title: 'Identify the kind of information', paragraphs: ['An observed difficulty level describes network data at a stated block. A forecast projects a later value using information available when it was issued. A market price reflects trading interest and costs. An illustrative calculation applies selected assumptions.', 'Keep those categories separate. A forecast does not resolve a position, and an example dataset does not establish a live forecast service or a historical performance record.'] },
       { title: 'Make a forecast reproducible', paragraphs: ['Check the source block heights and timestamps, current difficulty, target adjustment, formula, protocol constraints and rounding rules. Record the issue time and method version so the output can be reproduced.', 'Any uncertainty range needs a construction method and evaluation against outcomes. Compare interval coverage and width across a stated evaluation window; a range alone does not establish calibration.'] },
-      { title: 'Read the limits of the website examples', paragraphs: ['The website’s research datasets and displayed ranges are authored examples. They demonstrate calculations and reporting structure, not measured accuracy, a forecaster ranking or a verified running data service.', 'A production-sensitivity calculation holds selected inputs constant to compare scenarios. It does not forecast difficulty or translate directly into a contract payout. The assumptions and limitations belong alongside the result.'] },
+      { title: 'Read the limits of the website examples', paragraphs: ['The observed-adjustment research report uses a frozen capture of 25 observed difficulty changes. The website’s forecast examples and displayed example ranges remain authored illustrations. Neither establishes measured forecast accuracy, a forecaster ranking or a verified running forecast service.', 'A production-sensitivity calculation holds selected inputs constant to compare scenarios. It does not forecast difficulty or translate directly into a contract payout. The assumptions and limitations belong alongside the result.'] },
     ], related: ['bitcoin-mining-difficulty', 'prices-and-probability', 'risks-and-limitations', 'smart-contracts'],
   },
   {

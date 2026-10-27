@@ -22,8 +22,6 @@ import * as Hashrate from '@/components/v3/V3Hashrate'
 import * as Scoreboard from '@/components/v3/V3Scoreboard'
 import * as Epoch from '@/components/v3/V3EpochPage'
 import * as Methodology from '@/components/v3/V3Methodology'
-import * as Docs from '@/components/v3/V3DocsIndex'
-import * as Doc from '@/components/v3/V3DocPage'
 import * as Guide from '@/components/v3/pages/GuidePage'
 import * as Example from '@/components/v3/pages/WorkedExamplePage'
 import * as About from '@/components/v3/V3About'
@@ -86,8 +84,6 @@ export const v3Routes: readonly V3Route[] = [
   staticRoute('data/scoreboard', Scoreboard),
   ...dynamicRoutes(Epoch, ({ height }) => `data/difficulty/epoch/${height}`),
   ...dynamicRoutes(Methodology, ({ metric }) => `methodology/${metric}`),
-  staticRoute('docs', Docs),
-  ...dynamicRoutes(Doc, ({ slug }) => `docs/${slug}`),
   ...dynamicRoutes({ ...Guide, default: (props) => createElement(ReferenceGuidePage, { ...props, schemaVersion: 'v3' }) }, ({ slug }) => `academy/guides/${slug}`),
   ...dynamicRoutes(Example, ({ tool, case: example }) => `tools/${tool}/example/${example}`),
   staticRoute('about', About),

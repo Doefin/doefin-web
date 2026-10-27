@@ -3,10 +3,10 @@ import Link from '@/components/routing/SiteLink'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { Container } from '@/components/layout/Container'
 import { PageHeader } from '@/components/ui'
-import { allV3Docs, v3DocGroups } from '@/content'
+import { allV3Docs, v3DocGroups, type V3Doc } from '@/content'
+import { DocsPublicationProvider } from '@/components/routing/DocsPublicationContext'
 
-function DocsNavigation({ activeSlug }: { activeSlug?: string }) {
-  const docs = allV3Docs()
+function DocsNavigation({ activeSlug, docs }: { activeSlug?: string; docs: V3Doc[] }) {
   return <nav aria-label="Documentation sections">
     <Link href="/v3/docs" aria-current={!activeSlug ? 'page' : undefined} className={'inline-flex min-h-10 items-center text-sm font-bold ' + (!activeSlug ? 'text-highlight' : 'text-body hover:text-highlight')}>Documentation home</Link>
     <div className="mt-5 space-y-6">{v3DocGroups.map(group => <div key={group}>
@@ -22,22 +22,23 @@ function DocsNavigation({ activeSlug }: { activeSlug?: string }) {
 }
 
 /** Server-rendered reading environment shared by the index and every docs page. */
-export function V3DocsLayout({ activeSlug, title, summary, eyebrow, children }: {
+export async function V3DocsLayout({ activeSlug, title, summary, eyebrow, children }: {
   activeSlug?: string
   title: string
   summary: string
   eyebrow: string
   children: ReactNode
 }) {
-  return <Container className="py-8 sm:py-12">
+  const docs = await allV3Docs()
+  return <DocsPublicationProvider slugs={docs.map(doc => doc.slug)}><Container className="py-8 sm:py-12 [overflow-wrap:anywhere]">
     <div className="grid items-start gap-8 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-12">
       <aside className="sticky top-36 hidden max-h-[calc(100dvh-10rem)] overflow-y-auto border-r border-white/10 pr-5 pb-5 lg:block">
-        <DocsNavigation activeSlug={activeSlug} />
+        <DocsNavigation activeSlug={activeSlug} docs={docs} />
       </aside>
       <div className="min-w-0">
         <details key={activeSlug ?? 'docs-home'} className="mb-7 rounded-lg border border-white/15 bg-surface/40 p-4 lg:hidden">
           <summary className="cursor-pointer text-sm font-semibold text-highlight">Browse documentation<span className="mt-1 block text-xs font-normal text-subtle">Current: {activeSlug ? title : 'Documentation home'}</span></summary>
-          <div className="mt-4 border-t border-white/10 pt-3"><DocsNavigation activeSlug={activeSlug} /></div>
+          <div className="mt-4 border-t border-white/10 pt-3"><DocsNavigation activeSlug={activeSlug} docs={docs} /></div>
         </details>
         <article id="docs-content" className="max-w-prose scroll-mt-36">
           <Breadcrumbs items={[{ name: 'Documentation', href: '/v3/docs' }, ...(activeSlug ? [{ name: title, href: '/v3/docs/' + activeSlug }] : [])]} />
@@ -46,5 +47,5 @@ export function V3DocsLayout({ activeSlug, title, summary, eyebrow, children }: 
         </article>
       </div>
     </div>
-  </Container>
+  </Container></DocsPublicationProvider>
 }

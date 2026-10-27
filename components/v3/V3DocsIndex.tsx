@@ -11,14 +11,15 @@ const groupDescriptions = {
   Reference: 'Look up a term, check collateral details or review the evidence behind a technical claim.',
 }
 
-export default function V3DocsIndex() {
-  const docs = allV3Docs()
+export default async function V3DocsIndex() {
+  const docs = await allV3Docs()
   return <V3DocsLayout title="Doefin documentation" summary="Understand the product, complete a task or look up a reference. Start where your question begins." eyebrow="Documentation">
     <div className="border-l-2 border-brand pl-5">
       <h2 className="text-lg font-bold">New to Doefin?</h2>
       <p className="mt-2 text-[16px] leading-relaxed text-subtle">The overview explains what the market tracks and how an order, a position and a payout fit together.</p>
       <Link href="/v3/docs/overview" className="mt-3 inline-flex min-h-11 items-center text-sm font-bold text-highlight underline-offset-4 hover:underline">Start with the Doefin overview <span aria-hidden="true" className="ml-2">→</span></Link>
     </div>
+    {!docs.length ? <p role="status" className="mt-8 text-subtle">No documentation is currently published.</p> : null}
     <div className="mt-12 space-y-12">{v3DocGroups.map(group => <section key={group}>
       <h2 className="text-2xl font-bold tracking-[-0.02em]">{group}</h2>
       <p className="mt-2 text-sm leading-relaxed text-subtle">{groupDescriptions[group]}</p>

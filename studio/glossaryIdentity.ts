@@ -12,6 +12,7 @@ export function fixedSlug(document: IdentityDocument): string | undefined {
   const id = publishedIdentity(document._id)
   if (id.startsWith('glossary-')) return id.slice('glossary-'.length)
   if (id.startsWith('topic-')) return id.slice('topic-'.length)
+  if (id.startsWith('docs-')) return id.slice('docs-'.length)
   return importedEditorialIdentity(id)?.[2] ?? document.canonicalSlug
 }
 export function fixedKind(document: IdentityDocument): string | undefined {

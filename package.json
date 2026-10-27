@@ -19,7 +19,11 @@
     "editorial:migrate": "node scripts/migrate-editorial.mjs",
     "check:editorial:schema": "node scripts/check-editorial-schema-import.mjs",
     "check:editorial": "node scripts/check-editorial.mjs",
-    "check:editorial:runtime": "node scripts/check-editorial-runtime.mjs"
+    "check:editorial:runtime": "node scripts/check-editorial-runtime.mjs",
+    "docs:migrate": "node scripts/migrate-docs.mjs",
+    "check:docs": "node scripts/check-docs.mjs",
+    "check:docs:schema": "node scripts/check-docs-schema-import.mjs",
+    "check:docs:runtime": "node scripts/check-docs-runtime.mjs"
   },
   "dependencies": {
     "@phosphor-icons/react": "2.1.10",

@@ -1,14 +1,16 @@
+import type { V3Doc } from '@/content/docs-types'
 import type { V3EditorialArticle } from '@/content/editorial-types'
 import type { GlossaryTerm } from '@/content/types'
 import { site } from './site'
 
-export function renderLlms(terms: GlossaryTerm[], articles: V3EditorialArticle[] = []) {
+export function renderLlms(terms: GlossaryTerm[], articles: V3EditorialArticle[] = [], docs: V3Doc[] = []) {
   const u = (path: string) => `${site.url}/v3${path}`
 
   const glossary = terms
     .map((t) => `- [${t.term}](${u(`/glossary/${t.slug}`)}): ${t.shortDef}`)
     .join('\n')
 
+  const markdownText = (value: string) => value.replace(/[\r\n]+/g, ' ').replace(/([\\`*_[\]<>])/g, '\\$1')
   const body = `# ${site.name}
 
 > ${site.description}
@@ -36,6 +38,10 @@ operational API or current trading availability. V3 remains a noindex preview.
 ## Educational articles
 
 ${articles.map(article => `- [${article.title}](${u(`/${article.kind}/${article.slug}`)}): ${article.summary}`).join('\n')}
+
+## Documentation pages
+
+${docs.map(doc => `- [${markdownText(doc.title)}](${u(`/docs/${doc.slug}`)}): ${markdownText(doc.summary)}`).join('\n')}
 
 ## Definitions
 
