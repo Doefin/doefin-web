@@ -20,7 +20,10 @@
     "reconcile:about-authors": "sanity exec ./scripts/about-authors-import.mjs --with-user-token",
     "import:about-authors": "sanity exec ./scripts/about-authors-import.mjs --with-user-token -- --apply",
     "lifecycle:about-authors": "sanity exec ./scripts/about-authors-lifecycle.mjs --with-user-token -- --apply --editors-paused",
-    "import:faqs": "sanity exec ./scripts/home-faq-import.mjs --with-user-token -- --apply"
+    "import:faqs": "sanity exec ./scripts/home-faq-import.mjs --with-user-token -- --apply",
+    "reconcile:research": "sanity exec ./scripts/research-import.mjs --with-user-token",
+    "import:research": "sanity exec ./scripts/research-import.mjs --with-user-token -- --apply",
+    "lifecycle:research": "sanity exec ./scripts/research-lifecycle.mjs --with-user-token -- --apply --editors-paused"
   },
   "dependencies": {
     "sanity": "6.20.0",

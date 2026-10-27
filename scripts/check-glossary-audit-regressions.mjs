@@ -112,6 +112,7 @@ const studioConfig = loadTypescript('studio/sanity.config.ts', {
   './permanentSlugPublishAction': { permanentSlugPublishAction: actionFactory }, './schemaTypes/glossaryTerm': { glossaryTerm: schema },
   './schemaTypes/toolGuide': { toolGuide: {} }, './schemaTypes/faqItem': { faqItem: {} }, './schemaTypes/homeFaqPlacement': { homeFaqPlacement: {} }, './schemaTypes/docPage': { docPage: {name:'docPage'} },
   './schemaTypes/topic': { topic: { name: 'topic' } }, './schemaTypes/editorialArticle': { editorialArticle: { name: 'editorialArticle' } },
+  './schemaTypes/aboutPage': { aboutPage: {} }, './schemaTypes/authorProfile': { authorProfile: {} }, './schemaTypes/researchReport': { researchReport: {} }, './schemaTypes/researchMethodology': { researchMethodology: {} },
 }).default
 const defaultActions = ['publish', 'duplicate', 'restore', 'unpublish'].map(name => Object.assign(() => ({ label: name }), { action: name }))
 assert.deepEqual(studioConfig.document.actions(defaultActions, { schemaType: 'glossaryTerm', getClient: () => identityClient }).map(action => action.action), ['publish', 'unpublish'], 'Actual Studio config disables duplicate and restore paths that could erase permanent identity')

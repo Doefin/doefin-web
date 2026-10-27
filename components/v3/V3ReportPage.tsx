@@ -3,8 +3,8 @@ import Link from '@/components/routing/SiteLink'
 import { Container } from '@/components/layout/Container'
 import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 import { AutoLinkedProse } from '@/components/content/AutoLinkedProse'
-import { allV3Reports, getV3Report } from '@/content'
-import { blockId } from '@/content/types'
+import { getV3Report } from '@/content'
+import { v3Reports } from '@/content/v3-research'
 import { dateShort } from '@/lib/format'
 import { seo, jsonLd, publisherRef } from '@/lib/seo'
 import { site } from '@/lib/site'
@@ -14,14 +14,15 @@ import { ResearchArchiveSummary } from './ResearchArchiveSummary'
 import { NewsletterDelivery } from './NewsletterDelivery'
 import { researchBase } from '@/lib/research-data'
 
-export const generateStaticParams = () => allV3Reports().map(report => ({ slug: report.slug }))
+// Stable route inventory remains source-defined; all public report fields are CMS-only.
+export const generateStaticParams = () => v3Reports.map(report => ({ slug: report.slug }))
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-  const report = getV3Report((await params).slug)
+  const report = await getV3Report((await params).slug)
   return report ? seo({ title: report.title, description: report.seoSummary ?? report.summary, path: '/v3/research/' + report.slug, type: 'article', publishedTime: report.publishedAt }) : {}
 }
 
 export default async function V3ReportPage({ params }: { params: Promise<{ slug: string }> }) {
-  const report = getV3Report((await params).slug)
+  const report = await getV3Report((await params).slug)
   if (!report) notFound()
   const observed = report.slug === 'observed-difficulty-adjustments'
   return <Container className="pb-14 pt-6 sm:pt-9">
@@ -36,9 +37,9 @@ export default async function V3ReportPage({ params }: { params: Promise<{ slug:
       <p className="mt-5 text-[11px] text-subtle">{observed ? 'Observed network report' : 'Educational comparison guide'} · Published <time dateTime={report.publishedAt}>{dateShort(report.publishedAt)}</time></p>
     </header>
     <div className="mt-7 grid items-start gap-8 lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-12">
-      <nav aria-label="Comparison criteria sections" className="hidden lg:sticky lg:top-28 lg:block"><p className="mb-3 text-[10px] font-bold uppercase tracking-[0.12em] text-subtle">Check before comparing</p><ol className="space-y-2">{report.sections.map((section, i) => <li key={section.heading}><a href={'#' + blockId({ heading: section.heading })} className="flex min-h-11 gap-3 py-2 text-xs leading-relaxed text-subtle hover:text-highlight"><span className="tabular text-[10px] text-highlight">{String(i + 1).padStart(2, '0')}</span>{section.heading}</a></li>)}</ol></nav>
+      <nav aria-label="Comparison criteria sections" className="hidden lg:sticky lg:top-28 lg:block"><p className="mb-3 text-[10px] font-bold uppercase tracking-[0.12em] text-subtle">Check before comparing</p><ol className="space-y-2">{report.sections.map((section, i) => <li key={section.id}><a href={'#' + section.id} className="flex min-h-11 gap-3 py-2 text-xs leading-relaxed text-subtle hover:text-highlight"><span className="tabular text-[10px] text-highlight">{String(i + 1).padStart(2, '0')}</span>{section.heading}</a></li>)}</ol></nav>
       <div className="min-w-0 max-w-[44rem]">
-        <article aria-label={report.title} className={styles.reading}><AutoLinkedProse paragraphs={report.sections.flatMap(section => [{ heading: section.heading }, ...section.paragraphs])} /></article>
+        <article aria-label={report.title} className={styles.reading}><AutoLinkedProse paragraphs={report.sections.flatMap(section => [{ heading: section.heading, id: section.id }, ...section.paragraphs])} /></article>
         {observed && <><ResearchArchiveSummary /><NewsletterDelivery kind="report" /><nav aria-label="Observed report downloads" className="flex flex-wrap gap-5 text-sm font-semibold text-highlight"><a className="inline-flex min-h-11 items-center underline" href={researchBase + '/report'}>Open printable report</a><a className="inline-flex min-h-11 items-center underline" href={researchBase + '/dataset?format=json'}>Download observed JSON</a><a className="inline-flex min-h-11 items-center underline" href={researchBase + '/source'}>Inspect exact source capture</a></nav></>}
         <section aria-labelledby="report-next-title" className="mt-9 rounded-panel border border-brand/25 bg-brand/5 p-5 sm:p-6"><p className="text-[10px] font-bold uppercase tracking-[0.12em] text-highlight">Apply the criteria</p><h2 id="report-next-title" className="mt-3 text-xl font-bold tracking-tight">Put the error calculation into numbers.</h2><p className="mt-3 text-sm leading-relaxed text-subtle">Work through five synthetic pairs, reproduce each absolute error and their mean, and download the CSV to check the arithmetic yourself.</p><Link href="/v3/research/evaluating-a-forecast" className="mt-4 inline-flex min-h-11 items-center gap-3 rounded-lg bg-brand px-4 text-xs font-bold text-white hover:bg-brandDeep">Calculate forecast error <Arrow className="h-4 w-4" /></Link></section>
         <nav aria-label="Further evaluation resources" className="mt-7 border-t border-white/10 pt-5"><ul className="space-y-2"><li><Link href="/v3/methodology/difficulty-index" className="inline-flex min-h-10 items-center gap-2 text-xs font-semibold text-highlight hover:underline">Inspect the forecast methodology <Arrow className="h-4 w-4" /></Link></li><li><Link href="/v3/data/scoreboard" className="inline-flex min-h-10 items-center gap-2 text-xs font-semibold text-highlight hover:underline">Read accuracy metrics <Arrow className="h-4 w-4" /></Link></li></ul></nav>

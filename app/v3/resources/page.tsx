@@ -22,7 +22,7 @@ const calculators = [
 export default async function Resources() {
   const lessons = await allV3Editorial('academy')
   const articles = await allV3Editorial('blog')
-  const reports = allV3Reports()
+  const reports = await allV3Reports()
   const {guides,unavailable} = await guideDiscovery()
 
   return <GuidesPublicationProvider slugs={unavailable ? null : guides.map(row=>row.slug)}><Container className="py-12 sm:py-16 [overflow-wrap:anywhere]">
@@ -114,12 +114,12 @@ export default async function Resources() {
         <p className="mt-4 text-[15px] leading-relaxed text-subtle">Explore a frozen capture of observed difficulty retargets, inspect its provenance and reuse its dataset. Separate teaching exercises show how forecast-error arithmetic works.</p>
         <p className="mt-4 border-l-2 border-caution/60 pl-4 text-sm leading-relaxed text-subtle"><strong className="font-semibold text-caution">Different evidence, clearly labelled.</strong> The observed-retarget report uses captured network data. Forecast comparisons and error exercises use authored synthetic values. Neither establishes live forecasts, measured estimator performance or a verified prediction track record.</p>
       </div>
-      <ul className="mt-7 divide-y divide-white/10 border-y border-white/10">
+      {reports.length === 0 ? <p role="status" className="mt-7 border-y border-white/10 py-6 text-sm text-subtle">No published research reports are available yet.</p> : <ul className="mt-7 divide-y divide-white/10 border-y border-white/10">
         {[
           ...reports.map(report => ({ title: report.title, summary: report.summary, href: '/v3/research/' + report.slug, provenance: report.slug === 'observed-difficulty-adjustments' ? 'Observed network data · Frozen source capture' : 'Synthetic teaching exercise · Authored values' })),
           { title: 'Evaluate a difficulty forecast', summary: 'Inspect every sample observation, follow the error calculation and download the synthetic dataset.', href: '/v3/research/evaluating-a-forecast', provenance: 'Synthetic teaching exercise · Authored values' },
         ].map(report => <li key={report.href}><Link href={report.href} className="group flex items-start justify-between gap-5 py-6"><div><p className="mb-2 text-xs font-semibold text-subtle">{report.provenance}</p><h3 className="text-lg font-semibold group-hover:text-highlight">{report.title}</h3><p className="mt-2 max-w-3xl text-sm leading-relaxed text-subtle">{report.summary}</p></div><Arrow className="mt-1" /></Link></li>)}
-      </ul>
+      </ul>}
       <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1">{[
         ['All research', '/v3/research'], ['Data & archive status', '/v3/data'], ['Methodology & assumptions', '/v3/methodology/difficulty-index'],
       ].map(([label, href]) => <Link key={href} href={href} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">{label} <Arrow /></Link>)}</div>

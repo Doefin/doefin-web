@@ -14,6 +14,8 @@ export function fixedSlug(document: IdentityDocument): string | undefined {
   if (id.startsWith('topic-')) return id.slice('topic-'.length)
   if (id.startsWith('tool-guide-')) return id.slice('tool-guide-'.length)
   if (id.startsWith('docs-')) return id.slice('docs-'.length)
+  if (id.startsWith('research-report-')) return id.slice('research-report-'.length)
+  if (id.startsWith('research-methodology-')) return id.slice('research-methodology-'.length)
   return importedEditorialIdentity(id)?.[2] ?? document.canonicalSlug
 }
 export function fixedKind(document: IdentityDocument): string | undefined {

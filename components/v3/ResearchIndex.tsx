@@ -12,8 +12,8 @@ import { Breadcrumbs } from '@/components/content/Breadcrumbs'
 export const metadata = seo({ title: 'Research on Bitcoin mining difficulty', description: 'Explore sample research and worked examples on Bitcoin mining difficulty, forecast accuracy and mining economics.', path: '/v3/research' })
 
 /** Keep prototype research honest without changing the original comparison site. */
-export default function ResearchIndex() {
-  const reports = allV3Reports()
+export default async function ResearchIndex() {
+  const reports = await allV3Reports()
   return <Container className="pb-14 pt-7 sm:pt-10">
     <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd({
       '@context': 'https://schema.org', '@type': 'ItemList', name: 'Doefin research examples',
@@ -28,7 +28,7 @@ export default function ResearchIndex() {
     </header>
 
     <ResearchArchiveSummary />
-    <div className="grid items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
+    {reports.length === 0 ? <p role="status" className="rounded-panel border border-white/10 bg-surface/30 p-6 text-sm text-subtle">No published research reports are available yet.</p> : <div className="grid items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
       <div className="min-w-0 space-y-6">{reports.map(report => <article key={report.slug} className="flex flex-col overflow-hidden rounded-panel border border-white/10 bg-surface/30">
         <div className="p-5 sm:p-7">
           <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2"><p className="text-[10px] font-bold uppercase tracking-[0.12em] text-highlight">{report.slug === 'observed-difficulty-adjustments' ? 'Observed network analysis' : 'Comparison criteria'}</p><p className="text-[11px] text-subtle">Published <time dateTime={report.publishedAt}>{dateShort(report.publishedAt)}</time></p></div>
@@ -43,7 +43,7 @@ export default function ResearchIndex() {
       </article>)}
       </div>
       <ResearchEvidencePreview />
-    </div>
+    </div>}
 
     <section aria-labelledby="research-sources-title" className="mt-10 border-t border-white/10 pt-7 sm:mt-12">
       <div className="mb-5 flex flex-wrap items-baseline justify-between gap-x-5 gap-y-2"><h2 id="research-sources-title" className="text-xl font-bold tracking-tight">Check the supporting method and data.</h2><Link href="/v3/resources" className="inline-flex min-h-10 items-center gap-2 text-xs font-semibold text-highlight hover:underline">All resources <Arrow className="h-4 w-4" /></Link></div>

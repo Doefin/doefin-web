@@ -49,7 +49,7 @@ export async function allRefs(terms: GlossaryTerm[]): Promise<Ref[]> {
     tags: p.tags,
     terms: termsIn(p.sections.flatMap(section => [{ heading: section.heading }, ...section.paragraphs]), terms),
   }))
-  const research: Ref[] = allV3Reports().map(r => ({
+  const research: Ref[] = (await allV3Reports()).map(r => ({
     kind: 'research', slug: r.slug, href: `/research/${r.slug}`,
     title: r.title, summary: r.summary, publishedAt: r.publishedAt,
     terms: termsIn(r.sections.flatMap(section => [{ heading: section.heading }, ...section.paragraphs]), terms),

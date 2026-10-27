@@ -2,7 +2,7 @@ import { site } from './site'
 import type { V3EditorialArticle } from '@/content/editorial-types'
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 type FeedReport = { slug: string; title: string; summary: string; publishedAt: string }
-/** Blog records come from CMS. Research stays on its existing local feed source.
+/** Blog and V3 research records come from their published CMS sources.
  * RSS pubDate is optional: review dates never substitute for publication dates. */
 export function renderEditorialFeed(articles: V3EditorialArticle[], reports: FeedReport[]) {
   const items = [
