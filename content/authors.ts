@@ -20,7 +20,7 @@ export type Author = {
   slug: string
   kind: 'organization' | 'person'
   name: string
-  /** Must resolve — the anchor exists in app/about/page.tsx. */
+  /** Must resolve — the anchor exists in app/v3/about/page.tsx. */
   url: string
   description: string
   /** Factual schema summary; legacy comparison-page prose remains unchanged. */
@@ -33,7 +33,7 @@ export const authors: Author[] = [
     slug: 'doefin-research',
     kind: 'organization',
     name: 'Doefin Research',
-    url: '/about#doefin-research',
+    url: '/v3/about#doefin-research',
     description:
       'The research desk at Doefin. Publishes difficulty forecasts as reproducible arithmetic over public chain data, with the method versioned and every restatement logged.',
     metadataDescription:

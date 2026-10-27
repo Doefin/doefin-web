@@ -57,6 +57,8 @@ export type { Epoch, NetworkPoint } from './sample-data'
 
 export { authors, getAuthor } from './authors'
 export type { Author } from './authors'
+export { aboutAuthorsSnapshot, aboutAuthorsQuery } from './sanity/about-authors'
+export type { AboutContent, AboutSection } from './about-types'
 
 export { previewTools, getPreviewTool, getExposureTutorial, getForecastReport } from './preview'
 export type { PreviewTool, EvidenceRow } from './preview'

@@ -27,7 +27,9 @@
     "guides:migrate": "node scripts/migrate-tool-guides.mjs",
     "check:guides": "node scripts/check-tool-guides.mjs",
     "check:guides:runtime": "node scripts/check-tool-guides-runtime.mjs",
-    "check:home-faq": "node scripts/check-home-faq.mjs"
+    "check:home-faq": "node scripts/check-home-faq.mjs",
+    "about-authors:migrate": "node scripts/migrate-about-authors.mjs",
+    "check:about-authors": "node scripts/check-about-authors.mjs"
   },
   "dependencies": {
     "@phosphor-icons/react": "2.1.10",
