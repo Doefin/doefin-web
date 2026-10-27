@@ -1,15 +1,10 @@
 import { ReferenceTermPage } from '@/components/content/ReferencePages'
 import { seo } from '@/lib/seo'
-import { allGlossary, getGlossary } from '@/content'
-
-export function generateStaticParams() {
-  return allGlossary().map((t) => ({ slug: t.slug }))
-}
-export const dynamicParams = false
+import { getGlossary } from '@/content'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const t = getGlossary(slug)
+  const t = await getGlossary(slug)
   if (!t) return {}
   return seo({
     title: `${t.term} — definition`,

@@ -12,7 +12,10 @@
     "check:seo": "node scripts/check-seo.mjs",
     "audit": "node scripts/audit.mjs",
     "check:tools": "node --experimental-strip-types --no-warnings scripts/check-tools.mjs",
-    "check:links": "node scripts/check-links.mjs"
+    "check:links": "node scripts/check-links.mjs",
+    "glossary:migrate": "node scripts/migrate-glossary.mjs",
+    "check:glossary": "node scripts/check-sanity-glossary.mjs && node scripts/check-glossary-audit-regressions.mjs",
+    "check:glossary:runtime": "node scripts/check-glossary-runtime.mjs"
   },
   "dependencies": {
     "@phosphor-icons/react": "2.1.10",

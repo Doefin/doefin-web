@@ -10,6 +10,7 @@ import { join } from 'node:path'
 
 const ROOT = join(process.cwd(), '.next', 'server', 'app')
 const MIN_WORDS = 120
+const base = process.argv.find(a => a.startsWith('--base='))?.slice(7)
 
 const PAGES = [
   ['v3.html', 'V3 home'],
@@ -35,7 +36,11 @@ let failed = 0
 for (const [file, label] of PAGES) {
   let html
   try {
-    html = await readFile(join(ROOT, file), 'utf8')
+    if (base) {
+      const response = await fetch(base + '/' + file.replace(/\.html$/, ''))
+      if (!response.ok) throw new Error(`HTTP ${response.status}`)
+      html = await response.text()
+    } else html = await readFile(join(ROOT, file), 'utf8')
   } catch {
     console.error(`FAIL  ${label.padEnd(22)} ${file} not found — did the build run?`)
     failed++

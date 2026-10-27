@@ -1,7 +1,7 @@
 import { createElement, type ReactNode } from 'react'
 import type { Metadata } from 'next'
 import { seo } from '@/lib/seo'
-import { ReferenceTermPage, ReferenceGuidePage } from '@/components/content/ReferencePages'
+import { ReferenceGuidePage } from '@/components/content/ReferencePages'
 
 // Explicit imports make the complete preview graph visible to the Next.js build.
 // Shared pages live under V3 and remain Server Components.
@@ -24,9 +24,6 @@ import * as Epoch from '@/components/v3/V3EpochPage'
 import * as Methodology from '@/components/v3/V3Methodology'
 import * as Docs from '@/components/v3/V3DocsIndex'
 import * as Doc from '@/components/v3/V3DocPage'
-import * as Glossary from '@/components/v3/pages/GlossaryPage'
-import { V3GlossaryIndex } from '@/components/v3/V3GlossaryIndex'
-import * as Term from '@/components/v3/pages/GlossaryTermPage'
 import { V3Academy as Academy, V3Lesson as Lesson, V3Blog as Blog, V3Post as Post, V3Tag as Tag } from '@/components/v3/V3Editorial'
 import * as Guide from '@/components/v3/pages/GuidePage'
 import * as Example from '@/components/v3/pages/WorkedExamplePage'
@@ -92,8 +89,6 @@ export const v3Routes: readonly V3Route[] = [
   ...dynamicRoutes(Methodology, ({ metric }) => `methodology/${metric}`),
   staticRoute('docs', Docs),
   ...dynamicRoutes(Doc, ({ slug }) => `docs/${slug}`),
-  staticRoute('glossary', { ...Glossary, default: V3GlossaryIndex }),
-  ...dynamicRoutes({ ...Term, default: (props) => createElement(ReferenceTermPage, { ...props, schemaVersion: 'v3' }) }, ({ slug }) => `glossary/${slug}`),
   staticRoute('academy', Academy),
   ...dynamicRoutes(Lesson, ({ slug }) => `academy/${slug}`),
   ...dynamicRoutes({ ...Guide, default: (props) => createElement(ReferenceGuidePage, { ...props, schemaVersion: 'v3' }) }, ({ slug }) => `academy/guides/${slug}`),

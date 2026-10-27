@@ -1,6 +1,5 @@
 import { posts } from './posts'
 import { academy } from './academy'
-import { glossary } from './glossary'
 import { reports } from './research'
 import type { AcademyPost, GlossaryTerm, Post, Report } from './types'
 
@@ -20,9 +19,7 @@ export const getPost = (slug: string) => allPosts().find((p) => p.slug === slug)
 export const allAcademy = (): AcademyPost[] => live(academy).sort(byDate)
 export const getAcademy = (slug: string) => allAcademy().find((p) => p.slug === slug)
 
-export const allGlossary = (): GlossaryTerm[] =>
-  [...glossary].sort((a, b) => a.term.localeCompare(b.term))
-export const getGlossary = (slug: string) => allGlossary().find((t) => t.slug === slug)
+export { allGlossary, getGlossary } from './sanity/glossary'
 
 export const allReports = (): Report[] => live(reports).sort(byDate)
 export const getReport = (slug: string) => allReports().find((r) => r.slug === slug)

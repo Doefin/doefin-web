@@ -49,16 +49,25 @@ const strip = (html) =>
 
 const one = (html, re) => (html.match(re) ?? [])[1]
 
+const base = process.argv.find(a => a.startsWith('--base='))?.slice(7)
 const files = await walk(ROOT)
+const rendered = new Map(await Promise.all(files.map(async file => [relative(ROOT, file), await readFile(file, 'utf8')])) )
+if (base) {
+  const routes = JSON.parse(await readFile('scripts/fixtures/v3-routes.json', 'utf8'))
+  for (const path of routes) {
+    if (path.endsWith('.csv') || path === '/v3/social-image') continue
+    const response = await fetch(base + path)
+    if (!response.ok) throw new Error(`${path}: HTTP ${response.status}`)
+    rendered.set(path.slice(1) + '.html', await response.text())
+  }
+}
 const problems = []
 const titles = new Map()
 let checked = 0
 
-for (const file of files) {
-  const rel = relative(ROOT, file)
+for (const [rel, html] of rendered) {
   // Next's internal shells are never served to a crawler as a real page.
   if (rel.startsWith('_not-found') || rel.startsWith('_global-error')) continue
-  const html = await readFile(file, 'utf8')
   checked++
 
   const add = (msg) => problems.push(`${rel}: ${msg}`)

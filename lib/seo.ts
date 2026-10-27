@@ -99,5 +99,5 @@ export function jsonLd(data: Record<string, unknown>, version: SiteVersion = 'v3
       return site.url + versionedPath(value.slice(site.url.length), version)
     }
     return value
-  }) }
+  }).replace(/</g, '\\u003c') }
 }

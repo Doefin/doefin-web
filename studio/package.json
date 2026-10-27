@@ -1,0 +1,26 @@
+{
+  "name": "doefin-glossary-studio",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "typecheck": "tsc --noEmit",
+    "login": "sanity login",
+    "import:glossary": "sanity exec ./scripts/glossary-import.mjs --with-user-token -- --apply",
+    "reconcile:glossary": "sanity exec ./scripts/glossary-import.mjs --with-user-token"
+  },
+  "dependencies": {
+    "sanity": "6.20.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "styled-components": "^6.1.19",
+    "@sanity/client": "8.11.0",
+    "@sanity/ui": "4.4.10"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5.7"
+  }
+}

@@ -8,6 +8,7 @@ import type { GlossaryTerm } from './types'
 export const glossary: GlossaryTerm[] = [
   {
     slug: 'mining-difficulty',
+    browseTopic: 'network',
     term: 'Mining difficulty',
     shortDef:
       'A number expressing how hard it is to find a valid Bitcoin block. It rises when more hashrate joins the network and falls when hashrate leaves.',
@@ -35,6 +36,7 @@ export const glossary: GlossaryTerm[] = [
   },
   {
     slug: 'difficulty-adjustment',
+    browseTopic: 'network',
     term: 'Difficulty adjustment',
     shortDef:
       'The recalculation of mining difficulty that happens every 2,016 blocks — roughly every two weeks — based on how quickly the previous 2,016 blocks were mined.',
@@ -58,6 +60,7 @@ export const glossary: GlossaryTerm[] = [
   },
   {
     slug: 'epoch',
+    browseTopic: 'network',
     term: 'Epoch',
     shortDef:
       'A run of 2,016 Bitcoin blocks between two difficulty adjustments, lasting about two weeks.',
@@ -81,6 +84,7 @@ export const glossary: GlossaryTerm[] = [
   },
   {
     slug: 'hashrate',
+    browseTopic: 'network',
     term: 'Hashrate',
     shortDef:
       'The computing power securing Bitcoin, expressed in hashes per second. Network hashrate is estimated from difficulty and block times, not measured directly.',
@@ -104,6 +108,7 @@ export const glossary: GlossaryTerm[] = [
   },
   {
     slug: 'hashprice',
+    browseTopic: 'revenue',
     term: 'Hashprice',
     shortDef:
       'The revenue a miner earns per unit of hashrate per day, usually in dollars per terahash. It combines the bitcoin price, difficulty and transaction fees.',
@@ -130,6 +135,7 @@ export const glossary: GlossaryTerm[] = [
   },
   {
     slug: 'confidence-interval',
+    browseTopic: 'uncertainty',
     term: 'Confidence interval',
     shortDef:
       'A range around a forecast expressing how uncertain it is. A 95% interval is one expected to contain the true outcome 95 times out of 100.',
@@ -153,6 +159,7 @@ export const glossary: GlossaryTerm[] = [
   },
   {
     slug: 'calibration',
+    browseTopic: 'uncertainty',
     term: 'Calibration',
     shortDef:
       'Whether a stated confidence interval is honest — whether a 95% band really does contain the outcome about 95% of the time when checked over many forecasts.',
@@ -175,6 +182,7 @@ export const glossary: GlossaryTerm[] = [
   },
   {
     slug: 'block-height',
+    browseTopic: 'network',
     term: 'Block height',
     shortDef:
       'The position of a block in the Bitcoin chain, counted from the first block. It is the canonical way to identify a moment in Bitcoin time.',
@@ -192,6 +200,7 @@ export const glossary: GlossaryTerm[] = [
   },
   {
     slug: 'exahash',
+    browseTopic: 'network',
     term: 'Exahash',
     shortDef:
       'One quintillion hashes per second, written EH/s. The unit in which total network hashrate and large mining fleets are quoted.',
@@ -210,6 +219,7 @@ export const glossary: GlossaryTerm[] = [
   },
   {
     slug: 'terahash',
+    browseTopic: 'network',
     term: 'Terahash',
     shortDef:
       'One trillion hashes per second, written TH/s. The unit used for individual machines and for quoting hashprice.',
@@ -228,6 +238,7 @@ export const glossary: GlossaryTerm[] = [
   },
   {
     slug: 'block-subsidy',
+    browseTopic: 'revenue',
     term: 'Block subsidy',
     shortDef:
       'The newly issued bitcoin paid to whoever mines a block. It halves roughly every four years and currently stands at 3.125 BTC.',
@@ -250,6 +261,7 @@ export const glossary: GlossaryTerm[] = [
   },
   {
     slug: 'halving',
+    browseTopic: 'revenue',
     term: 'Halving',
     shortDef:
       'The scheduled event every 210,000 blocks — about four years — at which the Bitcoin block subsidy is cut in half.',
@@ -272,6 +284,7 @@ export const glossary: GlossaryTerm[] = [
   },
   {
     slug: 'transaction-fees',
+    browseTopic: 'revenue',
     term: 'Transaction fees',
     shortDef:
       'The amount users pay to have transactions included in a block, paid to the miner on top of the block subsidy.',
@@ -289,6 +302,7 @@ export const glossary: GlossaryTerm[] = [
   },
   {
     slug: 'mining-pool',
+    browseTopic: 'revenue',
     term: 'Mining pool',
     shortDef:
       'A service that combines many miners’ hashrate and shares the resulting rewards, smoothing the income of participants who would otherwise find blocks rarely.',
@@ -306,6 +320,7 @@ export const glossary: GlossaryTerm[] = [
   },
   {
     slug: 'fpps',
+    browseTopic: 'revenue',
     term: 'FPPS',
     shortDef:
       'Full Pay Per Share: a pool scheme paying a fixed amount per share submitted, including average transaction fees, whether or not the pool finds blocks.',
@@ -328,6 +343,7 @@ export const glossary: GlossaryTerm[] = [
   },
   {
     slug: 'pool-luck',
+    browseTopic: 'revenue',
     term: 'Pool luck',
     shortDef:
       'How a pool’s actual block discoveries compare with what probability alone predicts. Above 100% means more blocks than expected; below means fewer.',
@@ -345,6 +361,7 @@ export const glossary: GlossaryTerm[] = [
   },
   {
     slug: 'curtailment',
+    browseTopic: 'operations',
     term: 'Curtailment',
     shortDef:
       'Deliberately switching mining machines off, usually because power is expensive or the grid needs the capacity back. It reduces both power cost and revenue.',
@@ -366,6 +383,7 @@ export const glossary: GlossaryTerm[] = [
   },
   {
     slug: 'uptime',
+    browseTopic: 'operations',
     term: 'Uptime',
     shortDef:
       'The share of time a miner’s machines are actually hashing. Advertised uptime is a target; realised uptime is what determines revenue.',
@@ -383,6 +401,7 @@ export const glossary: GlossaryTerm[] = [
   },
   {
     slug: 'hosting',
+    browseTopic: 'operations',
     term: 'Hosting',
     shortDef:
       'Paying a third party to run your mining machines in their facility, typically priced per kilowatt-hour plus fees.',

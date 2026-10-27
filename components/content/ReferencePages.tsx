@@ -1,3 +1,4 @@
+import { GlossaryPreviewNotice } from './GlossaryPreviewNotice'
 import Link from '@/components/routing/SiteLink'
 import { notFound } from 'next/navigation'
 import { Container } from '@/components/layout/Container'
@@ -17,8 +18,8 @@ import type { SiteVersion } from '@/lib/versioning'
 
 // Shared server renderers accept an explicit schema version. Next page wrappers
 // keep their normal PageProps, and all retained content uses V3 URLs.
-export function ReferenceGlossaryIndex({ schemaVersion = 'v3' }: { schemaVersion?: SiteVersion }) {
-  const terms = allGlossary()
+export async function ReferenceGlossaryIndex({ schemaVersion = 'v3' }: { schemaVersion?: SiteVersion }) {
+  const terms = await allGlossary()
   return (
     <Container className="py-16">
       <script
@@ -75,16 +76,17 @@ export function ReferenceGlossaryIndex({ schemaVersion = 'v3' }: { schemaVersion
 
 export async function ReferenceTermPage({ params, schemaVersion = 'v3' }: { params: Promise<{ slug: string }>; schemaVersion?: SiteVersion }) {
   const { slug } = await params
-  const term = getGlossary(slug)
+  const term = await getGlossary(slug)
   if (!term) notFound()
-  const seeAlso = (term.seeAlso ?? []).map(getGlossary).filter(Boolean)
+  const terms = await allGlossary()
+  const seeAlso = (term.seeAlso ?? []).map(slug => terms.find(t => t.slug === slug)).filter(Boolean)
   // The return leg. Prose has always linked down into the glossary; nothing linked
   // back out. This also gives each of the 19 otherwise near-identical term pages a
   // block of content unique to it.
-  const uses = usedBy(term.slug)
+  const uses = usedBy(term.slug, terms)
 
   return (
-    <Container size="narrow" className="py-16">
+    <><GlossaryPreviewNotice /><Container size="narrow" className="py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd({
@@ -165,10 +167,10 @@ export async function ReferenceTermPage({ params, schemaVersion = 'v3' }: { para
 
       <p className="mt-10 text-xs text-muted/70">Last reviewed {term.updatedAt}</p>
 
-      <NextLinks items={nextLinksForTerm(term.slug)} />
+      <NextLinks items={nextLinksForTerm(term.slug, terms)} />
 
-      <Reviewed />
-    </Container>
+      <Reviewed date={term.updatedAt} />
+    </Container></>
   )
 }
 

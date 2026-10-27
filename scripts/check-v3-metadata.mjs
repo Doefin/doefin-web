@@ -50,7 +50,7 @@ const preview = seo({ title: 'Example', description: 'Example', path: '/v3/docs'
 assert.equal(preview.alternates.canonical, `${site.url}/v3/docs`)
 assert.deepEqual(preview.openGraph.images, [v3SocialImage])
 assert.deepEqual(preview.twitter.images, [v3SocialImage])
-const llms = await load('app/llms.txt/route.ts').GET().text()
+const llms = load('lib/llms.ts').renderLlms(load('content/glossary.ts').glossary)
 truthful(llms)
 assert(llms.includes('V3 website prototype'))
 assert(llms.includes('illustrative examples'))

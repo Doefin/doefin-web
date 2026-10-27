@@ -4,15 +4,18 @@ The public site at **doefin.com** — research, open mining data, tools and docu
 Separate from the trading application, which lives at `app.doefin.com` in
 `../doefin-frontend`.
 
-Currently a **static build with no backend**. Content is typed data in `content/`;
-figures are illustrative placeholders in `content/sample-data.ts`.
+The glossary now reads published content from Sanity (`yzvr33lo/production`) on
+the server. Other editorial content remains typed data in `content/`; data-service
+status and illustrative figures retain their existing boundaries. See
+[`docs/sanity-glossary.md`](docs/sanity-glossary.md) for Studio, safe migration and
+runtime validation instructions.
 
 ```
 npm run dev          # local
 npm run build        # production build
 npm run typecheck    # tsc --noEmit
-npm run check:crawlable   # run AFTER build — fails if a page is empty to crawlers
-npm run check:seo         # run AFTER build — titles, canonicals, h1s, schema validity
+npm run check:crawlable -- --base=http://127.0.0.1:3039 # after build + start; includes CMS routes
+npm run check:seo -- --base=http://127.0.0.1:3039 # after build + start; titles, canonicals, h1s, schema
 npm run check:tools       # tool microcopy: hints match sliders, presets reachable, length caps
 ```
 
@@ -79,7 +82,10 @@ All reads go through `content/index.ts`. **Nothing else touches the content file
 directly** — that discipline is what makes swapping in a CMS later a one-file change
 rather than a refactor.
 
-Adding content means editing the typed arrays in `content/`. Types are in
+Glossary edits and new terms belong in the standalone `studio/` package. Its
+published slugs are permanent; unpublishing does not permit renaming.
+`content/glossary.ts` is the initial migration seed, never a runtime fallback.
+Other editorial content still uses the typed arrays in `content/`. Types are in
 `content/types.ts`.
 
 **One exception, and only this one.** The three calculators in `components/tools/` are
@@ -113,5 +119,7 @@ backend arrives, replace that module with a fetch and set `isLive: true`.
 
 ## What this project deliberately does not have
 
-No CMS, no database, no authentication, no email capture, no analytics section
-backend. Those are specified but not built. Do not add them speculatively.
+Sanity is integrated for the glossary only, with existing project roles and an
+optional server-only draft preview that remains disabled without credentials.
+Do not add other CMS migrations, databases, end-user authentication, email capture
+or analytics backends speculatively.
