@@ -32,4 +32,4 @@ Miners and the people who finance them, and funds and trading desks. All of them
 - Would you say it this way to a miner on the phone?
 - Did it pass the copy checker (`tools/check_copy.py`)?
 - Is it free of return figures, promises and anything aimed at retail?
-- If it is public and about Doefin or its markets, has Raffaella Tenconi approved it in writing? That includes a single post.
+- If it is public and about Doefin or its markets, has it been signed off in writing? That includes a single post. Until an approver is named, Matteo signs off.

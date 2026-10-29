@@ -20,7 +20,7 @@ All of them sit on top of `voice.md` and `compliance.md`.
 ## Matteo's own posts
 
 - His voice and "I". The same rules for numbers.
-- Anything about Doefin markets goes to Raffaella first.
+- Anything about Doefin markets follows `compliance.md` like any other public piece.
 
 ## Newsletter
 

@@ -8,4 +8,4 @@ Doefin is registered in Port Louis, Mauritius, and is for professional investors
 - Never call anything "AI-powered". Forecasting difficulty is arithmetic.
 - Give every number that can change a dated source. Mark anything single-source or a judgement as such.
 - End anything public about Doefin markets with the disclaimer: Doefin is for professional investors only. Positions involve risk. Nothing here is investment advice.
-- Anything public about Doefin or its markets needs written approval from Raffaella Tenconi, our regulatory adviser, before it goes out. That includes a single post. Ask her for the full checklist.
+- Anything public about Doefin or its markets needs written sign-off before it goes out. That includes a single post. Doefin has not named a compliance approver yet (see `decisions.md`); until it does, Matteo signs off.

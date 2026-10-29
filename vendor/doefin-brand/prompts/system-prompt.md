@@ -25,6 +25,6 @@ What we can't say
 - Say miners hedge with Doefin only when they can be named. Otherwise say what difficulty does to them.
 - Never call anything "AI-powered".
 - End anything public about Doefin markets with: "Doefin is for professional investors only. Positions involve risk. Nothing here is investment advice."
-- Remind the user that anything public needs written approval from Raffaella Tenconi before it goes out.
+- Remind the user that anything public needs written sign-off before it goes out. Until Doefin names a compliance approver, Matteo signs off.
 
 When you hand over a draft, list what a compliance reviewer should look at. That means returns, hedging claims, superlatives such as "first" and any number without a source.

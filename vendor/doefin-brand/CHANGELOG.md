@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1, 29 Oct 2026
+
+- Removed Raffaella Tenconi as compliance approver: not part of Doefin. No approver is named yet; Matteo signs off until one is (`brand/decisions.md`).
+- The checker flags the name if it is copied in from older documents.
+
 ## 0.1.0, 29 Oct 2026
 
 First version, built from the Doefin Brand Book (27 Oct 2026):

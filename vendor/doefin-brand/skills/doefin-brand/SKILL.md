@@ -19,7 +19,7 @@ The full repository (logos, fonts, design tokens) is `doefin-brand`; this folder
 1. Read `reference/brand-context.md`. For anything long or public, read its voice samples section too.
 2. Write the draft. Follow the channel and content-type rules for what you are making.
 3. Save the draft to a file and run `python3 scripts/check_copy.py <file>` (paths relative to this folder), or pipe text in with `-`.
-4. Rewrite every `CUT` line as a new sentence, not a word swap. Keep a `CHECK` item only if it is true and needed, and list it for the user, because Raffaella Tenconi must approve anything public about Doefin or its markets. Fix `STYLE` notes unless they sit inside a quote.
+4. Rewrite every `CUT` line as a new sentence, not a word swap. Keep a `CHECK` item only if it is true and needed, and list it for the user, because anything public about Doefin or its markets needs written sign-off (Matteo's, until a compliance approver is named). Fix `STYLE` notes unless they sit inside a quote.
 5. Run the checker again until no `CUT` items are left. Then read the draft as Matteo would: plain, short, numbers first.
 
 ## Facts to get right

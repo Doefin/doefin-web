@@ -16,7 +16,7 @@ Follow these rules whenever you write or design anything for Doefin: website or 
 - In one line: "Markets for Bitcoin mining difficulty." Don't call it "hashrate derivatives" or a "prediction market".
 - Doefin is for professional investors only. Never address retail readers.
 - The disclaimer, word for word: "Doefin is for professional investors only. Positions involve risk. Nothing here is investment advice."
-- Anything public about Doefin or its markets needs written approval from Raffaella Tenconi before it goes out. You can't approve it. Say it needs her approval.
+- Anything public about Doefin or its markets needs written sign-off before it goes out. No compliance approver is named yet (`brand/decisions.md`); until one is, Matteo signs off. You can't sign it off yourself: say it needs sign-off.
 
 ## How Doefin writes, in short
 
