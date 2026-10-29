@@ -30,6 +30,7 @@ npm run check:crawlable
 npm run check:seo
 npm run check:links
 npm run check:tools
+npm run check:brand
 node scripts/check-v3-routes.mjs --built
 node scripts/check-v3-metadata.mjs --built
 node scripts/check-v3-publication.mjs
@@ -42,3 +43,13 @@ market handoff, research archive, measurement and newsletter prototype.
 
 V3 design and operational notes are under `docs/v3-*`. Older documents describe
 historical prototypes and do not define the `final` branch route configuration.
+
+## Brand
+
+The company brand (how Doefin writes, what it can't say, colours, type, logos) is
+vendored in `vendor/doefin-brand/` from github.com/Doefin/doefin-brand. Read
+[`docs/brand.md`](docs/brand.md) before changing copy or UI.
+
+- `npm run check:brand` must pass. It runs on every pull request.
+- Never edit `vendor/doefin-brand/` by hand. Update it with `npm run brand:sync -- <tag>`.
+- AI agents get the brand rules through `AGENTS.md` and `CLAUDE.md`.

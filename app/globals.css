@@ -1,6 +1,15 @@
+/* Company brand tokens (--df-*, .df-* type classes), vendored from github.com/Doefin/doefin-brand.
+   Never edit the vendored copy: see docs/brand.md. */
+@import '../vendor/doefin-brand/dist/tokens.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Brand type classes use the Manrope that next/font already loads, so it is fetched once. */
+:root {
+  --df-font-sans: var(--font-manrope), "Segoe UI", system-ui, sans-serif;
+}
 
 @layer base {
   html {

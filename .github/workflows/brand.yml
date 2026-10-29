@@ -1,0 +1,21 @@
+# Brand guard: the vendored brand must match its lock file, and copy added in a
+# pull request must not sound generated. See docs/brand.md.
+name: Brand
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check-brand:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check the brand
+        run: node scripts/check-brand.mjs --since=origin/${{ github.base_ref || 'main' }}
