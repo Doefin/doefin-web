@@ -14,6 +14,6 @@ export function ProductUpdates() {
       <ul className={styles.topics} aria-label="What research emails cover"><li><ChartLine size={18} aria-hidden="true" />Retarget research</li><li><Lightning size={18} aria-hidden="true" />New publications</li></ul>
       <NewsletterForm />
     </div>
-    <figure className={styles.art} aria-hidden="true"><Image src="/v4/assets/product-updates-envelope.png" width={1254} height={1254} alt="" sizes="(max-width: 639px) 240px, (max-width: 899px) 300px, (max-width: 1199px) 380px, 490px" /></figure>
+    <figure className={styles.art} aria-hidden="true"><Image src="/images/v3/product-updates-envelope.png" width={1254} height={1254} alt="" sizes="(max-width: 639px) 240px, (max-width: 899px) 300px, (max-width: 1199px) 380px, 490px" /></figure>
   </div>
 }

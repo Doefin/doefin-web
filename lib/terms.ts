@@ -1,4 +1,4 @@
-import { allGlossary } from '@/content'
+import type { GlossaryTerm } from '@/content/types'
 import { isHeading, type Block } from '@/content/types'
 
 /**
@@ -23,8 +23,8 @@ export type TermMatch = { slug: string; block: number; index: number; label: str
 type Candidate = { label: string; slug: string; def: string }
 
 /** Glossary labels, longest first. Exported so the renderer shares the ordering. */
-export function termCandidates(skip: string[] = []): Candidate[] {
-  return allGlossary()
+export function termCandidates(terms: GlossaryTerm[], skip: string[] = []): Candidate[] {
+  return terms
     .filter((t) => !skip.includes(t.slug))
     .flatMap((t) =>
       [t.term, ...(t.aliases ?? [])].map((label) => ({ label, slug: t.slug, def: t.shortDef })),
@@ -35,8 +35,8 @@ export function termCandidates(skip: string[] = []): Candidate[] {
 const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
 /** Every first-mention match in `body`, in document order. */
-export function matchTerms(body: Block[], skip: string[] = []): TermMatch[] {
-  const candidates = termCandidates(skip)
+export function matchTerms(body: Block[], terms: GlossaryTerm[], skip: string[] = []): TermMatch[] {
+  const candidates = termCandidates(terms, skip)
   const used = new Set<string>()
   const out: TermMatch[] = []
 
@@ -52,7 +52,7 @@ export function matchTerms(body: Block[], skip: string[] = []): TermMatch[] {
       for (const c of candidates) {
         if (used.has(c.slug)) continue
         const m = rest.match(new RegExp(`\\b${escape(c.label)}\\b`, 'i'))
-        if (m?.index !== undefined && (best === null || m.index < best.index)) {
+        if (m?.index !== undefined && (best === null || offset + m.index < best.index)) {
           best = {
             slug: c.slug,
             block: bi,
@@ -76,5 +76,5 @@ export function matchTerms(body: Block[], skip: string[] = []): TermMatch[] {
 }
 
 /** Just the slugs, which is what the link graph needs. */
-export const termsIn = (body: Block[], skip: string[] = []): string[] =>
-  matchTerms(body, skip).map((m) => m.slug)
+export const termsIn = (body: Block[], terms: GlossaryTerm[], skip: string[] = []): string[] =>
+  matchTerms(body, terms, skip).map((m) => m.slug)

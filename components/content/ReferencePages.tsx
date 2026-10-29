@@ -1,3 +1,4 @@
+import { GlossaryPreviewNotice } from './GlossaryPreviewNotice'
 import Link from '@/components/routing/SiteLink'
 import { notFound } from 'next/navigation'
 import { Container } from '@/components/layout/Container'
@@ -9,16 +10,16 @@ import { NextLinks, Reviewed } from '@/components/content/NextLinks'
 import { Subscribe } from '@/components/content/Subscribe'
 import { GuideArticle } from '@/components/tools/GuideArticle'
 import { nextLinksForTerm, usedBy } from '@/content/graph'
-import { allGlossary, getGlossary, guideFor, TOOLS, getAuthor } from '@/content'
+import { allGlossary, getGlossary, allGuides, TOOLS, getAuthor } from '@/content'
 import { dateLong } from '@/lib/format'
 import { jsonLd, publisherRef, authorNode } from '@/lib/seo'
 import { site } from '@/lib/site'
 import type { SiteVersion } from '@/lib/versioning'
 
 // Shared server renderers accept an explicit schema version. Next page wrappers
-// keep their normal PageProps, and V1 remains the default for retained content.
-export function ReferenceGlossaryIndex({ schemaVersion = 'v1' }: { schemaVersion?: SiteVersion }) {
-  const terms = allGlossary()
+// keep their normal PageProps, and all retained content uses V3 URLs.
+export async function ReferenceGlossaryIndex({ schemaVersion = 'v3' }: { schemaVersion?: SiteVersion }) {
+  const terms = await allGlossary()
   return (
     <Container className="py-16">
       <script
@@ -73,18 +74,19 @@ export function ReferenceGlossaryIndex({ schemaVersion = 'v1' }: { schemaVersion
 }
 
 
-export async function ReferenceTermPage({ params, schemaVersion = 'v1' }: { params: Promise<{ slug: string }>; schemaVersion?: SiteVersion }) {
+export async function ReferenceTermPage({ params, schemaVersion = 'v3' }: { params: Promise<{ slug: string }>; schemaVersion?: SiteVersion }) {
   const { slug } = await params
-  const term = getGlossary(slug)
+  const term = await getGlossary(slug)
   if (!term) notFound()
-  const seeAlso = (term.seeAlso ?? []).map(getGlossary).filter(Boolean)
+  const terms = await allGlossary()
+  const seeAlso = (term.seeAlso ?? []).map(slug => terms.find(t => t.slug === slug)).filter(Boolean)
   // The return leg. Prose has always linked down into the glossary; nothing linked
   // back out. This also gives each of the 19 otherwise near-identical term pages a
   // block of content unique to it.
-  const uses = usedBy(term.slug)
+  const uses = await usedBy(term.slug, terms)
 
   return (
-    <Container size="narrow" className="py-16">
+    <><GlossaryPreviewNotice /><Container size="narrow" className="py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd({
@@ -118,7 +120,7 @@ export async function ReferenceTermPage({ params, schemaVersion = 'v1' }: { para
       </div>
 
       {uses.length ? (
-        <aside className="mt-12 border-t border-white/[0.07] pt-8">
+        <aside className="mt-12 border-t border-white/[0.07] pt-8 [overflow-wrap:anywhere]">
           <h2 className="text-xs font-bold uppercase tracking-[0.12em] text-muted">
             Where this term is used
           </h2>
@@ -165,22 +167,23 @@ export async function ReferenceTermPage({ params, schemaVersion = 'v1' }: { para
 
       <p className="mt-10 text-xs text-muted/70">Last reviewed {term.updatedAt}</p>
 
-      <NextLinks items={nextLinksForTerm(term.slug)} />
+      <NextLinks className="[overflow-wrap:anywhere]" items={await nextLinksForTerm(term.slug, terms)} />
 
-      <Reviewed />
-    </Container>
+      <Reviewed date={term.updatedAt} />
+    </Container></>
   )
 }
 
 
-export async function ReferenceGuidePage({ params, schemaVersion = 'v1' }: { params: Promise<{ slug: string }>; schemaVersion?: SiteVersion }) {
+export async function ReferenceGuidePage({ params, schemaVersion = 'v3' }: { params: Promise<{ slug: string }>; schemaVersion?: SiteVersion }) {
   const { slug } = await params
-  const g = guideFor(slug)
-  const tool = TOOLS.find((t) => t.slug === slug)
+  const row = (await allGuides()).find(row => row.slug === slug)
+  const g = row?.guide
+  const tool = TOOLS.find((t) => t.slug === row?.toolSlug)
   if (!g || !tool) notFound()
 
   return (
-    <Container size="narrow" className="py-16">
+    <Container size="narrow" className="py-16 [overflow-wrap:anywhere] [&_li>span:last-child]:min-w-0">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd({
@@ -188,7 +191,7 @@ export async function ReferenceGuidePage({ params, schemaVersion = 'v1' }: { par
           '@type': 'Article',
           headline: g.article.title,
           description: g.article.summary,
-          datePublished: g.article.publishedAt,
+          ...(g.article.publishedAt ? {datePublished: g.article.publishedAt} : {}),
           author: authorNode(getAuthor('doefin-research')),
           publisher: publisherRef,
           about: { '@type': 'Thing', name: tool.title },
@@ -211,10 +214,10 @@ export async function ReferenceGuidePage({ params, schemaVersion = 'v1' }: { par
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-muted">{g.article.summary}</p>
         <p className="mt-5 border-b border-white/[0.07] pb-6 text-sm text-muted/80">
-          Doefin Research · {dateLong(g.article.publishedAt)}
+          Doefin Research{g.article.publishedAt && <> · <time dateTime={g.article.publishedAt}>{dateLong(g.article.publishedAt)}</time></>}
         </p>
 
-        <GuideArticle g={g} slug={slug} toolTitle={tool.title} />
+        <GuideArticle g={g} slug={tool.slug} toolTitle={tool.title} />
       </article>
 
       <NextLinks
@@ -231,7 +234,7 @@ export async function ReferenceGuidePage({ params, schemaVersion = 'v1' }: { par
         <Subscribe compact />
       </div>
 
-      <Reviewed />
+      {row?.reviewedAt && <Reviewed date={row.reviewedAt} />}
     </Container>
   )
 }

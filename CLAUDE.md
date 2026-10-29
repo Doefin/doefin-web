@@ -4,15 +4,20 @@ The public site at **doefin.com** — research, open mining data, tools and docu
 Separate from the trading application, which lives at `app.doefin.com` in
 `../doefin-frontend`.
 
-Currently a **static build with no backend**. Content is typed data in `content/`;
-figures are illustrative placeholders in `content/sample-data.ts`.
+Glossary, V3 Blog/Academy topics and articles, and V3 Docs read published content
+from Sanity (`yzvr33lo/production`) on the server. Other content remains typed
+data in `content/`; data-service
+status and illustrative figures retain their existing boundaries. See
+[`docs/sanity-glossary.md`](docs/sanity-glossary.md) for Studio, safe migration and
+runtime validation instructions. See `docs/sanity-editorial.md` and
+`docs/sanity-docs.md` for the subsequent scoped migrations.
 
 ```
 npm run dev          # local
 npm run build        # production build
 npm run typecheck    # tsc --noEmit
-npm run check:crawlable   # run AFTER build — fails if a page is empty to crawlers
-npm run check:seo         # run AFTER build — titles, canonicals, h1s, schema validity
+npm run check:crawlable -- --base=http://127.0.0.1:3039 # after build + start; includes CMS routes
+npm run check:seo -- --base=http://127.0.0.1:3039 # after build + start; titles, canonicals, h1s, schema
 npm run check:tools       # tool microcopy: hints match sliders, presets reachable, length caps
 ```
 
@@ -76,10 +81,14 @@ staying collapsed for readers. Never swap that for conditional rendering on stat
 ## Content
 
 All reads go through `content/index.ts`. **Nothing else touches the content files
-directly** — that discipline is what makes swapping in a CMS later a one-file change
-rather than a refactor.
+directly**; the async published CMS readers and retained local categories share
+that access boundary.
 
-Adding content means editing the typed arrays in `content/`. Types are in
+Glossary edits and new terms belong in the standalone `studio/` package. Its
+published slugs are permanent; unpublishing does not permit renaming.
+`content/glossary.ts` is the initial migration seed, never a runtime fallback.
+`content/v3-editorial.ts` and `content/v3-docs.ts` are migration seeds, not runtime
+fallbacks. Other categories still use typed arrays in `content/`. Types are in
 `content/types.ts`.
 
 **One exception, and only this one.** The three calculators in `components/tools/` are
@@ -113,5 +122,7 @@ backend arrives, replace that module with a fetch and set `isLive: true`.
 
 ## What this project deliberately does not have
 
-No CMS, no database, no authentication, no email capture, no analytics section
-backend. Those are specified but not built. Do not add them speculatively.
+Sanity is integrated for glossary, V3 topics/articles and Docs, with existing project roles and an
+optional server-only draft preview that remains disabled without credentials.
+Do not add other CMS migrations, databases, end-user authentication, email capture
+or analytics backends speculatively.

@@ -1,18 +1,17 @@
 import { createElement, type ReactNode } from 'react'
 import type { Metadata } from 'next'
 import { seo } from '@/lib/seo'
-import { ReferenceTermPage, ReferenceGuidePage } from '@/components/content/ReferencePages'
 
 // Explicit imports make the complete preview graph visible to the Next.js build.
-// Source page modules remain Server Components; no page body is duplicated here.
-import * as Product from '@/app/v2/product/page'
-import * as Settlement from '@/app/v2/product/settlement/page'
+// Shared pages live under V3 and remain Server Components.
+import * as Product from '@/components/v3/pages/ProductPage'
+import * as Settlement from '@/components/v3/pages/SettlementPage'
 import * as Miners from '@/components/v3/MinersPage'
 import * as Institutions from '@/components/v3/InstitutionsPage'
 import * as Tools from '@/components/v3/V3ToolsIndex'
 import * as Tool from '@/components/v3/V3ToolPage'
 import * as Learn from '@/components/v3/V3Learn'
-import * as Tutorial from '@/app/v2/learn/difficulty-exposure/page'
+import * as Tutorial from '@/components/v3/pages/TutorialPage'
 import * as SampleReport from '@/components/v3/V3ForecastExample'
 import * as Research from '@/components/v3/ResearchIndex'
 import * as Report from '@/components/v3/V3ReportPage'
@@ -20,19 +19,11 @@ import * as Data from '@/components/v3/V3DataIndex'
 import * as Difficulty from '@/components/v3/V3Difficulty'
 import * as Hashrate from '@/components/v3/V3Hashrate'
 import * as Scoreboard from '@/components/v3/V3Scoreboard'
-import * as Epoch from '@/components/v3/V3EpochPage'
 import * as Methodology from '@/components/v3/V3Methodology'
-import * as Docs from '@/components/v3/V3DocsIndex'
-import * as Doc from '@/components/v3/V3DocPage'
-import * as Glossary from '@/app/v1/glossary/page'
-import { V3GlossaryIndex } from '@/components/v3/V3GlossaryIndex'
-import * as Term from '@/app/v1/glossary/[slug]/page'
-import { V3Academy as Academy, V3Lesson as Lesson, V3Blog as Blog, V3Post as Post, V3Tag as Tag } from '@/components/v3/V3Editorial'
-import * as Guide from '@/app/v1/academy/guides/[slug]/page'
-import * as Example from '@/app/v1/tools/[tool]/example/[case]/page'
+import * as Example from '@/components/v3/pages/WorkedExamplePage'
 import * as About from '@/components/v3/V3About'
 import * as Privacy from '@/components/v3/V3Privacy'
-import * as Terms from '@/app/v1/terms/page'
+import * as Terms from '@/components/v3/pages/TermsPage'
 
 type PageResult = ReactNode | Promise<ReactNode>
 type StaticPage = { default: () => PageResult; metadata: Metadata }
@@ -69,7 +60,7 @@ function dynamicRoutes<P extends Record<string, string>>(
 }
 
 /**
- * The V2 product journey, retained reference routes and V3-specific content.
+ * The complete V3 product journey, reference routes and supporting content.
  * Home, resources, newsletter and internal prototype review have dedicated V3 pages.
  */
 export const v3Routes: readonly V3Route[] = [
@@ -88,19 +79,8 @@ export const v3Routes: readonly V3Route[] = [
   staticRoute('data/difficulty', Difficulty),
   staticRoute('data/hashrate', Hashrate),
   staticRoute('data/scoreboard', Scoreboard),
-  ...dynamicRoutes(Epoch, ({ height }) => `data/difficulty/epoch/${height}`),
   ...dynamicRoutes(Methodology, ({ metric }) => `methodology/${metric}`),
-  staticRoute('docs', Docs),
-  ...dynamicRoutes(Doc, ({ slug }) => `docs/${slug}`),
-  staticRoute('glossary', { ...Glossary, default: V3GlossaryIndex }),
-  ...dynamicRoutes({ ...Term, default: (props) => createElement(ReferenceTermPage, { ...props, schemaVersion: 'v3' }) }, ({ slug }) => `glossary/${slug}`),
-  staticRoute('academy', Academy),
-  ...dynamicRoutes(Lesson, ({ slug }) => `academy/${slug}`),
-  ...dynamicRoutes({ ...Guide, default: (props) => createElement(ReferenceGuidePage, { ...props, schemaVersion: 'v3' }) }, ({ slug }) => `academy/guides/${slug}`),
   ...dynamicRoutes(Example, ({ tool, case: example }) => `tools/${tool}/example/${example}`),
-  staticRoute('blog', Blog),
-  ...dynamicRoutes(Post, ({ slug }) => `blog/${slug}`),
-  ...dynamicRoutes(Tag, ({ tag }) => `blog/tag/${tag}`),
   staticRoute('about', About),
   staticRoute('privacy', Privacy),
   staticRoute('terms', Terms),

@@ -11,11 +11,11 @@ const { outputText } = ts.transpileModule(source, { compilerOptions: { module: t
 const { versionedPath } = await import('data:text/javascript;base64,' + Buffer.from(outputText).toString('base64'))
 
 const cases = [
-  ['/', undefined, '/v1'],
-  ['/docs', undefined, '/v1/docs'],
-  ['/?ref=guide#start', undefined, '/v1?ref=guide#start'],
-  ['/v1/docs', undefined, '/v1/docs'],
-  ['/v2/tools', undefined, '/v2/tools'],
+  ['/', undefined, '/v3'],
+  ['/docs', undefined, '/v3/docs'],
+  ['/?ref=guide#start', undefined, '/v3?ref=guide#start'],
+  ['/v1/docs', undefined, '/v3/docs'],
+  ['/v2/tools', undefined, '/v3/tools'],
   ['/v3/resources', undefined, '/v3/resources'],
   ['/v3?ref=nav#learn', undefined, '/v3?ref=nav#learn'],
   ['/', 'v3', '/v3'],
@@ -48,28 +48,42 @@ const cases = [
 for (const [href, version, expected] of cases) {
   assert.equal(versionedPath(href, version), expected, `${version ?? 'legacy'}: ${href}`)
 }
-console.log(`Passed ${cases.length} V1/V2/V3 path cases.`)
+console.log(`Passed ${cases.length} V3 path cases, including retained content-link normalization.`)
 
 if (process.argv.includes('--built')) {
   const manifest = JSON.parse(readFileSync('.next/prerender-manifest.json', 'utf8'))
   const routes = Object.keys(manifest.routes)
   const routeSet = new Set(routes)
-  const library = /^\/v1\/(?:research|data|methodology|docs|glossary|academy|blog|about|privacy|terms)(?:\/|$)/
-  const examples = /^\/v1\/tools\/[^/]+\/example\//
-  const expected = routes.filter(path =>
-    (library.test(path) || examples.test(path) || path.startsWith('/v2/')) &&
-    !path.includes('/opengraph-image'),
-  ).map(path => path.replace(/^\/v[12]/, '/v3'))
-  assert(expected.length > 20, 'Build must include the existing supporting library')
-  for (const path of expected) assert(routeSet.has(path), `Missing V3 route: ${path}`)
+  const base = process.argv.find(a => a.startsWith('--base='))?.slice(7)
+  const htmlByPath = new Map()
+  const expected = JSON.parse(readFileSync('scripts/fixtures/v3-routes.json', 'utf8'))
+  assert(expected.length > 80, 'Expected the complete original V3 route inventory')
+  for (const path of expected) {
+    if (base) {
+      const response = await fetch(base + path)
+      assert.equal(response.status, 200, `Missing preserved V3 route: ${path}`)
+      if (path !== '/v3/social-image' && !path.endsWith('.csv')) htmlByPath.set(path, await response.text())
+      routeSet.add(path)
+    } else assert(routeSet.has(path), `Missing static V3 route: ${path}; supply --base to verify dynamic CMS routes`)
+  }
+  assert(!routes.some(path => /^\/v[124](?:\/|$)/.test(path)), 'Build must contain V3 only')
+  const appPaths = JSON.parse(readFileSync('.next/server/app-paths-manifest.json', 'utf8'))
+  assert(!Object.keys(appPaths).some(path => /^\/v[124](?:\/|$)/.test(path)), 'Removed versions must not remain dynamic routes')
+  const redirects = JSON.parse(readFileSync('.next/routes-manifest.json', 'utf8')).redirects
+  assert.equal(redirects.find(route => route.source === '/')?.destination, '/v3', 'Root must open V3')
+  assert(!redirects.some(route => /^\/v[124](?:\/|$)/.test(route.destination)), 'Redirects must not target removed versions')
   assert(routeSet.has('/v3/newsletter'), 'V3 must expose the explicitly labelled newsletter demo')
   assert(routeSet.has('/v3/prototype-review'), 'V3 must expose the internal journey review')
-  assert.equal(manifest.dynamicRoutes['/v3/[...path]']?.fallback, false, 'Unknown V3 routes must return 404')
+  if (base) {
+    for (const path of ['/v3/not-a-page', '/v3/glossary/not-a-published-term']) {
+      assert.equal((await fetch(base + path, { headers: { 'user-agent': 'Googlebot' } })).status, 404, `${path}: unknown route must 404`)
+    }
+  } else assert.equal(manifest.dynamicRoutes['/v3/[...path]']?.fallback, false, 'Unknown V3 routes must return 404')
 
-  const pages = routes.filter(path => /^\/v3(?:\/|$)/.test(path) && !path.endsWith('.csv') && path !== '/v3/social-image')
+  const pages = [...routeSet].filter(path => /^\/v3(?:\/|$)/.test(path) && !path.endsWith('.csv') && path !== '/v3/social-image')
   assert(routeSet.has('/v3') && routeSet.has('/v3/resources'), 'Build must include both dedicated V3 pages')
   for (const path of pages) {
-    const html = readFileSync(`.next/server/app${path}.html`, 'utf8')
+    const html = htmlByPath.get(path) ?? readFileSync(`.next/server/app${path}.html`, 'utf8')
     const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1]
     assert(main, `${path}: missing server-rendered main content`)
     assert(/<meta name="robots" content="noindex, nofollow"/.test(html), `${path}: preview indexing is enabled`)
@@ -77,13 +91,18 @@ if (process.argv.includes('--built')) {
     assert(html.includes(`<meta property="og:url" content="https://doefin.com${path}"`), `${path}: wrong Open Graph URL`)
     assert(/<title>[^<]+<\/title>/.test(html), `${path}: missing source title`)
     assert(/<meta name="description" content="[^"]+"/.test(html), `${path}: missing source description`)
-    for (const [, href] of main.matchAll(/<a\b[^>]*\bhref="([^"]+)"/g)) {
-      assert(!/^\/v[12](?:\/|[?#]|$)/.test(href), `${path}: body link leaves V3: ${href}`)
+    assert(!html.includes('aria-label="Website version"'), `${path}: removed version switcher remains`)
+    for (const [, href] of html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/g)) {
+      assert(!/^\/v[124](?:\/|[?#]|$)/.test(href), `${path}: body link leaves V3: ${href}`)
       if (href.startsWith('/v3')) {
         const destination = href.split(/[?#]/)[0]
-        assert(routeSet.has(destination), `${path}: missing internal destination: ${href}`)
+        if (!routeSet.has(destination) && base) {
+          const response = await fetch(base + destination)
+          assert.equal(response.status, 200, `${path}: missing internal destination: ${href}`)
+          routeSet.add(destination)
+        } else assert(routeSet.has(destination), `${path}: missing internal destination: ${href}`)
       }
     }
   }
-  console.log(`Passed ${expected.length} reused route mappings and ${pages.length} built V3 pages.`)
+  console.log(`Passed ${expected.length} preserved V3 routes and ${pages.length} built V3 pages.`)
 }

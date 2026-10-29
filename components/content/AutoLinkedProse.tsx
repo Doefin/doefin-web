@@ -11,8 +11,8 @@ import { blockId, isHeading, type Block } from '@/content/types'
  *
  * Only the first occurrence is linked, so paragraphs stay readable.
  */
-export function AutoLinkedProse({ paragraphs, skip = [] }: { paragraphs: Block[]; skip?: string[] }) {
-  const terms = allGlossary()
+export async function AutoLinkedProse({ paragraphs, skip = [] }: { paragraphs: Block[]; skip?: string[] }) {
+  const terms = (await allGlossary())
     .filter((t) => !skip.includes(t.slug))
     .flatMap((t) => [t.term, ...(t.aliases ?? [])].map((label) => ({ label, slug: t.slug, def: t.shortDef })))
     // Longest first, so "difficulty adjustment" wins over "difficulty".

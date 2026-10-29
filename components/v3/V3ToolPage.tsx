@@ -1,11 +1,18 @@
+import { GuidesPublicationProvider } from '@/components/routing/GuidesPublicationContext'
 import { notFound } from 'next/navigation'
 import Link from '@/components/routing/SiteLink'
 import { Container } from '@/components/layout/Container'
 import { PreviewCalculator } from '@/components/preview/PreviewCalculator'
-import { RelatedContent } from '@/components/preview/Primitives'
-import { previewTools, getPreviewTool, examplesFor, guideFor } from '@/content'
+import { previewSeo, RelatedContent } from '@/components/preview/Primitives'
+import { previewTools, getPreviewTool, examplesFor, guideDiscovery } from '@/content'
 import { preview } from '@/lib/preview'
-export { generateStaticParams, generateMetadata } from '@/app/v2/tools/[slug]/page'
+export const generateStaticParams = () => previewTools().map(({ slug }) => ({ slug }))
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const tool = getPreviewTool(slug)
+  if (!tool) notFound()
+  return previewSeo(tool.title, tool.description, preview.tools + '/' + slug)
+}
 
 const tools = [
   { slug: 'difficulty-exposure', name: 'Difficulty exposure', detail: 'Production sensitivity' },
@@ -18,9 +25,10 @@ export default async function V3ToolPage({ params }: { params: Promise<{ slug: s
   const tool = getPreviewTool(slug)
   if (!tool || !previewTools().some(t => t.slug === slug)) notFound()
   const examples = examplesFor(slug)
-  const guide = guideFor(slug)
+  const {guides,unavailable} = await guideDiscovery()
+  const guide = guides.find(row=>row.slug===slug)?.guide
   const active = tools.find(t => t.slug === slug)!
-  return <Container className="pb-14 pt-8 sm:pt-10">
+  return <GuidesPublicationProvider slugs={unavailable ? null : guides.map(row=>row.slug)}><Container className="pb-14 pt-8 sm:pt-10 [overflow-wrap:anywhere]">
     <div className="mb-6 flex flex-wrap items-center justify-between gap-3 text-xs text-subtle">
       <Link href="/v3/tools" className="py-1 hover:text-highlight">Tools <span aria-hidden> / </span><span className="text-body">Mining analysis</span></Link>
       <span className="rounded-full border border-white/10 px-3 py-1.5">Sample inputs · 17 September 2026</span>
@@ -47,6 +55,7 @@ export default async function V3ToolPage({ params }: { params: Promise<{ slug: s
     <section className="mt-7 border-t border-white/10 pt-6" aria-labelledby="tool-worked-examples">
       <h2 id="tool-worked-examples" className="text-lg font-bold">Check the working</h2>
       <p className="mt-2 text-sm leading-relaxed text-subtle">Educational scenarios with stated assumptions. Compare the working, then return to the calculator.</p>
+      {unavailable && <p role="status" className="mt-3 text-sm text-subtle">Calculator guides are temporarily unavailable.</p>}
       <ul className="mt-3 space-y-2 text-sm">
         {examples.map(example => <li key={example.slug}><Link href={`/v3/tools/${slug}/example/${example.slug}`} className="inline-flex min-h-11 items-center text-highlight underline underline-offset-4">{example.title}</Link></li>)}
         {guide && <li><Link href={`/v3/academy/guides/${slug}`} className="inline-flex min-h-11 items-center text-highlight underline underline-offset-4">Read the input guide: {guide.article.title}</Link></li>}
@@ -55,5 +64,5 @@ export default async function V3ToolPage({ params }: { params: Promise<{ slug: s
     <RelatedContent learning={tool.learning} action={slug === 'difficulty-exposure'
       ? { href: preview.payback, title: 'Test the wider payback picture', text: 'Explore power costs and capital recovery separately.' }
       : { href: preview.exposure, title: 'Isolate difficulty exposure', text: 'Compare BTC production across two difficulty scenarios.' }} />
-  </Container>
+  </Container></GuidesPublicationProvider>
 }

@@ -5,3 +5,8 @@ out/
 *.tsbuildinfo
 next-env.d.ts
 .DS_Store
+
+# Local migration reports and Studio build output
+work/
+studio/dist/
+studio/.sanity/

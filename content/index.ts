@@ -1,6 +1,5 @@
 import { posts } from './posts'
 import { academy } from './academy'
-import { glossary } from './glossary'
 import { reports } from './research'
 import type { AcademyPost, GlossaryTerm, Post, Report } from './types'
 
@@ -20,9 +19,7 @@ export const getPost = (slug: string) => allPosts().find((p) => p.slug === slug)
 export const allAcademy = (): AcademyPost[] => live(academy).sort(byDate)
 export const getAcademy = (slug: string) => allAcademy().find((p) => p.slug === slug)
 
-export const allGlossary = (): GlossaryTerm[] =>
-  [...glossary].sort((a, b) => a.term.localeCompare(b.term))
-export const getGlossary = (slug: string) => allGlossary().find((t) => t.slug === slug)
+export { allGlossary, getGlossary } from './sanity/glossary'
 
 export const allReports = (): Report[] => live(reports).sort(byDate)
 export const getReport = (slug: string) => allReports().find((r) => r.slug === slug)
@@ -46,8 +43,8 @@ export type { Post, AcademyPost, GlossaryTerm, Report, Source, Confidence } from
 export { TOOLS, EXAMPLES, examplesFor } from './tools'
 export type { Tool, ToolExample } from './tools'
 
-export { TOOL_GUIDES, guideFor, allGuides } from './tool-guides'
-export type { ToolGuideContent } from './tool-guides'
+export { guideFor, allGuides, guidesNavigation, guideDiscovery } from './sanity/tool-guides'
+export type { ToolGuideContent, ToolGuide } from './tool-guide-types'
 
 export { TOOL_MICRO, microFor, hintFor, resultHintFor, presetsFor } from './tool-micro'
 export type { ToolMicro } from './tool-micro'
@@ -60,13 +57,17 @@ export type { Epoch, NetworkPoint } from './sample-data'
 
 export { authors, getAuthor } from './authors'
 export type { Author } from './authors'
+export { aboutAuthorsSnapshot, aboutAuthorsQuery } from './sanity/about-authors'
+export type { AboutContent, AboutSection } from './about-types'
 
 export { previewTools, getPreviewTool, getExposureTutorial, getForecastReport } from './preview'
 export type { PreviewTool, EvidenceRow } from './preview'
 
-export { allV3Docs, getV3Doc, v3DocGroups, v3DocReviewedAt } from './v3-docs'
-export type { V3Doc } from './v3-docs'
-export { allV3Reports, getV3Report, v3Methodology, v3AboutSections, v3ContentReviewedAt } from './v3-research'
-export type { V3ResearchSection } from './v3-research'
-export { allV3Editorial, getV3Editorial, allV3EditorialTags, v3EditorialReviewedAt } from './v3-editorial'
-export type { V3EditorialArticle } from './v3-editorial'
+export { allV3Docs, getV3Doc, docsNavigation } from './sanity/docs'
+export { v3DocGroups } from './docs-contract'
+export type { V3Doc } from './docs-types'
+export { allV3Reports, getV3Report, getV3Methodology } from './sanity/research'
+export type { V3ResearchSection, V3ResearchReport, V3Methodology } from './research-types'
+export { v3AboutSections, v3ContentReviewedAt } from './v3-research'
+export { allV3Editorial, getV3Editorial, allV3EditorialTags, allV3EditorialTopics, allV3Topics, getV3Topic } from './sanity/editorial'
+export type { V3EditorialArticle, EditorialTopic } from './editorial-types'

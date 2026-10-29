@@ -1,9 +1,11 @@
+import { getV3Editorial } from '@/content'
 import Link from '@/components/routing/SiteLink'
 import { Arrow } from './Arrow'
 import { BrandIcon } from './BrandIcon'
 
 /** Concrete entry points put the library on the visitor's path. */
-export function HomeResources() {
+export async function HomeResources() {
+  const featured = await getV3Editorial('blog', 'reading-a-hashrate-chart-honestly')
   return <>
     <div className="v37-section-top" data-reveal>
       <div><p className="v37-eyebrow">Tools and learning</p><h2 id="learning-title" className="v37-heading">Tools and reading<br />you can use.</h2></div>
@@ -25,7 +27,7 @@ export function HomeResources() {
     <div className="mt-5 flex flex-wrap items-center justify-between gap-x-8 gap-y-2 border-t border-white/10 pt-4" data-reveal>
       <p className="max-w-xl text-xs leading-relaxed text-subtle">Calculators explore assumptions. They do not forecast difficulty or determine a suitable position size. Hosting-bill comparison is a separate question from production exposure; a business may operate owned and hosted fleets.</p>
       <div className="flex flex-wrap gap-x-6 gap-y-1">
-        <Link href="/v3/blog/reading-a-hashrate-chart-honestly" className="v37-link">Read a hashrate chart honestly <Arrow /></Link>
+        <Link href={featured ? '/v3/blog/' + featured.slug : '/v3/blog'} className="v37-link">{featured ? 'Read a hashrate chart honestly' : 'Browse mining articles'} <Arrow /></Link>
         <Link href="/v3/for/institutions" data-v3-cta="institutions" data-v3-placement="resources" className="v37-link">For funds &amp; desks <Arrow /></Link>
       </div>
     </div>

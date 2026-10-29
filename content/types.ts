@@ -96,7 +96,12 @@ export type AcademyPost = Base & {
   body: Block[]
 }
 
+export type GlossaryBrowseTopic = 'network' | 'revenue' | 'operations' | 'uncertainty'
+
 export type GlossaryTerm = {
+  browseTopic: GlossaryBrowseTopic
+  /** Optional editorial classification; independent of the four browse topics. */
+  domain?: 'network' | 'product'
   slug: string
   term: string
   shortDef: string

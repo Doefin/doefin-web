@@ -1,0 +1,35 @@
+import assert from 'node:assert/strict'
+import { loadTypescript } from './lib/load-typescript.mjs'
+
+const contract = loadTypescript('lib/bitcoin-analytics-contract.ts')
+const { describeServerOutcome, fetchBrowserAnalytics } = loadTypescript('lib/browser-analytics.ts', { './bitcoin-analytics-contract': contract })
+assert.equal(contract.hashrateHpsToEhps('1000000000000000000'), '1')
+assert.equal(contract.hashrateHpsToEhps('1234000000000000000'), '1.234')
+assert.equal(contract.hashrateHpsToEhps('1.23e18'), '1.23')
+assert.equal(contract.hashrateHpsToEhps('bad'), null)
+assert.equal(contract.hashrateHpsToEhps('-1e18'), null)
+assert.equal(contract.hashrateHpsToEhps('1e9999999'), null)
+assert.equal(contract.hashrateHpsToEhps('1e101'), null)
+assert.equal(contract.apiFailure(451, { error: 'region_restricted' }, '2026-10-29T00:00:00Z').status, 'region-restricted')
+assert.equal(contract.apiFailure(404, {}, '2026-10-29T00:00:00Z').status, 'not-found')
+assert.equal(contract.apiFailure(503, {}, '2026-10-29T00:00:00Z').status, 'unavailable')
+assert.match(describeServerOutcome('region-restricted'), /region-restricted/)
+assert.match(describeServerOutcome('unavailable'), /did not return usable data/)
+assert.match(describeServerOutcome('not-found'), /returned no record/)
+assert.equal(contract.parseCurrentHashrate({ block_number: 1, timestamp: 1, difficulty: null, rolling_avg_hashrate_120: '1000000000000000000', rolling_avg_hashrate_144: null, rolling_avg_hashrate_2016: null }).rolling_avg_hashrate_120, '1000000000000000000')
+assert.equal(contract.parseCurrentHashrate({ block_number: 1, timestamp: 1, rolling_avg_hashrate_120: 1 }), null)
+const maliciousHashrate = { block_number: 1, timestamp: 1, difficulty: null, rolling_avg_hashrate_120: '-1e18', rolling_avg_hashrate_144: null, rolling_avg_hashrate_2016: null }
+assert.equal(contract.parseCurrentHashrate(maliciousHashrate), null)
+assert.equal(contract.parseCurrentHashrate({ ...maliciousHashrate, rolling_avg_hashrate_120: '1e9999999' }), null)
+assert.equal(contract.parseCurrentHashrate({ ...maliciousHashrate, rolling_avg_hashrate_120: '1'.repeat(129) }), null)
+assert.equal(contract.parseDifficultyAnalytics({}), null)
+const validDifficulty = { current_block_height: 10, current_difficulty: 100, current_difficulty_epoch: 1, current_epoch_average_block_time: 612.5, blocks_till_next_adjustment: 10, last_difficulty_adjsutment_timestamp: 1_800_000_000, time_to_next_adjustment: 6000, next_adjustment_timestamp: 1_800_006_000, next_difficulty_estimation: 101, next_difficulty_pct_changes: 0.01, next_difficulty_adjustment_block_height: 20 }
+assert.equal(contract.parseDifficultyAnalytics(validDifficulty).current_epoch_average_block_time, 612.5)
+const validHashrate = { block_number: 10, timestamp: 1_800_000_000, difficulty: null, rolling_avg_hashrate_120: '1234000000000000000', rolling_avg_hashrate_144: null, rolling_avg_hashrate_2016: null }
+const browserOk = await fetchBrowserAnalytics('https://api.example.test/hashrate', contract.parseCurrentHashrate, async () => ({ ok: true, status: 200, json: async () => validHashrate }))
+assert.equal(browserOk.status, 'available'); assert.equal(browserOk.data.rolling_avg_hashrate_120, validHashrate.rolling_avg_hashrate_120)
+const browser451 = await fetchBrowserAnalytics('https://api.example.test/hashrate', contract.parseCurrentHashrate, async () => ({ ok: false, status: 451, json: async () => ({ error: 'region_restricted' }) }))
+assert.equal(browser451.status, 'region-restricted')
+const blocked = await fetchBrowserAnalytics('https://api.example.test/hashrate', contract.parseCurrentHashrate, async () => { throw new TypeError('Failed to fetch') })
+assert.equal(blocked.status, 'unavailable'); assert.match(blocked.detail, /CORS or network policy/)
+console.log(JSON.stringify({ conversion: 'exact decimal H/s to EH/s', browserFallback: ['valid response parsed', '451 retained as region-restricted', 'network/CORS failure explicit'], serverStatuses: ['451 region restricted', '404 no record', '503 unavailable'], malformedPayloadsRejected: true, noRangeDerived: true }, null, 2))

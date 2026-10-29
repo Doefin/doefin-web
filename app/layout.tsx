@@ -1,10 +1,13 @@
 import type { Metadata } from 'next'
 import { Manrope } from 'next/font/google'
-import { Footer } from '@/components/layout/Footer'
-import { Header } from '@/components/layout/Header'
-import { SiteChrome } from '@/components/layout/SiteChrome'
+import { V3Chrome } from '@/components/v3/Chrome'
+import { SiteVersionProvider } from '@/components/routing/SiteVersionContext'
 import { jsonLd, ID, publisherRef } from '@/lib/seo'
 import { site } from '@/lib/site'
+import { guidesNavigation } from '@/content'
+import { GuidesPublicationProvider } from '@/components/routing/GuidesPublicationContext'
+import { docsNavigation } from '@/content'
+import { DocsPublicationProvider } from '@/components/routing/DocsPublicationContext'
 import './globals.css'
 
 // Manrope is the brand typeface, carried over from the trading app.
@@ -28,13 +31,14 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description: site.description,
-  alternates: { canonical: '/v1' },
+  alternates: { canonical: '/v3' },
   openGraph: { siteName: site.name, type: 'website', locale: 'en_GB' },
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: false },
   icons: { icon: '/images/favicon.png', shortcut: '/favicon.ico' },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const [docSlugs,guideSlugs] = await Promise.all([docsNavigation(),guidesNavigation()])
   const org = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -68,9 +72,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
-        <SiteChrome header={<Header />} footer={<Footer />}>
-          {children}
-        </SiteChrome>
+        <SiteVersionProvider version="v3">
+          <DocsPublicationProvider slugs={docSlugs}><GuidesPublicationProvider slugs={guideSlugs}><V3Chrome>{children}</V3Chrome></GuidesPublicationProvider></DocsPublicationProvider>
+        </SiteVersionProvider>
       </body>
     </html>
   )

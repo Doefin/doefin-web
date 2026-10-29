@@ -12,14 +12,31 @@
     "check:seo": "node scripts/check-seo.mjs",
     "audit": "node scripts/audit.mjs",
     "check:tools": "node --experimental-strip-types --no-warnings scripts/check-tools.mjs",
-    "check:links": "node scripts/check-links.mjs"
+    "check:links": "node scripts/check-links.mjs",
+    "glossary:migrate": "node scripts/migrate-glossary.mjs",
+    "check:glossary": "node scripts/check-sanity-glossary.mjs && node scripts/check-glossary-audit-regressions.mjs",
+    "check:glossary:runtime": "node scripts/check-glossary-runtime.mjs",
+    "editorial:migrate": "node scripts/migrate-editorial.mjs",
+    "check:editorial:schema": "node scripts/check-editorial-schema-import.mjs",
+    "check:editorial": "node scripts/check-editorial.mjs",
+    "check:editorial:runtime": "node scripts/check-editorial-runtime.mjs",
+    "docs:migrate": "node scripts/migrate-docs.mjs",
+    "check:docs": "node scripts/check-docs.mjs",
+    "check:docs:schema": "node scripts/check-docs-schema-import.mjs",
+    "check:docs:runtime": "node scripts/check-docs-runtime.mjs",
+    "guides:migrate": "node scripts/migrate-tool-guides.mjs",
+    "check:guides": "node scripts/check-tool-guides.mjs",
+    "check:guides:runtime": "node scripts/check-tool-guides-runtime.mjs",
+    "check:home-faq": "node scripts/check-home-faq.mjs",
+    "about-authors:migrate": "node scripts/migrate-about-authors.mjs",
+    "check:about-authors": "node scripts/check-about-authors.mjs",
+    "check:research-methodology": "node scripts/check-research-methodology.mjs"
   },
   "dependencies": {
     "@phosphor-icons/react": "2.1.10",
     "next": "^16.3.3",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "recharts": "^3.10.1"
+    "react-dom": "^19.2.8"
   },
   "devDependencies": {
     "@types/node": "^22",

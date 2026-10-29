@@ -1,0 +1,41 @@
+{
+  "name": "doefin-glossary-studio",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "typecheck": "tsc --noEmit",
+    "login": "sanity login",
+    "import:glossary": "sanity exec ./scripts/glossary-import.mjs --with-user-token -- --apply",
+    "reconcile:glossary": "sanity exec ./scripts/glossary-import.mjs --with-user-token",
+    "import:editorial": "sanity exec ./scripts/editorial-import.mjs --with-user-token -- --apply",
+    "reconcile:editorial": "sanity exec ./scripts/editorial-import.mjs --with-user-token",
+    "import:docs": "sanity exec ./scripts/docs-import.mjs --with-user-token -- --apply",
+    "reconcile:docs": "sanity exec ./scripts/docs-import.mjs --with-user-token",
+    "reconcile:guides": "sanity exec ./scripts/tool-guides-import.mjs --with-user-token",
+    "import:guides": "sanity exec ./scripts/tool-guides-import.mjs --with-user-token -- --apply",
+    "preflight:guides": "sanity exec ./scripts/tool-guides-preflight.mjs --with-user-token",
+    "reconcile:faqs": "sanity exec ./scripts/home-faq-import.mjs --with-user-token",
+    "reconcile:about-authors": "sanity exec ./scripts/about-authors-import.mjs --with-user-token",
+    "import:about-authors": "sanity exec ./scripts/about-authors-import.mjs --with-user-token -- --apply",
+    "lifecycle:about-authors": "sanity exec ./scripts/about-authors-lifecycle.mjs --with-user-token -- --apply --editors-paused",
+    "import:faqs": "sanity exec ./scripts/home-faq-import.mjs --with-user-token -- --apply",
+    "reconcile:research": "sanity exec ./scripts/research-import.mjs --with-user-token",
+    "import:research": "sanity exec ./scripts/research-import.mjs --with-user-token -- --apply",
+    "lifecycle:research": "sanity exec ./scripts/research-lifecycle.mjs --with-user-token -- --apply --editors-paused"
+  },
+  "dependencies": {
+    "sanity": "6.20.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "styled-components": "^6.1.19",
+    "@sanity/client": "8.11.0",
+    "@sanity/ui": "4.4.10"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5.7"
+  }
+}

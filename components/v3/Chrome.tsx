@@ -103,10 +103,7 @@ export function V3Chrome({ children }: { children: ReactNode }) {
           <p className="max-w-xl">For professional investors. Positions involve risk. Nothing here is investment advice. This prototype contains illustrative content.</p>
           <div className="flex gap-5"><Link href="/v3/terms" className="inline-flex min-h-11 items-center hover:text-body">Terms</Link><Link href="/v3/privacy" className="inline-flex min-h-11 items-center hover:text-body">Privacy</Link></div>
         </div>
-        {publication.showVersionSelector && <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-white/[0.07] pt-4 text-xs text-subtle sm:mt-7 sm:pt-5">
-          <p>Preview <span className="mx-2 text-muted" aria-hidden="true">/</span> V3</p>
-          <nav aria-label="Website version" className="flex items-center gap-2"><span className="mr-2">Compare</span>{['v1', 'v2', 'v3', 'v4'].map(v => <a key={v} href={'/' + v} aria-current={v === 'v3' ? 'page' : undefined} className={'rounded-md border px-3 py-2 uppercase ' + (v === 'v3' ? 'border-brand/40 bg-brand/10 text-highlight' : 'border-white/10 hover:border-white/30')}>{v}</a>)}</nav>
-        </div>}
+
       </Container>
     </footer>
   </>

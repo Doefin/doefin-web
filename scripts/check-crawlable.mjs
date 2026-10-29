@@ -10,23 +10,21 @@ import { join } from 'node:path'
 
 const ROOT = join(process.cwd(), '.next', 'server', 'app')
 const MIN_WORDS = 120
+const base = process.argv.find(a => a.startsWith('--base='))?.slice(7)
 
 const PAGES = [
-  ['v4.html', 'V4 home'],
   ['v3.html', 'V3 home'],
+  ['v3/academy/guides/hosting-effective-rate.html', 'V3 calculator guide'],
+  ['v3/docs.html', 'V3 Docs index'],
+  ['v3/docs/key-terms.html', 'V3 Docs definitions'],
   ['v3/resources.html', 'V3 resources'],
   ['v3/tools/difficulty-exposure.html', 'V3 enhanced tool'],
   ['v3/product/settlement.html', 'V3 settlement'],
   ['v3/glossary/hashprice.html', 'V3 glossary'],
   ['v3/research/difficulty-forecast-accuracy-2026.html', 'V3 research'],
-  ['v2.html', 'V2 home'],
-  ['v2/learn/difficulty-exposure.html', 'V2 tutorial'],
-  ['v2/research/evaluating-a-forecast.html', 'V2 sample report'],
-  ['v1.html', 'V1 home'],
-  ['v1/data/difficulty.html', 'Difficulty forecast'],
-  ['v1/glossary/hashprice.html', 'Glossary term'],
-  ['v1/research/difficulty-forecast-accuracy-2026.html', 'Research report'],
-  ['v1/for/miners.html', 'For miners'],
+  ['v3/learn/difficulty-exposure.html', 'V3 tutorial'],
+  ['v3/data/difficulty.html', 'V3 difficulty data'],
+  ['v3/for/miners.html', 'V3 miners planner'],
 ]
 
 const text = (html) =>
@@ -41,7 +39,11 @@ let failed = 0
 for (const [file, label] of PAGES) {
   let html
   try {
-    html = await readFile(join(ROOT, file), 'utf8')
+    if (base) {
+      const response = await fetch(base + '/' + file.replace(/\.html$/, ''))
+      if (!response.ok) throw new Error(`HTTP ${response.status}`)
+      html = await response.text()
+    } else html = await readFile(join(ROOT, file), 'utf8')
   } catch {
     console.error(`FAIL  ${label.padEnd(22)} ${file} not found — did the build run?`)
     failed++

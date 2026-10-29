@@ -18,6 +18,7 @@
  */
 import { readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
+import { loadTypescript } from './lib/load-typescript.mjs'
 
 const read = (p) => readFileSync(p, 'utf8')
 const fails = []
@@ -25,13 +26,20 @@ const warns = []
 
 /* ── 1. seeAlso must be reciprocal ──────────────────────────────────────── */
 
-const glossarySrc = read('content/glossary.ts')
-const entries = [...glossarySrc.matchAll(/slug:\s*'([^']+)'([\s\S]*?)(?=slug:\s*'|$)/g)]
-const seeAlso = new Map()
-for (const [, slug, body] of entries) {
-  const m = body.match(/seeAlso:\s*\[([\s\S]*?)\]/)
-  seeAlso.set(slug, m ? [...m[1].matchAll(/'([^']+)'/g)].map((x) => x[1]) : [])
+let glossary = loadTypescript('content/glossary.ts').glossary
+if (process.argv.includes('--live')) {
+  const { sanityProjectId, sanityDataset, sanityApiVersion, glossaryQuery } = loadTypescript('content/sanity/config.ts')
+  const url = new URL(`https://${sanityProjectId}.api.sanity.io/v${sanityApiVersion}/data/query/${sanityDataset}`)
+  url.searchParams.set('query', glossaryQuery)
+  url.searchParams.set('perspective', 'published')
+  const response = await fetch(url, { signal: AbortSignal.timeout(15000) })
+  if (!response.ok) throw new Error(`Sanity unavailable: ${response.status}`)
+  glossary = loadTypescript('content/sanity/parse.ts').parseGlossary((await response.json()).result)
+  if (!glossary.length) throw new Error('Live glossary is empty; seed-only link checks do not prove migration completion')
 }
+console.log(`Checking ${process.argv.includes('--live') ? 'live published CMS' : 'migration seed'} glossary links.`)
+const entries = glossary.map(t => [null, t.slug, t])
+const seeAlso = new Map(glossary.map(t => [t.slug, t.seeAlso ?? []]))
 
 for (const [slug, targets] of seeAlso) {
   for (const t of targets) {
@@ -57,8 +65,8 @@ function walk(dir) {
 // Only editorial routes belong in the graph. A hub page such as /data or /about
 // is not a content item, so a hand-written list there is correct — warning about
 // it forever would only teach people to ignore this script.
-const EDITORIAL = /^app\/v1\/(blog|research|academy|glossary)\/\[/
-const routes = walk('app').filter((f) => f.endsWith('.tsx'))
+const EDITORIAL = /^(?:components\/v3\/(?:V3Editorial|V3BlogPost|V3ReportPage))\.tsx$/
+const routes = [...walk('app'), ...walk('components')].filter((f) => f.endsWith('.tsx'))
 for (const f of routes.filter((f) => EDITORIAL.test(f))) {
   if (/<NextLinks[\s\S]{0,120}items=\{\[/.test(read(f))) {
     fails.push(`${f} passes a literal array to <NextLinks> — derive it from content/graph.ts`)
@@ -68,9 +76,8 @@ for (const f of routes.filter((f) => EDITORIAL.test(f))) {
 /* ── 3. every long-form piece should mention at least two glossary terms ── */
 
 const MIN_TERMS = 2
-const terms = [...glossarySrc.matchAll(/\bterm:\s*'([^']+)'/g)].map((m) => m[1].toLowerCase())
-const aliasBlocks = [...glossarySrc.matchAll(/aliases:\s*\[([\s\S]*?)\]/g)]
-const aliases = aliasBlocks.flatMap((b) => [...b[1].matchAll(/'([^']+)'/g)].map((x) => x[1].toLowerCase()))
+const terms = glossary.map(t => t.term.toLowerCase())
+const aliases = glossary.flatMap(t => (t.aliases ?? []).map(a => a.toLowerCase()))
 const vocabulary = [...new Set([...terms, ...aliases])]
 
 for (const file of ['content/posts.ts', 'content/academy.ts', 'content/research.ts']) {
@@ -92,10 +99,7 @@ const allProse = ['content/posts.ts', 'content/academy.ts', 'content/research.ts
   .toLowerCase()
 
 for (const [, slug, body] of entries) {
-  const label = (body.match(/\bterm:\s*'([^']+)'/) ?? [])[1]
-  if (!label) continue
-  const alias = body.match(/aliases:\s*\[([\s\S]*?)\]/)
-  const labels = [label, ...(alias ? [...alias[1].matchAll(/'([^']+)'/g)].map((x) => x[1]) : [])]
+  const labels = [body.term, ...(body.aliases ?? [])]
   const used = labels.some((l) =>
     new RegExp(`\\b${l.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(allProse),
   )
