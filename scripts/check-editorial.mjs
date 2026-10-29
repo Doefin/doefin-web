@@ -58,6 +58,8 @@ try {
 } finally {globalThis.fetch=realFetch}
 const {renderEditorialFeed}=loadTypescript('lib/editorial-feed.ts',{'./site':{site:{url:'https://doefin.com',name:'Doefin',description:'Test'}}})
 const xml=renderEditorialFeed(view.articles.filter(a=>a.kind==='blog'),[{slug:'unchanged-research',title:'Research',summary:'Existing feed source',publishedAt:'2026-08-01'}])
+assert(xml.includes('<link>https://doefin.com/blog/'), 'Feed item links use root routes')
+assert(xml.includes('<guid isPermaLink="true">https://doefin.com/v3/blog/'), 'Feed GUID keeps its legacy V3 identity')
 assert.equal((xml.match(/<pubDate>/g)??[]).length,1,'Review dates must not become publication dates')
 assert(xml.includes('unchanged-research'));assert(xml.includes(view.articles[0].title))
 console.log('Passed editorial source parity, topics/anchors/references, date semantics, published/empty/error/new-slug source behavior and feed publication metadata.')

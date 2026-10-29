@@ -11,6 +11,9 @@ assert.deepEqual(docs.about.sections.map(({heading,paragraphs})=>({heading,parag
 assert.deepEqual(docs.authors[0],{_id:'author-doefin-research',_type:'authorProfile',slug:'doefin-research',kind:'organization',name:'Doefin Research',url:'/about#doefin-research',description:authors.authors[0].description,metadataDescription:authors.authors[0].metadataDescription})
 const raw=[...docs.authors,docs.about].map(d=>({...structuredClone(d),_rev:'fixture'}))
 assert.equal(planAboutAuthorsImport(raw).missing.length,0);assert.equal(planAboutAuthorsImport([]).missing.length,2)
+const legacyAuthor=structuredClone(raw); legacyAuthor[0].url='/v3'+legacyAuthor[0].url
+assert.equal(planAboutAuthorsImport(legacyAuthor).changed.length,0,'Legacy V3 author href alone does not look like an editor change')
+legacyAuthor[0].description+=' Editor change.'; assert(planAboutAuthorsImport(legacyAuthor).changed.includes(legacyAuthor[0]._id),'Unrelated author edits remain visible')
 assert(planAboutAuthorsImport([{_id:'drafts.about-doefin',_type:'aboutPage'}]).conflicts.length)
 assert(planAboutAuthorsImport([{_id:'versions.release.author-doefin-research',_type:'authorProfile'}]).conflicts.length)
 assert(planAboutAuthorsImport([{_id:'author-doefin-research',_type:'other'}]).conflicts.length)

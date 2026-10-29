@@ -13,8 +13,17 @@ const originalFaq = [
 ]
 assert.deepEqual(seed.map(({id,question,answer,href,label})=>({id,question,answer,href,label})),originalFaq)
 const {homeFaqMigrationDocuments,planHomeFaqImport}=await import('./lib/home-faq-migration.mjs')
+const {comparableHref}=await import('./lib/legacy-href.mjs')
+assert.equal(comparableHref('/v3?ref=old'), '/?ref=old')
+assert.equal(comparableHref('/v3#start'), '/#start')
+assert.equal(comparableHref('/v3ish/path'), '/v3ish/path')
+assert.equal(comparableHref('/images/v3/chart.png'), '/images/v3/chart.png')
+assert.equal(comparableHref('/api/v3/market-snapshot'), '/api/v3/market-snapshot')
 const docs=homeFaqMigrationDocuments(); assert.equal(docs.length,6); assert.equal(docs[5].items.length,5)
 const raw=docs.map(x=>({...x,_rev:'rev'})); assert.equal(planHomeFaqImport(raw).conflicts.length,0); assert.equal(planHomeFaqImport(raw).changed.length,0); assert.equal(planHomeFaqImport(raw).missing.length,0)
+const legacyFaq=structuredClone(raw); legacyFaq[0].href='/v3'+legacyFaq[0].href
+assert.equal(planHomeFaqImport(legacyFaq).changed.length,0,'Legacy V3 FAQ href alone does not look like an editor change')
+legacyFaq[0].answer+=' Editor change.'; assert.deepEqual(planHomeFaqImport(legacyFaq).changed,[legacyFaq[0]._id],'Unrelated FAQ edits remain visible')
 assert.equal(planHomeFaqImport([]).missing.length,6)
 assert.match(planHomeFaqImport([{_id:'drafts.faq-funding-account',_type:'faqItem'}]).conflicts.join(' '),/draft\/version-only/)
 assert.match(planHomeFaqImport([{_id:'faq-funding-account',_type:'editorialArticle'}]).conflicts.join(' '),/another type/)

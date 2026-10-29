@@ -3,7 +3,7 @@ import Link from '@/components/routing/SiteLink'
 import { Arrow } from './Arrow'
 import styles from './ProductPreview.module.css'
 
-const capture = '/images/market-detail-2026-10-19.jpg'
+const capture = '/images/v3/market-detail-2026-10-19.jpg'
 
 /** CSS frames the question and chart at x14/y175/w918/h512 in the original 1440×756 capture. */
 export function ProductPreview() {

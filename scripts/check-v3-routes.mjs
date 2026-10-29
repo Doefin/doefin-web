@@ -3,7 +3,8 @@
  * after `next build` to check complete library coverage and served HTML links.
  */
 import assert from 'node:assert/strict'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync } from 'node:fs'
+import { relative, sep } from 'node:path'
 import ts from 'typescript'
 
 const source = readFileSync('lib/versioning.ts', 'utf8')
@@ -29,6 +30,15 @@ for (const [href, version, expected] of cases) {
   assert.equal(versionedPath(href, version), expected, `${version ?? 'legacy'}: ${href}`)
 }
 console.log(`Passed ${cases.length} V3 path cases, including retained content-link normalization.`)
+assert(readFileSync('components/v3/MinersPage.tsx', 'utf8').includes('href="/#who-its-for"'), 'Miners page returns to the home page anchor')
+for (const [source, asset] of [
+  ['components/v3/ProductPreview.tsx', '/images/v3/market-detail-2026-10-19.jpg'],
+  ['components/v3/ProductUpdates.tsx', '/images/v3/product-updates-envelope.png'],
+]) {
+  assert(readFileSync(source, 'utf8').includes(asset), `${source}: asset URL retains its images/v3 prefix`)
+  assert(existsSync(`public${asset}`), `${source}: referenced image exists`)
+}
+assert(readFileSync('lib/bitcoin-analytics.ts', 'utf8').includes("fetchEndpoint<CurrentHashrate>('/v3/bitcoin/hashrate/current'"), 'Server hashrate lookup retains the backend V3 endpoint')
 
 if (process.argv.includes('--built')) {
   const manifest = JSON.parse(readFileSync('.next/prerender-manifest.json', 'utf8'))
@@ -59,16 +69,36 @@ if (process.argv.includes('--built')) {
     const legacy = await fetch(base + '/v3/tools?ref=legacy', { redirect: 'manual' })
     assert.equal(legacy.status, 308, 'Legacy pages use permanent redirects')
     assert.equal(legacy.headers.get('location'), '/tools?ref=legacy', 'Legacy redirect preserves query strings')
-    assert.equal((await fetch(base + '/api/v3/market-snapshot', { redirect: 'manual' })).status, 200, 'Versioned API remains directly available')
+    const marketSnapshot = await fetch(base + '/api/v3/market-snapshot', { redirect: 'manual' })
+    assert([200, 451].includes(marketSnapshot.status), `Versioned API must be available or explicitly blocked by the API environment, got HTTP ${marketSnapshot.status}`)
+    assert(![301, 302, 303, 307, 308].includes(marketSnapshot.status), 'Versioned API must not redirect')
     for (const path of ['/not-a-page', '/glossary/not-a-published-term']) {
       assert.equal((await fetch(base + path, { headers: { 'user-agent': 'Googlebot' } })).status, 404, `${path}: unknown route must 404`)
     }
   } else assert.equal(manifest.dynamicRoutes['/[...path]']?.fallback, false, 'Unknown V3 routes must return 404')
 
   const pages = expected.filter(path => path !== '/social-image' && !path.endsWith('.csv'))
+  const appRoot = '.next/server/app'
+  const builtFiles = []
+  const collectHtml = directory => {
+    for (const entry of readdirSync(directory, { withFileTypes: true })) {
+      const file = `${directory}/${entry.name}`
+      if (entry.isDirectory()) collectHtml(file)
+      else if (entry.name.endsWith('.html')) builtFiles.push(file)
+    }
+  }
+  collectHtml(appRoot)
+  const artifactRoute = file => {
+    const segments = relative(appRoot, file).split(sep).filter(segment => !/^\(.*\)$/.test(segment))
+    const route = `/${segments.join('/')}`.replace(/\.html$/, '')
+    return route === '/index' ? '/' : route
+  }
+  const builtHtmlPath = path => {
+    return builtFiles.find(file => artifactRoute(file) === path) ?? `${appRoot}${path === '/' ? '/index' : path}.html`
+  }
   assert(routeSet.has('/') && routeSet.has('/resources'), 'Build must include homepage and resources')
   for (const path of pages) {
-    const html = htmlByPath.get(path) ?? readFileSync(`.next/server/app${path}.html`, 'utf8')
+    const html = htmlByPath.get(path) ?? readFileSync(builtHtmlPath(path), 'utf8')
     const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1]
     assert(main, `${path}: missing server-rendered main content`)
     assert(/<meta name="robots" content="noindex, nofollow"/.test(html), `${path}: preview indexing is enabled`)

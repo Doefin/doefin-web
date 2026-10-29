@@ -21,6 +21,11 @@ npm ci
 npm run dev
 ```
 
+`npm ci` installs the website and standalone Studio packages from the root npm
+workspace. Run it only from the repository root; do not run a second `npm ci` in
+`studio/`. The embedded editor is available at `/studio`. To run the standalone
+Studio separately, use `npm --workspace=doefin-glossary-studio run dev`.
+
 ## Verification
 
 ```sh

@@ -25,4 +25,4 @@ async function fetchEndpoint<T>(path: string, parse: (value: unknown) => T | nul
 }
 
 export const getDifficultyAnalytics = () => fetchEndpoint<DifficultyAnalytics>('/v1/block/analytics', parseDifficultyAnalytics)
-export const getCurrentHashrate = () => fetchEndpoint<CurrentHashrate>('/bitcoin/hashrate/current', parseCurrentHashrate)
+export const getCurrentHashrate = () => fetchEndpoint<CurrentHashrate>('/v3/bitcoin/hashrate/current', parseCurrentHashrate)

@@ -20,7 +20,7 @@ export function renderEditorialFeed(articles: V3EditorialArticle[], reports: Fee
 ${items.map(item => `    <item>
       <title>${esc(item.title)}</title>
       <link>${site.url}${item.path}</link>
-      <guid isPermaLink="true">${site.url}${item.path}</guid>
+      <guid isPermaLink="true">${site.url}/v3${item.path}</guid>
       <description>${esc(item.summary)}</description>${item.publishedAt ? `
       <pubDate>${new Date(item.publishedAt).toUTCString()}</pubDate>` : ''}
     </item>`).join('\n')}

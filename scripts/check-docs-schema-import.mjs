@@ -9,6 +9,13 @@ const contract = loadTypescript('content/docs-contract.ts', { './editorial-contr
 const documents = docsMigrationDocuments()
 assert.equal(documents.length, 18)
 assert.deepEqual(docsMigrationDocuments(), documents, 'Docs seed generation is deterministic')
+const docsWithOptionalLinks = documents.find(doc => doc.optionalLinks?.length)
+const docsSnapshot = structuredClone(documents).map(doc => ({ ...doc, _rev: 'fixture' }))
+const migratedLink = docsSnapshot.find(doc => doc._id === docsWithOptionalLinks._id).optionalLinks[0]
+migratedLink.href = `/v3${migratedLink.href}`
+assert.equal(planDocsImport(docsSnapshot).changed.length, 0, 'Legacy V3 Docs href alone does not look like an editor change')
+migratedLink.label += ' edited'
+assert.deepEqual(planDocsImport(docsSnapshot).changed, [docsWithOptionalLinks._id], 'Unrelated Docs edits remain visible')
 assert.deepEqual(Object.fromEntries(contract.v3DocGroups.map(group => [group, documents.filter(doc => doc.group === group).length])), { 'Understand Doefin': 6, 'Use the app': 8, Reference: 4 })
 assert.equal(documents.filter(doc => doc.reviewDateSource === 'legacy-shared-review-date').length, 13)
 for (const [order, original] of docsSeed.entries()) {
@@ -180,7 +187,7 @@ const failedPublish = actionFactory(() => ({ label: 'Publish', onHandle() { dele
 await failedPublish({ id: 'new-doc-id' }).onHandle()
 assert.equal(delegated, 1, 'Stamp failure must not delegate publish')
 assert.equal(failed.length, 2)
-const config = loadTypescript('studio/sanity.config.ts', { sanity: { defineConfig: value => value }, 'sanity/structure': { structureTool: () => ({}) }, './permanentSlugPublishAction': { permanentSlugPublishAction: actionFactory }, './schemaTypes/glossaryTerm': { glossaryTerm: {} }, './schemaTypes/topic': { topic: {} }, './schemaTypes/editorialArticle': { editorialArticle: {} }, './schemaTypes/toolGuide': { toolGuide: {} }, './schemaTypes/faqItem': { faqItem: {} }, './schemaTypes/homeFaqPlacement': { homeFaqPlacement: {} }, './schemaTypes/docPage': { docPage: schema } }).default
+const config = loadTypescript('studio/sanity.config.ts', { sanity: { defineConfig: value => value }, 'sanity/structure': { structureTool: () => ({}) }, './permanentSlugPublishAction': { permanentSlugPublishAction: actionFactory }, './schemaTypes/glossaryTerm': { glossaryTerm: {} }, './schemaTypes/topic': { topic: {} }, './schemaTypes/editorialArticle': { editorialArticle: {} }, './schemaTypes/toolGuide': { toolGuide: {} }, './schemaTypes/faqItem': { faqItem: {} }, './schemaTypes/homeFaqPlacement': { homeFaqPlacement: {} }, './schemaTypes/docPage': { docPage: schema }, './schemaTypes/aboutPage': { aboutPage: {} }, './schemaTypes/authorProfile': { authorProfile: {} }, './schemaTypes/researchReport': { researchReport: {} }, './schemaTypes/researchMethodology': { researchMethodology: {} } }).default
 const actions = ['publish', 'duplicate', 'restore', 'unpublish'].map(name => Object.assign(() => ({ label: name }), { action: name }))
 assert.deepEqual(config.document.actions(actions, { schemaType: 'docPage', getClient: () => actionClient }).map(action => action.action), ['publish', 'unpublish'])
 console.log('Passed 18 Docs seed fidelity/order/anchors/dates/definitions/steps, weak related identity safety, raw draft-aware create-only import and preservation of 40 existing records, idempotence, and actual Studio validators/publish failure guards.')

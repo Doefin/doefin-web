@@ -5,27 +5,46 @@
  * shipped invisible to every search engine. This is the guard that stops it
  * happening here. Run after `next build`.
  */
-import { readFile } from 'node:fs/promises'
-import { join } from 'node:path'
+import { readFile, readdir } from 'node:fs/promises'
+import { join, relative, sep } from 'node:path'
 
 const ROOT = join(process.cwd(), '.next', 'server', 'app')
 const MIN_WORDS = 120
 const base = process.argv.find(a => a.startsWith('--base='))?.slice(7)
 
 const PAGES = [
-  ['v3.html', 'V3 home'],
-  ['v3/academy/guides/hosting-effective-rate.html', 'V3 calculator guide'],
-  ['v3/docs.html', 'V3 Docs index'],
-  ['v3/docs/key-terms.html', 'V3 Docs definitions'],
-  ['v3/resources.html', 'V3 resources'],
-  ['v3/tools/difficulty-exposure.html', 'V3 enhanced tool'],
-  ['v3/product/settlement.html', 'V3 settlement'],
-  ['v3/glossary/hashprice.html', 'V3 glossary'],
-  ['v3/research/difficulty-forecast-accuracy-2026.html', 'V3 research'],
-  ['v3/learn/difficulty-exposure.html', 'V3 tutorial'],
-  ['v3/data/difficulty.html', 'V3 difficulty data'],
-  ['v3/for/miners.html', 'V3 miners planner'],
+  ['/', 'Home'],
+  ['/academy/guides/hosting-effective-rate', 'Calculator guide'],
+  ['/docs', 'Docs index'],
+  ['/docs/key-terms', 'Docs definitions'],
+  ['/resources', 'Resources'],
+  ['/tools/difficulty-exposure', 'Enhanced tool'],
+  ['/product/settlement', 'Settlement'],
+  ['/glossary/hashprice', 'Glossary'],
+  ['/research/difficulty-forecast-accuracy-2026', 'Research'],
+  ['/learn/difficulty-exposure', 'Tutorial'],
+  ['/data/difficulty', 'Difficulty data'],
+  ['/for/miners', 'Miners planner'],
 ]
+
+const builtFiles = []
+const collectHtml = async directory => {
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const file = join(directory, entry.name)
+    if (entry.isDirectory()) await collectHtml(file)
+    else if (entry.name.endsWith('.html')) builtFiles.push(file)
+  }
+}
+await collectHtml(ROOT)
+const artifactRoute = file => {
+  const segments = relative(ROOT, file).split(sep).filter(segment => !/^\(.*\)$/.test(segment))
+  const route = `/${segments.join('/')}`.replace(/\.html$/, '')
+  return route === '/index' ? '/' : route
+}
+const builtPath = path => {
+  const match = builtFiles.find(file => artifactRoute(file) === path)
+  return match ?? join(ROOT, `${path === '/' ? 'index' : path.slice(1)}.html`)
+}
 
 const text = (html) =>
   html
@@ -40,10 +59,10 @@ for (const [file, label] of PAGES) {
   let html
   try {
     if (base) {
-      const response = await fetch(base + '/' + file.replace(/\.html$/, ''))
+      const response = await fetch(base + file)
       if (!response.ok) throw new Error(`HTTP ${response.status}`)
       html = await response.text()
-    } else html = await readFile(join(ROOT, file), 'utf8')
+    } else html = await readFile(builtPath(file), 'utf8')
   } catch {
     console.error(`FAIL  ${label.padEnd(22)} ${file} not found — did the build run?`)
     failed++
