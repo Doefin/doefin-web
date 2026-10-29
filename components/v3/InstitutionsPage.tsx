@@ -6,10 +6,10 @@ import { seo } from '@/lib/seo'
 import { site } from '@/lib/site'
 import styles from './audience.module.css'
 
-export const metadata = seo({ title: 'Doefin for finance teams, funds and trading desks', description: 'Prepare a CFO or treasury review of mining difficulty exposure. Share production scenarios, check mandate and settlement questions, then inspect a contract with your team.', path: '/v3/for/institutions' })
+export const metadata = seo({ title: 'Doefin for finance teams, funds and trading desks', description: 'Trade your view on Bitcoin network hashrate through markets on mining difficulty. Inspect the contracts and prepare a review with your team.', path: '/v3/for/institutions' })
 
 const reading = [
-  ['01', 'Settlement & payout', 'What is observed, when it resolves and how winning tokens redeem.', '/v3/docs/how-settlement-works'],
+  ['01', 'Settlement & payout', 'What is observed, when it resolves and how winning shares redeem.', '/v3/docs/how-settlement-works'],
   ['02', 'Execution & liquidity', 'Market and limit orders, available depth and unfilled amounts.', '/v3/docs/market-vs-limit-orders'],
   ['03', 'Contracts & operations', 'The deployment and technical evidence your review needs.', '/v3/docs/smart-contracts'],
 ]
@@ -26,17 +26,17 @@ export default function InstitutionsPage() {
       <aside className={styles.mandate} aria-label="Instrument at a glance">
         <span className={styles.eyebrow}>The instrument</span>
         <p>Bitcoin mining difficulty<br /><strong>Binary outcome. Defined block.</strong></p>
-        <dl><div><dt>Reference</dt><dd>Network difficulty</dd></div><div><dt>Position</dt><dd>Buy YES or NO</dd></div><div><dt>Winning payout</dt><dd>Fixed per token</dd></div></dl>
-        <Link href="/v3/docs/risks-and-limitations" className={styles.textLink}>Read the risk framework <Arrow /></Link>
+        <dl><div><dt>Reference</dt><dd>Network difficulty</dd></div><div><dt>Position</dt><dd>Buy Yes or No shares</dd></div><div><dt>Winning payout</dt><dd>Fixed per share</dd></div></dl>
+        <Link href="/v3/docs/risks-and-limitations" className={styles.textLink}>Read risks and limitations <Arrow /></Link>
       </aside>
     </div>
 
     <section id="finance-review" className={styles.diligence} aria-labelledby="finance-review-title">
-      <div className={styles.sectionHeading}><div><p className={styles.eyebrow}>From analysis to an internal decision</p><h2 id="finance-review-title">Give each reviewer the evidence they need.</h2></div><p>A reader can explore the public material freely. A capital decision needs the organisation’s own exposure, constraints and approval process.</p></div>
+      <div className={styles.sectionHeading}><div><p className={styles.eyebrow}>From analysis to an internal decision</p><h2 id="finance-review-title">Give each reviewer the evidence they need.</h2></div><p>The public material is free to explore. A capital decision needs your organisation’s own exposure, constraints and approval process.</p></div>
       <div className={styles.readingGrid}>
         <div className={styles.readingCard}><span className={styles.readingNumber}>CFO &amp; treasury</span><h3>Define the business question.</h3><p>Which production period matters? What BTC production range changes your cash plan? Record your assumptions and compare scenarios before considering position size or funding.</p><Link href="/v3/tools/difficulty-exposure" className={styles.textLink}>Prepare a production scenario <Arrow /></Link></div>
         <div className={styles.readingCard}><span className={styles.readingNumber}>Funds, desks &amp; credit teams</span><h3>Check the mandate and the instrument.</h3><p>Identify the observation block, threshold, collateral and payout. Assess whether the instrument fits your thesis or borrower review. Production exposure and contract payout are separate calculations.</p><a href="#market-explorer" className={styles.textLink}>Inspect the contracts <Arrow /></a></div>
-        <div className={styles.readingCard}><span className={styles.readingNumber}>Internal champion</span><h3>Make the review forwardable.</h3><p>Use the scenario brief to share your inputs, results and model limits. Add the intended decision and the open questions. Keep private discussion notes out of public links.</p><Link href="/v3/tools/difficulty-exposure#scenario-brief" className={styles.textLink}>Build a team brief <Arrow /></Link></div>
+        <div className={styles.readingCard}><span className={styles.readingNumber}>Review lead</span><h3>Make the review easy to forward.</h3><p>Use the scenario brief to share your inputs, results and model limits. Add the intended decision and the open questions. Keep private discussion notes out of public links.</p><Link href="/v3/tools/difficulty-exposure#scenario-brief" className={styles.textLink}>Build a team brief <Arrow /></Link></div>
       </div>
       <div className="mt-7 rounded-panel border border-white/10 p-5 sm:p-7">
         <h3 className="text-lg font-semibold">Questions to resolve with your approvers</h3>
@@ -56,7 +56,7 @@ export default function InstitutionsPage() {
     <section id="review-checklist" className={styles.diligence} aria-labelledby="desk-diligence-title">
       <div className={styles.sectionHeading}><div><p className={styles.eyebrow}>Before committing capital</p><h2 id="desk-diligence-title">Build your review.</h2></div><p>A public snapshot helps you identify an instrument. Your mandate, execution and operational checks remain essential.</p></div>
       <div className={styles.readingGrid}>{reading.map(([number, title, body, href]) => <Link key={href} href={href} className={styles.readingCard}><span className={styles.readingNumber}>{number}</span><h3>{title} <Arrow /></h3><p>{body}</p></Link>)}</div>
-      <div className={styles.reviewStrip}><div><h3>Bring the specific contract to your team.</h3><p>Review size and fees, collateral and funding, exit constraints, settlement and redemption, and the approvals your mandate requires.</p></div><a href={`mailto:${site.contactEmail}?subject=Doefin%20desk%20review`} className={styles.textLink}>Talk to the team <Arrow diagonal /></a></div>
+      <div className={styles.reviewStrip}><div><h3>Bring the specific contract to your team.</h3><p>Review size and fees, collateral and funding, exit constraints, settlement and redemption, and the approvals your mandate requires.</p></div><a href={`mailto:${site.contactEmail}?subject=Doefin%20desk%20review`} className={styles.textLink}>Contact the team <Arrow diagonal /></a></div>
     </section>
   </Container>
 }

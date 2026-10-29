@@ -33,9 +33,9 @@ export type Ref = {
 
 const HUB: Record<RefKind, { href: string; label: string; note: string }> = {
   post: { href: '/blog', label: 'All notes', note: 'Shorter pieces on mining economics and method.' },
-  academy: { href: '/academy', label: 'Academy', note: 'How difficulty, hashrate and hashprice actually work.' },
+  academy: { href: '/academy', label: 'Academy', note: 'How difficulty, hashrate and hashprice work.' },
   research: { href: '/research', label: 'Research', note: 'Dated reports, with their sources and confidence.' },
-  glossary: { href: '/glossary', label: 'Glossary', note: 'Definitions, each written to be quoted.' },
+  glossary: { href: '/glossary', label: 'Glossary', note: 'Short definitions of mining, network and forecast terms.' },
 }
 
 /** Every editorial item, with the glossary terms it actually mentions. */

@@ -39,14 +39,14 @@ export function DifficultyReadingPanel({ result, detail = false }: { result: Bac
 export function HashrateReadingPanel({ result, detail = false }: { result: BackendData<CurrentHashrate>; detail?: boolean }) {
   if (result.status !== 'available') {
     const state = sourceStatus(result)
-    return <article role="status" className={`${dataPanel} border-caution/30`}><div className="flex flex-wrap items-center justify-between gap-3"><h2 className="text-lg font-bold tracking-tight">Observed network hashrate</h2><span className="text-[10px] font-bold uppercase tracking-wider text-caution">Unavailable</span></div><p className="mt-4 text-sm font-semibold text-body">{state.heading}</p><p className="mt-2 text-xs leading-relaxed text-subtle">{state.message}</p><p className="mt-3 text-[11px] text-subtle">Response checked {receivedAt(result.receivedAt)}.</p><p className="mt-4 border-t border-white/10 pt-4 text-xs leading-relaxed text-subtle">No synthetic center or authored spread is substituted for backend data.</p><BrowserAnalyticsFallback kind="hashrate" serverStatus={result.status} />{!detail && <Link href="/v3/data/hashrate" className="mt-3 inline-flex min-h-10 items-center gap-2 text-xs font-bold text-highlight hover:underline">Open hashrate guide <Arrow className="h-4 w-4" /></Link>}</article>
+    return <article role="status" className={`${dataPanel} border-caution/30`}><div className="flex flex-wrap items-center justify-between gap-3"><h2 className="text-lg font-bold tracking-tight">Observed network hashrate</h2><span className="text-[10px] font-bold uppercase tracking-wider text-caution">Unavailable</span></div><p className="mt-4 text-sm font-semibold text-body">{state.heading}</p><p className="mt-2 text-xs leading-relaxed text-subtle">{state.message}</p><p className="mt-3 text-[11px] text-subtle">Response checked {receivedAt(result.receivedAt)}.</p><p className="mt-4 border-t border-white/10 pt-4 text-xs leading-relaxed text-subtle">No synthetic centre or authored spread is substituted for backend data.</p><BrowserAnalyticsFallback kind="hashrate" serverStatus={result.status} />{!detail && <Link href="/v3/data/hashrate" className="mt-3 inline-flex min-h-10 items-center gap-2 text-xs font-bold text-highlight hover:underline">Open hashrate guide <Arrow className="h-4 w-4" /></Link>}</article>
   }
   const data = result.data, freshness = hashrateFreshness(data.timestamp, result.receivedAt)
   const ageMinutes = Math.max(0, (Date.parse(result.receivedAt) - data.timestamp * 1000) / 60000)
   const windows = [
     ['120 blocks (~20 hours)', data.rolling_avg_hashrate_120],
     ['144 blocks (~1 day)', data.rolling_avg_hashrate_144],
-    ['2016 blocks (~2 weeks)', data.rolling_avg_hashrate_2016],
+    ['2,016 blocks (~2 weeks)', data.rolling_avg_hashrate_2016],
   ] as const
   const present = windows.filter(([, raw]) => raw !== null)
   return <article className="overflow-hidden rounded-panel border border-chart/25 bg-gradient-to-br from-surfaceAlt/70 to-surface/20">

@@ -92,7 +92,7 @@ export default async function V3ToolsIndex() {
     <div className="mt-5 grid items-stretch gap-5 lg:grid-cols-2">
       <section aria-labelledby="exposure-title" className="flex min-w-0 flex-col rounded-panel border border-white/10 bg-surface/35 p-5 sm:p-7">
         <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-highlight"><span className="tabular mr-3 text-subtle">02</span>Production sensitivity</p>
-        <h2 id="exposure-title" className="mt-4 max-w-md text-balance text-[26px] font-extrabold leading-tight tracking-[-0.03em] sm:text-[28px]">What does a difficulty change mean for your BTC?</h2>
+        <h2 id="exposure-title" className="mt-4 max-w-md text-balance text-[26px] font-extrabold leading-tight tracking-[-0.03em] sm:text-[28px]">How much does difficulty change your expected BTC production?</h2>
         <p className="mt-3 text-sm leading-[1.8] text-subtle">Hold your fleet and time window constant. Compare the BTC produced under two difficulty scenarios.</p>
         <div className="mt-5"><StartLink slug={exposure.slug}>Size difficulty exposure</StartLink></div>
         <Inputs>Fleet hashrate · time window · starting difficulty · scenario changes · fees and BTC price</Inputs>
@@ -103,8 +103,8 @@ export default async function V3ToolsIndex() {
           <div className="mt-5 space-y-4">
             {[{ label: 'Difficulty unchanged', value: example.base }, { label: `Difficulty +${exampleInputs.high}%`, value: example.atHigh }].map(row => <div key={row.label}><div className="mb-2 flex items-baseline justify-between gap-3"><p className="tabular text-[11px] text-subtle">{row.label}</p><p className="tabular text-sm font-bold">{row.value.toFixed(3)} <span className="text-[10px] font-medium text-subtle">BTC</span></p></div><div aria-hidden="true" className="h-2 rounded-full bg-active/50"><div className="h-2 rounded-full bg-chart" style={{ width: `${row.value / example.base * 100}%` }} /></div></div>)}
           </div>
-          <p className="mt-5 text-xs leading-relaxed text-subtle"><strong className="tabular font-bold text-body">{example.lossHigh.toFixed(3)} BTC less</strong> with the difficulty increase.</p>
-          <p className="mt-3 border-t border-white/10 pt-3 text-[11px] leading-[1.8] text-subtle">Sample: <span className="tabular">{exampleInputs.eh} EH/s</span> over <span className="tabular">{exampleInputs.epochs}</span> target {exampleInputs.epochs === 1 ? 'epoch' : 'epochs'} (~<span className="tabular">{example.weeks}</span> weeks), starting at <span className="tabular">{exampleInputs.diffT} T</span>; <span className="tabular">{exampleInputs.fees} BTC</span> fees per block and fixed <span className="tabular">3.125 BTC</span> subsidy. Excludes uptime and pool fees. Figures rounded to three decimals.</p>
+          <p className="mt-5 text-xs leading-relaxed text-subtle"><strong className="tabular font-bold text-body">{example.lossHigh.toFixed(3)} BTC less</strong> expected production with the difficulty increase.</p>
+          <p className="mt-3 border-t border-white/10 pt-3 text-[11px] leading-[1.8] text-subtle">Sample: <span className="tabular">{exampleInputs.eh} EH/s</span> over <span className="tabular">{exampleInputs.epochs}</span> target {exampleInputs.epochs === 1 ? 'epoch' : 'epochs'} (~<span className="tabular">{example.weeks}</span> weeks), starting at <span className="tabular">{exampleInputs.diffT}T</span>; <span className="tabular">{exampleInputs.fees} BTC</span> fees per block and fixed <span className="tabular">3.125 BTC</span> subsidy. Excludes uptime and pool fees. Figures rounded to three decimals.</p>
           <Link href={tutorial.calculatorHref} className={`mt-3 inline-flex min-h-10 items-center gap-3 text-xs font-bold text-highlight hover:underline ${focus}`}>Load this example<Arrow className="h-4 w-4" /></Link>
         </figure>
         <div className="mt-auto"><GuideLink slug={exposure.slug} title={guideTitle(exposure.slug)} /></div>
@@ -112,7 +112,7 @@ export default async function V3ToolsIndex() {
 
       <section aria-labelledby="payback-title" className="flex min-w-0 flex-col rounded-panel border border-white/10 bg-surface/35 p-5 sm:p-7">
         <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-highlight"><span className="tabular mr-3 text-subtle">03</span>Capital recovery</p>
-        <h2 id="payback-title" className="mt-4 max-w-md text-balance text-[26px] font-extrabold leading-tight tracking-[-0.03em] sm:text-[28px]">When could the fleet earn back its cost?</h2>
+        <h2 id="payback-title" className="mt-4 max-w-md text-balance text-[26px] font-extrabold leading-tight tracking-[-0.03em] sm:text-[28px]">When could the fleet recover its cost?</h2>
         <p className="mt-3 text-sm leading-[1.8] text-subtle">{payback.description}</p>
         <div className="mt-5"><StartLink slug={payback.slug}>Test fleet payback</StartLink></div>
         <Inputs>Fleet hashrate and efficiency · all-in power rate · upfront cost · BTC price · difficulty and horizon</Inputs>
@@ -134,7 +134,7 @@ export default async function V3ToolsIndex() {
     </div>
 
     <aside aria-labelledby="tools-note-title" className="mt-8 grid gap-5 border-y border-white/10 py-6 sm:mt-10 sm:grid-cols-[1fr_1fr] sm:gap-12 sm:py-7">
-      <div><h2 id="tools-note-title" className="text-sm font-bold">Your assumptions. An inspectable result.</h2><p className="mt-2 max-w-xl text-xs leading-[1.9] text-subtle">Each calculator starts with illustrative inputs, not live data. Replace them with your own numbers; the page URL keeps the scenario so you can return to it or share it.</p></div>
+      <div><h2 id="tools-note-title" className="text-sm font-bold">Use your own assumptions.</h2><p className="mt-2 max-w-xl text-xs leading-[1.9] text-subtle">Each calculator starts with illustrative inputs, not live data. Replace them with your own numbers; the page URL keeps the scenario so you can return to it or share it.</p></div>
       <div><p className="text-sm font-bold">Production and contract settlement are different.</p><p className="mt-2 text-xs leading-[1.9] text-subtle">A BTC production change is not a contract payout or an order size.</p><Link href="/v3/product/settlement" className={`mt-2 inline-flex min-h-10 items-center gap-3 text-xs font-semibold text-highlight hover:underline ${focus}`}>Read how settlement works<Arrow className="h-4 w-4" /></Link></div>
     </aside>
   </Container></GuidesPublicationProvider>

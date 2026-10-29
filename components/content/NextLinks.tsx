@@ -45,7 +45,7 @@ export function Reviewed({ date = REVIEWED }: { date?: string }) {
       <time dateTime={date}>
         {new Date(date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
       </time>
-      . Figures marked illustrative are placeholders until the data pipeline is connected.
+      . Figures marked illustrative are placeholders, not live data.
     </p>
   )
 }

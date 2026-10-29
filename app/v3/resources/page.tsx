@@ -9,7 +9,7 @@ import { seo } from '@/lib/seo'
 import { site } from '@/lib/site'
 
 export const metadata: Metadata = {
-  ...seo({ title: 'Resources: guides, tools and mining glossary', description: 'Understand Bitcoin difficulty, compare mining scenarios and explore guides, articles, definitions, captured retarget observations and clearly labelled synthetic exercises.', path: '/v3/resources' }),
+  ...seo({ title: 'Resources: guides, tools and mining glossary', description: 'Understand Bitcoin difficulty and compare mining scenarios: guides, articles, definitions, captured difficulty adjustments and labelled synthetic exercises.', path: '/v3/resources' }),
   robots: { index: false, follow: false },
 }
 
@@ -89,7 +89,7 @@ export default async function Resources() {
         </div>)}
       </div>
       <Link href="/v3/learn/difficulty-exposure" data-v3-cta="tutorial" data-v3-placement="resources" className="mt-7 flex flex-wrap items-center justify-between gap-3 rounded-panel border border-white/10 bg-surface/40 px-6 py-5 hover:border-brand/40">
-        <span><span className="block text-xs font-semibold text-subtle">Prefer a practical walkthrough?</span><span className="mt-2 block font-semibold">Measure your fleet’s difficulty exposure</span></span><span className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight">Follow the four steps <Arrow /></span>
+        <span><span className="block text-xs font-semibold text-subtle">Prefer a practical walkthrough?</span><span className="mt-2 block font-semibold">Estimate your fleet’s difficulty exposure</span></span><span className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight">Follow the four steps <Arrow /></span>
       </Link>
     </section>
 
@@ -102,7 +102,7 @@ export default async function Resources() {
       </div>
       <div className="border-t border-white/10 pt-6 md:border-l md:border-t-0 md:pl-8 md:pt-0">
         <h3 className="text-lg font-bold">Looking up an app or market term?</h3>
-        <p className="mt-3 text-sm leading-relaxed text-subtle">Find concise explanations of position tokens, collateral, orders, resolution and redemption in the Docs.</p>
+        <p className="mt-3 text-sm leading-relaxed text-subtle">Find concise explanations of shares (position tokens), collateral, orders, resolution and redemption in the docs.</p>
         <Link href="/v3/docs/key-terms" className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">Read market key terms <Arrow /></Link>
       </div>
     </section>
@@ -111,8 +111,8 @@ export default async function Resources() {
       <div className="max-w-2xl">
         <p className="text-xs font-bold uppercase tracking-[0.12em] text-subtle">Research &amp; data</p>
         <h2 id="resources-research" className="mt-3 text-3xl font-bold tracking-[-0.03em]">Inspect the observations. Understand the methods.</h2>
-        <p className="mt-4 text-[15px] leading-relaxed text-subtle">Explore a frozen capture of observed difficulty retargets, inspect its provenance and reuse its dataset. Separate teaching exercises show how forecast-error arithmetic works.</p>
-        <p className="mt-4 border-l-2 border-caution/60 pl-4 text-sm leading-relaxed text-subtle"><strong className="font-semibold text-caution">Different evidence, clearly labelled.</strong> The observed-retarget report uses captured network data. Forecast comparisons and error exercises use authored synthetic values. Neither establishes live forecasts, measured estimator performance or a verified prediction track record.</p>
+        <p className="mt-4 text-[15px] leading-relaxed text-subtle">Explore a frozen capture of observed difficulty adjustments, inspect its provenance and reuse its dataset. Separate teaching exercises show how forecast-error arithmetic works.</p>
+        <p className="mt-4 border-l-2 border-caution/60 pl-4 text-sm leading-relaxed text-subtle"><strong className="font-semibold text-caution">Different evidence, clearly labelled.</strong> The report on observed difficulty adjustments uses captured network data. Forecast comparisons and error exercises use authored synthetic values. Neither establishes live forecasts, measured estimator performance or a verified prediction track record.</p>
       </div>
       {reports.length === 0 ? <p role="status" className="mt-7 border-y border-white/10 py-6 text-sm text-subtle">No published research reports are available yet.</p> : <ul className="mt-7 divide-y divide-white/10 border-y border-white/10">
         {[
@@ -127,7 +127,7 @@ export default async function Resources() {
 
     <section id="updates" aria-labelledby="resources-contact" className="mt-14 flex scroll-mt-28 flex-wrap items-center justify-between gap-5 border-t border-white/10 pt-7">
       <div className="max-w-2xl"><h2 id="resources-contact" className="text-xl font-bold">Need a detail you cannot find?</h2><p className="mt-3 text-sm leading-relaxed text-subtle">Ask the team about the product or the evidence your review needs.</p><p className="mt-2 text-xs leading-relaxed text-subtle">Preview research email preferences, publication alerts or a requested report email. This demo does not send emails or save personal details.</p></div>
-      <div className="flex flex-wrap gap-x-6 gap-y-2"><a href={'mailto:' + site.contactEmail} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">Ask the team <Arrow diagonal /></a><Link href="/v3/newsletter" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">Explore research emails <Arrow /></Link></div>
+      <div className="flex flex-wrap gap-x-6 gap-y-2"><a href={'mailto:' + site.contactEmail} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">Contact the team <Arrow diagonal /></a><Link href="/v3/newsletter" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">Explore research emails <Arrow /></Link></div>
     </section>
   </Container></GuidesPublicationProvider>
 }

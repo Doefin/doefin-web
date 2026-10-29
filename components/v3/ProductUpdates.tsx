@@ -11,7 +11,7 @@ export function ProductUpdates() {
       <p className={`v37-eyebrow ${styles.eyebrow}`}><EnvelopeSimple size={16} aria-hidden="true" />Stay informed</p>
       <h2 id="updates-title" className="v37-heading">Follow the<br /><span className={styles.accent}>difficulty markets.</span></h2>
       <p className={`v37-copy ${styles.description}`}>Get difficulty market updates, trading activity and network hashrate insights. Choose research emails, product updates or publication alerts.</p>
-      <ul className={styles.topics} aria-label="What research emails cover"><li><ChartLine size={18} aria-hidden="true" />Retarget research</li><li><Lightning size={18} aria-hidden="true" />New publications</li></ul>
+      <ul className={styles.topics} aria-label="What research emails cover"><li><ChartLine size={18} aria-hidden="true" />Difficulty adjustment research</li><li><Lightning size={18} aria-hidden="true" />New publications</li></ul>
       <NewsletterForm />
     </div>
     <figure className={styles.art} aria-hidden="true"><Image src="/images/v3/product-updates-envelope.png" width={1254} height={1254} alt="" sizes="(max-width: 639px) 240px, (max-width: 899px) 300px, (max-width: 1199px) 380px, 490px" /></figure>

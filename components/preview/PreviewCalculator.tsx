@@ -17,7 +17,7 @@ function Action({ href, title, children }: { href: string; title: string; childr
 export function PreviewCalculator({ slug }: { slug: string }) {
   const [savedQuote, setSavedQuote] = useState<number | null>(null)
   if (slug === 'difficulty-exposure') return <ExposureSizer enhanced nextStep={
-    <Action href={preview.settlement} title="Understand settlement">See how a binary contract differs from the production range you just measured.</Action>
+    <Action href={preview.settlement} title="Understand settlement">See how a binary contract differs from the production range you just estimated.</Action>
   } />
   if (slug === 'fleet-payback') return <PaybackModel enhanced nextStep={
     <Action href={preview.exposure} title="Explore difficulty exposure">Look at the production effect separately from power cost and capital recovery.</Action>

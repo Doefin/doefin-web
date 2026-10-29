@@ -15,7 +15,7 @@ const lessonThemes: Record<string, { label: string }> = {
 
 const guideThemes: Record<string, { label: string; inputs: string; outcome: string }> = {
   'hosting-effective-rate': { label: 'Compare hosting', inputs: 'Power rate · fees · lost hours', outcome: 'Effective cost per kWh' },
-  'difficulty-exposure': { label: 'Size production exposure', inputs: 'Hashrate · time window · difficulty', outcome: 'BTC across difficulty scenarios' },
+  'difficulty-exposure': { label: 'Size production exposure', inputs: 'Hashrate · time window · difficulty', outcome: 'Expected BTC production across difficulty scenarios' },
   'fleet-payback': { label: 'Test fleet payback', inputs: 'Fleet cost · power · difficulty growth', outcome: 'Payback across assumptions' },
 }
 
@@ -43,8 +43,8 @@ export async function V3AcademyIndex() {
 
     <section id="foundations" aria-labelledby="foundations-title" className="scroll-mt-28 [overflow-wrap:anywhere]">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-x-5 gap-y-2">
-        <h2 id="foundations-title" className="text-lg font-bold tracking-tight">Build the foundations</h2>
-        <Link href="#guides" className="inline-flex min-h-10 items-center gap-2 text-xs font-semibold text-highlight underline-offset-4 hover:underline">Here for the calculators? <span aria-hidden="true">↓</span></Link>
+        <h2 id="foundations-title" className="text-lg font-bold tracking-tight">Start with the lessons</h2>
+        <Link href="#guides" className="inline-flex min-h-10 items-center gap-2 text-xs font-semibold text-highlight underline-offset-4 hover:underline">Go to the calculator guides <span aria-hidden="true">↓</span></Link>
       </div>
       {!lessons.length && <p role="status" className="py-5 text-subtle">No Academy lessons have been published yet.</p>}
       <div className="grid gap-4 lg:grid-cols-[1.1fr_1fr]">
@@ -74,7 +74,7 @@ export async function V3AcademyIndex() {
     </section>
 
     <section id="guides" aria-labelledby="guides-title" className="[overflow-wrap:anywhere] mt-10 scroll-mt-28 border-t border-white/10 pt-7 sm:mt-14 sm:pt-9">
-      <div className="mb-6 flex flex-wrap items-end justify-between gap-x-8 gap-y-3"><div><p className="text-[10px] font-bold uppercase tracking-[0.12em] text-highlight">Put it into practice</p><h2 id="guides-title" className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">One question. A worked guide.</h2><p className="mt-3 max-w-2xl text-sm leading-relaxed text-subtle">Find the inputs, follow a worked example and learn how to read the result.</p></div><Link href="/v3/tools" className="inline-flex min-h-10 items-center gap-2 text-xs font-semibold text-highlight hover:underline">All calculators <Arrow className="h-4 w-4" /></Link></div>
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-x-8 gap-y-3"><div><p className="text-[10px] font-bold uppercase tracking-[0.12em] text-highlight">Put it into practice</p><h2 id="guides-title" className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">Each guide answers one question.</h2><p className="mt-3 max-w-2xl text-sm leading-relaxed text-subtle">Find the inputs, follow a worked example and learn how to read the result.</p></div><Link href="/v3/tools" className="inline-flex min-h-10 items-center gap-2 text-xs font-semibold text-highlight hover:underline">All calculators <Arrow className="h-4 w-4" /></Link></div>
       <div className="overflow-hidden rounded-panel border border-white/10 bg-surface/30">
         {!guides.length && <p role="status" className="p-5 text-subtle">No calculator guides are currently published.</p>}
         {guides.map(({ slug, toolSlug, guide }) => <article key={slug} className="grid gap-5 border-b border-white/10 p-5 last:border-b-0 sm:p-7 lg:grid-cols-[10rem_1fr_auto] lg:gap-8">
@@ -87,7 +87,7 @@ export async function V3AcademyIndex() {
     </section>
 
     <aside aria-label="Learning resources" className="mt-10 grid gap-5 border-t border-white/10 pt-7 sm:mt-12 md:grid-cols-2 md:gap-10">
-      <Link href="/v3/glossary" className="group flex items-start justify-between gap-5 py-2"><div><p className="text-[10px] font-bold uppercase tracking-[0.12em] text-subtle">Keep a reference nearby</p><h2 className="mt-2 text-lg font-bold group-hover:text-highlight">A term you haven't met?</h2><p className="mt-2 text-sm leading-relaxed text-subtle">Look up difficulty, hashprice and the language of mining.</p><span className="mt-3 inline-flex min-h-8 items-center text-xs font-semibold text-highlight">Browse the glossary</span></div><Arrow className="mt-7 h-5 w-5 text-highlight" /></Link>
+      <Link href="/v3/glossary" className="group flex items-start justify-between gap-5 py-2"><div><p className="text-[10px] font-bold uppercase tracking-[0.12em] text-subtle">Keep a reference nearby</p><h2 className="mt-2 text-lg font-bold group-hover:text-highlight">A term you have not met?</h2><p className="mt-2 text-sm leading-relaxed text-subtle">Look up difficulty, hashprice and the language of mining.</p><span className="mt-3 inline-flex min-h-8 items-center text-xs font-semibold text-highlight">Browse the glossary</span></div><Arrow className="mt-7 h-5 w-5 text-highlight" /></Link>
       <Link href="/v3/research" className="group flex items-start justify-between gap-5 border-t border-white/10 py-2 pt-5 md:border-l md:border-t-0 md:pl-10 md:pt-2"><div><p className="text-[10px] font-bold uppercase tracking-[0.12em] text-subtle">Follow the evidence</p><h2 className="mt-2 text-lg font-bold group-hover:text-highlight">See the method in practice.</h2><p className="mt-2 text-sm leading-relaxed text-subtle">Inspect a worked research example and its limitations.</p><span className="mt-3 inline-flex min-h-8 items-center text-xs font-semibold text-highlight">Explore research</span></div><Arrow className="mt-7 h-5 w-5 text-highlight" /></Link>
     </aside>
   </Container></GuidesPublicationProvider>

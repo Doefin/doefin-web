@@ -248,7 +248,7 @@ export function PaybackModel({ enhanced = false, nextStep }: { enhanced?: boolea
           </caption>
           <thead>
             <tr className="bg-surface/60">
-              {['Monthly difficulty growth', 'Payback', `Position at ${v.months} months`].map((h) => (
+              {['Monthly difficulty growth', 'Payback', `Cash position at ${v.months} months`].map((h) => (
                 <th key={h} scope="col" className="border-b border-white/[0.07] px-4 py-3 text-left text-xs font-bold uppercase tracking-[0.1em] text-muted">{h}</th>
               ))}
             </tr>

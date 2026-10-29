@@ -84,7 +84,7 @@ export function V3Chrome({ children }: { children: ReactNode }) {
             <p className="px-3 text-xs font-semibold uppercase tracking-[0.1em] text-subtle">{group.label}</p>
             <ul className="mt-2 grid min-[420px]:grid-cols-2">{group.items.map(item => <li key={item.href}><Link href={item.href} data-v3-cta={navigationCta(item.href)} data-v3-placement="header" onClick={closeNavigation} aria-current={pathname === item.href ? 'page' : undefined} className="block rounded-lg px-3 py-2.5 hover:bg-white/5"><span className="block text-sm font-semibold text-body">{item.label}</span><span className="mt-1 block text-xs leading-relaxed text-subtle">{item.description}</span></Link></li>)}</ul>
           </div>)}
-          {!commentary && <a href={'mailto:' + site.contactEmail} className="block px-3 py-3 text-sm text-highlight">Talk to the team ↗</a>}
+          {!commentary && <a href={'mailto:' + site.contactEmail} className="block px-3 py-3 text-sm text-highlight">Contact the team ↗</a>}
         </nav>
       </Container>
     </header>
