@@ -9,8 +9,8 @@ export function ProductUpdates() {
   return <div className={styles.layout} data-reveal>
     <div className={styles.copy}>
       <p className={`v37-eyebrow ${styles.eyebrow}`}><EnvelopeSimple size={16} aria-hidden="true" />Stay informed</p>
-      <h2 id="updates-title" className="v37-heading">Follow the next<br /><span className={styles.accent}>difficulty retarget.</span></h2>
-      <p className={`v37-copy ${styles.description}`}>Research you can inspect: observed retargets, methods and reusable datasets. Choose research emails, product updates or publication alerts.</p>
+      <h2 id="updates-title" className="v37-heading">Follow the<br /><span className={styles.accent}>difficulty markets.</span></h2>
+      <p className={`v37-copy ${styles.description}`}>Get difficulty market updates, trading activity and network hashrate insights. Choose research emails, product updates or publication alerts.</p>
       <ul className={styles.topics} aria-label="What research emails cover"><li><ChartLine size={18} aria-hidden="true" />Retarget research</li><li><Lightning size={18} aria-hidden="true" />New publications</li></ul>
       <NewsletterForm />
     </div>

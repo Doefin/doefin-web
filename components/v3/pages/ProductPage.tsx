@@ -8,13 +8,13 @@ export const metadata = previewSeo('A market on Bitcoin difficulty', 'Understand
 
 export default function ProductPreview() {
   return <>
-    <PageIntro section="Product" title="A defined view on Bitcoin difficulty."
-      description="Doefin markets let professional investors take positions on mining difficulty at a specified block height. Start with the mechanics, then explore the market.">
-      <div className="flex flex-wrap gap-3"><Button href={preview.settlement}>Understand settlement →</Button><Button href={site.appUrl} external variant="secondary">Open app ↗</Button></div>
+    <PageIntro section="Product" title="Trade hashrate exposure through difficulty markets."
+      description="Doefin lets professional investors take Yes or No positions on whether Bitcoin mining difficulty will be above or below a specified level at a specified block height. Hashrate is the economic exposure; difficulty determines the contract outcome.">
+      <div className="flex flex-wrap gap-3"><Button href={preview.settlement}>Understand settlement →</Button><Button href={site.appUrl} external variant="secondary">Enter app ↗</Button></div>
     </PageIntro>
     <Container className="py-12 sm:py-16">
       <section className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <div><Eyebrow>The contract at a glance</Eyebrow><h2 className={headingClass}>A threshold.<br />An observation.<br />A binary outcome.</h2>
+        <div><Eyebrow>The contract at a glance</Eyebrow>
           <p className="mt-5 text-[17px] leading-[1.75] text-subtle">The product documentation describes an outcome based on public Bitcoin network difficulty. The size of a move past the threshold does not change the full payout.</p>
         </div>
         <dl className={panelClass + ' divide-y divide-white/10'}>
