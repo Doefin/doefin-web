@@ -3,8 +3,16 @@ import type { Config } from 'tailwindcss'
 /**
  * Brand tokens are lifted from the trading app so the two properties read as one
  * company. Do not introduce arbitrary hex values in components — add a token here.
+ *
+ * The company brand (vendor/doefin-brand, see docs/brand.md) adds its own tokens under
+ * a df- prefix (bg-df-surface, text-df-text-muted, rounded-df-panel, text-df-figure).
+ * They read the --df-* variables that app/globals.css imports.
  */
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const doefinBrand = require('./vendor/doefin-brand/dist/tailwind-preset.cjs')
+
 export default {
+  presets: [doefinBrand],
   content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './content/**/*.{ts,tsx}'],
   theme: {
     extend: {

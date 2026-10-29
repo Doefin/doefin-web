@@ -19,6 +19,7 @@ npm run typecheck    # tsc --noEmit
 npm run check:crawlable -- --base=http://127.0.0.1:3039 # after build + start; includes CMS routes
 npm run check:seo -- --base=http://127.0.0.1:3039 # after build + start; titles, canonicals, h1s, schema
 npm run check:tools       # tool microcopy: hints match sliders, presets reachable, length caps
+npm run check:brand       # brand guard: copy you added + the vendored brand untouched (see Brand)
 ```
 
 ## Search and AI visibility
@@ -105,12 +106,30 @@ excuse: read through `@/content`.
 
 ## Brand
 
-Tokens live in `tailwind.config.ts`. **Never write an arbitrary hex value in a
-component** — add a token instead. Full reference: `.claude/skills/brand/SKILL.md`.
+The company brand lives in `vendor/doefin-brand/`, a pinned copy of
+github.com/Doefin/doefin-brand. Its rules apply to every word and every screen on
+this site, and are loaded here (paths inside it are relative to `vendor/doefin-brand/`):
 
+@vendor/doefin-brand/AGENTS.md
+
+- **Run `npm run check:brand` before you finish any change that touches copy.** It
+  fails on generated-sounding phrasing in the lines you added, and on any hand edit
+  to `vendor/doefin-brand/`. After a build, `-- --base=http://127.0.0.1:3039` checks
+  every page, Sanity content included.
+- **Write and edit copy with the voice agents.** `doefin-voice-writer` drafts new copy and
+  `doefin-voice-editor` reviews or rewrites existing copy, both from the CEO's own model
+  (`vendor/doefin-brand/brand/matteo/`). When Matteo edits or comments on copy, run
+  `doefin-voice-learner`: it records the edit in the brand repository.
+- **Never edit `vendor/doefin-brand/` by hand.** Change the brand repository, then
+  `npm run brand:sync -- <tag>`. Why it is vendored and how to update it:
+  [`docs/brand.md`](docs/brand.md).
+- Site tokens live in `tailwind.config.ts` (`ink`, `brand`, `subtle`…). The brand's
+  tokens are also available as `df-*` classes and `--df-*` variables, and
+  `docs/brand.md` maps one to the other. **Never write an arbitrary hex value in a
+  component** — add a token instead. Site reference: `.claude/skills/brand/SKILL.md`.
 - Typeface is **Manrope**, loaded via `next/font`.
-- The wordmark is a **white lockup for dark grounds only**. Never place it on a light
-  surface.
+- On dark grounds use the white wordmark; on light grounds the ink one, from
+  `vendor/doefin-brand/assets/logos/`. Never recolour or redraw it.
 - Panels use `rounded-panel` (22px); headers use `rounded-header` (30px).
 
 ## Placeholder data

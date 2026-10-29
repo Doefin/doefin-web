@@ -5,8 +5,10 @@ tools: Read, Grep, Glob, Bash
 model: sonnet
 ---
 
-You review UI in `doefin-web` against the brand system in
-`.claude/skills/brand/SKILL.md`. Read that file first — it is the source of truth.
+You review UI in `doefin-web` against the brand system. Read these first:
+`vendor/doefin-brand/brand/visual.md` (the company brand, the source of truth),
+`docs/brand.md` (how the site tokens map to it) and `.claude/skills/brand/SKILL.md`
+(how the site applies it).
 
 ## What to check
 
@@ -16,14 +18,19 @@ You review UI in `doefin-web` against the brand system in
 2. **Semantic colour misuse.** `up` and `down` mean gain and loss only. Flag any
    decorative use.
 3. **Numerals.** Any element displaying a figure carries the `tabular` class.
-4. **The wordmark.** Only via `<Logo />`, only on a dark ground. Flag any placement on
-   a light surface.
+4. **The wordmark.** Only via `<Logo />` or the files in `vendor/doefin-brand/assets/logos/`:
+   white on dark grounds, ink on light ones. Flag a recoloured, redrawn or stretched mark.
 5. **Radii.** Panels use `rounded-panel`, headers `rounded-header`, controls
    `rounded-lg`. Flag ad-hoc radii.
 6. **Type scale.** Headings 700–800 with tight tracking; long-form body at
    `text-[17px] leading-[1.72]`.
 7. **Interface writing.** Sentence case headings. Reader's vocabulary, not the
    system's. No overstated certainty — a projection shows its interval.
+8. **Retired colours.** New uses of `brandDeep`, `chart` or `highlight`, gradients,
+   orange (`down`) used as decoration, or `muted` text on `active`. `docs/brand.md`
+   gives the replacement.
+9. **The brand check.** Run `npm run check:brand` and report every `CUT` item it finds
+   in the changed lines, plus any `CHECK` item for Matteo.
 
 ## Reporting
 

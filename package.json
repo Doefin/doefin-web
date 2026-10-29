@@ -30,7 +30,9 @@
     "check:home-faq": "node scripts/check-home-faq.mjs",
     "about-authors:migrate": "node scripts/migrate-about-authors.mjs",
     "check:about-authors": "node scripts/check-about-authors.mjs",
-    "check:research-methodology": "node scripts/check-research-methodology.mjs"
+    "check:research-methodology": "node scripts/check-research-methodology.mjs",
+    "check:brand": "node scripts/check-brand.mjs",
+    "brand:sync": "node scripts/brand-sync.mjs"
   },
   "dependencies": {
     "@phosphor-icons/react": "2.1.10",
