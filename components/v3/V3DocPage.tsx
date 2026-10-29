@@ -33,7 +33,7 @@ export default async function V3DocPage({ params }: { params: Promise<{ slug: st
       {section.definitions ? <dl className="divide-y divide-white/10 border-y border-white/10">{section.definitions.map((item,index) => <div key={index} className="py-4"><dt className="font-semibold">{item.term}</dt><dd className="mt-1.5 text-[16px] leading-[1.75] text-subtle">{item.definition}</dd></div>)}</dl> : null}
     </section>)}</div>
 
-    {doc.optionalLinks?.length ? <aside aria-label="Optional tools" className="mt-9 border-l-2 border-white/20 pl-4"><p className="mb-2 text-xs font-semibold text-subtle">Explore further, if useful</p>{doc.optionalLinks.map(link => <Link key={link.href} href={link.href} className="inline-flex min-h-10 items-center text-sm text-highlight underline-offset-4 hover:underline">{link.label} <span aria-hidden="true" className="ml-2">→</span></Link>)}</aside> : null}
+    {doc.optionalLinks?.length ? <aside aria-label="Optional tools" className="mt-9 border-l-2 border-white/20 pl-4"><p className="mb-2 text-xs font-semibold text-subtle">Related tools</p>{doc.optionalLinks.map(link => <Link key={link.href} href={link.href} className="inline-flex min-h-10 items-center text-sm text-highlight underline-offset-4 hover:underline">{link.label} <span aria-hidden="true" className="ml-2">→</span></Link>)}</aside> : null}
 
     <nav aria-label="Related documentation" className="mt-12 border-t border-white/10 pt-7">
       <h2 className="text-lg font-bold">Related documentation</h2>

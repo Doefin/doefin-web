@@ -27,7 +27,7 @@ export default function V3Home() {
           <h1 id="v3-title">Trade and hedge<br /><span>Bitcoin hashrate exposure.</span></h1>
           <p className="v37-lede">Miners can hedge the effect of rising <Link href="/v3/glossary/mining-difficulty" className="underline decoration-white/30 underline-offset-4 hover:decoration-white">difficulty</Link> on expected Bitcoin production. Investors can trade their views on network hashrate through markets on Bitcoin mining difficulty.</p>
           <div className="v37-actions"><Link href="/v3/for/miners" data-v3-cta="planner" data-v3-placement="hero" className="v37-button">Plan difficulty exposure <Arrow /></Link><Link href="/v3/learn/difficulty-exposure" data-v3-cta="tutorial" data-v3-placement="hero" className="v37-link">Follow a worked example <Arrow /></Link></div>
-          <p className="v37-risk">A losing position pays zero. You can lose the amount paid, plus applicable costs.</p>
+          <p className="v37-risk">A losing position pays zero. You can lose the full amount paid for a position, plus applicable costs.</p>
           <nav aria-label="Review before using Doefin" className="mt-2 flex flex-wrap gap-x-6 gap-y-1">
             <Link href="/v3/docs/smart-contracts" data-v3-cta="evidence" data-v3-placement="hero" className="v37-link">Review technical evidence <Arrow /></Link>
             <Link href="/v3/docs/risks-and-limitations" data-v3-cta="risk" data-v3-placement="hero" className="v37-link">Risks and limitations <Arrow /></Link>
@@ -39,13 +39,13 @@ export default function V3Home() {
 
     <section id="production-scenario" aria-labelledby="production-title" className="v37-audience v37-section">
       <Container>
-        <div id="who-its-for" className="scroll-mt-28" data-reveal><p className="v37-eyebrow">Start with production</p><h2 id="production-title" className="v37-heading"><span id="audience-title" className="scroll-mt-28">What changes when difficulty rises?</span></h2></div>
+        <div id="who-its-for" className="scroll-mt-28" data-reveal><p className="v37-eyebrow">Start with production</p><h2 id="production-title" className="v37-heading"><span id="audience-title" className="scroll-mt-28">Rising difficulty reduces expected production.</span></h2></div>
         <article className="v37-audience-card mt-7" data-reveal>
-          <p className="v37-copy">Illustrative scenario: if your fixed hashrate would produce 1 BTC over a period at unchanged difficulty, a 10% higher difficulty throughout that same period gives an expected 1 ÷ 1.10 ≈ 0.909 BTC. The difference is about 0.091 BTC, or 9.09%.</p>
+          <p className="v37-copy">Illustrative scenario: suppose your fixed hashrate would produce 1 BTC over a period at unchanged difficulty. If difficulty is 10% higher for that whole period, expected production is 1 ÷ 1.10 ≈ 0.909 BTC. That is about 0.091 BTC (9.09%) less.</p>
           <p className="text-sm leading-relaxed text-subtle">This holds hashrate, uptime, block reward and other production assumptions constant. It is a sensitivity calculation, not a forecast or a suitable position size. Pool results, fees, power costs and BTC price require separate assumptions.</p>
-          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1"><Link href="/v3/tools/difficulty-exposure" data-v3-cta="calculator" data-v3-placement="scenario" className="v37-link">Try your numbers <Arrow /></Link><Link href="/v3/product/settlement" data-v3-cta="settlement" data-v3-placement="scenario" className="v37-link">How this relates to a contract <Arrow /></Link></div>
+          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1"><Link href="/v3/tools/difficulty-exposure" data-v3-cta="calculator" data-v3-placement="scenario" className="v37-link">Try your numbers <Arrow /></Link><Link href="/v3/product/settlement" data-v3-cta="settlement" data-v3-placement="scenario" className="v37-link">See how this relates to a contract <Arrow /></Link></div>
         </article>
-        <p className="v37-note">Expected production changes with difficulty. A YES/NO contract has a binary payout at its threshold; its cost, size and timing determine how it relates to a production shortfall. It does not cover every mining risk.</p>
+        <p className="v37-note">A Doefin position pays a fixed amount or nothing, depending on difficulty at its observation block. Its cost, size and timing determine how it relates to a production shortfall. It does not cover every mining risk.</p>
       </Container>
     </section>
 
@@ -74,10 +74,10 @@ export default function V3Home() {
           {[
             { number: '1', title: 'Sign in', description: 'Review account access and wallet signing.', href: '/v3/docs/connecting-a-wallet' },
             { number: '2', title: 'Get collateral', description: 'Check the token, network, destination and funding costs.', href: '/v3/docs/getting-collateral' },
-            { number: '3', title: 'Place your first order', description: 'Check the market terms, price, amount and execution.', href: '/v3/docs/your-first-trade' },
+            { number: '3', title: 'Place your first trade', description: 'Check the market terms, price, amount and execution.', href: '/v3/docs/your-first-trade' },
           ].map(item => <Link key={item.href} href={item.href} data-v3-cta="setup" data-v3-placement="setup" className="group rounded-panel border border-white/10 bg-surface/40 p-5 hover:border-brand/50"><p className="text-xs font-semibold text-subtle">Step {item.number}</p><h3 className="mt-3 text-lg font-semibold text-body group-hover:text-highlight">{item.title} <span aria-hidden="true">→</span></h3><p className="mt-2 text-sm leading-relaxed text-subtle">{item.description}</p></Link>)}
         </nav>
-        <p className="v37-note">Returning to a position? Open the app directly or <Link href="/v3/docs/managing-positions" className="underline underline-offset-4">read about managing positions</Link>. You do not need to repeat the learning steps.</p>
+        <p className="v37-note">Returning to a position? Enter the app directly or <Link href="/v3/docs/managing-positions" className="underline underline-offset-4">read about managing positions</Link>. You do not need to repeat the learning steps.</p>
       </Container>
     </section>
 
@@ -86,7 +86,7 @@ export default function V3Home() {
         <div data-reveal><p className="v37-eyebrow">Review the evidence</p><h2 id="evidence-title" className="v37-heading">Know what to check.</h2></div>
         <nav aria-label="Evidence and risk review" className="mt-7 grid gap-4 md:grid-cols-3" data-reveal>
           {[
-            { title: 'About Doefin', description: 'Find product context and a way to contact the team.', href: '/v3/about', cta: 'evidence' },
+            { title: 'About Doefin', description: 'Read what Doefin does and contact the team.', href: '/v3/about', cta: 'evidence' },
             { title: 'Technical review', description: 'Check what contract, deployment and audit evidence to request.', href: '/v3/docs/smart-contracts', cta: 'evidence' },
             { title: 'Risks and limitations', description: 'Review full loss, liquidity, collateral and technical dependencies.', href: '/v3/docs/risks-and-limitations', cta: 'risk' },
           ].map(item => <Link key={item.href} href={item.href} data-v3-cta={item.cta} data-v3-placement="trust" className="group rounded-panel border border-white/10 bg-surface/40 p-5 hover:border-brand/50"><h3 className="text-lg font-semibold text-body group-hover:text-highlight">{item.title} <span aria-hidden="true">→</span></h3><p className="mt-2 text-sm leading-relaxed text-subtle">{item.description}</p></Link>)}
@@ -103,7 +103,7 @@ export default function V3Home() {
 
     <section id="faq" aria-labelledby="faq-title" className="v37-faq v37-section">
       <Container className="v37-faq-grid">
-        <div data-reveal><p className="v37-eyebrow">Common questions</p><h2 id="faq-title" className="v37-heading">Before you<br />get started.</h2><p className="v37-copy v37-faq-intro">The essentials here. Step-by-step explanations in Docs whenever you need them.</p><Link href="/v3/docs" className="v37-link">Explore the documentation <Arrow /></Link><Link href="/v3/resources" data-v3-cta="resources" data-v3-placement="faq" className="v37-link">Browse educational resources <Arrow /></Link><Link href="/v3/resources#updates" data-v3-cta="contact" data-v3-placement="faq" className="v37-link">Ask the team a question <Arrow /></Link></div>
+        <div data-reveal><p className="v37-eyebrow">Common questions</p><h2 id="faq-title" className="v37-heading">Before you<br />get started.</h2><p className="v37-copy v37-faq-intro">Short answers here. Step-by-step guides are in the docs.</p><Link href="/v3/docs" className="v37-link">Explore the documentation <Arrow /></Link><Link href="/v3/resources" data-v3-cta="resources" data-v3-placement="faq" className="v37-link">Browse educational resources <Arrow /></Link><Link href="/v3/resources#updates" data-v3-cta="contact" data-v3-placement="faq" className="v37-link">Ask the team a question <Arrow /></Link></div>
         <div data-reveal><HomeFaq /></div>
       </Container>
     </section>

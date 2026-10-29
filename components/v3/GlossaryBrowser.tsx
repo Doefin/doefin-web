@@ -50,7 +50,7 @@ export function GlossaryBrowser({ entries, academyHref = '/v3/academy' }: { entr
             <span>{t.label}</span><span className="tabular text-[11px] text-subtle">{counts[t.id]}</span>
           </button>)}
         </nav>
-        <div className="mt-7 hidden border-t border-white/10 pt-5 lg:block"><p className="text-sm font-bold">New to mining?</p><p className="mt-2 text-xs leading-relaxed text-subtle">Build the foundations with a short explanation of how difficulty works.</p><Link href={academyHref} className="mt-3 inline-flex min-h-11 items-center gap-2 text-xs font-semibold text-highlight hover:underline">Start with the Academy <Arrow className="h-4 w-4" /></Link></div>
+        <div className="mt-7 hidden border-t border-white/10 pt-5 lg:block"><p className="text-sm font-bold">New to mining?</p><p className="mt-2 text-xs leading-relaxed text-subtle">Read a short explanation of how difficulty works.</p><Link href={academyHref} className="mt-3 inline-flex min-h-11 items-center gap-2 text-xs font-semibold text-highlight hover:underline">Start with the Academy <Arrow className="h-4 w-4" /></Link></div>
       </aside>
 
       <div id="glossary-results" className="min-w-0 scroll-mt-48">
@@ -76,6 +76,6 @@ export function GlossaryBrowser({ entries, academyHref = '/v3/academy' }: { entr
       </div>
     </div>
 
-    <section aria-labelledby="glossary-next" className="mt-12 flex flex-col items-start justify-between gap-5 rounded-panel border border-white/10 bg-gradient-to-br from-surface to-surfaceAlt/40 p-6 sm:flex-row sm:items-center sm:p-7"><div><p className="text-[11px] font-bold uppercase tracking-[0.12em] text-highlight">From definition to application</p><h2 id="glossary-next" className="mt-2 text-xl font-bold tracking-tight">Put the terms to work.</h2><p className="mt-2 max-w-xl text-sm leading-relaxed text-subtle">Explore difficulty exposure, hosting costs and fleet payback with your own assumptions.</p></div><Link href="/v3/tools" className="inline-flex min-h-11 shrink-0 items-center gap-3 rounded-lg border border-brand/30 bg-brand/10 px-4 py-3 text-sm font-semibold text-highlight hover:border-brand/60 hover:bg-brand/20">Explore calculators <Arrow /></Link></section>
+    <section aria-labelledby="glossary-next" className="mt-12 flex flex-col items-start justify-between gap-5 rounded-panel border border-white/10 bg-gradient-to-br from-surface to-surfaceAlt/40 p-6 sm:flex-row sm:items-center sm:p-7"><div><p className="text-[11px] font-bold uppercase tracking-[0.12em] text-highlight">From definition to application</p><h2 id="glossary-next" className="mt-2 text-xl font-bold tracking-tight">Put the terms to work.</h2><p className="mt-2 max-w-xl text-sm leading-relaxed text-subtle">Estimate difficulty exposure, hosting costs and fleet payback from your own assumptions.</p></div><Link href="/v3/tools" className="inline-flex min-h-11 shrink-0 items-center gap-3 rounded-lg border border-brand/30 bg-brand/10 px-4 py-3 text-sm font-semibold text-highlight hover:border-brand/60 hover:bg-brand/20">Explore calculators <Arrow /></Link></section>
   </div>
 }

@@ -13,7 +13,7 @@ export default function NotFound() {
         rather than something moved.
       </p>
       <div className="mt-8 flex flex-wrap justify-center gap-3">
-        <Button href="/data/difficulty">Current forecast</Button>
+        <Button href="/data/difficulty">Difficulty data</Button>
         <Button href="/glossary" variant="secondary">
           Glossary
         </Button>

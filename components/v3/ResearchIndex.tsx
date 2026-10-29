@@ -38,7 +38,7 @@ export default async function ResearchIndex() {
         </div>
         <div className="mt-auto border-t border-white/10 bg-ink/35 px-5 py-5 sm:px-7">
           <h3 className="text-[10px] font-bold uppercase tracking-[0.12em] text-subtle">Use this to check</h3>
-          <ul className="mt-4 space-y-3">{(report.slug === 'observed-difficulty-adjustments' ? ['A defined observation window', 'Inspect source data and arithmetic', 'Versioned public downloads and citation'] : ['The same target and forecast timing', 'Error and uncertainty as separate measures', 'A reproducible evidence record']).map(item => <li key={item} className="flex items-baseline gap-3 text-xs leading-relaxed text-body"><span aria-hidden="true" className="h-1 w-1 shrink-0 self-center rounded-full bg-chart" />{item}</li>)}</ul>
+          <ul className="mt-4 space-y-3">{(report.slug === 'observed-difficulty-adjustments' ? ['A defined observation window', 'The source data and arithmetic', 'Versioned public downloads and citation'] : ['The same target and forecast timing', 'Error and uncertainty as separate measures', 'A reproducible evidence record']).map(item => <li key={item} className="flex items-baseline gap-3 text-xs leading-relaxed text-body"><span aria-hidden="true" className="h-1 w-1 shrink-0 self-center rounded-full bg-chart" />{item}</li>)}</ul>
         </div>
       </article>)}
       </div>

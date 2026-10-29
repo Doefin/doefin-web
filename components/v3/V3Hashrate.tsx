@@ -8,10 +8,10 @@ export const dynamic = 'force-dynamic'
 
 export default async function V3Hashrate() {
   const result = await getCurrentHashrate()
-  return <DataDetail title="Hashrate is inferred, not counted." summary="Read backend rolling windows and their timestamp, then separate them from an illustrative series." category="Hashrate" current="hashrate" crumbs={[{ name: 'Hashrate', href: '/v3/data/hashrate' }]} datasetNotice={<><strong className="font-semibold text-highlight">Live backend reading.</strong> The panel uses the current API response. The series below is a separate synthetic illustration.</>}>
+  return <DataDetail title="Hashrate is estimated, not counted." summary="Read backend rolling windows and their timestamp, then separate them from an illustrative series." category="Hashrate" current="hashrate" crumbs={[{ name: 'Hashrate', href: '/v3/data/hashrate' }]} datasetNotice={<><strong className="font-semibold text-highlight">Live backend reading.</strong> The panel uses the current API response. The series below is a separate synthetic illustration.</>}>
     <HashrateReadingPanel result={result} />
-    <DataSection title="What a hashrate window means." description="The backend publishes rolling estimates in hashes per second. It does not publish forecast intervals or per-retarget hashrate records.">
-      <p className={dataCopy}>A longer averaging window smooths short-term variation. The 120, 144 and 2016 block windows are separate source values; no range is inferred from them.</p>
+    <DataSection title="What a hashrate window means." description="The backend publishes rolling estimates in hashes per second. It does not publish forecast intervals or hashrate records for each difficulty adjustment.">
+      <p className={dataCopy}>A longer averaging window smooths short-term variation. The 120-, 144- and 2,016-block windows are separate source values; no range is inferred from them.</p>
     </DataSection>
     <DataSection title="A synthetic sequence for learning." eyebrow="Teaching illustration" description="This authored series illustrates how a rate can move. It is not current network history or a backend observation.">
       <DataSeries metric="hashrateEH" />

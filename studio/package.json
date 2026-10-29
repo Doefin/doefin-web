@@ -23,7 +23,9 @@
     "import:faqs": "sanity exec ./scripts/home-faq-import.mjs --with-user-token -- --apply",
     "reconcile:research": "sanity exec ./scripts/research-import.mjs --with-user-token",
     "import:research": "sanity exec ./scripts/research-import.mjs --with-user-token -- --apply",
-    "lifecycle:research": "sanity exec ./scripts/research-lifecycle.mjs --with-user-token -- --apply --editors-paused"
+    "lifecycle:research": "sanity exec ./scripts/research-lifecycle.mjs --with-user-token -- --apply --editors-paused",
+    "plan:voice-drafts": "sanity exec ./scripts/voice-drafts.mjs --with-user-token",
+    "write:voice-drafts": "sanity exec ./scripts/voice-drafts.mjs --with-user-token -- --apply"
   },
   "dependencies": {
     "sanity": "6.20.0",

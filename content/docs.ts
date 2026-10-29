@@ -21,9 +21,9 @@ export const docs: Doc[] = [
     group: 'Getting started',
     status: 'published',
     body: [
-      'Every Doefin market settles on Bitcoin mining difficulty as published by the network, observed once at a specific block height. Not hashprice, not the bitcoin price, and not a composite index.',
-      'Settlement is defined by block height rather than by calendar date because heights are exact. A date is an estimate until the block actually lands, and in a market that settles on a single observation that difference matters.',
-      'Because difficulty is public chain data, any counterparty can verify the settlement value independently rather than trusting a print. That is the point of settling on it.',
+      'Every Doefin market settles on Bitcoin mining difficulty as published by the network, observed once at a specific block height. It does not settle on hashprice, the Bitcoin price or a composite index.',
+      'Settlement is defined by block height, not calendar date, because a block height is exact. A date is an estimate until the block is mined. In a market that settles on one observation, that difference matters.',
+      'Difficulty is public chain data, so any counterparty can verify the settlement value independently rather than trust a print. That is the reason to settle on it.',
     ],
   },
   {
@@ -33,9 +33,9 @@ export const docs: Doc[] = [
     group: 'Positions',
     status: 'published',
     body: [
-      'Positions are binary. At the observation block, difficulty is either at or above the level you selected or it is not, and the position pays in full or pays nothing.',
-      'The size of the move does not change the payout. A small move past your selected level and a large one pay the same amount, which is what makes the instrument simple to size against a production shortfall.',
-      'All positions are fully collateralised, and settle in a bitcoin-denominated token so payouts keep their bitcoin denomination.',
+      'Positions are binary. At the observation block, Yes wins if difficulty is at or above the threshold; No wins if it is below. A winning position pays in full; a losing one pays nothing.',
+      'The size of the move does not change the payout. A small move past the threshold and a large one pay the same amount, which makes the payout simple to size against a production shortfall. It may still not match your actual production loss.',
+      'All positions are fully collateralised and settle in a BTC-denominated token, so payouts stay denominated in BTC.',
     ],
   },
   { slug: 'connecting-a-wallet', title: 'Connecting a wallet', summary: 'Supported wallets and the connection flow.', group: 'Getting started', status: 'to-migrate', body: [] },

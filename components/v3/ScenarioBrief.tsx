@@ -120,7 +120,7 @@ export function ScenarioBrief({ inputs }: { inputs: ExposureInputs }) {
       {downloadMessage ? <p className="pb-5">{downloadMessage}</p> : null}
     </div>
     {copyStatus === 'fallback' ? <div className="px-5 pb-5 sm:px-7">
-      <label htmlFor="scenario-copy-link" className="block text-xs font-semibold text-subtle">Scenario link — select and copy</label>
+      <label htmlFor="scenario-copy-link" className="block text-xs font-semibold text-subtle">Scenario link: select and copy</label>
       <textarea id="scenario-copy-link" readOnly value={brief.scenarioUrl ?? ''} rows={3} onFocus={event => event.currentTarget.select()}
         className="mt-2 w-full resize-y rounded-lg border border-white/20 bg-ink p-3 text-sm text-body" />
     </div> : null}
@@ -155,7 +155,7 @@ export function ScenarioBrief({ inputs }: { inputs: ExposureInputs }) {
       <summary className="flex min-h-8 cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold [&::-webkit-details-marker]:hidden"><span>Read the complete brief</span><span aria-hidden className="text-lg text-highlight group-open:rotate-45">+</span></summary>
       <article aria-label="Current scenario brief" className="mt-4 rounded-xl border border-white/10 bg-ink/40 p-4 sm:p-6">
         <h3 className="text-lg font-bold">Bitcoin difficulty and fleet production</h3>
-        <p className="mt-2 text-xs leading-relaxed text-subtle">{brief.preparedDate ? <>Prepared <time dateTime={brief.preparedDate}>{brief.preparedDate}</time> UTC</> : 'Preparation date added when the calculator opens'} · Illustrative — not live data</p>
+        <p className="mt-2 text-xs leading-relaxed text-subtle">{brief.preparedDate ? <>Prepared <time dateTime={brief.preparedDate}>{brief.preparedDate}</time> UTC</> : 'Preparation date added when the calculator opens'} · Illustrative. Not live data.</p>
 
         {brief.contextRows.length ? <section aria-label="Discussion context" className="mt-5 border-b border-white/10 pb-5">
           <h4 className="text-sm font-bold">Discussion context</h4>

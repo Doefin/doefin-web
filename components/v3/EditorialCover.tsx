@@ -31,7 +31,7 @@ export function EditorialCover({ kind, compact = false }: { kind: 'assumptions' 
         <circle cx="153" cy="150" r="8" fill="currentColor" className="text-highlight" /><circle cx="153" cy="150" r="19" stroke="currentColor" strokeOpacity="0.3" className="text-highlight" />
         {[30, 95, 213].map((y, i) => <circle key={y} cx="452" cy={y} r="5" fill="currentColor" className={i === 0 ? 'text-highlight' : i === 1 ? 'text-chart' : 'text-brandDeep'} />)}
       </svg>
-      <p className="relative text-xs leading-relaxed text-subtle">One starting point. Different paths to compare.</p>
+      <p className="relative text-xs leading-relaxed text-subtle">Three difficulty assumptions from the same starting point.</p>
     </> : <>
       <svg aria-hidden="true" viewBox="0 0 480 250" preserveAspectRatio="none" fill="none" className="my-1 min-h-0 w-full flex-1 text-chart">
         <rect x="34" y="52" width="412" height="64" rx="12" fill="currentColor" fillOpacity="0.06" stroke="currentColor" strokeOpacity="0.2" />

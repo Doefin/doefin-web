@@ -7,25 +7,25 @@ export type NavigationGroup = { label: string; items: readonly NavigationItem[] 
 export const navigationGroups: readonly NavigationGroup[] = [
   { label: 'Product', items: [
     { label: 'How it works', href: '/v3/product', description: 'Understand the instrument and its limits.' },
-    { label: 'For miners', href: '/v3/for/miners', description: 'Plan production exposure and review a market.' },
-    { label: 'For finance teams, funds & desks', href: '/v3/for/institutions', description: 'Prepare an internal review and inspect contract terms.' },
+    { label: 'For miners', href: '/v3/for/miners', description: 'Estimate the effect of rising difficulty on expected BTC production, and hedge part of it.' },
+    { label: 'For finance teams, funds & desks', href: '/v3/for/institutions', description: 'Trade your view on Bitcoin network hashrate.' },
     { label: 'Documentation', href: '/v3/docs', description: 'Mechanics, app tasks, risks and key terms.' },
     { label: 'Technical review', href: '/v3/docs/smart-contracts', description: 'Inspect deployment and contract evidence.' },
   ] },
   { label: 'Tools', items: [
     { label: 'All calculators', href: '/v3/tools', description: 'Use exact inputs and compare operating scenarios.' },
-    { label: 'Difficulty exposure', href: '/v3/tools/difficulty-exposure', description: 'Compare BTC production and prepare a team brief.' },
+    { label: 'Difficulty exposure', href: '/v3/tools/difficulty-exposure', description: 'Compare expected BTC production and prepare a team brief.' },
   ] },
   { label: 'Data & Research', items: [
     { label: 'Data', href: '/v3/data', description: 'Inspect data provenance, examples and limitations.' },
     { label: 'Research', href: '/v3/research', description: 'Read findings, methods and reproducible calculations.' },
     { label: 'Forecast evaluation', href: '/v3/data/scoreboard', description: 'Compare errors and check the evidence status.' },
     { label: 'Methodology', href: '/v3/methodology/difficulty-index', description: 'Understand how the difficulty estimate is constructed.' },
-    { label: 'Research emails', href: '/v3/newsletter', description: 'Preview retarget research, requested formats and publication alerts.' },
+    { label: 'Newsletter', href: '/v3/newsletter', description: 'Get market updates, trading activity and network hashrate insights.' },
   ] },
   { label: 'Learn', items: [
     { label: 'Start learning', href: '/v3/learn', description: 'Follow a practical, reproducible walkthrough.' },
-    { label: 'Worked example', href: '/v3/learn/difficulty-exposure', description: 'Connect difficulty to BTC production.' },
+    { label: 'Worked example', href: '/v3/learn/difficulty-exposure', description: 'Connect difficulty to expected BTC production.' },
     { label: 'Academy', href: '/v3/academy', description: 'Understand difficulty, hashprice and uncertainty.' },
     { label: 'Articles', href: '/v3/blog', description: 'Read about mining assumptions and data.' },
     { label: 'Mining glossary', href: '/v3/glossary', description: 'Look up factual network and operating definitions.' },

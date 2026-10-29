@@ -41,8 +41,8 @@ export default async function V3DataIndex() {
 
     <section id="sample-records" aria-labelledby="sample-records-title" className="mt-12 scroll-mt-28 sm:mt-16">
       <div className="grid gap-4 sm:grid-cols-[1fr_1fr] sm:items-end sm:gap-12">
-        <div><p className="text-[11px] font-bold uppercase tracking-[0.13em] text-highlight">Backend forecast archive</p><h2 id="sample-records-title" className="mt-3 text-2xl font-extrabold tracking-[-0.03em] sm:text-3xl">No published retarget forecast records.</h2></div>
-        <p className="max-w-xl text-sm leading-[1.8] text-subtle">The backend exposes a current point estimate, but no endpoint for published forecast records or their ranges and outcomes. No per-retarget pages are linked until those records are available.</p>
+        <div><p className="text-[11px] font-bold uppercase tracking-[0.13em] text-highlight">Backend forecast archive</p><h2 id="sample-records-title" className="mt-3 text-2xl font-extrabold tracking-[-0.03em] sm:text-3xl">No published forecast records for difficulty adjustments.</h2></div>
+        <p className="max-w-xl text-sm leading-[1.8] text-subtle">The backend exposes a current point estimate, but no endpoint for published forecast records or their ranges and outcomes. No page per difficulty adjustment is linked without those records.</p>
       </div>
       <p role="status" className="mt-6 rounded-panel border border-white/10 bg-surface/15 p-5 text-sm leading-relaxed text-subtle">Published forecast records: 0 available from the current API contract. The dated rows below are a separate synthetic teaching illustration.</p>
       <details className="mt-5 rounded-panel border border-white/10 bg-surface/15">
@@ -57,16 +57,16 @@ export default async function V3DataIndex() {
             <td><span className={styles.mobileLabel}>Forecast date</span><time dateTime={epoch.startedAt}>{dateShort(epoch.startedAt)}</time></td>
             <td><span className={styles.mobileLabel}>Forecast</span>{pct(epoch.forecastPct)}</td>
             <td><span className={styles.mobileLabel}>Outcome</span>{epoch.realisedPct === undefined ? <span className="text-subtle">Not included</span> : pct(epoch.realisedPct)}</td>
-            <td><span className={styles.mobileLabel}>Outcome date</span>{epoch.settledAt ? <time dateTime={epoch.settledAt}>{dateShort(epoch.settledAt)}</time> : <span className="text-subtle">—</span>}</td>
+            <td><span className={styles.mobileLabel}>Outcome date</span>{epoch.settledAt ? <time dateTime={epoch.settledAt}>{dateShort(epoch.settledAt)}</time> : <span className="text-subtle">Not included</span>}</td>
           </tr>)}</tbody>
         </table>
       </div>
-      <p className="mx-5 mb-5 mt-4 max-w-3xl text-xs leading-relaxed text-subtle">“Not included” means the teaching example has no outcome. It does not describe a pending live adjustment. These rows have no matching per-retarget route.</p>
+      <p className="mx-5 mb-5 mt-4 max-w-3xl text-xs leading-relaxed text-subtle">“Not included” means the teaching example has no outcome. It does not describe a pending live adjustment. These rows have no page of their own.</p>
       </details>
     </section>
 
     <section id="accuracy" aria-labelledby="accuracy-title" className="mt-12 grid scroll-mt-28 gap-7 rounded-panel border border-white/10 bg-surfaceAlt/30 p-6 sm:mt-14 sm:p-8 md:grid-cols-[1fr_1fr] md:gap-14">
-      <div><p className="text-[11px] font-bold uppercase tracking-[0.13em] text-highlight">Read accuracy with care</p><h2 id="accuracy-title" className="mt-3 text-2xl font-extrabold tracking-[-0.03em] sm:text-3xl">A smaller error needs<br className="hidden sm:block" /> a bigger explanation.</h2><p className="mt-4 max-w-md text-sm leading-[1.8] text-subtle">The units, sample count and evaluation window matter. An average alone cannot tell you which forecast to trust.</p><Link href="/v3/data/scoreboard" className="mt-5 inline-flex min-h-11 items-center gap-4 text-sm font-bold text-highlight hover:underline">Read the accuracy metrics<Arrow /></Link></div>
+      <div><p className="text-[11px] font-bold uppercase tracking-[0.13em] text-highlight">Read accuracy with care</p><h2 id="accuracy-title" className="mt-3 text-2xl font-extrabold tracking-[-0.03em] sm:text-3xl">A smaller error is not<br className="hidden sm:block" /> enough on its own.</h2><p className="mt-4 max-w-md text-sm leading-[1.8] text-subtle">The units, sample count and evaluation window matter. An average alone cannot tell you which forecast to trust.</p><Link href="/v3/data/scoreboard" className="mt-5 inline-flex min-h-11 items-center gap-4 text-sm font-bold text-highlight hover:underline">Read the accuracy metrics<Arrow /></Link></div>
       <div className="border-t border-white/10 pt-6 md:border-l md:border-t-0 md:pl-8 md:pt-0"><p className="text-sm font-bold">Want to check the workings?</p><p className="mt-3 text-sm leading-[1.8] text-subtle">Research shows how to evaluate a forecast comparison and reproduce error calculations from a downloadable sample.</p><Link href="/v3/research" className="mt-4 inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-highlight hover:underline">Go to Research<Arrow className="h-4 w-4" /></Link><Link href="/v3/methodology/difficulty-index" className="mt-1 block w-fit py-2 text-xs font-semibold text-subtle underline decoration-white/20 underline-offset-4 hover:text-highlight">Inspect inputs and methodology</Link></div>
     </section>
   </Container>

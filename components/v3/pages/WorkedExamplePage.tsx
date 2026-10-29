@@ -94,7 +94,7 @@ export default async function ExamplePage({ params }: { params: Promise<{ tool: 
         items={[
           { href: '/tools', label: 'Calculators', note: 'Work out your hosting cost, exposure or payback.' },
           { href: '/academy', label: 'Learn', note: 'How difficulty works, from first principles.' },
-          { href: '/for/miners', label: 'For miners', note: 'What difficulty risk looks like on a real site.' },
+          { href: '/for/miners', label: 'For miners', note: 'Estimate production and compare difficulty scenarios.' },
         ]}
       />
 

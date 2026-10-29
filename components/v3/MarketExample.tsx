@@ -7,11 +7,11 @@ export function MarketExample() {
   return <div className={styles.explainer}>
     <div className={styles.intro}>
       <p className={styles.kicker}>Illustrative purchase</p>
-      <p>Assume your YES tokens have a combined winning payout of <strong>100 units</strong>: tokens held × the stated payout per token. All amounts use the payment token, before fees.</p>
+      <p>Assume your Yes shares have a combined winning payout of <strong>100 units</strong>: shares held × the stated payout per share. All amounts are in the payment token, before fees.</p>
     </div>
     <div className={styles.story}>
       <div className={styles.purchase}>
-        <span className={styles.position}>Example position <strong>YES</strong></span>
+        <span className={styles.position}>Example position <strong>Yes</strong></span>
         <p className={styles.cost}><strong>60</strong><span>units paid</span></p>
         <p className={styles.purchaseNote}>Separate from the chart. Held through resolution.</p>
       </div>
@@ -24,8 +24,8 @@ export function MarketExample() {
         <p className={styles.observation}>Difficulty at Bitcoin block <strong>979,776</strong> · T = trillion</p>
         <div className={styles.ending}>
           <div className={styles.condition}>
-            <span className={styles.outcome}>Your YES wins</span>
-            <p>At or above <strong>137.2 T</strong></p>
+            <span className={styles.outcome}>Yes wins</span>
+            <p>At or above <strong>137.2T</strong></p>
           </div>
           <div className={styles.money}>
             <p className={styles.payout}><strong>100</strong><span>Total payout</span></p>
@@ -38,8 +38,8 @@ export function MarketExample() {
         </div>
         <div className={`${styles.ending} ${styles.losing}`}>
           <div className={styles.condition}>
-            <span className={styles.outcome}>Your YES loses</span>
-            <p>Below <strong>137.2 T</strong></p>
+            <span className={styles.outcome}>Yes loses</span>
+            <p>Below <strong>137.2T</strong></p>
           </div>
           <div className={styles.money}>
             <p className={styles.payout}><strong>0</strong><span>Total payout</span></p>
@@ -50,10 +50,10 @@ export function MarketExample() {
       </div>
     </div>
     <div className={styles.takeaway}>
-      <p><strong>Bought NO?</strong> It pays below 137.2 T; at or above, it pays zero.</p>
+      <p><strong>Bought No shares?</strong> They pay below 137.2T; at or above, they pay zero.</p>
     </div>
     <div className={styles.footer}>
-      <p>Earlier crossings don’t count. Redeem winning tokens after resolution. Check actual amounts and fees in the app.</p>
+      <p>Earlier crossings do not count. Redeem winning shares after the market resolves. Check actual amounts and fees in the app.</p>
       <Link href="/v3/docs/how-settlement-works" className="v37-link">Settlement guide <Arrow /></Link>
     </div>
   </div>

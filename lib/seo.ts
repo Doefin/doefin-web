@@ -23,7 +23,7 @@ export const v3SocialImage = {
   url: `${site.url}/v3/social-image`,
   width: 1200,
   height: 630,
-  alt: 'Doefin — Bitcoin difficulty markets. Understand the market and review the details. Educational prototype.',
+  alt: 'Doefin. Trade and hedge Bitcoin hashrate exposure through markets on mining difficulty. Educational prototype with illustrative examples.',
 } as const
 
 /**

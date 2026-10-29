@@ -20,7 +20,7 @@ export default function Page() {
         <Prose
           paragraphs={[
             `${site.entity} is registered in ${site.registeredIn} and made available to professional investors only.`,
-            'Nothing published on this site constitutes investment advice, an offer, or an invitation to engage in investment activity.',
+            'Nothing published on this site constitutes investment advice, an offer or an invitation to engage in investment activity.',
           ]}
         />
       </div>
