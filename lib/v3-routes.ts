@@ -19,7 +19,6 @@ import * as Data from '@/components/v3/V3DataIndex'
 import * as Difficulty from '@/components/v3/V3Difficulty'
 import * as Hashrate from '@/components/v3/V3Hashrate'
 import * as Scoreboard from '@/components/v3/V3Scoreboard'
-import * as Epoch from '@/components/v3/V3EpochPage'
 import * as Methodology from '@/components/v3/V3Methodology'
 import * as Example from '@/components/v3/pages/WorkedExamplePage'
 import * as About from '@/components/v3/V3About'
@@ -80,7 +79,6 @@ export const v3Routes: readonly V3Route[] = [
   staticRoute('data/difficulty', Difficulty),
   staticRoute('data/hashrate', Hashrate),
   staticRoute('data/scoreboard', Scoreboard),
-  ...dynamicRoutes(Epoch, ({ height }) => `data/difficulty/epoch/${height}`),
   ...dynamicRoutes(Methodology, ({ metric }) => `methodology/${metric}`),
   ...dynamicRoutes(Example, ({ tool, case: example }) => `tools/${tool}/example/${example}`),
   staticRoute('about', About),
