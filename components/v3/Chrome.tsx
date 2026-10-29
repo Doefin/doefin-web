@@ -48,7 +48,7 @@ export function V3Chrome({ children }: { children: ReactNode }) {
     { title: 'Product', links: [['How it works', '/v3/product'], ['For miners', '/v3/for/miners'], ['For finance teams, funds & desks', '/v3/for/institutions']] },
     { title: 'Documentation', links: [['Start here', '/v3/docs'], ['Contract mechanics', '/v3/docs/what-doefin-settles-on'], ['Risks & limitations', '/v3/docs/risks-and-limitations'], ['Technical review', '/v3/docs/smart-contracts'], ['Key terms', '/v3/docs/key-terms']] },
     { title: 'Resources', links: [['Resource library', '/v3/resources'], ['Calculators', '/v3/tools'], ['Academy & guides', '/v3/academy'], ['Articles', '/v3/blog'], ['Research', '/v3/research'], ['Mining glossary', '/v3/glossary']] },
-    { title: 'Connect', links: [['About Doefin', '/v3/about'], ['Talk to the team', 'mailto:' + site.contactEmail], ['Open app ↗', site.appUrl]] },
+    { title: 'Connect', links: [['About Doefin', '/v3/about'], ['Contact the team', 'mailto:' + site.contactEmail], ['Enter app ↗', site.appUrl]] },
   ]
   return <>
     <header data-publication-surface={commentary ? 'commentary' : 'product'} onKeyDown={event => {
@@ -73,7 +73,7 @@ export function V3Chrome({ children }: { children: ReactNode }) {
             })}
           </nav></div>
           <div className="flex items-center gap-2">
-            {!commentary && <a href={site.appUrl} data-v3-cta="app" data-v3-placement="header" className="v37-nav-app inline-flex min-h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-lg border border-white/20 px-3 py-2 text-sm font-semibold transition-colors hover:border-brand hover:bg-brand/10 sm:px-4">Open app <Arrow diagonal className="!h-4 !w-4" /></a>}
+            {!commentary && <a href={site.appUrl} data-v3-cta="app" data-v3-placement="header" className="v37-nav-app inline-flex min-h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-lg border border-white/20 px-3 py-2 text-sm font-semibold transition-colors hover:border-brand hover:bg-brand/10 sm:px-4">Enter app <Arrow diagonal className="!h-4 !w-4" /></a>}
             <button ref={menuButton} type="button" aria-expanded={menuOpen} aria-controls="v3-mobile-menu" aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} onClick={() => setMenuOpen(!menuOpen)} className="grid h-11 w-11 place-items-center rounded-lg border border-white/15 lg:hidden">
               <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d={menuOpen ? 'm5 5 10 10M15 5 5 15' : 'M3 6h14M3 10h14M3 14h14'} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>
             </button>
@@ -96,11 +96,11 @@ export function V3Chrome({ children }: { children: ReactNode }) {
     <footer className={'border-t border-white/10 bg-surface/20' + (isLanding ? ' v37-chrome' : '')}>
       <Container className="py-7 sm:py-10">
         <div className="grid grid-cols-2 gap-x-5 gap-y-6 sm:gap-10 lg:grid-cols-[1.2fr_1fr_1fr_1fr_1fr]">
-          <div className="col-span-2 lg:col-span-1"><Logo href="/v3" className="w-24" /><p className="mt-3 text-sm leading-relaxed text-subtle lg:max-w-[240px]">{commentary ? 'Mining data, methods and reference material.' : 'Markets for Bitcoin mining difficulty.'}</p></div>
+          <div className="col-span-2 lg:col-span-1"><Logo href="/v3" className="w-24" /><p className="mt-3 text-sm leading-relaxed text-subtle lg:max-w-[240px]">{commentary ? 'Mining data, methods and reference material.' : 'Trade and hedge Bitcoin hashrate exposure through markets on mining difficulty.'}</p></div>
           {footerGroups.map(group => <div key={group.title}><h2 className="text-xs font-semibold uppercase tracking-[0.1em] text-subtle">{group.title}</h2><ul className="mt-2 sm:mt-4">{group.links.map(([label, href]) => <li key={href}><Link href={href} className="inline-flex min-h-11 items-center text-sm text-subtle hover:text-body">{label}</Link></li>)}</ul></div>)}
         </div>
         <div className="mt-5 flex flex-wrap items-start justify-between gap-3 border-t border-white/10 pt-4 text-xs leading-relaxed text-subtle sm:mt-9 sm:gap-5 sm:pt-6">
-          <p className="max-w-xl">For professional investors. Positions involve risk. Nothing here is investment advice. This prototype contains illustrative content.</p>
+          <p className="max-w-xl">For professional investors. You can lose the full amount paid for a position. Nothing here is investment advice. This prototype contains illustrative content.</p>
           <div className="flex gap-5"><Link href="/v3/terms" className="inline-flex min-h-11 items-center hover:text-body">Terms</Link><Link href="/v3/privacy" className="inline-flex min-h-11 items-center hover:text-body">Privacy</Link></div>
         </div>
 

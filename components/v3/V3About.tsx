@@ -8,7 +8,7 @@ export const metadata = seo({ title: 'About Doefin', description: 'Understand Do
 
 export default async function V3About() {
   const { sections, author } = await aboutAuthorsSnapshot()
-  return <ContentPage title="About Doefin" summary="Doefin provides markets on future Bitcoin mining difficulty for professional investors." eyebrow="About" crumbs={[{ name: 'About', href: '/v3/about' }]}>
+  return <ContentPage title="About Doefin" summary="Doefin provides markets for trading and hedging Bitcoin hashrate exposure. Our contracts reference future Bitcoin mining difficulty. We help miners assess that exposure and give professional investors a way to trade their views through defined market outcomes." eyebrow="About" crumbs={[{ name: 'About', href: '/v3/about' }]}>
     <AutoLinkedProse paragraphs={sections.flatMap(section => [{ heading: section.heading, id: section.id }, ...section.paragraphs])} />
     <section id="doefin-research" className="mt-10 scroll-mt-28"><h2 className="text-2xl font-bold">{author.name}</h2><p className="mt-4 text-[16px] leading-relaxed text-subtle">{author.description}</p><p className="mt-4 text-[16px] leading-relaxed text-subtle">The current research library contains educational examples. Read the classification and sources on each page; a sample report should not be treated as a measured result.</p></section>
     <a href={'mailto:' + site.contactEmail} className="mt-8 inline-flex min-h-11 items-center rounded-lg bg-brand px-5 py-3 text-sm font-semibold text-white">Contact the team ↗</a>

@@ -19,8 +19,8 @@ export default function InstitutionsPage() {
     <div className={styles.deskIntro}>
       <div>
         <p className={styles.eyebrow}>For finance teams, funds &amp; desks</p>
-        <h1 className={styles.title}>A view on difficulty.<br /><span>A contract to inspect.</span></h1>
-        <p className={styles.intro}>For mining CFOs and treasury teams, start with the production question and the approvals your organisation needs. For funds, trading desks and lender credit teams, inspect the contract and its assumptions against your mandate. Compare both outcomes before an execution review.</p>
+        <h1 className={styles.title}>Trade your view on<br /><span>Bitcoin network hashrate.</span></h1>
+        <p className={styles.intro}>Take positions through markets on mining difficulty, with a defined threshold and settlement block. The contract outcome follows difficulty, giving your hashrate view a publicly verifiable reference. Trading involves the risk of loss.</p>
         <div className="mt-5 flex flex-wrap gap-x-7 gap-y-1"><a href="#market-explorer" className={styles.textLink}>Explore contracts <Arrow /></a><Link href="/v3/docs/what-doefin-settles-on" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-subtle hover:text-body">Understand the instrument <Arrow /></Link></div>
       </div>
       <aside className={styles.mandate} aria-label="Instrument at a glance">
