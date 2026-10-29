@@ -15,7 +15,7 @@ export function DataDetail({ title, summary, category, current, crumbs = [], chi
   crumbs?: { name: string; href: string }[]; children: ReactNode; datasetNotice?: ReactNode
 }) {
   return <Container className="pb-16 pt-5 sm:pb-20 sm:pt-9">
-    <div className="hidden sm:block"><Breadcrumbs items={[{ name: 'Data', href: '/v3/data' }, ...crumbs]} /></div>
+    <div className="hidden sm:block"><Breadcrumbs items={[{ name: 'Data', href: '/data' }, ...crumbs]} /></div>
     <header className="mt-2 sm:mt-7">
       <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-highlight">Data field guide / {category}</p>
       <h1 className="tabular mt-3 max-w-4xl text-balance text-[32px] font-extrabold leading-[1.13] tracking-[-0.035em] sm:text-[46px]">{title}</h1>
@@ -23,8 +23,8 @@ export function DataDetail({ title, summary, category, current, crumbs = [], chi
       <p className="mt-4 max-w-2xl border-l-2 border-caution/50 pl-3 text-xs leading-[1.8] text-subtle">{datasetNotice ?? <><strong className="font-semibold text-caution">Synthetic learning dataset.</strong> Figures, dates and outcomes are authored examples, not current network data or measured performance.</>}</p>
     </header>
     <nav aria-label="Data guides" className="mb-6 mt-6 flex flex-wrap gap-2 sm:mb-8">
-      <Link href="/v3/data" className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-white/10 px-3 text-xs font-semibold text-subtle hover:border-brand/40 hover:text-highlight">← Data library</Link>
-      {[['difficulty', 'Difficulty'], ['hashrate', 'Hashrate'], ['scoreboard', 'Accuracy']].map(([slug, name]) => <Link key={slug} href={'/v3/data/' + slug} aria-current={current === slug ? 'page' : undefined} className={`inline-flex min-h-10 items-center rounded-lg border px-3 text-xs font-semibold ${current === slug ? 'border-chart/30 bg-chart/10 text-highlight' : 'border-white/10 text-subtle hover:border-brand/40 hover:text-highlight'}`}>{name}</Link>)}
+      <Link href="/data" className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-white/10 px-3 text-xs font-semibold text-subtle hover:border-brand/40 hover:text-highlight">← Data library</Link>
+      {[['difficulty', 'Difficulty'], ['hashrate', 'Hashrate'], ['scoreboard', 'Accuracy']].map(([slug, name]) => <Link key={slug} href={'/data/' + slug} aria-current={current === slug ? 'page' : undefined} className={`inline-flex min-h-10 items-center rounded-lg border px-3 text-xs font-semibold ${current === slug ? 'border-chart/30 bg-chart/10 text-highlight' : 'border-white/10 text-subtle hover:border-brand/40 hover:text-highlight'}`}>{name}</Link>)}
     </nav>
     {children}
   </Container>

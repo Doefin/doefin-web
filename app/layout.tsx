@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description: site.description,
-  alternates: { canonical: '/v3' },
+  alternates: { canonical: '/' },
   openGraph: { siteName: site.name, type: 'website', locale: 'en_GB' },
   robots: { index: false, follow: false },
   icons: { icon: '/images/favicon.png', shortcut: '/favicon.ico' },

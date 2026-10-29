@@ -19,7 +19,7 @@ export default function GlobalNotFound() {
         <p className="mt-5 text-base leading-relaxed text-subtle">Check the address, or choose a starting point below.</p>
         <div className="mt-7 flex flex-wrap gap-3">
           <a href="/" className="inline-flex min-h-11 items-center rounded-lg bg-brand px-5 py-3 text-sm font-semibold text-white">Website home</a>
-          <a href="/v3/docs" className="inline-flex min-h-11 items-center rounded-lg border border-white/20 px-5 py-3 text-sm font-semibold text-highlight">V3 documentation</a>
+          <a href="/docs" className="inline-flex min-h-11 items-center rounded-lg border border-white/20 px-5 py-3 text-sm font-semibold text-highlight">V3 documentation</a>
         </div>
       </main>
     </body>

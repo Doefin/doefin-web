@@ -29,11 +29,11 @@ export async function V3AcademyIndex() {
     <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd({
       '@context': 'https://schema.org', '@type': 'ItemList', name: 'Doefin Academy',
       itemListElement: [
-        ...lessons.map(lesson => ({ name: lesson.title, url: `${site.url}/v3/academy/${lesson.slug}` })),
-        ...guides.map(({ slug, guide }) => ({ name: guide.article.title, url: `${site.url}/v3/academy/guides/${slug}` })),
+        ...lessons.map(lesson => ({ name: lesson.title, url: `${site.url}/academy/${lesson.slug}` })),
+        ...guides.map(({ slug, guide }) => ({ name: guide.article.title, url: `${site.url}/academy/guides/${slug}` })),
       ].map((item, i) => ({ '@type': 'ListItem', position: i + 1, ...item })),
     }, 'v3')} />
-    <div className="hidden sm:block"><Breadcrumbs schemaVersion="v3" items={[{ name: 'Academy', href: '/v3/academy' }]} /></div>
+    <div className="hidden sm:block"><Breadcrumbs schemaVersion="v3" items={[{ name: 'Academy', href: '/academy' }]} /></div>
 
     <header className="mb-7 mt-2 sm:mb-9 sm:mt-8">
       <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-highlight">Doefin / Academy</p>
@@ -48,7 +48,7 @@ export async function V3AcademyIndex() {
       </div>
       {!lessons.length && <p role="status" className="py-5 text-subtle">No Academy lessons have been published yet.</p>}
       <div className="grid gap-4 lg:grid-cols-[1.1fr_1fr]">
-        {first && <Link href={`/v3/academy/${first.slug}`} className="group flex min-w-0 flex-col overflow-hidden rounded-panel border border-brand/30 bg-gradient-to-br from-active/45 via-surfaceAlt/60 to-surface/60 p-5 transition-colors hover:border-brand/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-highlight sm:p-7">
+        {first && <Link href={`/academy/${first.slug}`} className="group flex min-w-0 flex-col overflow-hidden rounded-panel border border-brand/30 bg-gradient-to-br from-active/45 via-surfaceAlt/60 to-surface/60 p-5 transition-colors hover:border-brand/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-highlight sm:p-7">
           <div className="flex items-center justify-between gap-4"><p className="text-[11px] font-bold uppercase tracking-[0.12em] text-highlight"><span className="tabular mr-3">01</span>Start here</p><span className="text-xs text-subtle">{lessonThemes[first.slug]?.label ?? 'Foundations'}</span></div>
           <h3 className="mt-5 max-w-lg text-balance text-[25px] font-extrabold leading-tight tracking-[-0.03em] group-hover:text-highlight sm:text-3xl">{first.title}</h3>
           <p className="mt-3 max-w-lg text-sm leading-relaxed text-subtle">{first.summary}</p>
@@ -64,7 +64,7 @@ export async function V3AcademyIndex() {
           </figure>
         </Link>}
         <ol start={2} className="grid gap-4">
-          {following.map((lesson, i) => <li key={lesson.slug} className="min-w-0"><Link href={`/v3/academy/${lesson.slug}`} className="group flex h-full gap-4 rounded-panel border border-white/[0.07] bg-surface/40 p-5 transition-colors hover:border-brand/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-highlight sm:gap-5 sm:p-6">
+          {following.map((lesson, i) => <li key={lesson.slug} className="min-w-0"><Link href={`/academy/${lesson.slug}`} className="group flex h-full gap-4 rounded-panel border border-white/[0.07] bg-surface/40 p-5 transition-colors hover:border-brand/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-highlight sm:gap-5 sm:p-6">
             <span aria-hidden="true" className="tabular flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-ink/40 text-sm font-bold text-highlight">{String(i + 2).padStart(2, '0')}</span>
             <div className="min-w-0"><p className="text-[10px] font-bold uppercase tracking-[0.12em] text-subtle">{lessonThemes[lesson.slug]?.label ?? 'Foundations'}</p><h3 className="mt-2 text-balance text-xl font-bold leading-snug tracking-tight group-hover:text-highlight">{lesson.title}</h3><p className="mt-2 text-[13px] leading-relaxed text-subtle">{lesson.summary}</p><span className="mt-3 inline-flex min-h-8 items-center gap-2 text-xs font-semibold text-highlight">Read lesson <Arrow className="h-4 w-4" /></span></div>
           </Link></li>)}
@@ -74,21 +74,21 @@ export async function V3AcademyIndex() {
     </section>
 
     <section id="guides" aria-labelledby="guides-title" className="[overflow-wrap:anywhere] mt-10 scroll-mt-28 border-t border-white/10 pt-7 sm:mt-14 sm:pt-9">
-      <div className="mb-6 flex flex-wrap items-end justify-between gap-x-8 gap-y-3"><div><p className="text-[10px] font-bold uppercase tracking-[0.12em] text-highlight">Put it into practice</p><h2 id="guides-title" className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">One question. A worked guide.</h2><p className="mt-3 max-w-2xl text-sm leading-relaxed text-subtle">Find the inputs, follow a worked example and learn how to read the result.</p></div><Link href="/v3/tools" className="inline-flex min-h-10 items-center gap-2 text-xs font-semibold text-highlight hover:underline">All calculators <Arrow className="h-4 w-4" /></Link></div>
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-x-8 gap-y-3"><div><p className="text-[10px] font-bold uppercase tracking-[0.12em] text-highlight">Put it into practice</p><h2 id="guides-title" className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">One question. A worked guide.</h2><p className="mt-3 max-w-2xl text-sm leading-relaxed text-subtle">Find the inputs, follow a worked example and learn how to read the result.</p></div><Link href="/tools" className="inline-flex min-h-10 items-center gap-2 text-xs font-semibold text-highlight hover:underline">All calculators <Arrow className="h-4 w-4" /></Link></div>
       <div className="overflow-hidden rounded-panel border border-white/10 bg-surface/30">
         {!guides.length && <p role="status" className="p-5 text-subtle">No calculator guides are currently published.</p>}
         {guides.map(({ slug, toolSlug, guide }) => <article key={slug} className="grid gap-5 border-b border-white/10 p-5 last:border-b-0 sm:p-7 lg:grid-cols-[10rem_1fr_auto] lg:gap-8">
           <div><p className="text-[11px] font-bold uppercase leading-relaxed tracking-[0.1em] text-highlight">{guideThemes[slug]?.label ?? 'Calculator guide'}</p><p className="mt-2 text-xs leading-relaxed text-subtle">{guideThemes[slug]?.inputs}</p></div>
-          <div className="min-w-0"><h3 className="text-balance text-lg font-bold leading-snug tracking-tight sm:text-xl"><Link href={`/v3/academy/guides/${slug}`} className="hover:text-highlight hover:underline">{guide.article.title}</Link></h3><p className="mt-2 max-w-2xl text-[13px] leading-relaxed text-subtle">{guide.article.summary}</p>{guideThemes[slug] && <p className="mt-3 text-xs leading-relaxed text-subtle"><span className="font-semibold text-body">Read the result:</span> {guideThemes[slug].outcome}</p>}</div>
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 lg:flex-col lg:items-start lg:justify-center lg:gap-2"><Link href={`/v3/academy/guides/${slug}`} className="inline-flex min-h-11 items-center justify-center gap-3 rounded-lg border border-white/15 bg-surfaceAlt px-4 text-xs font-bold text-highlight transition-colors hover:border-brand/50">Read guide <Arrow className="h-4 w-4" /></Link><Link href={`/v3/tools/${toolSlug}`} className="inline-flex min-h-10 items-center gap-2 text-xs font-semibold text-subtle hover:text-highlight lg:px-1">Open calculator <Arrow diagonal className="h-3.5 w-3.5" /></Link></div>
+          <div className="min-w-0"><h3 className="text-balance text-lg font-bold leading-snug tracking-tight sm:text-xl"><Link href={`/academy/guides/${slug}`} className="hover:text-highlight hover:underline">{guide.article.title}</Link></h3><p className="mt-2 max-w-2xl text-[13px] leading-relaxed text-subtle">{guide.article.summary}</p>{guideThemes[slug] && <p className="mt-3 text-xs leading-relaxed text-subtle"><span className="font-semibold text-body">Read the result:</span> {guideThemes[slug].outcome}</p>}</div>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 lg:flex-col lg:items-start lg:justify-center lg:gap-2"><Link href={`/academy/guides/${slug}`} className="inline-flex min-h-11 items-center justify-center gap-3 rounded-lg border border-white/15 bg-surfaceAlt px-4 text-xs font-bold text-highlight transition-colors hover:border-brand/50">Read guide <Arrow className="h-4 w-4" /></Link><Link href={`/tools/${toolSlug}`} className="inline-flex min-h-10 items-center gap-2 text-xs font-semibold text-subtle hover:text-highlight lg:px-1">Open calculator <Arrow diagonal className="h-3.5 w-3.5" /></Link></div>
         </article>)}
       </div>
       <p className="mt-4 text-xs leading-relaxed text-subtle">Educational examples. Calculator outputs depend on your assumptions and do not establish future performance.</p>
     </section>
 
     <aside aria-label="Learning resources" className="mt-10 grid gap-5 border-t border-white/10 pt-7 sm:mt-12 md:grid-cols-2 md:gap-10">
-      <Link href="/v3/glossary" className="group flex items-start justify-between gap-5 py-2"><div><p className="text-[10px] font-bold uppercase tracking-[0.12em] text-subtle">Keep a reference nearby</p><h2 className="mt-2 text-lg font-bold group-hover:text-highlight">A term you haven't met?</h2><p className="mt-2 text-sm leading-relaxed text-subtle">Look up difficulty, hashprice and the language of mining.</p><span className="mt-3 inline-flex min-h-8 items-center text-xs font-semibold text-highlight">Browse the glossary</span></div><Arrow className="mt-7 h-5 w-5 text-highlight" /></Link>
-      <Link href="/v3/research" className="group flex items-start justify-between gap-5 border-t border-white/10 py-2 pt-5 md:border-l md:border-t-0 md:pl-10 md:pt-2"><div><p className="text-[10px] font-bold uppercase tracking-[0.12em] text-subtle">Follow the evidence</p><h2 className="mt-2 text-lg font-bold group-hover:text-highlight">See the method in practice.</h2><p className="mt-2 text-sm leading-relaxed text-subtle">Inspect a worked research example and its limitations.</p><span className="mt-3 inline-flex min-h-8 items-center text-xs font-semibold text-highlight">Explore research</span></div><Arrow className="mt-7 h-5 w-5 text-highlight" /></Link>
+      <Link href="/glossary" className="group flex items-start justify-between gap-5 py-2"><div><p className="text-[10px] font-bold uppercase tracking-[0.12em] text-subtle">Keep a reference nearby</p><h2 className="mt-2 text-lg font-bold group-hover:text-highlight">A term you haven't met?</h2><p className="mt-2 text-sm leading-relaxed text-subtle">Look up difficulty, hashprice and the language of mining.</p><span className="mt-3 inline-flex min-h-8 items-center text-xs font-semibold text-highlight">Browse the glossary</span></div><Arrow className="mt-7 h-5 w-5 text-highlight" /></Link>
+      <Link href="/research" className="group flex items-start justify-between gap-5 border-t border-white/10 py-2 pt-5 md:border-l md:border-t-0 md:pl-10 md:pt-2"><div><p className="text-[10px] font-bold uppercase tracking-[0.12em] text-subtle">Follow the evidence</p><h2 className="mt-2 text-lg font-bold group-hover:text-highlight">See the method in practice.</h2><p className="mt-2 text-sm leading-relaxed text-subtle">Inspect a worked research example and its limitations.</p><span className="mt-3 inline-flex min-h-8 items-center text-xs font-semibold text-highlight">Explore research</span></div><Arrow className="mt-7 h-5 w-5 text-highlight" /></Link>
     </aside>
   </Container></GuidesPublicationProvider>
 }

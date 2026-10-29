@@ -6,14 +6,14 @@ type FeedReport = { slug: string; title: string; summary: string; publishedAt: s
  * RSS pubDate is optional: review dates never substitute for publication dates. */
 export function renderEditorialFeed(articles: V3EditorialArticle[], reports: FeedReport[]) {
   const items = [
-    ...articles.map(article => ({ ...article, path: `/v3/blog/${article.slug}` })),
-    ...reports.map(report => ({ ...report, path: `/v3/research/${report.slug}` })),
+    ...articles.map(article => ({ ...article, path: `/blog/${article.slug}` })),
+    ...reports.map(report => ({ ...report, path: `/research/${report.slug}` })),
   ]
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${esc(site.name)}</title>
-    <link>${site.url}/v3</link>
+    <link>${site.url}</link>
     <description>${esc(site.description)}</description>
     <language>en-GB</language>
     <atom:link href="${site.url}/feed.xml" rel="self" type="application/rss+xml"/>

@@ -10,13 +10,13 @@ import { DifficultyReadingPanel, HashrateReadingPanel } from './data-reading'
 import styles from './data-reading.module.css'
 import { ResearchArchiveSummary } from './ResearchArchiveSummary'
 
-export const metadata = seo({ title: 'Bitcoin mining data, explained', description: 'Read current Bitcoin difficulty and hashrate estimates beside sourced historical observations and clearly labelled teaching examples.', path: '/v3/data' })
+export const metadata = seo({ title: 'Bitcoin mining data, explained', description: 'Read current Bitcoin difficulty and hashrate estimates beside sourced historical observations and clearly labelled teaching examples.', path: '/data' })
 export const dynamic = 'force-dynamic'
 
 export default async function V3DataIndex() {
   const [difficultyResult, hashrateResult] = await Promise.all([getDifficultyAnalytics(), getCurrentHashrate()])
   return <Container className="pb-16 pt-5 sm:pb-20 sm:pt-10">
-    <div className="hidden sm:block"><Breadcrumbs items={[{ name: 'Resources', href: '/v3/resources' }, { name: 'Data', href: '/v3/data' }]} /></div>
+    <div className="hidden sm:block"><Breadcrumbs items={[{ name: 'Resources', href: '/resources' }, { name: 'Data', href: '/data' }]} /></div>
     <header className="mt-2 grid gap-4 sm:mt-9 sm:gap-6 lg:grid-cols-[1.45fr_1fr] lg:items-end lg:gap-16">
       <div>
         <p className="text-xs font-bold uppercase tracking-[0.14em] text-highlight">The data field guide</p>
@@ -29,7 +29,7 @@ export default async function V3DataIndex() {
     </header>
 
     <nav aria-label="On this page" className="mb-6 mt-5 flex flex-wrap gap-2 sm:mb-8 sm:mt-9">
-      {[['Difficulty guide', '/v3/data/difficulty'], ['Hashrate guide', '/v3/data/hashrate'], ['Dated records', '#sample-records']].map(([label, href]) => <a key={href} href={href} className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-white/10 px-3 text-xs font-semibold text-subtle hover:border-brand/40 hover:text-highlight">{label}<span aria-hidden="true">{href.startsWith('#') ? '↓' : '→'}</span></a>)}
+      {[['Difficulty guide', '/data/difficulty'], ['Hashrate guide', '/data/hashrate'], ['Dated records', '#sample-records']].map(([label, href]) => <a key={href} href={href} className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-white/10 px-3 text-xs font-semibold text-subtle hover:border-brand/40 hover:text-highlight">{label}<span aria-hidden="true">{href.startsWith('#') ? '↓' : '→'}</span></a>)}
     </nav>
 
     <ResearchArchiveSummary />
@@ -66,8 +66,8 @@ export default async function V3DataIndex() {
     </section>
 
     <section id="accuracy" aria-labelledby="accuracy-title" className="mt-12 grid scroll-mt-28 gap-7 rounded-panel border border-white/10 bg-surfaceAlt/30 p-6 sm:mt-14 sm:p-8 md:grid-cols-[1fr_1fr] md:gap-14">
-      <div><p className="text-[11px] font-bold uppercase tracking-[0.13em] text-highlight">Read accuracy with care</p><h2 id="accuracy-title" className="mt-3 text-2xl font-extrabold tracking-[-0.03em] sm:text-3xl">A smaller error needs<br className="hidden sm:block" /> a bigger explanation.</h2><p className="mt-4 max-w-md text-sm leading-[1.8] text-subtle">The units, sample count and evaluation window matter. An average alone cannot tell you which forecast to trust.</p><Link href="/v3/data/scoreboard" className="mt-5 inline-flex min-h-11 items-center gap-4 text-sm font-bold text-highlight hover:underline">Read the accuracy metrics<Arrow /></Link></div>
-      <div className="border-t border-white/10 pt-6 md:border-l md:border-t-0 md:pl-8 md:pt-0"><p className="text-sm font-bold">Want to check the workings?</p><p className="mt-3 text-sm leading-[1.8] text-subtle">Research shows how to evaluate a forecast comparison and reproduce error calculations from a downloadable sample.</p><Link href="/v3/research" className="mt-4 inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-highlight hover:underline">Go to Research<Arrow className="h-4 w-4" /></Link><Link href="/v3/methodology/difficulty-index" className="mt-1 block w-fit py-2 text-xs font-semibold text-subtle underline decoration-white/20 underline-offset-4 hover:text-highlight">Inspect inputs and methodology</Link></div>
+      <div><p className="text-[11px] font-bold uppercase tracking-[0.13em] text-highlight">Read accuracy with care</p><h2 id="accuracy-title" className="mt-3 text-2xl font-extrabold tracking-[-0.03em] sm:text-3xl">A smaller error needs<br className="hidden sm:block" /> a bigger explanation.</h2><p className="mt-4 max-w-md text-sm leading-[1.8] text-subtle">The units, sample count and evaluation window matter. An average alone cannot tell you which forecast to trust.</p><Link href="/data/scoreboard" className="mt-5 inline-flex min-h-11 items-center gap-4 text-sm font-bold text-highlight hover:underline">Read the accuracy metrics<Arrow /></Link></div>
+      <div className="border-t border-white/10 pt-6 md:border-l md:border-t-0 md:pl-8 md:pt-0"><p className="text-sm font-bold">Want to check the workings?</p><p className="mt-3 text-sm leading-[1.8] text-subtle">Research shows how to evaluate a forecast comparison and reproduce error calculations from a downloadable sample.</p><Link href="/research" className="mt-4 inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-highlight hover:underline">Go to Research<Arrow className="h-4 w-4" /></Link><Link href="/methodology/difficulty-index" className="mt-1 block w-fit py-2 text-xs font-semibold text-subtle underline decoration-white/20 underline-offset-4 hover:text-highlight">Inspect inputs and methodology</Link></div>
     </section>
   </Container>
 }

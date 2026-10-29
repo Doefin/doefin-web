@@ -5,7 +5,7 @@ import type { GlossaryTerm } from '@/content/types'
 import { site } from './site'
 
 export function renderLlms(terms: GlossaryTerm[], articles: V3EditorialArticle[] = [], docs: V3Doc[] = [], guides: ToolGuide[] = []) {
-  const u = (path: string) => `${site.url}/v3${path}`
+  const u = (path: string) => `${site.url}${path}`
 
   const glossary = terms
     .map((t) => `- [${t.term}](${u(`/glossary/${t.slug}`)}): ${t.shortDef}`)

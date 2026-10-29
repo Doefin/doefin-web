@@ -11,7 +11,7 @@ export type Crumb = { name: string; href: string }
  */
 export function Breadcrumbs({ items, schemaVersion }: { items: Crumb[]; schemaVersion?: SiteVersion }) {
   const version = schemaVersion ?? 'v3'
-  const all: Crumb[] = [{ name: 'Home', href: '/v3' }, ...items]
+  const all: Crumb[] = [{ name: 'Home', href: '/' }, ...items]
   return (
     <>
       <script

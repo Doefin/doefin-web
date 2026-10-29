@@ -55,7 +55,7 @@ const rendered = new Map(await Promise.all(files.map(async file => [relative(ROO
 if (base) {
   const routes = JSON.parse(await readFile('scripts/fixtures/v3-routes.json', 'utf8'))
   for (const path of routes) {
-    if (path.endsWith('.csv') || path === '/v3/social-image') continue
+    if (path.endsWith('.csv') || path === '/social-image') continue
     const response = await fetch(base + path)
     if (!response.ok) throw new Error(`${path}: HTTP ${response.status}`)
     rendered.set(path.slice(1) + '.html', await response.text())

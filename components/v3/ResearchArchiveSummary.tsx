@@ -9,7 +9,7 @@ export function ResearchArchiveSummary() {
     <p className="mt-3 max-w-3xl text-sm leading-[1.8] text-subtle">From {researchSummary.firstDate.slice(0, 10)} to {researchSummary.lastDate.slice(0, 10)}, the captured observations contain {researchSummary.increases} increases and {researchSummary.decreases} decreases. Mean absolute difficulty change: {researchSummary.meanAbsoluteChangePct.toFixed(2)}%. This is historical network movement, separate from forecast error and the synthetic examples below.</p>
     <p className="mt-3 text-xs leading-[1.8] text-subtle">Source: mempool.space, captured {researchCapture.capturedAt.slice(0, 10)}. Frozen one-year source window; no claim of live coverage or independent node verification.</p>
     <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-xs font-semibold text-highlight">
-      <Link href="/v3/research/observed-difficulty-adjustments" className="inline-flex min-h-11 items-center hover:underline">Read findings and method →</Link>
+      <Link href="/research/observed-difficulty-adjustments" className="inline-flex min-h-11 items-center hover:underline">Read findings and method →</Link>
       <a href={researchBase + '/dataset?format=csv'} className="inline-flex min-h-11 items-center hover:underline">Download observed CSV</a>
       <a href={researchBase} className="inline-flex min-h-11 items-center hover:underline">Free API and citation manifest</a>
     </div>

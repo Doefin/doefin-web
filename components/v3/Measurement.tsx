@@ -16,12 +16,12 @@ export function MeasurementBoundary() {
     return () => window.removeEventListener(REVIEW_CHANGE, update)
   }, [])
   useEffect(() => {
-    if ((process.env.NEXT_PUBLIC_V3_MEASUREMENT_QA !== 'enabled' && !reviewEnabled) || !pathname || !/^\/v3(?:\/|$)/.test(pathname)) return
+    if ((process.env.NEXT_PUBLIC_V3_MEASUREMENT_QA !== 'enabled' && !reviewEnabled) || !pathname) return
     const deactivate = activateMeasurement(event => {
       window.dispatchEvent(new CustomEvent(V3_MEASUREMENT_CHANNEL, { detail: event }))
       appendPrototypeEvent(event)
     }, true)
-    if (pathname !== '/v3/prototype-review') emitV3Measurement('page_view', { section: measurementSection(pathname), signal: 'route-render' })
+    if (pathname !== '/prototype-review') emitV3Measurement('page_view', { section: measurementSection(pathname), signal: 'route-render' })
     function click(event: MouseEvent) {
       if (!event.isTrusted || event.defaultPrevented || event.button !== 0 || !(event.target instanceof Element)) return
       const target = event.target.closest<HTMLElement>('[data-v3-cta][data-v3-placement]')
@@ -29,13 +29,13 @@ export function MeasurementBoundary() {
       emitV3Measurement('homepage_cta_click', {
         cta: target.dataset.v3Cta as MeasurementPayloads['homepage_cta_click']['cta'],
         placement: target.dataset.v3Placement as MeasurementPayloads['homepage_cta_click']['placement'],
-        entry: pathname === '/v3' || pathname === '/v3/' ? 'homepage' : 'other-v3',
+        entry: pathname === '/' || pathname === '/' ? 'homepage' : 'other-v3',
       })
     }
     // Capture precedes Next Link's deliberate preventDefault for client-side routing.
     // This records click intent, never successful destination navigation.
     document.addEventListener('click', click, true)
-    const tutorialObserver = pathname === '/v3/learn/difficulty-exposure' && typeof IntersectionObserver !== 'undefined'
+    const tutorialObserver = pathname === '/learn/difficulty-exposure' && typeof IntersectionObserver !== 'undefined'
       ? new IntersectionObserver(entries => {
         for (const entry of entries) if (entry.isIntersecting && entry.intersectionRatio >= 0.25 && entry.target instanceof HTMLElement) {
           const step = entry.target.dataset.v3TutorialStep as MeasurementPayloads['tutorial_step_visit']['step']

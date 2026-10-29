@@ -6,10 +6,10 @@ import { dateShort } from '@/lib/format'
 import { seo } from '@/lib/seo'
 import { Arrow } from './Arrow'
 
-export const metadata = seo({ title: 'Calculate forecast error: a worked example', description: 'Reproduce absolute error and mean absolute error on five synthetic difficulty-change pairs, then download the CSV to check the arithmetic.', path: '/v3/research/evaluating-a-forecast' })
+export const metadata = seo({ title: 'Calculate forecast error: a worked example', description: 'Reproduce absolute error and mean absolute error on five synthetic difficulty-change pairs, then download the CSV to check the arithmetic.', path: '/research/evaluating-a-forecast' })
 
-const csvPath = '/v3/research/evaluating-a-forecast/sample.csv'
-const comparisonPath = '/v3/research/difficulty-forecast-accuracy-2026'
+const csvPath = '/research/evaluating-a-forecast/sample.csv'
+const comparisonPath = '/research/difficulty-forecast-accuracy-2026'
 
 export default function V3ForecastExample() {
   const report = getForecastReport()
@@ -18,9 +18,9 @@ export default function V3ForecastExample() {
   const sum = errors.reduce((total, error) => total + error, 0)
   const mae = sum / report.rows.length
   return <Container className="pb-14 pt-6 sm:pt-9">
-    <div className="hidden sm:block"><Breadcrumbs schemaVersion="v3" items={[{ name: 'Research', href: '/v3/research' }, { name: 'Forecast error calculation', href: '/v3/research/evaluating-a-forecast' }]} /></div>
+    <div className="hidden sm:block"><Breadcrumbs schemaVersion="v3" items={[{ name: 'Research', href: '/research' }, { name: 'Forecast error calculation', href: '/research/evaluating-a-forecast' }]} /></div>
     <header className="mt-2 border-b border-white/10 pb-7 sm:mt-6 sm:pb-9">
-      <Link href="/v3/research" className="mb-4 inline-flex min-h-9 items-center gap-2 text-xs font-semibold text-highlight hover:underline"><span aria-hidden>←</span> All evaluation guides</Link>
+      <Link href="/research" className="mb-4 inline-flex min-h-9 items-center gap-2 text-xs font-semibold text-highlight hover:underline"><span aria-hidden>←</span> All evaluation guides</Link>
       <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-highlight">Worked calculation</p>
       <h1 className="mt-3 max-w-3xl text-balance text-3xl font-extrabold leading-[1.15] tracking-[-0.035em] sm:text-[42px]">Calculate forecast error.</h1>
       <p className="mt-4 max-w-2xl text-base leading-relaxed text-subtle">Find the error for one forecast, repeat it for every pair, then calculate the mean. Use the CSV to reproduce the arithmetic.</p>
@@ -45,7 +45,7 @@ export default function V3ForecastExample() {
           <div className="mt-5 rounded-panel border border-brand/25 bg-brand/5 p-5 sm:p-6"><p className="text-xs font-semibold text-subtle">MAE in this synthetic sample</p><p className="tabular mt-3 text-4xl font-extrabold tracking-tight text-highlight">{mae.toFixed(2)} <span className="text-lg">pp</span></p><p className="tabular mt-4 break-words text-xs leading-relaxed text-body">({errors.map(error => error.toFixed(1)).join(' + ')}) ÷ {report.rows.length} = {sum.toFixed(1)} ÷ {report.rows.length} = {mae.toFixed(2)} pp</p><p className="mt-3 text-xs leading-relaxed text-subtle">pp = percentage points. This is a calculation on authored values, not a measured accuracy result for any forecaster.</p><Link href={csvPath} prefetch={false} download="doefin-synthetic-forecast-sample.csv" className="mt-4 inline-flex min-h-11 items-center gap-2 text-xs font-bold text-highlight hover:underline">Check the numbers in the CSV <span aria-hidden>↓</span></Link></div>
         </section>
         <section aria-labelledby="interpretation-title" className="mt-9 border-t border-white/10 pt-7"><h2 id="interpretation-title" className="text-2xl font-bold tracking-tight">Read the result in context.</h2><p className="mt-4 text-[15px] leading-relaxed text-subtle">{report.summary}</p><div className="mt-5 space-y-5">{report.findings.map(item => <div key={item.title}><h3 className="text-sm font-bold text-body">{item.title}</h3><p className="mt-2 text-sm leading-relaxed text-subtle">{item.body}</p></div>)}</div><details className="mt-6 rounded-xl border border-white/10 bg-surface/30 p-4"><summary className="min-h-6 cursor-pointer text-sm font-semibold">Limits and provenance</summary><p className="mt-4 text-sm leading-relaxed text-subtle">All five pairs were authored for this website prototype. There is no live model, observation period or historical source behind them.</p><p className="mt-4 text-sm leading-relaxed text-subtle">A real report would include forecast timestamps, observation heights, model version, an unedited evaluation window and a comparison baseline. This sample does not assess uncertainty intervals or performance across market conditions.</p></details></section>
-        <nav aria-label="Continue evaluating forecasts" className="mt-8 border-t border-white/10 pt-5"><ul className="space-y-2"><li><Link href={comparisonPath} className="inline-flex min-h-11 items-center gap-2 text-xs font-semibold text-highlight hover:underline">Check whether a comparison is fair <Arrow className="h-4 w-4" /></Link></li><li><Link href="/v3/data/scoreboard" className="inline-flex min-h-11 items-center gap-2 text-xs font-semibold text-highlight hover:underline">Read accuracy metrics <Arrow className="h-4 w-4" /></Link></li><li><Link href="/v3/methodology/difficulty-index" className="inline-flex min-h-11 items-center gap-2 text-xs font-semibold text-highlight hover:underline">Inspect the forecast methodology <Arrow className="h-4 w-4" /></Link></li></ul></nav>
+        <nav aria-label="Continue evaluating forecasts" className="mt-8 border-t border-white/10 pt-5"><ul className="space-y-2"><li><Link href={comparisonPath} className="inline-flex min-h-11 items-center gap-2 text-xs font-semibold text-highlight hover:underline">Check whether a comparison is fair <Arrow className="h-4 w-4" /></Link></li><li><Link href="/data/scoreboard" className="inline-flex min-h-11 items-center gap-2 text-xs font-semibold text-highlight hover:underline">Read accuracy metrics <Arrow className="h-4 w-4" /></Link></li><li><Link href="/methodology/difficulty-index" className="inline-flex min-h-11 items-center gap-2 text-xs font-semibold text-highlight hover:underline">Inspect the forecast methodology <Arrow className="h-4 w-4" /></Link></li></ul></nav>
       </div>
     </div>
   </Container>

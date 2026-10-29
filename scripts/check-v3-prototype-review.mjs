@@ -22,11 +22,11 @@ review.appendPrototypeEvent({ ...event, payload: { ...event.payload, email: 'pri
 assert.equal(review.readPrototypeEvents().length, 100)
 assert.doesNotMatch(JSON.stringify([...storage.values()]), /private@|example\.invalid/)
 for (const section of ['home', 'tools', 'research', 'institutions', 'newsletter']) {
-  const path = { home: '/v3', tools: '/v3/tools/difficulty-exposure', research: '/v3/research/example', institutions: '/v3/for/institutions', newsletter: '/v3/newsletter' }[section]
+  const path = { home: '/', tools: '/tools/difficulty-exposure', research: '/research/example', institutions: '/for/institutions', newsletter: '/newsletter' }[section]
   assert.equal(review.measurementSection(path), section)
 }
 assert.equal(sanitizeMeasurement('identification_request', { kind: 'newsletter', result: 'subscribed' }), null)
-assert.equal(sanitizeMeasurement('page_view', { section: '/v3/private?email=private', signal: 'route-render' }), null)
+assert.equal(sanitizeMeasurement('page_view', { section: '/private?email=private', signal: 'route-render' }), null)
 review.clearPrototypeEvents()
 assert.equal(review.readPrototypeEvents().length, 0)
 review.appendPrototypeEvent(event)

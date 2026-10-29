@@ -34,7 +34,7 @@ type DynamicPage<P extends Record<string, string>> = {
 }
 
 export type V3Route = {
-  /** Path below /v3, without a leading slash. */
+  /** Root-relative path without a leading slash. */
   path: string
   render: () => ReactNode
   metadata: () => Metadata | Promise<Metadata>
@@ -99,7 +99,7 @@ export async function v3RouteMetadata(route: V3Route): Promise<Metadata> {
   const base = seo({
     title: 'Doefin preview',
     description: source.description ?? '',
-    path: `/v3/${route.path}`,
+    path: `/${route.path}`,
   })
   return {
     ...base,

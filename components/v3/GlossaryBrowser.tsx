@@ -17,7 +17,7 @@ export type GlossaryEntry = { slug: string; term: string; shortDef: string; alia
 const bands = [{ id: 'bc', label: 'B–C', from: 'A', to: 'C' }, { id: 'dh', label: 'D–H', from: 'D', to: 'H' }, { id: 'mp', label: 'M–P', from: 'I', to: 'P' }, { id: 'tu', label: 'T–U', from: 'Q', to: 'Z' }]
 const normalize = (s: string) => s.normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim()
 
-export function GlossaryBrowser({ entries, academyHref = '/v3/academy' }: { entries: GlossaryEntry[]; academyHref?: string }) {
+export function GlossaryBrowser({ entries, academyHref = '/academy' }: { entries: GlossaryEntry[]; academyHref?: string }) {
   const [query, setQuery] = useState('')
   const [topic, setTopic] = useState<Topic>('all')
   const search = useRef<HTMLInputElement>(null)
@@ -66,7 +66,7 @@ export function GlossaryBrowser({ entries, academyHref = '/v3/academy' }: { entr
             <div className="mb-3 flex items-baseline gap-3"><h2 id={'glossary-heading-' + group.id} className="tabular text-xl font-extrabold tracking-tight text-highlight">{group.label}</h2><span className="tabular text-[11px] text-subtle">{group.entries.length} {group.entries.length === 1 ? 'term' : 'terms'}</span></div>
             <dl className="grid gap-3 sm:grid-cols-2">
               {group.entries.map(t => <div key={t.slug} data-glossary-term={t.slug} className="group relative flex min-w-0 flex-col rounded-xl border border-white/[0.08] bg-surface/50 p-5 transition-colors focus-within:border-brand/50 hover:border-brand/40 hover:bg-surface">
-                <dt><Link href={'/v3/glossary/' + t.slug} className="flex min-h-9 items-start justify-between gap-3 text-base font-bold tracking-tight text-body group-hover:text-highlight"><span>{t.term}</span><Arrow diagonal className="mt-0.5 h-4 w-4 text-subtle group-hover:text-highlight" /></Link></dt>
+                <dt><Link href={'/glossary/' + t.slug} className="flex min-h-9 items-start justify-between gap-3 text-base font-bold tracking-tight text-body group-hover:text-highlight"><span>{t.term}</span><Arrow diagonal className="mt-0.5 h-4 w-4 text-subtle group-hover:text-highlight" /></Link></dt>
                 <dd className="mt-3 flex flex-1 flex-col"><p className="text-sm leading-[1.75] text-subtle">{t.shortDef}</p>{t.aliases.length ? <p className="mt-3 text-[11px] leading-relaxed text-subtle"><span className="font-semibold text-body/70">Also </span>{t.aliases.join(' · ')}</p> : null}<p className="mt-4 pt-1 text-[10px] font-medium text-subtle">{glossaryTopics.find(topic => topic.id === t.topic)!.label}</p></dd>
               </div>)}
             </dl>
@@ -76,6 +76,6 @@ export function GlossaryBrowser({ entries, academyHref = '/v3/academy' }: { entr
       </div>
     </div>
 
-    <section aria-labelledby="glossary-next" className="mt-12 flex flex-col items-start justify-between gap-5 rounded-panel border border-white/10 bg-gradient-to-br from-surface to-surfaceAlt/40 p-6 sm:flex-row sm:items-center sm:p-7"><div><p className="text-[11px] font-bold uppercase tracking-[0.12em] text-highlight">From definition to application</p><h2 id="glossary-next" className="mt-2 text-xl font-bold tracking-tight">Put the terms to work.</h2><p className="mt-2 max-w-xl text-sm leading-relaxed text-subtle">Explore difficulty exposure, hosting costs and fleet payback with your own assumptions.</p></div><Link href="/v3/tools" className="inline-flex min-h-11 shrink-0 items-center gap-3 rounded-lg border border-brand/30 bg-brand/10 px-4 py-3 text-sm font-semibold text-highlight hover:border-brand/60 hover:bg-brand/20">Explore calculators <Arrow /></Link></section>
+    <section aria-labelledby="glossary-next" className="mt-12 flex flex-col items-start justify-between gap-5 rounded-panel border border-white/10 bg-gradient-to-br from-surface to-surfaceAlt/40 p-6 sm:flex-row sm:items-center sm:p-7"><div><p className="text-[11px] font-bold uppercase tracking-[0.12em] text-highlight">From definition to application</p><h2 id="glossary-next" className="mt-2 text-xl font-bold tracking-tight">Put the terms to work.</h2><p className="mt-2 max-w-xl text-sm leading-relaxed text-subtle">Explore difficulty exposure, hosting costs and fleet payback with your own assumptions.</p></div><Link href="/tools" className="inline-flex min-h-11 shrink-0 items-center gap-3 rounded-lg border border-brand/30 bg-brand/10 px-4 py-3 text-sm font-semibold text-highlight hover:border-brand/60 hover:bg-brand/20">Explore calculators <Arrow /></Link></section>
   </div>
 }

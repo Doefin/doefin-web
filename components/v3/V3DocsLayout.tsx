@@ -8,11 +8,11 @@ import { DocsPublicationProvider } from '@/components/routing/DocsPublicationCon
 
 function DocsNavigation({ activeSlug, docs }: { activeSlug?: string; docs: V3Doc[] }) {
   return <nav aria-label="Documentation sections">
-    <Link href="/v3/docs" aria-current={!activeSlug ? 'page' : undefined} className={'inline-flex min-h-10 items-center text-sm font-bold ' + (!activeSlug ? 'text-highlight' : 'text-body hover:text-highlight')}>Documentation home</Link>
+    <Link href="/docs" aria-current={!activeSlug ? 'page' : undefined} className={'inline-flex min-h-10 items-center text-sm font-bold ' + (!activeSlug ? 'text-highlight' : 'text-body hover:text-highlight')}>Documentation home</Link>
     <div className="mt-5 space-y-6">{v3DocGroups.map(group => <div key={group}>
       <p className="mb-2 text-xs font-bold uppercase tracking-[0.1em] text-subtle">{group}</p>
       <ul className="space-y-1">{docs.filter(doc => doc.group === group).map(doc => <li key={doc.slug}>
-        <Link href={'/v3/docs/' + doc.slug} aria-current={doc.slug === activeSlug ? 'page' : undefined}
+        <Link href={'/docs/' + doc.slug} aria-current={doc.slug === activeSlug ? 'page' : undefined}
           className={'block rounded-lg border-l-2 px-3 py-2 text-sm leading-snug ' + (doc.slug === activeSlug ? 'border-brand bg-brand/10 font-semibold text-highlight' : 'border-transparent text-subtle hover:bg-white/[0.04] hover:text-body')}>
           {doc.title}
         </Link>
@@ -41,7 +41,7 @@ export async function V3DocsLayout({ activeSlug, title, summary, eyebrow, childr
           <div className="mt-4 border-t border-white/10 pt-3"><DocsNavigation activeSlug={activeSlug} docs={docs} /></div>
         </details>
         <article id="docs-content" className="max-w-prose scroll-mt-36">
-          <Breadcrumbs items={[{ name: 'Documentation', href: '/v3/docs' }, ...(activeSlug ? [{ name: title, href: '/v3/docs/' + activeSlug }] : [])]} />
+          <Breadcrumbs items={[{ name: 'Documentation', href: '/docs' }, ...(activeSlug ? [{ name: title, href: '/docs/' + activeSlug }] : [])]} />
           <header className="mt-7"><PageHeader eyebrow={eyebrow} title={title} lede={summary} /></header>
           <div className="mt-8">{children}</div>
         </article>

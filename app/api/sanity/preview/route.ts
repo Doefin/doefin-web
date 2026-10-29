@@ -11,5 +11,5 @@ export async function GET(request: NextRequest) {
   const slug = request.nextUrl.searchParams.get('slug') ?? ''
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) return new Response('Invalid glossary slug', { status: 400 })
   ;(await draftMode()).enable()
-  return NextResponse.redirect(new URL(`/v3/glossary/${slug}`, request.url), { headers: { 'Cache-Control': 'no-store', 'Referrer-Policy': 'no-referrer' } })
+  return NextResponse.redirect(new URL(`/glossary/${slug}`, request.url), { headers: { 'Cache-Control': 'no-store', 'Referrer-Policy': 'no-referrer' } })
 }

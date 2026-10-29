@@ -69,8 +69,8 @@ await actionFactory(()=>({onHandle(){delegated++}}),{getClient:()=>badClient})({
 const site=loadTypescript('lib/site.ts'),versioning=loadTypescript('lib/versioning.ts')
 const links=loadTypescript('lib/docs-links.ts',{'./site':site,'./versioning':versioning})
 const {toolGuideLinkState}=loadTypescript('lib/tool-guide-links.ts',{'./docs-links':links})
-for(const href of ['/academy/guides/hosting-effective-rate?x=1#settings','https://doefin.com/v3/academy/guides/hosting-effective-rate#settings',{pathname:'/v3/academy/guides/hosting-effective-rate',query:{x:'1'},hash:'settings'}])assert.equal(toolGuideLinkState(href,['hosting-effective-rate']),'published')
-assert.equal(toolGuideLinkState('/v3/academy/guides/gone',[]),'missing');assert.equal(toolGuideLinkState('/v3/academy/guides/gone',null),'unavailable');assert.equal(toolGuideLinkState('https://elsewhere.test/v3/academy/guides/gone',[]),undefined)
+for(const href of ['/academy/guides/hosting-effective-rate?x=1#settings','https://doefin.com/academy/guides/hosting-effective-rate#settings',{pathname:'/academy/guides/hosting-effective-rate',query:{x:'1'},hash:'settings'}])assert.equal(toolGuideLinkState(href,['hosting-effective-rate']),'published')
+assert.equal(toolGuideLinkState('/academy/guides/gone',[]),'missing');assert.equal(toolGuideLinkState('/academy/guides/gone',null),'unavailable');assert.equal(toolGuideLinkState('https://elsewhere.test/academy/guides/gone',[]),undefined)
 console.log('Passed3-guide exact source parity, optional dates/hostile prose, permanent slug/tool action+revision guards, namespace/draft/version/all-type import safety, old58 preservation, combined61 verifier compatibility, create-only/idempotence and curated URL policy.')
 const config=loadTypescript('content/sanity/config.ts')
 const parser={parseToolGuides,parseGuideManifest},requests=[]

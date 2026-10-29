@@ -54,7 +54,7 @@ export function MarketExample() {
     </div>
     <div className={styles.footer}>
       <p>Earlier crossings don’t count. Redeem winning tokens after resolution. Check actual amounts and fees in the app.</p>
-      <Link href="/v3/docs/how-settlement-works" className="v37-link">Settlement guide <Arrow /></Link>
+      <Link href="/docs/how-settlement-works" className="v37-link">Settlement guide <Arrow /></Link>
     </div>
   </div>
 }

@@ -6,7 +6,7 @@ import { RelatedContent, type RelatedLink } from '@/components/preview/Primitive
 export function TutorialRelatedContent({ action }: { learning: RelatedLink; action: RelatedLink }) {
   return <RelatedContent
     learning={{
-      href: '/v3/docs/how-settlement-works',
+      href: '/docs/how-settlement-works',
       title: 'Distinguish production from settlement',
       text: 'Read how a threshold-based payout differs from a continuously changing production estimate.',
     }}

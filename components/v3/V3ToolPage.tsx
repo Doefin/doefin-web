@@ -30,7 +30,7 @@ export default async function V3ToolPage({ params }: { params: Promise<{ slug: s
   const active = tools.find(t => t.slug === slug)!
   return <GuidesPublicationProvider slugs={unavailable ? null : guides.map(row=>row.slug)}><Container className="pb-14 pt-8 sm:pt-10 [overflow-wrap:anywhere]">
     <div className="mb-6 flex flex-wrap items-center justify-between gap-3 text-xs text-subtle">
-      <Link href="/v3/tools" className="py-1 hover:text-highlight">Tools <span aria-hidden> / </span><span className="text-body">Mining analysis</span></Link>
+      <Link href="/tools" className="py-1 hover:text-highlight">Tools <span aria-hidden> / </span><span className="text-body">Mining analysis</span></Link>
       <span className="rounded-full border border-white/10 px-3 py-1.5">Sample inputs · 17 September 2026</span>
     </div>
     <div className="mb-7 max-w-3xl">
@@ -38,7 +38,7 @@ export default async function V3ToolPage({ params }: { params: Promise<{ slug: s
       <p className="mt-3 max-w-2xl text-sm leading-relaxed text-subtle sm:text-base">{tool.description}</p>
     </div>
     <nav aria-label="Mining calculators" className="mb-6 grid grid-cols-3 gap-1 rounded-xl border border-white/10 bg-surface/60 p-1.5">
-      {tools.map(t => <Link key={t.slug} href={'/v3/tools/' + t.slug} aria-current={slug === t.slug ? 'page' : undefined}
+      {tools.map(t => <Link key={t.slug} href={'/tools/' + t.slug} aria-current={slug === t.slug ? 'page' : undefined}
         className={'min-w-0 rounded-lg px-2 py-3 transition-colors sm:px-4 ' + (slug === t.slug ? 'bg-active text-body shadow-sm' : 'text-subtle hover:bg-white/5 hover:text-body')}>
         <span className="block text-xs font-bold sm:text-sm">{t.name}</span><span className="mt-1 hidden text-xs text-subtle sm:block">{t.detail}</span>
       </Link>)}
@@ -57,8 +57,8 @@ export default async function V3ToolPage({ params }: { params: Promise<{ slug: s
       <p className="mt-2 text-sm leading-relaxed text-subtle">Educational scenarios with stated assumptions. Compare the working, then return to the calculator.</p>
       {unavailable && <p role="status" className="mt-3 text-sm text-subtle">Calculator guides are temporarily unavailable.</p>}
       <ul className="mt-3 space-y-2 text-sm">
-        {examples.map(example => <li key={example.slug}><Link href={`/v3/tools/${slug}/example/${example.slug}`} className="inline-flex min-h-11 items-center text-highlight underline underline-offset-4">{example.title}</Link></li>)}
-        {guide && <li><Link href={`/v3/academy/guides/${slug}`} className="inline-flex min-h-11 items-center text-highlight underline underline-offset-4">Read the input guide: {guide.article.title}</Link></li>}
+        {examples.map(example => <li key={example.slug}><Link href={`/tools/${slug}/example/${example.slug}`} className="inline-flex min-h-11 items-center text-highlight underline underline-offset-4">{example.title}</Link></li>)}
+        {guide && <li><Link href={`/academy/guides/${slug}`} className="inline-flex min-h-11 items-center text-highlight underline underline-offset-4">Read the input guide: {guide.article.title}</Link></li>}
       </ul>
     </section>
     <RelatedContent learning={tool.learning} action={slug === 'difficulty-exposure'

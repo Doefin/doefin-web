@@ -12,7 +12,7 @@ import { V3AcademyIndex } from './V3AcademyIndex'
 
 type Kind = V3EditorialArticle['kind']
 const label = (kind: Kind) => kind === 'academy' ? 'Academy' : 'Articles'
-const path = (kind: Kind, slug = '') => `/v3/${kind}${slug ? '/' + slug : ''}`
+const path = (kind: Kind, slug = '') => `/${kind}${slug ? '/' + slug : ''}`
 
 function ArticleList({ articles }: { articles: V3EditorialArticle[] }) {
   return <div className="divide-y divide-white/10 border-y border-white/10">{articles.map(article => <Link key={article.slug} href={path(article.kind, article.slug)} className="group block py-6"><h2 className="text-xl font-bold group-hover:text-highlight">{article.title} →</h2><p className="mt-3 text-sm leading-relaxed text-subtle">{article.summary}</p></Link>)}</div>
@@ -24,8 +24,8 @@ function collection(kind: Kind) {
     default: async function Collection() {
       return <ContentPage title={kind === 'academy' ? 'Understand the moving parts.' : 'Read the assumptions behind the number.'} summary={kind === 'academy' ? 'Start with difficulty, hashprice and uncertainty, then use a guide to apply the concepts.' : 'Educational articles about mining scenarios and how to interpret data. These are not reports of measured market performance.'} eyebrow={label(kind)} crumbs={[{ name: label(kind), href: path(kind) }]}>
         <ArticleList articles={await allV3Editorial(kind)} />
-        {kind === 'academy' && <section id="guides" className="mt-10 scroll-mt-28"><h2 className="text-2xl font-bold">Calculator guides</h2><ul className="mt-5 space-y-4">{(await allGuides()).map(({ slug, guide }) => <li key={slug}><Link href={'/v3/academy/guides/' + slug} className="text-sm font-semibold text-highlight hover:underline">{guide.article.title} →</Link></li>)}</ul></section>}
-        <ContentLinks links={[{ href: '/v3/tools', label: 'Work with your own assumptions' }, { href: '/v3/research', label: 'Inspect a worked research example' }, { href: '/v3/glossary', label: 'Look up a term' }]} />
+        {kind === 'academy' && <section id="guides" className="mt-10 scroll-mt-28"><h2 className="text-2xl font-bold">Calculator guides</h2><ul className="mt-5 space-y-4">{(await allGuides()).map(({ slug, guide }) => <li key={slug}><Link href={'/academy/guides/' + slug} className="text-sm font-semibold text-highlight hover:underline">{guide.article.title} →</Link></li>)}</ul></section>}
+        <ContentLinks links={[{ href: '/tools', label: 'Work with your own assumptions' }, { href: '/research', label: 'Inspect a worked research example' }, { href: '/glossary', label: 'Look up a term' }]} />
       </ContentPage>
     },
   }
@@ -46,7 +46,7 @@ function article(kind: Kind) {
         <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd({ '@context': 'https://schema.org', '@type': 'Article', headline: item.title, description: item.summary, publisher: publisherRef, mainEntityOfPage: site.url + path(kind, item.slug), datePublished: item.publishedAt })} />
         {item.reviewedAt && <p className="mb-8 text-xs text-subtle">Guide reviewed <time dateTime={item.reviewedAt}>{dateLong(item.reviewedAt)}</time></p>}
         <AutoLinkedProse paragraphs={item.sections.flatMap(section => [{ heading: section.heading, id: section.id }, ...section.paragraphs])} />
-        <ContentLinks links={[{ href: '/v3/methodology/difficulty-index', label: 'Evaluate a forecast’s method' }, { href: '/v3/tools/difficulty-exposure', label: 'Compare your production scenarios' }, { href: '/v3/data', label: 'Read the data examples' }]} />
+        <ContentLinks links={[{ href: '/methodology/difficulty-index', label: 'Evaluate a forecast’s method' }, { href: '/tools/difficulty-exposure', label: 'Compare your production scenarios' }, { href: '/data', label: 'Read the data examples' }]} />
       </ContentPage></div>
     },
   }
@@ -60,7 +60,7 @@ export const V3Tag = {
   generateMetadata: async ({ params }: { params: Promise<{ tag: string }> }) => {
     const topic = await getV3Topic((await params).tag)
     if (!topic) notFound()
-    return seo({ title: `${topic.label}: educational articles`, description: `Read educational articles on ${topic.label} and the assumptions behind mining data.`, path: '/v3/blog/tag/' + topic.slug })
+    return seo({ title: `${topic.label}: educational articles`, description: `Read educational articles on ${topic.label} and the assumptions behind mining data.`, path: '/blog/tag/' + topic.slug })
   },
   default: async function TaggedArticles({ params }: { params: Promise<{ tag: string }> }) {
     const topic = await getV3Topic((await params).tag)

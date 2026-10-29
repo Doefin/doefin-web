@@ -7,7 +7,7 @@ import { useSiteVersion } from '@/components/routing/SiteVersionContext'
 export function LibraryLinks({ className }: { className: string }) {
   const isV3 = useSiteVersion() === 'v3'
   const links = isV3
-    ? [['Resource library', '/v3/resources'], ['Academy & guides', '/v3/academy'], ['Articles', '/v3/blog'], ['Mining glossary', '/v3/glossary'], ['Docs', '/v3/docs']]
+    ? [['Resource library', '/resources'], ['Academy & guides', '/academy'], ['Articles', '/blog'], ['Mining glossary', '/glossary'], ['Docs', '/docs']]
     : [['Academy', '/academy'], ['Blog', '/blog'], ['Glossary', '/glossary'], ['Product documentation', '/docs']]
   return <section className={className}>
     <h2 className="text-xl font-bold">{isV3 ? 'Keep exploring' : 'Explore the existing library'}</h2>

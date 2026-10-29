@@ -35,9 +35,9 @@ export function contentPath(href: DocsHref): string | undefined {
  * Published destinations remain untouched, including their original query/hash. */
 export function docsLinkState(href: DocsHref, slugs: readonly string[] | null | undefined): 'published' | 'missing' | 'unavailable' | undefined {
   const path = contentPath(href)
-  if (!path?.startsWith('/v3/docs/') || slugs === undefined) return undefined
+  if (!path?.startsWith('/docs/') || slugs === undefined) return undefined
   if (slugs === null) return 'unavailable'
   let slug: string
-  try { slug = decodeURIComponent(path.split(/[?#]/)[0].slice('/v3/docs/'.length).replace(/\/$/,'')) } catch { return 'missing' }
+  try { slug = decodeURIComponent(path.split(/[?#]/)[0].slice('/docs/'.length).replace(/\/$/,'')) } catch { return 'missing' }
   return slugs.includes(slug) ? 'published' : 'missing'
 }

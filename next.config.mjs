@@ -7,17 +7,9 @@ const nextConfig = {
   // audience — do not drop analytics. Mirrors the trading app's configuration.
   skipTrailingSlashRedirect: true,
   async redirects() {
-    const originalSections = [
-      'about', 'academy', 'blog', 'data', 'docs', 'for', 'glossary', 'methodology',
-      'newsletter', 'privacy', 'research', 'resources', 'terms', 'tools',
-    ]
     return [
-      { source: '/', destination: '/v3', permanent: false },
-      ...originalSections.map(section => ({
-        source: '/' + section + '/:path*',
-        destination: '/v3/' + section + '/:path*',
-        permanent: false,
-      })),
+      { source: '/v3', destination: '/', permanent: true },
+      { source: '/v3/:path*', destination: '/:path*', permanent: true },
     ]
   },
   async rewrites() {

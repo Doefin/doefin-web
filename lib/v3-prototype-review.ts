@@ -47,13 +47,13 @@ export function appendPrototypeEvent(event: MeasurementEvent) {
 
 /** Coarse page category only: query strings, scenario URLs and free text stay out. */
 export function measurementSection(pathname: string): MeasurementPayloads['page_view']['section'] {
-  if (/^\/v3\/?$/.test(pathname)) return 'home'
-  if (/^\/v3\/for\/institutions(?:\/|$)/.test(pathname)) return 'institutions'
-  if (/^\/v3\/(?:product|for)(?:\/|$)/.test(pathname)) return 'product'
-  if (/^\/v3\/tools(?:\/|$)/.test(pathname)) return 'tools'
-  if (/^\/v3\/(?:learn|academy|glossary|blog)(?:\/|$)/.test(pathname)) return 'learn'
-  if (/^\/v3\/(?:research|methodology)(?:\/|$)/.test(pathname)) return 'research'
-  if (/^\/v3\/data(?:\/|$)/.test(pathname)) return 'data'
-  if (/^\/v3\/newsletter(?:\/|$)/.test(pathname)) return 'newsletter'
+  if (/^\/?$/.test(pathname)) return 'home'
+  if (/^\/for\/institutions(?:\/|$)/.test(pathname)) return 'institutions'
+  if (/^\/(?:product|for)(?:\/|$)/.test(pathname)) return 'product'
+  if (/^\/tools(?:\/|$)/.test(pathname)) return 'tools'
+  if (/^\/(?:learn|academy|glossary|blog)(?:\/|$)/.test(pathname)) return 'learn'
+  if (/^\/(?:research|methodology)(?:\/|$)/.test(pathname)) return 'research'
+  if (/^\/data(?:\/|$)/.test(pathname)) return 'data'
+  if (/^\/newsletter(?:\/|$)/.test(pathname)) return 'newsletter'
   return 'other'
 }

@@ -8,7 +8,7 @@ import { Arrow } from './Arrow'
 export const metadata = seo({
   title: 'Mining calculators: hosting, production and payback',
   description: 'Choose a mining calculator by the question, inputs and result: compare hosting costs, size difficulty exposure or explore simplified fleet payback.',
-  path: '/v3/tools',
+  path: '/tools',
 })
 
 const choices = [
@@ -22,11 +22,11 @@ const sampleLabel = 'text-[10px] font-bold uppercase tracking-[0.12em] text-caut
 const inputsLabel = 'text-[10px] font-bold uppercase tracking-[0.12em] text-subtle'
 
 function StartLink({ slug, children }: { slug: string; children: React.ReactNode }) {
-  return <Link href={`/v3/tools/${slug}`} className={`inline-flex min-h-11 items-center justify-center gap-4 rounded-lg bg-brand px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-brandDeep ${focus}`}>{children}<Arrow className="h-4 w-4" /></Link>
+  return <Link href={`/tools/${slug}`} className={`inline-flex min-h-11 items-center justify-center gap-4 rounded-lg bg-brand px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-brandDeep ${focus}`}>{children}<Arrow className="h-4 w-4" /></Link>
 }
 
 function GuideLink({ slug, title }: { slug: string; title: string }) {
-  return <Link href={`/v3/academy/guides/${slug}`} className={`group flex min-h-12 items-center justify-between gap-5 border-t border-white/10 pt-4 text-xs leading-relaxed text-subtle hover:text-highlight ${focus}`}><span className="min-w-0"><span className="mr-2 text-body">Worked guide</span>{title}</span><Arrow className="h-4 w-4" /></Link>
+  return <Link href={`/academy/guides/${slug}`} className={`group flex min-h-12 items-center justify-between gap-5 border-t border-white/10 pt-4 text-xs leading-relaxed text-subtle hover:text-highlight ${focus}`}><span className="min-w-0"><span className="mr-2 text-body">Worked guide</span>{title}</span><Arrow className="h-4 w-4" /></Link>
 }
 
 function Inputs({ children }: { children: React.ReactNode }) {
@@ -55,7 +55,7 @@ export default async function V3ToolsIndex() {
     </header>
 
     <nav aria-label="Choose a mining calculator" className="mb-7 mt-6 grid gap-0 divide-y divide-white/10 border-y border-white/10 sm:mb-9 sm:mt-8 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-      {choices.map(choice => <Link key={choice.slug} href={`/v3/tools/${choice.slug}`} className={`group flex items-center justify-between gap-4 py-3.5 sm:items-start sm:px-5 sm:py-5 sm:first:pl-0 sm:last:pr-0 ${focus}`}>
+      {choices.map(choice => <Link key={choice.slug} href={`/tools/${choice.slug}`} className={`group flex items-center justify-between gap-4 py-3.5 sm:items-start sm:px-5 sm:py-5 sm:first:pl-0 sm:last:pr-0 ${focus}`}>
         <div><p className="text-[13px] font-bold text-body group-hover:text-highlight"><span className="tabular mr-2.5 text-[10px] text-subtle">{choice.number}</span>{choice.name}</p><p className="mt-1.5 text-[11px] text-subtle">{choice.output}</p></div><Arrow className="mt-0.5 h-4 w-4 text-highlight transition-transform group-hover:translate-x-1" />
       </Link>)}
     </nav>
@@ -135,7 +135,7 @@ export default async function V3ToolsIndex() {
 
     <aside aria-labelledby="tools-note-title" className="mt-8 grid gap-5 border-y border-white/10 py-6 sm:mt-10 sm:grid-cols-[1fr_1fr] sm:gap-12 sm:py-7">
       <div><h2 id="tools-note-title" className="text-sm font-bold">Your assumptions. An inspectable result.</h2><p className="mt-2 max-w-xl text-xs leading-[1.9] text-subtle">Each calculator starts with illustrative inputs, not live data. Replace them with your own numbers; the page URL keeps the scenario so you can return to it or share it.</p></div>
-      <div><p className="text-sm font-bold">Production and contract settlement are different.</p><p className="mt-2 text-xs leading-[1.9] text-subtle">A BTC production change is not a contract payout or an order size.</p><Link href="/v3/product/settlement" className={`mt-2 inline-flex min-h-10 items-center gap-3 text-xs font-semibold text-highlight hover:underline ${focus}`}>Read how settlement works<Arrow className="h-4 w-4" /></Link></div>
+      <div><p className="text-sm font-bold">Production and contract settlement are different.</p><p className="mt-2 text-xs leading-[1.9] text-subtle">A BTC production change is not a contract payout or an order size.</p><Link href="/product/settlement" className={`mt-2 inline-flex min-h-10 items-center gap-3 text-xs font-semibold text-highlight hover:underline ${focus}`}>Read how settlement works<Arrow className="h-4 w-4" /></Link></div>
     </aside>
   </Container></GuidesPublicationProvider>
 }

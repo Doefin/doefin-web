@@ -7,12 +7,12 @@ import { clearPrototypeEvents, prototypeReviewEnabled, readPrototypeEvents, REVI
 import type { MeasurementEvent } from '@/lib/v3-measurement'
 
 const stages = [
-  ['Discover', 'A citable glossary, education and public research.', '/v3/glossary', 'Search Console, Bing and named AI citations; indexing stays off in preview.'],
-  ['Return', 'Saved calculator scenarios and a retarget research issue.', '/v3/data', 'An unprompted visit in a later fortnight; requires consented production measurement.'],
-  ['Identify', 'Role, newsletter preferences and emailed-format previews.', '/v3/newsletter', 'A confirmed, permissioned subscriber; a preview submission is not one.'],
-  ['Qualify', 'Volunteered organisation context and production exposure.', '/v3/tools/difficulty-exposure', 'An authorised CRM match against a named target list; never infer eligibility from fleet size.'],
-  ['Converse', 'A forwardable scenario and finance-team review questions.', '/v3/for/institutions', 'A conversation with a named decision-maker and the other approvers recorded by the team.'],
-  ['Trade again', 'Contract, settlement and risk explanations before app handoff.', '/v3/product/settlement', 'Executed fills by the same eligible counterparty in two epochs; website clicks cannot establish this.'],
+  ['Discover', 'A citable glossary, education and public research.', '/glossary', 'Search Console, Bing and named AI citations; indexing stays off in preview.'],
+  ['Return', 'Saved calculator scenarios and a retarget research issue.', '/data', 'An unprompted visit in a later fortnight; requires consented production measurement.'],
+  ['Identify', 'Role, newsletter preferences and emailed-format previews.', '/newsletter', 'A confirmed, permissioned subscriber; a preview submission is not one.'],
+  ['Qualify', 'Volunteered organisation context and production exposure.', '/tools/difficulty-exposure', 'An authorised CRM match against a named target list; never infer eligibility from fleet size.'],
+  ['Converse', 'A forwardable scenario and finance-team review questions.', '/for/institutions', 'A conversation with a named decision-maker and the other approvers recorded by the team.'],
+  ['Trade again', 'Contract, settlement and risk explanations before app handoff.', '/product/settlement', 'Executed fills by the same eligible counterparty in two epochs; website clicks cannot establish this.'],
 ] as const
 
 export function PrototypeReview() {
