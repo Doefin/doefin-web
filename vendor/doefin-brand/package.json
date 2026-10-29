@@ -1,18 +1,29 @@
 {
   "name": "@doefin/brand",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "private": true,
-  "description": "Doefin brand: voice rules, design tokens, logos and fonts.",
-  "files": ["dist", "assets", "brand", "AGENTS.md", "tools"],
+  "description": "Doefin brand: the CEO's voice and thinking, writing rules, design tokens, logos and fonts.",
+  "files": [
+    "dist",
+    "assets",
+    "brand",
+    "agents",
+    "skills",
+    "prompts",
+    "AGENTS.md",
+    "tools"
+  ],
   "exports": {
     "./tokens.css": "./dist/tokens.css",
     "./tailwind-preset": "./dist/tailwind-preset.cjs",
     "./tokens.json": "./dist/tokens.dtcg.json",
     "./brand-context.md": "./dist/brand-context.md",
-    "./assets/*": "./assets/*"
+    "./assets/*": "./assets/*",
+    "./matteo-edits.jsonl": "./dist/matteo-edits.jsonl"
   },
   "scripts": {
     "build": "python3 scripts/build.py",
-    "check": "python3 tools/check_copy.py"
+    "check": "python3 tools/check_copy.py",
+    "add-edit": "python3 tools/add_edit.py"
   }
 }

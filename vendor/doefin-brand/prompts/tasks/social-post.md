@@ -9,6 +9,6 @@ Write a [X / LinkedIn] post for the [Doefin company account / Matteo's own accou
 - The view or trade-off to end on: [one sentence, or "none"]
 - Image: [figure card / app screenshot dated [date] / none]
 
-Rules: first line is the subject or the number. On X, one sentence per line and under 280 characters if possible. On LinkedIn, short paragraphs of one to three sentences. Company posts say "we", Matteo's say "I". No emoji, no hashtags. If the post is about Doefin markets, end with the disclaimer.
+Rules: the first line is the number, a claim Matteo would defend, or the reader's question. Numbers carry their qualifiers (expected, at the same hashrate, all else equal). State the limit next to any claim about what Doefin does. On X, one sentence per line and under 280 characters if possible. On LinkedIn, short paragraphs of one to three sentences, up to 250 words for an argument and about 100 for an update. Company posts say "we", Matteo's say "I" and keep opinion apart from company facts. No contractions, no hashtags; emoji and exclamation marks only when they fit. If the post is about Doefin markets, end with the disclaimer.
 
-Give me the post, then the line for the image card (number, label, date, source), then anything the compliance reviewer should check.
+Give me the post, then the line for the image card (number, label, date, source), then anything Matteo must review.

@@ -1,29 +1,27 @@
 ---
 name: doefin-brand
-description: Doefin's brand voice and visual identity. Load before writing or designing anything for Doefin, such as website or app copy, X or LinkedIn posts, emails, newsletters, decks, documents, glossary entries or social images. Carries the CEO's voice rules, the phrases that make copy sound generated, what Doefin can't say, the visual rules and a copy checker to run on every draft.
+description: Doefin's visual identity and brand facts. Load before designing or building anything for Doefin, such as screens, pages, social images, decks or documents, or when you need the logos, colours, type, tokens, templates or the brand rules in one file. For writing or editing text, use the doefin-voice skill, which carries the CEO's voice and thinking.
 ---
 
 # Doefin brand
 
 Everything is in this folder, so the skill works on its own:
 
-- `reference/brand-context.md`: every writing and visual rule in one file. Read it before you draft.
-- `scripts/check_copy.py` with `rules.json`: the copy checker.
-
+- `reference/brand-context.md`: every writing and visual rule in one file. Read the visual section before you design.
+- `scripts/check_copy.py` with `rules.json`: the copy checker, for any words on a screen or image.
 - `reference/links.md`: the brand book page, the editable social, document and deck templates, and the tone check.
 
 The full repository (logos, fonts, design tokens) is `doefin-brand`; this folder is built from it.
 
 ## Procedure
 
-1. Read `reference/brand-context.md`. For anything long or public, read its voice samples section too.
-2. Write the draft. Follow the channel and content-type rules for what you are making.
-3. Save the draft to a file and run `python3 scripts/check_copy.py <file>` (paths relative to this folder), or pipe text in with `-`.
-4. Rewrite every `CUT` line as a new sentence, not a word swap. Keep a `CHECK` item only if it is true and needed, and list it for the user, because anything public about Doefin or its markets needs written sign-off (Matteo's, until a compliance approver is named). Fix `STYLE` notes unless they sit inside a quote.
-5. Run the checker again until no `CUT` items are left. Then read the draft as Matteo would: plain, short, numbers first.
+1. Read `reference/brand-context.md`: the visual rules, and the channel you are designing for.
+2. For any words in the design, follow the doefin-voice skill (or `brand/matteo/thinking.md` in the repository). Run `python3 scripts/check_copy.py <file> --channel=<web|app|social|email|deck|doc>` on them.
+3. Use the tokens (`dist/tokens.css`, the Tailwind preset), never a hard-coded hex value. Use the logo files as they are.
+4. Anything public that includes a new product claim, settlement or collateral wording, a financial example, a performance claim, or legal or access language goes to Matteo before it is published.
 
 ## Facts to get right
 
 - Doefin is registered in Port Louis, Mauritius. Never a UK company.
-- "Markets for Bitcoin mining difficulty." Not "hashrate derivatives" or "prediction market".
-- Professional investors only. The disclaimer: "Doefin is for professional investors only. Positions involve risk. Nothing here is investment advice."
+- One line: "Trade and hedge Bitcoin hashrate exposure through markets on mining difficulty." Not "hashrate derivatives" or "prediction market".
+- Professional investors only. The disclaimer: "Doefin is for professional investors only. You can lose the full amount paid for a position. Nothing here is investment advice."

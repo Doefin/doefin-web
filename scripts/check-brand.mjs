@@ -13,8 +13,11 @@
  *                                               start. Report only; add --strict to fail on CUT.
  *
  * CUT   sounds generated: rewrite the sentence.
- * CHECK compliance-sensitive: keep only if true and needed, and show it to the approver.
- * STYLE house style (em dash, emoji, exclamation mark, hashtag).
+ * CHECK compliance-sensitive: keep only if true and needed, and show it to Matteo.
+ * STYLE house style (contractions, em dash, emoji, exclamation mark, hashtag, the words Matteo replaces).
+ *
+ * The site is the `web` channel: rules marked `except: ["web"]` are skipped, and rules marked
+ * `case_sensitive` are matched as written.
  */
 import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
@@ -70,7 +73,9 @@ if (!existsSync(join(VENDOR, 'brand-lock.json'))) {
 const rulesFile = join(VENDOR, 'tools', 'rules.json')
 if (!existsSync(rulesFile)) process.exit(1)
 const { rules } = JSON.parse(await readFile(rulesFile, 'utf8'))
-const compiled = rules.map(r => ({ ...r, re: new RegExp(r.match, 'giu') }))
+const compiled = rules
+  .filter(r => !(r.except ?? []).includes('web'))
+  .map(r => ({ ...r, re: new RegExp(r.match, r.case_sensitive ? 'gu' : 'giu') }))
 
 function scan(text) {
   const hits = []
@@ -169,7 +174,7 @@ if (base) {
   if (counts.cut) failed = true
 }
 
-console.log(`${counts.cut} to cut, ${counts.check} for the approver, ${counts.style} style notes.`)
+console.log(`${counts.cut} to cut, ${counts.check} for Matteo, ${counts.style} style notes.`)
 if (failed) {
   console.log('Brand check failed. Rules: vendor/doefin-brand/brand/voice.md and compliance.md.')
   process.exit(1)

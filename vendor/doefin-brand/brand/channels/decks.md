@@ -8,4 +8,5 @@
 - At most one big number per slide, in `figure-xl`.
 - Every slide with data has a source line at the bottom, in `small` and `text-muted`: "Source: mempool.space, fetched 27 Oct 2026."
 - Four bullets at most. If you need more, write a document instead.
+- Investor and partner decks hold the same standards for evidence, product mechanics and risk; only the depth changes.
 - The closing slide carries the disclaimer.

@@ -30,7 +30,7 @@ You review UI in `doefin-web` against the brand system. Read these first:
    orange (`down`) used as decoration, or `muted` text on `active`. `docs/brand.md`
    gives the replacement.
 9. **The brand check.** Run `npm run check:brand` and report every `CUT` item it finds
-   in the changed lines, plus any `CHECK` item for the compliance approver.
+   in the changed lines, plus any `CHECK` item for Matteo.
 
 ## Reporting
 

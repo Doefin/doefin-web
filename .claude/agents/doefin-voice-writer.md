@@ -1,0 +1,1 @@
+../../vendor/doefin-brand/agents/doefin-voice-writer.md

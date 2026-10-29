@@ -33,11 +33,27 @@ npm run check:brand -- --base=http://127.0.0.1:3039   # after build + start: eve
 The default run does two things:
 
 1. It checks every vendored file against `brand-lock.json`, and fails if anything was edited, added or deleted by hand.
-2. It reads the prose in the lines added since `origin/main` (JSX text and sentence-like strings, not class lists or paths), and fails on any `CUT` item. `CHECK` items are listed for the compliance approver but don't fail. `STYLE` items are notes.
+2. It reads the prose in the lines added since `origin/main` (JSX text and sentence-like strings, not class lists or paths), and fails on any `CUT` item. `CHECK` items are listed for Matteo but do not fail. `STYLE` items are notes.
+
+The site counts as the `web` channel: a rule marked `except: ["web"]` is skipped, and a rule marked `case_sensitive` is matched as written (YES and NO in capitals, 140.58 T).
 
 The rules come from `vendor/doefin-brand/tools/rules.json`, the same rules as the brand book's Copy check and the brand repository's Python checker. The checker reads phrasing only, so facts, numbers and tone still need a person.
 
 Sanity content is written in the Studio, not in this repository, so only the `--base` run sees it. Run it before a release, and send what it finds to whoever edits that page in Sanity.
+
+## Agents and skills
+
+The brand ships three Claude Code agents and a skill, linked into this project so everyone who clones it has them:
+
+| Link | Points to | Use it to |
+|---|---|---|
+| `.claude/agents/doefin-voice-writer.md` | `vendor/doefin-brand/agents/` | Draft new copy the way Matteo would |
+| `.claude/agents/doefin-voice-editor.md` | `vendor/doefin-brand/agents/` | Review or rewrite existing copy: Keep, Change or Cut, with reasons |
+| `.claude/agents/doefin-voice-learner.md` | `vendor/doefin-brand/agents/` | Record Matteo's edits in the brand repository, so the model learns |
+| `.claude/skills/doefin-voice` | `vendor/doefin-brand/skills/doefin-voice` | The same procedures as a skill |
+| `.claude/skills/doefin-brand` | `vendor/doefin-brand/skills/doefin-brand` | The visual side |
+
+They update with every `brand:sync`. The learner writes to the brand repository, never to `vendor/`.
 
 ## Updating the brand
 

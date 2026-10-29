@@ -9,7 +9,8 @@ description: The Doefin brand reference for this site — colour tokens, typogra
 tokens, logos), a pinned copy of github.com/Doefin/doefin-brand. This file covers how
 the site applies it. Read `vendor/doefin-brand/brand/visual.md` for the rules and
 `docs/brand.md` for how the site tokens below map to the brand's `df-*` tokens. For any
-words, follow `vendor/doefin-brand/brand/voice.md`. Run `npm run check:brand` before you
+words, follow `vendor/doefin-brand/brand/matteo/thinking.md` and `brand/voice.md`, or use the
+`doefin-voice-writer` and `doefin-voice-editor` agents. Run `npm run check:brand` before you
 finish. Never edit `vendor/doefin-brand/` by hand.
 
 Tokens are defined once in `tailwind.config.ts`. **Never write an arbitrary hex value

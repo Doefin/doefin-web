@@ -2,12 +2,16 @@
 """Check Doefin copy against the house rules in ../rules.json.
 
 Usage:
-  python3 check_copy.py draft.md            # check a file
-  pbpaste | python3 check_copy.py -         # check stdin
-  python3 check_copy.py draft.md --json     # machine-readable output
+  python3 check_copy.py draft.md                    # check a file
+  pbpaste | python3 check_copy.py -                 # check stdin
+  python3 check_copy.py draft.md --channel=social   # web, app, social, email, deck or doc
+  python3 check_copy.py draft.md --json             # machine-readable output
+
+Some rules depend on the channel: emoji and exclamation marks are fine on social, for
+example. Without --channel every rule applies.
 
 Exit code 0 when nothing is marked `cut`, 1 otherwise. `check` items never fail the
-run: they are for the compliance approver to see, not for the writer to delete.
+run: they are for Matteo (or the compliance approver) to see, not for the writer to delete.
 """
 import json
 import re
@@ -20,14 +24,17 @@ RULES_PATH = next((p for p in (HERE / "rules.json", HERE.parent / "rules.json") 
 SMALL_WORDS = {"a", "an", "and", "as", "at", "but", "by", "for", "in", "of", "on", "or", "the", "to", "vs", "via", "with"}
 
 
-def load_rules():
+def load_rules(channel=None):
     data = json.loads(RULES_PATH.read_text())
     rules = []
     for r in data["rules"]:
+        if channel and channel in r.get("except", []):
+            continue
         # rules.json is shared with the brand book's browser checker, which writes
         # astral code points as \u{1F300}; Python's re wants the characters themselves.
         pattern = re.sub(r"\\u\{([0-9A-Fa-f]+)\}", lambda m: chr(int(m.group(1), 16)), r["match"])
-        rules.append({**r, "re": re.compile(pattern, re.IGNORECASE | re.MULTILINE)})
+        flags = re.MULTILINE if r.get("case_sensitive") else re.IGNORECASE | re.MULTILINE
+        rules.append({**r, "re": re.compile(pattern, flags)})
     return rules, data.get("max_sentence_words", 25)
 
 
@@ -58,8 +65,8 @@ def title_case(line):
     return len(big) >= 2 and all(w[0].isupper() for w in big) and not all(w.isupper() for w in big)
 
 
-def check(text):
-    rules, max_words = load_rules()
+def check(text, channel=None):
+    rules, max_words = load_rules(channel)
     lines = strip_markup(text)
     findings = []
     for n, line in enumerate(lines, 1):
@@ -85,8 +92,9 @@ def main(argv):
         print(__doc__.strip())
         return 2
     src = argv[1]
+    channel = next((a.split("=", 1)[1] for a in argv if a.startswith("--channel=")), None)
     text = sys.stdin.read() if src == "-" else Path(src).read_text()
-    findings = check(text)
+    findings = check(text, channel)
     if "--json" in argv:
         print(json.dumps(findings, ensure_ascii=False, indent=1))
     else:
@@ -94,7 +102,7 @@ def main(argv):
         for f in sorted(findings, key=lambda f: (order[f["kind"]], f["line"])):
             print(f'{f["kind"].upper():5}  line {f["line"]:>4}  "{f["found"]}"  ->  {f["say"]}')
         counts = {k: sum(f["kind"] == k for f in findings) for k in order}
-        print(f'\n{counts["cut"]} to cut, {counts["check"]} for the approver, {counts["style"]} style notes.')
+        print(f'\n{counts["cut"]} to cut, {counts["check"]} for Matteo to see, {counts["style"]} style notes.')
     return 1 if any(f["kind"] == "cut" for f in findings) else 0
 
 

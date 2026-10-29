@@ -15,12 +15,12 @@ The wordmark is DOEFIN in slanted capitals. The inside of the D is a fin. Always
 - Keep clear space around the wordmark equal to half its height, on every side.
 - Minimum size: 80px wide on screen, 20 mm in print. Smaller than that, use the icon.
 - The icon is the D on its own: white on `blue` (`doefin-icon-blue.svg`), or white on `ink` (`doefin-icon-ink.svg`). Use it wherever a square is needed: profile pictures, the app icon, the favicon.
-- Don't stretch it, rotate it or straighten the slant. Don't add outlines, shadows or gradients.
+- Do not stretch it, rotate it or straighten the slant. Do not add outlines, shadows or gradients.
 - On a photo or a busy background, put the wordmark on a flat `ink` or `blue` panel.
 
 ## Colour
 
-Most of any layout is `ink` and white. Doefin Blue (`blue`) marks the one thing to look at: the main number, the main line in a chart, one block of colour. Use `blue` for one thing per screen. Buttons, links and the faint big letter don't count.
+Most of any layout is `ink` and white. Doefin Blue (`blue`) marks the one thing to look at: the main number, the main line in a chart, one block of colour. Use `blue` for one thing per screen. Buttons, links and the faint big letter do not count.
 
 Dark is home: the app, the website and social images. Light is for documents, decks, PDFs and print.
 
@@ -55,7 +55,7 @@ Rules:
 
 - Sentence case for every heading, button and title.
 - Figures line up in columns. Developers set `font-variant-numeric: tabular-nums` on every number.
-- Manrope has no italic, so don't press the italic button: the software will fake a slant. Use bold for emphasis, and use it rarely.
+- Manrope has no italic, so do not press the italic button: the software will fake a slant. Use bold for emphasis, and use it rarely.
 - Keep reading text narrower than `measure`.
 - In Google Slides and Google Docs, choose Manrope from the font menu. In PowerPoint or Word without Manrope installed, use Arial.
 
@@ -74,13 +74,13 @@ One letter of the wordmark, usually the D, can sit very large behind a layout: `
 
 - Our series is `chart-1`. Everything else is `chart-context` grey. Use `chart-2` only when a second series needs its own colour, and label both lines on the chart.
 - A forecast always shows its range as a `chart-band`, and the caption gives the range in numbers.
-- Every chart has its numbers in a caption: the start, the end, the high or low, the dates and the source. A reader who can't see the chart still gets the point.
+- Every chart has its numbers in a caption: the start, the end, the high or low, the dates and the source. A reader who cannot see the chart still gets the point.
 - 2px lines, hairline grid, one y-axis. No 3D and no animation on load.
 - Difficulty adjustments are bars above or below zero in one colour. `up` and `down` stay for money.
 
 ## Icons
 
-Line icons on a 24px grid, 2px stroke, round ends, no fill. Colour them `text-muted`, or `blue` for the one active item. No emoji in the app, on social or in email.
+Line icons on a 24px grid, 2px stroke, round ends, no fill. Colour them `text-muted`, or `blue` for the one active item. No emoji in the app, on the website or in email. On social, only when it fits.
 
 ## Images
 

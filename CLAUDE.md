@@ -116,6 +116,10 @@ this site, and are loaded here (paths inside it are relative to `vendor/doefin-b
   fails on generated-sounding phrasing in the lines you added, and on any hand edit
   to `vendor/doefin-brand/`. After a build, `-- --base=http://127.0.0.1:3039` checks
   every page, Sanity content included.
+- **Write and edit copy with the voice agents.** `doefin-voice-writer` drafts new copy and
+  `doefin-voice-editor` reviews or rewrites existing copy, both from the CEO's own model
+  (`vendor/doefin-brand/brand/matteo/`). When Matteo edits or comments on copy, run
+  `doefin-voice-learner`: it records the edit in the brand repository.
 - **Never edit `vendor/doefin-brand/` by hand.** Change the brand repository, then
   `npm run brand:sync -- <tag>`. Why it is vendored and how to update it:
   [`docs/brand.md`](docs/brand.md).

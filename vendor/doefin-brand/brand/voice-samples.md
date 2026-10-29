@@ -1,8 +1,36 @@
 # Matteo's writing: voice samples
 
-Public posts by Matteo Spinosa, CEO, kept as a reference for how Doefin sounds. Read them before drafting anything long. Imitate the rhythm, not the content: the figures were true on the day he posted.
+Public posts by Matteo Spinosa, CEO, kept as a reference for how Doefin sounds. Read them before drafting anything long. Imitate the rhythm and the reasoning, not the content: the figures were true on the day he posted.
 
-Left out on purpose: internal emails, and posts that quote a trade's return or invite people to trade (see `compliance.md`).
+The first three are his rewrites from the tone check (29 Oct 2026), the newest and closest to what he wants now. The rest are older posts. One of those uses a contraction ("That's"); since the tone check, his rule is no contractions, so do not copy it.
+
+Left out on purpose: internal emails (`matteo/thinking.md` describes the shape of one), and posts that quote a trade's return or invite people to trade (see `compliance.md`). His rewrites of website copy are in `matteo/edits.md`.
+
+## LinkedIn: lenders and difficulty (tone check rewrite)
+
+Difficulty exposure makes Bitcoin mining businesses unbankable.
+
+When a loan depends on future Bitcoin production, Bitcoin difficulty affects the assumptions behind repayment. For example, a 10% difficulty rise means about 9.1% less expected BTC production at the same hashrate, all else equal.
+
+I think lenders have a reason to watch this market. A price for future difficulty allows them to estimate future Bitcoin miners' revenues.
+
+Doefin's proposition is trading and hedging hashrate exposure. Its contracts reference difficulty, so the outcome is defined and publicly verifiable.
+
+That distinction matters. A difficulty position may offset some exposure, but it does not cover every risk in a mining business or a loan.
+
+## LinkedIn: a product update (tone check rewrite)
+
+How much does difficulty change your expected Bitcoin production?
+
+Use Doefin's production calculator to compare difficulty scenarios at your fleet's hashrate.
+
+Explore the calculator on the Doefin website.
+
+## X: a difficulty adjustment (tone check rewrite)
+
+A 5.92% rise in difficulty means about 5.6% less expected BTC production at the same hashrate, all else equal.
+
+Network growth changes miners' production exposure. Difficulty gives that exposure a public, verifiable reference.
 
 ## X: a benchmark for compute
 
@@ -80,10 +108,10 @@ Thank you Ian, John and the QUBIC team for what you have built and for the oppor
 
 ## What they have in common
 
-- A plain first line that goes straight to the subject.
-- Real figures with units and dates, estimates marked ("about", "~").
+- A plain first line that goes straight to the subject: a number, a claim, or the reader's question.
+- Exact figures with units, dates and qualifiers ("expected", "at the same hashrate", "all else equal"); estimates marked ("about", "~").
 - A turn on "But" or "So yes".
-- A named trade-off ("gross revenue, not net margin").
+- A named trade-off or limit ("gross revenue, not net margin", "does not cover every risk").
 - Comparisons from commodities and markets the reader already knows.
-- Opinions owned ("I think", "From what we have seen so far").
+- Opinions owned ("I think", "From what we have seen so far") and kept apart from company facts.
 - One point at the end.
