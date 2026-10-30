@@ -136,7 +136,7 @@ Do not overlook these before buying anything:
 | | |
 |---|---|
 | `npm run check:seo` | Titles, descriptions, canonicals, single h1, prose volume, JSON-LD validity, and that FAQ questions appear on the page. Runs over every built page. |
-| `npm run check:crawlable` | Fails if a page would return an empty body to a crawler. |
+| `npm run check:crawlable -- --base=http://127.0.0.1:3039` | Fetches 12 representative routes from a running site and fails if a page returns too little crawlable content. |
 | **`seo-audit` agent** | Builds the site, runs the checks, then judges the things automation cannot — answer-first openings, orphan pages, schema honesty, title quality. |
 | **The four skills** in `.claude/skills/` | `seo-onpage`, `seo-technical`, `aeo-geo`, `schema-markup`. |
 

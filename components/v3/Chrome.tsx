@@ -12,7 +12,7 @@ import { Arrow } from './Arrow'
 
 export function V3Chrome({ children }: { children: ReactNode }) {
   const pathname = usePathname()
-  const isLanding = pathname === '/v3'
+  const isLanding = pathname === '/'
   const commentary = isCommentaryPath(pathname)
   const groups = navigationForPath(pathname)
   const publication = publicationUi()
@@ -37,18 +37,18 @@ export function V3Chrome({ children }: { children: ReactNode }) {
     document.addEventListener('pointerdown', dismiss)
     return () => document.removeEventListener('pointerdown', dismiss)
   }, [openGroup])
-  const navigationCta = (href: string) => href.endsWith('/for/miners') ? 'planner' : href.endsWith('/for/institutions') ? 'institutions' : href.endsWith('/smart-contracts') ? 'evidence' : href.endsWith('/resources') ? 'resources' : href.includes('/learn/') ? 'tutorial' : href === '/v3/tools' ? 'calculator' : undefined
+  const navigationCta = (href: string) => href.endsWith('/for/miners') ? 'planner' : href.endsWith('/for/institutions') ? 'institutions' : href.endsWith('/smart-contracts') ? 'evidence' : href.endsWith('/resources') ? 'resources' : href.includes('/learn/') ? 'tutorial' : href === '/tools' ? 'calculator' : undefined
   const active = (href: string) => pathname === href || pathname.startsWith(href + '/')
   const footerGroups = commentary ? [
-    { title: 'Learn', links: [['Academy & guides', '/v3/academy'], ['Articles', '/v3/blog'], ['Mining glossary', '/v3/glossary'], ['Worked example', '/v3/learn/difficulty-exposure']] },
-    { title: 'Data & Research', links: [['Research', '/v3/research'], ['Data', '/v3/data'], ['Forecast evaluation', '/v3/data/scoreboard'], ['Methodology', '/v3/methodology/difficulty-index']] },
-    { title: 'Tools & references', links: [['Calculators', '/v3/tools'], ['Resource library', '/v3/resources'], ['Documentation', '/v3/docs'], ['Risks & limitations', '/v3/docs/risks-and-limitations']] },
-    { title: 'About', links: [['About Doefin', '/v3/about'], ['Research updates', '/v3/resources#updates']] },
+    { title: 'Learn', links: [['Academy & guides', '/academy'], ['Articles', '/blog'], ['Mining glossary', '/glossary'], ['Worked example', '/learn/difficulty-exposure']] },
+    { title: 'Data & Research', links: [['Research', '/research'], ['Data', '/data'], ['Forecast evaluation', '/data/scoreboard'], ['Methodology', '/methodology/difficulty-index']] },
+    { title: 'Tools & references', links: [['Calculators', '/tools'], ['Resource library', '/resources'], ['Documentation', '/docs'], ['Risks & limitations', '/docs/risks-and-limitations']] },
+    { title: 'About', links: [['About Doefin', '/about'], ['Research updates', '/resources#updates']] },
   ] : [
-    { title: 'Product', links: [['How it works', '/v3/product'], ['For miners', '/v3/for/miners'], ['For finance teams, funds & desks', '/v3/for/institutions']] },
-    { title: 'Documentation', links: [['Start here', '/v3/docs'], ['Contract mechanics', '/v3/docs/what-doefin-settles-on'], ['Risks & limitations', '/v3/docs/risks-and-limitations'], ['Technical review', '/v3/docs/smart-contracts'], ['Key terms', '/v3/docs/key-terms']] },
-    { title: 'Resources', links: [['Resource library', '/v3/resources'], ['Calculators', '/v3/tools'], ['Academy & guides', '/v3/academy'], ['Articles', '/v3/blog'], ['Research', '/v3/research'], ['Mining glossary', '/v3/glossary']] },
-    { title: 'Connect', links: [['About Doefin', '/v3/about'], ['Talk to the team', 'mailto:' + site.contactEmail], ['Open app ↗', site.appUrl]] },
+    { title: 'Product', links: [['How it works', '/product'], ['For miners', '/for/miners'], ['For finance teams, funds & desks', '/for/institutions']] },
+    { title: 'Documentation', links: [['Start here', '/docs'], ['Contract mechanics', '/docs/what-doefin-settles-on'], ['Risks & limitations', '/docs/risks-and-limitations'], ['Technical review', '/docs/smart-contracts'], ['Key terms', '/docs/key-terms']] },
+    { title: 'Resources', links: [['Resource library', '/resources'], ['Calculators', '/tools'], ['Academy & guides', '/academy'], ['Articles', '/blog'], ['Research', '/research'], ['Mining glossary', '/glossary']] },
+    { title: 'Connect', links: [['About Doefin', '/about'], ['Talk to the team', 'mailto:' + site.contactEmail], ['Open app ↗', site.appUrl]] },
   ]
   return <>
     <header data-publication-surface={commentary ? 'commentary' : 'product'} onKeyDown={event => {
@@ -58,7 +58,7 @@ export function V3Chrome({ children }: { children: ReactNode }) {
     }} className={'sticky top-0 z-40 border-b border-white/10 bg-ink/95 backdrop-blur-lg' + (isLanding ? ' v37-chrome' : '')}>
       <Container>
         <div className="flex h-[76px] items-center justify-between gap-4">
-          <div className="flex items-center gap-6 lg:gap-10"><Logo href="/v3" className="w-[88px] min-[375px]:w-[104px]" /><nav ref={desktopNavigation} aria-label="Main" className="hidden items-center gap-5 xl:gap-7 lg:flex">
+          <div className="flex items-center gap-6 lg:gap-10"><Logo href="/" className="w-[88px] min-[375px]:w-[104px]" /><nav ref={desktopNavigation} aria-label="Main" className="hidden items-center gap-5 xl:gap-7 lg:flex">
             {groups.map((group, index) => {
               const id = `v3-navigation-${index}`
               const isOpen = openGroup === group.label
@@ -89,19 +89,19 @@ export function V3Chrome({ children }: { children: ReactNode }) {
       </Container>
     </header>
     <main id="main" className="flex-1">
-      {pathname !== '/v3' && publication.showPreviewLabel && <div className="border-b border-white/[0.07] bg-surface/20"><Container className="py-2.5"><p className="text-xs leading-relaxed text-subtle"><span className="font-semibold text-caution">V3 preview</span><span className="mx-2" aria-hidden="true">·</span>{commentary ? 'Educational and research material. Check the sources and evidence status on each page.' : pathname.startsWith('/v3/for/') ? 'Read-only market data. Review execution and terms in the app.' : 'Examples are illustrative. Confirm current market terms in the app.'}</p></Container></div>}
+      {pathname !== '/' && publication.showPreviewLabel && <div className="border-b border-white/[0.07] bg-surface/20"><Container className="py-2.5"><p className="text-xs leading-relaxed text-subtle"><span className="font-semibold text-caution">V3 preview</span><span className="mx-2" aria-hidden="true">·</span>{commentary ? 'Educational and research material. Check the sources and evidence status on each page.' : pathname.startsWith('/for/') ? 'Read-only market data. Review execution and terms in the app.' : 'Examples are illustrative. Confirm current market terms in the app.'}</p></Container></div>}
       {children}
     </main>
     {commentary && <CommentaryPromotion promotion={commentaryPromotionFor(pathname)} />}
     <footer className={'border-t border-white/10 bg-surface/20' + (isLanding ? ' v37-chrome' : '')}>
       <Container className="py-7 sm:py-10">
         <div className="grid grid-cols-2 gap-x-5 gap-y-6 sm:gap-10 lg:grid-cols-[1.2fr_1fr_1fr_1fr_1fr]">
-          <div className="col-span-2 lg:col-span-1"><Logo href="/v3" className="w-24" /><p className="mt-3 text-sm leading-relaxed text-subtle lg:max-w-[240px]">{commentary ? 'Mining data, methods and reference material.' : 'Markets for Bitcoin mining difficulty.'}</p></div>
+          <div className="col-span-2 lg:col-span-1"><Logo href="/" className="w-24" /><p className="mt-3 text-sm leading-relaxed text-subtle lg:max-w-[240px]">{commentary ? 'Mining data, methods and reference material.' : 'Markets for Bitcoin mining difficulty.'}</p></div>
           {footerGroups.map(group => <div key={group.title}><h2 className="text-xs font-semibold uppercase tracking-[0.1em] text-subtle">{group.title}</h2><ul className="mt-2 sm:mt-4">{group.links.map(([label, href]) => <li key={href}><Link href={href} className="inline-flex min-h-11 items-center text-sm text-subtle hover:text-body">{label}</Link></li>)}</ul></div>)}
         </div>
         <div className="mt-5 flex flex-wrap items-start justify-between gap-3 border-t border-white/10 pt-4 text-xs leading-relaxed text-subtle sm:mt-9 sm:gap-5 sm:pt-6">
           <p className="max-w-xl">For professional investors. Positions involve risk. Nothing here is investment advice. This prototype contains illustrative content.</p>
-          <div className="flex gap-5"><Link href="/v3/terms" className="inline-flex min-h-11 items-center hover:text-body">Terms</Link><Link href="/v3/privacy" className="inline-flex min-h-11 items-center hover:text-body">Privacy</Link></div>
+          <div className="flex gap-5"><Link href="/terms" className="inline-flex min-h-11 items-center hover:text-body">Terms</Link><Link href="/privacy" className="inline-flex min-h-11 items-center hover:text-body">Privacy</Link></div>
         </div>
 
       </Container>

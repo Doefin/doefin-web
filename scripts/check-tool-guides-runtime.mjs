@@ -18,38 +18,38 @@ const strings=value=>typeof value==='string'?[value]:Array.isArray(value)?value.
 try{
   for(let i=0;;i++){try{await fetch(base+'/robots.txt');break}catch{if(i>40||server.exitCode!==null)throw new Error(output);await new Promise(r=>setTimeout(r,250))}}
   for(const row of original.guides){
-    const path='/v3/academy/guides/'+row.slug,html=await get(path),body=dom(html),article=schema(html)
+    const path='/academy/guides/'+row.slug,html=await get(path),body=dom(html),article=schema(html)
     assert(html.includes(`<link rel="canonical" href="https://doefin.com${path}"`));assert(html.includes('noindex, nofollow'))
     assert.equal(article.headline,row.article.title);assert.equal(article.datePublished,'2026-08-31')
     for(const text of strings({whatItIs:row.whatItIs,whoFor:row.whoFor,howToUse:row.howToUse,inputs:row.inputs,readingResults:row.readingResults,walkthrough:row.walkthrough,mistakes:row.mistakes,limits:row.limits}))assert(body.includes(escape(text)),`Original guide text missing: ${text.slice(0,60)}`)
     for(const id of ['how-to-use','settings','reading','walkthrough','mistakes','limits']){assert.equal((body.match(new RegExp(`id="${id}"`,'g'))??[]).length,1);assert(body.includes(`href="#${id}"`))}
-    assert(body.includes('dateTime="2026-08-31"'));assert(body.includes(`/v3/tools/${row.toolSlug}`))
+    assert(body.includes('dateTime="2026-08-31"'));assert(body.includes(`/tools/${row.toolSlug}`))
   }
   const future={...structuredClone(fixture.guides[0]),_id:'editor-future',slug:'future-hosting-guide',sortOrder:1000};delete future.article.publishedAt;delete future.reviewedAt
   future.article.title='Future guide';future.walkthrough.title='Changed walkthrough heading'
   fixture.guides.push(future);await save()
-  let html=await get('/v3/academy/guides/future-hosting-guide')
-  assert.equal(schema(html).datePublished,undefined);assert(!dom(html).includes('<time'));assert(dom(html).includes('id="walkthrough"'));assert(dom(html).includes('/v3/tools/hosting-effective-rate'))
-  assert(dom(await get('/v3/academy')).includes('future-hosting-guide'));assert((await get('/llms.txt')).includes('future-hosting-guide'))
-  const tool=dom(await get('/v3/tools/hosting-effective-rate'));assert(tool.includes('Read the input guide: What your hosting contract really costs'));assert(!tool.includes('Read the input guide: Future guide'),'Canonical tool recommendation uses exact guide slug regardless of other guide ordering')
-  fixture.guides.reverse();await save();assert(dom(await get('/v3/tools/hosting-effective-rate')).includes('Read the input guide: What your hosting contract really costs'))
-  future.article.title='Published revision without rebuild';fixture.guides.find(row=>row._id==='editor-future').article.title=future.article.title;await save();assert.equal(schema(await get('/v3/academy/guides/future-hosting-guide')).headline,future.article.title)
+  let html=await get('/academy/guides/future-hosting-guide')
+  assert.equal(schema(html).datePublished,undefined);assert(!dom(html).includes('<time'));assert(dom(html).includes('id="walkthrough"'));assert(dom(html).includes('/tools/hosting-effective-rate'))
+  assert(dom(await get('/academy')).includes('future-hosting-guide'));assert((await get('/llms.txt')).includes('future-hosting-guide'))
+  const tool=dom(await get('/tools/hosting-effective-rate'));assert(tool.includes('Read the input guide: What your hosting contract really costs'));assert(!tool.includes('Read the input guide: Future guide'),'Canonical tool recommendation uses exact guide slug regardless of other guide ordering')
+  fixture.guides.reverse();await save();assert(dom(await get('/tools/hosting-effective-rate')).includes('Read the input guide: What your hosting contract really costs'))
+  future.article.title='Published revision without rebuild';fixture.guides.find(row=>row._id==='editor-future').article.title=future.article.title;await save();assert.equal(schema(await get('/academy/guides/future-hosting-guide')).headline,future.article.title)
   fixture=structuredClone(original);fixture.guides[0].walkthrough.title='</script><script>globalThis.__guideXss=true</script>'+'x'.repeat(5000);await save()
-  html=await get('/v3/academy/guides/hosting-effective-rate');assert(!html.includes('</script><script>globalThis.__guideXss'));assert(dom(html).includes('&lt;/script&gt;'));assert(dom(html).includes('overflow-wrap:anywhere'))
+  html=await get('/academy/guides/hosting-effective-rate');assert(!html.includes('</script><script>globalThis.__guideXss'));assert(dom(html).includes('&lt;/script&gt;'));assert(dom(html).includes('overflow-wrap:anywhere'))
   fixture=structuredClone(original);fixture.guidesManifestStatus=503;await save()
-  assert(!dom(await get('/v3/academy')).includes('data-guides-fallback'),'Valid full collection overrides shell manifest failure')
-  assert(!dom(await get('/v3/tools')).includes('data-guides-fallback'))
-  assert(!dom(await get('/v3/resources')).includes('data-guides-fallback'))
-  assert(!dom(await get('/v3/tools/hosting-effective-rate')).includes('data-guides-fallback'))
+  assert(!dom(await get('/academy')).includes('data-guides-fallback'),'Valid full collection overrides shell manifest failure')
+  assert(!dom(await get('/tools')).includes('data-guides-fallback'))
+  assert(!dom(await get('/resources')).includes('data-guides-fallback'))
+  assert(!dom(await get('/tools/hosting-effective-rate')).includes('data-guides-fallback'))
   fixture=structuredClone(original);fixture.guides=fixture.guides.filter(row=>row.slug!=='hosting-effective-rate');await save()
-  await get('/v3/academy/guides/hosting-effective-rate',404);assert(!dom(await get('/v3/academy')).includes('What your hosting contract really costs'));assert(!(await get('/llms.txt')).includes('/academy/guides/hosting-effective-rate'))
-  for(const path of ['/v3/tools','/v3/resources']){const body=dom(await get(path));assert(body.includes('data-guides-fallback="missing"'));assert(body.includes('Browse calculator guides'));assert(!body.includes('href="/v3/academy/guides/hosting-effective-rate"'))}
-  fixture=structuredClone(original);fixture.guides=[];await save();assert(dom(await get('/v3/academy')).includes('No calculator guides are currently published'));await get('/v3/academy/guides/difficulty-exposure',404)
-  fixture=structuredClone(original);fixture.guidesStatus=503;await save();await get('/v3/academy/guides/hosting-effective-rate',500)
-  assert(dom(await get('/v3/tools/hosting-effective-rate')).includes('Calculator guides are temporarily unavailable'))
-  assert(dom(await get('/v3/tools')).includes('data-guides-fallback="unavailable"'));await get('/v3/product');await get('/v3/docs/overview')
-  fixture=structuredClone(original);fixture.guides[0].article.publishedAt='2026-02-30';await save();await get('/v3/academy/guides/hosting-effective-rate',500)
-  fixture=structuredClone(original);await save();await get('/v3/academy/guides/hosting-effective-rate');await get('/v3/academy/guides/not-published',404)
+  await get('/academy/guides/hosting-effective-rate',404);assert(!dom(await get('/academy')).includes('What your hosting contract really costs'));assert(!(await get('/llms.txt')).includes('/academy/guides/hosting-effective-rate'))
+  for(const path of ['/tools','/resources']){const body=dom(await get(path));assert(body.includes('data-guides-fallback="missing"'));assert(body.includes('Browse calculator guides'));assert(!body.includes('href="/academy/guides/hosting-effective-rate"'))}
+  fixture=structuredClone(original);fixture.guides=[];await save();assert(dom(await get('/academy')).includes('No calculator guides are currently published'));await get('/academy/guides/difficulty-exposure',404)
+  fixture=structuredClone(original);fixture.guidesStatus=503;await save();await get('/academy/guides/hosting-effective-rate',500)
+  assert(dom(await get('/tools/hosting-effective-rate')).includes('Calculator guides are temporarily unavailable'))
+  assert(dom(await get('/tools')).includes('data-guides-fallback="unavailable"'));await get('/product');await get('/docs/overview')
+  fixture=structuredClone(original);fixture.guides[0].article.publishedAt='2026-02-30';await save();await get('/academy/guides/hosting-effective-rate',500)
+  fixture=structuredClone(original);await save();await get('/academy/guides/hosting-effective-rate');await get('/academy/guides/not-published',404)
   if(process.argv.includes('--checks')) {
     for(const [script,args] of [['check-crawlable.mjs',[]],['check-seo.mjs',[]],['check-v3-routes.mjs',['--built']],['check-v3-metadata.mjs',[]]]) {
       await new Promise((resolve,reject)=>{

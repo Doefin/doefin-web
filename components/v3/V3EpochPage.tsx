@@ -8,7 +8,7 @@ const findEpoch = (height: string) => epochs.find(epoch => String(epoch.height) 
 export const generateStaticParams = () => epochs.map(epoch => ({ height: String(epoch.height) }))
 export async function generateMetadata({ params }: { params: Promise<{ height: string }> }) {
   const epoch = findEpoch((await params).height)
-  return epoch ? seo({ title: `Sample difficulty record: ${epoch.height}`, description: 'Inspect an authored difficulty forecast, before/after levels, a supplied outcome and error arithmetic. All values and dates are synthetic.', path: '/v3/data/difficulty/epoch/' + epoch.height }) : {}
+  return epoch ? seo({ title: `Sample difficulty record: ${epoch.height}`, description: 'Inspect an authored difficulty forecast, before/after levels, a supplied outcome and error arithmetic. All values and dates are synthetic.', path: '/data/difficulty/epoch/' + epoch.height }) : {}
 }
 
 export default async function V3EpochPage({ params }: { params: Promise<{ height: string }> }) {
@@ -20,7 +20,7 @@ export default async function V3EpochPage({ params }: { params: Promise<{ height
   const inRange = outcome === undefined ? undefined : outcome >= epoch.band95[0] && outcome <= epoch.band95[1]
   const projected = epoch.difficultyBeforeT * (1 + epoch.forecastPct / 100)
   const seriesPoint = networkSeries.find(point => point.height === epoch.height)
-  return <DataDetail title={`A record at block ${int(epoch.height)}.`} summary="Trace the authored forecast, the supplied outcome and the difference between them." category="Dated example" current="difficulty" crumbs={[{ name: 'Difficulty', href: '/v3/data/difficulty' }, { name: `Block ${int(epoch.height)}`, href: '/v3/data/difficulty/epoch/' + epoch.height }]}>
+  return <DataDetail title={`A record at block ${int(epoch.height)}.`} summary="Trace the authored forecast, the supplied outcome and the difference between them." category="Dated example" current="difficulty" crumbs={[{ name: 'Difficulty', href: '/data/difficulty' }, { name: `Block ${int(epoch.height)}`, href: '/data/difficulty/epoch/' + epoch.height }]}>
     <div className="grid items-start gap-5 lg:grid-cols-[1.3fr_1fr]">
       <section className="overflow-hidden rounded-panel border border-chart/25 bg-gradient-to-br from-surfaceAlt/70 to-surface/20" aria-labelledby="forecast-outcome-title">
         <div className="p-5 sm:p-7"><div className="flex flex-wrap items-center justify-between gap-3"><h2 id="forecast-outcome-title" className="text-lg font-bold">Forecast → outcome</h2><span className="text-[10px] font-bold uppercase tracking-wider text-caution">Synthetic record</span></div>
@@ -54,6 +54,6 @@ export default async function V3EpochPage({ params }: { params: Promise<{ height
     ]} /></section><section className={dataPanel}><h3 className="text-base font-bold">What this record can establish</h3><p className={'mt-3 ' + dataCopy}>You can inspect the supplied forecast, range and {outcome === undefined ? 'absence of an outcome' : 'outcome, and reproduce the arithmetic'}. A measured historical record would also need original input data, captured forecast timestamps, method version and a verifiable outcome.</p><p className={'mt-3 ' + dataCopy}>This is an editable example page, not an immutable archive. Corrections to a measured record should identify revisions and retain the evidence needed to reproduce the earlier result.</p>{seriesPoint && <details className="mt-5 border-t border-white/10 pt-2"><summary className="cursor-pointer py-3 text-xs font-semibold text-highlight">Why this record differs from the chart fixture</summary><p className="pb-2 text-xs leading-[1.9] text-subtle">The separate series assigns block <span className="tabular">{int(seriesPoint.height)}</span> a level of <span className="tabular">{tera(seriesPoint.difficultyT)}</span> on <time dateTime={seriesPoint.date}>{dateLong(seriesPoint.date)}</time>. This record starts on <time dateTime={epoch.startedAt}>{dateLong(epoch.startedAt)}</time>{epoch.settledAt ? <> and assigns its outcome to <time dateTime={epoch.settledAt}>{dateLong(epoch.settledAt)}</time></> : ' and supplies no outcome date'}. These authored fixtures do not form a verified shared timeline.</p></details>}</section></div></DataSection>
 
     <DataSection title="Inspect another example record."><DataRecords exclude={epoch.height} /></DataSection>
-    <DataNext items={[{ href: '/v3/data/difficulty', label: 'Return to the difficulty example', note: 'Read the snapshot, level calculation and separate source series.' }, { href: '/v3/data/scoreboard', label: 'Understand accuracy metrics', note: 'Put an individual error in context with sample size, coverage and evaluation rules.' }]} />
+    <DataNext items={[{ href: '/data/difficulty', label: 'Return to the difficulty example', note: 'Read the snapshot, level calculation and separate source series.' }, { href: '/data/scoreboard', label: 'Understand accuracy metrics', note: 'Put an individual error in context with sample size, coverage and evaluation rules.' }]} />
   </DataDetail>
 }

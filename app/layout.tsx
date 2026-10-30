@@ -1,13 +1,6 @@
 import type { Metadata } from 'next'
 import { Manrope } from 'next/font/google'
-import { V3Chrome } from '@/components/v3/Chrome'
-import { SiteVersionProvider } from '@/components/routing/SiteVersionContext'
-import { jsonLd, ID, publisherRef } from '@/lib/seo'
 import { site } from '@/lib/site'
-import { guidesNavigation } from '@/content'
-import { GuidesPublicationProvider } from '@/components/routing/GuidesPublicationContext'
-import { docsNavigation } from '@/content'
-import { DocsPublicationProvider } from '@/components/routing/DocsPublicationContext'
 import './globals.css'
 
 // Manrope is the brand typeface, carried over from the trading app.
@@ -26,55 +19,14 @@ const manrope = Manrope({
  */
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: {
-    default: `${site.name} — ${site.tagline}`,
-    template: `%s | ${site.name}`,
-  },
-  description: site.description,
-  alternates: { canonical: '/v3' },
-  openGraph: { siteName: site.name, type: 'website', locale: 'en_GB' },
   robots: { index: false, follow: false },
-  icons: { icon: '/images/favicon.png', shortcut: '/favicon.ico' },
 }
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const [docSlugs,guideSlugs] = await Promise.all([docsNavigation(),guidesNavigation()])
-  const org = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    '@id': ID.org,
-    name: site.name,
-    url: site.url,
-    description: site.description,
-    ...(site.sameAs.length ? { sameAs: site.sameAs } : {}),
-  }
-
-  // WebSite tells search engines the site is one entity rather than loose pages.
-  const website = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    '@id': ID.website,
-    name: site.name,
-    url: site.url,
-    description: site.description,
-    publisher: publisherRef,
-    inLanguage: 'en-GB',
-  }
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-GB" className={manrope.variable}>
-      <body className="flex min-h-screen flex-col">
-        <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(org)} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(website)} />
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-brand focus:px-4 focus:py-2 focus:text-white"
-        >
-          Skip to content
-        </a>
-        <SiteVersionProvider version="v3">
-          <DocsPublicationProvider slugs={docSlugs}><GuidesPublicationProvider slugs={guideSlugs}><V3Chrome>{children}</V3Chrome></GuidesPublicationProvider></DocsPublicationProvider>
-        </SiteVersionProvider>
+      <body>
+        {children}
       </body>
     </html>
   )

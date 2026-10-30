@@ -28,7 +28,7 @@ try {
       await new Promise(r=>setTimeout(r,250))
     }
   }
-  for(const path of ['/v3/glossary',`/v3/glossary/${rows[0].slug}`]) {
+  for(const path of ['/glossary',`/glossary/${rows[0].slug}`]) {
     const response=await fetch(base+path,{headers:{'user-agent':'Googlebot'}})
     assert.equal(response.status,200,path)
     const html=await response.text()
@@ -47,7 +47,7 @@ try {
     await writeFile(resolve(`work/hostile-${path.endsWith(rows[0].slug)?'detail':'index'}.html`),html)
   }
   for (const row of rows) {
-    const response = await fetch(`${base}/v3/glossary/${row.slug}`, { headers: { 'user-agent': 'Googlebot' } })
+    const response = await fetch(`${base}/glossary/${row.slug}`, { headers: { 'user-agent': 'Googlebot' } })
     assert.equal(response.status, 200, row.slug)
     const html = await response.text()
     const visible = html.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '')

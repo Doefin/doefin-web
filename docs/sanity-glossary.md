@@ -23,14 +23,13 @@ Drafts are excluded from public reads explicitly. Optional website draft preview
 
 ## Studio and safe import
 
-Studio is a separate package under `studio/`, so editor dependencies never enter the website bundle. It uses existing project roles. No dataset, security setting, API token, CORS origin, hosted Studio or production website is created/deployed by these files.
+Studio remains a separate package under `studio/`; its editor UI loads on the embedded `/studio` route. The root npm workspace shares its pinned dependencies with the website build. It uses existing project roles. No dataset, security setting, API token or CORS origin is changed, and no Studio or website is deployed by these instructions.
 
 The Studio package requires Node >=22.12. Available runtime:
 
 ```
 export PATH="/Users/fardinvahdat/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:$PATH"
 npm ci
-npm --prefix studio ci
 npm --prefix studio run login
 npm run glossary:migrate -- --reconcile --write
 npm --prefix studio run import:glossary -- --editors-paused
@@ -38,7 +37,7 @@ npm run glossary:migrate -- --reconcile --verify
 npm --prefix studio run dev -- --host 127.0.0.1 --port 3333
 ```
 
-Run from the repository root with the bundled Node directory on PATH. The installed Sanity CLI retrieves the current user's normal login session using `sanity exec --with-user-token`; no new API token is generated or printed. `npm --prefix studio run reconcile:glossary` is the supported read-only authentication/access check. It validates an authenticated user identity and the configured project/dataset, then queries `perspective=raw`, including drafts and release versions. Anonymous published-only reads cannot authorize import and fail closed.
+Run from the repository root with the bundled Node directory on PATH. Root `npm ci` installs the website and Studio workspace dependencies; do not run a separate install in `studio/`. The installed Sanity CLI retrieves the current user's normal login session using `sanity exec --with-user-token`; no new API token is generated or printed. `npm --prefix studio run reconcile:glossary` is the supported read-only authentication/access check. It validates an authenticated user identity and the configured project/dataset, then queries `perspective=raw`, including drafts and release versions. Anonymous published-only reads cannot authorize import and fail closed.
 
 `npm run glossary:migrate -- --write` can generate a local NDJSON plan without authentication, but this is **not** an import preflight. Authenticated `--reconcile --write` also writes the local file after checking access/conflicts. Remote import never trusts that file or a prior snapshot: the official CLI script regenerates the seed and repeats a fresh raw preflight immediately before a single `createIfNotExists` transaction. This has the non-overwrite behavior of `--missing`, with additional draft-aware gating. The earlier bare `datasets import --missing` command is superseded and must not be used for this migration.
 

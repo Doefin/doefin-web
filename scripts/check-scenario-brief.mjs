@@ -70,7 +70,7 @@ check('Every boundary combination is finite and shareable without changing resul
 check('Shared URLs include every input even at defaults', () => {
   const url = new URL(scenarioUrl(exposureDefaults, origin))
   assert.equal(url.origin, origin)
-  assert.equal(url.pathname, '/v3/tools/difficulty-exposure')
+  assert.equal(url.pathname, '/tools/difficulty-exposure')
   assert.deepEqual([...url.searchParams.keys()], keys)
   for (const key of keys) assert.equal(url.searchParams.get(key), String(exposureDefaults[key]))
   assert.equal(url.hash, '')

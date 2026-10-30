@@ -20,7 +20,7 @@ export const publisherRef = { '@id': ID.org } as const
 
 /** Explicitly shared: Next.js replaces nested Open Graph metadata between layouts/pages. */
 export const v3SocialImage = {
-  url: `${site.url}/v3/social-image`,
+  url: `${site.url}/social-image`,
   width: 1200,
   height: 630,
   alt: 'Doefin — Bitcoin difficulty markets. Understand the market and review the details. Educational prototype.',

@@ -16,7 +16,7 @@ runtime validation instructions. See `docs/sanity-editorial.md` and
 npm run dev          # local
 npm run build        # production build
 npm run typecheck    # tsc --noEmit
-npm run check:crawlable -- --base=http://127.0.0.1:3039 # after build + start; includes CMS routes
+npm run check:crawlable -- --base=http://127.0.0.1:3039 # against a running site; includes CMS routes
 npm run check:seo -- --base=http://127.0.0.1:3039 # after build + start; titles, canonicals, h1s, schema
 npm run check:tools       # tool microcopy: hints match sliders, presets reachable, length caps
 npm run check:brand       # brand guard: copy you added + the vendored brand untouched (see Brand)
@@ -56,7 +56,7 @@ Charts are enhancement. A chart without an accompanying table or text figure is 
    also makes `export const metadata` impossible on every page beneath it.
 2. **Every page exports metadata through `seo()` in `lib/seo.ts`**, so nothing ships
    without a canonical URL.
-3. **`npm run check:crawlable` passes.** Run it after every build. It is the guard
+3. **`npm run check:crawlable -- --base=<running-site-url>` passes.** Run it after every build and start. It is the guard
    the trading app did not have.
 
 ## Tools and their guides
@@ -145,3 +145,13 @@ Sanity is integrated for glossary, V3 topics/articles and Docs, with existing pr
 optional server-only draft preview that remains disabled without credentials.
 Do not add other CMS migrations, databases, end-user authentication, email capture
 or analytics backends speculatively.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

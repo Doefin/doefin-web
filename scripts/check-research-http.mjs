@@ -17,9 +17,9 @@ async function get(path, status = 200) {
 }
 const jsonld = html => [...html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)].map(match => JSON.parse(match[1]))
 const result = { base, routes: {}, reports: [], methodology: {}, graph: {}, feed: {}, backend: {} }
-const index = await get('/v3/research'), resources = await get('/v3/resources')
+const index = await get('/research'), resources = await get('/resources')
 for (const report of reports) {
-  const path = `/v3/research/${report.slug}`, { body } = await get(path), text = domText(body)
+  const path = `/research/${report.slug}`, { body } = await get(path), text = domText(body)
   for (const section of report.sections) {
     const id = section.heading.toLowerCase().replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '-')
     assert.match(body, new RegExp(`\\bid="${id}"`), `${path} anchor ${id}`)
@@ -34,23 +34,23 @@ for (const report of reports) {
   assert.ok(resources.body.includes(`href="${path}"`) && resources.body.includes(report.title), 'Resources resolves CMS report')
   result.reports.push({ slug: report.slug, status: 200, exactSections: report.sections.length, exactParagraphs: report.sections.reduce((sum, section) => sum + section.paragraphs.length, 0), anchors: report.sections.map(section => section.heading.toLowerCase().replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '-')), datePublished: article.datePublished, canonical: `https://doefin.com${path}`, authorField: 'absent as in source' })
 }
-const methodPath = '/v3/methodology/difficulty-index', method = await get(methodPath), methodText = domText(method.body)
+const methodPath = '/methodology/difficulty-index', method = await get(methodPath), methodText = domText(method.body)
 for (const section of methodology) {
   const id = section.heading.toLowerCase().replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '-')
   assert.match(method.body, new RegExp(`\\bid="${id}"`), `Methodology anchor ${id}`)
   for (const paragraph of section.paragraphs) assert.ok(methodText.includes(norm(paragraph)), `Methodology missing source paragraph: ${section.heading}`)
 }
-assert.match(method.body, /<link rel="canonical" href="https:\/\/doefin\.com\/v3\/methodology\/difficulty-index"/)
+assert.match(method.body, /<link rel="canonical" href="https:\/\/doefin\.com\/methodology\/difficulty-index"/)
 assert.ok(!methodText.includes('TEMP lifecycle check'), 'Lifecycle marker absent')
-result.methodology = { status: 200, exactSections: methodology.length, exactParagraphs: methodology.reduce((sum, section) => sum + section.paragraphs.length, 0), anchors: methodology.map(section => section.heading.toLowerCase().replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '-')), canonical: 'https://doefin.com/v3/methodology/difficulty-index', dateOrAuthorAdded: false }
+result.methodology = { status: 200, exactSections: methodology.length, exactParagraphs: methodology.reduce((sum, section) => sum + section.paragraphs.length, 0), anchors: methodology.map(section => section.heading.toLowerCase().replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '-')), canonical: 'https://doefin.com/methodology/difficulty-index', dateOrAuthorAdded: false }
 const feed = await get('/feed.xml')
 assert.ok(reports.every(report => feed.body.includes(`<title>${report.title}</title>`)), 'Feed contains CMS reports')
 assert.ok(feed.body.includes('<pubDate>Thu, 22 Oct 2026 00:00:00 GMT</pubDate>') && feed.body.includes('<pubDate>Mon, 19 Oct 2026 00:00:00 GMT</pubDate>'), 'Feed preserves source dates')
 result.feed = { status: feed.response.status, includesBothCmsReports: true, sourceDatesPreserved: true }
-const graph = await get('/v3/glossary/mining-difficulty')
-assert.ok(reports.every(report => graph.body.includes(report.title) && graph.body.includes(`/v3/research/${report.slug}`)), 'Glossary research backlinks use current CMS report content')
+const graph = await get('/glossary/mining-difficulty')
+assert.ok(reports.every(report => graph.body.includes(report.title) && graph.body.includes(`/research/${report.slug}`)), 'Glossary research backlinks use current CMS report content')
 result.graph = { glossaryTerm: 'mining-difficulty', status: graph.response.status, includesBothCmsResearchBacklinks: true }
-result.routes = { researchIndex: index.response.status, resources: resources.response.status, reportPages: reports.length, methodology: method.response.status, unknownReport: (await get('/v3/research/not-a-published-report', 404)).response.status, unknownMethodology: (await get('/v3/methodology/not-a-published-method', 404)).response.status }
+result.routes = { researchIndex: index.response.status, resources: resources.response.status, reportPages: reports.length, methodology: method.response.status, unknownReport: (await get('/research/not-a-published-report', 404)).response.status, unknownMethodology: (await get('/methodology/not-a-published-method', 404)).response.status }
 const [forecastApi, observedApi] = await Promise.all([get('/api/v3/research/v1/forecasts'), get('/api/v3/research/v1/dataset?format=csv')])
 result.backend = { forecastArchive: { status: forecastApi.response.status, contentType: forecastApi.response.headers.get('content-type') }, observedDataset: { status: observedApi.response.status, contentType: observedApi.response.headers.get('content-type') }, dataRoutesRemainOutsideSanityNarrative: true }
 await mkdir('work/sanity-research-methodology', { recursive: true })

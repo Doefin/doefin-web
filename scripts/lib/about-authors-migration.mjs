@@ -1,4 +1,5 @@
 import { loadTypescript } from './load-typescript.mjs'
+import { comparableHref } from './legacy-href.mjs'
 const contract = loadTypescript('content/about-contract.ts')
 const editorialContract = loadTypescript('content/editorial-contract.ts')
 const docsContract = loadTypescript('content/docs-contract.ts', { './editorial-contract': editorialContract })
@@ -27,7 +28,7 @@ export function aboutAuthorDocuments(sections = aboutSeed, authors = authorSeed)
   })
   return { authors: authorDocs, about: { _id: aboutDocumentId, _type: 'aboutPage', sections: aboutSections, author: { _type: 'reference', _ref: authorDocs[0]._id, _weak: true } } }
 }
-const cmpAuthor = d => ({ _id:d._id,_type:d._type,slug:d.slug,kind:d.kind,name:d.name,url:d.url,description:d.description,metadataDescription:d.metadataDescription??null,sameAs:d.sameAs??null })
+const cmpAuthor = d => ({ _id:d._id,_type:d._type,slug:d.slug,kind:d.kind,name:d.name,url:comparableHref(d.url),description:d.description,metadataDescription:d.metadataDescription??null,sameAs:d.sameAs??null })
 const cmpAbout = d => ({ _id:d._id,_type:d._type,sections:d.sections?.map(s=>({id:s.id,heading:s.heading,paragraphs:s.paragraphs})),author:d.author?{_ref:d.author._ref,weak:d.author._weak===true}:null })
 
 export function planAboutAuthorsImport(snapshot, expected = aboutAuthorDocuments()) {

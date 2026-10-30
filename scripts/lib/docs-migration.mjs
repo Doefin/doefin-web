@@ -1,4 +1,5 @@
 import { loadTypescript } from './load-typescript.mjs'
+import { comparableHref } from './legacy-href.mjs'
 const editorialContract = loadTypescript('content/editorial-contract.ts')
 const { v3DocGroups, docsSectionId, isDocsAnchor, isSafeDocsHref } = loadTypescript('content/docs-contract.ts', { './editorial-contract': editorialContract })
 const source = loadTypescript('content/v3-docs.ts')
@@ -49,7 +50,7 @@ const comparison = doc => ({
   title: doc.title, summary: doc.summary, group: doc.group, sortOrder: doc.sortOrder,
   reviewedAt: doc.reviewedAt ?? null, reviewDateSource: doc.reviewDateSource ?? null,
   sections: doc.sections?.map(section => ({ id: section.id, title: section.title, paragraphs: section.paragraphs ?? null, steps: section.steps ?? null, definitions: section.definitions?.map(({ term, definition }) => ({ term, definition })) ?? null })),
-  optionalLinks: doc.optionalLinks?.map(({ href, label }) => ({ href, label })) ?? null,
+  optionalLinks: doc.optionalLinks?.map(({ href, label }) => ({ href: comparableHref(href), label })) ?? null,
   related: doc.related?.map(ref => ({ type: ref._type, _ref: ref._ref, weak: ref._weak === true })) ?? null,
 })
 

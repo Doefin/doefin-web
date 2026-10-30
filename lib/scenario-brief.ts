@@ -70,7 +70,7 @@ export function isLocalScenarioUrl(value: string | null): boolean {
 /** Encode every input explicitly so a saved link survives future default changes. */
 export function scenarioUrl(inputs: ExposureInputs, origin: string): string {
   const values = checkedInputs(inputs)
-  const url = new URL('/v3/tools/difficulty-exposure', safeWebUrl(origin))
+  const url = new URL('/tools/difficulty-exposure', safeWebUrl(origin))
   const query = new URLSearchParams()
   for (const key of Object.keys(exposureDefaults) as (keyof ExposureInputs)[]) query.set(key, String(values[key]))
   url.search = query.toString()

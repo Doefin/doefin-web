@@ -6,7 +6,7 @@ import { V3DocsLayout } from './V3DocsLayout'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const doc = await getV3Doc((await params).slug)
-  return doc ? seo({ title: doc.title, description: doc.summary, path: '/v3/docs/' + doc.slug }) : {}
+  return doc ? seo({ title: doc.title, description: doc.summary, path: '/docs/' + doc.slug }) : {}
 }
 
 export default async function V3DocPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -37,11 +37,11 @@ export default async function V3DocPage({ params }: { params: Promise<{ slug: st
 
     <nav aria-label="Related documentation" className="mt-12 border-t border-white/10 pt-7">
       <h2 className="text-lg font-bold">Related documentation</h2>
-      <ul className="mt-3 space-y-2">{doc.related.map(slug => <li key={slug}><Link href={'/v3/docs/' + slug} className="inline-flex min-h-8 items-center text-sm font-semibold text-highlight underline-offset-4 hover:underline">{ordered.find(item => item.slug === slug)!.title}</Link></li>)}</ul>
+      <ul className="mt-3 space-y-2">{doc.related.map(slug => <li key={slug}><Link href={'/docs/' + slug} className="inline-flex min-h-8 items-center text-sm font-semibold text-highlight underline-offset-4 hover:underline">{ordered.find(item => item.slug === slug)!.title}</Link></li>)}</ul>
     </nav>
     <nav aria-label="Documentation reading order" className="mt-8 grid gap-5 border-t border-white/10 pt-6 sm:grid-cols-2">
-      {previous ? <Link href={'/v3/docs/' + previous.slug} className="text-sm hover:text-highlight"><span className="mb-1 block text-xs text-subtle">Previous</span>{previous.title}</Link> : <span />}
-      {next ? <Link href={'/v3/docs/' + next.slug} className="text-sm hover:text-highlight sm:text-right"><span className="mb-1 block text-xs text-subtle">Next</span>{next.title}</Link> : null}
+      {previous ? <Link href={'/docs/' + previous.slug} className="text-sm hover:text-highlight"><span className="mb-1 block text-xs text-subtle">Previous</span>{previous.title}</Link> : <span />}
+      {next ? <Link href={'/docs/' + next.slug} className="text-sm hover:text-highlight sm:text-right"><span className="mb-1 block text-xs text-subtle">Next</span>{next.title}</Link> : null}
     </nav>
   </V3DocsLayout>
 }

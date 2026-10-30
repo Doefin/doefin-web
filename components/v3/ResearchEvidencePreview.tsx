@@ -14,7 +14,7 @@ export function ResearchEvidencePreview() {
       <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-highlight">The calculation</p>
       <h2 id="example-preview-title" className="mt-5 text-balance text-[25px] font-extrabold leading-tight tracking-[-0.03em] sm:text-3xl">Calculate forecast error.</h2>
       <p className="mt-4 text-sm leading-relaxed text-subtle">Follow the arithmetic over {sample.rows.length} synthetic forecast/outcome pairs. Check each error, reproduce their mean and download the CSV.</p>
-      <Link href="/v3/research/evaluating-a-forecast" className="mt-5 inline-flex min-h-11 items-center justify-center gap-3 rounded-lg border border-brand/40 bg-brand/10 px-4 text-sm font-bold text-highlight transition-colors hover:border-brand/70 hover:bg-brand/20">Work through the calculation <Arrow className="h-4 w-4" /></Link>
+      <Link href="/research/evaluating-a-forecast" className="mt-5 inline-flex min-h-11 items-center justify-center gap-3 rounded-lg border border-brand/40 bg-brand/10 px-4 text-sm font-bold text-highlight transition-colors hover:border-brand/70 hover:bg-brand/20">Work through the calculation <Arrow className="h-4 w-4" /></Link>
     </div>
     <div className="mt-auto border-t border-white/10 bg-ink/35 p-5 sm:px-7">
       <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-subtle">One synthetic pair</p>

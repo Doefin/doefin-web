@@ -33,7 +33,7 @@ const docs: V3Doc[] = [
       { title: 'Block height and calendar time', paragraphs: ['Individual blocks arrive irregularly. A specified block height identifies an observation, but the calendar date when it will arrive is an estimate. A projection made before that observation is complete remains a forecast.', 'For a Doefin market, check the specified observation block and threshold. Reaching the block, recording the resolved outcome and redeeming a position are separate stages.'] },
       { title: 'Production and revenue are broader questions', paragraphs: ['For a fixed hashrate and time window, higher difficulty lowers expected block production. Actual results also depend on block discovery, uptime and pool arrangements. Revenue further depends on rewards, fees and the Bitcoin price.', 'A binary difficulty position has a threshold-based payout. That payout does not scale with every change in a fleet’s production, so a production estimate alone does not determine an appropriate position size.'] },
     ], related: ['what-doefin-settles-on', 'how-settlement-works', 'key-terms'],
-    optionalLinks: [{ href: '/v3/tools/difficulty-exposure', label: 'Optional: explore production sensitivity in the calculator' }],
+    optionalLinks: [{ href: '/tools/difficulty-exposure', label: 'Optional: explore production sensitivity in the calculator' }],
   },
   {
     slug: 'risks-and-limitations', title: 'Risks and limitations',

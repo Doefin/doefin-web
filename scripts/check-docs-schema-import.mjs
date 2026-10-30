@@ -9,6 +9,13 @@ const contract = loadTypescript('content/docs-contract.ts', { './editorial-contr
 const documents = docsMigrationDocuments()
 assert.equal(documents.length, 18)
 assert.deepEqual(docsMigrationDocuments(), documents, 'Docs seed generation is deterministic')
+const docsWithOptionalLinks = documents.find(doc => doc.optionalLinks?.length)
+const docsSnapshot = structuredClone(documents).map(doc => ({ ...doc, _rev: 'fixture' }))
+const migratedLink = docsSnapshot.find(doc => doc._id === docsWithOptionalLinks._id).optionalLinks[0]
+migratedLink.href = `/v3${migratedLink.href}`
+assert.equal(planDocsImport(docsSnapshot).changed.length, 0, 'Legacy V3 Docs href alone does not look like an editor change')
+migratedLink.label += ' edited'
+assert.deepEqual(planDocsImport(docsSnapshot).changed, [docsWithOptionalLinks._id], 'Unrelated Docs edits remain visible')
 assert.deepEqual(Object.fromEntries(contract.v3DocGroups.map(group => [group, documents.filter(doc => doc.group === group).length])), { 'Understand Doefin': 6, 'Use the app': 8, Reference: 4 })
 assert.equal(documents.filter(doc => doc.reviewDateSource === 'legacy-shared-review-date').length, 13)
 for (const [order, original] of docsSeed.entries()) {
@@ -34,11 +41,11 @@ const modified = change => docsSeed.map((doc, index) => index === 0 ? change(str
 // Browsers normalize these into site destinations; reject the ambiguous input
 // in the actual importer and Studio field before navigation can bypass filtering.
 const ambiguousDocsHrefs = [
-  'https:doefin.com/v3/docs/gone',
-  'https:/doefin.com/v3/docs/gone',
-  'https:///doefin.com/v3/docs/gone',
-  '/v3/%2e%2e/v3/docs/smart-contracts',
-  '/v3/docs/%2e/smart-contracts',
+  'https:doefin.com/docs/gone',
+  'https:/doefin.com/docs/gone',
+  'https:///doefin.com/docs/gone',
+  '/%2e%2e/docs/smart-contracts',
+  '/docs/%2e/smart-contracts',
 ]
 for (const href of ambiguousDocsHrefs) {
   assert.throws(() => docsMigrationDocuments(modified(doc => ({ ...doc, optionalLinks: [{ href, label: 'Ambiguous destination' }] }))), `Importer rejects browser-normalized destination ${href}`)
@@ -51,7 +58,7 @@ for (const seed of [
   modified(doc => ({ ...doc, sections: [{ title: 'Empty' }] })),
   modified(doc => ({ ...doc, sections: [{ title: 'Definitions', definitions: [{ term: 'Term', definition: '' }] }] })),
   modified(doc => ({ ...doc, optionalLinks: [{ href: 'javascript:alert(1)', label: 'Unsafe' }] })),
-  modified(doc => ({ ...doc, optionalLinks: [{ href: '/v3/tools', label: 'First' }, { href: '/v3/tools', label: 'Different label, same destination' }] })),
+  modified(doc => ({ ...doc, optionalLinks: [{ href: '/tools', label: 'First' }, { href: '/tools', label: 'Different label, same destination' }] })),
   modified(doc => ({ ...doc, related: ['missing-doc'] })),
   modified(doc => ({ ...doc, related: [doc.slug] })),
 ]) assert.throws(() => docsMigrationDocuments(seed), 'Malformed Docs seeds fail before any write')
@@ -140,12 +147,12 @@ assert.notEqual(custom(section)({ title: 'Empty' }), true)
 for (const value of [{ paragraphs: ['Text'] }, { steps: ['Step'] }, { definitions: [{ term: 'Term', definition: 'Definition' }] }, { paragraphs: ['Text'], steps: ['Step'] }]) assert.equal(custom(section)(value), true)
 const optionalLinks = custom(field('optionalLinks'))
 assert.equal(optionalLinks(undefined), true, 'Optional links remain optional')
-assert.equal(optionalLinks([{ href: '/v3/tools', label: 'Tools' }, { href: '/v3/glossary', label: 'Glossary' }]), true)
-assert.notEqual(optionalLinks([{ href: '/v3/tools', label: 'First' }, { href: '/v3/tools', label: 'Different label, same destination' }]), true, 'Actual schema rejects duplicate hrefs before publish, matching runtime validation')
+assert.equal(optionalLinks([{ href: '/tools', label: 'Tools' }, { href: '/glossary', label: 'Glossary' }]), true)
+assert.notEqual(optionalLinks([{ href: '/tools', label: 'First' }, { href: '/tools', label: 'Different label, same destination' }]), true, 'Actual schema rejects duplicate hrefs before publish, matching runtime validation')
 const href = custom(field('optionalLinks').of[0].fields.find(item => item.name === 'href'))
 for (const unsafe of ['javascript:alert(1)', 'data:text/html,unsafe', '//evil.example', '/%2f/evil', '/bad\\link', 'https://user:pass@example.com', 'https://example.com/a\nb']) assert.notEqual(href(unsafe), true)
 for (const ambiguous of ambiguousDocsHrefs) assert.notEqual(href(ambiguous), true, `Actual Studio href validator rejects browser-normalized destination ${ambiguous}`)
-for (const safe of ['/v3/tools/difficulty-exposure', 'https://example.com/research']) assert.equal(href(safe), true)
+for (const safe of ['/tools/difficulty-exposure', 'https://example.com/research']) assert.equal(href(safe), true)
 const related = custom(field('related'))
 const relatedContext = (rows = []) => ({ document: { _id: 'drafts.docs-overview' }, getClient: () => ({ withConfig: () => ({ fetch: async () => rows }) }) })
 assert.equal(field('related').of[0].weak, true)
@@ -180,7 +187,7 @@ const failedPublish = actionFactory(() => ({ label: 'Publish', onHandle() { dele
 await failedPublish({ id: 'new-doc-id' }).onHandle()
 assert.equal(delegated, 1, 'Stamp failure must not delegate publish')
 assert.equal(failed.length, 2)
-const config = loadTypescript('studio/sanity.config.ts', { sanity: { defineConfig: value => value }, 'sanity/structure': { structureTool: () => ({}) }, './permanentSlugPublishAction': { permanentSlugPublishAction: actionFactory }, './schemaTypes/glossaryTerm': { glossaryTerm: {} }, './schemaTypes/topic': { topic: {} }, './schemaTypes/editorialArticle': { editorialArticle: {} }, './schemaTypes/toolGuide': { toolGuide: {} }, './schemaTypes/faqItem': { faqItem: {} }, './schemaTypes/homeFaqPlacement': { homeFaqPlacement: {} }, './schemaTypes/docPage': { docPage: schema } }).default
+const config = loadTypescript('studio/sanity.config.ts', { sanity: { defineConfig: value => value }, 'sanity/structure': { structureTool: () => ({}) }, './permanentSlugPublishAction': { permanentSlugPublishAction: actionFactory }, './schemaTypes/glossaryTerm': { glossaryTerm: {} }, './schemaTypes/topic': { topic: {} }, './schemaTypes/editorialArticle': { editorialArticle: {} }, './schemaTypes/toolGuide': { toolGuide: {} }, './schemaTypes/faqItem': { faqItem: {} }, './schemaTypes/homeFaqPlacement': { homeFaqPlacement: {} }, './schemaTypes/docPage': { docPage: schema }, './schemaTypes/aboutPage': { aboutPage: {} }, './schemaTypes/authorProfile': { authorProfile: {} }, './schemaTypes/researchReport': { researchReport: {} }, './schemaTypes/researchMethodology': { researchMethodology: {} } }).default
 const actions = ['publish', 'duplicate', 'restore', 'unpublish'].map(name => Object.assign(() => ({ label: name }), { action: name }))
 assert.deepEqual(config.document.actions(actions, { schemaType: 'docPage', getClient: () => actionClient }).map(action => action.action), ['publish', 'unpublish'])
 console.log('Passed 18 Docs seed fidelity/order/anchors/dates/definitions/steps, weak related identity safety, raw draft-aware create-only import and preservation of 40 existing records, idempotence, and actual Studio validators/publish failure guards.')

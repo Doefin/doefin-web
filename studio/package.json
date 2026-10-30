@@ -2,6 +2,9 @@
   "name": "doefin-glossary-studio",
   "private": true,
   "version": "0.1.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "sanity dev",
     "build": "sanity build",
@@ -27,9 +30,9 @@
   },
   "dependencies": {
     "sanity": "6.20.0",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "styled-components": "^6.1.19",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "styled-components": "6.1.19",
     "@sanity/client": "8.11.0",
     "@sanity/ui": "4.4.10"
   },

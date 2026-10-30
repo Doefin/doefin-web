@@ -1,4 +1,5 @@
 import { loadTypescript } from './load-typescript.mjs'
+import { comparableHref } from './legacy-href.mjs'
 const contract = loadTypescript('content/home-faq-contract.ts')
 export const homeFaqSeed = loadTypescript('content/home-faq.ts').homeFaqSeed
 export const faqId = id => id
@@ -10,7 +11,7 @@ export function homeFaqMigrationDocuments(seed=homeFaqSeed) {
  return [...items,{_id:placementId,_type:'homeFaqPlacement',placement:'homepage',items:items.map(x=>({_type:'reference',_ref:x._id,_weak:true}))}]
 }
 export const normalizedFaqId=id=>id.startsWith('drafts.')?id.slice(7):id.startsWith('versions.')?id.split('.').slice(2).join('.'):id
-const comparable=d=>d._type==='faqItem'?{_id:d._id,_type:d._type,question:d.question,answer:d.answer,href:d.href,label:d.label}:{_id:d._id,_type:d._type,placement:d.placement,items:d.items?.map(x=>({_ref:x._ref,weak:x._weak===true}))}
+const comparable=d=>d._type==='faqItem'?{_id:d._id,_type:d._type,question:d.question,answer:d.answer,href:comparableHref(d.href),label:d.label}:{_id:d._id,_type:d._type,placement:d.placement,items:d.items?.map(x=>({_ref:x._ref,weak:x._weak===true}))}
 export function planHomeFaqImport(snapshot, documents=homeFaqMigrationDocuments()) {
  if(!Array.isArray(snapshot)||snapshot.some(x=>!x||typeof x._id!=='string'||typeof x._type!=='string')) throw new Error('Invalid authenticated raw FAQ snapshot')
  const ids=new Set(documents.map(x=>x._id)); const conflicts=[],changed=[],missing=[]
