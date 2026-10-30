@@ -5,12 +5,23 @@
  * shipped invisible to every search engine. This is the guard that stops it
  * happening here. Run after `next build`.
  */
-import { readFile, readdir } from 'node:fs/promises'
-import { join, relative, sep } from 'node:path'
-
-const ROOT = join(process.cwd(), '.next', 'server', 'app')
 const MIN_WORDS = 120
-const base = process.argv.find(a => a.startsWith('--base='))?.slice(7)
+const baseArgument = process.argv.find(argument => argument === '--base' || argument.startsWith('--base='))
+const usage = 'Usage: npm run check:crawlable -- --base=http://127.0.0.1:3039\nStart the site first with `npm run start -- --port 3039` (or `npm run dev`).'
+if (!baseArgument?.startsWith('--base=') || !baseArgument.slice(7).trim()) {
+  console.error(`${usage}\nA running site URL is required; this check fetches dynamic pages and does not read build artifacts.`)
+  process.exit(2)
+}
+
+let base
+try {
+  const url = new URL(baseArgument.slice(7))
+  if (!['http:', 'https:'].includes(url.protocol)) throw new Error('Expected an HTTP or HTTPS URL')
+  base = url.toString().replace(/\/+$/, '')
+} catch (error) {
+  console.error(`Invalid --base URL: ${error.message}\n${usage}`)
+  process.exit(2)
+}
 
 const PAGES = [
   ['/', 'Home'],
@@ -27,25 +38,6 @@ const PAGES = [
   ['/for/miners', 'Miners planner'],
 ]
 
-const builtFiles = []
-const collectHtml = async directory => {
-  for (const entry of await readdir(directory, { withFileTypes: true })) {
-    const file = join(directory, entry.name)
-    if (entry.isDirectory()) await collectHtml(file)
-    else if (entry.name.endsWith('.html')) builtFiles.push(file)
-  }
-}
-await collectHtml(ROOT)
-const artifactRoute = file => {
-  const segments = relative(ROOT, file).split(sep).filter(segment => !/^\(.*\)$/.test(segment))
-  const route = `/${segments.join('/')}`.replace(/\.html$/, '')
-  return route === '/index' ? '/' : route
-}
-const builtPath = path => {
-  const match = builtFiles.find(file => artifactRoute(file) === path)
-  return match ?? join(ROOT, `${path === '/' ? 'index' : path.slice(1)}.html`)
-}
-
 const text = (html) =>
   html
     .replace(/<script[\s\S]*?<\/script>/g, ' ')
@@ -58,13 +50,11 @@ let failed = 0
 for (const [file, label] of PAGES) {
   let html
   try {
-    if (base) {
-      const response = await fetch(base + file)
-      if (!response.ok) throw new Error(`HTTP ${response.status}`)
-      html = await response.text()
-    } else html = await readFile(builtPath(file), 'utf8')
-  } catch {
-    console.error(`FAIL  ${label.padEnd(22)} ${file} not found — did the build run?`)
+    const response = await fetch(base + file)
+    if (!response.ok) throw new Error(`HTTP ${response.status}`)
+    html = await response.text()
+  } catch (error) {
+    console.error(`FAIL  ${label.padEnd(22)} ${file} (${error.message})`)
     failed++
     continue
   }
@@ -91,4 +81,4 @@ if (failed) {
   console.error(`\n${failed} page(s) would be invisible to crawlers.`)
   process.exit(1)
 }
-console.log('\nAll checked pages return real prose to a crawler.')
+console.log(`\nAll ${PAGES.length} checked pages at ${base} return real prose to a crawler.`)

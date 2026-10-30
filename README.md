@@ -14,7 +14,7 @@ The `final` branch contains the selected Version 3 website, extracted from
 
 ## Development
 
-Use Node.js 22.6 or newer (Node.js 24 recommended).
+The website and standalone Studio require Node.js 22.12.0 or newer (Node.js 24 recommended).
 
 ```sh
 npm ci
@@ -31,7 +31,6 @@ Studio separately, use `npm --workspace=doefin-glossary-studio run dev`.
 ```sh
 npm run build
 npm run typecheck
-npm run check:crawlable
 npm run check:seo
 npm run check:links
 npm run check:tools
@@ -44,6 +43,12 @@ The routing check compares the build with the 86-route inventory recorded in
 `scripts/fixtures/v3-routes.json` (84 HTML pages plus the CSV and social image),
 checks legacy redirects and query preservation, and rejects retired version prefixes in links. Feature checks under `scripts/` cover the retained planners,
 market handoff, research archive, measurement and newsletter prototype.
+
+`check:crawlable` requires a running website server and an explicit base URL. Start
+the built site with `npm run start -- --port 3039`, then run
+`npm run check:crawlable -- --base=http://127.0.0.1:3039`. It fetches all 12
+representative pages, including dynamic guide and Docs routes; it does not read
+local build artifacts.
 
 V3 design and operational notes are under `docs/v3-*`. Older documents describe
 historical prototypes and do not define the `final` branch route configuration.

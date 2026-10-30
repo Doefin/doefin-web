@@ -16,7 +16,7 @@ runtime validation instructions. See `docs/sanity-editorial.md` and
 npm run dev          # local
 npm run build        # production build
 npm run typecheck    # tsc --noEmit
-npm run check:crawlable -- --base=http://127.0.0.1:3039 # after build + start; includes CMS routes
+npm run check:crawlable -- --base=http://127.0.0.1:3039 # against a running site; includes CMS routes
 npm run check:seo -- --base=http://127.0.0.1:3039 # after build + start; titles, canonicals, h1s, schema
 npm run check:tools       # tool microcopy: hints match sliders, presets reachable, length caps
 ```
@@ -55,7 +55,7 @@ Charts are enhancement. A chart without an accompanying table or text figure is 
    also makes `export const metadata` impossible on every page beneath it.
 2. **Every page exports metadata through `seo()` in `lib/seo.ts`**, so nothing ships
    without a canonical URL.
-3. **`npm run check:crawlable` passes.** Run it after every build. It is the guard
+3. **`npm run check:crawlable -- --base=<running-site-url>` passes.** Run it after every build and start. It is the guard
    the trading app did not have.
 
 ## Tools and their guides
