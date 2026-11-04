@@ -6,7 +6,7 @@ status, see [Brand copy integration, 4 Nov 2026](brand-copy-integration-2026-11-
 Every visible line of v3 was rewritten in Matteo's voice, using the voice model in `vendor/doefin-brand/brand/matteo/`.
 
 - **Live doefin.com** (`doefin-frontend`) is not part of this change.
-- **Matteo's own lines** from his v3 review (PR #6, `docs/copy-review-2026-10-29.md`) are unchanged.
+- **Matteo's own lines** from his v3 review (PR #6, `docs/copy-review-2026-10-29.md`) are retained except for the factual corrections listed in the integration report. Those corrections need his review before publication.
 - **The copy around his lines** was rewritten so each page reads as one voice and does not repeat him.
 
 The work comes in two parts:
@@ -21,16 +21,19 @@ The work comes in two parts:
 Run these from the repository root. The scripts use the normal Studio login (`--with-user-token`), never a new token.
 
 ```
-npm run check:voice-drafts                 # no login: every row still matches the live text, limits, brand rules
+npm run check:voice-drafts                 # changed/cut rows match published text; limits and brand rules on proposed text
 npm --prefix studio run plan:voice-drafts  # shows the drafts it would create; writes nothing
-npm --prefix studio run write:voice-drafts # writes them as drafts
 ```
 
+Read the [current integration report](brand-copy-integration-2026-11-04.md#sanity-status) before any write. The 47 saved drafts must not be overwritten or recreated after an editor discards them. About and the existing block-subsidy draft remain reserved for Matteo. Only run `npm --prefix studio run write:voice-drafts -- --only=<approved-id>,<approved-id>` for a separately approved list of documents; replace the placeholders with those exact IDs. The writer rejects unscoped writes.
+
+The live-text comparison excludes `Keep` rows. It only checks that their prepared before/after values are identical; an editor must inspect their current Studio text separately. The limits and brand scan cover both `Change` and `Matteo` rows, including paragraph arrays. The checker does not replace Matteo's review.
+
 **What `write:voice-drafts` does:**
-- It creates one draft per changed document and never publishes anything.
+- It creates one draft per changed document in one atomic request and never publishes anything. If an action is rejected, the transaction writes none of its drafts.
 - An editor reviews each draft in the Studio. To accept it, publish it; to keep the live text, discard it.
 - It skips any document whose live text has changed since the rewrite, or that already has a draft, and says which ones.
-- `--only=<id>,<id>` limits it to some documents.
+- Writing requires `--only=<id>,<id>` with the approved document list.
 
 **After the drafts are published:**
 - Update the migration seeds (`content/v3-docs.ts`, `content/glossary.ts`, `content/tool-guides.ts`, `content/v3-editorial.ts`, `content/v3-research.ts`, `content/home-faq.ts`) to match.
@@ -53,6 +56,10 @@ These fall under the five kinds of copy you review. Most keep the meaning and ch
 ## Questions only Matteo or Reza can answer
 
 The editors left these alone because they could not confirm the facts.
+The 4 November review follow-up proposes source-backed corrections for the
+homepage's collateral qualification, observation block and threshold equality.
+See the integration report for the exact changes. Matteo still reviews those
+corrections and the broader collateral wording below before publication.
 
 1. **Collateral.**
    - The product page, the settlement page and `content/docs.ts` say every position settles in a BTC-denominated token, and the tone check (E05) says cbBTC.

@@ -97,7 +97,9 @@ Replace the first paragraph ("Network hashrate is inferred from difficulty and b
 
 ### 21. About: section "Information for an organisational review"
 
-His verdict: Cut, with no comment. Delete the sentence "Ask the team for the current legal entity, contractual terms, access requirements and any authorisation relevant to your organisation and jurisdiction." Whether the rest of that section stays is a question for him.
+Historical instruction, superseded by the [4 November integration report](brand-copy-integration-2026-11-04.md#sanity-status): About is reserved for Matteo and has been left untouched. Do not apply this instruction independently.
+
+His original verdict was Cut, with no comment, on the sentence "Ask the team for the current legal entity, contractual terms, access requirements and any authorisation relevant to your organisation and jurisdiction." Matteo will decide how to apply that edit and whether the rest of the section stays.
 
 ## 3. Judgement calls
 

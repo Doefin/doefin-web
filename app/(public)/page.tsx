@@ -54,9 +54,9 @@ export default function V3Home() {
         <div className="v311-payout-heading" data-reveal><p className="v37-eyebrow">How it works</p><h2 id="mechanics-title" className="v37-heading">Choose a market. Fund your account. Place a trade.</h2><p className="v37-copy">All done in a few minutes.</p></div>
         <ol className="mt-7 grid gap-4 md:grid-cols-3" data-reveal>
           {[
-            { title: 'Choose a Bitcoin difficulty market', text: ['Review the difficulty threshold and settlement block. Buy Yes if you expect difficulty to be at or above the threshold, or No if you expect it to be below.', 'Prices change as traders buy and sell.'] },
+            { title: 'Choose a Bitcoin difficulty market', text: ['Review the difficulty threshold and observation block. At that block, Yes wins if difficulty is at or above the threshold; No wins if it is below. Buy the side that matches your view.', 'Prices change as traders buy and sell.'] },
             { title: 'Fund your account and trade', text: ['Deposit cbBTC directly or use the integrated SwapKit to convert native BTC. Then choose your position and place your trade.', 'cbBTC is a wrapped Bitcoin asset; it is not native BTC.'] },
-            { title: 'Sell or redeem', text: ['Place a sell order before settlement, or hold until the market resolves. A sale depends on available buyers and price.', 'Each winning share redeems for 1 cbBTC; losing shares have no payout. Your profit or loss also depends on what you paid and any fees.'] },
+            { title: 'Sell or redeem', text: ['Place a sell order before settlement, or hold until the market resolves. A sale depends on available buyers and price.', 'For cbBTC markets, each winning share redeems for 1 cbBTC. For other markets, check the displayed payout and collateral token. Losing shares have no payout. Your profit or loss also depends on what you paid and any fees.'] },
           ].map((step, index) => <li key={step.title} className="rounded-panel border border-white/10 bg-surface/40 p-5"><p className="text-xs font-semibold text-subtle">Step {index + 1}</p><h3 className="mt-3 text-lg font-semibold text-body">{step.title}</h3>{step.text.map(line => <p key={line} className="mt-2 text-sm leading-relaxed text-subtle">{line}</p>)}</li>)}
         </ol>
         <div className="mt-7" data-reveal><MarketExample /></div>

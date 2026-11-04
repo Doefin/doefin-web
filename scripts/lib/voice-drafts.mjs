@@ -33,10 +33,14 @@ function assign(doc, segments, value) {
   if (parent == null) return false
   if ('field' in last) parent[last.field] = value
   else if ('key' in last) {
+    if (!Array.isArray(parent)) return false
     const i = parent.findIndex(item => item?._key === last.key)
     if (i < 0) return false
     parent[i] = value
-  } else parent[last.index] = value
+  } else {
+    if (!Array.isArray(parent) || last.index >= parent.length) return false
+    parent[last.index] = value
+  }
   return true
 }
 
@@ -68,21 +72,34 @@ export function planVoiceDrafts(rows, published, { draftIds = new Set() } = {}) 
     const stale = docRows.filter(row => !same(valueAt(base, row.path), row.before))
     if (stale.length) { conflicts.push(`${id}: published text changed at ${stale.map(row => row.path).join(', ')}`); continue }
     const next = structuredClone(base)
+    let blocked = false
     for (const row of docRows) {
       const segments = parsePath(row.path)
       const cut = row.verdict === 'Cut' || (row.verdict === 'Matteo' && row.after === '')
-      if (!cut) { assign(next, segments, row.after); continue }
+      if (!cut) {
+        if (assign(next, segments, row.after)) continue
+        conflicts.push(`${id}: cannot set ${row.path}`)
+        blocked = true
+        break
+      }
       const last = segments.at(-1)
-      if ('index' in last) assign(next, segments, CUT)
-      else {
+      if ('index' in last || 'key' in last) {
+        if (!assign(next, segments, CUT)) {
+          conflicts.push(`${id}: cannot cut ${row.path}`)
+          blocked = true
+          break
+        }
+      } else {
         const owner = segments.slice(0, -1).reduce(step, next)
         if (!owner || typeof owner !== 'object' || !segments.at(-2) || !('key' in segments.at(-2))) {
           conflicts.push(`${id}: cannot cut ${row.path}`)
-          continue
+          blocked = true
+          break
         }
         owner[CUT] = true
       }
     }
+    if (blocked) continue
     const pruned = prune(next)
     const set = {}
     for (const field of new Set(docRows.map(row => parsePath(row.path)[0].field))) {

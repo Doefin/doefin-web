@@ -108,14 +108,69 @@ Next:
 
 ## Matteo's review before publication
 
+Review in [Sanity Studio](https://doefin-web.vercel.app/studio/structure) and
+[PR #8](https://github.com/Doefin/doefin-web/pull/8/files). In Studio, open each
+saved draft and use **Review changes**. Keep About and Block subsidy for Matteo;
+the other 47 documents have verified drafts. Do not publish during this review.
+
+The 4 November PR follow-up corrects four website explanations. These are proposed
+factual corrections to the prepared copy, rather than a new sign-off from Matteo:
+
+| Location | Before | Proposed correction | Reason |
+|---|---|---|---|
+| Homepage, Choose a market | Review the settlement block | Compare difficulty at the observation block; Yes includes equality | Market data has separate observation and settlement blocks. E25 explains that the specified observation determines the outcome. |
+| Homepage, Sell or redeem | Every winning share redeems for 1 cbBTC | Limit that amount to cbBTC markets; direct other markets to their displayed payout and collateral | The explorer supports multiple collateral currencies. Keep the loss, fees and profit-or-loss wording (E15, E17). |
+| Product introduction | Above or below a specified level | Yes wins at or above the threshold; No wins below it | Match the existing outcome table and E25; keep the exposure distinction (E23). |
+| Miners planner, assumptions | Production-based payout formula in both modes | Show the production formula with 0.01 rounding in protection mode; risk budget divided by No price in premium mode | Match `estimateProtection` and `estimatePremium`; show the assumptions and keep the cbBTC risk sentence (E28). |
+
+The follow-up also fixes the offline draft tooling: a failed edit blocks its whole
+document, keyed list cuts are supported, both Change and Matteo text are scanned,
+and writing requires an approved `--only` list. A single action request submits
+the planned drafts. No CMS draft was written and no publication command was run
+for this follow-up; the unscoped-write regression exits before client access.
+
+The default source brand guard still reports 12 CHECK matches for Matteo:
+homepage and explorer profit-or-loss wording; the miners page's warning that
+estimates do not guarantee a suitable position or profit; epoch and tool return
+wording; the production tool's warning that a return is not guaranteed; worked
+example profitability/profit text; and the scenario brief's profit wording.
+Retain risk statements while reviewing their context. The four STYLE alerts are
+the explanation of position tokens, the screenshot's quoted YES label and two
+code exclamation marks. They are not new prose-style violations.
+
+Follow-up validation (Node 22.22.3 for build and typecheck):
+
+- Production build, typecheck, source brand guard and diff whitespace checks pass.
+- Offline voice regressions pass, including rejection of partial documents,
+  keyed cuts, protected existing drafts, changed source, Matteo paragraph arrays,
+  CUT detection and rejection of unscoped writes. No CMS requests are made.
+- The full 607-row historical rewrite passes against a snapshot reconstructed
+  from its prepared before-values: 49 documents, 192 changes, zero CUT, seven
+  CHECK and five STYLE matches. This checks internal plan consistency, not live
+  CMS parity. The STYLE matches explain position tokens in docs.
+- Public-market/planner arithmetic (17 cases), routing (34 cases), tool microcopy,
+  P0 corrections and publication contracts pass.
+- Against a production build using isolated CMS fixtures, all 12 crawler checks
+  and SEO checks on all 84 pages pass. The main journey reaches all 39 linked
+  destination pages successfully.
+- Browser checks confirm the homepage corrections and product equality wording,
+  and exercise both planner modes using isolated market fixtures. Protection
+  shows the production formula with 0.01 rounding; premium shows risk budget
+  divided by No price. Both keep the cbBTC risk sentence. There is no horizontal
+  overflow on the homepage at 1440px/390px, product at 390px or planner at
+  1280px/390px. Fixtures are confined to ignored local validation files.
+
+The deployed preview and current published CMS content are separate evidence;
+these local checks do not establish either. Publishing remains on hold.
+
 The full review list and factual questions remain in
 [`copy-rewrite-2026-10-29.md`](copy-rewrite-2026-10-29.md). In particular:
 
 | Location | Prepared wording or example | Review needed |
 |---|---|---|
 | Homepage, How it works | "All done in a few minutes." | Timing claim against current funding flows |
-| Homepage, Sell or redeem | "Each winning share redeems for 1 cbBTC; losing shares have no payout." | Settlement/collateral wording; the explorer also supports USDC markets |
-| Product introduction | "above or below a specified level" | Reconcile the intended meaning with "at or above" in the outcome description |
+| Homepage, Sell or redeem | "For cbBTC markets, each winning share redeems for 1 cbBTC." | Review the collateral qualification and direction to other markets' displayed payout |
+| Product introduction | "Yes wins at or above the difficulty threshold; No wins below it." | Review the equality clarification against the existing outcome description |
 | Product and settlement pages | "Fully collateralised positions in a BTC-denominated token" | Collateral description |
 | Homepage, production note | "A Doefin position pays a fixed amount or nothing, depending on difficulty at its observation block." | Settlement wording; observation versus settlement terminology |
 | Navigation, For miners | "Estimate the effect of rising difficulty on expected BTC production, and hedge part of it." | Product claim |

@@ -39,6 +39,7 @@
     "check:research-methodology": "node scripts/check-research-methodology.mjs",
     "check:brand": "node scripts/check-brand.mjs",
     "check:voice-drafts": "node --experimental-strip-types --no-warnings scripts/check-voice-drafts.mjs",
+    "check:voice-drafts:regressions": "node --experimental-strip-types --no-warnings scripts/check-voice-draft-regressions.mjs",
     "brand:sync": "node scripts/brand-sync.mjs"
   },
   "dependencies": {

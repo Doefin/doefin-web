@@ -5,7 +5,10 @@
  *
  *   node scripts/check-voice-drafts.mjs [rewrite.json] [--snapshot=<published.json>]
  *
- * Fails when a row no longer matches the published text, a field would be left empty,
+ * Compares Change, Cut and Matteo rows with published text. Keep rows are checked
+ * for before/after equality only; an editor reviews those fields separately.
+ * Scans new text in both Change and Matteo rows, including array-valued text.
+ * Fails when a changed row no longer matches published text, a field would be left empty,
  * a length limit is broken or the brand rules find generated-sounding phrasing (CUT).
  */
 import assert from 'node:assert/strict'
@@ -61,7 +64,7 @@ else {
   published = (await (await fetch(url)).json()).result
 }
 const { drafts, conflicts } = planVoiceDrafts(rows, published)
-assert.deepEqual(conflicts, [], 'Every row must match the published text')
+assert.deepEqual(conflicts, [], 'Every changed or cut row must match the published text')
 
 // 3. Limits and phrasing on the new text.
 const limits = { shortDef: 160, summary: 160, seoSummary: 160, metadataDescription: 160, seoTitle: 70 }
@@ -76,11 +79,13 @@ const rules = JSON.parse(await readFile('vendor/doefin-brand/tools/rules.json', 
   .filter(r => !(r.except ?? []).includes('web'))
   .map(r => ({ ...r, re: new RegExp(r.match, r.case_sensitive ? 'gu' : 'giu') }))
 const counts = { cut: 0, check: 0, style: 0 }
-for (const row of rows.filter(r => r.verdict === 'Change')) {
-  for (const rule of rules) {
-    for (const m of row.after.matchAll(rule.re)) {
-      counts[rule.kind]++
-      if (rule.kind !== 'check') console.log(`${rule.kind.toUpperCase().padEnd(6)} ${row._id} ${row.path}  "${m[0]}"  ->  ${rule.say}`)
+for (const row of rows.filter(r => r.verdict === 'Change' || r.verdict === 'Matteo')) {
+  for (const text of [row.after].flat()) {
+    for (const rule of rules) {
+      for (const m of text.matchAll(rule.re)) {
+        counts[rule.kind]++
+        if (rule.kind !== 'check') console.log(`${rule.kind.toUpperCase().padEnd(6)} ${row._id} ${row.path}  "${m[0]}"  ->  ${rule.say}`)
+      }
     }
   }
 }

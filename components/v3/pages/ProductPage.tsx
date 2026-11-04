@@ -9,7 +9,7 @@ export const metadata = previewSeo('A market on Bitcoin difficulty', 'Understand
 export default function ProductPreview() {
   return <>
     <PageIntro section="Product" title="Trade hashrate exposure through difficulty markets."
-      description="Doefin lets professional investors take Yes or No positions on whether Bitcoin mining difficulty will be above or below a specified level at a specified block height. Hashrate is the economic exposure; difficulty determines the contract outcome.">
+      description="Doefin lets professional investors take positions on Bitcoin mining difficulty at a specified block height. Yes wins at or above the difficulty threshold; No wins below it. Hashrate is the economic exposure; difficulty determines the contract outcome.">
       <div className="flex flex-wrap gap-3"><Button href={preview.settlement}>Understand settlement →</Button><Button href={site.appUrl} external variant="secondary">Enter app ↗</Button></div>
     </PageIntro>
     <Container className="py-12 sm:py-16">

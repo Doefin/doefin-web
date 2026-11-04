@@ -7,6 +7,9 @@ process.chdir(fileURLToPath(new URL('../..', import.meta.url)))
 const args = process.argv.slice(2)
 const file = args.find(arg => arg.endsWith('.json')) ?? 'studio/rewrites/2026-10-29-v3-voice.json'
 const only = args.find(arg => arg.startsWith('--only='))?.slice(7).split(',')
+if (args.includes('--apply') && (!only?.length || only.some(id => !id.trim()))) {
+  throw new Error('Writing drafts requires an approved --only=<id>,<id> scope. See docs/brand-copy-integration-2026-11-04.md.')
+}
 const client = getCliClient({ apiVersion: '2025-02-19' })
 const c = client.config()
 if (!c.token || c.projectId !== 'yzvr33lo' || c.dataset !== 'production') throw new Error('Authenticated CLI access to yzvr33lo/production is required')
@@ -19,9 +22,9 @@ const draftIds = new Set(await raw.fetch('*[_id in $ids]._id', { ids: ids.map(id
 const plan = planVoiceDrafts(rows, published, { draftIds })
 const written = []
 if (args.includes('--apply')) {
-  for (const draft of plan.drafts) {
-    await client.action({ actionType: 'sanity.action.document.edit', draftId: `drafts.${draft._id}`, publishedId: draft._id, patch: { set: draft.set } })
-    written.push(draft._id)
+  if (plan.drafts.length) {
+    await client.action(plan.drafts.map(draft => ({ actionType: 'sanity.action.document.edit', draftId: `drafts.${draft._id}`, publishedId: draft._id, patch: { set: draft.set } })))
+    written.push(...plan.drafts.map(draft => draft._id))
   }
 }
 console.log(JSON.stringify({
