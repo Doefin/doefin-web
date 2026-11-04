@@ -52,21 +52,41 @@ returned HTTP 403. A normal local server consequently returned HTTP 500 for CMS
 pages. The report-only brand crawler skips failed responses, so its zero-alert
 result in that environment is not a successful page validation.
 
-No draft was written, no document published and no Sanity access setting changed.
-The current draft state and whether published text still matches the prepared
-rewrite remain unverified.
+The logged-in Fardin Chrome profile provided working Studio access. The browser
+pass accounted for all 49 planned documents and saved **42 unpublished drafts,
+covering 170 changed strings**. Before each change, the current document and its
+planned before-values were checked in the Raw JSON inspector. Each completed
+draft was compared with the expected complete document, excluding CMS system
+metadata. Unrelated content, slugs, stable keys, anchors, references and editorial
+dates were preserved.
 
-Once the existing session can read `yzvr33lo/production`:
+Seven documents were left untouched:
 
-1. Run `npm run check:voice-drafts` against current published content.
-2. Run `npm --prefix studio run plan:voice-drafts`. Preserve editor drafts and
-   report changed-source conflicts; never overwrite either.
-3. Run `npm --prefix studio run write:voice-drafts` to create drafts only after
-   the preflight succeeds. The prepared file has 192 changed strings across
-   49 documents.
-4. An editor reviews each draft and publishes or discards it. Matteo reviews the
-   five sensitive categories before publication.
-5. After publication, update migration seeds to match and rerun source parity,
+| Document | Reason |
+|---|---|
+| `faq-fees-and-costs` | Current `answer` differs from the prepared before-text |
+| `about-doefin` | An active editor was observed in Studio |
+| `glossary-uptime` | Current FAQ answer differs |
+| `glossary-pool-luck` | Current first body paragraph and FAQ answer differ |
+| `glossary-exahash` | Current short definition differs |
+| `glossary-block-subsidy` | An existing draft was preserved |
+| `glossary-hashprice` | Current short definition differs |
+
+The remaining 22 planned string changes belong to these seven documents. No
+document was published and no Sanity access setting or credential was changed.
+The terminal API restriction remains separate from the successful Studio workflow.
+The per-document record is
+[`brand-copy-draft-audit-2026-11-04.json`](brand-copy-draft-audit-2026-11-04.json).
+
+Next:
+
+1. Review the 42 saved drafts in `/studio`; the existing writer will now skip
+   these documents because drafts exist. Do not overwrite them with a bulk rerun.
+2. Rebase the seven preserved items on their current text with the editor. Keep
+   existing drafts and active editing work intact.
+3. Matteo reviews the five sensitive categories before publication. An editor
+   then publishes or discards each approved draft.
+4. After publication, update migration seeds to match and rerun source parity,
    runtime, crawlability, SEO and rendered brand checks against the actual site.
 
 ## Matteo's review before publication

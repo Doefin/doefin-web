@@ -12,7 +12,7 @@ Every visible line of v3 was rewritten in Matteo's voice, using the voice model 
 The work comes in two parts:
 
 - **Code** (this branch). About 250 strings across 70 files: pages, components, tool microcopy, worked examples, navigation, metadata and share images.
-- **Sanity** (drafts, not yet written). 192 of 607 strings across 49 documents: docs, glossary, homepage FAQ, About, tool guides, articles and research.
+- **Sanity** (prepared draft plan). 192 of 607 strings across 49 documents: docs, glossary, homepage FAQ, About, tool guides, articles and research. The current saved-draft and exception counts are in the integration report linked above.
   - The rewrites are in `studio/rewrites/2026-10-29-v3-voice.json`, one row per string, each with a Keep, Change, Cut or Matteo verdict and a note.
   - Matteo's own docs, FAQ, glossary and article rewrites from the tone check are in the same file, marked `Matteo`.
 
