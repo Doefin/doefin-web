@@ -5,9 +5,9 @@
   "sourcePlan": "studio/rewrites/2026-10-29-v3-voice.json",
   "method": "Fardin Chrome profile; Sanity Studio UI and Raw JSON inspector",
   "publicationActions": 0,
-  "verifiedDrafts": 42,
-  "verifiedChangedStrings": 170,
-  "preservedDocuments": 7,
+  "verifiedDrafts": 47,
+  "verifiedChangedStrings": 182,
+  "preservedDocuments": 2,
   "verification": "Each staged draft matched the expected complete document after applying only the prepared changes. CMS system metadata was excluded from comparison; content, slugs, references, stable keys, anchors and editorial dates were preserved.",
   "documents": [
     {
@@ -118,10 +118,12 @@
     },
     {
       "id": "faq-fees-and-costs",
-      "status": "source_changed",
-      "paths": [
-        "answer"
-      ]
+      "status": "draft_verified",
+      "changes": 1,
+      "draftId": "drafts.faq-fees-and-costs",
+      "followUpPlan": "studio/rewrites/2026-11-04-preserved-voice.json",
+      "previousStatus": "source_changed",
+      "auditCorrection": "Earlier source-conflict flag was incorrect. Fresh document-ID-checked reads matched the original before-values."
     },
     {
       "id": "faq-market-settlement",
@@ -177,10 +179,12 @@
     },
     {
       "id": "glossary-exahash",
-      "status": "source_changed",
-      "paths": [
-        "shortDef"
-      ]
+      "status": "draft_verified",
+      "changes": 3,
+      "draftId": "drafts.glossary-exahash",
+      "followUpPlan": "studio/rewrites/2026-11-04-preserved-voice.json",
+      "previousStatus": "source_changed",
+      "approvedMergedDefinition": "One quintillion (10¹⁸) hashes per second, written EH/s: a 1 followed by 18 zeros. Used for network and large-fleet hashrate."
     },
     {
       "id": "glossary-fpps",
@@ -196,10 +200,12 @@
     },
     {
       "id": "glossary-hashprice",
-      "status": "source_changed",
-      "paths": [
-        "shortDef"
-      ]
+      "status": "draft_verified",
+      "changes": 5,
+      "draftId": "drafts.glossary-hashprice",
+      "followUpPlan": "studio/rewrites/2026-11-04-preserved-voice.json",
+      "previousStatus": "source_changed",
+      "approvedMergedDefinition": "Expected mining revenue per unit of hashrate per day, set by difficulty, block subsidy and fees; BTC price also matters when expressed in USD."
     },
     {
       "id": "glossary-hashrate",
@@ -227,11 +233,12 @@
     },
     {
       "id": "glossary-pool-luck",
-      "status": "source_changed",
-      "paths": [
-        "body[0]",
-        "faq[_key==\"faq-0\"].a"
-      ]
+      "status": "draft_verified",
+      "changes": 2,
+      "draftId": "drafts.glossary-pool-luck",
+      "followUpPlan": "studio/rewrites/2026-11-04-preserved-voice.json",
+      "previousStatus": "source_changed",
+      "auditCorrection": "Earlier source-conflict flag was incorrect. Fresh document-ID-checked reads matched the original before-values."
     },
     {
       "id": "glossary-terahash",
@@ -247,10 +254,12 @@
     },
     {
       "id": "glossary-uptime",
-      "status": "source_changed",
-      "paths": [
-        "faq[_key==\"faq-0\"].a"
-      ]
+      "status": "draft_verified",
+      "changes": 1,
+      "draftId": "drafts.glossary-uptime",
+      "followUpPlan": "studio/rewrites/2026-11-04-preserved-voice.json",
+      "previousStatus": "source_changed",
+      "auditCorrection": "Earlier source-conflict flag was incorrect. Fresh document-ID-checked reads matched the original before-values."
     },
     {
       "id": "editorial-academy-how-difficulty-adjustment-works",
@@ -306,5 +315,22 @@
       "changes": 9,
       "draftId": "drafts.tool-guide-hosting-effective-rate"
     }
-  ]
+  ],
+  "followUpPlan": "studio/rewrites/2026-11-04-preserved-voice.json",
+  "followUp": {
+    "date": "2026-11-04",
+    "authorization": "User approved the three clear documents and exact merged Exahash/Hashprice definitions; explicitly excluded About, the existing block-subsidy draft and publication.",
+    "verifiedAdditionalDrafts": 5,
+    "verifiedAdditionalChanges": 12,
+    "correctedEarlierFlags": [
+      "faq-fees-and-costs",
+      "glossary-pool-luck",
+      "glossary-uptime"
+    ],
+    "preservedForMatteo": [
+      "about-doefin",
+      "glossary-block-subsidy"
+    ],
+    "publicationActions": 0
+  }
 }

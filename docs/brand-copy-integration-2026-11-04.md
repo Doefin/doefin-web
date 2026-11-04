@@ -53,37 +53,54 @@ pages. The report-only brand crawler skips failed responses, so its zero-alert
 result in that environment is not a successful page validation.
 
 The logged-in Fardin Chrome profile provided working Studio access. The browser
-pass accounted for all 49 planned documents and saved **42 unpublished drafts,
-covering 170 changed strings**. Before each change, the current document and its
+pass accounted for all 49 planned documents. The initial pass saved 42 drafts;
+the authorized follow-up brought the total to **47 unpublished drafts, covering
+182 changed strings**. Before each change, the current document and its
 planned before-values were checked in the Raw JSON inspector. Each completed
 draft was compared with the expected complete document, excluding CMS system
 metadata. Unrelated content, slugs, stable keys, anchors, references and editorial
 dates were preserved.
 
-Seven documents were left untouched:
+The follow-up resolved five of the seven initially preserved documents:
 
 | Document | Reason |
 |---|---|
-| `faq-fees-and-costs` | Current `answer` differs from the prepared before-text |
-| `about-doefin` | An active editor was observed in Studio |
-| `glossary-uptime` | Current FAQ answer differs |
-| `glossary-pool-luck` | Current first body paragraph and FAQ answer differ |
-| `glossary-exahash` | Current short definition differs |
-| `glossary-block-subsidy` | An existing draft was preserved |
-| `glossary-hashprice` | Current short definition differs |
+| `faq-fees-and-costs` | Original planned change saved and verified as a draft |
+| `glossary-uptime` | Original planned change saved and verified as a draft |
+| `glossary-pool-luck` | Both original planned changes saved and verified as a draft |
+| `glossary-exahash` | Three changes saved and verified, including the user-approved merged definition |
+| `glossary-hashprice` | Five changes saved and verified, including the user-approved merged definition and the planned paragraph cut |
+| `about-doefin` | Still untouched, explicitly left for Matteo; Studio showed an active editor |
+| `glossary-block-subsidy` | Existing draft still untouched, explicitly left for Matteo |
 
-The remaining 22 planned string changes belong to these seven documents. No
-document was published and no Sanity access setting or credential was changed.
+**Audit correction:** the initial conflict flags for the fees FAQ, Uptime and
+Pool luck were incorrect. Fresh reads that checked document identity showed
+their current text matched the original before-values. The real text conflicts
+were the newer Exahash and Hashprice short definitions. The user approved exact
+merged definitions that preserve those newer clarifications; both are under the
+160-character limit (124 and 142 characters respectively).
+
+The 12-row follow-up input is
+[`2026-11-04-preserved-voice.json`](../studio/rewrites/2026-11-04-preserved-voice.json).
+It records the current before-values and the approved after-values without
+rewriting the historical 29 October plan. Its after-text passes the web checker
+with zero CUT, one CHECK and zero STYLE findings. The CHECK is the fees FAQ's
+profit-or-loss risk context; keep it and include it in Matteo's review.
+
+Only About (six planned changes) and block subsidy (four) remain for Matteo.
+A read-only comparison found the existing block-subsidy draft content matches
+its published version, but it was preserved as instructed. No document was
+published and no Sanity access setting or credential was changed.
 The terminal API restriction remains separate from the successful Studio workflow.
 The per-document record is
 [`brand-copy-draft-audit-2026-11-04.json`](brand-copy-draft-audit-2026-11-04.json).
 
 Next:
 
-1. Review the 42 saved drafts in `/studio`; the existing writer will now skip
+1. Review the 47 saved drafts in `/studio`; the existing writer will now skip
    these documents because drafts exist. Do not overwrite them with a bulk rerun.
-2. Rebase the seven preserved items on their current text with the editor. Keep
-   existing drafts and active editing work intact.
+2. Leave About and the existing block-subsidy draft to Matteo. Keep existing
+   drafts and active editing work intact.
 3. Matteo reviews the five sensitive categories before publication. An editor
    then publishes or discards each approved draft.
 4. After publication, update migration seeds to match and rerun source parity,
@@ -105,6 +122,7 @@ The full review list and factual questions remain in
 | Homepage market example | 60 paid, 100 payout, 40 profit or 60 loss, before fees | Financial example; retain both outcomes and the illustrative label |
 | Miners planner | Dynamic cost, payout and net-result wording | Financial examples; retain the loss and collateral limits |
 | Research archive | "The prototype’s dated forecasts and scoreboard are illustrative" | Performance and evidence status |
+| Homepage fees FAQ | "Your profit or loss depends on what you paid and on any fees and costs, even when your position wins." | Fee and result wording; this is risk context, not a promise |
 
 The one-liner, Enter app labels and footer risk sentence use the agreed wording.
 The footer retains Matteo's shorter professional-investor wording. No open brand

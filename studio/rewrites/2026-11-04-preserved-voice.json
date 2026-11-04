@@ -1,0 +1,110 @@
+[
+  {
+    "_id": "faq-fees-and-costs",
+    "_type": "faqItem",
+    "path": "answer",
+    "before": "Review the costs shown for your order and funding route before confirming. Wallets, exchanges and conversion services may charge separately. Your purchase price and applicable costs affect your result, even when your position wins.",
+    "after": "Review the costs shown for your order and funding route before confirming. Wallets, exchanges and conversion services may charge separately. Your profit or loss depends on what you paid and on any fees and costs, even when your position wins.",
+    "verdict": "Change",
+    "note": "Matteo: settlement or collateral wording (fees). Meaning kept; last line in his E15 wording (\"profit or loss\", \"what you paid\")."
+  },
+  {
+    "_id": "glossary-exahash",
+    "_type": "glossaryTerm",
+    "path": "body[0]",
+    "before": "A single modern machine produces a few hundred terahash. A thousand terahash is one petahash; a thousand petahash is one exahash. Large listed miners operate tens of exahash.",
+    "after": "A single modern machine runs at a few hundred TH/s. Large listed miners operate tens of EH/s.",
+    "verdict": "Change",
+    "note": "Units as rates; the conversion is left to the FAQ (habit 3, habit 6)."
+  },
+  {
+    "_id": "glossary-exahash",
+    "_type": "glossaryTerm",
+    "path": "faq[_key==\"faq-0\"].a",
+    "before": "A thousand terahash is one petahash, and a thousand petahash is one exahash. A single modern machine produces a few hundred terahash.",
+    "after": "One million. A thousand terahash is one petahash, and a thousand petahash is one exahash.",
+    "verdict": "Change",
+    "note": "The number first (habit 3); no repeat of the body (habit 6)."
+  },
+  {
+    "_id": "glossary-exahash",
+    "_type": "glossaryTerm",
+    "path": "shortDef",
+    "before": "One quintillion hashes per second, written EH/s. A quintillion has 18 zeros.\nIn total, it is a 19-digit number",
+    "after": "One quintillion (10¹⁸) hashes per second, written EH/s: a 1 followed by 18 zeros. Used for network and large-fleet hashrate.",
+    "verdict": "Change",
+    "note": "User-approved merged definition, 4 Nov 2026. Preserves the newer editor clarification. This is not a new Matteo brand decision."
+  },
+  {
+    "_id": "glossary-hashprice",
+    "_type": "glossaryTerm",
+    "path": "body[0]",
+    "before": "Hashprice is the single number that tells a miner whether the machines are worth running. It falls when difficulty rises, when the bitcoin price falls, or when fees dry up.",
+    "after": "Hashprice falls when difficulty rises, when the Bitcoin price falls or when transaction fees fall. A 10% rise in difficulty, for example, cuts hashprice by about 9.1%, all else equal.",
+    "verdict": "Change",
+    "note": "\"The single number that tells a miner\" overstated (it needs costs too, as the FAQ says); one worked number, 1/1.10 − 1 (habit 3, E36)."
+  },
+  {
+    "_id": "glossary-hashprice",
+    "_type": "glossaryTerm",
+    "path": "body[1]",
+    "before": "The term was coined by Luxor in 2019 and is now the industry standard. Different publishers compute it differently — mostly in which exchange prices they use and when they sample — and few disclose the basket.",
+    "after": "",
+    "verdict": "Cut",
+    "note": "Repeats faq-1 and faq-2 on the same page (E24, E25); \"few disclose the basket\" moved into faq-1."
+  },
+  {
+    "_id": "glossary-hashprice",
+    "_type": "glossaryTerm",
+    "path": "faq[_key==\"faq-0\"].a",
+    "before": "Whether the machines are worth running. It falls when difficulty rises and when the bitcoin price falls, and when it drops below a fleet's all-in cost per terahash that fleet loses money every hour it stays on.",
+    "after": "Whether the machines are worth running. When hashprice falls below a fleet's power cost per terahash, the machines lose money for every hour they run.",
+    "verdict": "Change",
+    "note": "The old answer said all-in cost; only the power cost decides whether running adds to the loss (habit 3)."
+  },
+  {
+    "_id": "glossary-hashprice",
+    "_type": "glossaryTerm",
+    "path": "faq[_key==\"faq-1\"].a",
+    "before": "Because publishers compute it differently, and the differences sit almost entirely in the price leg — which exchanges are in the basket, how they are weighted, and when the snapshot is taken.",
+    "after": "Because publishers compute it differently. The differences sit almost entirely in the price leg: which exchanges are in the basket, how they are weighted and when the snapshot is taken. Few publishers disclose the basket.",
+    "verdict": "Change",
+    "note": "Em dash removed; takes \"few disclose the basket\" from the cut body line (habit 6)."
+  },
+  {
+    "_id": "glossary-hashprice",
+    "_type": "glossaryTerm",
+    "path": "shortDef",
+    "before": "The revenue a miner earns per unit of hashrate per day. It combines the difficulty, block subsidy and transaction fees (and BTC price when expressed in USD).",
+    "after": "Expected mining revenue per unit of hashrate per day, set by difficulty, block subsidy and fees; BTC price also matters when expressed in USD.",
+    "verdict": "Change",
+    "note": "User-approved merged definition, 4 Nov 2026. Preserves the newer editor clarification. This is not a new Matteo brand decision."
+  },
+  {
+    "_id": "glossary-pool-luck",
+    "_type": "glossaryTerm",
+    "path": "body[0]",
+    "before": "Luck is noise, not skill, and it dominates short-run pool comparisons. A pool can look one percent better for months purely by chance — which is why payout comparisons need the variance maths shown alongside them.",
+    "after": "Luck dominates short-run pool comparisons. A payout comparison between pools needs the variance maths shown alongside it; without it, a difference that is pure chance reads as a better pool.",
+    "verdict": "Change",
+    "note": "Em dash removed; no longer repeats the FAQ (habit 6)."
+  },
+  {
+    "_id": "glossary-pool-luck",
+    "_type": "glossaryTerm",
+    "path": "faq[_key==\"faq-0\"].a",
+    "before": "No. Luck is noise rather than skill, and it dominates short-run comparisons — a pool can look one percent better for months purely by chance.",
+    "after": "No. Luck is noise, not skill. A pool can look 1% better for months purely by chance.",
+    "verdict": "Change",
+    "note": "Em dash removed; 1% as a figure (house style)."
+  },
+  {
+    "_id": "glossary-uptime",
+    "_type": "glossaryTerm",
+    "path": "faq[_key==\"faq-0\"].a",
+    "before": "Generally not. Providers advertise uptime figures that operators cannot check independently, and the gap between advertised and realised uptime is a real cost.",
+    "after": "Generally not. Operators usually rely on the provider's own figures, and any gap between advertised and realised uptime is a real cost.",
+    "verdict": "Change",
+    "note": "Reworded so it does not repeat the body (habit 6)."
+  }
+]
