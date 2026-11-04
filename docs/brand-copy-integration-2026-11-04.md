@@ -162,6 +162,11 @@ Follow-up validation (Node 22.22.3 for build and typecheck):
 
 The deployed preview and current published CMS content are separate evidence;
 these local checks do not establish either. Publishing remains on hold.
+Vercel reports a successful deployment for follow-up commit `6fd355b`
+([deployment status](https://vercel.com/jahankohans-projects/doefin-web/7MihjQBKCndDQRTMkXSHecy33gqD)).
+This is deployment-status evidence only; the protected preview's rendered pages
+have not been inspected. All nine original inline review threads were resolved
+after the fixes were pushed.
 
 The full review list and factual questions remain in
 [`copy-rewrite-2026-10-29.md`](copy-rewrite-2026-10-29.md). In particular:
