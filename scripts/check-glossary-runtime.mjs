@@ -58,7 +58,7 @@ try {
     const renderedDate = new Date(reviewDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
     const dateTexts = reviewed.map(match => match[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim())
     assert.equal(dateTexts[0], `Last reviewed ${reviewDate}`, `${row.slug}: inline date must use CMS review date`)
-    assert.equal(dateTexts[1], `Last reviewed ${renderedDate}. Figures marked illustrative are placeholders until the data pipeline is connected.`, `${row.slug}: footer must use the same CMS review date`)
+    assert.equal(dateTexts[1], `Last reviewed ${renderedDate}. Figures marked illustrative are placeholders, not live data.`, `${row.slug}: footer must use the same CMS review date`)
     const semanticDates = [...reviewed[1][1].matchAll(/<time\b[^>]*dateTime="([^"]+)"/gi)].map(match => match[1])
     assert.deepEqual(semanticDates, [reviewDate], `${row.slug}: semantic review date must agree`)
   }

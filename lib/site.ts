@@ -2,9 +2,9 @@ export const site = {
   name: 'Doefin',
   url: 'https://doefin.com',
   appUrl: 'https://www.doefin.com/app/markets',
-  tagline: 'Bitcoin mining difficulty, forecast honestly.',
+  tagline: 'Trade and hedge Bitcoin hashrate exposure',
   description:
-    'Educational documentation, calculators and illustrative examples for understanding Bitcoin mining difficulty and evaluating related markets.',
+    'Doefin provides markets for trading and hedging Bitcoin hashrate exposure. Documentation, calculators and illustrative examples on mining difficulty.',
   entity: 'Doefin',
   /** Retained legal-page prototype values; unverified and excluded from shared metadata. */
   legalName: 'Doefin',

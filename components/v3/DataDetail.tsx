@@ -61,6 +61,7 @@ export function DataRange({ low, high, forecast, outcome, id }: { low: number; h
 export function DataSeries({ metric }: { metric: 'difficultyT' | 'hashrateEH' }) {
   const isDifficulty = metric === 'difficultyT'
   const unit = isDifficulty ? 'T' : 'EH/s'
+  const gap = isDifficulty ? '' : ' '
   const max = isDifficulty ? 140 : 1000
   const value = (n: number) => isDifficulty ? n.toFixed(2) : int(n)
   const y = (n: number) => 240 - (n / max) * 240
@@ -72,11 +73,11 @@ export function DataSeries({ metric }: { metric: 'difficultyT' | 'hashrateEH' })
   return <div className="overflow-hidden rounded-panel border border-white/10 bg-surface/20">
     <figure className="p-5 sm:p-7">
       <div className="flex flex-wrap items-start justify-between gap-3"><figcaption className="text-sm font-bold">{title}</figcaption><span className="tabular text-[10px] font-bold uppercase tracking-wider text-caution">Authored data · {networkSeries.length} points</span></div>
-      <p className="tabular mt-3 text-xl font-bold tracking-tight text-highlight">{value(first[metric])} → {value(last[metric])} <span className="text-sm font-semibold">{unit}</span></p>
+      <p className="tabular mt-3 text-xl font-bold tracking-tight text-highlight">{value(first[metric])} → {value(last[metric])}{gap}<span className="text-sm font-semibold">{unit}</span></p>
       <p className="mt-2 text-xs leading-relaxed text-subtle">{isDifficulty ? 'Difficulty changes in discrete steps; the line steps between the supplied example points.' : 'These values are derived from the series’ difficulty using the ten-minute target. They are not independent observations of hashrate.'} Vertical axis starts at zero.</p>
       <div className="mt-7 grid grid-cols-[3rem_minmax(0,1fr)] gap-3">
         <div className="tabular flex h-48 flex-col justify-between text-right text-[11px] text-subtle sm:h-56"><span>{int(max)}</span><span>{int(max / 2)}</span><span>0</span></div>
-        <div className="min-w-0"><svg viewBox="0 0 1000 240" preserveAspectRatio="none" role="img" aria-label={`${title}. ${networkSeries.length} points from ${first.date} to ${last.date}. Starts at ${value(first[metric])} ${unit}, ends at ${value(last[metric])} ${unit}. All values are available in the following table.`} className="h-48 w-full overflow-visible sm:h-56">
+        <div className="min-w-0"><svg viewBox="0 0 1000 240" preserveAspectRatio="none" role="img" aria-label={`${title}. ${networkSeries.length} points from ${first.date} to ${last.date}. Starts at ${value(first[metric])}${gap}${unit}, ends at ${value(last[metric])}${gap}${unit}. All values are available in the following table.`} className="h-48 w-full overflow-visible sm:h-56">
           {[0, 120, 240].map(y => <line key={y} x1="0" y1={y} x2="1000" y2={y} className="stroke-white/10" strokeWidth="1" vectorEffect="non-scaling-stroke" />)}
           <path d={path} fill="none" className="stroke-chart" strokeWidth="2.5" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
         </svg><div className="tabular mt-3 flex justify-between gap-3 text-[11px] text-subtle"><time dateTime={first.date}>{dateShort(first.date)}</time><time dateTime={last.date}>{dateShort(last.date)}</time></div></div>
@@ -84,7 +85,7 @@ export function DataSeries({ metric }: { metric: 'difficultyT' | 'hashrateEH' })
       <p className="mt-4 text-xs leading-[1.8] text-subtle">Unit: {unit === 'T' ? 'T, meaning trillion' : 'EH/s, exahashes per second'}. This is a separate synthetic series, not a verified year of network history or a continuation of the snapshot above.</p>
     </figure>
     <details className="border-t border-white/10"><summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-sm font-semibold text-highlight sm:px-7 [&::-webkit-details-marker]:hidden">Inspect all {networkSeries.length} source rows<span aria-hidden="true">＋</span></summary><div>
-      <table className={`${styles.seriesTable} tabular w-full text-left text-sm`}><caption className="sr-only">All values for the synthetic {isDifficulty ? 'difficulty' : 'implied hashrate'} chart. Dates and heights belong to the example fixture.</caption><thead className="bg-ink/25 text-xs text-subtle"><tr><th scope="col">Example date</th><th scope="col">Block</th><th scope="col">{isDifficulty ? 'Difficulty (T)' : 'Implied hashrate (EH/s)'}</th></tr></thead><tbody>{networkSeries.map(point => <tr key={point.height}><th scope="row"><time dateTime={point.date}>{dateShort(point.date)}</time></th><td><span className={styles.mobileLabel}>Block</span>{int(point.height)}</td><td><span className={styles.mobileLabel}>{isDifficulty ? 'Difficulty' : 'Implied hashrate'}</span>{value(point[metric])} {unit}</td></tr>)}</tbody></table>
+      <table className={`${styles.seriesTable} tabular w-full text-left text-sm`}><caption className="sr-only">All values for the synthetic {isDifficulty ? 'difficulty' : 'implied hashrate'} chart. Dates and heights belong to the example.</caption><thead className="bg-ink/25 text-xs text-subtle"><tr><th scope="col">Example date</th><th scope="col">Block</th><th scope="col">{isDifficulty ? 'Difficulty (T)' : 'Implied hashrate (EH/s)'}</th></tr></thead><tbody>{networkSeries.map(point => <tr key={point.height}><th scope="row"><time dateTime={point.date}>{dateShort(point.date)}</time></th><td><span className={styles.mobileLabel}>Block</span>{int(point.height)}</td><td><span className={styles.mobileLabel}>{isDifficulty ? 'Difficulty' : 'Implied hashrate'}</span>{value(point[metric])}{gap}{unit}</td></tr>)}</tbody></table>
     </div></details>
   </div>
 }

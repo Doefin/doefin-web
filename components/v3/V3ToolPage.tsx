@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 const tools = [
   { slug: 'difficulty-exposure', name: 'Difficulty exposure', detail: 'Production sensitivity' },
-  { slug: 'hosting-effective-rate', name: 'Hosting comparison', detail: 'True cost of power' },
+  { slug: 'hosting-effective-rate', name: 'Hosting comparison', detail: 'Effective cost of power' },
   { slug: 'fleet-payback', name: 'Fleet payback', detail: 'Capital recovery' },
 ]
 
@@ -45,7 +45,7 @@ export default async function V3ToolPage({ params }: { params: Promise<{ slug: s
     </nav>
     <div className="mb-5 flex flex-wrap items-start justify-between gap-x-8 gap-y-3 border-l-2 border-brand pl-4 text-xs leading-relaxed text-subtle">
       <p className="max-w-xl"><strong className="font-semibold text-body">{tool.use}</strong><br />{tool.limit}</p>
-      <p className="sm:max-w-xs">Illustrative — not live data.<br />Type a value and press Enter, or drag a slider. Your inputs are saved in the page URL.</p>
+      <p className="sm:max-w-xs">Illustrative. Not live data.<br />Type a value and press Enter, or drag a slider. Your inputs are saved in the page URL.</p>
     </div>
     <PreviewCalculator slug={slug} />
     <details className="mt-7 rounded-panel border border-white/10 bg-surface/40 p-5">
@@ -63,6 +63,6 @@ export default async function V3ToolPage({ params }: { params: Promise<{ slug: s
     </section>
     <RelatedContent learning={tool.learning} action={slug === 'difficulty-exposure'
       ? { href: preview.payback, title: 'Test the wider payback picture', text: 'Explore power costs and capital recovery separately.' }
-      : { href: preview.exposure, title: 'Isolate difficulty exposure', text: 'Compare BTC production across two difficulty scenarios.' }} />
+      : { href: preview.exposure, title: 'Isolate difficulty exposure', text: 'Compare expected BTC production across two difficulty scenarios.' }} />
   </Container></GuidesPublicationProvider>
 }

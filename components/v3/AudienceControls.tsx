@@ -11,7 +11,7 @@ export function TokenChip({ currency, compact = false }: { currency: string; com
 }
 
 export function OutcomeChip({ side }: { side: 'yes' | 'no' }) {
-  return <span className={styles.outcome} data-outcome={side}>{side.toUpperCase()}</span>
+  return <span className={styles.outcome} data-outcome={side}>{side === 'yes' ? 'Yes' : 'No'}</span>
 }
 
 export function CollateralSelect({ value, currencies, onChange, disabled = false }: { value: string; currencies: string[]; onChange: (value: string) => void; disabled?: boolean }) {

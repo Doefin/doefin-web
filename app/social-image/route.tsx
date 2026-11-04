@@ -13,8 +13,8 @@ export function GET() {
         Doefin
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', marginTop: 76 }}>
-        <div style={{ fontSize: 64, fontWeight: 700, letterSpacing: -4 }}>Bitcoin difficulty markets.</div>
-        <div style={{ fontSize: 42, marginTop: 18, color: colors.highlight }}>Understand the market. Review the details.</div>
+        <div style={{ fontSize: 64, fontWeight: 700, letterSpacing: -4 }}>Trade and hedge Bitcoin hashrate exposure</div>
+        <div style={{ fontSize: 42, marginTop: 18, color: colors.highlight }}>through markets on mining difficulty.</div>
       </div>
       <div style={{ display: 'flex', marginTop: 'auto', paddingTop: 28, borderTop: `1px solid ${colors.active}`, color: colors.subtle, fontSize: 24 }}>
         Educational prototype · Illustrative examples

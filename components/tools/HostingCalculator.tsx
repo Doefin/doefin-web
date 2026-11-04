@@ -112,7 +112,7 @@ export function HostingCalculator({ enhanced = false, nextStep }: {
                 hint={hintFor(SLUG, f.label)}
               />))}
             </InputSection>
-            <InputSection number="02" title="Availability & pool" description="Account for lost hours and the share of revenue retained.">
+            <InputSection number="02" title="Availability & pool" description="Account for lost hours and the pool’s share of revenue.">
               {FIELDS.slice(3).map(f => (<Slider
                 key={f.key}
                 id={f.key}
@@ -160,7 +160,7 @@ export function HostingCalculator({ enhanced = false, nextStep }: {
             ${num(out.afterPool)}
           </p>
           <p className="tabular mt-1 text-sm text-muted">
-            per kWh — {out.upliftPct.toFixed(0)}% above the advertised ${num(v.rate, 3)}
+            per kWh, {out.upliftPct.toFixed(0)}% above the advertised ${num(v.rate, 3)}
           </p>
           {resultHintFor(SLUG, '% above the advertised rate') ? (
             <Hint label="What this means">
@@ -172,15 +172,13 @@ export function HostingCalculator({ enhanced = false, nextStep }: {
             {out.upliftPct < 10 ? (
               <>
                 You lose about {out.lostHoursWeek.toFixed(0)} hours a week, so ${num(v.rate, 3)} becomes{' '}
-                <strong>${num(out.afterPool, 3)}</strong>. That is close to the quote — at this level the
-                headline rate is roughly honest.
+                <strong>${num(out.afterPool, 3)}</strong>. That is close to the quoted rate.
               </>
             ) : (
               <>
-                You pay for all 168 hours a week and earn in about{' '}
-                {(168 - out.lostHoursWeek).toFixed(0)} of them. That is what turns ${num(v.rate, 3)} into{' '}
-                <strong>${num(out.afterPool, 3)}</strong> — {out.upliftPct.toFixed(0)}% more than you were
-                quoted.
+                You pay for all 168 hours a week and your machines run in about{' '}
+                {(168 - out.lostHoursWeek).toFixed(0)} of them. With the pool fee, that turns ${num(v.rate, 3)} into{' '}
+                <strong>${num(out.afterPool, 3)}</strong>, {out.upliftPct.toFixed(0)}% above the quoted rate.
               </>
             )}
           </Readout>

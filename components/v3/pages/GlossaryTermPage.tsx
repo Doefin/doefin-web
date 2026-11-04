@@ -7,7 +7,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const t = await getGlossary(slug)
   if (!t) return {}
   return seo({
-    title: `${t.term} — definition`,
+    title: `${t.term}: definition`,
     description: t.shortDef,
     path: `/glossary/${t.slug}`,
   })

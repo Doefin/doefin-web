@@ -7,7 +7,7 @@ import Link from '@/components/routing/SiteLink'
  */
 export function Logo({ className = 'w-[104px]', href = '/' }: { className?: string; href?: string }) {
   return (
-    <Link href={href} aria-label="Doefin — home" className="inline-flex shrink-0 items-center">
+    <Link href={href} aria-label="Doefin home" className="inline-flex shrink-0 items-center">
       <Image
         src="/images/logo/logo-white.png"
         alt="Doefin"
