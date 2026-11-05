@@ -32,25 +32,31 @@ literals in all 28 edited source files. A separate comparison confirmed unchange
 numeric text in every before/after pair. Routes, links, formulas and layout were
 preserved. Copy length changes were checked in the rendered page.
 
-## CMS: proposed, not applied
+## CMS: saved as verified drafts
 
-The read-only CLI request returned HTTP 403. Fardin's signed-in Chrome Studio
-session reported that it could not reach Sanity servers, including after one
-retry. No draft was written, discarded or published, and no access setting was
-changed.
+The earlier CLI HTTP 403 and Studio connection error were retried using Fardin's
+Chrome profile. Studio access worked, and all 18 edits were saved across 14
+documents: 12 existing drafts updated and two new drafts created. About and Block
+subsidy were not opened or edited. No document was published or discarded, and no
+access setting was changed.
 
-18 further edits are prepared in
+Each current source was read by document ID through the Raw JSON inspector. All
+18 expected passages matched at their recorded paths. Every saved draft was
+compared with its expected complete document, excluding CMS system metadata, then
+reloaded and read again. Slugs, keys, section anchors, references, review and
+publication dates, and unrelated content were preserved. All 14 published IDs and
+revisions were checked in Studio's published view and remained unchanged.
+
+Before saving, one erroneous proposal was corrected: the collateral-approval
+paragraph had duplicated the definition. Its intended approval/support warning
+was restored before any CMS write.
+
+The exact applied text and verification status are in
 [`humanise-cms-proposals-2026-11-05.json`](humanise-cms-proposals-2026-11-05.json).
-These include the duplicated "The Use the app guides" phrase in the prepared
-overview, dense explanation in the probability and collateral docs, and research
-and calculator-guide wording. Their before-text comes from the prepared rewrite
-plan, not a fresh read of current drafts. The recorded paths are hints: prior cuts
-may have shifted array positions.
-
-Once Studio access works, read each current draft by document ID, locate the
-expected text and apply only matching changes. Preserve editor work, all unrelated
-fields and the reserved documents. Do not use the published-document draft writer
-to overwrite existing drafts. Do not publish.
+The per-document revision audit is
+[`humanise-cms-draft-audit-2026-11-05.json`](humanise-cms-draft-audit-2026-11-05.json).
+Do not rerun a bulk writer from these files. Review current drafts in Studio and
+keep publishing on hold.
 
 ## Checks and evidence limits
 
@@ -69,16 +75,17 @@ to overwrite existing drafts. Do not publish.
   planner have no horizontal overflow at 1440px or 390px.
 - These runtime and browser checks use isolated CMS and market fixtures in ignored
   local validation files. They do not verify current Sanity drafts, live data or
-  a deployed preview.
+  a deployed preview. The separate Studio audit above verifies draft persistence
+  and unchanged published revisions.
 
-The brand's Python checker on the 124 revised source passages and 18 CMS proposals
+The brand's Python checker on the 124 revised source passages and 18 CMS draft edits
 reports **zero CUT, zero STYLE and three CHECK matches**. The CHECK passages are:
 
 | Location | Exact text or context | Decision |
 |---|---|---|
 | `lib/scenario-brief.ts`, assumptions | A production difference is not a hedge size, contract payout, trading profit or recommendation. Assess the contract terms and settlement separately. | Keep the risk distinction; send to Matteo. |
 | `components/v3/V3ToolsIndex.tsx`, closing note | Each calculator starts with example inputs, not live data. Enter your own numbers. The page URL saves the scenario so you can return to it or share it. | Keep. "Return" means reopening a page, not an investment return. |
-| CMS proposal, managing positions | Splitting creates both sides together. It does not choose a direction or create a profit. | Keep the warning; confirm against the current draft before editing and send to Matteo. |
+| CMS draft, managing positions | Splitting creates both sides together. It does not choose a direction or create a profit. | Keep the warning; it was verified in the saved draft and remains for Matteo. |
 
 The repository brand guard, covering the entire PR since `origin/main`, passes
 with **zero CUT, 13 CHECK and five STYLE matches**. The other CHECK matches remain
@@ -103,6 +110,6 @@ research/performance claims and legal/access/privacy wording. The prior factual
 questions and publication hold remain in
 [`brand-copy-integration-2026-11-04.md`](brand-copy-integration-2026-11-04.md).
 
-The remaining CMS work is blocked on current Studio access. The source changes
-and proposals are ready for Fardin's review; the whole website/CMS pass is not
-fully applied. Nothing is merged or published by this task.
+All 18 CMS edits are now verified drafts. The source changes and saved drafts are
+ready for Fardin's reading before team review. Nothing is merged or published by
+this task.
