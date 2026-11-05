@@ -1,5 +1,8 @@
 # Brand copy integration, 4 Nov 2026
 
+For the subsequent editorial pass, its source changes and the CMS connection
+blocker, see [Website editorial pass, 5 Nov 2026](humanise-review-2026-11-05.md).
+
 The prepared copy on `copy/matteo-v3-review` is reconciled with current `main`.
 The wording comes from the existing review and rewrite, rather than a new rewrite.
 The guide is [Doefin brand and voice: how to use it](https://claude.ai/artifact/FuYM8YKchEqBNoT1fzUjCo#91003157-ee4a).

@@ -122,7 +122,7 @@ export default async function V3ToolsIndex() {
           <figcaption className="flex flex-wrap items-center justify-between gap-2"><span className="text-xs font-semibold">Follow the capital</span><span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-subtle">Model logic</span></figcaption>
           <ol className="relative mt-5 space-y-0">
             {[
-              { label: 'Start with the outlay', text: 'The fleet begins below zero by its upfront cost.', sign: '−' },
+              { label: 'Start with the outlay', text: 'The starting cash balance is minus the upfront cost.', sign: '−' },
               { label: 'Add revenue, subtract power', text: 'Repeat each month as difficulty changes.', sign: '±' },
               { label: 'Find the recovery point', text: 'Payback is the first month cumulative cash reaches zero.', sign: '=' },
             ].map((step, i) => <li key={step.label} className={`flex gap-3 ${i < 2 ? 'pb-4' : ''}`}><span aria-hidden="true" className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-active/35 text-base font-bold text-highlight">{step.sign}</span><div><p className="text-xs font-bold">{step.label}</p><p className="mt-1 text-[11px] leading-[1.7] text-subtle">{step.text}</p></div></li>)}
@@ -134,7 +134,7 @@ export default async function V3ToolsIndex() {
     </div>
 
     <aside aria-labelledby="tools-note-title" className="mt-8 grid gap-5 border-y border-white/10 py-6 sm:mt-10 sm:grid-cols-[1fr_1fr] sm:gap-12 sm:py-7">
-      <div><h2 id="tools-note-title" className="text-sm font-bold">Use your own assumptions.</h2><p className="mt-2 max-w-xl text-xs leading-[1.9] text-subtle">Each calculator starts with illustrative inputs, not live data. Replace them with your own numbers; the page URL keeps the scenario so you can return to it or share it.</p></div>
+      <div><h2 id="tools-note-title" className="text-sm font-bold">Use your own assumptions.</h2><p className="mt-2 max-w-xl text-xs leading-[1.9] text-subtle">Each calculator starts with example inputs, not live data. Enter your own numbers. The page URL saves the scenario so you can return to it or share it.</p></div>
       <div><p className="text-sm font-bold">Production and contract settlement are different.</p><p className="mt-2 text-xs leading-[1.9] text-subtle">A BTC production change is not a contract payout or an order size.</p><Link href="/product/settlement" className={`mt-2 inline-flex min-h-10 items-center gap-3 text-xs font-semibold text-highlight hover:underline ${focus}`}>Read how settlement works<Arrow className="h-4 w-4" /></Link></div>
     </aside>
   </Container></GuidesPublicationProvider>

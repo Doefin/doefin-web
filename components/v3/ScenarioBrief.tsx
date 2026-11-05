@@ -78,7 +78,7 @@ export function ScenarioBrief({ inputs }: { inputs: ExposureInputs }) {
     <div className="flex flex-wrap items-start justify-between gap-4 px-5 py-6 sm:px-7">
       <div className="flex items-start gap-3">
         <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-brand/25 bg-brand/10 text-highlight"><BriefIcon kind="document" /></span>
-        <div><h2 id="scenario-brief-heading" className="text-xl font-bold tracking-[-0.02em]">Scenario brief</h2><p className="mt-1.5 max-w-xl text-sm leading-relaxed text-subtle">Your inputs and results, ready for a team review.</p></div>
+        <div><h2 id="scenario-brief-heading" className="text-xl font-bold tracking-[-0.02em]">Scenario brief</h2><p className="mt-1.5 max-w-xl text-sm leading-relaxed text-subtle">Share your assumptions and results with your team.</p></div>
       </div>
       <span className="self-center rounded-full border border-white/10 px-3 py-1.5 text-[11px] text-subtle">Updates with your inputs</span>
     </div>
@@ -103,7 +103,7 @@ export function ScenarioBrief({ inputs }: { inputs: ExposureInputs }) {
         <button type="button" onClick={() => downloadBrief()} disabled={!brief.scenarioUrl} className={actionClass + ' border-brand bg-brand text-white hover:bg-brandDeep'}>
           <BriefIcon kind="download" /><span className="min-w-0 flex-1"><span className="block text-sm font-bold">Download brief</span><span className="mt-1 block text-xs text-white/80">HTML document · print or save as PDF</span></span><span aria-hidden>↓</span>
         </button>
-        <button type="button" onClick={() => downloadBrief(true)} disabled={!brief.scenarioUrl} className={actionClass + ' mt-3 border-white/15 bg-ink/20 text-body hover:border-brand/50 hover:bg-brand/5'}><BriefIcon kind="document" className="text-highlight" /><span className="min-w-0 flex-1"><span className="block text-sm font-semibold">Download concise review</span><span className="mt-1 block text-xs text-subtle">Condensed inputs, results and approval questions</span></span><span aria-hidden>↓</span></button>
+        <button type="button" onClick={() => downloadBrief(true)} disabled={!brief.scenarioUrl} className={actionClass + ' mt-3 border-white/15 bg-ink/20 text-body hover:border-brand/50 hover:bg-brand/5'}><BriefIcon kind="document" className="text-highlight" /><span className="min-w-0 flex-1"><span className="block text-sm font-semibold">Download concise review</span><span className="mt-1 block text-xs text-subtle">A short version with inputs, results and approval questions</span></span><span aria-hidden>↓</span></button>
         <button type="button" onClick={copyScenario} disabled={!brief.scenarioUrl} className={actionClass + ' mt-3 border-white/15 bg-ink/20 text-body hover:border-brand/50 hover:bg-brand/5'}>
           <BriefIcon kind="link" className="text-highlight" /><span className="min-w-0 flex-1"><span className="block text-sm font-semibold">{copyStatus === 'copied' ? 'Scenario link copied' : 'Copy scenario link'}</span><span className="mt-1 block text-xs text-subtle">Reopen these calculator inputs</span></span><span aria-hidden className="text-highlight">{copyStatus === 'copied' ? '✓' : '↗'}</span>
         </button>
@@ -128,7 +128,7 @@ export function ScenarioBrief({ inputs }: { inputs: ExposureInputs }) {
 
     <details className="group border-t border-white/[0.07] px-5 py-4 sm:px-7" data-brief-context>
       <summary className="flex min-h-8 cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold [&::-webkit-details-marker]:hidden"><span>Add discussion notes <span className="ml-1 text-xs font-normal text-subtle">{brief.contextRows.length ? `${brief.contextRows.length} added` : 'Optional'}</span></span><span aria-hidden className="text-lg text-highlight group-open:rotate-45">+</span></summary>
-      <p id="scenario-context-disclosure" className="mt-3 max-w-2xl text-xs leading-relaxed text-subtle">Context stays in this browser session and clears when you reload or leave this page. It is included in downloads and email drafts you choose to create, but never in the copied scenario link.</p>
+      <p id="scenario-context-disclosure" className="mt-3 max-w-2xl text-xs leading-relaxed text-subtle">Your notes stay in this browser session and clear when you reload or leave this page. Downloads and email drafts you create include them. The copied scenario link never includes them.</p>
       <div className="mt-5 grid items-start gap-4 sm:grid-cols-2">
         {scenarioContextFields.map(field => {
           const id = `scenario-context-${field.key}`

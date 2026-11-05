@@ -31,13 +31,13 @@ export type ToolMicro = {
 export const TOOL_MICRO: Record<string, ToolMicro> = {
   "hosting-effective-rate": {
     "blurb": "Compare an advertised hosting rate with fees and paid lost hours. The final figure is an equivalent cost, not profit.",
-    "useIf": "you own hosted machines and pay booked capacity during lost hours",
+    "useIf": "you own hosted machines and pay for booked capacity during lost hours",
     "notFor": "energy-only billing, hosting fee income or a complete profitability model",
     "steps": [
         "Check the billing agreement and your invoices.",
         "Enter the rate and separate percentage fees.",
-        "Set distinct paid downtime and curtailment assumptions.",
-        "Compare absolute final costs under consistent assumptions."
+        "Enter paid downtime and curtailment separately.",
+        "Compare the final costs using the same assumptions."
     ],
     "inputHints": [
         {
@@ -60,7 +60,7 @@ export const TOOL_MICRO: Record<string, ToolMicro> = {
         },
         {
             "label": "Unplanned downtime",
-            "means": "Lost hours that remain payable, separate from curtailment.",
+            "means": "Downtime you still pay for. Enter curtailment separately.",
             "whereToFind": "Pool and billing records for the same period. Never count an hour twice.",
             "typical": "Sample 4%; supported input 0–30%."
         },
@@ -72,7 +72,7 @@ export const TOOL_MICRO: Record<string, ToolMicro> = {
         },
         {
             "label": "Pool fee",
-            "means": "A revenue percentage converted into an equivalent cost adjustment.",
+            "means": "The share of revenue paid to the pool, converted into an equivalent cost.",
             "whereToFind": "Your pool terms. This is not an actual electricity invoice charge.",
             "typical": "Sample 2%; supported input 0–30%."
         }
@@ -88,7 +88,7 @@ export const TOOL_MICRO: Record<string, ToolMicro> = {
         },
         {
             "figure": "After lost hours",
-            "hint": "Adjusted cost divided by the productive-hours fraction. It assumes booked capacity remains payable while idle."
+            "hint": "Adjusted cost divided by the share of productive hours. You are assumed to pay for booked capacity even while idle."
         },
         {
             "figure": "% above the advertised rate",
@@ -146,20 +146,20 @@ export const TOOL_MICRO: Record<string, ToolMicro> = {
     "notFor": "fee-only hosting income or a complete cost, profit or contract model",
     "steps": [
         "Enter expected average hashrate in EH/s.",
-        "Choose a modelled horizon and check starting difficulty.",
+        "Choose the production period and check starting difficulty.",
         "Set your own easier and harder difficulty scenarios.",
         "Compare production; the spread is not a loss."
     ],
     "inputHints": [
         {
             "label": "Hashrate",
-            "means": "Expected average fleet hashrate. One EH/s equals 1,000,000 TH/s.",
+            "means": "Your fleet’s expected average hashrate. One EH/s equals 1,000,000 TH/s.",
             "whereToFind": "Pool records; account for future changes without deducting downtime already included in your average.",
             "typical": "0.01–30 EH/s is the supported input range."
         },
         {
             "label": "How far ahead",
-            "means": "A fixed-duration comparison, using approximately two weeks per modelled epoch.",
+            "means": "The comparison period, using approximately two weeks per modelled epoch.",
             "whereToFind": "Choose the period you want to compare; actual epoch dates can differ.",
             "typical": "1–13 modelled epochs, approximately 2–26 weeks."
         },
@@ -195,7 +195,7 @@ export const TOOL_MICRO: Record<string, ToolMicro> = {
         },
         {
             "figure": "Worst case vs today",
-            "hint": "Expected BTC production below the unchanged baseline in your harder scenario. No operating costs, contract payout or trade recommendation are included."
+            "hint": "How much less BTC the harder case produces than the unchanged-difficulty case. Excludes operating costs, contract payout and trade recommendations."
         },
         {
             "figure": "Production at current difficulty",
@@ -251,7 +251,7 @@ export const TOOL_MICRO: Record<string, ToolMicro> = {
         "The spread between scenarios is not a loss. Compare the harder case with unchanged difficulty separately.",
         "Defaults are illustrative, not live or forecast inputs. Set scenarios for the whole horizon.",
         "Each scenario applies its difficulty from the start. A gradual path produces different results.",
-        "The fixed subsidy, constant hashrate and target block timing omit subsidy changes, pool fees and operating costs."
+        "The model fixes subsidy, hashrate and target block timing. It excludes subsidy changes, pool fees and operating costs."
     ]
 },
   "fleet-payback": {
@@ -260,9 +260,9 @@ export const TOOL_MICRO: Record<string, ToolMicro> = {
     "notFor": "fee-only hosting income, bought hashrate or a complete investment valuation",
     "steps": [
         "Check starting difficulty and the modelled horizon.",
-        "Enter consistent fleet, efficiency, power and outlay assumptions.",
+        "Enter fleet, efficiency, power and outlay figures for the same scenario.",
         "Choose your BTC price and difficulty-growth scenarios.",
-        "Compare all rows, final balances and omitted costs."
+        "Compare final balances across scenarios and check the costs left out."
     ],
     "inputHints": [
         {
@@ -286,7 +286,7 @@ export const TOOL_MICRO: Record<string, ToolMicro> = {
         {
             "label": "What you paid up front",
             "means": "The modelled initial outlay. It is independent of fleet hashrate.",
-            "whereToFind": "Invoices or a stated scenario amount. This page does not validate equipment prices.",
+            "whereToFind": "Use your invoices or a clearly stated example amount. This page does not check equipment prices.",
             "typical": "Sample $20,000; supported input $5,000–$2,000,000."
         },
         {
@@ -297,7 +297,7 @@ export const TOOL_MICRO: Record<string, ToolMicro> = {
         },
         {
             "label": "Difficulty growth guess",
-            "means": "A compounded monthly assumption, first applied before month-one production.",
+            "means": "A monthly growth rate that compounds. The first increase applies before month-one production.",
             "whereToFind": "Choose a sensitivity assumption. The sample is not a forecast.",
             "typical": "Sample 1.5% monthly; central input supports 0–8%."
         }
@@ -313,7 +313,7 @@ export const TOOL_MICRO: Record<string, ToolMicro> = {
         },
         {
             "figure": "Cash after 48 months",
-            "hint": "Modelled revenue minus power cost and initial outlay. A negative balance cannot establish whether payback ever happens later."
+            "hint": "Revenue minus power cost and initial outlay in the model. A negative balance does not tell you whether payback could happen later."
         },
         {
             "figure": "Power cost per day",

@@ -2,14 +2,14 @@ import { calculateExposure, exposureBounds, exposureDefaults, type ExposureInput
 import { readToolQuery, toolQuery } from './tool-url-state'
 
 export const scenarioAssumptions = [
-  'Fixed duration: 2,016 target block intervals (about two weeks) per epoch. Each scenario holds difficulty constant for that duration.',
+  'Each modelled epoch lasts 2,016 target block intervals, about two weeks. Difficulty stays fixed within each scenario for that period.',
   'Fleet hashrate, BTC price and expected fees stay constant. Block subsidy is 3.125 BTC; network hashrate is implied by starting difficulty and the 10-minute target.',
 ] as const
 
 export const scenarioLimitations = [
   'Illustrative sensitivity calculation, not live data or a difficulty forecast. Selected cases have no assigned probability.',
   'Excludes uptime, pool fees, operating costs, changes in fleet capacity and subsidy changes. USD figures use the chosen BTC price.',
-  'Production differences are not a hedge size, contract payout, trading profit or recommendation. Contract terms and settlement need a separate assessment.',
+  'A production difference is not a hedge size, contract payout, trading profit or recommendation. Assess the contract terms and settlement separately.',
 ] as const
 
 export const scenarioContextFields = [

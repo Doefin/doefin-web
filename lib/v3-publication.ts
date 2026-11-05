@@ -17,19 +17,19 @@ export const navigationGroups: readonly NavigationGroup[] = [
     { label: 'Difficulty exposure', href: '/tools/difficulty-exposure', description: 'Compare expected BTC production and prepare a team brief.' },
   ] },
   { label: 'Data & Research', items: [
-    { label: 'Data', href: '/data', description: 'Inspect data provenance, examples and limitations.' },
+    { label: 'Data', href: '/data', description: 'Check where the data comes from, with examples and limits.' },
     { label: 'Research', href: '/research', description: 'Read findings, methods and reproducible calculations.' },
     { label: 'Forecast evaluation', href: '/data/scoreboard', description: 'Compare errors and check the evidence status.' },
     { label: 'Methodology', href: '/methodology/difficulty-index', description: 'Understand how the difficulty estimate is constructed.' },
     { label: 'Newsletter', href: '/newsletter', description: 'Get market updates, trading activity and network hashrate insights.' },
   ] },
   { label: 'Learn', items: [
-    { label: 'Start learning', href: '/learn', description: 'Follow a practical, reproducible walkthrough.' },
+    { label: 'Start learning', href: '/learn', description: 'Follow a worked example and check the calculation.' },
     { label: 'Worked example', href: '/learn/difficulty-exposure', description: 'Connect difficulty to expected BTC production.' },
     { label: 'Academy', href: '/academy', description: 'Understand difficulty, hashprice and uncertainty.' },
     { label: 'Articles', href: '/blog', description: 'Read about mining assumptions and data.' },
     { label: 'Mining glossary', href: '/glossary', description: 'Look up factual network and operating definitions.' },
-    { label: 'All resources', href: '/resources', description: 'Find the complete reference library.' },
+    { label: 'All resources', href: '/resources', description: 'Find the guides, calculators and definitions.' },
   ] },
 ]
 

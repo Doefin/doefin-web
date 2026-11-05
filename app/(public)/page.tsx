@@ -42,10 +42,10 @@ export default function V3Home() {
         <div id="who-its-for" className="scroll-mt-28" data-reveal><p className="v37-eyebrow">Start with production</p><h2 id="production-title" className="v37-heading"><span id="audience-title" className="scroll-mt-28">Rising difficulty reduces expected production.</span></h2></div>
         <article className="v37-audience-card mt-7" data-reveal>
           <p className="v37-copy">Illustrative scenario: suppose your fixed hashrate would produce 1 BTC over a period at unchanged difficulty. If difficulty is 10% higher for that whole period, expected production is 1 ÷ 1.10 ≈ 0.909 BTC. That is about 0.091 BTC (9.09%) less.</p>
-          <p className="text-sm leading-relaxed text-subtle">This holds hashrate, uptime, block reward and other production assumptions constant. It is a sensitivity calculation, not a forecast or a suitable position size. Pool results, fees, power costs and BTC price require separate assumptions.</p>
+          <p className="text-sm leading-relaxed text-subtle">The example keeps hashrate, uptime, block reward and other production assumptions unchanged. It shows the effect of a difficulty change, not a forecast or a suitable position size. Pool results, fees, power costs and BTC price need separate assumptions.</p>
           <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1"><Link href="/tools/difficulty-exposure" data-v3-cta="calculator" data-v3-placement="scenario" className="v37-link">Try your numbers <Arrow /></Link><Link href="/product/settlement" data-v3-cta="settlement" data-v3-placement="scenario" className="v37-link">See how this relates to a contract <Arrow /></Link></div>
         </article>
-        <p className="v37-note">A Doefin position pays a fixed amount or nothing, depending on difficulty at its observation block. Its cost, size and timing determine how it relates to a production shortfall. It does not cover every mining risk.</p>
+        <p className="v37-note">A Doefin position pays a fixed amount or nothing, depending on difficulty at its observation block. Whether it offsets a production shortfall, and by how much, depends on its cost, size and timing. It does not cover every mining risk.</p>
       </Container>
     </section>
 
@@ -72,7 +72,7 @@ export default function V3Home() {
         <div className="v37-section-top" data-reveal><div><p className="v37-eyebrow">Get started or resume</p><h2 id="setup-title" className="v37-heading">Find the step you need.</h2></div><a href={site.appUrl} data-v3-cta="app" data-v3-placement="setup" className="v37-link">Enter app <Arrow diagonal /></a></div>
         <nav aria-label="Account and first-order guides" className="mt-7 grid gap-4 md:grid-cols-3" data-reveal>
           {[
-            { number: '1', title: 'Sign in', description: 'Review account access and wallet signing.', href: '/docs/connecting-a-wallet' },
+            { number: '1', title: 'Sign in', description: 'Check how to sign in and what your wallet will sign.', href: '/docs/connecting-a-wallet' },
             { number: '2', title: 'Get collateral', description: 'Check the token, network, destination and funding costs.', href: '/docs/getting-collateral' },
             { number: '3', title: 'Place your first trade', description: 'Check the market terms, price, amount and execution.', href: '/docs/your-first-trade' },
           ].map(item => <Link key={item.href} href={item.href} data-v3-cta="setup" data-v3-placement="setup" className="group rounded-panel border border-white/10 bg-surface/40 p-5 hover:border-brand/50"><p className="text-xs font-semibold text-subtle">Step {item.number}</p><h3 className="mt-3 text-lg font-semibold text-body group-hover:text-highlight">{item.title} <span aria-hidden="true">→</span></h3><p className="mt-2 text-sm leading-relaxed text-subtle">{item.description}</p></Link>)}
@@ -87,11 +87,11 @@ export default function V3Home() {
         <nav aria-label="Evidence and risk review" className="mt-7 grid gap-4 md:grid-cols-3" data-reveal>
           {[
             { title: 'About Doefin', description: 'Read what Doefin does and contact the team.', href: '/about', cta: 'evidence' },
-            { title: 'Technical review', description: 'Check what contract, deployment and audit evidence to request.', href: '/docs/smart-contracts', cta: 'evidence' },
-            { title: 'Risks and limitations', description: 'Review full loss, liquidity, collateral and technical dependencies.', href: '/docs/risks-and-limitations', cta: 'risk' },
+            { title: 'Technical review', description: 'Check which contract details, deployment records and audit evidence to request.', href: '/docs/smart-contracts', cta: 'evidence' },
+            { title: 'Risks and limitations', description: 'Understand the risk of losing your full payment, limited liquidity, collateral and technical failures.', href: '/docs/risks-and-limitations', cta: 'risk' },
           ].map(item => <Link key={item.href} href={item.href} data-v3-cta={item.cta} data-v3-placement="trust" className="group rounded-panel border border-white/10 bg-surface/40 p-5 hover:border-brand/50"><h3 className="text-lg font-semibold text-body group-hover:text-highlight">{item.title} <span aria-hidden="true">→</span></h3><p className="mt-2 text-sm leading-relaxed text-subtle">{item.description}</p></Link>)}
         </nav>
-        <p className="v37-note">Educational examples and synthetic research do not establish live forecasts, trading performance or an audit certification.</p>
+        <p className="v37-note">These examples and synthetic research are for learning. They do not demonstrate live forecasts, trading performance or an audit certification.</p>
       </Container>
     </section>
 

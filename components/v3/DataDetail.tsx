@@ -20,7 +20,7 @@ export function DataDetail({ title, summary, category, current, crumbs = [], chi
       <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-highlight">Data field guide / {category}</p>
       <h1 className="tabular mt-3 max-w-4xl text-balance text-[32px] font-extrabold leading-[1.13] tracking-[-0.035em] sm:text-[46px]">{title}</h1>
       <p className="mt-4 max-w-2xl text-[15px] leading-[1.8] text-subtle">{summary}</p>
-      <p className="mt-4 max-w-2xl border-l-2 border-caution/50 pl-3 text-xs leading-[1.8] text-subtle">{datasetNotice ?? <><strong className="font-semibold text-caution">Synthetic learning dataset.</strong> Figures, dates and outcomes are authored examples, not current network data or measured performance.</>}</p>
+      <p className="mt-4 max-w-2xl border-l-2 border-caution/50 pl-3 text-xs leading-[1.8] text-subtle">{datasetNotice ?? <><strong className="font-semibold text-caution">Synthetic learning dataset.</strong> The figures, dates and outcomes were created for these examples. They are not current network data or measured performance.</>}</p>
     </header>
     <nav aria-label="Data guides" className="mb-6 mt-6 flex flex-wrap gap-2 sm:mb-8">
       <Link href="/data" className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-white/10 px-3 text-xs font-semibold text-subtle hover:border-brand/40 hover:text-highlight">← Data library</Link>

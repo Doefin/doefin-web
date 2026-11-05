@@ -27,8 +27,8 @@ export default function Page() {
       <div className="mt-8">
         <Callout tone="caution" title="Awaiting legal drafting">
           <p>
-            This page exists so the site has no broken links and the layout can be reviewed. The
-            operative text must be drafted by counsel before launch.
+            This placeholder lets the page layout and links be reviewed. Counsel must draft the
+            final terms before launch.
           </p>
         </Callout>
       </div>

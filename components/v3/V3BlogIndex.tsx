@@ -35,7 +35,7 @@ export async function V3BlogIndex({ topic }: { topic?: EditorialTopic } = {}) {
       slug: article.slug, title: article.title, summary: article.summary, tags: article.tags, topics: article.topics,
       minutes: minutes(article), reviewedAt: article.reviewedAt ?? null, reviewedLabel: article.reviewedAt ? dateShort(article.reviewedAt) : null, cover: editorialCoverFor(article.slug),
     }))} />
-    <p className="mt-5 text-xs leading-relaxed text-subtle">Educational articles. These explain assumptions and interpretation; they do not report measured market performance.</p>
+    <p className="mt-5 text-xs leading-relaxed text-subtle">These articles explain mining assumptions and how to read the data. They do not report measured market performance.</p>
     <section aria-labelledby="reading-next" className="mt-10 border-t border-white/10 pt-7 sm:mt-12">
       <div className="mb-5 flex flex-wrap items-baseline justify-between gap-3"><h2 id="reading-next" className="text-xl font-bold tracking-tight">Take the next step.</h2><Link href="/resources" className="inline-flex min-h-10 items-center gap-2 text-xs font-semibold text-highlight hover:underline">All resources <Arrow className="h-4 w-4" /></Link></div>
       <div className="grid gap-4 sm:grid-cols-3">{[

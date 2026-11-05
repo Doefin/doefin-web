@@ -1,0 +1,157 @@
+{
+  "date": "2026-11-05",
+  "source": "prepared rewrite plan; current Studio drafts could not be read",
+  "status": "proposed_only_not_applied",
+  "blockedBy": "CLI returns HTTP 403; Studio reports it cannot reach Sanity servers",
+  "reservedDocuments": [
+    "about-doefin",
+    "glossary-block-subsidy"
+  ],
+  "instructions": "Read current draft by ID before editing. Locate expected text in its actual current structure; originalPathHint comes from the historical plan and array positions may have shifted after cuts. Preserve all other draft content and active-editor work. Do not feed this file to the published-document draft writer. Do not publish.",
+  "proposals": [
+    {
+      "documentId": "docs-overview",
+      "originalPathHint": "sections[_key==\"section-2\"].paragraphs[1]",
+      "expectedPreparedText": "The Use the app guides cover sign-in, funding, orders and account actions. Reference pages define the terms and explain what evidence to check. The calculators are optional: use them to explore your own assumptions.",
+      "proposedText": "The app guides cover signing in, funding, orders and account actions. Reference pages explain the terms and the evidence to check. Use the optional calculators to explore your own assumptions.",
+      "reason": "Fix the duplicated “The Use the app” wording and make the reading path direct (E25, habit 5).",
+      "status": "pending_current_draft_inspection"
+    },
+    {
+      "documentId": "docs-overview",
+      "originalPathHint": "sections[_key==\"section-0\"].paragraphs[1]",
+      "expectedPreparedText": "Each market has its own threshold, observation block, outcome sides and collateral token. Read that specification before you interpret a price or place an order.",
+      "proposedText": "Each market has its own threshold, observation block, outcome sides and collateral token. Check those details before reading a price or placing an order.",
+      "reason": "Replace an abstract specification instruction with the actual details to check (habit 5).",
+      "status": "pending_current_draft_inspection"
+    },
+    {
+      "documentId": "docs-collateral-tokens",
+      "originalPathHint": "sections[_key==\"section-0\"].paragraphs[0]",
+      "expectedPreparedText": "Collateral is the asset used to fund a position and denominate its payout. Check the collateral listed for the specific market and the supported-token list in Funds. This guide does not maintain a live token list.",
+      "proposedText": "Collateral is the asset you use to fund a position. Its payout is in the same asset. Check the token listed for your market and the supported-token list in Funds. This guide does not keep a live token list.",
+      "reason": "Explain denomination without adding a supported-token claim (habit 10).",
+      "status": "pending_current_draft_inspection"
+    },
+    {
+      "documentId": "docs-collateral-tokens",
+      "originalPathHint": "sections[_key==\"section-2\"].paragraphs[0]",
+      "expectedPreparedText": "The app may request account setup or token approvals before an action can proceed. Review the scope presented in the current confirmation. A previous approval for one token does not establish support for a different token or contract.",
+      "proposedText": "Collateral is the asset you use to fund a position. Its payout is in the same asset. Check the token listed for your market and the supported-token list in Funds. This guide does not keep a live token list.",
+      "reason": "Use direct actions while keeping the approval and support limits (E25).",
+      "status": "pending_current_draft_inspection"
+    },
+    {
+      "documentId": "docs-managing-positions",
+      "originalPathHint": "sections[_key==\"section-1\"].paragraphs[1]",
+      "expectedPreparedText": "Splitting creates both sides together. It does not itself select a directional view or create a profit. Check the market and collateral when reviewing a merge, because shares from different markets or collateral pools are not interchangeable pairs.",
+      "proposedText": "Splitting creates both sides together. It does not choose a direction or create a profit. Before merging, check the market and collateral: shares from different markets or collateral pools cannot be paired.",
+      "reason": "Remove indirect phrasing while keeping every split/merge qualification (habits 3, 4).",
+      "status": "pending_current_draft_inspection"
+    },
+    {
+      "documentId": "docs-market-vs-limit-orders",
+      "originalPathHint": "sections[_key==\"section-2\"].paragraphs[0]",
+      "expectedPreparedText": "Compare outcome, direction, collateral, amount, average or limit price, fees and expiry. The same outcome in a different collateral token is a different instrument for funding and redemption.",
+      "proposedText": "Compare the outcome, buy or sell direction, collateral, amount, average or limit price, fees and expiry. The same outcome in another collateral token is a separate instrument with different funding and redemption.",
+      "reason": "Explain the practical consequence of the instrument distinction (habit 10).",
+      "status": "pending_current_draft_inspection"
+    },
+    {
+      "documentId": "docs-order-management",
+      "originalPathHint": "sections[_key==\"section-2\"].paragraphs[0]",
+      "expectedPreparedText": "Compare Total, Locked and Available balances after changes. A pending action or a stale balance is not confirmation that funds have been released. Use the order’s latest status and any transaction or request reference when asking the team to investigate.",
+      "proposedText": "After a change, check Total, Locked and Available balances. A pending action or an old balance does not confirm that funds have been released. If you ask the team to investigate, include the latest order status and any transaction or request reference.",
+      "reason": "Put the task and support action in a natural order; preserve the confirmation limit (E25).",
+      "status": "pending_current_draft_inspection"
+    },
+    {
+      "documentId": "docs-prices-and-probability",
+      "originalPathHint": "sections[_key==\"section-0\"].paragraphs[0]",
+      "expectedPreparedText": "A share’s price as a fraction of its full payout is often read as an implied probability. That interpretation depends on the instrument, collateral and costs; it is a way to read a market price, not evidence that the stated chance is objectively correct.",
+      "proposedText": "A share’s price divided by its full payout is often read as an implied probability. That reading depends on the instrument, collateral and costs. It describes a market price; it does not prove the stated chance is correct.",
+      "reason": "Split the dense definition and preserve the probability caveat (habit 3).",
+      "status": "pending_current_draft_inspection"
+    },
+    {
+      "documentId": "docs-redeeming-positions",
+      "originalPathHint": "sections[_key==\"section-0\"].paragraphs[0]",
+      "expectedPreparedText": "Open Portfolio and find the resolved market. Check the winning side and that you still hold a positive balance of winning shares. Reaching the observation block does not by itself mean that the resolution has been recorded and redemption is ready.",
+      "proposedText": "Open Portfolio and find the resolved market. Check which side won and that you still hold winning shares. The observation block may have passed before resolution is recorded and redemption is ready.",
+      "reason": "Keep the distinction between observation, recorded resolution and redemption, in direct language (E25).",
+      "status": "pending_current_draft_inspection"
+    },
+    {
+      "documentId": "docs-smart-contracts",
+      "originalPathHint": "sections[_key==\"section-2\"].paragraphs[0]",
+      "expectedPreparedText": "A source repository, verified explorer page or audit of another version is not proof that the current deployment has the same properties. This guide does not certify contract security or provide a verified deployment registry. Contact the team for the current evidence before relying on an address or audit claim.",
+      "proposedText": "A source repository, a verified explorer page or an audit of another version does not prove that the current deployment behaves the same way. This guide does not certify contract security or list verified deployments. Ask the team for current evidence before relying on an address or audit claim.",
+      "reason": "Explain what the evidence can and cannot establish without registry jargon (habit 4).",
+      "status": "pending_current_draft_inspection"
+    },
+    {
+      "documentId": "docs-withdrawing-funds",
+      "originalPathHint": "sections[_key==\"section-2\"].steps[3]",
+      "expectedPreparedText": "Inspect the transaction reference before trying again if the status is pending or unclear. After confirmation, check the recipient and the updated Doefin balance.",
+      "proposedText": "If the status is pending or unclear, check the transaction reference before trying again. After confirmation, check the recipient and your updated Doefin balance.",
+      "reason": "Put the condition before the action and retain the retry warning (E25).",
+      "status": "pending_current_draft_inspection"
+    },
+    {
+      "documentId": "docs-methodology-and-evidence",
+      "originalPathHint": "sections[_key==\"section-2\"].paragraphs[0]",
+      "expectedPreparedText": "The observed-adjustment research report uses a frozen capture of 25 observed difficulty changes. The website’s forecast examples and displayed example ranges remain authored illustrations. Neither establishes measured forecast accuracy, a forecaster ranking or a verified running forecast service.",
+      "proposedText": "The observed-adjustment report uses a fixed dataset of 25 recorded difficulty changes. The website’s forecast examples and example ranges use made-up values. Neither shows measured forecast accuracy, a forecaster ranking or a verified live forecast service.",
+      "reason": "Keep all evidence limitations while replacing archival and authorship jargon (E30).",
+      "status": "pending_current_draft_inspection"
+    },
+    {
+      "documentId": "research-methodology-difficulty-index",
+      "originalPathHint": "sections[_key==\"section-0\"].paragraphs[1]",
+      "expectedPreparedText": "Blocks arrive irregularly. Extrapolating the pace observed so far makes an assumption about the rest of the adjustment period; it is not a reading of a future network value. Calendar timing is also an estimate.",
+      "proposedText": "Blocks arrive irregularly. Projecting from the pace so far assumes something about the rest of the adjustment period; it does not measure a future network value. Calendar timing is also an estimate.",
+      "reason": "Shorten the explanation without making the projection a measurement (habit 3).",
+      "status": "pending_current_draft_inspection"
+    },
+    {
+      "documentId": "research-methodology-difficulty-index",
+      "originalPathHint": "sections[_key==\"section-2\"].paragraphs[1]",
+      "expectedPreparedText": "The ranges displayed in this website’s examples are authored illustrations. They have not been fitted or calibrated, and no claimed coverage level or probability of a direction change should be inferred from them.",
+      "proposedText": "The ranges in this website’s examples use made-up values. They have not been fitted or calibrated, so they do not establish a coverage level or the probability of a change in direction.",
+      "reason": "Explain the absence of statistical evidence directly (habit 3).",
+      "status": "pending_current_draft_inspection"
+    },
+    {
+      "documentId": "research-methodology-difficulty-index",
+      "originalPathHint": "sections[_key==\"section-3\"].paragraphs[0]",
+      "expectedPreparedText": "This page explains the information required to evaluate a forecast. It does not document a verified running forecast service, publish a measured accuracy history or promise an immutable archive.",
+      "proposedText": "This page explains what you need to evaluate a forecast. It does not document a verified live forecasting service, publish a measured accuracy record or promise an unchangeable archive.",
+      "reason": "Keep the scope limits while replacing internal service and archive terminology (habit 10).",
+      "status": "pending_current_draft_inspection"
+    },
+    {
+      "documentId": "tool-guide-fleet-payback",
+      "originalPathHint": "whatItIs",
+      "expectedPreparedText": "The model starts with a capital outlay, adds modelled mining revenue and subtracts power cost each month. It reports the first month that cumulative modelled cash flow is non-negative, if that occurs within the chosen horizon. Three difficulty-growth assumptions provide a sensitivity comparison.",
+      "proposedText": "The model starts with your initial outlay, then adds mining revenue and subtracts power costs each month. It shows the first month that cumulative modelled cash flow reaches zero, if that happens within your chosen period. Compare three assumed difficulty-growth rates to see how the result changes.",
+      "reason": "Explain the model as a sequence of actions and keep the finite-horizon limit (E28).",
+      "status": "pending_current_draft_inspection"
+    },
+    {
+      "documentId": "tool-guide-difficulty-exposure",
+      "originalPathHint": "article.summary",
+      "expectedPreparedText": "Compare expected BTC production under assumptions you choose. Separate production sensitivity from costs and contract payouts.",
+      "proposedText": "Compare expected BTC production using your own assumptions. Production changes, costs and contract payouts are separate calculations.",
+      "reason": "Replace abstract sensitivity terminology with the three distinct quantities (E28).",
+      "status": "pending_current_draft_inspection"
+    },
+    {
+      "documentId": "editorial-blog-reading-a-hashrate-chart-honestly",
+      "originalPathHint": "sections[_key==\"section-2\"].paragraphs[0]",
+      "expectedPreparedText": "An error band should state its construction method and assumptions. This guide does not report measured error-band widths or classify a recent network movement as noise.",
+      "proposedText": "An error band should explain how it was calculated and which assumptions it uses. This guide does not report measured band widths or identify a recent network movement as noise.",
+      "reason": "Use ordinary words while preserving the limits on measurement and interpretation (E30).",
+      "status": "pending_current_draft_inspection"
+    }
+  ]
+}

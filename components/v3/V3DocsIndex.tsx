@@ -13,7 +13,7 @@ const groupDescriptions = {
 
 export default async function V3DocsIndex() {
   const docs = await allV3Docs()
-  return <V3DocsLayout title="Doefin documentation" summary="Understand the product, complete a task or look up a reference. Start where your question begins." eyebrow="Documentation">
+  return <V3DocsLayout title="Doefin documentation" summary="Find out how the product works, follow an app task or look up a term. Choose the section that answers your question." eyebrow="Documentation">
     <div className="border-l-2 border-brand pl-5">
       <h2 className="text-lg font-bold">New to Doefin?</h2>
       <p className="mt-2 text-[16px] leading-relaxed text-subtle">The overview explains what the market tracks and how an order, a position and a payout fit together.</p>
@@ -32,7 +32,7 @@ export default async function V3DocsIndex() {
     </section>)}</div>
     <aside className="mt-12 rounded-panel border border-white/10 bg-surface/40 p-6" aria-labelledby="docs-resources">
       <h2 id="docs-resources" className="text-xl font-bold">Explore the mining context</h2>
-      <p className="mt-3 text-sm leading-relaxed text-subtle">The resource library connects mining fundamentals, calculators and worked examples. Look up a network term in the mining glossary, or compare expected BTC production with your own assumptions.</p>
+      <p className="mt-3 text-sm leading-relaxed text-subtle">The resource library brings together mining guides, calculators and worked examples. Look up an unfamiliar term in the glossary or compare expected BTC production using your own assumptions.</p>
       <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1">
         {[
           ['Browse resources', '/resources'],
