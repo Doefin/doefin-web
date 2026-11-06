@@ -23,22 +23,22 @@ export default async function ResearchIndex() {
     <header className="mb-7 mt-2 sm:mb-9 sm:mt-8">
       <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-highlight">Doefin / Research</p>
       <h1 className="mt-3 max-w-3xl text-balance text-3xl font-extrabold tracking-[-0.04em] sm:text-5xl">Evaluate a difficulty forecast.</h1>
-      <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-subtle">Check a forecast comparison. Reproduce the error calculation.</p>
-      <p className="mt-5 max-w-3xl border-l-2 border-caution/60 pl-3 text-xs leading-relaxed text-subtle"><span className="font-semibold text-caution">Educational research.</span> Forecast examples are synthetic. A separate sourced network dataset is available; it does not rank providers.</p>
+      <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-subtle">How close was a forecast to the outcome? Learn how to compare forecasts and calculate their errors.</p>
+      <p className="mt-5 max-w-3xl border-l-2 border-caution/60 pl-3 text-xs leading-relaxed text-subtle"><span className="font-semibold text-caution">Research and worked examples.</span> The forecast examples use made-up values. The separate historical network dataset contains sourced observations, not a provider ranking.</p>
     </header>
 
     <ResearchArchiveSummary />
     {reports.length === 0 ? <p role="status" className="rounded-panel border border-white/10 bg-surface/30 p-6 text-sm text-subtle">No published research reports are available yet.</p> : <div className="grid items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
       <div className="min-w-0 space-y-6">{reports.map(report => <article key={report.slug} className="flex flex-col overflow-hidden rounded-panel border border-white/10 bg-surface/30">
         <div className="p-5 sm:p-7">
-          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2"><p className="text-[10px] font-bold uppercase tracking-[0.12em] text-highlight">{report.slug === 'observed-difficulty-adjustments' ? 'Observed network analysis' : 'Comparison criteria'}</p><p className="text-[11px] text-subtle">Published <time dateTime={report.publishedAt}>{dateShort(report.publishedAt)}</time></p></div>
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2"><p className="text-[10px] font-bold uppercase tracking-[0.12em] text-highlight">{report.slug === 'observed-difficulty-adjustments' ? 'Historical network data' : 'Forecast comparison guide'}</p><p className="text-[11px] text-subtle">Published <time dateTime={report.publishedAt}>{dateShort(report.publishedAt)}</time></p></div>
           <h2 className="mt-5 text-balance text-[25px] font-extrabold leading-tight tracking-[-0.03em] sm:text-3xl"><Link href={'/research/' + report.slug} className="hover:text-highlight">{report.title}</Link></h2>
           <p className="mt-4 text-sm leading-relaxed text-subtle">{report.summary}</p>
-          <Link href={'/research/' + report.slug} className="mt-5 inline-flex min-h-11 items-center justify-center gap-3 rounded-lg bg-brand px-4 text-sm font-bold text-white transition-colors hover:bg-brandDeep">{report.slug === 'observed-difficulty-adjustments' ? 'Read observed findings' : 'Read the comparison criteria'} <Arrow className="h-4 w-4" /></Link>
+          <Link href={'/research/' + report.slug} className="mt-5 inline-flex min-h-11 items-center justify-center gap-3 rounded-lg bg-brand px-4 text-sm font-bold text-white transition-colors hover:bg-brandDeep">{report.slug === 'observed-difficulty-adjustments' ? 'Read the network findings' : 'Read the comparison guide'} <Arrow className="h-4 w-4" /></Link>
         </div>
         <div className="mt-auto border-t border-white/10 bg-ink/35 px-5 py-5 sm:px-7">
-          <h3 className="text-[10px] font-bold uppercase tracking-[0.12em] text-subtle">Use this to check</h3>
-          <ul className="mt-4 space-y-3">{(report.slug === 'observed-difficulty-adjustments' ? ['The period being measured', 'The source data and arithmetic', 'Which version to download and how to cite it'] : ['The same target and forecast timing', 'Error and uncertainty as separate measures', 'Records you can use to check the result']).map(item => <li key={item} className="flex items-baseline gap-3 text-xs leading-relaxed text-body"><span aria-hidden="true" className="h-1 w-1 shrink-0 self-center rounded-full bg-chart" />{item}</li>)}</ul>
+          <h3 className="text-[10px] font-bold uppercase tracking-[0.12em] text-subtle">What the report covers</h3>
+          <ul className="mt-4 space-y-3">{(report.slug === 'observed-difficulty-adjustments' ? ['The dates covered', 'The source data and arithmetic', 'Which version to download and how to cite it'] : ['Matching targets and forecast times', 'Error and uncertainty as separate measures', 'Records needed to repeat the calculation']).map(item => <li key={item} className="flex items-baseline gap-3 text-xs leading-relaxed text-body"><span aria-hidden="true" className="h-1 w-1 shrink-0 self-center rounded-full bg-chart" />{item}</li>)}</ul>
         </div>
       </article>)}
       </div>
@@ -46,11 +46,11 @@ export default async function ResearchIndex() {
     </div>}
 
     <section aria-labelledby="research-sources-title" className="mt-10 border-t border-white/10 pt-7 sm:mt-12">
-      <div className="mb-5 flex flex-wrap items-baseline justify-between gap-x-5 gap-y-2"><h2 id="research-sources-title" className="text-xl font-bold tracking-tight">Check the supporting method and data.</h2><Link href="/resources" className="inline-flex min-h-10 items-center gap-2 text-xs font-semibold text-highlight hover:underline">All resources <Arrow className="h-4 w-4" /></Link></div>
+      <div className="mb-5 flex flex-wrap items-baseline justify-between gap-x-5 gap-y-2"><h2 id="research-sources-title" className="text-xl font-bold tracking-tight">Understand the method and data.</h2><Link href="/resources" className="inline-flex min-h-10 items-center gap-2 text-xs font-semibold text-highlight hover:underline">All resources <Arrow className="h-4 w-4" /></Link></div>
       <div className="grid gap-4 md:grid-cols-3">{[
-        { label: 'The method', title: 'How is a forecast built?', description: 'Check the inputs, calculation and evidence needed to support an uncertainty range.', href: '/methodology/difficulty-index', action: 'Read the methodology' },
-        { label: 'The context', title: 'What does the data mean?', description: 'Read the difficulty and hashrate examples alongside their dates and assumptions.', href: '/data', action: 'Explore data examples' },
-        { label: 'The comparison', title: 'How should accuracy be read?', description: 'Understand error, coverage, interval width and sample count before comparing forecasts.', href: '/data/scoreboard', action: 'Read accuracy metrics' },
+        { label: 'The method', title: 'How is a forecast built?', description: 'See how inputs become an estimate and what evidence a forecast range needs.', href: '/methodology/difficulty-index', action: 'Read the methodology' },
+        { label: 'The context', title: 'What does the data mean?', description: 'Find difficulty and hashrate readings, with their dates and assumptions.', href: '/data', action: 'Explore data examples' },
+        { label: 'The comparison', title: 'How should accuracy be read?', description: 'Learn what forecast error, range coverage, range width and sample size tell you.', href: '/data/scoreboard', action: 'Read accuracy metrics' },
       ].map(item => <Link key={item.href} href={item.href} className="group flex flex-col rounded-panel border border-white/[0.07] bg-surface/20 p-5 transition-colors hover:border-brand/40"><p className="text-[10px] font-bold uppercase tracking-[0.12em] text-subtle">{item.label}</p><h3 className="mt-3 text-lg font-bold tracking-tight group-hover:text-highlight">{item.title}</h3><p className="mb-4 mt-2 text-xs leading-relaxed text-subtle">{item.description}</p><span className="mt-auto inline-flex min-h-8 items-center justify-between gap-3 text-xs font-semibold text-highlight">{item.action}<Arrow className="h-4 w-4" /></span></Link>)}</div>
     </section>
   </Container>

@@ -30,14 +30,14 @@ export type ToolMicro = {
 
 export const TOOL_MICRO: Record<string, ToolMicro> = {
   "hosting-effective-rate": {
-    "blurb": "Compare an advertised hosting rate with fees and paid lost hours. The final figure is an equivalent cost, not profit.",
-    "useIf": "you own hosted machines and pay for booked capacity during lost hours",
+    "blurb": "Compare an advertised hosting rate with separate fees and hours you pay for while machines are stopped. The result is an equivalent cost, not profit.",
+    "useIf": "you own hosted machines and still pay when they are stopped",
     "notFor": "energy-only billing, hosting fee income or a complete profitability model",
     "steps": [
         "Check the billing agreement and your invoices.",
         "Enter the rate and separate percentage fees.",
         "Enter paid downtime and curtailment separately.",
-        "Compare the final costs using the same assumptions."
+        "Compare final costs with the same billing assumptions."
     ],
     "inputHints": [
         {
@@ -84,7 +84,7 @@ export const TOOL_MICRO: Record<string, ToolMicro> = {
         },
         {
             "figure": "Effective uptime",
-            "hint": "100% minus the two distinct lost-hours assumptions. Check the period and avoid double-counting."
+            "hint": "100% minus downtime and curtailment. Use the same period and count each lost hour once."
         },
         {
             "figure": "After lost hours",
@@ -92,7 +92,7 @@ export const TOOL_MICRO: Record<string, ToolMicro> = {
         },
         {
             "figure": "% above the advertised rate",
-            "hint": "The percentage uplift caused by your inputs. Compare absolute final costs too; this is not a provider rating."
+            "hint": "The percentage increase caused by your inputs. Compare final costs too; this is not a provider rating."
         }
     ],
     "presets": [
@@ -177,14 +177,14 @@ export const TOOL_MICRO: Record<string, ToolMicro> = {
         },
         {
             "label": "Best case: difficulty falls by",
-            "means": "An easier difficulty scenario applied across the whole modelled horizon.",
+            "means": "A lower difficulty applied from the start of the whole modelled period.",
             "whereToFind": "Choose a sensitivity assumption; this sample is not a forecast.",
             "typical": "0–15% lower difficulty; default 2.4% is illustrative."
         },
         {
             "label": "Worst case: difficulty rises by",
-            "means": "A harder difficulty scenario applied across the whole modelled horizon.",
-            "whereToFind": "Choose a sensitivity assumption for your horizon. No automatic forecast adjustment.",
+            "means": "A higher difficulty applied from the start of the whole modelled period.",
+            "whereToFind": "Choose a change for the whole period. The scenario does not adjust automatically when you extend it.",
             "typical": "0–15% higher difficulty; default 7% is illustrative."
         }
     ],
@@ -255,8 +255,8 @@ export const TOOL_MICRO: Record<string, ToolMicro> = {
     ]
 },
   "fleet-payback": {
-    "blurb": "Compare when a fleet could recover its initial outlay under three monthly difficulty-growth assumptions. Results depend on your inputs, with no guaranteed return.",
-    "useIf": "you own machines and want a simplified capital-recovery comparison",
+    "blurb": "Estimate when a fleet could recover its initial cost under three monthly difficulty-growth assumptions. Results depend on your inputs, with no guaranteed return.",
+    "useIf": "you own machines and want to compare when their costs could be recovered",
     "notFor": "fee-only hosting income, bought hashrate or a complete investment valuation",
     "steps": [
         "Check starting difficulty and the modelled horizon.",
@@ -285,7 +285,7 @@ export const TOOL_MICRO: Record<string, ToolMicro> = {
         },
         {
             "label": "What you paid up front",
-            "means": "The modelled initial outlay. It is independent of fleet hashrate.",
+            "means": "The initial amount to recover. Changing fleet hashrate does not change this amount.",
             "whereToFind": "Use your invoices or a clearly stated example amount. This page does not check equipment prices.",
             "typical": "Sample $20,000; supported input $5,000–$2,000,000."
         },
@@ -297,7 +297,7 @@ export const TOOL_MICRO: Record<string, ToolMicro> = {
         },
         {
             "label": "Difficulty growth guess",
-            "means": "A monthly growth rate that compounds. The first increase applies before month-one production.",
+            "means": "A monthly growth rate applied repeatedly. The first increase comes before production in month one.",
             "whereToFind": "Choose a sensitivity assumption. The sample is not a forecast.",
             "typical": "Sample 1.5% monthly; central input supports 0–8%."
         }
@@ -305,7 +305,7 @@ export const TOOL_MICRO: Record<string, ToolMicro> = {
     "resultHints": [
         {
             "figure": "Payback",
-            "hint": "The first modelled month in which cumulative cash reaches zero on the central path. It excludes costs not represented in inputs."
+            "hint": "The first month the central scenario recovers the initial outlay after power costs. Costs outside your inputs are excluded."
         },
         {
             "figure": "Monthly difficulty growth",

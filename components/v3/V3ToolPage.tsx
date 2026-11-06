@@ -54,7 +54,7 @@ export default async function V3ToolPage({ params }: { params: Promise<{ slug: s
     </details>
     <section className="mt-7 border-t border-white/10 pt-6" aria-labelledby="tool-worked-examples">
       <h2 id="tool-worked-examples" className="text-lg font-bold">Check the working</h2>
-      <p className="mt-2 text-sm leading-relaxed text-subtle">Educational scenarios with stated assumptions. Compare the working, then return to the calculator.</p>
+      <p className="mt-2 text-sm leading-relaxed text-subtle">Follow the worked examples to check how the inputs produce each result.</p>
       {unavailable && <p role="status" className="mt-3 text-sm text-subtle">Calculator guides are temporarily unavailable.</p>}
       <ul className="mt-3 space-y-2 text-sm">
         {examples.map(example => <li key={example.slug}><Link href={`/tools/${slug}/example/${example.slug}`} className="inline-flex min-h-11 items-center text-highlight underline underline-offset-4">{example.title}</Link></li>)}
@@ -62,7 +62,7 @@ export default async function V3ToolPage({ params }: { params: Promise<{ slug: s
       </ul>
     </section>
     <RelatedContent learning={tool.learning} action={slug === 'difficulty-exposure'
-      ? { href: preview.payback, title: 'Test the wider payback picture', text: 'Explore power costs and capital recovery separately.' }
-      : { href: preview.exposure, title: 'Isolate difficulty exposure', text: 'Compare expected BTC production across two difficulty scenarios.' }} />
+      ? { href: preview.payback, title: 'Compare fleet payback', text: 'Explore power costs and capital recovery separately.' }
+      : { href: preview.exposure, title: 'Compare difficulty scenarios', text: 'Compare expected BTC production across two difficulty scenarios.' }} />
   </Container></GuidesPublicationProvider>
 }

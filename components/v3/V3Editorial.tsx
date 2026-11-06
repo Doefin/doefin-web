@@ -22,10 +22,10 @@ function collection(kind: Kind) {
   return {
     metadata: seo({ title: kind === 'academy' ? 'Bitcoin mining fundamentals' : 'Mining assumptions and interpretation', description: kind === 'academy' ? 'Understand difficulty, hashprice and forecast uncertainty before working through the tools.' : 'Practical explanations of mining assumptions, hashrate estimates and their limits.', path: path(kind) }),
     default: async function Collection() {
-      return <ContentPage title={kind === 'academy' ? 'Understand the moving parts.' : 'Read the assumptions behind the number.'} summary={kind === 'academy' ? 'Start with difficulty, hashprice and uncertainty, then use a guide to apply the concepts.' : 'Educational articles about mining scenarios and how to interpret data. These are not reports of measured market performance.'} eyebrow={label(kind)} crumbs={[{ name: label(kind), href: path(kind) }]}>
+      return <ContentPage title={kind === 'academy' ? 'Understand Bitcoin mining.' : 'Understand mining data and assumptions.'} summary={kind === 'academy' ? 'Learn how difficulty, hashprice and uncertainty affect mining calculations, then work through a calculator guide.' : 'Educational articles about mining scenarios and how to interpret data. These are not reports of measured market performance.'} eyebrow={label(kind)} crumbs={[{ name: label(kind), href: path(kind) }]}>
         <ArticleList articles={await allV3Editorial(kind)} />
         {kind === 'academy' && <section id="guides" className="mt-10 scroll-mt-28"><h2 className="text-2xl font-bold">Calculator guides</h2><ul className="mt-5 space-y-4">{(await allGuides()).map(({ slug, guide }) => <li key={slug}><Link href={'/academy/guides/' + slug} className="text-sm font-semibold text-highlight hover:underline">{guide.article.title} →</Link></li>)}</ul></section>}
-        <ContentLinks links={[{ href: '/tools', label: 'Work with your own assumptions' }, { href: '/research', label: 'Inspect a worked research example' }, { href: '/glossary', label: 'Look up a term' }]} />
+        <ContentLinks links={[{ href: '/tools', label: 'Compare your mining assumptions' }, { href: '/research', label: 'Read a worked research example' }, { href: '/glossary', label: 'Look up a term' }]} />
       </ContentPage>
     },
   }
@@ -46,7 +46,7 @@ function article(kind: Kind) {
         <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd({ '@context': 'https://schema.org', '@type': 'Article', headline: item.title, description: item.summary, publisher: publisherRef, mainEntityOfPage: site.url + path(kind, item.slug), datePublished: item.publishedAt })} />
         {item.reviewedAt && <p className="mb-8 text-xs text-subtle">Guide reviewed <time dateTime={item.reviewedAt}>{dateLong(item.reviewedAt)}</time></p>}
         <AutoLinkedProse paragraphs={item.sections.flatMap(section => [{ heading: section.heading, id: section.id }, ...section.paragraphs])} />
-        <ContentLinks links={[{ href: '/methodology/difficulty-index', label: 'Evaluate a forecast’s method' }, { href: '/tools/difficulty-exposure', label: 'Compare your production scenarios' }, { href: '/data', label: 'Read the data examples' }]} />
+        <ContentLinks links={[{ href: '/methodology/difficulty-index', label: 'Read how the forecast is calculated' }, { href: '/tools/difficulty-exposure', label: 'Compare your production scenarios' }, { href: '/data', label: 'Read the data examples' }]} />
       </ContentPage></div>
     },
   }

@@ -15,7 +15,7 @@ import { site } from '@/lib/site'
 import './home.css'
 
 export const metadata: Metadata = {
-  ...seo({ title: 'Trade and hedge Bitcoin hashrate exposure', description: 'Doefin provides markets on Bitcoin mining difficulty for professional investors: who they serve, how contracts settle and what to review before you enter the app.', path: '/' }),
+  ...seo({ title: 'Trade and hedge Bitcoin hashrate exposure', description: 'Trade and hedge Bitcoin hashrate exposure through markets on mining difficulty. See how markets work and what to check before trading. For professional investors.', path: '/' }),
   robots: { index: false, follow: false },
 }
 
@@ -41,11 +41,11 @@ export default function V3Home() {
       <Container>
         <div id="who-its-for" className="scroll-mt-28" data-reveal><p className="v37-eyebrow">Start with production</p><h2 id="production-title" className="v37-heading"><span id="audience-title" className="scroll-mt-28">Rising difficulty reduces expected production.</span></h2></div>
         <article className="v37-audience-card mt-7" data-reveal>
-          <p className="v37-copy">Illustrative scenario: suppose your fixed hashrate would produce 1 BTC over a period at unchanged difficulty. If difficulty is 10% higher for that whole period, expected production is 1 ÷ 1.10 ≈ 0.909 BTC. That is about 0.091 BTC (9.09%) less.</p>
-          <p className="text-sm leading-relaxed text-subtle">The example keeps hashrate, uptime, block reward and other production assumptions unchanged. It shows the effect of a difficulty change, not a forecast or a suitable position size. Pool results, fees, power costs and BTC price need separate assumptions.</p>
-          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1"><Link href="/tools/difficulty-exposure" data-v3-cta="calculator" data-v3-placement="scenario" className="v37-link">Try your numbers <Arrow /></Link><Link href="/product/settlement" data-v3-cta="settlement" data-v3-placement="scenario" className="v37-link">See how this relates to a contract <Arrow /></Link></div>
+          <p className="v37-copy">Illustrative scenario: at unchanged difficulty, your fixed hashrate is expected to produce 1 BTC over a given period. With difficulty 10% higher throughout that period, expected production falls to 1 ÷ 1.10 ≈ 0.909 BTC. That is about 0.091 BTC (9.09%) less.</p>
+          <p className="text-sm leading-relaxed text-subtle">Hashrate, uptime, block reward and other production assumptions stay the same in this example. It shows how difficulty affects expected production. It does not forecast production or tell you how large a position to buy. Pool results, fees, power costs and BTC price need separate assumptions.</p>
+          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1"><Link href="/tools/difficulty-exposure" data-v3-cta="calculator" data-v3-placement="scenario" className="v37-link">Try your numbers <Arrow /></Link><Link href="/product/settlement" data-v3-cta="settlement" data-v3-placement="scenario" className="v37-link">Compare production and contract payout <Arrow /></Link></div>
         </article>
-        <p className="v37-note">A Doefin position pays a fixed amount or nothing, depending on difficulty at its observation block. Whether it offsets a production shortfall, and by how much, depends on its cost, size and timing. It does not cover every mining risk.</p>
+        <p className="v37-note">A Doefin position pays a fixed amount or nothing, depending on difficulty at its observation block. Its cost, size and timing determine how much of a production shortfall it may offset. It does not cover every mining risk.</p>
       </Container>
     </section>
 
@@ -54,14 +54,14 @@ export default function V3Home() {
         <div className="v311-payout-heading" data-reveal><p className="v37-eyebrow">How it works</p><h2 id="mechanics-title" className="v37-heading">Choose a market. Fund your account. Place a trade.</h2><p className="v37-copy">All done in a few minutes.</p></div>
         <ol className="mt-7 grid gap-4 md:grid-cols-3" data-reveal>
           {[
-            { title: 'Choose a Bitcoin difficulty market', text: ['Review the difficulty threshold and observation block. At that block, Yes wins if difficulty is at or above the threshold; No wins if it is below. Buy the side that matches your view.', 'Prices change as traders buy and sell.'] },
-            { title: 'Fund your account and trade', text: ['Check which collateral token your selected market requires and fund your account with that token. For cbBTC markets, deposit cbBTC directly or use the integrated SwapKit to convert native BTC. Then choose your position and place your trade.', 'cbBTC is a wrapped Bitcoin asset; it is not native BTC.'] },
-            { title: 'Sell or redeem', text: ['Place a sell order before settlement, or hold until the market resolves. A sale depends on available buyers and price.', 'For cbBTC markets, each winning share redeems for 1 cbBTC. For other markets, check the displayed payout and collateral token. Losing shares have no payout. Your profit or loss also depends on what you paid and any fees.'] },
+            { title: 'Choose a Bitcoin difficulty market', text: ['Check the difficulty threshold and the block at which difficulty will be observed. Yes wins if difficulty at that block is at or above the threshold; No wins below it. Buy shares on the side that matches your view. These tokens represent your position.', 'Prices change as traders buy and sell.'] },
+            { title: 'Fund your account and trade', text: ['Fund your account with the collateral token required by your market. For cbBTC markets, deposit cbBTC directly or convert native BTC using the integrated SwapKit service. Then choose your position and place your trade.', 'cbBTC is a wrapped Bitcoin asset; it is not native BTC.'] },
+            { title: 'Sell or redeem', text: ['Place a sell order before settlement, or hold until the market resolves. A sale depends on available buyers and price.', 'Each winning share in a cbBTC market redeems for 1 cbBTC. Check the displayed payout and collateral token for other markets. Losing shares pay nothing. Your profit or loss also depends on what you paid and any fees.'] },
           ].map((step, index) => <li key={step.title} className="rounded-panel border border-white/10 bg-surface/40 p-5"><p className="text-xs font-semibold text-subtle">Step {index + 1}</p><h3 className="mt-3 text-lg font-semibold text-body">{step.title}</h3>{step.text.map(line => <p key={line} className="mt-2 text-sm leading-relaxed text-subtle">{line}</p>)}</li>)}
         </ol>
         <div className="mt-7" data-reveal><MarketExample /></div>
         <details id="inside-the-product" className="mt-7 rounded-panel border border-white/15 bg-surface/40 p-5 sm:p-6" data-reveal>
-          <summary id="product-title" className="min-h-11 scroll-mt-28 cursor-pointer text-base font-semibold text-highlight">Inspect the app capture: 19 October 2026 · not live</summary>
+          <summary id="product-title" className="min-h-11 scroll-mt-28 cursor-pointer text-base font-semibold text-highlight">View the app screenshot: 19 October 2026 · not live</summary>
           <ProductPreview />
         </details>
       </Container>
@@ -74,24 +74,24 @@ export default function V3Home() {
           {[
             { number: '1', title: 'Sign in', description: 'Check how to sign in and what your wallet will sign.', href: '/docs/connecting-a-wallet' },
             { number: '2', title: 'Get collateral', description: 'Check the token, network, destination and funding costs.', href: '/docs/getting-collateral' },
-            { number: '3', title: 'Place your first trade', description: 'Check the market terms, price, amount and execution.', href: '/docs/your-first-trade' },
+            { number: '3', title: 'Place your first trade', description: 'Review the market terms, price and amount. See how orders execute.', href: '/docs/your-first-trade' },
           ].map(item => <Link key={item.href} href={item.href} data-v3-cta="setup" data-v3-placement="setup" className="group rounded-panel border border-white/10 bg-surface/40 p-5 hover:border-brand/50"><p className="text-xs font-semibold text-subtle">Step {item.number}</p><h3 className="mt-3 text-lg font-semibold text-body group-hover:text-highlight">{item.title} <span aria-hidden="true">→</span></h3><p className="mt-2 text-sm leading-relaxed text-subtle">{item.description}</p></Link>)}
         </nav>
-        <p className="v37-note">Returning to a position? Enter the app directly or <Link href="/docs/managing-positions" className="underline underline-offset-4">read about managing positions</Link>. You do not need to repeat the learning steps.</p>
+        <p className="v37-note">Returning to a position? Enter the app or <Link href="/docs/managing-positions" className="underline underline-offset-4">read about managing positions</Link>.</p>
       </Container>
     </section>
 
     <section id="review-evidence" aria-labelledby="evidence-title" className="v37-section">
       <Container>
-        <div data-reveal><p className="v37-eyebrow">Review the evidence</p><h2 id="evidence-title" className="v37-heading">Know what to check.</h2></div>
+        <div data-reveal><p className="v37-eyebrow">Review the evidence</p><h2 id="evidence-title" className="v37-heading">Check the product and its risks.</h2></div>
         <nav aria-label="Evidence and risk review" className="mt-7 grid gap-4 md:grid-cols-3" data-reveal>
           {[
             { title: 'About Doefin', description: 'Read what Doefin does and contact the team.', href: '/about', cta: 'evidence' },
-            { title: 'Technical review', description: 'Check which contract details, deployment records and audit evidence to request.', href: '/docs/smart-contracts', cta: 'evidence' },
-            { title: 'Risks and limitations', description: 'Understand the risk of losing your full payment, limited liquidity, collateral and technical failures.', href: '/docs/risks-and-limitations', cta: 'risk' },
+            { title: 'Technical review', description: 'Find out which contract details, deployment records and audit evidence to ask for.', href: '/docs/smart-contracts', cta: 'evidence' },
+            { title: 'Risks and limitations', description: 'Read about losing your full payment, limited liquidity and collateral or technical failures.', href: '/docs/risks-and-limitations', cta: 'risk' },
           ].map(item => <Link key={item.href} href={item.href} data-v3-cta={item.cta} data-v3-placement="trust" className="group rounded-panel border border-white/10 bg-surface/40 p-5 hover:border-brand/50"><h3 className="text-lg font-semibold text-body group-hover:text-highlight">{item.title} <span aria-hidden="true">→</span></h3><p className="mt-2 text-sm leading-relaxed text-subtle">{item.description}</p></Link>)}
         </nav>
-        <p className="v37-note">These examples and synthetic research are for learning. They do not demonstrate live forecasts, trading performance or an audit certification.</p>
+        <p className="v37-note">The examples and research with made-up data are for learning. They do not show live forecasts, trading performance or audit certification.</p>
       </Container>
     </section>
 
@@ -103,7 +103,7 @@ export default function V3Home() {
 
     <section id="faq" aria-labelledby="faq-title" className="v37-faq v37-section">
       <Container className="v37-faq-grid">
-        <div data-reveal><p className="v37-eyebrow">Common questions</p><h2 id="faq-title" className="v37-heading">Before you<br />get started.</h2><p className="v37-copy v37-faq-intro">Short answers here. Step-by-step guides are in the docs.</p><Link href="/docs" className="v37-link">Explore the documentation <Arrow /></Link><Link href="/resources" data-v3-cta="resources" data-v3-placement="faq" className="v37-link">Browse educational resources <Arrow /></Link><Link href="/resources#updates" data-v3-cta="contact" data-v3-placement="faq" className="v37-link">Ask the team a question <Arrow /></Link></div>
+        <div data-reveal><p className="v37-eyebrow">Common questions</p><h2 id="faq-title" className="v37-heading">Before you<br />get started.</h2><p className="v37-copy v37-faq-intro">Short answers here. Step-by-step guides are in the docs.</p><Link href="/docs" className="v37-link">Browse the docs <Arrow /></Link><Link href="/resources" data-v3-cta="resources" data-v3-placement="faq" className="v37-link">Browse the learning resources <Arrow /></Link><Link href="/resources#updates" data-v3-cta="contact" data-v3-placement="faq" className="v37-link">Ask the team a question <Arrow /></Link></div>
         <div data-reveal><HomeFaq /></div>
       </Container>
     </section>

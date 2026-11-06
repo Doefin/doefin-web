@@ -41,9 +41,9 @@ export function ProductPreview() {
       <div className="border-t border-white/10 px-4 py-5 sm:px-6">
         <div className={styles.desktopOnly}>
           <p className="text-sm font-semibold text-body">What the chart shows</p>
-          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-subtle">The chart shows hourly order-book midpoints as an implied chance of Yes. This is market pricing, not a Doefin forecast, trade quote or Bitcoin difficulty.</p>
+          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-subtle">The chart takes the midpoint between the best buy and sell prices each hour and shows it as an implied chance of Yes. These are market prices, not a Doefin forecast, a trade quote or Bitcoin difficulty.</p>
         </div>
-        <p className={`${styles.mobileOnly} text-sm leading-relaxed text-subtle`}>Market pricing, not a Doefin forecast or trade quote. The line shows hourly order-book midpoints, not Bitcoin difficulty.</p>
+        <p className={`${styles.mobileOnly} text-sm leading-relaxed text-subtle`}>The line shows the midpoint between the best buy and sell prices each hour. These are market prices, not a Doefin forecast, a trade quote or Bitcoin difficulty.</p>
         <Link href="/docs/prices-and-probability" className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">Understand market prices and probability <Arrow /></Link>
       </div>
     </div>

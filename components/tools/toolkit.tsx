@@ -91,7 +91,7 @@ function SliderHint({ hint }: { hint: InputHint }) {
         {hint.whereToFind}
       </p>
       <p>
-        <span className="font-semibold text-body">Typical: </span>
+        <span className="font-semibold text-body">Sample and range: </span>
         {hint.typical}
       </p>
     </Hint>
@@ -112,7 +112,7 @@ export function Slider({
   if (isV3) return <div className={styles.field}>
     <label htmlFor={id} className="block text-xs font-semibold leading-relaxed text-subtle">{label}</label>
     <div className={styles.valueControl}>
-      <input aria-label={label + ' — exact value'} type="number" min={min} max={max} step={step}
+      <input aria-label={label + ': exact value'} type="number" min={min} max={max} step={step}
         key={value} defaultValue={value} onBlur={e => {
           const n = e.target.valueAsNumber
           const next = Number.isFinite(n) ? Math.min(max, Math.max(min, n)) : value
@@ -128,7 +128,7 @@ export function Slider({
     <div className="tabular flex justify-between gap-3 text-[10px] text-subtle"><span>{min.toLocaleString('en-US')}</span><span>{max.toLocaleString('en-US')}</span></div>
     {hint ? <details className={styles.guide}>
       <summary className="cursor-pointer text-[11px] font-semibold text-highlight">Input guide</summary>
-      <div className="mt-2 space-y-2 text-xs leading-relaxed text-subtle"><p>{hint.means}</p><p><strong className="text-body">Where to find yours: </strong>{hint.whereToFind}</p><p><strong className="text-body">Typical: </strong>{hint.typical}</p></div>
+      <div className="mt-2 space-y-2 text-xs leading-relaxed text-subtle"><p>{hint.means}</p><p><strong className="text-body">Where to find yours: </strong>{hint.whereToFind}</p><p><strong className="text-body">Sample and range: </strong>{hint.typical}</p></div>
     </details> : null}
   </div>
   return (
@@ -145,7 +145,7 @@ export function Slider({
         className="mt-2 w-full accent-brand"
       />
       {precise ? <div className="mt-1 flex items-center gap-2 text-xs text-subtle">
-        <input aria-label={label + ' — exact value'} type="number" min={min} max={max} step={step}
+        <input aria-label={label + ': exact value'} type="number" min={min} max={max} step={step}
           key={value} defaultValue={value} onBlur={e => {
             const n = e.target.valueAsNumber
             const next = Number.isFinite(n) ? Math.min(max, Math.max(min, n)) : value

@@ -35,7 +35,7 @@ export const docs: Doc[] = [
     body: [
       'Positions are binary. At the observation block, Yes wins if difficulty is at or above the threshold; No wins if it is below. A winning position pays in full; a losing one pays nothing.',
       'The size of the move does not change the payout. A small move past the threshold and a large one pay the same amount, which makes the payout simple to size against a production shortfall. It may still not match your actual production loss.',
-      'All positions are fully collateralised and settle in a BTC-denominated token, so payouts stay denominated in BTC.',
+      'Positions are fully collateralised. Check the selected market’s collateral token and payout terms in the app.',
     ],
   },
   { slug: 'connecting-a-wallet', title: 'Connecting a wallet', summary: 'Supported wallets and the connection flow.', group: 'Getting started', status: 'to-migrate', body: [] },

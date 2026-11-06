@@ -1,0 +1,329 @@
+{
+  "date": "2026-11-06",
+  "project": "yzvr33lo",
+  "dataset": "production",
+  "method": "Normal authenticated Sanity CLI; guarded atomic version-create/edit batch; fresh raw reread",
+  "status": "all_31_drafts_verified",
+  "documents": 31,
+  "textEdits": 167,
+  "publicationActions": 0,
+  "publishedDocumentsChanged": 0,
+  "protectedDocumentsExcluded": [
+    "about-doefin",
+    "glossary-block-subsidy"
+  ],
+  "shortDefinitionsChanged": 0,
+  "verification": "Every complete saved draft matches the current published document plus only its reviewed changes, excluding CMS system metadata. Every published revision and complete content value still matches the captured baseline.",
+  "records": [
+    {
+      "id": "research-report-difficulty-forecast-accuracy-2026",
+      "type": "researchReport",
+      "status": "draft_verified",
+      "draftId": "drafts.research-report-difficulty-forecast-accuracy-2026",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "Mac7TZNCor7fzOhjX9tFa5",
+      "textEdits": 10,
+      "contentSha256": "524501fcef57d6f5021504133c05fb0220545c78655d6d618cc40fa2e4c1157e"
+    },
+    {
+      "id": "research-methodology-difficulty-index",
+      "type": "researchMethodology",
+      "status": "draft_verified",
+      "draftId": "drafts.research-methodology-difficulty-index",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "JYRqnCqPqeQAja5ejqW3WE",
+      "textEdits": 12,
+      "contentSha256": "9921724374e0cf47fa1c3ae45af93a1558e9e23e997f23cc8b339aca6dedde91"
+    },
+    {
+      "id": "research-report-observed-difficulty-adjustments",
+      "type": "researchReport",
+      "status": "draft_verified",
+      "draftId": "drafts.research-report-observed-difficulty-adjustments",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "Mac7TZNCor7fzOhjX9tJjy",
+      "textEdits": 14,
+      "contentSha256": "3bf8083971363147483cb3cc969980b7711063c30199605a67640d30a90b76d0"
+    },
+    {
+      "id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+      "type": "editorialArticle",
+      "status": "draft_verified",
+      "draftId": "drafts.editorial-blog-what-a-static-growth-assumption-costs-you",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "Xd6iQy1NoBvyei09KqKRLb",
+      "textEdits": 7,
+      "contentSha256": "971675faa53917fdeb32995e292ceb06c80e33812196d43d6c371363110f8cb3"
+    },
+    {
+      "id": "editorial-blog-reading-a-hashrate-chart-honestly",
+      "type": "editorialArticle",
+      "status": "draft_verified",
+      "draftId": "drafts.editorial-blog-reading-a-hashrate-chart-honestly",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "JYRqnCqPqeQAja5ejqVoIy",
+      "textEdits": 6,
+      "contentSha256": "9e1f153e0f8397c470dbce3376a559df578c676cb707b491bb4f2ad11fdc8847"
+    },
+    {
+      "id": "editorial-academy-how-difficulty-adjustment-works",
+      "type": "editorialArticle",
+      "status": "draft_verified",
+      "draftId": "drafts.editorial-academy-how-difficulty-adjustment-works",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "Mac7TZNCor7fzOhjX9rXjl",
+      "textEdits": 3,
+      "contentSha256": "ec52df00325e8e576aa0be4c241602ced6f824a4dfde2eef28f5b3c8d575df9e"
+    },
+    {
+      "id": "editorial-academy-what-hashprice-means",
+      "type": "editorialArticle",
+      "status": "draft_verified",
+      "draftId": "drafts.editorial-academy-what-hashprice-means",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "Mac7TZNCor7fzOhjX9rgYw",
+      "textEdits": 8,
+      "contentSha256": "3b188165c1719d295932468b503d2f1ce28cdf994334482f45e31532fd6b79ec"
+    },
+    {
+      "id": "editorial-academy-why-forecasts-need-error-bars",
+      "type": "editorialArticle",
+      "status": "draft_verified",
+      "draftId": "drafts.editorial-academy-why-forecasts-need-error-bars",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "Xd6iQy1NoBvyei09Kq5IgV",
+      "textEdits": 9,
+      "contentSha256": "f07f415c6ef2d6ef2bcd26443184d2caec43a1d6a5893c9a9c1f37c428c03cd7"
+    },
+    {
+      "id": "tool-guide-difficulty-exposure",
+      "type": "toolGuide",
+      "status": "draft_verified",
+      "draftId": "drafts.tool-guide-difficulty-exposure",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "k8hlzjuhoL42eLegpQK2Du",
+      "textEdits": 20,
+      "contentSha256": "4e6bf8d8ec0541c46ff22c2451f0e1d5c4cd51d680bcf98d4d3fe67c0459107d"
+    },
+    {
+      "id": "tool-guide-fleet-payback",
+      "type": "toolGuide",
+      "status": "draft_verified",
+      "draftId": "drafts.tool-guide-fleet-payback",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "k8hlzjuhoL42eLegpQKMpQ",
+      "textEdits": 24,
+      "contentSha256": "23b1dfbdeaac35e05b6c0979b62e938fc3a59b7a69d2adf114d67c7072ace70d"
+    },
+    {
+      "id": "tool-guide-hosting-effective-rate",
+      "type": "toolGuide",
+      "status": "draft_verified",
+      "draftId": "drafts.tool-guide-hosting-effective-rate",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "k8hlzjuhoL42eLegpQKiTJ",
+      "textEdits": 18,
+      "contentSha256": "2a03d9bd4daacd2f698f662c0fcf30c4192da456be9258d5b6dd0b56d7c43998"
+    },
+    {
+      "id": "docs-overview",
+      "type": "docPage",
+      "status": "draft_verified",
+      "draftId": "drafts.docs-overview",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "k8hlzjuhoL42eLegpPmf0Z",
+      "textEdits": 4,
+      "contentSha256": "50cc25cba8f1877dc3f7f78927a7cd110899e426be651d19fd4e6cf48f9fe040"
+    },
+    {
+      "id": "docs-bitcoin-mining-difficulty",
+      "type": "docPage",
+      "status": "draft_verified",
+      "draftId": "drafts.docs-bitcoin-mining-difficulty",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "k8hlzjuhoL42eLegpPhyrM",
+      "textEdits": 2,
+      "contentSha256": "66c138ae3fcc64a50d05602497089d77ae6500abfaa073f521960c28a7ce166d"
+    },
+    {
+      "id": "docs-what-doefin-settles-on",
+      "type": "docPage",
+      "status": "draft_verified",
+      "draftId": "drafts.docs-what-doefin-settles-on",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "JYRqnCqPqeQAja5ejqPrL0",
+      "textEdits": 1,
+      "contentSha256": "a145086603d31f3984b8fda7de04cbe0ea596de5f18027bb766b9ae8e33e5188"
+    },
+    {
+      "id": "docs-prices-and-probability",
+      "type": "docPage",
+      "status": "draft_verified",
+      "draftId": "drafts.docs-prices-and-probability",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "Mac7TZNCor7fzOhjX9naR5",
+      "textEdits": 4,
+      "contentSha256": "57a32a7651b9da948e0e4e5a4080e584424ec23382134e0ac0588bc846a0ebc5"
+    },
+    {
+      "id": "docs-risks-and-limitations",
+      "type": "docPage",
+      "status": "draft_verified",
+      "draftId": "drafts.docs-risks-and-limitations",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "k8hlzjuhoL42eLegpPnngk",
+      "textEdits": 1,
+      "contentSha256": "d880eac2930a2a51be92d68886c940bef46054a0658bd43c5b1c084b36d563a4"
+    },
+    {
+      "id": "docs-your-first-trade",
+      "type": "docPage",
+      "status": "draft_verified",
+      "draftId": "drafts.docs-your-first-trade",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "Mac7TZNCor7fzOhjX9ny6T",
+      "textEdits": 2,
+      "contentSha256": "285be46bf0bfc614b1c475a9277e9a1d213b5727933700617a687738853ad414"
+    },
+    {
+      "id": "docs-market-vs-limit-orders",
+      "type": "docPage",
+      "status": "draft_verified",
+      "draftId": "drafts.docs-market-vs-limit-orders",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "k8hlzjuhoL42eLegpQL2HJ",
+      "textEdits": 1,
+      "contentSha256": "87ee4d7ee69ddb9d164367959505b9b28524cccb97f91204898c1cd4ced7c934"
+    },
+    {
+      "id": "docs-order-management",
+      "type": "docPage",
+      "status": "draft_verified",
+      "draftId": "drafts.docs-order-management",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "k8hlzjuhoL42eLegpPlSjZ",
+      "textEdits": 3,
+      "contentSha256": "3c5811cdf9dee85f18b7bb0324c8bc519a0c2989e11c595ca3af4e7fd3b819dc"
+    },
+    {
+      "id": "docs-redeeming-positions",
+      "type": "docPage",
+      "status": "draft_verified",
+      "draftId": "drafts.docs-redeeming-positions",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "k8hlzjuhoL42eLegpPnWuu",
+      "textEdits": 1,
+      "contentSha256": "320f4b010bcae87c407bc2325c8048d7277a6f0e70216decc6e00186b996db9a"
+    },
+    {
+      "id": "docs-withdrawing-funds",
+      "type": "docPage",
+      "status": "draft_verified",
+      "draftId": "drafts.docs-withdrawing-funds",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "Mac7TZNCor7fzOhjX9nwIB",
+      "textEdits": 1,
+      "contentSha256": "74f0c36c7000744ed0278244a85ee0fd73f37872acfd57c1afdd6056b26cba75"
+    },
+    {
+      "id": "docs-collateral-tokens",
+      "type": "docPage",
+      "status": "draft_verified",
+      "draftId": "drafts.docs-collateral-tokens",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "Mac7TZNCor7fzOhjX9miD2",
+      "textEdits": 2,
+      "contentSha256": "746863721f14bbf74c795d612f5d79d335fcb3d67188addb356ba828c3557500"
+    },
+    {
+      "id": "docs-smart-contracts",
+      "type": "docPage",
+      "status": "draft_verified",
+      "draftId": "drafts.docs-smart-contracts",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "Mac7TZNCor7fzOhjX9npZN",
+      "textEdits": 3,
+      "contentSha256": "8707ee20fb1ed08215c56943a1a42e844dd2a6c9ad733a15d55c81ea7d24cc87"
+    },
+    {
+      "id": "docs-methodology-and-evidence",
+      "type": "docPage",
+      "status": "draft_verified",
+      "draftId": "drafts.docs-methodology-and-evidence",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "JYRqnCqPqeQAja5ejqOF3b",
+      "textEdits": 1,
+      "contentSha256": "b02bee5581e71282e68f98db2dba78c8ef6bd71bbedfa0df8285f5d856233fef"
+    },
+    {
+      "id": "glossary-hashprice",
+      "type": "glossaryTerm",
+      "status": "draft_verified",
+      "draftId": "drafts.glossary-hashprice",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "Mac7TZNCor7fzOhjX9puYj",
+      "textEdits": 2,
+      "contentSha256": "02c95655099f0d015c9d3cdefd0505be2933bab7923e5890445f829fb2173dc8"
+    },
+    {
+      "id": "glossary-halving",
+      "type": "glossaryTerm",
+      "status": "draft_verified",
+      "draftId": "drafts.glossary-halving",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "k8hlzjuhoL42eLegpQ02is",
+      "textEdits": 1,
+      "contentSha256": "bbeb0234059695f966efe159a005380bed1d35d55cd22b46d35fa2e676b7b210"
+    },
+    {
+      "id": "glossary-terahash",
+      "type": "glossaryTerm",
+      "status": "draft_verified",
+      "draftId": "drafts.glossary-terahash",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "Mac7TZNCor7fzOhjX9qnd7",
+      "textEdits": 1,
+      "contentSha256": "4dbd02d2df037bb617dbe97bf9070d28b908e4e8e9a22466ff3c29611727be74"
+    },
+    {
+      "id": "glossary-pool-luck",
+      "type": "glossaryTerm",
+      "status": "draft_verified",
+      "draftId": "drafts.glossary-pool-luck",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "JYRqnCqPqeQAja5ejqTxwr",
+      "textEdits": 1,
+      "contentSha256": "fc7a1b41ea5376d6054d30668183a4fc3baf1c52684289f1d8994ae0f73fee78"
+    },
+    {
+      "id": "glossary-epoch",
+      "type": "glossaryTerm",
+      "status": "draft_verified",
+      "draftId": "drafts.glossary-epoch",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "JYRqnCqPqeQAja5ejqS67I",
+      "textEdits": 1,
+      "contentSha256": "e3d9f34c36c7c49de4e2d1ff662601ed6d1391441655112738b70c2c3ec8346b"
+    },
+    {
+      "id": "glossary-confidence-interval",
+      "type": "glossaryTerm",
+      "status": "draft_verified",
+      "draftId": "drafts.glossary-confidence-interval",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "Mac7TZNCor7fzOhjX9p1xq",
+      "textEdits": 3,
+      "contentSha256": "c8747509f76b016e1622a724b9eefeb07e61986cea8840ad9f86f8afeb882bf5"
+    },
+    {
+      "id": "glossary-hashrate",
+      "type": "glossaryTerm",
+      "status": "draft_verified",
+      "draftId": "drafts.glossary-hashrate",
+      "draftRevision": "k8hlzjuhoL42eLegpUdl4H",
+      "publishedRevisionUnchanged": "k8hlzjuhoL42eLegpQ1NrV",
+      "textEdits": 1,
+      "contentSha256": "e461961d722dd05e26d7f9c710e7f67f5f51eb4683708dfef7c5f8fe7aa7163b"
+    }
+  ]
+}

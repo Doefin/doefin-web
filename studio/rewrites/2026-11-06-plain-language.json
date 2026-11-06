@@ -1,0 +1,1505 @@
+[
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "summary",
+    "before": "A worked approach to comparing forecasts and outcomes, using a synthetic dataset rather than measured estimator performance.",
+    "after": "How to compare difficulty forecasts fairly, with a worked calculation using made-up values. The example does not measure any forecaster’s performance.",
+    "verdict": "Change",
+    "note": "States the question and synthetic limitation directly; no measured-performance claim."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-0\"].heading",
+    "before": "Compare the same question",
+    "after": "Match the target and forecast time",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-0\"].paragraphs[0]",
+    "before": "A fair comparison starts with the same target block, difficulty-change definition and forecast time. Comparing a forecast issued early in the adjustment period with a later one gives the later forecast information the earlier one did not have.",
+    "after": "A fair comparison asks each forecast the same question: what will the difficulty change be at the same target block? Use the same definition of difficulty change and compare forecasts issued at the same time. A later forecast has information that an earlier one did not.",
+    "verdict": "Change",
+    "note": "Preserves same target, definition, timing, information advantage, original records, provenance fields and treatment of failures or missing forecasts."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-0\"].paragraphs[1]",
+    "before": "Record the forecast as it was issued, the input block height, source, model version and outcome definition. Preserve failed and missing forecasts in the evaluation record rather than selecting only successful predictions.",
+    "after": "Keep each forecast as originally issued, together with its input block height, source, model version and definition of the outcome. Include failed and missing forecasts in the record. Selecting only successful predictions would change the comparison.",
+    "verdict": "Change",
+    "note": "Preserves same target, definition, timing, information advantage, original records, provenance fields and treatment of failures or missing forecasts."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-1\"].heading",
+    "before": "Measure error and uncertainty separately",
+    "after": "Error and forecast ranges",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-1\"].paragraphs[0]",
+    "before": "Absolute error is the distance between a forecast and its outcome. Mean absolute error averages that distance over the selected observations. It describes that evaluation set; it does not establish how a model will perform in another period.",
+    "after": "Absolute error is the size of the gap between a forecast and its outcome. Mean absolute error averages those gaps across the forecasts being tested. It describes that sample, not how the model will perform in another period.",
+    "verdict": "Change",
+    "note": "Retains error definition, sample limit, coverage versus width and calibration requirements; explains calibration rather than leaving jargon unexplained."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-1\"].paragraphs[1]",
+    "before": "An interval needs a separate check: how often did outcomes fall inside the stated range, and how wide was it? Wide intervals can cover many outcomes without being useful. Calibration needs enough independent observations and an explicit evaluation window.",
+    "after": "A forecast range needs a separate test. How often did it contain the outcome, and how wide was it? A wide range can contain many outcomes while telling you little. Testing whether ranges match their stated confidence level needs enough independent observations over a clearly defined period.",
+    "verdict": "Change",
+    "note": "Retains error definition, sample limit, coverage versus width and calibration requirements; explains calibration rather than leaving jargon unexplained."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-2\"].heading",
+    "before": "What this example establishes",
+    "after": "What the worked example can show",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-2\"].paragraphs[0]",
+    "before": "The linked worked example makes the arithmetic inspectable. Its forecast/outcome pairs were authored for an educational exercise. They are not captured predictions, network observations or results for Doefin or another estimator.",
+    "after": "The linked example shows each step of the error calculation. Its forecasts and outcomes were made up for the exercise. They are not captured predictions, network observations or results for Doefin or another estimator.",
+    "verdict": "Change",
+    "note": "Preserves synthetic origin and every unsupported inference; replaces inspectable and authored with familiar language."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-2\"].paragraphs[1]",
+    "before": "There is no verified comparison of public forecasters on this page. It cannot support a ranking, an accuracy advantage, a volatility estimate or a claim about which forecasters publish intervals.",
+    "after": "This page has no verified comparison of public forecasters. It cannot establish a provider ranking, an accuracy advantage, a volatility estimate or which forecasters publish ranges.",
+    "verdict": "Change",
+    "note": "Preserves synthetic origin and every unsupported inference; replaces inspectable and authored with familiar language."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-0\"].heading",
+    "before": "Start with the observable inputs",
+    "after": "Which inputs does a forecast use?",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-0\"].paragraphs[0]",
+    "before": "A difficulty projection can use the current difficulty, the adjustment boundary and the elapsed time between observed Bitcoin blocks. The method must say which blocks it includes and when those inputs were captured.",
+    "after": "A difficulty forecast can use current difficulty, the block where the next adjustment occurs and the time elapsed between observed Bitcoin blocks. The method needs to identify those blocks and when the inputs were recorded.",
+    "verdict": "Change",
+    "note": "Keeps available input types, captured-time requirement, irregular blocks, projection assumption and estimated calendar timing."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-0\"].paragraphs[1]",
+    "before": "Blocks arrive irregularly. Projecting from the pace so far assumes something about the rest of the adjustment period; it does not measure a future network value. Calendar timing is also an estimate.",
+    "after": "Blocks do not arrive at regular intervals. Extending the pace so far into the rest of the adjustment period requires an assumption about future block timing. It does not measure a future network value. The estimated calendar date can change too.",
+    "verdict": "Change",
+    "note": "Keeps available input types, captured-time requirement, irregular blocks, projection assumption and estimated calendar timing."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-1\"].heading",
+    "before": "Make the calculation reproducible",
+    "after": "How can someone repeat the calculation?",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-1\"].paragraphs[0]",
+    "before": "Publish the input block heights and timestamps, target adjustment height, formula, protocol constraints and rounding rules. Identify the method version so another reader can reproduce that particular output.",
+    "after": "To repeat a forecast calculation, a reader needs the input block heights and timestamps, target adjustment height, formula, protocol constraints, rounding rules and method version.",
+    "verdict": "Change",
+    "note": "Retains every reproducibility field and distinction between projection, observed level and market-implied probability."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-1\"].paragraphs[1]",
+    "before": "Keep the projected percentage change distinct from the observed difficulty level and from any market-implied probability. They answer different questions.",
+    "after": "A projected percentage change, an observed difficulty level and a probability implied by a market answer different questions. Report them separately.",
+    "verdict": "Change",
+    "note": "Retains every reproducibility field and distinction between projection, observed level and market-implied probability."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-2\"].heading",
+    "before": "Validate any uncertainty interval",
+    "after": "What supports the forecast range?",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-2\"].paragraphs[0]",
+    "before": "An uncertainty range needs a documented construction method and an evaluation against outcomes. State the fitting period, forecast timing and held-out evaluation window; report interval width together with observed coverage.",
+    "after": "Explain how the range was calculated, then test it against outcomes. Give the period used to fit the method, when each forecast was made and a separate test period that was not used to fit it. Report how wide the ranges were and how often they contained the outcome.",
+    "verdict": "Change",
+    "note": "Explains held-out evaluation, width, coverage and calibration; preserves both absence of fitting and calibrated evidence and direction-probability limitation."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-2\"].paragraphs[1]",
+    "before": "The ranges in this website’s examples use made-up values. They have not been fitted or calibrated, so they do not establish a coverage level or the probability of a change in direction.",
+    "after": "The ranges in this website’s examples use made-up values. They have not been fitted to data or tested against a stated confidence level. They do not establish how often outcomes will fall within a range or the probability that difficulty will change direction.",
+    "verdict": "Change",
+    "note": "Explains held-out evaluation, width, coverage and calibration; preserves both absence of fitting and calibrated evidence and direction-probability limitation."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-3\"].heading",
+    "before": "Read the status of the evidence",
+    "after": "What evidence is available here?",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-3\"].paragraphs[0]",
+    "before": "This page explains what you need to evaluate a forecast. It does not document a verified live forecasting service, publish a measured accuracy record or promise an unchangeable archive.",
+    "after": "This page explains how to assess a forecast method. It does not document a verified live forecasting service, provide measured accuracy results or promise an archive that cannot be changed.",
+    "verdict": "Change",
+    "note": "Preserves service, performance and archive boundaries; distinguishes captured observations from synthetic arithmetic and retains original record requirements."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-3\"].paragraphs[1]",
+    "before": "The observed-adjustment report and public API publish captured network data separately from forecasts. Use the synthetic forecast report to reproduce error arithmetic; a measured forecast comparison still requires original timestamped predictions, matched lead times, outcomes and corrections.",
+    "after": "The historical adjustment report and public API provide captured network observations, separately from forecasts. The synthetic forecast report shows the error calculation. Measuring forecast accuracy still needs original predictions with timestamps, comparable forecast lead times, outcomes and corrections.",
+    "verdict": "Change",
+    "note": "Preserves service, performance and archive boundaries; distinguishes captured observations from synthetic arithmetic and retains original record requirements."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "summary",
+    "before": "A reproducible analysis of a frozen mempool.space capture: findings, CSV, source payload and version metadata. Observed changes are not forecast performance.",
+    "after": "A fixed snapshot of 25 difficulty adjustments, with the source data and calculations. These observations do not measure forecast performance.",
+    "verdict": "Change",
+    "note": "Leads with findings already in section 0; preserves source, fixed capture, reproducibility and performance boundary. Parent review: tightened the card/metadata summary; supporting detail and all qualifications remain in the article."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "seoSummary",
+    "before": "Reproduce 25 observed difficulty changes from a frozen mempool.space capture. Inspect findings, CSV and sources; this is not forecast performance.",
+    "after": "Explore 25 recorded difficulty changes from a fixed mempool.space snapshot. Download the calculations and sources. This does not measure forecast performance.",
+    "verdict": "Change",
+    "note": "Preserves number, fixed source, public evidence and forecast-performance limit."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-0\"].heading",
+    "before": "A defined window, not a forecast backtest",
+    "after": "25 adjustments: 11 rises and 14 falls",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-0\"].paragraphs[0]",
+    "before": "The capture contains 25 consecutive observed difficulty changes between 2025-11-12 and 2026-10-16. There were 11 increases and 14 decreases. Mean absolute observed change was 3.75%; the minimum was -11.16% and maximum 14.73%.",
+    "after": "The dataset records 25 consecutive difficulty changes between 2025-11-12 and 2026-10-16: 11 increases and 14 decreases. The mean absolute change was 3.75%. The minimum change was -11.16% and the maximum was 14.73%.",
+    "verdict": "Change",
+    "note": "Preserves all figures, dates and all excluded interpretations; explains calibrated uncertainty without the technical label."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-0\"].paragraphs[1]",
+    "before": "These describe difficulty adjustments in this historical window. They do not measure forecast error, calibrated uncertainty, mining profit or a trading return. The capture is a small descriptive analysis, not evidence of a forecasting advantage.",
+    "after": "These figures describe network difficulty in this historical period. They do not measure forecast error, the reliability of forecast ranges, mining profit or a trading return. This small descriptive study does not show a forecasting advantage.",
+    "verdict": "Change",
+    "note": "Preserves all figures, dates and all excluded interpretations; explains calibrated uncertainty without the technical label."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-1\"].heading",
+    "before": "Reproduce the arithmetic",
+    "after": "How the changes were calculated",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-1\"].paragraphs[0]",
+    "before": "The source is the mempool.space one-year difficulty-adjustment endpoint, captured on 22 October 2026. Sort the 26 supplied boundaries by block height and check consecutive boundaries are 2,016 blocks apart. Exclude the earliest because the preceding difficulty is outside this capture. For each remaining boundary, compute 100 × (new difficulty / previous difficulty − 1). Ignore the provider’s rounded adjustment ratio.",
+    "after": "The source is the mempool.space one-year difficulty-adjustment API, captured on 22 October 2026. To repeat the calculation, sort its 26 adjustment blocks by height and check that consecutive blocks are 2,016 blocks apart. Exclude the earliest: its preceding difficulty is outside the snapshot. For each remaining adjustment, calculate 100 × (new difficulty / previous difficulty − 1). Do not use the provider’s rounded adjustment ratio.",
+    "verdict": "Change",
+    "note": "Preserves endpoint scope/date, 26 boundaries, 2,016 gap, earliest exclusion, exact formula, no rounded ratio, 25 mean, precision and SHA-256 scope; explains checksum purpose."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-1\"].paragraphs[1]",
+    "before": "The mean absolute change is the arithmetic mean of the 25 absolute percentage changes. The retained values use the provider’s difficulty precision; display rounding is separate. The manifest includes SHA-256 digests for the source bytes and CSV/JSON distributions, making later changes detectable against this version.",
+    "after": "The mean absolute change averages the size of the 25 percentage changes, ignoring whether each is positive or negative. Calculations retain the provider’s full difficulty precision; rounding affects only the display. The citation manifest lists SHA-256 digests, which are file checksums, for the original response and CSV/JSON downloads. These let readers detect changes from this version.",
+    "verdict": "Change",
+    "note": "Preserves endpoint scope/date, 26 boundaries, 2,016 gap, earliest exclusion, exact formula, no rounded ratio, 25 mean, precision and SHA-256 scope; explains checksum purpose."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-2\"].heading",
+    "before": "Inspect provenance and limitations",
+    "after": "Where the data comes from",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-2\"].paragraphs[0]",
+    "before": "The capture includes exact source response bytes and matching boundary-block metadata for the first and last retained observations. Those checks use the same provider, so they are consistency checks rather than verification by an independent Bitcoin node. The rolling endpoint window fixes the inclusion rule; it is not a selection of profitable periods.",
+    "after": "The downloads include the source response exactly as received, plus matching block details for the first and last retained observations. These checks use the same provider. They show consistency within that source, not independent verification against a Bitcoin node. The API’s rolling window determines which adjustments are included; the study does not select profitable periods.",
+    "verdict": "Change",
+    "note": "Preserves exact bytes, endpoint boundary metadata, same-source limit, inclusion rule, access, version, stable identity, no DOI, new-version requirement and timestamp/hosting limits."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-2\"].paragraphs[1]",
+    "before": "All findings and downloads are available without email. Version 1.0.0 has a stable dataset identifier and a citation manifest. No DOI has been registered or deposited. Updating the dataset requires a new version; local digests do not establish an external publication timestamp or immutable hosting.",
+    "after": "All findings and downloads are available without email. Version 1.0.0 has a stable dataset identifier and a citation manifest. No DOI, a persistent research identifier, has been registered or deposited. An update requires a new version. Local file checksums do not prove an external publication time or guarantee that hosted files cannot change.",
+    "verdict": "Change",
+    "note": "Preserves exact bytes, endpoint boundary metadata, same-source limit, inclusion rule, access, version, stable identity, no DOI, new-version requirement and timestamp/hosting limits."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-3\"].heading",
+    "before": "Keep forecasts separate from observations",
+    "after": "Why these are not forecast results",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-3\"].paragraphs[0]",
+    "before": "The prospective forecast archive currently has zero published records. The dated forecast examples and arithmetic scoreboard elsewhere remain clearly labelled synthetic. Historical observed adjustments cannot be counted as previously published predictions.",
+    "after": "The forecast archive has zero published records. The dated forecasts and accuracy examples elsewhere on this site are labelled synthetic because they use made-up values. A historical difficulty adjustment is not a previously published prediction.",
+    "verdict": "Change",
+    "note": "Preserves zero archive, synthetic distinction, all original evidence fields, matched lead-time cohorts, missing providers and independent pre-event publication receipts."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-3\"].paragraphs[1]",
+    "before": "Before scoring a provider, preserve its prediction, input height, target, model version, stated interval and time-stamped original capture. Compare the same lead-time cohorts and retain missing providers. Original publication before an outcome or market listing requires separate independently verifiable receipts; this site cannot create them after the fact.",
+    "after": "Scoring a provider requires its original prediction, input height, target, model version, stated range and a timestamped capture. Group forecasts by how far ahead they were made and record providers with missing forecasts. Proving publication before an outcome or market listing requires separate, independently verifiable records. This site cannot create that proof after the event.",
+    "verdict": "Change",
+    "note": "Preserves zero archive, synthetic distinction, all original evidence fields, matched lead-time cohorts, missing providers and independent pre-event publication receipts."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "summary",
+    "before": "Compare production and payback across assumptions instead of treating one growth rate as a forecast.",
+    "after": "A difficulty-growth assumption changes expected production and fleet payback. Comparing several paths shows how much the result depends on that assumption.",
+    "verdict": "Change",
+    "note": "Explains what the comparison reveals instead of directing an internal review. Keeps the distinction between a scenario and a forecast in section 0; no measured result or new forecast (habits 1, 3)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-0\"].heading",
+    "before": "State the assumption",
+    "after": "An assumption is not a forecast",
+    "verdict": "Change",
+    "note": "Names the distinction the section teaches (E31)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-0\"].paragraphs[0]",
+    "before": "A fixed difficulty-growth rate is an input to a scenario. It is not evidence of what the network will do. Label its time period and keep it separate from measured historical data or a dated forecast.",
+    "after": "A fixed difficulty-growth rate describes a scenario, with a stated period over which the growth is assumed to occur. It is an assumption, not measured historical data or a dated forecast of what the network will do.",
+    "verdict": "Change",
+    "note": "Keeps scenario/input status, time period, historical-data distinction and dated-forecast distinction. Replaces an instruction to label data with the reason a reader needs the label (habit 3, E31)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].heading",
+    "before": "Compare the result, not only the input",
+    "after": "How growth changes production and payback",
+    "verdict": "Change",
+    "note": "Names the effect being examined rather than telling a reviewer what to compare (habit 1)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].paragraphs[0]",
+    "before": "Run the same fleet assumptions with different difficulty paths. Compare the resulting production and payback alongside power cost, uptime, capital cost and Bitcoin price. Holding the other inputs constant helps show which change drives the difference.",
+    "after": "Changing the difficulty path changes the production and payback estimates for a fleet. To see the effect of that assumption, compare several paths while keeping power cost, uptime, capital cost and Bitcoin price constant. Otherwise, a difference in the result may come from another input.",
+    "verdict": "Change",
+    "note": "Preserves fleet comparison, production/payback, all four other inputs and the reason for holding them constant. No new number, financial example or measured result (habits 1, 3)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].heading",
+    "before": "Keep the decision proportional to the evidence",
+    "after": "What a calculator cannot decide",
+    "verdict": "Change",
+    "note": "Replaces internal review instruction with the concrete limitation a professional reader needs (habit 4)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].paragraphs[0]",
+    "before": "A simplified calculator exposes sensitivity; it does not determine whether a position is suitable or economical. That assessment also needs timing, transaction costs, available liquidity, operational constraints and the decision-maker’s objectives. This article provides no measured threshold at which an operation should hedge.",
+    "after": "A simplified calculator shows how sensitive a result is to the assumptions. It cannot tell you whether a position suits your objectives or makes economic sense. That also depends on timing, transaction costs, available liquidity and operational constraints. This article provides no measured threshold at which an operation should hedge.",
+    "verdict": "Change",
+    "note": "Preserves suitability and economics limits, every named decision factor, objectives and exact no-measured-hedging-threshold qualification. Defines sensitivity through the explanation (habit 4). Matteo should review position-suitability wording before publication."
+  },
+  {
+    "_id": "editorial-blog-reading-a-hashrate-chart-honestly",
+    "_type": "editorialArticle",
+    "path": "summary",
+    "before": "Check the observation window and uncertainty before interpreting a change in estimated network hashrate.",
+    "after": "A change in estimated network hashrate can reflect the observation window. The estimate and its uncertainty need to be read together.",
+    "verdict": "Change",
+    "note": "Introduces the reader’s interpretation question; retains the window and uncertainty as the two checks, without claiming a particular movement is noise (habit 3)."
+  },
+  {
+    "_id": "editorial-blog-reading-a-hashrate-chart-honestly",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-0\"].heading",
+    "before": "An estimate from observable inputs",
+    "after": "How network hashrate is estimated",
+    "verdict": "Change",
+    "note": "Gives the reader a concrete subject. All three Matteo-approved E30 paragraphs remain byte-for-byte unchanged."
+  },
+  {
+    "_id": "editorial-blog-reading-a-hashrate-chart-honestly",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].heading",
+    "before": "Compare like with like",
+    "after": "Why two charts can differ",
+    "verdict": "Change",
+    "note": "Names the question answered by this section (E31)."
+  },
+  {
+    "_id": "editorial-blog-reading-a-hashrate-chart-honestly",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].paragraphs[0]",
+    "before": "Short and long windows can produce different estimates because blocks arrive irregularly. Two charts are comparable only when their timestamps and difficulty inputs also match. A chart alone does not establish that mining capacity has changed.",
+    "after": "Blocks arrive irregularly, so estimates over short and long windows can differ. Comparing two charts also requires matching timestamps and difficulty inputs. A change on a chart alone does not establish that mining capacity has changed.",
+    "verdict": "Change",
+    "note": "Preserves irregular arrival, window differences, timestamp/difficulty matching and the limit on inferring capacity. No claim about a particular observed movement (habit 3)."
+  },
+  {
+    "_id": "editorial-blog-reading-a-hashrate-chart-honestly",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].heading",
+    "before": "Ask how uncertainty was estimated",
+    "after": "What an error band can tell you",
+    "verdict": "Change",
+    "note": "Replaces an instruction to ask for evidence with the question the evidence answers (E31)."
+  },
+  {
+    "_id": "editorial-blog-reading-a-hashrate-chart-honestly",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].paragraphs[0]",
+    "before": "An error band should explain how it was calculated and which assumptions it uses. This guide does not report measured band widths or identify a recent network movement as noise.",
+    "after": "An error band shows uncertainty under a set of assumptions. Its meaning depends on how it was calculated, so the method and assumptions need to accompany it. This article does not report measured band widths or identify a recent network movement as noise.",
+    "verdict": "Change",
+    "note": "Explains why construction and assumptions matter; preserves both explicit limits on measured width and attribution of recent movement to noise. No performance claim (habits 3, 4)."
+  },
+  {
+    "_id": "editorial-academy-how-difficulty-adjustment-works",
+    "_type": "editorialArticle",
+    "path": "summary",
+    "before": "Difficulty sets the work needed to find a valid block. How it adjusts, what it does to expected BTC production and why its timing is an estimate.",
+    "after": "Difficulty sets the work needed to find a valid block. Adjustments affect expected BTC production; the next adjustment’s date remains an estimate.",
+    "verdict": "Change",
+    "note": "Turns the fragment into connected explanation. Definition and production/timing distinctions preserved (habit 3). Parent review: tightened the card/metadata summary; supporting detail and all qualifications remain in the article."
+  },
+  {
+    "_id": "editorial-academy-how-difficulty-adjustment-works",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-0\"].paragraphs[0]",
+    "before": "Bitcoin adjusts mining difficulty every 2,016 blocks to target an average block interval of about ten minutes. Each adjustment uses the elapsed time of the preceding period: faster block production raises difficulty and slower production lowers it, within the protocol’s limits.",
+    "after": "Bitcoin adjusts mining difficulty every 2,016 blocks to target an average block interval of about ten minutes. The adjustment uses the time taken by the preceding period. Faster block production raises difficulty and slower production lowers it, within the protocol’s limits.",
+    "verdict": "Change",
+    "note": "Splits the long second sentence. Keeps every numeric fact, averaging qualifier, preceding-period basis, directions and protocol limits. No new mechanism (habit 3, E29)."
+  },
+  {
+    "_id": "editorial-academy-how-difficulty-adjustment-works",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].paragraphs[0]",
+    "before": "Individual blocks arrive irregularly. A target block height is specific, but the calendar date when it will arrive is estimated. A difficulty forecast projects the adjustment before the observation is complete.",
+    "after": "Individual blocks arrive irregularly, so a specified block height does not give an exact calendar date. A difficulty forecast estimates the next adjustment before all the blocks in the observation period have arrived.",
+    "verdict": "Change",
+    "note": "Connects irregular blocks to estimated calendar timing and explains the incomplete observation period. Preserves specific height versus estimated date and forecast status (habit 3)."
+  },
+  {
+    "_id": "editorial-academy-what-hashprice-means",
+    "_type": "editorialArticle",
+    "path": "summary",
+    "before": "Read expected mining revenue per unit of hashrate and time, with the denomination and assumptions visible.",
+    "after": "Hashprice measures expected mining revenue per unit of hashrate and time. Its currency, units and calculation assumptions matter when comparing figures.",
+    "verdict": "Change",
+    "note": "Replaces a review instruction with what hashprice describes and why comparisons require care. Keeps expected revenue, time, hashrate, denomination and assumptions (habit 3)."
+  },
+  {
+    "_id": "editorial-academy-what-hashprice-means",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-0\"].paragraphs[0]",
+    "before": "Hashprice expresses mining revenue per unit of hashrate over a stated time period. It can be denominated in Bitcoin or converted into a currency such as US dollars. Always check those units before comparing figures.",
+    "after": "Hashprice expresses mining revenue per unit of hashrate over a stated time period. It can be denominated in Bitcoin or converted into a currency such as US dollars. A comparison needs the same currency, hashrate units and time period.",
+    "verdict": "Change",
+    "note": "Keeps the natural definition and denomination examples. Makes the units check specific using the dimensions already stated, without adding example values (habit 3)."
+  },
+  {
+    "_id": "editorial-academy-what-hashprice-means",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].heading",
+    "before": "Check the inputs",
+    "after": "Why published hashprices can differ",
+    "verdict": "Change",
+    "note": "Replaces internal checking language with the reader’s concrete question (E31)."
+  },
+  {
+    "_id": "editorial-academy-what-hashprice-means",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].paragraphs[0]",
+    "before": "The calculation depends on difficulty, block rewards and transaction fees. A currency-denominated version also depends on its Bitcoin price source. Different observation windows, averaging choices and price timestamps can produce different published values.",
+    "after": "Hashprice depends on difficulty, block rewards and transaction fees. When it is expressed in a currency such as US dollars, the Bitcoin price source also matters. Publishers can report different values if they use different observation periods, averaging methods or price timestamps.",
+    "verdict": "Change",
+    "note": "Preserves every calculation input and source of methodological difference, without attributing a real publisher discrepancy to any cause (habit 3)."
+  },
+  {
+    "_id": "editorial-academy-what-hashprice-means",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].heading",
+    "before": "Keep revenue distinct from profit",
+    "after": "Hashprice does not measure profit",
+    "verdict": "Change",
+    "note": "Makes the economic distinction explicit rather than instructing a reviewer to preserve it (habit 4)."
+  },
+  {
+    "_id": "editorial-academy-what-hashprice-means",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].paragraphs[0]",
+    "before": "Hashprice describes revenue, not an operation’s margin. Compare it with the relevant power, hosting, maintenance and other costs using compatible units. Fleet efficiency and uptime also affect the outcome.",
+    "after": "Hashprice describes revenue, not an operation’s margin. Profit also depends on power, hosting, maintenance and other costs, as well as fleet efficiency and uptime. Revenue and costs need to be expressed in compatible units for the comparison to be meaningful.",
+    "verdict": "Change",
+    "note": "Keeps the existing natural first sentence, all four cost categories, compatible units, efficiency and uptime. Adds no profit figure or claim about realised returns (habit 4)."
+  },
+  {
+    "_id": "editorial-academy-what-hashprice-means",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-3\"].heading",
+    "before": "Do not assume a constant fee share",
+    "after": "The fee share changes over time",
+    "verdict": "Change",
+    "note": "Names the changing quantity instead of prescribing an assumption (E31)."
+  },
+  {
+    "_id": "editorial-academy-what-hashprice-means",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-3\"].paragraphs[0]",
+    "before": "Transaction-fee revenue varies. A claim about its share of mining rewards needs a stated observation period and source. This guide makes no measured claim about the current share or the causes of differences between particular publishers.",
+    "after": "Transaction-fee revenue varies, so its share of mining rewards depends on the period being measured. A quoted share needs a source and an observation period. This guide makes no measured claim about the current share or the causes of differences between particular publishers.",
+    "verdict": "Change",
+    "note": "Connects the variable to the required context. Preserves variable fee revenue, observation period/source requirement and exact no-measured/current-share/publisher-attribution limitation (habit 3)."
+  },
+  {
+    "_id": "editorial-academy-why-forecasts-need-error-bars",
+    "_type": "editorialArticle",
+    "path": "title",
+    "before": "Why difficulty forecasts need uncertainty",
+    "after": "Why difficulty forecasts need a range",
+    "verdict": "Change",
+    "note": "Replaces the abstract phrase forecasts need uncertainty with the range discussed in the article. No slug or metadata date changes (E31)."
+  },
+  {
+    "_id": "editorial-academy-why-forecasts-need-error-bars",
+    "_type": "editorialArticle",
+    "path": "summary",
+    "before": "Assess a point forecast, its uncertainty range and the evidence for its accuracy as separate questions.",
+    "after": "A forecast estimates the next difficulty adjustment. Its range describes uncertainty. Assessing accuracy needs recorded forecasts and outcomes.",
+    "verdict": "Change",
+    "note": "Names the three separate questions: estimate, uncertainty and evidence of accuracy. Does not claim this site has validated either (habits 3, 4). Parent review: tightened the card/metadata summary; supporting detail and all qualifications remain in the article."
+  },
+  {
+    "_id": "editorial-academy-why-forecasts-need-error-bars",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-0\"].heading",
+    "before": "A projection is not an outcome",
+    "after": "Why a forecast changes",
+    "verdict": "Change",
+    "note": "Names the concrete question answered by incomplete block observations (E31)."
+  },
+  {
+    "_id": "editorial-academy-why-forecasts-need-error-bars",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-0\"].paragraphs[0]",
+    "before": "A point forecast estimates a future adjustment using information available at its issue time. Remaining blocks can change the observed pace and therefore the projection. The issue time matters when comparing forecasts.",
+    "after": "A point forecast is a single estimate of a future difficulty adjustment, based on information available when it was issued. As the remaining blocks arrive, the observed pace can change and so can the forecast. Comparing forecasts therefore requires their issue times as well as their values.",
+    "verdict": "Change",
+    "note": "Keeps future-adjustment estimate, issue-time information, remaining-block influence and timestamp comparison requirement. Explains point forecast without introducing a number (habit 3)."
+  },
+  {
+    "_id": "editorial-academy-why-forecasts-need-error-bars",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].paragraphs[0]",
+    "before": "A stated range should identify its assumptions, construction and intended coverage. A theoretical interval and an empirically fitted interval each need evaluation; neither is validated by its label alone.",
+    "after": "A forecast range needs an explanation of how it was calculated, which assumptions it uses and how often it is intended to contain the outcome. A range derived from a theoretical model and one fitted to observed data both need evaluation. The label alone does not show that either works.",
+    "verdict": "Change",
+    "note": "Explains construction, assumptions and intended coverage, theoretical versus empirical construction and the need to evaluate each. No asserted coverage, calibration or performance (habit 3)."
+  },
+  {
+    "_id": "editorial-academy-why-forecasts-need-error-bars",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].heading",
+    "before": "Evaluate accuracy and calibration",
+    "after": "Accuracy and coverage measure different things",
+    "verdict": "Change",
+    "note": "Names the actual distinction instead of directing an internal evaluation (habit 3)."
+  },
+  {
+    "_id": "editorial-academy-why-forecasts-need-error-bars",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].paragraphs[0]",
+    "before": "Point error measures the distance between a forecast and an outcome. Interval coverage measures how often outcomes fell inside a published band across an evaluation set. Also inspect interval width, lead time, missing observations and changes to the method.",
+    "after": "Point error measures the distance between a forecast and an outcome. Interval coverage measures how often outcomes fell inside a published band across a set of forecasts being evaluated. Neither measure gives the full picture on its own. The band’s width, how far ahead each forecast was issued, missing observations and changes to the method also matter.",
+    "verdict": "Change",
+    "note": "Retains the natural point-error definition and all evaluation factors. Explains evaluation set and lead time; makes no new empirical finding (habits 3, 4)."
+  },
+  {
+    "_id": "editorial-academy-why-forecasts-need-error-bars",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-3\"].heading",
+    "before": "Look for a reproducible record",
+    "after": "What evidence of accuracy requires",
+    "verdict": "Change",
+    "note": "Names what the record is needed to establish instead of instructing a reviewer to look for it (E31)."
+  },
+  {
+    "_id": "editorial-academy-why-forecasts-need-error-bars",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-3\"].paragraphs[0]",
+    "before": "Use original forecast captures, source outcomes and an explicit evaluation window. The sample data on this website demonstrates calculations only. It does not establish a calibrated interval, an accuracy ranking or a general claim about competing forecasters.",
+    "after": "An accuracy assessment needs the forecasts as originally issued, the source outcomes and a defined evaluation period so that someone else can repeat the comparison. The sample data on this website demonstrates calculations only. It does not establish a calibrated interval, an accuracy ranking or a general claim about competing forecasters.",
+    "verdict": "Change",
+    "note": "Connects reproducibility to original captures, source outcomes and evaluation window. Preserves both sample-data sentences verbatim, including all three evidence limits (habits 3, 4)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "article.summary",
+    "before": "Compare expected BTC production using your own assumptions. Production changes, costs and contract payouts are separate calculations.",
+    "after": "Compare expected BTC production under your own difficulty assumptions. Costs and contract payouts need separate calculations.",
+    "verdict": "Change",
+    "note": "States the calculation first, then its boundary. Keeps expected production separate from costs and payouts (E28, habit 3)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "whoFor",
+    "before": "For miners whose own expected BTC production changes with difficulty, within the calculator’s input range. There is no minimum fleet size at which this calculation becomes economically relevant; relevance depends on your own income and obligations. A hosting business can use it for the machines it owns; fee-only hosting income needs a separate model. Holding or selling mined BTC does not change the production calculation. Fixed-output commitments and sold hashrate need their own analysis.",
+    "after": "Use this if you mine BTC with your own machines and want to compare difficulty scenarios within the calculator’s input range. Fleet size alone does not decide whether a production change matters to your business; your income and obligations matter too. Hosting businesses can model machines they own, but need another model for fee-only income. Holding or selling mined BTC does not change expected production. Fixed-output commitments and sold hashrate need separate analysis.",
+    "verdict": "Change",
+    "note": "Replaces eligibility and economic-relevance abstractions with the reader’s task. Preserves the range, ownership, fee-only hosting, income/obligation, BTC-sale and commitment limits (habits 1, 2)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "howToUse[0]",
+    "before": "Enter your fleet’s expected average hashrate in EH/s. Divide TH/s by 1,000,000. If your pool average already includes downtime, do not deduct that downtime again.",
+    "after": "Enter your fleet’s expected average hashrate in EH/s. Divide TH/s by 1,000,000. If the pool average includes downtime, do not deduct it again.",
+    "verdict": "Change",
+    "note": "Follows visible controls and explains the result without internal model language. Keeps conversion, timing, sample, fee/subsidy and URL privacy boundaries (habits 3, 5)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "howToUse[1]",
+    "before": "Choose the horizon in modelled epochs. Each represents 2,016 target block intervals, about two weeks. This is a fixed-duration approximation, not a prediction of actual epoch dates.",
+    "after": "Use How far ahead to choose the number of modelled epochs. Each represents 2,016 target block intervals, about two weeks. Actual epoch dates can differ.",
+    "verdict": "Change",
+    "note": "Follows visible controls and explains the result without internal model language. Keeps conversion, timing, sample, fee/subsidy and URL privacy boundaries (habits 3, 5)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "howToUse[2]",
+    "before": "Check starting difficulty against a source you trust and enter it in Starting difficulty. Older calculator views also accept ?diffT= in the address. The default 127.48T is illustrative.",
+    "after": "Check a trusted source and enter its value in Starting difficulty. Older calculator views also accept ?diffT= in the address. The default 127.48T is illustrative.",
+    "verdict": "Change",
+    "note": "Follows visible controls and explains the result without internal model language. Keeps conversion, timing, sample, fee/subsidy and URL privacy boundaries (habits 3, 5)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "howToUse[3]",
+    "before": "Choose easier and harder difficulty scenarios for the whole horizon. The defaults −2.4% and +7.0% are invented sensitivity inputs, not a published forecast or a confidence interval.",
+    "after": "Choose an easier and a harder difficulty for the whole period. The defaults −2.4% and +7.0% are illustrative assumptions, not forecasts or a confidence interval.",
+    "verdict": "Change",
+    "note": "Follows visible controls and explains the result without internal model language. Keeps conversion, timing, sample, fee/subsidy and URL privacy boundaries (habits 3, 5)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "howToUse[4]",
+    "before": "Enter average transaction fees per block. The model adds the fixed 3.125 BTC subsidy, assumes both remain constant and excludes pool fees. Use a different model for a horizon that crosses a subsidy change.",
+    "after": "Enter Expected fees as average transaction fees per block. The model adds the fixed 3.125 BTC subsidy and holds both constant. It excludes pool fees and cannot model a subsidy change.",
+    "verdict": "Change",
+    "note": "Follows visible controls and explains the result without internal model language. Keeps conversion, timing, sample, fee/subsidy and URL privacy boundaries (habits 3, 5)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "howToUse[5]",
+    "before": "Read production at unchanged difficulty and both scenario values. Worst case vs today compares the harder scenario with the unchanged baseline; it does not measure cash-flow loss.",
+    "after": "Compare expected production at unchanged difficulty with each scenario. The harder case versus the starting case shows lower production, not a cash-flow loss.",
+    "verdict": "Change",
+    "note": "Follows visible controls and explains the result without internal model language. Keeps conversion, timing, sample, fee/subsidy and URL privacy boundaries (habits 3, 5)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "howToUse[6]",
+    "before": "BTC price converts the scenario spread into a USD illustration only. It changes no BTC result. Copy the URL to retain inputs, and share only assumptions you are comfortable making visible.",
+    "after": "Bitcoin price converts the scenario spread to a USD illustration; it changes no BTC result. Copy the URL to save your inputs. Anyone with the link can read them.",
+    "verdict": "Change",
+    "note": "Follows visible controls and explains the result without internal model language. Keeps conversion, timing, sample, fee/subsidy and URL privacy boundaries (habits 3, 5)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-0\"].typical",
+    "before": "The supported slider range is 0.01–30 EH/s. This technical input range is not an audience eligibility rule.",
+    "after": "The slider accepts 0.01–30 EH/s. This is an input limit, not a rule about who the calculator is for.",
+    "verdict": "Change",
+    "note": "Explains the input range without implying a typical market range or audience eligibility rule."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-3\"].means",
+    "before": "A constant USD conversion assumption for the spread.",
+    "after": "Your chosen USD price for converting the difference between the two production scenarios. It stays constant.",
+    "verdict": "Change",
+    "note": "Explains spread using the calculation it represents; retains constant-price assumption."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-4\"].whereToFind",
+    "before": "Choose a sensitivity assumption. Historical data or a separately sourced forecast can inform it, but neither guarantees the future.",
+    "after": "Choose a change to test. Historical data or a separately sourced forecast can help you choose, but neither guarantees what will happen.",
+    "verdict": "Change",
+    "note": "Replaces sensitivity-assumption jargon; keeps the limit on history and forecasts."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-5\"].whereToFind",
+    "before": "Choose a sensitivity assumption for the whole horizon. The page does not widen it automatically when you extend the horizon.",
+    "after": "Choose a change for the whole period. Extending How far ahead does not automatically widen this scenario.",
+    "verdict": "Change",
+    "note": "Names the control and its fixed scenario boundary."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-4\"].label",
+    "before": "Best case: difficulty falls by",
+    "after": "Difficulty change · easier case",
+    "verdict": "Change",
+    "note": "Matches the current calculator control; the legacy help lookup key remains unchanged in source."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-5\"].label",
+    "before": "Worst case: difficulty rises by",
+    "after": "Difficulty change · harder case",
+    "verdict": "Change",
+    "note": "Matches the current calculator control without changing its values or behaviour."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-1\"].figure",
+    "before": "Worst case vs today",
+    "after": "Harder case vs starting case",
+    "verdict": "Change",
+    "note": "Matches the current result row; corrects a pre-existing heading mismatch."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-6\"].label",
+    "before": "Current difficulty",
+    "after": "Starting difficulty",
+    "verdict": "Change",
+    "note": "Matches the current visible control; records correction of a pre-existing label mismatch, not a change to the control."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-6\"].means",
+    "before": "The starting network difficulty in trillions, used to infer target-interval network hashrate.",
+    "after": "The starting network difficulty in trillions. The model uses it to estimate network hashrate at the target block interval.",
+    "verdict": "Change",
+    "note": "Explains the role of difficulty without changing its units or implied-hashrate assumption."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-1\"].soWhat",
+    "before": "This is a modelled production difference, before pool fees and operating costs. There is no percentage-of-bills rule, reserve recommendation or recommendation to trade.",
+    "after": "This estimated production difference is before pool fees and operating costs. It does not tell you how much to reserve for bills or whether to trade.",
+    "verdict": "Change",
+    "note": "Makes the limit useful to the reader; retains exclusions and no reserve/trade recommendation."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "walkthrough.takeaway",
+    "before": "The model isolates production sensitivity. Whether that matters to a particular operation and whether any response is appropriate require information this calculator does not contain.",
+    "after": "This comparison shows how difficulty alone changes expected production under the stated assumptions. To decide what it means for your business or whether to act, you need information beyond this calculator.",
+    "verdict": "Change",
+    "note": "Explains production sensitivity and the limits of action in connected English (E28)."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "article.summary",
+    "before": "Compare a simplified payback model under three difficulty-growth assumptions and inspect its limits.",
+    "after": "Compare when a fleet could recover its initial cost under three difficulty-growth assumptions, with the model’s limits shown.",
+    "verdict": "Change",
+    "note": "Replaces inspect-its-limits process language with the reader’s question (habit 5)."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "whoFor",
+    "before": "For machine owners exploring capital recovery under explicit assumptions. Hosting operators can use it for fleets they own. A fee-only hosting business, bought hashrate, non-mining income or a full investment valuation requires another model.",
+    "after": "Use this if you own mining machines and want to compare when their initial cost could be recovered under stated assumptions. Hosting operators can model fleets they own. Fee-only hosting, bought hashrate, non-mining income and a full investment valuation need another model.",
+    "verdict": "Change",
+    "note": "Puts task and ownership first. Keeps all excluded business models (habit 2)."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "howToUse[0]",
+    "before": "Enter fleet hashrate in TH/s and efficiency in J/TH. Keep both consistent with the fleet you are modelling.",
+    "after": "Enter Fleet hashrate in TH/s and Efficiency in J/TH for the same fleet and operating mode.",
+    "verdict": "Change",
+    "note": "Uses exact current control labels, explains how to read results and preserves units, offsets, floors, defaults, URL inputs and privacy (habits 3, 5)."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "howToUse[1]",
+    "before": "Enter the modelled power cost per kWh and initial outlay. Specify which actual costs those inputs cover; omitted costs do not appear elsewhere.",
+    "after": "Enter All-in power cost per kWh and What you paid up front. Check which costs they cover; the model adds no omitted costs elsewhere.",
+    "verdict": "Change",
+    "note": "Uses exact current control labels, explains how to read results and preserves units, offsets, floors, defaults, URL inputs and privacy (habits 3, 5)."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "howToUse[2]",
+    "before": "Choose a constant BTC conversion price and your own monthly difficulty-growth assumption. The default 1.5% is an illustrative input, not an estimate supplied by this site.",
+    "after": "Choose a constant Bitcoin price and enter a monthly Difficulty growth guess. The default 1.5% is an illustrative input, not a site forecast.",
+    "verdict": "Change",
+    "note": "Uses exact current control labels, explains how to read results and preserves units, offsets, floors, defaults, URL inputs and privacy (habits 3, 5)."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "howToUse[3]",
+    "before": "Check starting difficulty and horizon. Enter them in Starting difficulty and Model horizon; the URL also accepts diffT and months within supported bounds. Defaults are 127.48T and 48 months.",
+    "after": "Check Starting difficulty and Model horizon. The URL also accepts diffT and months within the input limits. Defaults are 127.48T and 48 months.",
+    "verdict": "Change",
+    "note": "Uses exact current control labels, explains how to read results and preserves units, offsets, floors, defaults, URL inputs and privacy (habits 3, 5)."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "howToUse[4]",
+    "before": "Compare the central row with the lower-growth and higher-growth rows. Lower growth is the selected rate minus two percentage points, floored at zero; higher growth is the selected rate plus three points.",
+    "after": "Compare the central result with lower and higher growth. Lower is your rate minus two percentage points, with a minimum of zero; higher is your rate plus three points.",
+    "verdict": "Change",
+    "note": "Uses exact current control labels, explains how to read results and preserves units, offsets, floors, defaults, URL inputs and privacy (habits 3, 5)."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "howToUse[5]",
+    "before": "Check the final cumulative cash balance alongside the payback month.",
+    "after": "Read the final cash balance as well as the payback month. Payback marks the first month the model recovers the initial cost; the balance shows where it ends.",
+    "verdict": "Change",
+    "note": "Uses exact current control labels, explains how to read results and preserves units, offsets, floors, defaults, URL inputs and privacy (habits 3, 5)."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "howToUse[6]",
+    "before": "Copy the URL to retain inputs. Share only assumptions you are comfortable exposing.",
+    "after": "Copy the URL to save the inputs. Anyone with the link can read your assumptions.",
+    "verdict": "Change",
+    "note": "Uses exact current control labels, explains how to read results and preserves units, offsets, floors, defaults, URL inputs and privacy (habits 3, 5)."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-0\"].whereToFind",
+    "before": "Use a consistent fleet specification or operating average, and document how downtime is represented.",
+    "after": "Use fleet specifications or an operating average for the same machines. Record whether that hashrate already allows for downtime.",
+    "verdict": "Change",
+    "note": "Replaces document-how-downtime-is-represented with a concrete choice."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-2\"].whereToFind",
+    "before": "Use your own billing assumptions. If converting another cost into $/kWh, avoid counting it twice and record the approximation.",
+    "after": "Use your billing terms. If you convert another cost to $/kWh, record the approximation and do not count it twice.",
+    "verdict": "Change",
+    "note": "Keeps the cost approximation and double-counting warning in a direct instruction."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-3\"].means",
+    "before": "The initial outlay to recover. It is independent of the hashrate input.",
+    "after": "The amount paid up front that the fleet needs to recover. Changing hashrate does not change this input.",
+    "verdict": "Change",
+    "note": "Explains independence of the inputs without financial-model jargon."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-5\"].label",
+    "before": "Assumed difficulty growth",
+    "after": "Difficulty growth guess",
+    "verdict": "Change",
+    "note": "Matches the current control, correcting a pre-existing label mismatch without changing the control."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-5\"].means",
+    "before": "A compounded monthly growth assumption. The first growth step applies in month one.",
+    "after": "The monthly difficulty increase, applied repeatedly. The first increase happens before the model calculates production for month one.",
+    "verdict": "Change",
+    "note": "Explains compounding and preserves month-one ordering (habit 3)."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-5\"].typical",
+    "before": "The central slider supports 0–8% per month. The comparison rows use its defined offsets.",
+    "after": "The central slider accepts 0–8% per month. The comparison rows subtract two percentage points, with a minimum of zero, or add three points.",
+    "verdict": "Change",
+    "note": "Makes the defined offsets explicit while preserving supported range and floor."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-6\"].means",
+    "before": "A sample network difficulty in trillions that sets the initial production denominator.",
+    "after": "The starting network difficulty in trillions. It sets the starting point for calculating expected production.",
+    "verdict": "Change",
+    "note": "Replaces production-denominator jargon; same units and role."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-6\"].whereToFind",
+    "before": "Check it against a separately selected data source.",
+    "after": "Check a block-data source you trust and enter its value in Starting difficulty.",
+    "verdict": "Change",
+    "note": "Names where the value comes from and the control receiving it."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-0\"].means",
+    "before": "The first modelled month in which cumulative revenue after power cost covers the initial outlay, on the central path.",
+    "after": "The first month when mining revenue, after power costs, has recovered the initial outlay in the central scenario.",
+    "verdict": "Change",
+    "note": "Explains cumulative recovery in connected English, preserving revenue minus power and initial outlay."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-0\"].soWhat",
+    "before": "It is conditional on the input assumptions and excluded costs. It does not guarantee capital recovery.",
+    "after": "This estimate depends on your inputs and leaves out costs outside them. It does not guarantee that you will recover the outlay.",
+    "verdict": "Change",
+    "note": "Keeps recovery risk, while saying what conditional means."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-1\"].soWhat",
+    "before": "They form a sensitivity comparison, not a confidence interval, forecast or ranking of investments.",
+    "after": "These scenarios show how a change in assumed difficulty growth changes payback. They are not a confidence interval, forecast or investment ranking.",
+    "verdict": "Change",
+    "note": "Explains what a sensitivity comparison does, keeping all boundaries."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-2\"].figure",
+    "before": "Cash after the modeled horizon",
+    "after": "Cash after the modelled horizon",
+    "verdict": "Change",
+    "note": "Corrects British spelling in a descriptive result heading; no data change."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-2\"].means",
+    "before": "Cumulative modelled revenue minus power costs and initial outlay. The model values mined BTC at the constant input price.",
+    "after": "All modelled mining revenue, minus power costs and the initial outlay. Mined BTC is valued at your chosen constant price.",
+    "verdict": "Change",
+    "note": "Explains cumulative modelled cash with its valuation assumption intact."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "walkthrough.title",
+    "before": "Reproduce the example: a static assumption versus a range",
+    "after": "Reproduce the example under three growth assumptions",
+    "verdict": "Change",
+    "note": "States the actual worked task; the walkthrough’s figures and paths stay unchanged."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "walkthrough.takeaway",
+    "before": "The same sample fleet produces different conditional results under different difficulty paths. None is a complete investment model or a contract-sizing calculation.",
+    "after": "The same fleet reaches different results under each assumed difficulty path. These estimates leave out parts of an investment valuation and do not calculate a contract position size.",
+    "verdict": "Change",
+    "note": "Explains conditional results and both model limits without noun-heavy wording."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "article.summary",
+    "before": "Compare an advertised hosting rate with fees and paid lost hours. Check billing assumptions before comparing quotes.",
+    "after": "Compare a hosting rate with fees and hours you pay for while machines are stopped. Use the same billing assumptions for each quote.",
+    "verdict": "Change",
+    "note": "Explains paid lost hours immediately; keeps consistent-billing requirement. Parent integration: shortened below the existing draft-checker summary limit while keeping fees, paid lost hours and matching billing assumptions."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "whatItIs",
+    "before": "A normalised cost comparison for hosting priced per kWh. It adds management and power-factor percentages to the advertised rate, divides by the share of productive hours, and divides by one minus the pool-fee fraction. The result is an equivalent cost per productive kWh, not an actual invoice or a profit calculation.",
+    "after": "This calculator compares hosting costs per productive kWh. It adds management and power-factor percentages to the advertised rate, then divides by the share of hours when machines run. It then divides by one minus the pool-fee fraction. The result is an equivalent cost for comparison, not an actual invoice or profit calculation.",
+    "verdict": "Change",
+    "note": "Explains the three operations in sequence. Preserves the additive fees, productive-hours divisor and pool divisor exactly (habits 3, 5)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "whoFor",
+    "before": "For machine owners comparing hosting terms when booked power capacity remains payable during lost hours. A business that hosts other people’s machines may also use it for machines it owns. Energy-only billing, revenue-share contracts, demand-response income and unrelated hosting income require different models.",
+    "after": "Use this if you own machines and pay for booked hosting capacity even when the machines are stopped. Hosting businesses can use it for machines they own. Energy-only billing, revenue-share contracts, demand-response income and unrelated hosting income need different models.",
+    "verdict": "Change",
+    "note": "Replaces booked-capacity/lost-hours nesting with a concrete billing condition. Keeps every excluded model."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "howToUse[0]",
+    "before": "Check your agreement and invoices. Confirm which fees are already included in the advertised rate and whether lost hours remain payable.",
+    "after": "Check the agreement and invoices. Which fees are included in the advertised rate, and do you still pay when machines stop?",
+    "verdict": "Change",
+    "note": "Makes billing checks and input sources easy to follow. Keeps percentage bases, non-overlap, pool-equivalent and privacy limits (habit 5)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "howToUse[1]",
+    "before": "Enter the advertised rate in $/kWh. Enter management and power-factor adjustments as percentages of that rate; do not enter a fee twice.",
+    "after": "Enter Advertised power rate in $/kWh. Enter management and power-factor fees as percentages of that rate. Do not add a fee already included in the rate.",
+    "verdict": "Change",
+    "note": "Makes billing checks and input sources easy to follow. Keeps percentage bases, non-overlap, pool-equivalent and privacy limits (habit 5)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "howToUse[2]",
+    "before": "Enter distinct downtime and curtailment hours as percentages of the same period. Do not count an hour in both. Use actual records or explicitly labelled assumptions.",
+    "after": "Enter downtime and curtailment as percentages of the same period. Use records or clearly labelled assumptions. Count each stopped hour once, under one input only.",
+    "verdict": "Change",
+    "note": "Makes billing checks and input sources easy to follow. Keeps percentage bases, non-overlap, pool-equivalent and privacy limits (habit 5)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "howToUse[3]",
+    "before": "Enter the pool-fee percentage. The tool converts it to an equivalent cost adjustment; a pool’s charge on revenue is not an electricity charge.",
+    "after": "Enter Pool fee as a percentage of revenue. The tool converts it to an equivalent cost for comparison; it is not an electricity charge.",
+    "verdict": "Change",
+    "note": "Makes billing checks and input sources easy to follow. Keeps percentage bases, non-overlap, pool-equivalent and privacy limits (habit 5)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "howToUse[4]",
+    "before": "Compare all steps and the absolute final rates for two offers under consistent assumptions. A small percentage uplift can still produce a higher absolute cost.",
+    "after": "Compare each step and the final rates using the same assumptions for both offers. A smaller percentage increase can still leave you with a higher final cost.",
+    "verdict": "Change",
+    "note": "Makes billing checks and input sources easy to follow. Keeps percentage bases, non-overlap, pool-equivalent and privacy limits (habit 5)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "howToUse[5]",
+    "before": "Copy the URL to retain the inputs. Anyone with that URL can read the terms you entered.",
+    "after": "Copy the URL to save the inputs. Anyone with the link can read the terms you entered.",
+    "verdict": "Change",
+    "note": "Makes billing checks and input sources easy to follow. Keeps percentage bases, non-overlap, pool-equivalent and privacy limits (habit 5)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-2\"].whereToFind",
+    "before": "Billing terms or a measured charge from your host. A technical power-factor specification alone may not describe your invoice.",
+    "after": "Use the billing terms or a charge on your host’s invoice. A machine’s power-factor specification alone may not match what you are billed.",
+    "verdict": "Change",
+    "note": "Names an actionable source and preserves the distinction between technical specification and invoice."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-3\"].means",
+    "before": "A share of the same measured period when machines were unavailable and booked capacity remained payable.",
+    "after": "The percentage of the period when machines were unexpectedly unavailable but you still paid for booked capacity.",
+    "verdict": "Change",
+    "note": "Explains downtime as an actual billing condition, preserving period, availability and paid capacity."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-3\"].whereToFind",
+    "before": "Pool or site records reconciled with billing.",
+    "after": "Compare pool or site records with the invoices for the same period.",
+    "verdict": "Change",
+    "note": "Explains reconciled-with-billing as the actual task."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-4\"].means",
+    "before": "A separate share of deliberately stopped hours for which booked capacity remains payable.",
+    "after": "The percentage of hours when machines were deliberately stopped but booked capacity was still payable. Count these separately from unplanned downtime.",
+    "verdict": "Change",
+    "note": "Explains curtailment and retains the non-overlap requirement."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-5\"].means",
+    "before": "A revenue percentage represented here as an equivalent cost adjustment.",
+    "after": "The percentage of revenue paid to the pool, converted here to an equivalent cost for comparison.",
+    "verdict": "Change",
+    "note": "Names who receives the fee and why it appears in a cost model."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-0\"].soWhat",
+    "before": "Compare absolute values under matching billing assumptions. This is not an invoice, revenue or profit.",
+    "after": "Compare final costs using the same billing assumptions. The result is an equivalent cost, not an invoice, revenue or profit.",
+    "verdict": "Change",
+    "note": "Makes absolute-values-under-matching-assumptions concrete; keeps the financial boundaries."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-1\"].soWhat",
+    "before": "This measures the effect of entered assumptions. It cannot establish a provider’s honesty or quality.",
+    "after": "This shows how your inputs change the starting rate. It does not rate the provider’s honesty or quality.",
+    "verdict": "Change",
+    "note": "Explains the uplift measure without implying a provider assessment."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-3\"].means",
+    "before": "Separate steps show which inputs contribute to the final equivalent cost. Pool-fee adjustment follows those steps.",
+    "after": "The rows show how fees and paid lost hours change the rate. The pool-fee adjustment comes after these steps.",
+    "verdict": "Change",
+    "note": "Connects result rows to the calculation order; no formula change."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "walkthrough.takeaway",
+    "before": "The result follows the entered billing and lost-hours assumptions. Comparing another offer requires the same treatment of tax, fees and paid lost hours.",
+    "after": "The result depends on the billing terms and paid lost hours you entered. To compare another offer, treat tax, fees and paid lost hours in the same way.",
+    "verdict": "Change",
+    "note": "Connects result to the inputs and gives the comparison task directly."
+  },
+  {
+    "_id": "docs-overview",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-1\"].title",
+    "before": "An order, a position and a payout are different",
+    "after": "Orders, positions and payouts",
+    "verdict": "Change",
+    "note": "Shortens the heading while keeping the three distinct stages."
+  },
+  {
+    "_id": "docs-overview",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-1\"].paragraphs[0]",
+    "before": "An order is an instruction to buy or sell. If it fills, you hold shares: the position tokens for one side of the market. Execution depends on available liquidity, so a market or limit order may not fill in full.",
+    "after": "An order is an instruction to buy or sell. A filled buy adds shares to your holding; a filled sell reduces it. Shares are the position tokens for one side of the market. Execution depends on available liquidity, so a market or limit order may not fill in full.",
+    "verdict": "Change",
+    "note": "Explains the order-to-holding relationship for both buys and sells. Retains the definition of shares and incomplete-execution warning; Managing positions already specifies that filled sells reduce shares."
+  },
+  {
+    "_id": "docs-overview",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].paragraphs[0]",
+    "before": "Start with mining difficulty and market mechanics if the underlying is new to you. Read settlement and the risks before moving to the app guides.",
+    "after": "If mining difficulty is new to you, start with the mining difficulty and market mechanics guides. Read about settlement and risks before moving to the app guides.",
+    "verdict": "Change",
+    "note": "Replaces “the underlying” with the subject the reader needs to understand; retains the reading order and warning before app use."
+  },
+  {
+    "_id": "docs-overview",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].paragraphs[1]",
+    "before": "The app guides cover signing in, funding, orders and account actions. Reference pages explain the terms and the evidence to check. Use the optional calculators to explore your own assumptions.",
+    "after": "The app guides cover signing in, funding, orders and account actions. Reference pages explain terms, collateral, contract audits and forecasting methods. Use the optional calculators to explore your own assumptions.",
+    "verdict": "Change",
+    "note": "Names the subjects covered by the reference pages instead of asking readers to “check evidence”. Retains the app-guide categories and assumption-based optional calculators."
+  },
+  {
+    "_id": "docs-bitcoin-mining-difficulty",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-0\"].paragraphs[1]",
+    "before": "Bitcoin periodically adjusts difficulty using elapsed time in the preceding adjustment period. Faster block production generally leads to higher difficulty, and slower production generally leads to lower difficulty, subject to the protocol’s rules.",
+    "after": "Bitcoin adjusts difficulty based on how long the preceding adjustment period took. Faster block production generally leads to higher difficulty, and slower production generally leads to lower difficulty, subject to the protocol’s rules.",
+    "verdict": "Change",
+    "note": "Explains elapsed time in familiar words. Retains both directions and the protocol qualification."
+  },
+  {
+    "_id": "docs-bitcoin-mining-difficulty",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].title",
+    "before": "Production and revenue are broader questions",
+    "after": "Difficulty, production and revenue",
+    "verdict": "Change",
+    "note": "Names the section’s subjects directly; the production and revenue qualifications stay intact."
+  },
+  {
+    "_id": "docs-what-doefin-settles-on",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].title",
+    "before": "Separate the market outcome from your operation",
+    "after": "The limits of a difficulty position",
+    "verdict": "Change",
+    "note": "Replaces an abstract instruction with the limit the section explains."
+  },
+  {
+    "_id": "docs-prices-and-probability",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-0\"].title",
+    "before": "Read price relative to the full payout",
+    "after": "How price implies a probability",
+    "verdict": "Change",
+    "note": "Names the calculation explained immediately below."
+  },
+  {
+    "_id": "docs-prices-and-probability",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-1\"].title",
+    "before": "Separate the display from an executable quote",
+    "after": "Displayed prices and available trades",
+    "verdict": "Change",
+    "note": "Distinguishes price displays from executable trades without the long noun phrase."
+  },
+  {
+    "_id": "docs-prices-and-probability",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-1\"].paragraphs[1]",
+    "before": "Review the available depth and your order preview. A wide spread or thin order book can make the displayed probability a weak summary of what participants would actually trade.",
+    "after": "Check the available depth and your order preview. When the spread is wide or the order book is thin, the displayed probability may tell you little about the prices and quantities participants will trade.",
+    "verdict": "Change",
+    "note": "Explains why depth matters in terms of actual prices and quantities; retains the wide-spread and thin-book qualifications."
+  },
+  {
+    "_id": "docs-prices-and-probability",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].title",
+    "before": "Keep the outcome and cost basis separate",
+    "after": "Payout and profit",
+    "verdict": "Change",
+    "note": "Names the distinction already explained by the existing paragraph; adds no payout claim or example."
+  },
+  {
+    "_id": "docs-risks-and-limitations",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-3\"].paragraphs[0]",
+    "before": "Check the current market specification, transaction confirmation, applicable terms and access requirements. An organisation should also resolve its internal permissions and review requirements. Contact the team for current information when the documents or app do not answer a material question.",
+    "after": "Before funding, read the current market specification, transaction confirmation, applicable terms and access requirements. If you act for an organisation, confirm its internal permissions and review requirements too. Ask the team about any material question the documents or app leave unanswered.",
+    "verdict": "Change",
+    "note": "Keeps the funding checkpoint, all four external checks, organisational permissions and review, and the escalation route. Makes the instruction personal and direct."
+  },
+  {
+    "_id": "docs-your-first-trade",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-1\"].paragraphs[0]",
+    "before": "If account setup is required, the app presents it before the order. Read that confirmation and any signing request. Then review the order confirmation itself; setup completion is not an order fill.",
+    "after": "If account setup is required, the app presents it before the order. Read that confirmation and any signing request, then review the order confirmation. Completing setup does not mean the order has filled.",
+    "verdict": "Change",
+    "note": "Replaces “setup completion is not an order fill” with a natural sentence. Retains conditional setup, signing request and separate order confirmation."
+  },
+  {
+    "_id": "docs-your-first-trade",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].paragraphs[0]",
+    "before": "After submission, inspect the order status and filled amount in Portfolio. An accepted or open order is not the same as a completed trade. Reconcile any remaining open amount before placing a replacement, and use the resulting position balance to confirm the exposure you hold.",
+    "after": "After submitting, open Portfolio and check the order status and filled amount. An accepted or open order is not the same as a completed trade. Check how much remains open before placing a replacement, then use your position balance to see the exposure you hold.",
+    "verdict": "Change",
+    "note": "Turns “reconcile” and “resulting position balance” into concrete checks. Keeps accepted/open versus completed, remaining amount before replacement and the actual holding."
+  },
+  {
+    "_id": "docs-market-vs-limit-orders",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-0\"].paragraphs[1]",
+    "before": "Review the actual quote, available amount and any partial-fill warning. An empty or changing book can prevent execution. Refresh the quote when the app requires it rather than treating an earlier preview as a guarantee.",
+    "after": "Review the current quote, available amount and any partial-fill warning. An empty or changing book can prevent execution. Refresh the quote when the app requires it; an earlier preview does not guarantee execution.",
+    "verdict": "Change",
+    "note": "States what to do and why without the “rather than treating” construction. Keeps amount, partial fills, changing liquidity and required refresh."
+  },
+  {
+    "_id": "docs-order-management",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-1\"].paragraphs[1]",
+    "before": "Cancellation and replacement can fail separately. If cancellation succeeded but the replacement was not signed or accepted, the old order is cancelled and there may be no replacement. Check Orders before submitting again.",
+    "after": "Cancellation and replacement are separate steps and either can fail. If cancellation succeeds but the replacement is not signed or accepted, the old order is cancelled and there may be no replacement. Check Orders before submitting again.",
+    "verdict": "Change",
+    "note": "Explains the two possible failures in a connected sequence. Retains unsigned/unaccepted replacement and the check before retrying."
+  },
+  {
+    "_id": "docs-order-management",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].title",
+    "before": "Reconcile reserved funds",
+    "after": "Check reserved funds",
+    "verdict": "Change",
+    "note": "Uses the action the reader can take instead of “reconcile”."
+  },
+  {
+    "_id": "docs-order-management",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].paragraphs[0]",
+    "before": "After a change, check Total, Locked and Available balances. A pending action or an old balance does not confirm that funds have been released. If you ask the team to investigate, include the latest order status and any transaction or request reference.",
+    "after": "After a change, check Total, Locked and Available balances. Funds may still be reserved while an action is pending or the displayed balance is out of date. If you ask the team to investigate, include the latest order status and any transaction or request reference.",
+    "verdict": "Change",
+    "note": "Explains why a pending action or old balance cannot confirm released funds. Keeps all balance labels and the support references."
+  },
+  {
+    "_id": "docs-redeeming-positions",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].paragraphs[1]",
+    "before": "Losing shares have no payout. Redemption proceeds are gross: your result is the amount redeemed minus what you paid and any costs.",
+    "after": "Losing shares have no payout. To work out your profit or loss, subtract what you paid and any costs from the amount redeemed.",
+    "verdict": "Change",
+    "note": "Explains gross proceeds with the calculation itself. Retains zero payout for losing shares and the same amount-redeemed minus cost calculation; no figures or returns added."
+  },
+  {
+    "_id": "docs-withdrawing-funds",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].steps[2]",
+    "before": "Wait for the confirmed result. A transaction reference or “submitted” message does not yet establish that the recipient has received the funds.",
+    "after": "A transaction reference or a “submitted” message does not confirm that the recipient has received the funds. Wait for the confirmed result.",
+    "verdict": "Change",
+    "note": "Puts the warning before the wait and replaces “establish” with “confirm”. Keeps the submitted-versus-received distinction."
+  },
+  {
+    "_id": "docs-collateral-tokens",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-0\"].title",
+    "before": "The token is part of the market specification",
+    "after": "Check the market’s collateral token",
+    "verdict": "Change",
+    "note": "Gives the task directly; the section retains market-specific funding and payout, token list and token risks."
+  },
+  {
+    "_id": "docs-collateral-tokens",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].paragraphs[0]",
+    "before": "The app may ask you to set up your account or approve a token before continuing. Read what the current confirmation allows. An earlier approval for one token does not establish support for another token or contract.",
+    "after": "The app may ask you to set up your account or approve a token before continuing. Read the confirmation to see what you are authorising. An earlier approval for one token does not establish support for another token or contract.",
+    "verdict": "Change",
+    "note": "Makes the purpose of reading a confirmation explicit. Retains conditional setup/approval and the limit on what an earlier approval establishes."
+  },
+  {
+    "_id": "docs-smart-contracts",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-0\"].title",
+    "before": "Separate account, order and token operations",
+    "after": "Signatures and contract transactions",
+    "verdict": "Change",
+    "note": "Names the distinction explained below, without an abstract imperative."
+  },
+  {
+    "_id": "docs-smart-contracts",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-1\"].steps[2]",
+    "before": "Request the audit reports, commit or version reviewed, scope, outstanding findings and remediation evidence.",
+    "after": "Ask for audit reports, including the commit or version reviewed, the scope, unresolved findings and evidence of fixes.",
+    "verdict": "Change",
+    "note": "Replaces compressed review jargon with a concrete request. Keeps version, scope, outstanding findings and remediation evidence."
+  },
+  {
+    "_id": "docs-smart-contracts",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-1\"].steps[3]",
+    "before": "Review account permissions, token approvals, resolution dependencies and the operational process for interruptions.",
+    "after": "Check account permissions, token approvals, dependencies involved in resolution and the process for handling interruptions.",
+    "verdict": "Change",
+    "note": "Unpacks “resolution dependencies” and “operational process” while preserving all four review areas."
+  },
+  {
+    "_id": "docs-methodology-and-evidence",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-1\"].paragraphs[1]",
+    "before": "Any uncertainty range needs a construction method and evaluation against outcomes. Compare interval coverage and width across a stated evaluation window; a range alone does not establish calibration.",
+    "after": "To judge an uncertainty range, you need to know how it was calculated and how it performed against actual outcomes. Over a stated evaluation window, compare how often outcomes fell within the range and how wide it was. A range alone does not show that it is calibrated.",
+    "verdict": "Change",
+    "note": "Explains construction method, interval coverage and width in ordinary language. Keeps the evaluation window and the warning that a range alone does not establish calibration."
+  },
+  {
+    "_id": "glossary-hashprice",
+    "_type": "glossaryTerm",
+    "path": "faq[_key==\"faq-1\"].a",
+    "before": "Because publishers compute it differently. The differences sit almost entirely in the price leg: which exchanges are in the basket, how they are weighted and when the snapshot is taken. Few publishers disclose the basket.",
+    "after": "Because publishers calculate it differently. Most differences come from the Bitcoin price used: which exchanges are included, how they are weighted and when the price is recorded. Few publishers disclose which exchanges they use.",
+    "verdict": "Change",
+    "note": "Explains 'the price leg' and the exchange 'basket' in plain words. Preserves the exchange selection, weighting, snapshot timing and limited disclosure; E30 names the method instead of using an image."
+  },
+  {
+    "_id": "glossary-halving",
+    "_type": "glossaryTerm",
+    "path": "faq[_key==\"faq-1\"].a",
+    "before": "Because behaviour before and after a halving differs so much that models spanning the boundary tend to mislead. A fit window should state which side of a halving it sits on.",
+    "after": "Because behaviour before and after a halving differs so much that models spanning the boundary tend to mislead. A model should state whether the period used to fit it is before or after a halving.",
+    "verdict": "Change",
+    "note": "Replaces 'fit window' and 'which side ... it sits on' with the period used to fit the model. Retains the warning about models spanning a halving; precision before punch, habit 3."
+  },
+  {
+    "_id": "glossary-terahash",
+    "_type": "glossaryTerm",
+    "path": "faq[_key==\"faq-0\"].a",
+    "before": "Because terahash is the unit in which a fleet's revenue is most easily reasoned about. It is also the scale of an individual machine.",
+    "after": "Because it is the easiest unit to use when working out a fleet's revenue. It is also the scale of an individual machine.",
+    "verdict": "Change",
+    "note": "Replaces the passive abstraction 'the unit in which ... most easily reasoned about' with a direct explanation. Retains the fleet revenue and individual-machine scales; plain register, habit 10."
+  },
+  {
+    "_id": "glossary-pool-luck",
+    "_type": "glossaryTerm",
+    "path": "body[0]",
+    "before": "Luck dominates short-run pool comparisons. A payout comparison between pools needs the variance maths shown alongside it; without it, a difference that is pure chance reads as a better pool.",
+    "after": "Luck dominates short-run pool comparisons. A comparison of pool payouts needs to show how much they can vary by chance. Without that, a difference caused purely by luck can make one pool look better.",
+    "verdict": "Change",
+    "note": "Explains 'the variance maths' and resolves the awkward 'reads as a better pool'. Preserves the need to show chance variation alongside comparisons; E30 uses a concrete explanation."
+  },
+  {
+    "_id": "glossary-epoch",
+    "_type": "glossaryTerm",
+    "path": "body[0]",
+    "before": "Difficulty stays fixed for a whole epoch and changes only at its boundary. That makes the epoch the natural unit of time for anyone managing difficulty exposure: production, forecasts and settlement all align to epoch boundaries rather than to calendar dates.",
+    "after": "Difficulty stays fixed during an epoch and changes at its boundary. Epochs are useful when comparing production and difficulty forecasts. Each Doefin market specifies the block at which difficulty is observed. Check the market’s terms for its observation and settlement blocks.",
+    "verdict": "Change",
+    "note": "Parent and independent review: Factual clarity: removes the unsupported claim that all production, forecasts and settlement align to epoch boundaries. Uses the existing market-specific observation/settlement distinction; does not claim arbitrary non-boundary block support. Requires Matteo reading before publication."
+  },
+  {
+    "_id": "glossary-confidence-interval",
+    "_type": "glossaryTerm",
+    "path": "body[1]",
+    "before": "A band derived from theory rather than from measured forecast error is typically two to three times too narrow. The first comparison with real outcomes shows the gap.",
+    "after": "A range calculated from theory and one fitted to historical data both need testing against outcomes. Compare how often the ranges contain the outcome with their stated confidence level.",
+    "verdict": "Change",
+    "note": "Parent and independent review: Factual clarity: removes the unsupported universal two-to-three-times claim. Consistent with the published Academy and methodology requirement to evaluate theoretical and fitted intervals. Requires Matteo reading before publication."
+  },
+  {
+    "_id": "glossary-confidence-interval",
+    "_type": "glossaryTerm",
+    "path": "faq[_key==\"faq-1\"].q",
+    "before": "Why are theoretical confidence intervals usually too narrow?",
+    "after": "How do you check a forecast range?",
+    "verdict": "Change",
+    "note": "Parent and independent review: Factual clarity: removes the presupposition that theoretical ranges are usually too narrow; asks the reader’s actual evaluation question. Requires Matteo reading before publication."
+  },
+  {
+    "_id": "glossary-confidence-interval",
+    "_type": "glossaryTerm",
+    "path": "faq[_key==\"faq-1\"].a",
+    "before": "Because they are derived from theory rather than fitted to measured forecast error. An interval only means something once it has been fitted to what actually happened.",
+    "after": "Compare the published ranges with the outcomes over a stated evaluation period. Report how often the ranges contained the outcome alongside their widths. Fitting a range to past data does not by itself show how it will perform on new forecasts.",
+    "verdict": "Change",
+    "note": "Parent and independent review: Factual clarity: neither theory nor empirical fitting validates an interval by itself. Retains the need for recorded outcomes and explains coverage and width without introducing figures. Requires Matteo reading before publication."
+  },
+  {
+    "_id": "glossary-hashrate",
+    "_type": "glossaryTerm",
+    "path": "faq[_key==\"faq-1\"].a",
+    "before": "A one-day estimate carries an uncertainty band of roughly ±16%. Over seven days the band narrows to about ±6%, so a one-day move is usually noise rather than a trend.",
+    "after": "Short observation windows can fluctuate because blocks arrive irregularly. A chart alone does not establish that mining capacity has changed. Check the publisher’s calculation, time window, timestamp and uncertainty range.",
+    "verdict": "Change",
+    "note": "Parent and independent review: Factual clarity: removes context-free ±16% and ±6% claims and the unsupported conclusion that a one-day move is usually noise. The existing article explains irregular blocks and the need to compare method, window and uncertainty. Requires Matteo reading before publication."
+  },
+  {
+    "_id": "glossary-hashprice",
+    "_type": "glossaryTerm",
+    "path": "body[0]",
+    "before": "Hashprice falls when difficulty rises, when the Bitcoin price falls or when transaction fees fall. A 10% rise in difficulty, for example, cuts hashprice by about 9.1%, all else equal.",
+    "after": "Hashprice falls when difficulty rises or transaction fees fall, all else equal. When quoted in US dollars, it also falls when the Bitcoin price falls. For example, a 10% rise in difficulty cuts hashprice by about 9.1%, all else equal.",
+    "verdict": "Change",
+    "note": "Parent and independent review: Factual clarity: limits the BTC-price effect to USD-denominated hashprice, consistent with its unchanged approved short definition. Preserves the 10%/about9.1% example and its all-else-equal condition. Requires Matteo reading before publication."
+  }
+]

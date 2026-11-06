@@ -1,0 +1,236 @@
+[
+  {
+    "_id": "docs-overview",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-1\"].title",
+    "before": "An order, a position and a payout are different",
+    "after": "Orders, positions and payouts",
+    "verdict": "Change",
+    "note": "Shortens the heading while keeping the three distinct stages."
+  },
+  {
+    "_id": "docs-overview",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-1\"].paragraphs[0]",
+    "before": "An order is an instruction to buy or sell. If it fills, you hold shares: the position tokens for one side of the market. Execution depends on available liquidity, so a market or limit order may not fill in full.",
+    "after": "An order is an instruction to buy or sell. A filled buy adds shares to your holding; a filled sell reduces it. Shares are the position tokens for one side of the market. Execution depends on available liquidity, so a market or limit order may not fill in full.",
+    "verdict": "Change",
+    "note": "Explains the order-to-holding relationship for both buys and sells. Retains the definition of shares and incomplete-execution warning; Managing positions already specifies that filled sells reduce shares."
+  },
+  {
+    "_id": "docs-overview",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].paragraphs[0]",
+    "before": "Start with mining difficulty and market mechanics if the underlying is new to you. Read settlement and the risks before moving to the app guides.",
+    "after": "If mining difficulty is new to you, start with the mining difficulty and market mechanics guides. Read about settlement and risks before moving to the app guides.",
+    "verdict": "Change",
+    "note": "Replaces “the underlying” with the subject the reader needs to understand; retains the reading order and warning before app use."
+  },
+  {
+    "_id": "docs-overview",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].paragraphs[1]",
+    "before": "The app guides cover signing in, funding, orders and account actions. Reference pages explain the terms and the evidence to check. Use the optional calculators to explore your own assumptions.",
+    "after": "The app guides cover signing in, funding, orders and account actions. Reference pages explain terms, collateral, contract audits and forecasting methods. Use the optional calculators to explore your own assumptions.",
+    "verdict": "Change",
+    "note": "Names the subjects covered by the reference pages instead of asking readers to “check evidence”. Retains the app-guide categories and assumption-based optional calculators."
+  },
+  {
+    "_id": "docs-bitcoin-mining-difficulty",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-0\"].paragraphs[1]",
+    "before": "Bitcoin periodically adjusts difficulty using elapsed time in the preceding adjustment period. Faster block production generally leads to higher difficulty, and slower production generally leads to lower difficulty, subject to the protocol’s rules.",
+    "after": "Bitcoin adjusts difficulty based on how long the preceding adjustment period took. Faster block production generally leads to higher difficulty, and slower production generally leads to lower difficulty, subject to the protocol’s rules.",
+    "verdict": "Change",
+    "note": "Explains elapsed time in familiar words. Retains both directions and the protocol qualification."
+  },
+  {
+    "_id": "docs-bitcoin-mining-difficulty",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].title",
+    "before": "Production and revenue are broader questions",
+    "after": "Difficulty, production and revenue",
+    "verdict": "Change",
+    "note": "Names the section’s subjects directly; the production and revenue qualifications stay intact."
+  },
+  {
+    "_id": "docs-what-doefin-settles-on",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].title",
+    "before": "Separate the market outcome from your operation",
+    "after": "The limits of a difficulty position",
+    "verdict": "Change",
+    "note": "Replaces an abstract instruction with the limit the section explains."
+  },
+  {
+    "_id": "docs-prices-and-probability",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-0\"].title",
+    "before": "Read price relative to the full payout",
+    "after": "How price implies a probability",
+    "verdict": "Change",
+    "note": "Names the calculation explained immediately below."
+  },
+  {
+    "_id": "docs-prices-and-probability",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-1\"].title",
+    "before": "Separate the display from an executable quote",
+    "after": "Displayed prices and available trades",
+    "verdict": "Change",
+    "note": "Distinguishes price displays from executable trades without the long noun phrase."
+  },
+  {
+    "_id": "docs-prices-and-probability",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-1\"].paragraphs[1]",
+    "before": "Review the available depth and your order preview. A wide spread or thin order book can make the displayed probability a weak summary of what participants would actually trade.",
+    "after": "Check the available depth and your order preview. When the spread is wide or the order book is thin, the displayed probability may tell you little about the prices and quantities participants will trade.",
+    "verdict": "Change",
+    "note": "Explains why depth matters in terms of actual prices and quantities; retains the wide-spread and thin-book qualifications."
+  },
+  {
+    "_id": "docs-prices-and-probability",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].title",
+    "before": "Keep the outcome and cost basis separate",
+    "after": "Payout and profit",
+    "verdict": "Change",
+    "note": "Names the distinction already explained by the existing paragraph; adds no payout claim or example."
+  },
+  {
+    "_id": "docs-risks-and-limitations",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-3\"].paragraphs[0]",
+    "before": "Check the current market specification, transaction confirmation, applicable terms and access requirements. An organisation should also resolve its internal permissions and review requirements. Contact the team for current information when the documents or app do not answer a material question.",
+    "after": "Before funding, read the current market specification, transaction confirmation, applicable terms and access requirements. If you act for an organisation, confirm its internal permissions and review requirements too. Ask the team about any material question the documents or app leave unanswered.",
+    "verdict": "Change",
+    "note": "Keeps the funding checkpoint, all four external checks, organisational permissions and review, and the escalation route. Makes the instruction personal and direct."
+  },
+  {
+    "_id": "docs-your-first-trade",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-1\"].paragraphs[0]",
+    "before": "If account setup is required, the app presents it before the order. Read that confirmation and any signing request. Then review the order confirmation itself; setup completion is not an order fill.",
+    "after": "If account setup is required, the app presents it before the order. Read that confirmation and any signing request, then review the order confirmation. Completing setup does not mean the order has filled.",
+    "verdict": "Change",
+    "note": "Replaces “setup completion is not an order fill” with a natural sentence. Retains conditional setup, signing request and separate order confirmation."
+  },
+  {
+    "_id": "docs-your-first-trade",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].paragraphs[0]",
+    "before": "After submission, inspect the order status and filled amount in Portfolio. An accepted or open order is not the same as a completed trade. Reconcile any remaining open amount before placing a replacement, and use the resulting position balance to confirm the exposure you hold.",
+    "after": "After submitting, open Portfolio and check the order status and filled amount. An accepted or open order is not the same as a completed trade. Check how much remains open before placing a replacement, then use your position balance to see the exposure you hold.",
+    "verdict": "Change",
+    "note": "Turns “reconcile” and “resulting position balance” into concrete checks. Keeps accepted/open versus completed, remaining amount before replacement and the actual holding."
+  },
+  {
+    "_id": "docs-market-vs-limit-orders",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-0\"].paragraphs[1]",
+    "before": "Review the actual quote, available amount and any partial-fill warning. An empty or changing book can prevent execution. Refresh the quote when the app requires it rather than treating an earlier preview as a guarantee.",
+    "after": "Review the current quote, available amount and any partial-fill warning. An empty or changing book can prevent execution. Refresh the quote when the app requires it; an earlier preview does not guarantee execution.",
+    "verdict": "Change",
+    "note": "States what to do and why without the “rather than treating” construction. Keeps amount, partial fills, changing liquidity and required refresh."
+  },
+  {
+    "_id": "docs-order-management",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-1\"].paragraphs[1]",
+    "before": "Cancellation and replacement can fail separately. If cancellation succeeded but the replacement was not signed or accepted, the old order is cancelled and there may be no replacement. Check Orders before submitting again.",
+    "after": "Cancellation and replacement are separate steps and either can fail. If cancellation succeeds but the replacement is not signed or accepted, the old order is cancelled and there may be no replacement. Check Orders before submitting again.",
+    "verdict": "Change",
+    "note": "Explains the two possible failures in a connected sequence. Retains unsigned/unaccepted replacement and the check before retrying."
+  },
+  {
+    "_id": "docs-order-management",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].title",
+    "before": "Reconcile reserved funds",
+    "after": "Check reserved funds",
+    "verdict": "Change",
+    "note": "Uses the action the reader can take instead of “reconcile”."
+  },
+  {
+    "_id": "docs-order-management",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].paragraphs[0]",
+    "before": "After a change, check Total, Locked and Available balances. A pending action or an old balance does not confirm that funds have been released. If you ask the team to investigate, include the latest order status and any transaction or request reference.",
+    "after": "After a change, check Total, Locked and Available balances. Funds may still be reserved while an action is pending or the displayed balance is out of date. If you ask the team to investigate, include the latest order status and any transaction or request reference.",
+    "verdict": "Change",
+    "note": "Explains why a pending action or old balance cannot confirm released funds. Keeps all balance labels and the support references."
+  },
+  {
+    "_id": "docs-redeeming-positions",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].paragraphs[1]",
+    "before": "Losing shares have no payout. Redemption proceeds are gross: your result is the amount redeemed minus what you paid and any costs.",
+    "after": "Losing shares have no payout. To work out your profit or loss, subtract what you paid and any costs from the amount redeemed.",
+    "verdict": "Change",
+    "note": "Explains gross proceeds with the calculation itself. Retains zero payout for losing shares and the same amount-redeemed minus cost calculation; no figures or returns added."
+  },
+  {
+    "_id": "docs-withdrawing-funds",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].steps[2]",
+    "before": "Wait for the confirmed result. A transaction reference or “submitted” message does not yet establish that the recipient has received the funds.",
+    "after": "A transaction reference or a “submitted” message does not confirm that the recipient has received the funds. Wait for the confirmed result.",
+    "verdict": "Change",
+    "note": "Puts the warning before the wait and replaces “establish” with “confirm”. Keeps the submitted-versus-received distinction."
+  },
+  {
+    "_id": "docs-collateral-tokens",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-0\"].title",
+    "before": "The token is part of the market specification",
+    "after": "Check the market’s collateral token",
+    "verdict": "Change",
+    "note": "Gives the task directly; the section retains market-specific funding and payout, token list and token risks."
+  },
+  {
+    "_id": "docs-collateral-tokens",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-2\"].paragraphs[0]",
+    "before": "The app may ask you to set up your account or approve a token before continuing. Read what the current confirmation allows. An earlier approval for one token does not establish support for another token or contract.",
+    "after": "The app may ask you to set up your account or approve a token before continuing. Read the confirmation to see what you are authorising. An earlier approval for one token does not establish support for another token or contract.",
+    "verdict": "Change",
+    "note": "Makes the purpose of reading a confirmation explicit. Retains conditional setup/approval and the limit on what an earlier approval establishes."
+  },
+  {
+    "_id": "docs-smart-contracts",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-0\"].title",
+    "before": "Separate account, order and token operations",
+    "after": "Signatures and contract transactions",
+    "verdict": "Change",
+    "note": "Names the distinction explained below, without an abstract imperative."
+  },
+  {
+    "_id": "docs-smart-contracts",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-1\"].steps[2]",
+    "before": "Request the audit reports, commit or version reviewed, scope, outstanding findings and remediation evidence.",
+    "after": "Ask for audit reports, including the commit or version reviewed, the scope, unresolved findings and evidence of fixes.",
+    "verdict": "Change",
+    "note": "Replaces compressed review jargon with a concrete request. Keeps version, scope, outstanding findings and remediation evidence."
+  },
+  {
+    "_id": "docs-smart-contracts",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-1\"].steps[3]",
+    "before": "Review account permissions, token approvals, resolution dependencies and the operational process for interruptions.",
+    "after": "Check account permissions, token approvals, dependencies involved in resolution and the process for handling interruptions.",
+    "verdict": "Change",
+    "note": "Unpacks “resolution dependencies” and “operational process” while preserving all four review areas."
+  },
+  {
+    "_id": "docs-methodology-and-evidence",
+    "_type": "docPage",
+    "path": "sections[_key==\"section-1\"].paragraphs[1]",
+    "before": "Any uncertainty range needs a construction method and evaluation against outcomes. Compare interval coverage and width across a stated evaluation window; a range alone does not establish calibration.",
+    "after": "To judge an uncertainty range, you need to know how it was calculated and how it performed against actual outcomes. Over a stated evaluation window, compare how often outcomes fell within the range and how wide it was. A range alone does not show that it is calibrated.",
+    "verdict": "Change",
+    "note": "Explains construction method, interval coverage and width in ordinary language. Keeps the evaluation window and the warning that a range alone does not establish calibration."
+  }
+]

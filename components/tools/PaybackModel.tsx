@@ -81,7 +81,7 @@ export function PaybackModel({ enhanced = false, nextStep }: { enhanced?: boolea
   }
   const sampleV = (next: typeof v, source: 'sample' | 'example' = 'sample') => { measurement.markSample(source); writeV(next) }
 
-  const label = (m: number | null) => (m === null ? `beyond ${v.months} months` : `${m} months`)
+  const label = (m: number | null) => (m === null ? `not reached in ${v.months} months` : `${m} months`)
   const usd = (n: number) => `$${Math.round(n).toLocaleString('en-US')}`
 
   // A small chart of the central path. The table beneath carries the same numbers.
@@ -108,7 +108,7 @@ export function PaybackModel({ enhanced = false, nextStep }: { enhanced?: boolea
             ) : null}
 
             {isV3 ? <>
-              <InputSection number="01" title="Fleet specifications" description="Size your fleet and its energy demand.">
+              <InputSection number="01" title="Fleet specifications" description="Enter the fleet’s hashrate and efficiency for the same operating mode.">
 <Slider id="th" label="Fleet hashrate" unit="TH/s" value={v.th} min={100} max={20000} step={50}
                 onChange={(n) => setV({ ...v, th: n })} format={(n) => n.toLocaleString('en-US')}
                   hint={hintFor(SLUG, "Fleet hashrate")} />
@@ -116,7 +116,7 @@ export function PaybackModel({ enhanced = false, nextStep }: { enhanced?: boolea
                 onChange={(n) => setV({ ...v, jPerTh: n })} format={(n) => n.toFixed(1)}
                   hint={hintFor(SLUG, "Efficiency")} />
               </InputSection>
-              <InputSection number="02" title="Cost assumptions" description="Separate operating cost from the initial investment.">
+              <InputSection number="02" title="Cost assumptions" description="Enter the power rate and the amount paid up front.">
 <Slider id="power" label="All-in power cost" unit="$/kWh" value={v.power} min={0.02} max={0.15} step={0.001}
                 onChange={(n) => setV({ ...v, power: n })} format={(n) => n.toFixed(3)}
                   hint={hintFor(SLUG, "All-in power cost")} />
@@ -177,7 +177,7 @@ export function PaybackModel({ enhanced = false, nextStep }: { enhanced?: boolea
             ) : null}
 
             {isV3 ? <CashPositionChart series={pts} capex={v.capex} months={v.months} /> : (            <svg viewBox="0 0 300 70" className="mt-5 w-full" role="img"
-              aria-label={`Cumulative cash position over ${v.months} months, crossing zero at ${label(runs.mid.paybackMonth)}`}>
+              aria-label={`Cumulative cash position over ${v.months} months. Central payback: ${label(runs.mid.paybackMonth)}`}>
               <line x1="0" y1="60" x2="300" y2="60" stroke="currentColor" className="text-white/10" strokeWidth="1" />
               <polyline points={path} fill="none" stroke="currentColor" className="text-brand" strokeWidth="2" />
             </svg>)}
@@ -186,24 +186,24 @@ export function PaybackModel({ enhanced = false, nextStep }: { enhanced?: boolea
               {enhanced ? (
                 <>With these assumptions, the central case {runs.mid.paybackMonth === null
                   ? `does not recover the initial outlay within ${v.months} months`
-                  : `recovers the initial outlay in month ${runs.mid.paybackMonth}`}. Compare the other difficulty paths below before changing your inputs.</>
+                  : `recovers the initial outlay in month ${runs.mid.paybackMonth}`}. Compare the other difficulty paths and final cash balances below. Costs outside the inputs are excluded.</>
               ) : runs.mid.paybackMonth === null ? (
                 <>
-                  At {v.growth.toFixed(1)}% a month this fleet never pays back the {usd(v.capex)} inside{' '}
-                  {v.months} months. Cheaper power or a lower price paid is the only fix.
+                  With {v.growth.toFixed(1)}% monthly difficulty growth, the model does not recover the {usd(v.capex)} outlay within{' '}
+                  {v.months} months. Compare the other growth assumptions and check the costs this model excludes.
                 </>
               ) : runs.high.paybackMonth === null ? (
                 <>
-                  At {v.growth.toFixed(1)}% a month you get the {usd(v.capex)} back in month{' '}
-                  <strong>{runs.mid.paybackMonth}</strong>. If mining gets harder faster — {(v.growth + 3).toFixed(1)}%
-                  a month — you never get it back. That is the part you do not control.
+                  With {v.growth.toFixed(1)}% monthly difficulty growth, the model recovers the {usd(v.capex)} outlay in month{' '}
+                  <strong>{runs.mid.paybackMonth}</strong>. At {(v.growth + 3).toFixed(1)}% monthly growth,
+                  it does not recover the outlay within the selected horizon. Both are scenarios, not forecasts.
                 </>
               ) : (
                 <>
-                  At {v.growth.toFixed(1)}% a month you get the {usd(v.capex)} back in month{' '}
-                  <strong>{runs.mid.paybackMonth}</strong>. If mining gets harder faster it is month{' '}
-                  {runs.high.paybackMonth} — {runs.high.paybackMonth - runs.mid.paybackMonth} months later,
-                  on a guess nobody can make for you.
+                  With {v.growth.toFixed(1)}% monthly difficulty growth, the model recovers the {usd(v.capex)} outlay in month{' '}
+                  <strong>{runs.mid.paybackMonth}</strong>. With higher difficulty growth, recovery moves to month{' '}
+                  {runs.high.paybackMonth}, {runs.high.paybackMonth - runs.mid.paybackMonth} months later.
+                  These estimates depend on your inputs and exclude costs outside the model.
                 </>
               )}
             </Readout>

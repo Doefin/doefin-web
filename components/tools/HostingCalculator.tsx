@@ -98,7 +98,7 @@ export function HostingCalculator({ enhanced = false, nextStep }: {
           ) : null}
 
           {isV3 ? <>
-            <InputSection wideFirst number="01" title="Contract & billing" description="Start with the quote and charges on top of power.">
+            <InputSection wideFirst number="01" title="Contract & billing" description="Enter the advertised rate and any fees charged separately.">
               {FIELDS.slice(0, 3).map(f => (<Slider
                 key={f.key}
                 id={f.key}
@@ -112,7 +112,7 @@ export function HostingCalculator({ enhanced = false, nextStep }: {
                 hint={hintFor(SLUG, f.label)}
               />))}
             </InputSection>
-            <InputSection number="02" title="Availability & pool" description="Account for lost hours and the pool’s share of revenue.">
+            <InputSection number="02" title="Availability & pool" description="Enter paid lost hours and the pool’s share of revenue.">
               {FIELDS.slice(3).map(f => (<Slider
                 key={f.key}
                 id={f.key}
@@ -171,14 +171,14 @@ export function HostingCalculator({ enhanced = false, nextStep }: {
           <Readout>
             {out.upliftPct < 10 ? (
               <>
-                You lose about {out.lostHoursWeek.toFixed(0)} hours a week, so ${num(v.rate, 3)} becomes{' '}
-                <strong>${num(out.afterPool, 3)}</strong> after management fees, power-factor charges and the pool fee. That is close to the quoted rate.
+                With about {out.lostHoursWeek.toFixed(0)} paid lost hours a week, the advertised ${num(v.rate, 3)}/kWh becomes{' '}
+                <strong>${num(out.afterPool, 3)}/kWh</strong> after management fees, power-factor charges and the pool-fee adjustment. This equivalent cost is close to the quote; it is not an invoice or profit.
               </>
             ) : (
               <>
-                You pay for all 168 hours a week and your machines run in about{' '}
-                {(168 - out.lostHoursWeek).toFixed(0)} of them. After management fees, power-factor charges and the pool fee, ${num(v.rate, 3)} becomes{' '}
-                <strong>${num(out.afterPool, 3)}</strong>, {out.upliftPct.toFixed(0)}% above the quoted rate.
+                The model assumes you pay for all 168 hours a week. Your machines run for about{' '}
+                {(168 - out.lostHoursWeek).toFixed(0)} of them. After management fees, power-factor charges and the pool-fee adjustment, ${num(v.rate, 3)}/kWh becomes{' '}
+                <strong>${num(out.afterPool, 3)}/kWh</strong>, {out.upliftPct.toFixed(0)}% above the quote. This is an equivalent cost, not an invoice or profit.
               </>
             )}
           </Readout>

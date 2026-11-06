@@ -13,8 +13,8 @@ export async function generateMetadata({ params }: { params: Promise<{ metric: s
 export default async function V3Methodology({ params }: { params: Promise<{ metric: string }> }) {
   const methodology = await getV3Methodology((await params).metric)
   if (!methodology) notFound()
-  return <ContentPage title="Evaluate the method behind a forecast." summary="A reproducible forecast needs identifiable inputs, an explicit calculation and evidence for its uncertainty claims." eyebrow="Forecast methodology" crumbs={[{ name: 'Resources', href: '/resources' }, { name: 'Methodology', href: '/methodology/difficulty-index' }]}>
+  return <ContentPage title="How is a difficulty forecast calculated?" summary="To repeat a forecast calculation, you need its original inputs and method. Any range around the estimate needs evidence too." eyebrow="Forecast methodology" crumbs={[{ name: 'Resources', href: '/resources' }, { name: 'Methodology', href: '/methodology/difficulty-index' }]}>
     <AutoLinkedProse paragraphs={methodology.sections.flatMap(section => [{ heading: section.heading, id: section.id }, ...section.paragraphs])} />
-    <ContentLinks links={[{ href: '/research/evaluating-a-forecast', label: 'Reproduce the worked error calculation' }, { href: '/data/scoreboard', label: 'Read the sample accuracy comparison' }, { href: '/docs/what-doefin-settles-on', label: 'Separate a forecast from market settlement' }]} />
+    <ContentLinks links={[{ href: '/research/evaluating-a-forecast', label: 'Work through the error calculation' }, { href: '/data/scoreboard', label: 'Read the sample accuracy comparison' }, { href: '/docs/what-doefin-settles-on', label: 'Separate a forecast from market settlement' }]} />
   </ContentPage>
 }
