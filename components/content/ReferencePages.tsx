@@ -63,7 +63,7 @@ export async function ReferenceGlossaryIndex({ schemaVersion = 'v3' }: { schemaV
       <NextLinks
         items={[
           { href: '/academy', label: 'Learn', note: 'How difficulty works, from first principles.' },
-          { href: '/data/difficulty', label: 'Difficulty forecast', note: 'The current epoch, with its confidence interval.' },
+          { href: '/data/difficulty', label: 'Difficulty data', note: 'Read the current estimate and distinguish it from the synthetic examples.' },
           { href: '/tools', label: 'Calculators', note: 'Work out your hosting cost, exposure or payback.' },
         ]}
       />
@@ -223,7 +223,7 @@ export async function ReferenceGuidePage({ params, schemaVersion = 'v3' }: { par
       <NextLinks
         items={[
           { href: '/glossary', label: 'Glossary', note: 'Plain definitions of every term used here.' },
-          { href: '/data/difficulty', label: 'Difficulty forecast', note: 'The current epoch, with its confidence interval.' },
+          { href: '/data/difficulty', label: 'Difficulty data', note: 'Read the current estimate and distinguish it from the synthetic examples.' },
           schemaVersion === 'v3'
             ? { href: '/tools', label: 'Mining calculators', note: 'Reproduce the method with your own assumptions.' }
             : { href: '/for/miners', label: 'For miners', note: 'What difficulty risk looks like on a real site.' },

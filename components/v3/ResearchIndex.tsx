@@ -24,7 +24,6 @@ export default async function ResearchIndex() {
       <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-highlight">Doefin / Research</p>
       <h1 className="mt-3 max-w-3xl text-balance text-3xl font-extrabold tracking-[-0.04em] sm:text-5xl">Evaluate a difficulty forecast.</h1>
       <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-subtle">How close was a forecast to the outcome? Learn how to compare forecasts and calculate their errors.</p>
-      <p className="mt-5 max-w-3xl border-l-2 border-caution/60 pl-3 text-xs leading-relaxed text-subtle"><span className="font-semibold text-caution">Research and worked examples.</span> The forecast examples use made-up values. The separate historical network dataset contains sourced observations, not a provider ranking.</p>
     </header>
 
     <ResearchArchiveSummary />
@@ -48,7 +47,7 @@ export default async function ResearchIndex() {
     <section aria-labelledby="research-sources-title" className="mt-10 border-t border-white/10 pt-7 sm:mt-12">
       <div className="mb-5 flex flex-wrap items-baseline justify-between gap-x-5 gap-y-2"><h2 id="research-sources-title" className="text-xl font-bold tracking-tight">Understand the method and data.</h2><Link href="/resources" className="inline-flex min-h-10 items-center gap-2 text-xs font-semibold text-highlight hover:underline">All resources <Arrow className="h-4 w-4" /></Link></div>
       <div className="grid gap-4 md:grid-cols-3">{[
-        { label: 'The method', title: 'How is a forecast built?', description: 'See how inputs become an estimate and what evidence a forecast range needs.', href: '/methodology/difficulty-index', action: 'Read the methodology' },
+        { label: 'The method', title: 'Why does block timing matter?', description: 'See how block pace informs an estimate and how to assess a forecast method.', href: '/methodology/difficulty-index', action: 'Read the methodology' },
         { label: 'The context', title: 'What does the data mean?', description: 'Find difficulty and hashrate readings, with their dates and assumptions.', href: '/data', action: 'Explore data examples' },
         { label: 'The comparison', title: 'How should accuracy be read?', description: 'Learn what forecast error, range coverage, range width and sample size tell you.', href: '/data/scoreboard', action: 'Read accuracy metrics' },
       ].map(item => <Link key={item.href} href={item.href} className="group flex flex-col rounded-panel border border-white/[0.07] bg-surface/20 p-5 transition-colors hover:border-brand/40"><p className="text-[10px] font-bold uppercase tracking-[0.12em] text-subtle">{item.label}</p><h3 className="mt-3 text-lg font-bold tracking-tight group-hover:text-highlight">{item.title}</h3><p className="mb-4 mt-2 text-xs leading-relaxed text-subtle">{item.description}</p><span className="mt-auto inline-flex min-h-8 items-center justify-between gap-3 text-xs font-semibold text-highlight">{item.action}<Arrow className="h-4 w-4" /></span></Link>)}</div>

@@ -1,3 +1,4 @@
+import Link from '@/components/routing/SiteLink'
 import { Container } from '@/components/layout/Container'
 import { Button, Eyebrow, DataTable } from '@/components/ui'
 import { PageIntro, RelatedContent, panelClass, headingClass, previewSeo } from '@/components/preview/Primitives'
@@ -25,17 +26,15 @@ export default function SettlementPreview() {
           <p className="mt-4 text-xs leading-relaxed text-subtle">Difficulty is a dimensionless target ratio; T denotes one trillion. A larger move above the threshold does not increase the binary payout.</p>
         </div>
       </section>
-      <section className="mt-14"><h2 className={headingClass}>Compare production and contract payout.</h2>
-        <ol className="mt-7 grid gap-5 md:grid-cols-3">{[
-          ['Compare the time periods', 'The calculator estimates production over a fixed period. The contract observes difficulty at a specified block. Its calendar date is an estimate.'],
-          ['Check the payout rule', 'The difference in expected production changes with difficulty in the calculator. The contract pays out according to its side and threshold.'],
-          ['Include costs and other risks', 'Position price, fees and size affect your profit or loss. Power costs, downtime and Bitcoin price remain separate risks.'],
-        ].map(([title, text], i) => <li key={title} className={panelClass}><span className="tabular text-sm font-bold text-highlight">0{i + 1}</span><h3 className="mt-4 text-lg font-bold">{title}</h3><p className="mt-3 text-sm leading-[1.75] text-subtle">{text}</p></li>)}</ol>
+      <section className="mt-14 max-w-3xl"><h2 className={headingClass}>Why payout can differ from production.</h2>
+        <p className="mt-5 text-[17px] leading-[1.75] text-subtle">The calculator estimates expected BTC production for the chosen period. Actual production can change with difficulty, hashrate and uptime throughout that period. The contract observes difficulty once, at its specified block, so a fixed payout can offset more or less than the actual production shortfall.</p>
+        <p className="mt-4 text-sm leading-relaxed text-subtle">The observation block determines which difficulty value counts. Reaching that block and having a resolved, redeemable position are separate stages. The calendar date is an estimate; redemption follows resolution under the market’s settlement rules.</p>
+        <p className="mt-4 text-sm leading-relaxed text-subtle">Position price, fees and size affect your profit or loss. Power costs, downtime and Bitcoin price remain separate risks. You can lose the full amount paid for a position.</p>
       </section>
       <section className={'mt-12 ' + panelClass}><h2 className="text-xl font-bold">Collateral and verification</h2>
         <p className="mt-4 max-w-3xl text-[17px] leading-[1.75] text-subtle">Positions are fully collateralised. Check your market’s collateral token, payout terms and contract terms in the app. You can check network difficulty yourself. This does not remove smart-contract, token or execution risks.</p>
         <details className="mt-5"><summary className="cursor-pointer text-sm font-semibold text-highlight">Read the source documentation</summary>
-          <div className="mt-4 space-y-5">{sources.map(source => <section key={source.slug}><h3 className="font-bold">{source.title}</h3>{source.body.map(text => <p key={text} className="mt-2 text-sm leading-relaxed text-subtle">{text}</p>)}</section>)}</div>
+          <nav aria-label="Settlement source documentation" className="mt-4 flex flex-col items-start gap-3">{sources.map(source => <Link key={source.slug} href={'/docs/' + source.slug} className="inline-flex min-h-11 items-center text-sm font-semibold text-highlight hover:underline">{source.title} →</Link>)}</nav>
         </details>
       </section>
       <section className="mt-12 flex flex-wrap items-center justify-between gap-6 rounded-header border border-brand/30 bg-surfaceAlt/60 p-7 sm:p-10">

@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import Link from '@/components/routing/SiteLink'
 import { Container } from '@/components/layout/Container'
 import { Arrow } from '@/components/v3/Arrow'
-import { BrandIcon } from '@/components/v3/BrandIcon'
 import { HeroVisual } from '@/components/v3/HeroVisual'
 import { LandingMotion } from '@/components/v3/LandingMotion'
 import { MarketExample } from '@/components/v3/MarketExample'
@@ -51,14 +50,15 @@ export default function V3Home() {
 
     <section id="how-it-works" aria-labelledby="mechanics-title" className="v37-mechanics v37-section">
       <Container>
-        <div className="v311-payout-heading" data-reveal><p className="v37-eyebrow">How it works</p><h2 id="mechanics-title" className="v37-heading">Choose a market. Fund your account. Place a trade.</h2><p className="v37-copy">All done in a few minutes.</p></div>
-        <ol className="mt-7 grid gap-4 md:grid-cols-3" data-reveal>
+        <div className="v311-payout-heading" data-reveal><p className="v37-eyebrow">How it works</p><h2 id="mechanics-title" className="v37-heading"><span id="setup-title" className="scroll-mt-28">Choose a market. Fund your account. Place a trade.</span></h2><p className="v37-copy">All done in a few minutes.</p></div>
+        <ol id="get-started" className="mt-7 grid scroll-mt-28 gap-4 md:grid-cols-3" data-reveal>
           {[
-            { title: 'Choose a Bitcoin difficulty market', text: ['Check the difficulty threshold and the block at which difficulty will be observed. Yes wins if difficulty at that block is at or above the threshold; No wins below it. Buy shares on the side that matches your view. These tokens represent your position.', 'Prices change as traders buy and sell.'] },
-            { title: 'Fund your account and trade', text: ['Fund your account with the collateral token required by your market. For cbBTC markets, deposit cbBTC directly or convert native BTC using the integrated SwapKit service. Then choose your position and place your trade.', 'cbBTC is a wrapped Bitcoin asset; it is not native BTC.'] },
-            { title: 'Sell or redeem', text: ['Place a sell order before settlement, or hold until the market resolves. A sale depends on available buyers and price.', 'Each winning share in a cbBTC market redeems for 1 cbBTC. Check the displayed payout and collateral token for other markets. Losing shares pay nothing. Your profit or loss also depends on what you paid and any fees.'] },
-          ].map((step, index) => <li key={step.title} className="rounded-panel border border-white/10 bg-surface/40 p-5"><p className="text-xs font-semibold text-subtle">Step {index + 1}</p><h3 className="mt-3 text-lg font-semibold text-body">{step.title}</h3>{step.text.map(line => <p key={line} className="mt-2 text-sm leading-relaxed text-subtle">{line}</p>)}</li>)}
+            { title: 'Choose a Bitcoin difficulty market', text: ['Check the difficulty threshold and the block at which difficulty will be observed. Yes wins if difficulty at that block is at or above the threshold; No wins below it. Buy shares on the side that matches your view. These tokens represent your position.', 'Prices change as traders buy and sell.'], guides: [{ href: '/docs/your-first-trade', label: 'Review price, amount and order execution' }] },
+            { title: 'Fund your account and trade', text: ['Fund your account with the collateral token required by your market. For cbBTC markets, deposit cbBTC directly or convert native BTC using the integrated SwapKit service. Then choose your position and place your trade.', 'cbBTC is a wrapped Bitcoin asset; it is not native BTC.'], guides: [{ href: '/docs/connecting-a-wallet', label: 'Check sign-in and wallet signatures' }, { href: '/docs/getting-collateral', label: 'Check token, network, destination and costs' }] },
+            { title: 'Sell or redeem', text: ['Place a sell order before settlement, or hold until the market resolves. A sale depends on available buyers and price.', 'Each winning share in a cbBTC market redeems for 1 cbBTC. Check the displayed payout and collateral token for other markets. Losing shares pay nothing. Your profit or loss also depends on what you paid and any fees.'], guides: [{ href: '/docs/managing-positions', label: 'Read about managing positions' }] },
+          ].map((step, index) => <li key={step.title} className="rounded-panel border border-white/10 bg-surface/40 p-5"><p className="text-xs font-semibold text-subtle">Step {index + 1}</p><h3 className="mt-3 text-lg font-semibold text-body">{step.title}</h3>{step.text.map(line => <p key={line} className="mt-2 text-sm leading-relaxed text-subtle">{line}</p>)}<nav aria-label={step.title + ' guides'} className="mt-4 flex flex-col items-start gap-2">{step.guides.map(guide => <Link key={guide.href} href={guide.href} data-v3-cta="setup" data-v3-placement="setup" className="inline-flex min-h-11 items-center text-sm font-semibold text-highlight hover:underline">{guide.label} <Arrow /></Link>)}</nav></li>)}
         </ol>
+        <p className="v37-note">Ready to inspect a market? <a href={site.appUrl} data-v3-cta="app" data-v3-placement="setup" className="font-semibold text-highlight underline underline-offset-4">Enter app</a>.</p>
         <div className="mt-7" data-reveal><MarketExample /></div>
         <details id="inside-the-product" className="mt-7 rounded-panel border border-white/15 bg-surface/40 p-5 sm:p-6" data-reveal>
           <summary id="product-title" className="min-h-11 scroll-mt-28 cursor-pointer text-base font-semibold text-highlight">View the app screenshot: 19 October 2026 · not live</summary>
@@ -67,43 +67,24 @@ export default function V3Home() {
       </Container>
     </section>
 
-    <section id="get-started" aria-labelledby="setup-title" className="v37-audience v37-section">
-      <Container>
-        <div className="v37-section-top" data-reveal><div><p className="v37-eyebrow">Get started or resume</p><h2 id="setup-title" className="v37-heading">Find the step you need.</h2></div><a href={site.appUrl} data-v3-cta="app" data-v3-placement="setup" className="v37-link">Enter app <Arrow diagonal /></a></div>
-        <nav aria-label="Account and first-order guides" className="mt-7 grid gap-4 md:grid-cols-3" data-reveal>
-          {[
-            { number: '1', title: 'Sign in', description: 'Check how to sign in and what your wallet will sign.', href: '/docs/connecting-a-wallet' },
-            { number: '2', title: 'Get collateral', description: 'Check the token, network, destination and funding costs.', href: '/docs/getting-collateral' },
-            { number: '3', title: 'Place your first trade', description: 'Review the market terms, price and amount. See how orders execute.', href: '/docs/your-first-trade' },
-          ].map(item => <Link key={item.href} href={item.href} data-v3-cta="setup" data-v3-placement="setup" className="group rounded-panel border border-white/10 bg-surface/40 p-5 hover:border-brand/50"><p className="text-xs font-semibold text-subtle">Step {item.number}</p><h3 className="mt-3 text-lg font-semibold text-body group-hover:text-highlight">{item.title} <span aria-hidden="true">→</span></h3><p className="mt-2 text-sm leading-relaxed text-subtle">{item.description}</p></Link>)}
-        </nav>
-        <p className="v37-note">Returning to a position? Enter the app or <Link href="/docs/managing-positions" className="underline underline-offset-4">read about managing positions</Link>.</p>
-      </Container>
-    </section>
-
-    <section id="review-evidence" aria-labelledby="evidence-title" className="v37-section">
-      <Container>
-        <div data-reveal><p className="v37-eyebrow">Review the evidence</p><h2 id="evidence-title" className="v37-heading">Check the product and its risks.</h2></div>
-        <nav aria-label="Evidence and risk review" className="mt-7 grid gap-4 md:grid-cols-3" data-reveal>
-          {[
-            { title: 'About Doefin', description: 'Read what Doefin does and contact the team.', href: '/about', cta: 'evidence' },
-            { title: 'Technical review', description: 'Find out which contract details, deployment records and audit evidence to ask for.', href: '/docs/smart-contracts', cta: 'evidence' },
-            { title: 'Risks and limitations', description: 'Read about losing your full payment, limited liquidity and collateral or technical failures.', href: '/docs/risks-and-limitations', cta: 'risk' },
-          ].map(item => <Link key={item.href} href={item.href} data-v3-cta={item.cta} data-v3-placement="trust" className="group rounded-panel border border-white/10 bg-surface/40 p-5 hover:border-brand/50"><h3 className="text-lg font-semibold text-body group-hover:text-highlight">{item.title} <span aria-hidden="true">→</span></h3><p className="mt-2 text-sm leading-relaxed text-subtle">{item.description}</p></Link>)}
-        </nav>
-        <p className="v37-note">The examples and research with made-up data are for learning. They do not show live forecasts, trading performance or audit certification.</p>
-      </Container>
-    </section>
-
     <section id="tools-and-learning" aria-labelledby="learning-title" className="v320-updates v37-section">
       <Container>
         <HomeResources />
+        <div id="review-evidence" className="mt-9 scroll-mt-28 border-t border-white/10 pt-6" data-reveal>
+          <h3 id="evidence-title" className="text-lg font-semibold">Check the product and its risks.</h3>
+          <nav aria-label="Evidence and risk review" className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+            <Link href="/about" data-v3-cta="evidence" data-v3-placement="trust" className="v37-link">About Doefin and the team <Arrow /></Link>
+            <Link href="/docs/smart-contracts" data-v3-cta="evidence" data-v3-placement="trust" className="v37-link">Review contract and audit evidence <Arrow /></Link>
+            <Link href="/docs/risks-and-limitations" data-v3-cta="risk" data-v3-placement="trust" className="v37-link">Risks and limitations <Arrow /></Link>
+          </nav>
+          <p className="v37-note">Check contract details, deployment records and available audit evidence. You can lose the full amount paid for a position. Limited liquidity, collateral failures and technical faults also carry risks. The examples and research with made-up data do not show live forecasts, trading performance or audit certification.</p>
+        </div>
       </Container>
     </section>
 
     <section id="faq" aria-labelledby="faq-title" className="v37-faq v37-section">
       <Container className="v37-faq-grid">
-        <div data-reveal><p className="v37-eyebrow">Common questions</p><h2 id="faq-title" className="v37-heading">Before you<br />get started.</h2><p className="v37-copy v37-faq-intro">Short answers here. Step-by-step guides are in the docs.</p><Link href="/docs" className="v37-link">Browse the docs <Arrow /></Link><Link href="/resources" data-v3-cta="resources" data-v3-placement="faq" className="v37-link">Browse the learning resources <Arrow /></Link><Link href="/resources#updates" data-v3-cta="contact" data-v3-placement="faq" className="v37-link">Ask the team a question <Arrow /></Link></div>
+        <div data-reveal><p className="v37-eyebrow">Common questions</p><h2 id="faq-title" className="v37-heading">Questions about<br />using Doefin.</h2><p className="v37-copy v37-faq-intro">Short answers here. Step-by-step guides are in the docs.</p><Link href="/docs" className="v37-link">Browse the docs <Arrow /></Link><Link href="/resources" data-v3-cta="resources" data-v3-placement="faq" className="v37-link">Browse the learning resources <Arrow /></Link><Link href="/resources#updates" data-v3-cta="contact" data-v3-placement="faq" className="v37-link">Ask the team a question <Arrow /></Link></div>
         <div data-reveal><HomeFaq /></div>
       </Container>
     </section>
@@ -112,13 +93,5 @@ export default function V3Home() {
       <Container><ProductUpdates /></Container>
     </section>
 
-    <section aria-labelledby="next-step-title" className="v37-next v37-section">
-      <Container>
-        <div className="v37-close-panel" data-reveal>
-          <div className="v37-close-art" aria-hidden="true"><span /><span /><span /></div>
-          <div className="v37-close-content"><p className="v37-eyebrow">Your next step</p><h2 id="next-step-title" className="v37-heading">Put your hashrate<br />view to work.</h2><p className="v37-copy">Explore the markets or talk to the team about hedging your exposure.</p><div className="v37-actions"><a href={site.appUrl} data-v3-cta="app" data-v3-placement="closing" className="v37-button">Enter app <Arrow diagonal /></a><a href={'mailto:' + site.contactEmail} data-v3-cta="contact" data-v3-placement="closing" className="v37-link">Contact the team <Arrow diagonal /></a></div></div>
-        </div>
-      </Container>
-    </section>
   </LandingMotion>
 }

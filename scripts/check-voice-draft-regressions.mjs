@@ -124,6 +124,15 @@ try {
   const flagged = await run([title, { ...matteo, after: ['Review the profit and loss.'] }])
   assert.equal(flagged.status, 0, flagged.stdout + flagged.stderr)
   assert.match(flagged.stdout, /1 for Matteo/)
+  const nested = { _id: 'd', path: 'items', before: base.items, verdict: 'Matteo', after: [{ _key: 'one', text: 'Review the limits.' }, { _key: 'three', text: 'Read the worked example.' }] }
+  const validObjects = await run([nested])
+  assert.equal(validObjects.status, 0, validObjects.stdout + validObjects.stderr)
+  const flaggedObjects = await run([{ ...nested, after: [{ _key: 'one', text: 'Review the profit and loss.' }] }])
+  assert.equal(flaggedObjects.status, 0, flaggedObjects.stdout + flaggedObjects.stderr)
+  assert.match(flaggedObjects.stdout, /1 for Matteo/)
+  const blockedObjects = await run([{ ...nested, after: [{ _key: 'one', text: 'Unlock your potential.' }] }])
+  assert.equal(blockedObjects.status, 1, blockedObjects.stdout + blockedObjects.stderr)
+  assert.match(blockedObjects.stdout, /CUT.*unlock/i)
   for (const after of ['Unlock your potential.', ['Review the terms.', 'Unlock your potential.']]) {
     const result = await run([{ ...matteo, path: Array.isArray(after) ? 'paragraphs' : 'title', before: Array.isArray(after) ? base.paragraphs : base.title, after }])
     assert.equal(result.status, 1, result.stdout + result.stderr)

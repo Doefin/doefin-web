@@ -114,7 +114,7 @@ export function GuideArticle({
                 {i.whereToFind}
               </p>
               <p className="mt-3 text-[15px] leading-[1.7] text-muted">
-                <span className="font-semibold text-body">Typical range: </span>
+                <span className="font-semibold text-body">Input limits and sample: </span>
                 {i.typical}
               </p>
             </div>

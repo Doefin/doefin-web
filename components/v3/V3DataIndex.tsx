@@ -24,7 +24,7 @@ export default async function V3DataIndex() {
         <p className="mt-3 max-w-xl text-[15px] leading-[1.75] text-subtle sm:mt-5 sm:text-base">Find current difficulty, estimated network hashrate, historical adjustments and examples of forecast error.</p>
       </div>
       <div className="border-l-2 border-caution/50 pl-4 lg:mb-1">
-        <p className="max-w-sm text-xs leading-[1.8] text-subtle"><strong className="font-bold text-highlight">Current estimates and worked examples.</strong> The API supplies current difficulty and estimated network hashrate. The forecast ranges and dated examples use made-up values; they do not show forecasting performance.</p>
+        <p className="max-w-sm text-xs leading-[1.8] text-subtle"><strong className="font-bold text-highlight">Start with the current readings.</strong> Each panel gives its source and time. The historical dataset and synthetic examples follow below.</p>
       </div>
     </header>
 
@@ -32,19 +32,19 @@ export default async function V3DataIndex() {
       {[['Difficulty guide', '/data/difficulty'], ['Hashrate guide', '/data/hashrate'], ['Dated records', '#sample-records']].map(([label, href]) => <a key={href} href={href} className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-white/10 px-3 text-xs font-semibold text-subtle hover:border-brand/40 hover:text-highlight">{label}<span aria-hidden="true">{href.startsWith('#') ? '↓' : '→'}</span></a>)}
     </nav>
 
-    <ResearchArchiveSummary />
-
     <section id="read-the-numbers" aria-label="Current backend readings" className="grid scroll-mt-28 gap-5 lg:grid-cols-2">
       <DifficultyReadingPanel result={difficultyResult} />
       <HashrateReadingPanel result={hashrateResult} />
     </section>
 
+    <ResearchArchiveSummary />
+
     <section id="sample-records" aria-labelledby="sample-records-title" className="mt-12 scroll-mt-28 sm:mt-16">
       <div className="grid gap-4 sm:grid-cols-[1fr_1fr] sm:items-end sm:gap-12">
-        <div><p className="text-[11px] font-bold uppercase tracking-[0.13em] text-highlight">Forecast history</p><h2 id="sample-records-title" className="mt-3 text-2xl font-extrabold tracking-[-0.03em] sm:text-3xl">The forecast archive is empty.</h2></div>
-        <p className="max-w-xl text-sm leading-[1.8] text-subtle">The API supplies a current estimate. It has no published records linking earlier forecasts to their ranges and outcomes, so there is no forecast history to follow for each adjustment.</p>
+        <div><p className="text-[11px] font-bold uppercase tracking-[0.13em] text-highlight">Synthetic forecast records</p><h2 id="sample-records-title" className="mt-3 text-2xl font-extrabold tracking-[-0.03em] sm:text-3xl">Read the dated example rows.</h2></div>
+        <p className="max-w-xl text-sm leading-[1.8] text-subtle">These rows show how a forecast, its date and an outcome fit together. The current API has no published history linking earlier forecasts to their ranges and outcomes.</p>
       </div>
-      <p role="status" className="mt-6 rounded-panel border border-white/10 bg-surface/15 p-5 text-sm leading-relaxed text-subtle">Published forecast records available from the current API: 0. The dated rows below are made-up teaching examples.</p>
+      <p role="status" className="mt-6 rounded-panel border border-white/10 bg-surface/15 p-5 text-sm leading-relaxed text-subtle">Published forecast records available from the current API: 0.</p>
       <details className="mt-5 rounded-panel border border-white/10 bg-surface/15">
         <summary className="cursor-pointer px-5 py-4 text-sm font-semibold text-highlight">Show {epochs.length} synthetic example rows (not published records)</summary>
       <div className="mt-6 overflow-hidden rounded-panel border border-white/10 bg-surface/15">

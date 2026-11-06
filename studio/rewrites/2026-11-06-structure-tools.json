@@ -1,0 +1,376 @@
+[
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-0\"].typical",
+    "before": "The slider accepts 0.01–30 EH/s. This is an input limit, not a rule about who the calculator is for.",
+    "after": "The input accepts 0.01–30 EH/s. The illustrative default is 1 EH/s. These are input limits, not eligibility rules.",
+    "verdict": "Change",
+    "note": "Names the actual control bounds and illustrative default, not an observed typical value. Checked against ExposureSizer and lib/exposure; no input or formula change (E28)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-1\"].typical",
+    "before": "1–13 modelled epochs, approximately 2–26 weeks.",
+    "after": "The input accepts 1–13 modelled epochs, approximately 2–26 weeks. The illustrative default is four epochs, about eight weeks.",
+    "verdict": "Change",
+    "note": "Names the actual control bounds and illustrative default, not an observed typical value. Checked against ExposureSizer and lib/exposure; no input or formula change (E28)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-2\"].typical",
+    "before": "The sample is 0.05 BTC per block; the slider supports 0–0.5.",
+    "after": "The input accepts 0–0.5 BTC per block. The illustrative default is 0.05 BTC per block.",
+    "verdict": "Change",
+    "note": "Names the actual control bounds and illustrative default, not an observed typical value. Checked against ExposureSizer and lib/exposure; no input or formula change (E28)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-3\"].typical",
+    "before": "$20,000–$200,000 in $1,000 steps. The $64,000 default is illustrative.",
+    "after": "The input accepts $20,000–$200,000 per BTC. The illustrative default is $64,000 per BTC. Slider steps are $1,000.",
+    "verdict": "Change",
+    "note": "Names the actual control bounds and illustrative default, not an observed typical value. Checked against ExposureSizer and lib/exposure; no input or formula change (E28)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-4\"].typical",
+    "before": "0–15% lower difficulty. The sample 2.4% is not a forecast.",
+    "after": "The input accepts 0–15% lower difficulty. The illustrative default is 2.4% lower, not a forecast.",
+    "verdict": "Change",
+    "note": "Names the actual control bounds and illustrative default, not an observed typical value. Checked against ExposureSizer and lib/exposure; no input or formula change (E28)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-5\"].typical",
+    "before": "0–15% higher difficulty. This range cannot represent every possible future outcome.",
+    "after": "The input accepts 0–15% higher difficulty. The illustrative default is 7% higher. The limit does not cover every possible future change.",
+    "verdict": "Change",
+    "note": "Names the actual control bounds and illustrative default, not an observed typical value. Checked against ExposureSizer and lib/exposure; no input or formula change (E28)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-6\"].typical",
+    "before": "127.48T is a sample baseline, not the current network value.",
+    "after": "The input accepts 1T–1,000T. The illustrative default is 127.48T, not current network difficulty.",
+    "verdict": "Change",
+    "note": "Names the actual control bounds and illustrative default, not an observed typical value. Checked against ExposureSizer and lib/exposure; no input or formula change (E28)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-0\"].figure",
+    "before": "Your exposure",
+    "after": "Production difference",
+    "verdict": "Change",
+    "note": "Matches the revised calculator heading. The result is easier-case production minus harder-case production, not the loss from the starting case (E28)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-0\"].means",
+    "before": "The BTC difference between production in the easier and harder scenarios. With sample inputs it is about 2.525 BTC.",
+    "after": "Expected production in the easier case minus expected production in the harder case. With the sample inputs, the difference is about 2.525 BTC.",
+    "verdict": "Change",
+    "note": "Defines the arithmetic behind the new heading; retains the existing verified example amount and separate starting-case loss (E28)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-0\"].soWhat",
+    "before": "It includes both the upside from easier difficulty and the downside from harder difficulty. It is not the amount of BTC lost against the unchanged baseline.",
+    "after": "The difference includes both higher production in the easier case and lower production in the harder case. It is not the shortfall against unchanged difficulty.",
+    "verdict": "Change",
+    "note": "Retains both sides of the spread and the baseline distinction using ordinary language (E28)."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "inputs",
+    "before": [
+      {
+        "_key": "input-0",
+        "_type": "inputsEntry",
+        "label": "Fleet hashrate",
+        "means": "Combined modelled fleet hashrate in TH/s.",
+        "typical": "The slider supports 100–20,000 TH/s. The default 1,000 TH/s is illustrative.",
+        "whereToFind": "Use fleet specifications or an operating average for the same machines. Record whether that hashrate already allows for downtime."
+      },
+      {
+        "_key": "input-1",
+        "_type": "inputsEntry",
+        "label": "Efficiency",
+        "means": "Joules per terahash. Hashrate × efficiency determines modelled wall power.",
+        "typical": "The slider supports 12–40 J/TH. The default 15 J/TH is illustrative.",
+        "whereToFind": "Use a measurement or specification relevant to the same operating mode as your hashrate."
+      },
+      {
+        "_key": "input-2",
+        "_type": "inputsEntry",
+        "label": "All-in power cost",
+        "means": "The chosen cost per modelled kWh. No separate operating-cost input is added.",
+        "typical": "The slider supports $0.02–$0.15/kWh. The default $0.045 is not a quoted market rate.",
+        "whereToFind": "Use your billing terms. If you convert another cost to $/kWh, record the approximation and do not count it twice."
+      },
+      {
+        "_key": "input-3",
+        "_type": "inputsEntry",
+        "label": "What you paid up front",
+        "means": "The amount paid up front that the fleet needs to recover. Changing hashrate does not change this input.",
+        "typical": "The slider supports $5,000–$2,000,000. The default $20,000 is a sample.",
+        "whereToFind": "Use invoices or a stated scenario amount. The model does not validate equipment prices or purchase history."
+      },
+      {
+        "_key": "input-4",
+        "_type": "inputsEntry",
+        "label": "Bitcoin price",
+        "means": "A constant USD price used to value all modelled mined BTC.",
+        "typical": "The slider supports $20,000–$200,000. The $90,000 default is illustrative.",
+        "whereToFind": "Choose and record a scenario price. It does not predict a future price path."
+      },
+      {
+        "_key": "input-5",
+        "_type": "inputsEntry",
+        "label": "Difficulty growth guess",
+        "means": "The monthly difficulty increase, applied repeatedly. The first increase happens before the model calculates production for month one.",
+        "typical": "The central slider accepts 0–8% per month. The comparison rows subtract two percentage points, with a minimum of zero, or add three points.",
+        "whereToFind": "Choose a sensitivity assumption. Historical observations are not a guarantee of a future growth rate."
+      },
+      {
+        "_key": "input-6",
+        "_type": "inputsEntry",
+        "label": "Starting difficulty",
+        "means": "The starting network difficulty in trillions. It sets the starting point for calculating expected production.",
+        "typical": "The 127.48T default is illustrative, not current network data.",
+        "whereToFind": "Check a block-data source you trust and enter its value in Starting difficulty."
+      }
+    ],
+    "after": [
+      {
+        "_key": "input-0",
+        "_type": "inputsEntry",
+        "label": "Fleet hashrate",
+        "means": "Combined modelled fleet hashrate in TH/s.",
+        "typical": "The input accepts 100–20,000 TH/s. The illustrative default is 1,000 TH/s.",
+        "whereToFind": "Use fleet specifications or an operating average for the same machines. Record whether that hashrate already allows for downtime."
+      },
+      {
+        "_key": "input-1",
+        "_type": "inputsEntry",
+        "label": "Efficiency",
+        "means": "Joules per terahash. Hashrate × efficiency determines modelled wall power.",
+        "typical": "The input accepts 12–40 J/TH. The illustrative default is 15 J/TH.",
+        "whereToFind": "Use a measurement or specification relevant to the same operating mode as your hashrate."
+      },
+      {
+        "_key": "input-2",
+        "_type": "inputsEntry",
+        "label": "All-in power cost",
+        "means": "The chosen cost per modelled kWh. No separate operating-cost input is added.",
+        "typical": "The input accepts $0.02–$0.15/kWh. The illustrative default is $0.045/kWh, not a market quote.",
+        "whereToFind": "Use your billing terms. If you convert another cost to $/kWh, record the approximation and do not count it twice."
+      },
+      {
+        "_key": "input-3",
+        "_type": "inputsEntry",
+        "label": "What you paid up front",
+        "means": "The amount paid up front that the fleet needs to recover. Changing hashrate does not change this input.",
+        "typical": "The input accepts $5,000–$2,000,000. The illustrative default is $20,000.",
+        "whereToFind": "Use invoices or a stated scenario amount. The model does not validate equipment prices or purchase history."
+      },
+      {
+        "_key": "input-4",
+        "_type": "inputsEntry",
+        "label": "Bitcoin price",
+        "means": "A constant USD price used to value all modelled mined BTC.",
+        "typical": "The input accepts $20,000–$200,000 per BTC. The illustrative default is $90,000 per BTC.",
+        "whereToFind": "Choose and record a scenario price. It does not predict a future price path."
+      },
+      {
+        "_key": "input-5",
+        "_type": "inputsEntry",
+        "label": "Difficulty growth guess",
+        "means": "The monthly difficulty increase, applied repeatedly. The first increase happens before the model calculates production for month one.",
+        "typical": "The central input accepts 0–8% per month. Its illustrative default is 1.5%. The comparison subtracts two percentage points, with a minimum of zero, or adds three.",
+        "whereToFind": "Choose a sensitivity assumption. Historical observations are not a guarantee of a future growth rate."
+      },
+      {
+        "_key": "input-6",
+        "_type": "inputsEntry",
+        "label": "Starting difficulty",
+        "means": "The starting network difficulty in trillions. It sets the starting point for calculating expected production.",
+        "typical": "The input accepts 1T–1,000T. The illustrative default is 127.48T, not current network difficulty.",
+        "whereToFind": "Check a block-data source you trust and enter its value in Starting difficulty."
+      },
+      {
+        "_key": "input-7",
+        "_type": "inputsEntry",
+        "label": "Model horizon",
+        "means": "The number of months to calculate before the model ends. Each month has 30.4 modelled days.",
+        "whereToFind": "Choose the period over which you want to test recovery of the initial outlay. A result ending below zero does not establish what happens after that period.",
+        "typical": "The input accepts 2–120 months. The illustrative default is 48 months."
+      }
+    ],
+    "verdict": "Matteo",
+    "note": "Atomic array proposal: preserves the seven existing input keys/types and updates their limits/defaults from PaybackModel. Adds the missing Model horizon explanation as stable key input-7, inputsEntry. Array/object validation is required. No control, default or formula is changed (E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-0\"].typical",
+    "before": "The slider supports $0–$0.20/kWh. The $0.065 default is a sample, not a market benchmark.",
+    "after": "The input accepts $0–$0.20/kWh. The illustrative default is $0.065/kWh, not a market benchmark.",
+    "verdict": "Change",
+    "note": "Names HostingCalculator control bounds, units and illustrative defaults. Percentages refer to their actual bases; none is an observed typical range (E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-1\"].typical",
+    "before": "The sample is 5%; the supported range is 0–30%.",
+    "after": "The input accepts 0–30% of the advertised power rate. The illustrative default is 5%.",
+    "verdict": "Change",
+    "note": "Names HostingCalculator control bounds, units and illustrative defaults. Percentages refer to their actual bases; none is an observed typical range (E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-2\"].typical",
+    "before": "The sample is 3%; the supported range is 0–30%.",
+    "after": "The input accepts 0–30% of the advertised power rate. The illustrative default is 3%.",
+    "verdict": "Change",
+    "note": "Names HostingCalculator control bounds, units and illustrative defaults. Percentages refer to their actual bases; none is an observed typical range (E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-3\"].typical",
+    "before": "The sample is 4%; the supported range is 0–30%.",
+    "after": "The input accepts 0–30% of hours in the period. The illustrative default is 4%.",
+    "verdict": "Change",
+    "note": "Names HostingCalculator control bounds, units and illustrative defaults. Percentages refer to their actual bases; none is an observed typical range (E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-4\"].typical",
+    "before": "The sample is 6%; the supported range is 0–30%.",
+    "after": "The input accepts 0–30% of hours in the period. The illustrative default is 6%.",
+    "verdict": "Change",
+    "note": "Names HostingCalculator control bounds, units and illustrative defaults. Percentages refer to their actual bases; none is an observed typical range (E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-5\"].typical",
+    "before": "The sample is 2%; the supported range is 0–30%.",
+    "after": "The input accepts 0–30% of revenue. The illustrative default is 2%.",
+    "verdict": "Change",
+    "note": "Names HostingCalculator control bounds, units and illustrative defaults. Percentages refer to their actual bases; none is an observed typical range (E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "whatItIs",
+    "before": "This calculator compares hosting costs per productive kWh. It adds management and power-factor percentages to the advertised rate, then divides by the share of hours when machines run. It then divides by one minus the pool-fee fraction. The result is an equivalent cost for comparison, not an actual invoice or profit calculation.",
+    "after": "This calculator converts a hosting rate into an equivalent cost per productive kWh. It adds separately billed fees to the rate. When stopped hours remain payable, the same cost is spread over fewer productive hours. The pool’s revenue deduction is then expressed as a cost adjustment.",
+    "verdict": "Change",
+    "note": "States what is calculated first, without repeating the full worked arithmetic in the introduction. The steps retain the additive fee rule, productive-hours divisor and pool divisor (E24, E25, E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "whoFor",
+    "before": "Use this if you own machines and pay for booked hosting capacity even when the machines are stopped. Hosting businesses can use it for machines they own. Energy-only billing, revenue-share contracts, demand-response income and unrelated hosting income need different models.",
+    "after": "Use this for machines you own when booked capacity remains payable during downtime or curtailment. Energy-only billing, revenue-share contracts, demand-response income and unrelated hosting income need different models.",
+    "verdict": "Change",
+    "note": "Keeps the paid-capacity condition and all excluded business models. Machines owned by a hosting business fit the same ownership condition without a separate role sentence (E24, E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "howToUse",
+    "before": [
+      "Check the agreement and invoices. Which fees are included in the advertised rate, and do you still pay when machines stop?",
+      "Enter Advertised power rate in $/kWh. Enter management and power-factor fees as percentages of that rate. Do not add a fee already included in the rate.",
+      "Enter downtime and curtailment as percentages of the same period. Use records or clearly labelled assumptions. Count each stopped hour once, under one input only.",
+      "Enter Pool fee as a percentage of revenue. The tool converts it to an equivalent cost for comparison; it is not an electricity charge.",
+      "Compare each step and the final rates using the same assumptions for both offers. A smaller percentage increase can still leave you with a higher final cost.",
+      "Copy the URL to save the inputs. Anyone with the link can read the terms you entered."
+    ],
+    "after": [
+      "Check the agreement and invoices. Which fees are included in the advertised rate, and do you still pay when machines stop?",
+      "Enter Advertised power rate in $/kWh. Enter management and power-factor fees as percentages of that rate. Do not add a fee already included in the rate.",
+      "Enter downtime and curtailment as percentages of the same period. Use records or clearly labelled assumptions. Count each stopped hour once, under one input only.",
+      "Enter Pool fee as a percentage of revenue. The tool converts it to an equivalent cost for comparison; it is not an electricity charge.",
+      "Compare the final rates using the same billing assumptions for both offers.",
+      "Copy the URL to save the inputs. Anyone with the link can read the terms you entered."
+    ],
+    "verdict": "Matteo",
+    "note": "Keeps checking agreements, separate additive fee inputs, distinct paid lost hours, pool revenue deduction and public-URL warning. Moves the percentage-versus-final-rate interpretation to its result explanation, where it is needed (E24, E25)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-1\"].soWhat",
+    "before": "This shows how your inputs change the starting rate. It does not rate the provider’s honesty or quality.",
+    "after": "Compare the final $/kWh rates as well as the percentage increases. A lower percentage increase can still leave a higher final cost.",
+    "verdict": "Change",
+    "note": "Explains how to use the result. Removes the unrelated detour about judging provider honesty or quality while preserving the material comparison caveat (E24, E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-3\"].soWhat",
+    "before": "Use the working to check the arithmetic and compare assumptions. The model does not recommend a provider.",
+    "after": "The change at each step shows how much that adjustment adds to the starting rate.",
+    "verdict": "Change",
+    "note": "Explains the intermediate calculation instead of disclaiming a provider recommendation. Keeps the arithmetic and the equivalent-cost boundary elsewhere (E24, E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "mistakes",
+    "before": [
+      "Adding a fee that is already in the advertised rate.",
+      "Counting the same stopped hour as both downtime and curtailment.",
+      "Using this paid-capacity model for a bill that falls proportionally when machines stop.",
+      "Treating the percentage uplift as a provider rating or comparing uplift percentages without comparing the absolute final rates."
+    ],
+    "after": [
+      "Adding a fee that is already in the advertised rate.",
+      "Counting the same stopped hour as both downtime and curtailment.",
+      "Using this paid-capacity model for a bill that falls proportionally when machines stop.",
+      "Comparing percentage increases without comparing the final rates in $/kWh."
+    ],
+    "verdict": "Matteo",
+    "note": "Retains the concrete comparison mistake and all other errors. Cuts the provider-rating detour (E24, E25)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "limits",
+    "before": [
+      "Booked capacity is assumed payable during lost hours. Credits, energy-only charges, curtailment compensation and revenue-share contracts need separate treatment.",
+      "The pool-fee calculation is an equivalent comparison adjustment, not the actual dollar charge a pool takes from revenue. Mining revenue is not an input.",
+      "The model does not include BTC price, difficulty, machine efficiency, hardware cost, repairs, financing, tax, deposits or resale value. It cannot determine profitability.",
+      "Management and power-factor percentages add once. Compounded charges or fees applied to a different base need separate arithmetic.",
+      "The defaults and presets are illustrative. No market rates, provider ranking or safe decision threshold are established here."
+    ],
+    "after": [
+      "Booked capacity is assumed payable during lost hours. Credits, energy-only charges, curtailment compensation and revenue-share contracts need separate treatment.",
+      "The pool-fee calculation is an equivalent comparison adjustment, not the actual dollar charge a pool takes from revenue. Mining revenue is not an input.",
+      "The model does not include BTC price, difficulty, machine efficiency, hardware cost, repairs, financing, tax, deposits or resale value. It cannot determine profitability.",
+      "Management and power-factor percentages add once. Compounded charges or fees applied to a different base need separate arithmetic.",
+      "The defaults and presets are illustrative, not observed market rates. This comparison does not establish a decision threshold."
+    ],
+    "verdict": "Matteo",
+    "note": "Retains sample status, no market-rate claim and no decision threshold. Cuts the provider-ranking detour; paid-capacity, pool, additive-fee and profitability limits remain exact (E24, E28)."
+  }
+]
