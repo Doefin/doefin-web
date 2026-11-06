@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-06",
+  "project": "yzvr33lo",
+  "dataset": "production",
+  "method": "Normal authenticated Sanity CLI; guarded atomic version-create/edit batch; fresh raw reread",
+  "status": "all_1_drafts_verified",
+  "documents": 1,
+  "textEdits": 3,
+  "publicationActions": 0,
+  "publishedDocumentsChanged": 0,
+  "protectedDocumentsExcluded": [
+    "about-doefin",
+    "glossary-block-subsidy"
+  ],
+  "shortDefinitionsChanged": 0,
+  "verification": "Every complete saved draft matches the current published document plus only its reviewed changes, excluding CMS system metadata. Every published revision and complete content value still matches the captured baseline.",
+  "records": [
+    {
+      "id": "glossary-hashprice",
+      "type": "glossaryTerm",
+      "status": "draft_verified",
+      "draftId": "drafts.glossary-hashprice",
+      "draftRevision": "k8hlzjuhoL42eLegplGsrZ",
+      "publishedRevisionUnchanged": "k8hlzjuhoL42eLegpVdC8V",
+      "textEdits": 3,
+      "contentSha256": "ace1776d451475ffc244c1d8e7acab26eac7f42a18aefcdc4e0e0af990e7bb77"
+    }
+  ],
+  "protectedPublishedAndDraftSlotsVerifiedUnchanged": 4,
+  "protectedVerification": "Exact raw before/after document comparison of About and Block subsidy, including draft slots."
+}

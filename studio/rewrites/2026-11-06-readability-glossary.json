@@ -1,0 +1,29 @@
+[
+  {
+    "_id": "glossary-hashprice",
+    "_type": "glossaryTerm",
+    "path": "faq[_key==\"faq-0\"].a",
+    "before": "Whether the machines are worth running. When hashprice falls below a fleet's power cost per terahash, the machines lose money for every hour they run.",
+    "after": "Expected mining revenue per unit of hashrate per day, before electricity and other operating costs. Whether a machine is worth running also depends on its efficiency, electricity price, other applicable costs and actual power and pool terms. Compare revenue and costs using the same currency, hashrate basis and time period.",
+    "verdict": "Change",
+    "note": "Factual clarity: expected revenue is not an operating decision. Match currency, hashrate basis and period; retain efficiency, electricity, other applicable costs and actual power/pool terms. Sources: https://docs.luxor.tech/hashrateindex/hashprice ; https://docs.luxor.tech/platform/commander/intelligent-miner ; https://docs.luxor.tech/platform/mining/revenue-payments . Matteo habits 3 and 4: precise metric with its limit. Fardin and Matteo should read the corrected operating-decision explanation before any publication."
+  },
+  {
+    "_id": "glossary-hashprice",
+    "_type": "glossaryTerm",
+    "path": "faq[_key==\"faq-1\"].a",
+    "before": "Because publishers calculate it differently. Most differences come from the Bitcoin price used: which exchanges are included, how they are weighted and when the price is recorded. Few publishers disclose which exchanges they use.",
+    "after": "Publishers can use different transaction-fee averaging windows, Bitcoin prices for USD conversion and observation times. Check each publisher's calculation method, units and timestamp, including whether pool fees are deducted, before comparing figures.",
+    "verdict": "Change",
+    "note": "Factual clarity: removes unsupported claims about most differences and limited publisher disclosure. Names comparison inputs without ranking their importance or claiming every publisher uses the same method. Luxor documents its transaction-fee window and USD conversion method; its pool documentation separates the pool fee from spot FPPS. Sources: https://docs.luxor.tech/hashrateindex/hashprice ; https://docs.luxor.tech/platform/mining/revenue-payments . E30: name the method. The possible reasons for differing figures are an inference from the calculation inputs, not a publisher survey."
+  },
+  {
+    "_id": "glossary-hashprice",
+    "_type": "glossaryTerm",
+    "path": "faq[_key==\"faq-2\"].a",
+    "before": "It was coined by Luxor in 2019 and is now the industry standard unit for mining revenue per unit of hashrate.",
+    "after": "Luxor says it coined the term in 2019. Hashprice is a revenue metric, quoted in BTC or a currency such as USD per unit of hashrate per day.",
+    "verdict": "Change",
+    "note": "Factual clarity: attributes the 2019 coinage to Luxor and replaces the unsupported industry-standard-unit claim with a revenue metric and its denomination. Source: https://docs.luxor.tech/hashrateindex/hashprice . Matteo habit 7: verifiable attribution. No claim about industry adoption or a physical unit."
+  }
+]
