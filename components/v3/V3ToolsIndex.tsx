@@ -7,14 +7,14 @@ import { Arrow } from './Arrow'
 
 export const metadata = seo({
   title: 'Mining calculators: hosting, production and payback',
-  description: 'Choose a mining calculator by the question, inputs and result: compare hosting costs, size difficulty exposure or explore simplified fleet payback.',
+  description: 'Compare hosting costs, estimate how difficulty changes expected BTC production or explore when a fleet could recover its initial cost.',
   path: '/tools',
 })
 
 const choices = [
   { slug: 'hosting-effective-rate', name: 'Hosting comparison', output: 'Effective cost per kWh', number: '01' },
   { slug: 'difficulty-exposure', name: 'Difficulty exposure', output: 'Production across two scenarios', number: '02' },
-  { slug: 'fleet-payback', name: 'Fleet payback', output: 'Recovery across difficulty paths', number: '03' },
+  { slug: 'fleet-payback', name: 'Fleet payback', output: 'Payback under three growth assumptions', number: '03' },
 ] as const
 
 const focus = 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-highlight'
@@ -51,7 +51,7 @@ export default async function V3ToolsIndex() {
   return <GuidesPublicationProvider slugs={unavailable ? null : guides.map(row=>row.slug)}><Container className="pb-14 pt-7 sm:pb-20 sm:pt-10 [overflow-wrap:anywhere]">
     <header className="grid gap-4 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:gap-14">
       <div><p className="text-[11px] font-bold uppercase tracking-[0.14em] text-highlight">Doefin / Mining calculators</p><h1 className="mt-3 max-w-2xl text-balance text-[34px] font-extrabold leading-[1.12] tracking-[-0.04em] sm:text-[50px]">Work through the numbers.</h1></div>
-      <p className="max-w-lg text-[15px] leading-[1.8] text-subtle">Compare a hosting quote, size a production change or test when a fleet could recover its cost.</p>
+      <p className="max-w-lg text-[15px] leading-[1.8] text-subtle">Compare a hosting quote, estimate a change in BTC production or test when a fleet could recover its cost.</p>
     </header>
 
     <nav aria-label="Choose a mining calculator" className="mb-7 mt-6 grid gap-0 divide-y divide-white/10 border-y border-white/10 sm:mb-9 sm:mt-8 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
@@ -99,7 +99,7 @@ export default async function V3ToolsIndex() {
         <p className="mt-3 text-xs leading-[1.8] text-subtle"><strong className="font-semibold text-body">You get</strong> production in each scenario and the BTC spread between them.</p>
 
         <figure className="mb-5 mt-6 rounded-xl border border-white/10 bg-ink/50 p-4 sm:p-5">
-          <figcaption className="flex flex-wrap items-center justify-between gap-2"><span className="text-xs font-semibold">Same fleet. Same time.</span><span className={sampleLabel}>Illustrative sample</span></figcaption>
+          <figcaption className="flex flex-wrap items-center justify-between gap-2"><span className="text-xs font-semibold">Expected production for the same fleet and period</span><span className={sampleLabel}>Illustrative sample</span></figcaption>
           <div className="mt-5 space-y-4">
             {[{ label: 'Difficulty unchanged', value: example.base }, { label: `Difficulty +${exampleInputs.high}%`, value: example.atHigh }].map(row => <div key={row.label}><div className="mb-2 flex items-baseline justify-between gap-3"><p className="tabular text-[11px] text-subtle">{row.label}</p><p className="tabular text-sm font-bold">{row.value.toFixed(3)} <span className="text-[10px] font-medium text-subtle">BTC</span></p></div><div aria-hidden="true" className="h-2 rounded-full bg-active/50"><div className="h-2 rounded-full bg-chart" style={{ width: `${row.value / example.base * 100}%` }} /></div></div>)}
           </div>
@@ -119,11 +119,11 @@ export default async function V3ToolsIndex() {
         <p className="mt-3 text-xs leading-[1.8] text-subtle"><strong className="font-semibold text-body">You get</strong> a payback month, or no payback within your horizon, plus final cash across three difficulty paths.</p>
 
         <figure className="mb-5 mt-6 rounded-xl border border-white/10 bg-ink/50 p-4 sm:p-5">
-          <figcaption className="flex flex-wrap items-center justify-between gap-2"><span className="text-xs font-semibold">Follow the capital</span><span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-subtle">Model logic</span></figcaption>
+          <figcaption className="flex flex-wrap items-center justify-between gap-2"><span className="text-xs font-semibold">How the model calculates payback</span><span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-subtle">Model logic</span></figcaption>
           <ol className="relative mt-5 space-y-0">
             {[
-              { label: 'Start with the outlay', text: 'The starting cash balance is minus the upfront cost.', sign: '−' },
-              { label: 'Add revenue, subtract power', text: 'Repeat each month as difficulty changes.', sign: '±' },
+              { label: 'Start with the outlay', text: 'The cash balance starts below zero by the amount paid up front.', sign: '−' },
+              { label: 'Add revenue, subtract power', text: 'Repeat each month using the assumed difficulty growth.', sign: '±' },
               { label: 'Find the recovery point', text: 'Payback is the first month cumulative cash reaches zero.', sign: '=' },
             ].map((step, i) => <li key={step.label} className={`flex gap-3 ${i < 2 ? 'pb-4' : ''}`}><span aria-hidden="true" className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-active/35 text-base font-bold text-highlight">{step.sign}</span><div><p className="text-xs font-bold">{step.label}</p><p className="mt-1 text-[11px] leading-[1.7] text-subtle">{step.text}</p></div></li>)}
           </ol>

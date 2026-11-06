@@ -8,14 +8,14 @@ export const dynamic = 'force-dynamic'
 
 export default async function V3Hashrate() {
   const result = await getCurrentHashrate()
-  return <DataDetail title="Hashrate is estimated, not counted." summary="Compare the rolling estimates and check their timestamp. The example series below is separate from the current data." category="Hashrate" current="hashrate" crumbs={[{ name: 'Hashrate', href: '/data/hashrate' }]} datasetNotice={<><strong className="font-semibold text-highlight">Live backend reading.</strong> The panel uses the current API response. The series below uses made-up values as a separate teaching example.</>}>
+  return <DataDetail title="Hashrate is estimated, not counted." summary="Compare estimates over different block windows and see when the source was updated. The example chart is separate from these readings." category="Hashrate" current="hashrate" crumbs={[{ name: 'Hashrate', href: '/data/hashrate' }]} datasetNotice={<><strong className="font-semibold text-highlight">Current API reading.</strong> The panel uses the current response. The chart below is a separate example made with synthetic values.</>}>
     <HashrateReadingPanel result={result} />
-    <DataSection title="What a hashrate window means." description="The backend publishes rolling estimates in hashes per second. It does not publish forecast intervals or hashrate records for each difficulty adjustment.">
-      <p className={dataCopy}>A longer averaging window smooths short-term variation. The 120-, 144- and 2,016-block windows are separate source values; no range is inferred from them.</p>
+    <DataSection title="Why the averaging window matters." description="The API estimates hashrate over recent blocks and reports it in hashes per second. It supplies no forecast ranges or hashrate records for each difficulty adjustment.">
+      <p className={dataCopy}>A longer window smooths short-term variation. Each of the 120-, 144- and 2,016-block estimates is a separate source value. The gap between them is not a forecast range.</p>
     </DataSection>
-    <DataSection title="A sequence of teaching examples." eyebrow="Teaching illustration" description="These example values show how a rate can move. They are not current network history or observations from the API.">
+    <DataSection title="Hashrate implied by example difficulty." eyebrow="Teaching illustration" description="The chart converts example difficulty into hashrate using the ten-minute block target. Its values are not current network history or API observations.">
       <DataSeries metric="hashrateEH" />
     </DataSection>
-    <DataNext items={[{ href: '/data/difficulty', label: 'Read difficulty estimates', note: 'Inspect the current point estimate and its limitations.' }, { href: '/methodology/difficulty-index', label: 'Inspect the methodology', note: 'Review the inputs and calculation context.' }]} />
+    <DataNext items={[{ href: '/data/difficulty', label: 'Read difficulty estimates', note: 'Inspect the current point estimate and its limitations.' }, { href: '/methodology/difficulty-index', label: 'Inspect the methodology', note: 'See which inputs a forecast uses and how it is calculated.' }]} />
   </DataDetail>
 }

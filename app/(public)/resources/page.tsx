@@ -9,14 +9,14 @@ import { seo } from '@/lib/seo'
 import { site } from '@/lib/site'
 
 export const metadata: Metadata = {
-  ...seo({ title: 'Resources: guides, tools and mining glossary', description: 'Understand Bitcoin difficulty and compare mining scenarios: guides, articles, definitions, captured difficulty adjustments and labelled synthetic exercises.', path: '/resources' }),
+  ...seo({ title: 'Resources: guides, tools and mining glossary', description: 'Find guides, calculators and definitions for Bitcoin mining difficulty. Explore recorded adjustments and clearly labelled exercises with made-up data.', path: '/resources' }),
   robots: { index: false, follow: false },
 }
 
 const calculators = [
   { slug: 'difficulty-exposure', title: 'Difficulty exposure', question: 'What could a difficulty change mean for production?', description: 'Compare BTC production across your own assumptions, then share or download a scenario brief.' },
-  { slug: 'hosting-effective-rate', title: 'Hosting costs', question: 'What does the quote really cost?', description: 'Bring fees and lost hours into the effective rate. Save one quote for a comparison during this visit.' },
-  { slug: 'fleet-payback', title: 'Fleet payback', question: 'Which assumptions change capital recovery?', description: 'Compare simplified cash flows across difficulty paths, power costs and fleet inputs.' },
+  { slug: 'hosting-effective-rate', title: 'Hosting costs', question: 'What does hosting cost after fees and downtime?', description: 'See the hosting rate after fees and lost operating hours. Save one quote to compare during this visit.' },
+  { slug: 'fleet-payback', title: 'Fleet payback', question: 'How long could the fleet take to pay back?', description: 'Compare simplified cash flows using different difficulty paths, power costs and fleet assumptions.' },
 ]
 
 export default async function Resources() {
@@ -41,8 +41,8 @@ export default async function Resources() {
 
     <section id="docs" aria-label="Choose a starting point" className="mt-8 grid scroll-mt-28 gap-4 md:grid-cols-3">
       {[
-        { icon: 'block' as const, title: 'Understand the market', description: 'See what the contract tracks, when difficulty is observed and how the outcome is decided. The docs cover individual app tasks.', href: '/product', action: 'Read the product introduction' },
-        { icon: 'mining' as const, title: 'Explore your production', description: 'Connect difficulty to a fleet’s expected production, then try the calculation yourself.', href: '/for/miners#planning-example', action: 'Follow the miner example' },
+        { icon: 'block' as const, title: 'Understand the market', description: 'See what a difficulty contract tracks, when difficulty is observed and how the outcome is decided. Use the docs for help with app tasks.', href: '/product', action: 'Read the product introduction' },
+        { icon: 'mining' as const, title: 'Explore your production', description: 'See how difficulty affects a fleet’s expected BTC production, then try the calculation yourself.', href: '/for/miners#planning-example', action: 'Follow the miner example' },
         { icon: 'market' as const, title: 'Prepare a market review', description: 'Review execution, collateral and the evidence your team needs before taking a position.', href: '/for/institutions#review-checklist', action: 'Open the review checklist' },
       ].map((item, index) => <Link key={item.href} href={item.href} className={'group flex flex-col rounded-panel border p-6 transition-colors hover:border-brand/50 ' + (index === 0 ? 'border-brand/30 bg-gradient-to-br from-brand/10 to-surface/60' : 'border-white/10 bg-surface/40')}>
         <BrandIcon name={item.icon} className="h-7 w-7 text-highlight" />
@@ -72,11 +72,11 @@ export default async function Resources() {
 
     <section id="learn" aria-labelledby="resources-learn" className="mt-16 scroll-mt-28 border-t border-white/10 pt-9 [overflow-wrap:anywhere]">
       <p className="text-xs font-bold uppercase tracking-[0.12em] text-subtle">Guides &amp; articles</p>
-      <h2 id="resources-learn" className="mt-3 text-3xl font-bold tracking-[-0.03em]">Build the context behind a decision.</h2>
+      <h2 id="resources-learn" className="mt-3 text-3xl font-bold tracking-[-0.03em]">Learn how mining works.</h2>
       <div className="mt-8 grid gap-10 md:grid-cols-2 md:gap-14">
         {[
           { title: 'Mining fundamentals', href: '/academy', items: lessons, prefix: '/academy/' },
-          { title: 'Assumptions & interpretation', href: '/blog', items: articles, prefix: '/blog/' },
+          { title: 'Working with mining assumptions', href: '/blog', items: articles, prefix: '/blog/' },
         ].map(group => <div key={group.href}>
           <h3 className="text-lg font-bold">{group.title}</h3>
           <ul className="mt-4 divide-y divide-white/10 border-y border-white/10">{group.items.map(article => <li key={article.slug}>
@@ -85,7 +85,7 @@ export default async function Resources() {
               <p className="mt-2 text-sm leading-relaxed text-subtle">{article.summary}</p>
             </Link>
           </li>)}</ul>
-          <Link href={group.href} className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">{group.href.endsWith('academy') ? 'Academy & written guides' : 'All articles'} <Arrow /></Link>
+          <Link href={group.href} className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">{group.href.endsWith('academy') ? 'Browse the academy' : 'All articles'} <Arrow /></Link>
         </div>)}
       </div>
       <Link href="/learn/difficulty-exposure" data-v3-cta="tutorial" data-v3-placement="resources" className="mt-7 flex flex-wrap items-center justify-between gap-3 rounded-panel border border-white/10 bg-surface/40 px-6 py-5 hover:border-brand/40">
@@ -96,13 +96,13 @@ export default async function Resources() {
     <section id="glossary" aria-labelledby="resources-glossary" className="mt-16 grid scroll-mt-28 gap-8 rounded-panel border border-white/10 bg-surface/40 p-6 sm:p-8 md:grid-cols-2 md:gap-12">
       <div>
         <p className="text-xs font-bold uppercase tracking-[0.12em] text-subtle">Definitions</p>
-        <h2 id="resources-glossary" className="mt-3 text-2xl font-bold tracking-tight">The right term, explained.</h2>
+        <h2 id="resources-glossary" className="mt-3 text-2xl font-bold tracking-tight">Look up a mining term.</h2>
         <p className="mt-3 text-sm leading-relaxed text-subtle">Difficulty, hashprice, epochs, pools and operating terms each have a short definition and a fuller explanation.</p>
         <Link href="/glossary" className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">Browse the mining glossary <Arrow /></Link>
       </div>
       <div className="border-t border-white/10 pt-6 md:border-l md:border-t-0 md:pl-8 md:pt-0">
         <h3 className="text-lg font-bold">Looking up an app or market term?</h3>
-        <p className="mt-3 text-sm leading-relaxed text-subtle">Find concise explanations of shares (position tokens), collateral, orders, resolution and redemption in the docs.</p>
+        <p className="mt-3 text-sm leading-relaxed text-subtle">The docs explain shares, which are tokens representing a position. They also cover collateral, orders, how markets resolve and how to redeem shares.</p>
         <Link href="/docs/key-terms" className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">Read market key terms <Arrow /></Link>
       </div>
     </section>
@@ -110,14 +110,14 @@ export default async function Resources() {
     <section id="research" aria-labelledby="resources-research" className="mt-16 scroll-mt-28 border-t border-white/10 pt-9">
       <div className="max-w-2xl">
         <p className="text-xs font-bold uppercase tracking-[0.12em] text-subtle">Research &amp; data</p>
-        <h2 id="resources-research" className="mt-3 text-3xl font-bold tracking-[-0.03em]">Inspect the observations. Understand the methods.</h2>
+        <h2 id="resources-research" className="mt-3 text-3xl font-bold tracking-[-0.03em]">Check the data and the calculations.</h2>
         <p className="mt-4 text-[15px] leading-relaxed text-subtle">Explore the recorded difficulty adjustments, check their sources and download the data. Separate examples show how to calculate forecast errors.</p>
-        <p className="mt-4 border-l-2 border-caution/60 pl-4 text-sm leading-relaxed text-subtle"><strong className="font-semibold text-caution">Different evidence, clearly labelled.</strong> The difficulty-adjustment report uses recorded network data. The forecast comparisons and error exercises use made-up values for teaching. Neither shows live forecasts, measured forecasting performance or a verified prediction record.</p>
+        <p className="mt-4 border-l-2 border-caution/60 pl-4 text-sm leading-relaxed text-subtle"><strong className="font-semibold text-caution">Recorded data and teaching examples.</strong> The difficulty-adjustment report uses recorded network data. The forecast comparisons and error exercises use made-up values for teaching. Neither shows live forecasts, measured forecasting performance or a verified prediction record.</p>
       </div>
       {reports.length === 0 ? <p role="status" className="mt-7 border-y border-white/10 py-6 text-sm text-subtle">No published research reports are available yet.</p> : <ul className="mt-7 divide-y divide-white/10 border-y border-white/10">
         {[
-          ...reports.map(report => ({ title: report.title, summary: report.summary, href: '/research/' + report.slug, provenance: report.slug === 'observed-difficulty-adjustments' ? 'Observed network data · Frozen source capture' : 'Synthetic teaching exercise · Authored values' })),
-          { title: 'Evaluate a difficulty forecast', summary: 'Inspect every sample observation, follow the error calculation and download the synthetic dataset.', href: '/research/evaluating-a-forecast', provenance: 'Synthetic teaching exercise · Authored values' },
+          ...reports.map(report => ({ title: report.title, summary: report.summary, href: '/research/' + report.slug, provenance: report.slug === 'observed-difficulty-adjustments' ? 'Observed network data · Saved source snapshot' : 'Teaching exercise · Made-up values' })),
+          { title: 'Evaluate a difficulty forecast', summary: 'Check each made-up observation, follow the error calculation and download the example data.', href: '/research/evaluating-a-forecast', provenance: 'Teaching exercise · Made-up values' },
         ].map(report => <li key={report.href}><Link href={report.href} className="group flex items-start justify-between gap-5 py-6"><div><p className="mb-2 text-xs font-semibold text-subtle">{report.provenance}</p><h3 className="text-lg font-semibold group-hover:text-highlight">{report.title}</h3><p className="mt-2 max-w-3xl text-sm leading-relaxed text-subtle">{report.summary}</p></div><Arrow className="mt-1" /></Link></li>)}
       </ul>}
       <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1">{[
@@ -126,8 +126,8 @@ export default async function Resources() {
     </section>
 
     <section id="updates" aria-labelledby="resources-contact" className="mt-14 flex scroll-mt-28 flex-wrap items-center justify-between gap-5 border-t border-white/10 pt-7">
-      <div className="max-w-2xl"><h2 id="resources-contact" className="text-xl font-bold">Need a detail you cannot find?</h2><p className="mt-3 text-sm leading-relaxed text-subtle">Ask the team about the product or request the evidence you need to review it.</p><p className="mt-2 text-xs leading-relaxed text-subtle">Preview research email preferences, publication alerts or a requested report email. This demo does not send emails or save personal details.</p></div>
-      <div className="flex flex-wrap gap-x-6 gap-y-2"><a href={'mailto:' + site.contactEmail} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">Contact the team <Arrow diagonal /></a><Link href="/newsletter" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">Explore research emails <Arrow /></Link></div>
+      <div className="max-w-2xl"><h2 id="resources-contact" className="text-xl font-bold">Need a detail you cannot find?</h2><p className="mt-3 text-sm leading-relaxed text-subtle">Ask the team about the product or request the evidence you need to review it.</p><p className="mt-2 text-xs leading-relaxed text-subtle">Try the demo to choose research emails, publication alerts or a report email. It does not send emails or save personal details.</p></div>
+      <div className="flex flex-wrap gap-x-6 gap-y-2"><a href={'mailto:' + site.contactEmail} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">Contact the team <Arrow diagonal /></a><Link href="/newsletter" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-highlight hover:underline">Try the research email demo <Arrow /></Link></div>
     </section>
   </Container></GuidesPublicationProvider>
 }

@@ -1,0 +1,293 @@
+[
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "summary",
+    "before": "A worked approach to comparing forecasts and outcomes, using a synthetic dataset rather than measured estimator performance.",
+    "after": "How to compare difficulty forecasts fairly, with a worked calculation using made-up values. The example does not measure any forecaster’s performance.",
+    "verdict": "Change",
+    "note": "States the question and synthetic limitation directly; no measured-performance claim."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-0\"].heading",
+    "before": "Compare the same question",
+    "after": "Match the target and forecast time",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-0\"].paragraphs",
+    "before": [
+      "A fair comparison starts with the same target block, difficulty-change definition and forecast time. Comparing a forecast issued early in the adjustment period with a later one gives the later forecast information the earlier one did not have.",
+      "Record the forecast as it was issued, the input block height, source, model version and outcome definition. Preserve failed and missing forecasts in the evaluation record rather than selecting only successful predictions."
+    ],
+    "after": [
+      "A fair comparison asks each forecast the same question: what will the difficulty change be at the same target block? Use the same definition of difficulty change and compare forecasts issued at the same time. A later forecast has information that an earlier one did not.",
+      "Keep each forecast as originally issued, together with its input block height, source, model version and definition of the outcome. Include failed and missing forecasts in the record. Selecting only successful predictions would change the comparison."
+    ],
+    "verdict": "Change",
+    "note": "Preserves same target, definition, timing, information advantage, original records, provenance fields and treatment of failures or missing forecasts."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-1\"].heading",
+    "before": "Measure error and uncertainty separately",
+    "after": "Error and forecast ranges",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-1\"].paragraphs",
+    "before": [
+      "Absolute error is the distance between a forecast and its outcome. Mean absolute error averages that distance over the selected observations. It describes that evaluation set; it does not establish how a model will perform in another period.",
+      "An interval needs a separate check: how often did outcomes fall inside the stated range, and how wide was it? Wide intervals can cover many outcomes without being useful. Calibration needs enough independent observations and an explicit evaluation window."
+    ],
+    "after": [
+      "Absolute error is the size of the gap between a forecast and its outcome. Mean absolute error averages those gaps across the forecasts being tested. It describes that sample, not how the model will perform in another period.",
+      "A forecast range needs a separate test. How often did it contain the outcome, and how wide was it? A wide range can contain many outcomes while telling you little. Testing whether ranges match their stated confidence level needs enough independent observations over a clearly defined period."
+    ],
+    "verdict": "Change",
+    "note": "Retains error definition, sample limit, coverage versus width and calibration requirements; explains calibration rather than leaving jargon unexplained."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-2\"].heading",
+    "before": "What this example establishes",
+    "after": "What the worked example can show",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-2\"].paragraphs",
+    "before": [
+      "The linked worked example makes the arithmetic inspectable. Its forecast/outcome pairs were authored for an educational exercise. They are not captured predictions, network observations or results for Doefin or another estimator.",
+      "There is no verified comparison of public forecasters on this page. It cannot support a ranking, an accuracy advantage, a volatility estimate or a claim about which forecasters publish intervals."
+    ],
+    "after": [
+      "The linked example shows each step of the error calculation. Its forecasts and outcomes were made up for the exercise. They are not captured predictions, network observations or results for Doefin or another estimator.",
+      "This page has no verified comparison of public forecasters. It cannot establish a provider ranking, an accuracy advantage, a volatility estimate or which forecasters publish ranges."
+    ],
+    "verdict": "Change",
+    "note": "Preserves synthetic origin and every unsupported inference; replaces inspectable and authored with familiar language."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-0\"].heading",
+    "before": "Start with the observable inputs",
+    "after": "Which inputs does a forecast use?",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-0\"].paragraphs",
+    "before": [
+      "A difficulty projection can use the current difficulty, the adjustment boundary and the elapsed time between observed Bitcoin blocks. The method must say which blocks it includes and when those inputs were captured.",
+      "Blocks arrive irregularly. Projecting from the pace so far assumes something about the rest of the adjustment period; it does not measure a future network value. Calendar timing is also an estimate."
+    ],
+    "after": [
+      "A difficulty forecast can use current difficulty, the block where the next adjustment occurs and the time elapsed between observed Bitcoin blocks. The method needs to identify those blocks and when the inputs were recorded.",
+      "Blocks do not arrive at regular intervals. Extending the pace so far into the rest of the adjustment period requires an assumption about future block timing. It does not measure a future network value. The estimated calendar date can change too."
+    ],
+    "verdict": "Change",
+    "note": "Keeps available input types, captured-time requirement, irregular blocks, projection assumption and estimated calendar timing."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-1\"].heading",
+    "before": "Make the calculation reproducible",
+    "after": "How can someone repeat the calculation?",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-1\"].paragraphs",
+    "before": [
+      "Publish the input block heights and timestamps, target adjustment height, formula, protocol constraints and rounding rules. Identify the method version so another reader can reproduce that particular output.",
+      "Keep the projected percentage change distinct from the observed difficulty level and from any market-implied probability. They answer different questions."
+    ],
+    "after": [
+      "To repeat a forecast calculation, a reader needs the input block heights and timestamps, target adjustment height, formula, protocol constraints, rounding rules and method version.",
+      "A projected percentage change, an observed difficulty level and a probability implied by a market answer different questions. Report them separately."
+    ],
+    "verdict": "Change",
+    "note": "Retains every reproducibility field and distinction between projection, observed level and market-implied probability."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-2\"].heading",
+    "before": "Validate any uncertainty interval",
+    "after": "What supports the forecast range?",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-2\"].paragraphs",
+    "before": [
+      "An uncertainty range needs a documented construction method and an evaluation against outcomes. State the fitting period, forecast timing and held-out evaluation window; report interval width together with observed coverage.",
+      "The ranges in this website’s examples use made-up values. They have not been fitted or calibrated, so they do not establish a coverage level or the probability of a change in direction."
+    ],
+    "after": [
+      "Explain how the range was calculated, then test it against outcomes. Give the period used to fit the method, when each forecast was made and a separate test period that was not used to fit it. Report how wide the ranges were and how often they contained the outcome.",
+      "The ranges in this website’s examples use made-up values. They have not been fitted to data or tested against a stated confidence level. They do not establish how often outcomes will fall within a range or the probability that difficulty will change direction."
+    ],
+    "verdict": "Change",
+    "note": "Explains held-out evaluation, width, coverage and calibration; preserves both absence of fitting and calibrated evidence and direction-probability limitation."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-3\"].heading",
+    "before": "Read the status of the evidence",
+    "after": "What evidence is available here?",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-3\"].paragraphs",
+    "before": [
+      "This page explains what you need to evaluate a forecast. It does not document a verified live forecasting service, publish a measured accuracy record or promise an unchangeable archive.",
+      "The observed-adjustment report and public API publish captured network data separately from forecasts. Use the synthetic forecast report to reproduce error arithmetic; a measured forecast comparison still requires original timestamped predictions, matched lead times, outcomes and corrections."
+    ],
+    "after": [
+      "This page explains how to assess a forecast method. It does not document a verified live forecasting service, provide measured accuracy results or promise an archive that cannot be changed.",
+      "The historical adjustment report and public API provide captured network observations, separately from forecasts. The synthetic forecast report shows the error calculation. Measuring forecast accuracy still needs original predictions with timestamps, comparable forecast lead times, outcomes and corrections."
+    ],
+    "verdict": "Change",
+    "note": "Preserves service, performance and archive boundaries; distinguishes captured observations from synthetic arithmetic and retains original record requirements."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "summary",
+    "before": "A reproducible analysis of a frozen mempool.space capture: findings, CSV, source payload and version metadata. Observed changes are not forecast performance.",
+    "after": "A fixed snapshot of 25 difficulty adjustments, with the source data and calculations. These observations do not measure forecast performance.",
+    "verdict": "Change",
+    "note": "Leads with findings already in section 0; preserves source, fixed capture, reproducibility and performance boundary. Parent review: tightened the card/metadata summary; supporting detail and all qualifications remain in the article."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "seoSummary",
+    "before": "Reproduce 25 observed difficulty changes from a frozen mempool.space capture. Inspect findings, CSV and sources; this is not forecast performance.",
+    "after": "Explore 25 recorded difficulty changes from a fixed mempool.space snapshot. Download the calculations and sources. This does not measure forecast performance.",
+    "verdict": "Change",
+    "note": "Preserves number, fixed source, public evidence and forecast-performance limit."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-0\"].heading",
+    "before": "A defined window, not a forecast backtest",
+    "after": "25 adjustments: 11 rises and 14 falls",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-0\"].paragraphs",
+    "before": [
+      "The capture contains 25 consecutive observed difficulty changes between 2025-11-12 and 2026-10-16. There were 11 increases and 14 decreases. Mean absolute observed change was 3.75%; the minimum was -11.16% and maximum 14.73%.",
+      "These describe difficulty adjustments in this historical window. They do not measure forecast error, calibrated uncertainty, mining profit or a trading return. The capture is a small descriptive analysis, not evidence of a forecasting advantage."
+    ],
+    "after": [
+      "The dataset records 25 consecutive difficulty changes between 2025-11-12 and 2026-10-16: 11 increases and 14 decreases. The mean absolute change was 3.75%. The minimum change was -11.16% and the maximum was 14.73%.",
+      "These figures describe network difficulty in this historical period. They do not measure forecast error, the reliability of forecast ranges, mining profit or a trading return. This small descriptive study does not show a forecasting advantage."
+    ],
+    "verdict": "Change",
+    "note": "Preserves all figures, dates and all excluded interpretations; explains calibrated uncertainty without the technical label."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-1\"].heading",
+    "before": "Reproduce the arithmetic",
+    "after": "How the changes were calculated",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-1\"].paragraphs",
+    "before": [
+      "The source is the mempool.space one-year difficulty-adjustment endpoint, captured on 22 October 2026. Sort the 26 supplied boundaries by block height and check consecutive boundaries are 2,016 blocks apart. Exclude the earliest because the preceding difficulty is outside this capture. For each remaining boundary, compute 100 × (new difficulty / previous difficulty − 1). Ignore the provider’s rounded adjustment ratio.",
+      "The mean absolute change is the arithmetic mean of the 25 absolute percentage changes. The retained values use the provider’s difficulty precision; display rounding is separate. The manifest includes SHA-256 digests for the source bytes and CSV/JSON distributions, making later changes detectable against this version."
+    ],
+    "after": [
+      "The source is the mempool.space one-year difficulty-adjustment API, captured on 22 October 2026. To repeat the calculation, sort its 26 adjustment blocks by height and check that consecutive blocks are 2,016 blocks apart. Exclude the earliest: its preceding difficulty is outside the snapshot. For each remaining adjustment, calculate 100 × (new difficulty / previous difficulty − 1). Do not use the provider’s rounded adjustment ratio.",
+      "The mean absolute change averages the size of the 25 percentage changes, ignoring whether each is positive or negative. Calculations retain the provider’s full difficulty precision; rounding affects only the display. The citation manifest lists SHA-256 digests, which are file checksums, for the original response and CSV/JSON downloads. These let readers detect changes from this version."
+    ],
+    "verdict": "Change",
+    "note": "Preserves endpoint scope/date, 26 boundaries, 2,016 gap, earliest exclusion, exact formula, no rounded ratio, 25 mean, precision and SHA-256 scope; explains checksum purpose."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-2\"].heading",
+    "before": "Inspect provenance and limitations",
+    "after": "Where the data comes from",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-2\"].paragraphs",
+    "before": [
+      "The capture includes exact source response bytes and matching boundary-block metadata for the first and last retained observations. Those checks use the same provider, so they are consistency checks rather than verification by an independent Bitcoin node. The rolling endpoint window fixes the inclusion rule; it is not a selection of profitable periods.",
+      "All findings and downloads are available without email. Version 1.0.0 has a stable dataset identifier and a citation manifest. No DOI has been registered or deposited. Updating the dataset requires a new version; local digests do not establish an external publication timestamp or immutable hosting."
+    ],
+    "after": [
+      "The downloads include the source response exactly as received, plus matching block details for the first and last retained observations. These checks use the same provider. They show consistency within that source, not independent verification against a Bitcoin node. The API’s rolling window determines which adjustments are included; the study does not select profitable periods.",
+      "All findings and downloads are available without email. Version 1.0.0 has a stable dataset identifier and a citation manifest. No DOI, a persistent research identifier, has been registered or deposited. An update requires a new version. Local file checksums do not prove an external publication time or guarantee that hosted files cannot change."
+    ],
+    "verdict": "Change",
+    "note": "Preserves exact bytes, endpoint boundary metadata, same-source limit, inclusion rule, access, version, stable identity, no DOI, new-version requirement and timestamp/hosting limits."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-3\"].heading",
+    "before": "Keep forecasts separate from observations",
+    "after": "Why these are not forecast results",
+    "verdict": "Change",
+    "note": "Names the section’s question or concrete subject. Section key and ID stay unchanged."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-3\"].paragraphs",
+    "before": [
+      "The prospective forecast archive currently has zero published records. The dated forecast examples and arithmetic scoreboard elsewhere remain clearly labelled synthetic. Historical observed adjustments cannot be counted as previously published predictions.",
+      "Before scoring a provider, preserve its prediction, input height, target, model version, stated interval and time-stamped original capture. Compare the same lead-time cohorts and retain missing providers. Original publication before an outcome or market listing requires separate independently verifiable receipts; this site cannot create them after the fact."
+    ],
+    "after": [
+      "The forecast archive has zero published records. The dated forecasts and accuracy examples elsewhere on this site are labelled synthetic because they use made-up values. A historical difficulty adjustment is not a previously published prediction.",
+      "Scoring a provider requires its original prediction, input height, target, model version, stated range and a timestamped capture. Group forecasts by how far ahead they were made and record providers with missing forecasts. Proving publication before an outcome or market listing requires separate, independently verifiable records. This site cannot create that proof after the event."
+    ],
+    "verdict": "Change",
+    "note": "Preserves zero archive, synthetic distinction, all original evidence fields, matched lead-time cohorts, missing providers and independent pre-event publication receipts."
+  }
+]

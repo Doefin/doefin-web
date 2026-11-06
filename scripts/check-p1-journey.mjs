@@ -47,7 +47,7 @@ for (const [href, label] of [
   assert.ok(firstSection.includes(label), `Hero lacks named action: ${label}`)
 }
 assert.ok(firstSection.includes('A losing position pays zero.'), 'Full-loss qualification must remain beside hero actions')
-assert.match(html, /<summary[^>]*>Inspect the app capture: 19 October 2026[^<]*not live<\/summary>/, 'Capture date and non-live label must be visible before expanding')
+assert.match(html, /<summary[^>]*>[^<]*(?:app capture|app screenshot): 19 October 2026[^<]*not live<\/summary>/, 'Capture date and non-live label must be visible before expanding')
 for (const path of ['/docs/connecting-a-wallet', '/docs/getting-collateral', '/docs/your-first-trade', '/about', '/tools/hosting-effective-rate', '/tools/fleet-payback', '/for/institutions']) {
   assert.ok(html.includes(`href="${path}"`), `Homepage lacks contextual ${path}`)
 }

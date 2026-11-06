@@ -103,7 +103,7 @@ export function ScenarioBrief({ inputs }: { inputs: ExposureInputs }) {
           <p className="tabular mt-1 text-2xl font-extrabold tracking-tight">{formatScenarioBtc(brief.results.spreadBtc)}</p>
           <p className="tabular mt-1 text-xs text-subtle">{formatScenarioUsd(brief.results.spreadUsd)} at your chosen BTC price</p>
         </div>
-        <p className="mt-5 text-[11px] leading-relaxed text-subtle">Includes all seven inputs, three production cases, assumptions{brief.contextRows.length ? ', your discussion notes' : ''} and model limitations.</p>
+        <p className="mt-5 text-[11px] leading-relaxed text-subtle">The brief includes all seven inputs, expected production in three scenarios, assumptions{brief.contextRows.length ? ', your discussion notes' : ''} and model limitations.</p>
       </div>
 
       <div className="min-w-0 self-center">
@@ -115,7 +115,7 @@ export function ScenarioBrief({ inputs }: { inputs: ExposureInputs }) {
           <BriefIcon kind="link" className="text-highlight" /><span className="min-w-0 flex-1"><span className="block text-sm font-semibold">{copyStatus === 'copied' ? 'Scenario link copied' : 'Copy scenario link'}</span><span className="mt-1 block text-xs text-subtle">Reopen these calculator inputs</span></span><span aria-hidden className="text-highlight">{copyStatus === 'copied' ? '✓' : '↗'}</span>
         </button>
         {brief.scenarioUrl ? <a href={scenarioDiscussionHref(brief, site.contactEmail)} className="mt-4 flex min-h-11 items-center gap-2 rounded-lg px-1 text-sm font-semibold text-highlight hover:underline"><BriefIcon kind="mail" />Draft an email to Doefin <span aria-hidden>↗</span></a> : <span className="mt-4 flex min-h-11 items-center gap-2 px-1 text-sm text-subtle"><BriefIcon kind="mail" />Preparing email draft…</span>}
-        <p className="mt-1 text-xs leading-relaxed text-subtle">Opens your email app. You review and send.</p>
+        <p className="mt-1 text-xs leading-relaxed text-subtle">Opens a draft in your email app for you to review and send.</p>
         <NewsletterDelivery kind="scenario" inputs={inputs} />
         {isLocalScenarioUrl(brief.scenarioUrl) ? <p className="mt-4 border-t border-white/[0.07] pt-3 text-xs leading-relaxed text-subtle">{localScenarioNotice}</p> : null}
       </div>

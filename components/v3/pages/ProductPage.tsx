@@ -4,7 +4,7 @@ import { PageIntro, LinkCards, panelClass, headingClass, previewSeo } from '@/co
 import { preview } from '@/lib/preview'
 import { site } from '@/lib/site'
 
-export const metadata = previewSeo('A market on Bitcoin difficulty', 'Understand Doefin’s underlying, observation block, collateral and binary settlement.', preview.product)
+export const metadata = previewSeo('A market on Bitcoin difficulty', 'See what decides a Doefin market outcome, when difficulty is observed and how collateral and payouts work.', preview.product)
 
 export default function ProductPreview() {
   return <>
@@ -19,10 +19,10 @@ export default function ProductPreview() {
         </div>
         <dl className={panelClass + ' divide-y divide-white/10'}>
           {[
-            ['Underlying', 'Bitcoin mining difficulty.'],
-            ['Observation', 'One specified block height. Calendar dates are estimates.'],
+            ['What it tracks', 'Bitcoin mining difficulty.'],
+            ['Observation block', 'One specified block height. Calendar dates are estimates.'],
             ['Outcome', 'Yes wins at or above the threshold; No wins below it.'],
-            ['Collateral', 'Fully collateralised positions in a BTC-denominated token, as described in the current documentation.'],
+            ['Collateral', 'Positions are fully collateralised. Check your market’s collateral token and payout terms in the app.'],
           ].map(([label, text]) => <div key={label} className="grid gap-2 py-4 first:pt-0 last:pb-0 sm:grid-cols-[7rem_1fr]"><dt className="text-sm text-subtle">{label}</dt><dd className="text-sm leading-relaxed">{text}</dd></div>)}
         </dl>
       </section>
@@ -31,7 +31,7 @@ export default function ProductPreview() {
         { title: 'I represent a fund or desk', text: 'Review the markets, collateral and settlement before you trade a view on hashrate.', href: preview.institutions },
         { title: 'I want to learn the mechanics', text: 'Follow a threshold example before you enter the app.', href: preview.settlement },
       ]} /></div></section>
-      <div className={'mt-12 ' + panelClass}><h2 className="text-xl font-bold">Before you enter a market</h2><p className="mt-4 max-w-3xl text-sm leading-[1.75] text-subtle">Review the actual threshold, observation block, collateral token, payout denomination, price, fees and available liquidity in the app. A production estimate does not determine a suitable order size. You can lose the full amount paid for a position.</p></div>
+      <div className={'mt-12 ' + panelClass}><h2 className="text-xl font-bold">Before you enter a market</h2><p className="mt-4 max-w-3xl text-sm leading-[1.75] text-subtle">Check the threshold and observation block in the app. Review the collateral token, the token used for payouts, price, fees and available liquidity. A production estimate does not determine a suitable order size. You can lose the full amount paid for a position.</p></div>
     </Container>
   </>
 }

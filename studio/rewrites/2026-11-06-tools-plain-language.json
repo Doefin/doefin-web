@@ -1,0 +1,453 @@
+[
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "article.summary",
+    "before": "Compare expected BTC production using your own assumptions. Production changes, costs and contract payouts are separate calculations.",
+    "after": "Compare expected BTC production under your own difficulty assumptions. Costs and contract payouts need separate calculations.",
+    "verdict": "Change",
+    "note": "States the calculation first, then its boundary. Keeps expected production separate from costs and payouts (E28, habit 3)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "whoFor",
+    "before": "For miners whose own expected BTC production changes with difficulty, within the calculator’s input range. There is no minimum fleet size at which this calculation becomes economically relevant; relevance depends on your own income and obligations. A hosting business can use it for the machines it owns; fee-only hosting income needs a separate model. Holding or selling mined BTC does not change the production calculation. Fixed-output commitments and sold hashrate need their own analysis.",
+    "after": "Use this if you mine BTC with your own machines and want to compare difficulty scenarios within the calculator’s input range. Fleet size alone does not decide whether a production change matters to your business; your income and obligations matter too. Hosting businesses can model machines they own, but need another model for fee-only income. Holding or selling mined BTC does not change expected production. Fixed-output commitments and sold hashrate need separate analysis.",
+    "verdict": "Change",
+    "note": "Replaces eligibility and economic-relevance abstractions with the reader’s task. Preserves the range, ownership, fee-only hosting, income/obligation, BTC-sale and commitment limits (habits 1, 2)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "howToUse",
+    "before": [
+      "Enter your fleet’s expected average hashrate in EH/s. Divide TH/s by 1,000,000. If your pool average already includes downtime, do not deduct that downtime again.",
+      "Choose the horizon in modelled epochs. Each represents 2,016 target block intervals, about two weeks. This is a fixed-duration approximation, not a prediction of actual epoch dates.",
+      "Check starting difficulty against a source you trust and enter it in Starting difficulty. Older calculator views also accept ?diffT= in the address. The default 127.48T is illustrative.",
+      "Choose easier and harder difficulty scenarios for the whole horizon. The defaults −2.4% and +7.0% are invented sensitivity inputs, not a published forecast or a confidence interval.",
+      "Enter average transaction fees per block. The model adds the fixed 3.125 BTC subsidy, assumes both remain constant and excludes pool fees. Use a different model for a horizon that crosses a subsidy change.",
+      "Read production at unchanged difficulty and both scenario values. Worst case vs today compares the harder scenario with the unchanged baseline; it does not measure cash-flow loss.",
+      "BTC price converts the scenario spread into a USD illustration only. It changes no BTC result. Copy the URL to retain inputs, and share only assumptions you are comfortable making visible."
+    ],
+    "after": [
+      "Enter your fleet’s expected average hashrate in EH/s. Divide TH/s by 1,000,000. If the pool average includes downtime, do not deduct it again.",
+      "Use How far ahead to choose the number of modelled epochs. Each represents 2,016 target block intervals, about two weeks. Actual epoch dates can differ.",
+      "Check a trusted source and enter its value in Starting difficulty. Older calculator views also accept ?diffT= in the address. The default 127.48T is illustrative.",
+      "Choose an easier and a harder difficulty for the whole period. The defaults −2.4% and +7.0% are illustrative assumptions, not forecasts or a confidence interval.",
+      "Enter Expected fees as average transaction fees per block. The model adds the fixed 3.125 BTC subsidy and holds both constant. It excludes pool fees and cannot model a subsidy change.",
+      "Compare expected production at unchanged difficulty with each scenario. The harder case versus the starting case shows lower production, not a cash-flow loss.",
+      "Bitcoin price converts the scenario spread to a USD illustration; it changes no BTC result. Copy the URL to save your inputs. Anyone with the link can read them."
+    ],
+    "verdict": "Change",
+    "note": "Follows visible controls and explains the result without internal model language. Keeps conversion, timing, sample, fee/subsidy and URL privacy boundaries (habits 3, 5)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-0\"].typical",
+    "before": "The supported slider range is 0.01–30 EH/s. This technical input range is not an audience eligibility rule.",
+    "after": "The slider accepts 0.01–30 EH/s. This is an input limit, not a rule about who the calculator is for.",
+    "verdict": "Change",
+    "note": "Explains the input range without implying a typical market range or audience eligibility rule."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-3\"].means",
+    "before": "A constant USD conversion assumption for the spread.",
+    "after": "Your chosen USD price for converting the difference between the two production scenarios. It stays constant.",
+    "verdict": "Change",
+    "note": "Explains spread using the calculation it represents; retains constant-price assumption."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-4\"].whereToFind",
+    "before": "Choose a sensitivity assumption. Historical data or a separately sourced forecast can inform it, but neither guarantees the future.",
+    "after": "Choose a change to test. Historical data or a separately sourced forecast can help you choose, but neither guarantees what will happen.",
+    "verdict": "Change",
+    "note": "Replaces sensitivity-assumption jargon; keeps the limit on history and forecasts."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-5\"].whereToFind",
+    "before": "Choose a sensitivity assumption for the whole horizon. The page does not widen it automatically when you extend the horizon.",
+    "after": "Choose a change for the whole period. Extending How far ahead does not automatically widen this scenario.",
+    "verdict": "Change",
+    "note": "Names the control and its fixed scenario boundary."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-4\"].label",
+    "before": "Best case: difficulty falls by",
+    "after": "Difficulty change · easier case",
+    "verdict": "Change",
+    "note": "Matches the current calculator control; the legacy help lookup key remains unchanged in source."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-5\"].label",
+    "before": "Worst case: difficulty rises by",
+    "after": "Difficulty change · harder case",
+    "verdict": "Change",
+    "note": "Matches the current calculator control without changing its values or behaviour."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-1\"].figure",
+    "before": "Worst case vs today",
+    "after": "Harder case vs starting case",
+    "verdict": "Change",
+    "note": "Matches the current result row; corrects a pre-existing heading mismatch."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-6\"].label",
+    "before": "Current difficulty",
+    "after": "Starting difficulty",
+    "verdict": "Change",
+    "note": "Matches the current visible control; records correction of a pre-existing label mismatch, not a change to the control."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-6\"].means",
+    "before": "The starting network difficulty in trillions, used to infer target-interval network hashrate.",
+    "after": "The starting network difficulty in trillions. The model uses it to estimate network hashrate at the target block interval.",
+    "verdict": "Change",
+    "note": "Explains the role of difficulty without changing its units or implied-hashrate assumption."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-1\"].soWhat",
+    "before": "This is a modelled production difference, before pool fees and operating costs. There is no percentage-of-bills rule, reserve recommendation or recommendation to trade.",
+    "after": "This estimated production difference is before pool fees and operating costs. It does not tell you how much to reserve for bills or whether to trade.",
+    "verdict": "Change",
+    "note": "Makes the limit useful to the reader; retains exclusions and no reserve/trade recommendation."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "walkthrough.takeaway",
+    "before": "The model isolates production sensitivity. Whether that matters to a particular operation and whether any response is appropriate require information this calculator does not contain.",
+    "after": "This comparison shows how difficulty alone changes expected production under the stated assumptions. To decide what it means for your business or whether to act, you need information beyond this calculator.",
+    "verdict": "Change",
+    "note": "Explains production sensitivity and the limits of action in connected English (E28)."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "article.summary",
+    "before": "Compare a simplified payback model under three difficulty-growth assumptions and inspect its limits.",
+    "after": "Compare when a fleet could recover its initial cost under three difficulty-growth assumptions, with the model’s limits shown.",
+    "verdict": "Change",
+    "note": "Replaces inspect-its-limits process language with the reader’s question (habit 5)."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "whoFor",
+    "before": "For machine owners exploring capital recovery under explicit assumptions. Hosting operators can use it for fleets they own. A fee-only hosting business, bought hashrate, non-mining income or a full investment valuation requires another model.",
+    "after": "Use this if you own mining machines and want to compare when their initial cost could be recovered under stated assumptions. Hosting operators can model fleets they own. Fee-only hosting, bought hashrate, non-mining income and a full investment valuation need another model.",
+    "verdict": "Change",
+    "note": "Puts task and ownership first. Keeps all excluded business models (habit 2)."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "howToUse",
+    "before": [
+      "Enter fleet hashrate in TH/s and efficiency in J/TH. Keep both consistent with the fleet you are modelling.",
+      "Enter the modelled power cost per kWh and initial outlay. Specify which actual costs those inputs cover; omitted costs do not appear elsewhere.",
+      "Choose a constant BTC conversion price and your own monthly difficulty-growth assumption. The default 1.5% is an illustrative input, not an estimate supplied by this site.",
+      "Check starting difficulty and horizon. Enter them in Starting difficulty and Model horizon; the URL also accepts diffT and months within supported bounds. Defaults are 127.48T and 48 months.",
+      "Compare the central row with the lower-growth and higher-growth rows. Lower growth is the selected rate minus two percentage points, floored at zero; higher growth is the selected rate plus three points.",
+      "Check the final cumulative cash balance alongside the payback month.",
+      "Copy the URL to retain inputs. Share only assumptions you are comfortable exposing."
+    ],
+    "after": [
+      "Enter Fleet hashrate in TH/s and Efficiency in J/TH for the same fleet and operating mode.",
+      "Enter All-in power cost per kWh and What you paid up front. Check which costs they cover; the model adds no omitted costs elsewhere.",
+      "Choose a constant Bitcoin price and enter a monthly Difficulty growth guess. The default 1.5% is an illustrative input, not a site forecast.",
+      "Check Starting difficulty and Model horizon. The URL also accepts diffT and months within the input limits. Defaults are 127.48T and 48 months.",
+      "Compare the central result with lower and higher growth. Lower is your rate minus two percentage points, with a minimum of zero; higher is your rate plus three points.",
+      "Read the final cash balance as well as the payback month. Payback marks the first month the model recovers the initial cost; the balance shows where it ends.",
+      "Copy the URL to save the inputs. Anyone with the link can read your assumptions."
+    ],
+    "verdict": "Change",
+    "note": "Uses exact current control labels, explains how to read results and preserves units, offsets, floors, defaults, URL inputs and privacy (habits 3, 5)."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-0\"].whereToFind",
+    "before": "Use a consistent fleet specification or operating average, and document how downtime is represented.",
+    "after": "Use fleet specifications or an operating average for the same machines. Record whether that hashrate already allows for downtime.",
+    "verdict": "Change",
+    "note": "Replaces document-how-downtime-is-represented with a concrete choice."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-2\"].whereToFind",
+    "before": "Use your own billing assumptions. If converting another cost into $/kWh, avoid counting it twice and record the approximation.",
+    "after": "Use your billing terms. If you convert another cost to $/kWh, record the approximation and do not count it twice.",
+    "verdict": "Change",
+    "note": "Keeps the cost approximation and double-counting warning in a direct instruction."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-3\"].means",
+    "before": "The initial outlay to recover. It is independent of the hashrate input.",
+    "after": "The amount paid up front that the fleet needs to recover. Changing hashrate does not change this input.",
+    "verdict": "Change",
+    "note": "Explains independence of the inputs without financial-model jargon."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-5\"].label",
+    "before": "Assumed difficulty growth",
+    "after": "Difficulty growth guess",
+    "verdict": "Change",
+    "note": "Matches the current control, correcting a pre-existing label mismatch without changing the control."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-5\"].means",
+    "before": "A compounded monthly growth assumption. The first growth step applies in month one.",
+    "after": "The monthly difficulty increase, applied repeatedly. The first increase happens before the model calculates production for month one.",
+    "verdict": "Change",
+    "note": "Explains compounding and preserves month-one ordering (habit 3)."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-5\"].typical",
+    "before": "The central slider supports 0–8% per month. The comparison rows use its defined offsets.",
+    "after": "The central slider accepts 0–8% per month. The comparison rows subtract two percentage points, with a minimum of zero, or add three points.",
+    "verdict": "Change",
+    "note": "Makes the defined offsets explicit while preserving supported range and floor."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-6\"].means",
+    "before": "A sample network difficulty in trillions that sets the initial production denominator.",
+    "after": "The starting network difficulty in trillions. It sets the starting point for calculating expected production.",
+    "verdict": "Change",
+    "note": "Replaces production-denominator jargon; same units and role."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-6\"].whereToFind",
+    "before": "Check it against a separately selected data source.",
+    "after": "Check a block-data source you trust and enter its value in Starting difficulty.",
+    "verdict": "Change",
+    "note": "Names where the value comes from and the control receiving it."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-0\"].means",
+    "before": "The first modelled month in which cumulative revenue after power cost covers the initial outlay, on the central path.",
+    "after": "The first month when mining revenue, after power costs, has recovered the initial outlay in the central scenario.",
+    "verdict": "Change",
+    "note": "Explains cumulative recovery in connected English, preserving revenue minus power and initial outlay."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-0\"].soWhat",
+    "before": "It is conditional on the input assumptions and excluded costs. It does not guarantee capital recovery.",
+    "after": "This estimate depends on your inputs and leaves out costs outside them. It does not guarantee that you will recover the outlay.",
+    "verdict": "Change",
+    "note": "Keeps recovery risk, while saying what conditional means."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-1\"].soWhat",
+    "before": "They form a sensitivity comparison, not a confidence interval, forecast or ranking of investments.",
+    "after": "These scenarios show how a change in assumed difficulty growth changes payback. They are not a confidence interval, forecast or investment ranking.",
+    "verdict": "Change",
+    "note": "Explains what a sensitivity comparison does, keeping all boundaries."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-2\"].figure",
+    "before": "Cash after the modeled horizon",
+    "after": "Cash after the modelled horizon",
+    "verdict": "Change",
+    "note": "Corrects British spelling in a descriptive result heading; no data change."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-2\"].means",
+    "before": "Cumulative modelled revenue minus power costs and initial outlay. The model values mined BTC at the constant input price.",
+    "after": "All modelled mining revenue, minus power costs and the initial outlay. Mined BTC is valued at your chosen constant price.",
+    "verdict": "Change",
+    "note": "Explains cumulative modelled cash with its valuation assumption intact."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "walkthrough.title",
+    "before": "Reproduce the example: a static assumption versus a range",
+    "after": "Reproduce the example under three growth assumptions",
+    "verdict": "Change",
+    "note": "States the actual worked task; the walkthrough’s figures and paths stay unchanged."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "walkthrough.takeaway",
+    "before": "The same sample fleet produces different conditional results under different difficulty paths. None is a complete investment model or a contract-sizing calculation.",
+    "after": "The same fleet reaches different results under each assumed difficulty path. These estimates leave out parts of an investment valuation and do not calculate a contract position size.",
+    "verdict": "Change",
+    "note": "Explains conditional results and both model limits without noun-heavy wording."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "article.summary",
+    "before": "Compare an advertised hosting rate with fees and paid lost hours. Check billing assumptions before comparing quotes.",
+    "after": "Compare a hosting rate with fees and hours you pay for while machines are stopped. Use the same billing assumptions for each quote.",
+    "verdict": "Change",
+    "note": "Explains paid lost hours immediately; keeps consistent-billing requirement. Parent integration: shortened below the existing draft-checker summary limit while keeping fees, paid lost hours and matching billing assumptions."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "whatItIs",
+    "before": "A normalised cost comparison for hosting priced per kWh. It adds management and power-factor percentages to the advertised rate, divides by the share of productive hours, and divides by one minus the pool-fee fraction. The result is an equivalent cost per productive kWh, not an actual invoice or a profit calculation.",
+    "after": "This calculator compares hosting costs per productive kWh. It adds management and power-factor percentages to the advertised rate, then divides by the share of hours when machines run. It then divides by one minus the pool-fee fraction. The result is an equivalent cost for comparison, not an actual invoice or profit calculation.",
+    "verdict": "Change",
+    "note": "Explains the three operations in sequence. Preserves the additive fees, productive-hours divisor and pool divisor exactly (habits 3, 5)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "whoFor",
+    "before": "For machine owners comparing hosting terms when booked power capacity remains payable during lost hours. A business that hosts other people’s machines may also use it for machines it owns. Energy-only billing, revenue-share contracts, demand-response income and unrelated hosting income require different models.",
+    "after": "Use this if you own machines and pay for booked hosting capacity even when the machines are stopped. Hosting businesses can use it for machines they own. Energy-only billing, revenue-share contracts, demand-response income and unrelated hosting income need different models.",
+    "verdict": "Change",
+    "note": "Replaces booked-capacity/lost-hours nesting with a concrete billing condition. Keeps every excluded model."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "howToUse",
+    "before": [
+      "Check your agreement and invoices. Confirm which fees are already included in the advertised rate and whether lost hours remain payable.",
+      "Enter the advertised rate in $/kWh. Enter management and power-factor adjustments as percentages of that rate; do not enter a fee twice.",
+      "Enter distinct downtime and curtailment hours as percentages of the same period. Do not count an hour in both. Use actual records or explicitly labelled assumptions.",
+      "Enter the pool-fee percentage. The tool converts it to an equivalent cost adjustment; a pool’s charge on revenue is not an electricity charge.",
+      "Compare all steps and the absolute final rates for two offers under consistent assumptions. A small percentage uplift can still produce a higher absolute cost.",
+      "Copy the URL to retain the inputs. Anyone with that URL can read the terms you entered."
+    ],
+    "after": [
+      "Check the agreement and invoices. Which fees are included in the advertised rate, and do you still pay when machines stop?",
+      "Enter Advertised power rate in $/kWh. Enter management and power-factor fees as percentages of that rate. Do not add a fee already included in the rate.",
+      "Enter downtime and curtailment as percentages of the same period. Use records or clearly labelled assumptions. Count each stopped hour once, under one input only.",
+      "Enter Pool fee as a percentage of revenue. The tool converts it to an equivalent cost for comparison; it is not an electricity charge.",
+      "Compare each step and the final rates using the same assumptions for both offers. A smaller percentage increase can still leave you with a higher final cost.",
+      "Copy the URL to save the inputs. Anyone with the link can read the terms you entered."
+    ],
+    "verdict": "Change",
+    "note": "Makes billing checks and input sources easy to follow. Keeps percentage bases, non-overlap, pool-equivalent and privacy limits (habit 5)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-2\"].whereToFind",
+    "before": "Billing terms or a measured charge from your host. A technical power-factor specification alone may not describe your invoice.",
+    "after": "Use the billing terms or a charge on your host’s invoice. A machine’s power-factor specification alone may not match what you are billed.",
+    "verdict": "Change",
+    "note": "Names an actionable source and preserves the distinction between technical specification and invoice."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-3\"].means",
+    "before": "A share of the same measured period when machines were unavailable and booked capacity remained payable.",
+    "after": "The percentage of the period when machines were unexpectedly unavailable but you still paid for booked capacity.",
+    "verdict": "Change",
+    "note": "Explains downtime as an actual billing condition, preserving period, availability and paid capacity."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-3\"].whereToFind",
+    "before": "Pool or site records reconciled with billing.",
+    "after": "Compare pool or site records with the invoices for the same period.",
+    "verdict": "Change",
+    "note": "Explains reconciled-with-billing as the actual task."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-4\"].means",
+    "before": "A separate share of deliberately stopped hours for which booked capacity remains payable.",
+    "after": "The percentage of hours when machines were deliberately stopped but booked capacity was still payable. Count these separately from unplanned downtime.",
+    "verdict": "Change",
+    "note": "Explains curtailment and retains the non-overlap requirement."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-5\"].means",
+    "before": "A revenue percentage represented here as an equivalent cost adjustment.",
+    "after": "The percentage of revenue paid to the pool, converted here to an equivalent cost for comparison.",
+    "verdict": "Change",
+    "note": "Names who receives the fee and why it appears in a cost model."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-0\"].soWhat",
+    "before": "Compare absolute values under matching billing assumptions. This is not an invoice, revenue or profit.",
+    "after": "Compare final costs using the same billing assumptions. The result is an equivalent cost, not an invoice, revenue or profit.",
+    "verdict": "Change",
+    "note": "Makes absolute-values-under-matching-assumptions concrete; keeps the financial boundaries."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-1\"].soWhat",
+    "before": "This measures the effect of entered assumptions. It cannot establish a provider’s honesty or quality.",
+    "after": "This shows how your inputs change the starting rate. It does not rate the provider’s honesty or quality.",
+    "verdict": "Change",
+    "note": "Explains the uplift measure without implying a provider assessment."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-3\"].means",
+    "before": "Separate steps show which inputs contribute to the final equivalent cost. Pool-fee adjustment follows those steps.",
+    "after": "The rows show how fees and paid lost hours change the rate. The pool-fee adjustment comes after these steps.",
+    "verdict": "Change",
+    "note": "Connects result rows to the calculation order; no formula change."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "walkthrough.takeaway",
+    "before": "The result follows the entered billing and lost-hours assumptions. Comparing another offer requires the same treatment of tax, fees and paid lost hours.",
+    "after": "The result depends on the billing terms and paid lost hours you entered. To compare another offer, treat tax, fees and paid lost hours in the same way.",
+    "verdict": "Change",
+    "note": "Connects result to the inputs and gives the comparison task directly."
+  }
+]

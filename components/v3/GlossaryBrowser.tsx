@@ -36,9 +36,9 @@ export function GlossaryBrowser({ entries, academyHref = '/academy' }: { entries
   return <div>
     <div role="search" aria-label="Glossary search" className="sticky top-[5.5rem] z-20 mb-5 flex sm:mb-8 items-center gap-3 rounded-xl border border-brand/35 bg-ink/95 px-4 py-2 shadow-lg shadow-ink/20 backdrop-blur-lg sm:gap-4 sm:px-5">
       <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-5 w-5 shrink-0 text-highlight"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" strokeWidth="1.5" /><path d="m16 16 5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>
-      <label htmlFor="glossary-search" className="sr-only">Search terms, abbreviations or definitions</label>
+      <label htmlFor="glossary-search" className="sr-only">Search terms, other names or definitions</label>
       <input ref={search} id="glossary-search" type="search" value={query} onChange={e => setQuery(e.target.value)} onKeyDown={e => { if (e.key === 'Escape') setQuery('') }} placeholder="Try difficulty or EH/s" autoComplete="off" spellCheck={false} aria-controls="glossary-results" className="min-h-11 min-w-0 flex-1 rounded bg-transparent px-1 text-base text-body placeholder:text-subtle [&::-webkit-search-cancel-button]:appearance-none" />
-      {query ? <button type="button" onClick={() => { setQuery(''); search.current?.focus() }} className="grid h-11 w-11 shrink-0 place-items-center rounded-lg text-xl text-subtle hover:bg-white/5 hover:text-body" aria-label="Clear search">×</button> : <span className="hidden text-xs text-subtle sm:block">Terms, aliases & definitions</span>}
+      {query ? <button type="button" onClick={() => { setQuery(''); search.current?.focus() }} className="grid h-11 w-11 shrink-0 place-items-center rounded-lg text-xl text-subtle hover:bg-white/5 hover:text-body" aria-label="Clear search">×</button> : <span className="hidden text-xs text-subtle sm:block">Terms, other names & definitions</span>}
     </div>
 
     <div className="grid items-start gap-5 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-10">
@@ -76,6 +76,6 @@ export function GlossaryBrowser({ entries, academyHref = '/academy' }: { entries
       </div>
     </div>
 
-    <section aria-labelledby="glossary-next" className="mt-12 flex flex-col items-start justify-between gap-5 rounded-panel border border-white/10 bg-gradient-to-br from-surface to-surfaceAlt/40 p-6 sm:flex-row sm:items-center sm:p-7"><div><p className="text-[11px] font-bold uppercase tracking-[0.12em] text-highlight">From definition to application</p><h2 id="glossary-next" className="mt-2 text-xl font-bold tracking-tight">Put the terms to work.</h2><p className="mt-2 max-w-xl text-sm leading-relaxed text-subtle">Estimate difficulty exposure, hosting costs and fleet payback from your own assumptions.</p></div><Link href="/tools" className="inline-flex min-h-11 shrink-0 items-center gap-3 rounded-lg border border-brand/30 bg-brand/10 px-4 py-3 text-sm font-semibold text-highlight hover:border-brand/60 hover:bg-brand/20">Explore calculators <Arrow /></Link></section>
+    <section aria-labelledby="glossary-next" className="mt-12 flex flex-col items-start justify-between gap-5 rounded-panel border border-white/10 bg-gradient-to-br from-surface to-surfaceAlt/40 p-6 sm:flex-row sm:items-center sm:p-7"><div><p className="text-[11px] font-bold uppercase tracking-[0.12em] text-highlight">Mining calculators</p><h2 id="glossary-next" className="mt-2 text-xl font-bold tracking-tight">Put the terms to work.</h2><p className="mt-2 max-w-xl text-sm leading-relaxed text-subtle">Estimate difficulty exposure, hosting costs and fleet payback from your own assumptions.</p></div><Link href="/tools" className="inline-flex min-h-11 shrink-0 items-center gap-3 rounded-lg border border-brand/30 bg-brand/10 px-4 py-3 text-sm font-semibold text-highlight hover:border-brand/60 hover:bg-brand/20">Explore calculators <Arrow /></Link></section>
   </div>
 }

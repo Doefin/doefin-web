@@ -1,0 +1,92 @@
+[
+  {
+    "_id": "glossary-hashprice",
+    "_type": "glossaryTerm",
+    "path": "faq[_key==\"faq-1\"].a",
+    "before": "Because publishers compute it differently. The differences sit almost entirely in the price leg: which exchanges are in the basket, how they are weighted and when the snapshot is taken. Few publishers disclose the basket.",
+    "after": "Because publishers calculate it differently. Most differences come from the Bitcoin price used: which exchanges are included, how they are weighted and when the price is recorded. Few publishers disclose which exchanges they use.",
+    "verdict": "Change",
+    "note": "Explains 'the price leg' and the exchange 'basket' in plain words. Preserves the exchange selection, weighting, snapshot timing and limited disclosure; E30 names the method instead of using an image."
+  },
+  {
+    "_id": "glossary-halving",
+    "_type": "glossaryTerm",
+    "path": "faq[_key==\"faq-1\"].a",
+    "before": "Because behaviour before and after a halving differs so much that models spanning the boundary tend to mislead. A fit window should state which side of a halving it sits on.",
+    "after": "Because behaviour before and after a halving differs so much that models spanning the boundary tend to mislead. A model should state whether the period used to fit it is before or after a halving.",
+    "verdict": "Change",
+    "note": "Replaces 'fit window' and 'which side ... it sits on' with the period used to fit the model. Retains the warning about models spanning a halving; precision before punch, habit 3."
+  },
+  {
+    "_id": "glossary-terahash",
+    "_type": "glossaryTerm",
+    "path": "faq[_key==\"faq-0\"].a",
+    "before": "Because terahash is the unit in which a fleet's revenue is most easily reasoned about. It is also the scale of an individual machine.",
+    "after": "Because it is the easiest unit to use when working out a fleet's revenue. It is also the scale of an individual machine.",
+    "verdict": "Change",
+    "note": "Replaces the passive abstraction 'the unit in which ... most easily reasoned about' with a direct explanation. Retains the fleet revenue and individual-machine scales; plain register, habit 10."
+  },
+  {
+    "_id": "glossary-pool-luck",
+    "_type": "glossaryTerm",
+    "path": "body[0]",
+    "before": "Luck dominates short-run pool comparisons. A payout comparison between pools needs the variance maths shown alongside it; without it, a difference that is pure chance reads as a better pool.",
+    "after": "Luck dominates short-run pool comparisons. A comparison of pool payouts needs to show how much they can vary by chance. Without that, a difference caused purely by luck can make one pool look better.",
+    "verdict": "Change",
+    "note": "Explains 'the variance maths' and resolves the awkward 'reads as a better pool'. Preserves the need to show chance variation alongside comparisons; E30 uses a concrete explanation."
+  },
+  {
+    "_id": "glossary-epoch",
+    "_type": "glossaryTerm",
+    "path": "body[0]",
+    "before": "Difficulty stays fixed for a whole epoch and changes only at its boundary. That makes the epoch the natural unit of time for anyone managing difficulty exposure: production, forecasts and settlement all align to epoch boundaries rather than to calendar dates.",
+    "after": "Difficulty stays fixed during an epoch and changes at its boundary. Epochs are useful when comparing production and difficulty forecasts. Each Doefin market specifies the block at which difficulty is observed. Check the market’s terms for its observation and settlement blocks.",
+    "verdict": "Change",
+    "note": "Parent and independent review: Factual clarity: removes the unsupported claim that all production, forecasts and settlement align to epoch boundaries. Uses the existing market-specific observation/settlement distinction; does not claim arbitrary non-boundary block support. Requires Matteo reading before publication."
+  },
+  {
+    "_id": "glossary-confidence-interval",
+    "_type": "glossaryTerm",
+    "path": "body[1]",
+    "before": "A band derived from theory rather than from measured forecast error is typically two to three times too narrow. The first comparison with real outcomes shows the gap.",
+    "after": "A range calculated from theory and one fitted to historical data both need testing against outcomes. Compare how often the ranges contain the outcome with their stated confidence level.",
+    "verdict": "Change",
+    "note": "Parent and independent review: Factual clarity: removes the unsupported universal two-to-three-times claim. Consistent with the published Academy and methodology requirement to evaluate theoretical and fitted intervals. Requires Matteo reading before publication."
+  },
+  {
+    "_id": "glossary-confidence-interval",
+    "_type": "glossaryTerm",
+    "path": "faq[_key==\"faq-1\"].q",
+    "before": "Why are theoretical confidence intervals usually too narrow?",
+    "after": "How do you check a forecast range?",
+    "verdict": "Change",
+    "note": "Parent and independent review: Factual clarity: removes the presupposition that theoretical ranges are usually too narrow; asks the reader’s actual evaluation question. Requires Matteo reading before publication."
+  },
+  {
+    "_id": "glossary-confidence-interval",
+    "_type": "glossaryTerm",
+    "path": "faq[_key==\"faq-1\"].a",
+    "before": "Because they are derived from theory rather than fitted to measured forecast error. An interval only means something once it has been fitted to what actually happened.",
+    "after": "Compare the published ranges with the outcomes over a stated evaluation period. Report how often the ranges contained the outcome alongside their widths. Fitting a range to past data does not by itself show how it will perform on new forecasts.",
+    "verdict": "Change",
+    "note": "Parent and independent review: Factual clarity: neither theory nor empirical fitting validates an interval by itself. Retains the need for recorded outcomes and explains coverage and width without introducing figures. Requires Matteo reading before publication."
+  },
+  {
+    "_id": "glossary-hashrate",
+    "_type": "glossaryTerm",
+    "path": "faq[_key==\"faq-1\"].a",
+    "before": "A one-day estimate carries an uncertainty band of roughly ±16%. Over seven days the band narrows to about ±6%, so a one-day move is usually noise rather than a trend.",
+    "after": "Short observation windows can fluctuate because blocks arrive irregularly. A chart alone does not establish that mining capacity has changed. Check the publisher’s calculation, time window, timestamp and uncertainty range.",
+    "verdict": "Change",
+    "note": "Parent and independent review: Factual clarity: removes context-free ±16% and ±6% claims and the unsupported conclusion that a one-day move is usually noise. The existing article explains irregular blocks and the need to compare method, window and uncertainty. Requires Matteo reading before publication."
+  },
+  {
+    "_id": "glossary-hashprice",
+    "_type": "glossaryTerm",
+    "path": "body[0]",
+    "before": "Hashprice falls when difficulty rises, when the Bitcoin price falls or when transaction fees fall. A 10% rise in difficulty, for example, cuts hashprice by about 9.1%, all else equal.",
+    "after": "Hashprice falls when difficulty rises or transaction fees fall, all else equal. When quoted in US dollars, it also falls when the Bitcoin price falls. For example, a 10% rise in difficulty cuts hashprice by about 9.1%, all else equal.",
+    "verdict": "Change",
+    "note": "Parent and independent review: Factual clarity: limits the BTC-price effect to USD-denominated hashprice, consistent with its unchanged approved short definition. Preserves the 10%/about9.1% example and its all-else-equal condition. Requires Matteo reading before publication."
+  }
+]

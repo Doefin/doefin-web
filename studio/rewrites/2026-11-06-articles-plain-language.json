@@ -1,0 +1,359 @@
+[
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "summary",
+    "before": "Compare production and payback across assumptions instead of treating one growth rate as a forecast.",
+    "after": "A difficulty-growth assumption changes expected production and fleet payback. Comparing several paths shows how much the result depends on that assumption.",
+    "verdict": "Change",
+    "note": "Explains what the comparison reveals instead of directing an internal review. Keeps the distinction between a scenario and a forecast in section 0; no measured result or new forecast (habits 1, 3)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-0\"].heading",
+    "before": "State the assumption",
+    "after": "An assumption is not a forecast",
+    "verdict": "Change",
+    "note": "Names the distinction the section teaches (E31)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-0\"].paragraphs",
+    "before": [
+      "A fixed difficulty-growth rate is an input to a scenario. It is not evidence of what the network will do. Label its time period and keep it separate from measured historical data or a dated forecast."
+    ],
+    "after": [
+      "A fixed difficulty-growth rate describes a scenario, with a stated period over which the growth is assumed to occur. It is an assumption, not measured historical data or a dated forecast of what the network will do."
+    ],
+    "verdict": "Change",
+    "note": "Keeps scenario/input status, time period, historical-data distinction and dated-forecast distinction. Replaces an instruction to label data with the reason a reader needs the label (habit 3, E31)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].heading",
+    "before": "Compare the result, not only the input",
+    "after": "How growth changes production and payback",
+    "verdict": "Change",
+    "note": "Names the effect being examined rather than telling a reviewer what to compare (habit 1)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].paragraphs",
+    "before": [
+      "Run the same fleet assumptions with different difficulty paths. Compare the resulting production and payback alongside power cost, uptime, capital cost and Bitcoin price. Holding the other inputs constant helps show which change drives the difference."
+    ],
+    "after": [
+      "Changing the difficulty path changes the production and payback estimates for a fleet. To see the effect of that assumption, compare several paths while keeping power cost, uptime, capital cost and Bitcoin price constant. Otherwise, a difference in the result may come from another input."
+    ],
+    "verdict": "Change",
+    "note": "Preserves fleet comparison, production/payback, all four other inputs and the reason for holding them constant. No new number, financial example or measured result (habits 1, 3)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].heading",
+    "before": "Keep the decision proportional to the evidence",
+    "after": "What a calculator cannot decide",
+    "verdict": "Change",
+    "note": "Replaces internal review instruction with the concrete limitation a professional reader needs (habit 4)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].paragraphs",
+    "before": [
+      "A simplified calculator exposes sensitivity; it does not determine whether a position is suitable or economical. That assessment also needs timing, transaction costs, available liquidity, operational constraints and the decision-maker’s objectives. This article provides no measured threshold at which an operation should hedge."
+    ],
+    "after": [
+      "A simplified calculator shows how sensitive a result is to the assumptions. It cannot tell you whether a position suits your objectives or makes economic sense. That also depends on timing, transaction costs, available liquidity and operational constraints. This article provides no measured threshold at which an operation should hedge."
+    ],
+    "verdict": "Change",
+    "note": "Preserves suitability and economics limits, every named decision factor, objectives and exact no-measured-hedging-threshold qualification. Defines sensitivity through the explanation (habit 4). Matteo should review position-suitability wording before publication."
+  },
+  {
+    "_id": "editorial-blog-reading-a-hashrate-chart-honestly",
+    "_type": "editorialArticle",
+    "path": "summary",
+    "before": "Check the observation window and uncertainty before interpreting a change in estimated network hashrate.",
+    "after": "A change in estimated network hashrate can reflect the observation window. The estimate and its uncertainty need to be read together.",
+    "verdict": "Change",
+    "note": "Introduces the reader’s interpretation question; retains the window and uncertainty as the two checks, without claiming a particular movement is noise (habit 3)."
+  },
+  {
+    "_id": "editorial-blog-reading-a-hashrate-chart-honestly",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-0\"].heading",
+    "before": "An estimate from observable inputs",
+    "after": "How network hashrate is estimated",
+    "verdict": "Change",
+    "note": "Gives the reader a concrete subject. All three Matteo-approved E30 paragraphs remain byte-for-byte unchanged."
+  },
+  {
+    "_id": "editorial-blog-reading-a-hashrate-chart-honestly",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].heading",
+    "before": "Compare like with like",
+    "after": "Why two charts can differ",
+    "verdict": "Change",
+    "note": "Names the question answered by this section (E31)."
+  },
+  {
+    "_id": "editorial-blog-reading-a-hashrate-chart-honestly",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].paragraphs",
+    "before": [
+      "Short and long windows can produce different estimates because blocks arrive irregularly. Two charts are comparable only when their timestamps and difficulty inputs also match. A chart alone does not establish that mining capacity has changed."
+    ],
+    "after": [
+      "Blocks arrive irregularly, so estimates over short and long windows can differ. Comparing two charts also requires matching timestamps and difficulty inputs. A change on a chart alone does not establish that mining capacity has changed."
+    ],
+    "verdict": "Change",
+    "note": "Preserves irregular arrival, window differences, timestamp/difficulty matching and the limit on inferring capacity. No claim about a particular observed movement (habit 3)."
+  },
+  {
+    "_id": "editorial-blog-reading-a-hashrate-chart-honestly",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].heading",
+    "before": "Ask how uncertainty was estimated",
+    "after": "What an error band can tell you",
+    "verdict": "Change",
+    "note": "Replaces an instruction to ask for evidence with the question the evidence answers (E31)."
+  },
+  {
+    "_id": "editorial-blog-reading-a-hashrate-chart-honestly",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].paragraphs",
+    "before": [
+      "An error band should explain how it was calculated and which assumptions it uses. This guide does not report measured band widths or identify a recent network movement as noise."
+    ],
+    "after": [
+      "An error band shows uncertainty under a set of assumptions. Its meaning depends on how it was calculated, so the method and assumptions need to accompany it. This article does not report measured band widths or identify a recent network movement as noise."
+    ],
+    "verdict": "Change",
+    "note": "Explains why construction and assumptions matter; preserves both explicit limits on measured width and attribution of recent movement to noise. No performance claim (habits 3, 4)."
+  },
+  {
+    "_id": "editorial-academy-how-difficulty-adjustment-works",
+    "_type": "editorialArticle",
+    "path": "summary",
+    "before": "Difficulty sets the work needed to find a valid block. How it adjusts, what it does to expected BTC production and why its timing is an estimate.",
+    "after": "Difficulty sets the work needed to find a valid block. Adjustments affect expected BTC production; the next adjustment’s date remains an estimate.",
+    "verdict": "Change",
+    "note": "Turns the fragment into connected explanation. Definition and production/timing distinctions preserved (habit 3). Parent review: tightened the card/metadata summary; supporting detail and all qualifications remain in the article."
+  },
+  {
+    "_id": "editorial-academy-how-difficulty-adjustment-works",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-0\"].paragraphs",
+    "before": [
+      "Bitcoin adjusts mining difficulty every 2,016 blocks to target an average block interval of about ten minutes. Each adjustment uses the elapsed time of the preceding period: faster block production raises difficulty and slower production lowers it, within the protocol’s limits."
+    ],
+    "after": [
+      "Bitcoin adjusts mining difficulty every 2,016 blocks to target an average block interval of about ten minutes. The adjustment uses the time taken by the preceding period. Faster block production raises difficulty and slower production lowers it, within the protocol’s limits."
+    ],
+    "verdict": "Change",
+    "note": "Splits the long second sentence. Keeps every numeric fact, averaging qualifier, preceding-period basis, directions and protocol limits. No new mechanism (habit 3, E29)."
+  },
+  {
+    "_id": "editorial-academy-how-difficulty-adjustment-works",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].paragraphs",
+    "before": [
+      "Individual blocks arrive irregularly. A target block height is specific, but the calendar date when it will arrive is estimated. A difficulty forecast projects the adjustment before the observation is complete."
+    ],
+    "after": [
+      "Individual blocks arrive irregularly, so a specified block height does not give an exact calendar date. A difficulty forecast estimates the next adjustment before all the blocks in the observation period have arrived."
+    ],
+    "verdict": "Change",
+    "note": "Connects irregular blocks to estimated calendar timing and explains the incomplete observation period. Preserves specific height versus estimated date and forecast status (habit 3)."
+  },
+  {
+    "_id": "editorial-academy-what-hashprice-means",
+    "_type": "editorialArticle",
+    "path": "summary",
+    "before": "Read expected mining revenue per unit of hashrate and time, with the denomination and assumptions visible.",
+    "after": "Hashprice measures expected mining revenue per unit of hashrate and time. Its currency, units and calculation assumptions matter when comparing figures.",
+    "verdict": "Change",
+    "note": "Replaces a review instruction with what hashprice describes and why comparisons require care. Keeps expected revenue, time, hashrate, denomination and assumptions (habit 3)."
+  },
+  {
+    "_id": "editorial-academy-what-hashprice-means",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-0\"].paragraphs",
+    "before": [
+      "Hashprice expresses mining revenue per unit of hashrate over a stated time period. It can be denominated in Bitcoin or converted into a currency such as US dollars. Always check those units before comparing figures."
+    ],
+    "after": [
+      "Hashprice expresses mining revenue per unit of hashrate over a stated time period. It can be denominated in Bitcoin or converted into a currency such as US dollars. A comparison needs the same currency, hashrate units and time period."
+    ],
+    "verdict": "Change",
+    "note": "Keeps the natural definition and denomination examples. Makes the units check specific using the dimensions already stated, without adding example values (habit 3)."
+  },
+  {
+    "_id": "editorial-academy-what-hashprice-means",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].heading",
+    "before": "Check the inputs",
+    "after": "Why published hashprices can differ",
+    "verdict": "Change",
+    "note": "Replaces internal checking language with the reader’s concrete question (E31)."
+  },
+  {
+    "_id": "editorial-academy-what-hashprice-means",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].paragraphs",
+    "before": [
+      "The calculation depends on difficulty, block rewards and transaction fees. A currency-denominated version also depends on its Bitcoin price source. Different observation windows, averaging choices and price timestamps can produce different published values."
+    ],
+    "after": [
+      "Hashprice depends on difficulty, block rewards and transaction fees. When it is expressed in a currency such as US dollars, the Bitcoin price source also matters. Publishers can report different values if they use different observation periods, averaging methods or price timestamps."
+    ],
+    "verdict": "Change",
+    "note": "Preserves every calculation input and source of methodological difference, without attributing a real publisher discrepancy to any cause (habit 3)."
+  },
+  {
+    "_id": "editorial-academy-what-hashprice-means",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].heading",
+    "before": "Keep revenue distinct from profit",
+    "after": "Hashprice does not measure profit",
+    "verdict": "Change",
+    "note": "Makes the economic distinction explicit rather than instructing a reviewer to preserve it (habit 4)."
+  },
+  {
+    "_id": "editorial-academy-what-hashprice-means",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].paragraphs",
+    "before": [
+      "Hashprice describes revenue, not an operation’s margin. Compare it with the relevant power, hosting, maintenance and other costs using compatible units. Fleet efficiency and uptime also affect the outcome."
+    ],
+    "after": [
+      "Hashprice describes revenue, not an operation’s margin. Profit also depends on power, hosting, maintenance and other costs, as well as fleet efficiency and uptime. Revenue and costs need to be expressed in compatible units for the comparison to be meaningful."
+    ],
+    "verdict": "Change",
+    "note": "Keeps the existing natural first sentence, all four cost categories, compatible units, efficiency and uptime. Adds no profit figure or claim about realised returns (habit 4)."
+  },
+  {
+    "_id": "editorial-academy-what-hashprice-means",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-3\"].heading",
+    "before": "Do not assume a constant fee share",
+    "after": "The fee share changes over time",
+    "verdict": "Change",
+    "note": "Names the changing quantity instead of prescribing an assumption (E31)."
+  },
+  {
+    "_id": "editorial-academy-what-hashprice-means",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-3\"].paragraphs",
+    "before": [
+      "Transaction-fee revenue varies. A claim about its share of mining rewards needs a stated observation period and source. This guide makes no measured claim about the current share or the causes of differences between particular publishers."
+    ],
+    "after": [
+      "Transaction-fee revenue varies, so its share of mining rewards depends on the period being measured. A quoted share needs a source and an observation period. This guide makes no measured claim about the current share or the causes of differences between particular publishers."
+    ],
+    "verdict": "Change",
+    "note": "Connects the variable to the required context. Preserves variable fee revenue, observation period/source requirement and exact no-measured/current-share/publisher-attribution limitation (habit 3)."
+  },
+  {
+    "_id": "editorial-academy-why-forecasts-need-error-bars",
+    "_type": "editorialArticle",
+    "path": "title",
+    "before": "Why difficulty forecasts need uncertainty",
+    "after": "Why difficulty forecasts need a range",
+    "verdict": "Change",
+    "note": "Replaces the abstract phrase forecasts need uncertainty with the range discussed in the article. No slug or metadata date changes (E31)."
+  },
+  {
+    "_id": "editorial-academy-why-forecasts-need-error-bars",
+    "_type": "editorialArticle",
+    "path": "summary",
+    "before": "Assess a point forecast, its uncertainty range and the evidence for its accuracy as separate questions.",
+    "after": "A forecast estimates the next difficulty adjustment. Its range describes uncertainty. Assessing accuracy needs recorded forecasts and outcomes.",
+    "verdict": "Change",
+    "note": "Names the three separate questions: estimate, uncertainty and evidence of accuracy. Does not claim this site has validated either (habits 3, 4). Parent review: tightened the card/metadata summary; supporting detail and all qualifications remain in the article."
+  },
+  {
+    "_id": "editorial-academy-why-forecasts-need-error-bars",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-0\"].heading",
+    "before": "A projection is not an outcome",
+    "after": "Why a forecast changes",
+    "verdict": "Change",
+    "note": "Names the concrete question answered by incomplete block observations (E31)."
+  },
+  {
+    "_id": "editorial-academy-why-forecasts-need-error-bars",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-0\"].paragraphs",
+    "before": [
+      "A point forecast estimates a future adjustment using information available at its issue time. Remaining blocks can change the observed pace and therefore the projection. The issue time matters when comparing forecasts."
+    ],
+    "after": [
+      "A point forecast is a single estimate of a future difficulty adjustment, based on information available when it was issued. As the remaining blocks arrive, the observed pace can change and so can the forecast. Comparing forecasts therefore requires their issue times as well as their values."
+    ],
+    "verdict": "Change",
+    "note": "Keeps future-adjustment estimate, issue-time information, remaining-block influence and timestamp comparison requirement. Explains point forecast without introducing a number (habit 3)."
+  },
+  {
+    "_id": "editorial-academy-why-forecasts-need-error-bars",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].paragraphs",
+    "before": [
+      "A stated range should identify its assumptions, construction and intended coverage. A theoretical interval and an empirically fitted interval each need evaluation; neither is validated by its label alone."
+    ],
+    "after": [
+      "A forecast range needs an explanation of how it was calculated, which assumptions it uses and how often it is intended to contain the outcome. A range derived from a theoretical model and one fitted to observed data both need evaluation. The label alone does not show that either works."
+    ],
+    "verdict": "Change",
+    "note": "Explains construction, assumptions and intended coverage, theoretical versus empirical construction and the need to evaluate each. No asserted coverage, calibration or performance (habit 3)."
+  },
+  {
+    "_id": "editorial-academy-why-forecasts-need-error-bars",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].heading",
+    "before": "Evaluate accuracy and calibration",
+    "after": "Accuracy and coverage measure different things",
+    "verdict": "Change",
+    "note": "Names the actual distinction instead of directing an internal evaluation (habit 3)."
+  },
+  {
+    "_id": "editorial-academy-why-forecasts-need-error-bars",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].paragraphs",
+    "before": [
+      "Point error measures the distance between a forecast and an outcome. Interval coverage measures how often outcomes fell inside a published band across an evaluation set. Also inspect interval width, lead time, missing observations and changes to the method."
+    ],
+    "after": [
+      "Point error measures the distance between a forecast and an outcome. Interval coverage measures how often outcomes fell inside a published band across a set of forecasts being evaluated. Neither measure gives the full picture on its own. The band’s width, how far ahead each forecast was issued, missing observations and changes to the method also matter."
+    ],
+    "verdict": "Change",
+    "note": "Retains the natural point-error definition and all evaluation factors. Explains evaluation set and lead time; makes no new empirical finding (habits 3, 4)."
+  },
+  {
+    "_id": "editorial-academy-why-forecasts-need-error-bars",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-3\"].heading",
+    "before": "Look for a reproducible record",
+    "after": "What evidence of accuracy requires",
+    "verdict": "Change",
+    "note": "Names what the record is needed to establish instead of instructing a reviewer to look for it (E31)."
+  },
+  {
+    "_id": "editorial-academy-why-forecasts-need-error-bars",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-3\"].paragraphs",
+    "before": [
+      "Use original forecast captures, source outcomes and an explicit evaluation window. The sample data on this website demonstrates calculations only. It does not establish a calibrated interval, an accuracy ranking or a general claim about competing forecasters."
+    ],
+    "after": [
+      "An accuracy assessment needs the forecasts as originally issued, the source outcomes and a defined evaluation period so that someone else can repeat the comparison. The sample data on this website demonstrates calculations only. It does not establish a calibrated interval, an accuracy ranking or a general claim about competing forecasters."
+    ],
+    "verdict": "Change",
+    "note": "Connects reproducibility to original captures, source outcomes and evaluation window. Preserves both sample-data sentences verbatim, including all three evidence limits (habits 3, 4)."
+  }
+]

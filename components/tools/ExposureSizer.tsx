@@ -64,7 +64,7 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
             ) : null}
 
             {isV3 ? <>
-              <InputSection number="01" title="Fleet & horizon" description="Set the scale and period of your production.">
+              <InputSection number="01" title="Fleet & horizon" description="Enter your fleet’s hashrate and the period you want to compare.">
 <Slider id="eh" label="Hashrate" unit="EH/s" value={v.eh} min={0.01} max={30} step={0.01}
                 onChange={(n) => setV({ ...v, eh: n })} format={(n) => n.toFixed(2)}
                 hint={hintFor(SLUG, "Hashrate")} />
@@ -80,7 +80,7 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
                 onChange={(n) => setV({ ...v, price: n })} format={(n) => `$${(n / 1000).toFixed(0)}k`}
                 hint={hintFor(SLUG, "Bitcoin price")} />
               </InputSection>
-              <InputSection wideFirst number="03" title="Difficulty range" description="Compare production around the same starting difficulty.">
+              <InputSection wideFirst number="03" title="Difficulty range" description="Set a starting difficulty, then choose an easier and a harder scenario.">
                 <div><Slider id="diffT" label="Starting difficulty" unit="T" value={v.diffT} min={1} max={1000} step={0.01}
                     onChange={n => setV({ ...v, diffT: n })} />
                   <p className="mt-2 text-xs leading-relaxed text-subtle">Your chosen model input. The 127.48T sample default is not live difficulty.</p>
@@ -146,9 +146,9 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
               </Hint>
             ) : null}
             <Readout>
-              Over {out.weeks} weeks of target block time, the model estimates {btc(out.base)} of expected production at starting difficulty.
+              Over {out.weeks} weeks of target block time, expected BTC production at starting difficulty is {btc(out.base)}.
               At {v.high.toFixed(1)}% higher difficulty, it estimates {btc(out.atHigh)}:{' '}
-              <strong>{out.lossHigh.toFixed(3)} BTC less</strong> at the same hashrate, about {usd(out.lossHigh * v.price)}.
+              <strong>{out.lossHigh.toFixed(3)} BTC less</strong> at the same hashrate, all else equal. At your chosen BTC price, that difference is about {usd(out.lossHigh * v.price)}. This is a production estimate, before costs.
             </Readout>
             {!isV3 ? nextStep : null}
 

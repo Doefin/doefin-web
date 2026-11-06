@@ -20,7 +20,7 @@ export function DataDetail({ title, summary, category, current, crumbs = [], chi
       <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-highlight">Data field guide / {category}</p>
       <h1 className="tabular mt-3 max-w-4xl text-balance text-[32px] font-extrabold leading-[1.13] tracking-[-0.035em] sm:text-[46px]">{title}</h1>
       <p className="mt-4 max-w-2xl text-[15px] leading-[1.8] text-subtle">{summary}</p>
-      <p className="mt-4 max-w-2xl border-l-2 border-caution/50 pl-3 text-xs leading-[1.8] text-subtle">{datasetNotice ?? <><strong className="font-semibold text-caution">Synthetic learning dataset.</strong> The figures, dates and outcomes were created for these examples. They are not current network data or measured performance.</>}</p>
+      <p className="mt-4 max-w-2xl border-l-2 border-caution/50 pl-3 text-xs leading-[1.8] text-subtle">{datasetNotice ?? <><strong className="font-semibold text-caution">Synthetic examples.</strong> The figures, dates and outcomes were created for these examples. They are not current network data or measured performance.</>}</p>
     </header>
     <nav aria-label="Data guides" className="mb-6 mt-6 flex flex-wrap gap-2 sm:mb-8">
       <Link href="/data" className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-white/10 px-3 text-xs font-semibold text-subtle hover:border-brand/40 hover:text-highlight">← Data library</Link>
@@ -44,8 +44,8 @@ export function DataFields({ rows }: { rows: { label: string; value: ReactNode; 
 export function DataRange({ low, high, forecast, outcome, id }: { low: number; high: number; forecast: number; outcome?: number; id: string }) {
   const position = (value: number) => `${((value - low) / (high - low)) * 100}%`
   return <figure aria-labelledby={id}>
-    <figcaption id={id} className="text-sm font-bold">Authored range: <span className="tabular">{pct(low, 1)} to {pct(high, 1)}</span></figcaption>
-    <div className="relative mx-1 mt-3 h-12" role="img" aria-label={`Synthetic range from ${pct(low, 1)} to ${pct(high, 1)}. Forecast ${pct(forecast)}.${outcome === undefined ? ' No outcome included.' : ` Example outcome ${pct(outcome)}.`} No calibrated confidence level.`}>
+    <figcaption id={id} className="text-sm font-bold">Example range: <span className="tabular">{pct(low, 1)} to {pct(high, 1)}</span></figcaption>
+    <div className="relative mx-1 mt-3 h-12" role="img" aria-label={`Synthetic range from ${pct(low, 1)} to ${pct(high, 1)}. Forecast ${pct(forecast)}.${outcome === undefined ? ' No outcome included.' : ` Example outcome ${pct(outcome)}.`} No tested confidence level.`}>
       <div className="absolute inset-x-0 top-1/2 h-2 -translate-y-1/2 rounded-full bg-chart/20" />
       {[0, 100].map(left => <span key={left} aria-hidden="true" className="absolute top-1/2 h-4 w-px -translate-y-1/2 bg-highlight" style={{ left: `${left}%` }} />)}
       {low < 0 && high > 0 && <span aria-hidden="true" className="absolute inset-y-1 border-l border-dashed border-subtle" style={{ left: position(0) }} />}
@@ -72,9 +72,9 @@ export function DataSeries({ metric }: { metric: 'difficultyT' | 'hashrateEH' })
   const title = `Synthetic ${isDifficulty ? 'difficulty' : 'implied hashrate'} series`
   return <div className="overflow-hidden rounded-panel border border-white/10 bg-surface/20">
     <figure className="p-5 sm:p-7">
-      <div className="flex flex-wrap items-start justify-between gap-3"><figcaption className="text-sm font-bold">{title}</figcaption><span className="tabular text-[10px] font-bold uppercase tracking-wider text-caution">Authored data · {networkSeries.length} points</span></div>
+      <div className="flex flex-wrap items-start justify-between gap-3"><figcaption className="text-sm font-bold">{title}</figcaption><span className="tabular text-[10px] font-bold uppercase tracking-wider text-caution">Synthetic data · {networkSeries.length} points</span></div>
       <p className="tabular mt-3 text-xl font-bold tracking-tight text-highlight">{value(first[metric])} → {value(last[metric])}{gap}<span className="text-sm font-semibold">{unit}</span></p>
-      <p className="mt-2 text-xs leading-relaxed text-subtle">{isDifficulty ? 'Difficulty changes in discrete steps; the line steps between the supplied example points.' : 'These values are derived from the series’ difficulty using the ten-minute target. They are not independent observations of hashrate.'} Vertical axis starts at zero.</p>
+      <p className="mt-2 text-xs leading-relaxed text-subtle">{isDifficulty ? 'Difficulty changes in steps. The line follows the supplied example points.' : 'These values convert the example difficulty into hashrate using the ten-minute target. They are not independent hashrate observations.'} Vertical axis starts at zero.</p>
       <div className="mt-7 grid grid-cols-[3rem_minmax(0,1fr)] gap-3">
         <div className="tabular flex h-48 flex-col justify-between text-right text-[11px] text-subtle sm:h-56"><span>{int(max)}</span><span>{int(max / 2)}</span><span>0</span></div>
         <div className="min-w-0"><svg viewBox="0 0 1000 240" preserveAspectRatio="none" role="img" aria-label={`${title}. ${networkSeries.length} points from ${first.date} to ${last.date}. Starts at ${value(first[metric])}${gap}${unit}, ends at ${value(last[metric])}${gap}${unit}. All values are available in the following table.`} className="h-48 w-full overflow-visible sm:h-56">
@@ -82,9 +82,9 @@ export function DataSeries({ metric }: { metric: 'difficultyT' | 'hashrateEH' })
           <path d={path} fill="none" className="stroke-chart" strokeWidth="2.5" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
         </svg><div className="tabular mt-3 flex justify-between gap-3 text-[11px] text-subtle"><time dateTime={first.date}>{dateShort(first.date)}</time><time dateTime={last.date}>{dateShort(last.date)}</time></div></div>
       </div>
-      <p className="mt-4 text-xs leading-[1.8] text-subtle">Unit: {unit === 'T' ? 'T, meaning trillion' : 'EH/s, exahashes per second'}. This is a separate synthetic series, not a verified year of network history or a continuation of the snapshot above.</p>
+      <p className="mt-4 text-xs leading-[1.8] text-subtle">Unit: {unit === 'T' ? 'T, meaning trillion' : 'EH/s, exahashes per second'}. This synthetic series is separate from the current reading above. It does not show a verified year of network history.</p>
     </figure>
-    <details className="border-t border-white/10"><summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-sm font-semibold text-highlight sm:px-7 [&::-webkit-details-marker]:hidden">Inspect all {networkSeries.length} source rows<span aria-hidden="true">＋</span></summary><div>
+    <details className="border-t border-white/10"><summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-sm font-semibold text-highlight sm:px-7 [&::-webkit-details-marker]:hidden">Show all {networkSeries.length} example rows<span aria-hidden="true">＋</span></summary><div>
       <table className={`${styles.seriesTable} tabular w-full text-left text-sm`}><caption className="sr-only">All values for the synthetic {isDifficulty ? 'difficulty' : 'implied hashrate'} chart. Dates and heights belong to the example.</caption><thead className="bg-ink/25 text-xs text-subtle"><tr><th scope="col">Example date</th><th scope="col">Block</th><th scope="col">{isDifficulty ? 'Difficulty (T)' : 'Implied hashrate (EH/s)'}</th></tr></thead><tbody>{networkSeries.map(point => <tr key={point.height}><th scope="row"><time dateTime={point.date}>{dateShort(point.date)}</time></th><td><span className={styles.mobileLabel}>Block</span>{int(point.height)}</td><td><span className={styles.mobileLabel}>{isDifficulty ? 'Difficulty' : 'Implied hashrate'}</span>{value(point[metric])}{gap}{unit}</td></tr>)}</tbody></table>
     </div></details>
   </div>

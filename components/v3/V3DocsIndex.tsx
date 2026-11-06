@@ -6,9 +6,9 @@ import { V3DocsLayout } from './V3DocsLayout'
 export const metadata = seo({ title: 'Doefin documentation', description: 'Understand Bitcoin difficulty markets, learn the app workflows and find definitions, risks and technical reference.', path: '/docs' })
 
 const groupDescriptions = {
-  'Understand Doefin': 'Read about the underlying, market mechanics, settlement and risks.',
+  'Understand Doefin': 'Read about mining difficulty, market mechanics, settlement and risks.',
   'Use the app': 'Follow a specific task, from signing in and funding to managing orders and withdrawing.',
-  Reference: 'Look up a term, check collateral details or review the evidence behind a technical claim.',
+  Reference: 'Look up a term, check collateral details or assess contract audits and forecasts.',
 }
 
 export default async function V3DocsIndex() {

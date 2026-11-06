@@ -13,14 +13,14 @@ export function ResearchEvidencePreview() {
     <div className="p-5 sm:p-7">
       <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-highlight">The calculation</p>
       <h2 id="example-preview-title" className="mt-5 text-balance text-[25px] font-extrabold leading-tight tracking-[-0.03em] sm:text-3xl">Calculate forecast error.</h2>
-      <p className="mt-4 text-sm leading-relaxed text-subtle">Follow the arithmetic over {sample.rows.length} synthetic forecast/outcome pairs. Check each error, reproduce their mean and download the CSV.</p>
+      <p className="mt-4 text-sm leading-relaxed text-subtle">For each of the {sample.rows.length} made-up pairs, find how far the forecast was from the outcome. Average those distances, then download the CSV.</p>
       <Link href="/research/evaluating-a-forecast" className="mt-5 inline-flex min-h-11 items-center justify-center gap-3 rounded-lg border border-brand/40 bg-brand/10 px-4 text-sm font-bold text-highlight transition-colors hover:border-brand/70 hover:bg-brand/20">Work through the calculation <Arrow className="h-4 w-4" /></Link>
     </div>
     <div className="mt-auto border-t border-white/10 bg-ink/35 p-5 sm:px-7">
       <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-subtle">One synthetic pair</p>
       <p className="tabular mt-3 text-xl font-bold tracking-tight text-highlight">|{pair.observed.toFixed(1)}% − {pair.forecast.toFixed(1)}%| = {error.toFixed(1)} pp</p>
-      <p className="mt-2 text-xs leading-relaxed text-subtle">Absolute difference between example outcome and forecast. pp = percentage points.</p>
-      <p className="mt-3 text-[11px] leading-relaxed text-subtle">Sample prepared <time dateTime={sample.publishedAt}>{dateShort(sample.publishedAt)}</time>. Made-up values, not recorded forecasts.</p>
+      <p className="mt-2 text-xs leading-relaxed text-subtle">The error is the size of the gap between the forecast and example outcome. pp means percentage points.</p>
+      <p className="mt-3 text-[11px] leading-relaxed text-subtle">Sample prepared <time dateTime={sample.publishedAt}>{dateShort(sample.publishedAt)}</time>. These values were created for the example, not recorded from forecasts.</p>
     </div>
   </article>
 }
