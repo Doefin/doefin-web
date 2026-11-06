@@ -3,8 +3,8 @@ import { readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 
 const read = path => readFileSync(path, 'utf8')
-const home = read('app/page.tsx')
-const resources = read('app/resources/page.tsx')
+const home = read('app/(public)/page.tsx')
+const resources = read('app/(public)/resources/page.tsx')
 const chrome = read('components/v3/Chrome.tsx')
 const docs = read('content/v3-docs.ts')
 const routes = read('lib/v3-routes.ts')

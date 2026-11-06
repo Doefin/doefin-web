@@ -1,0 +1,169 @@
+{
+  "date": "2026-11-05",
+  "browserProfile": "Fardin",
+  "studio": "https://doefin-web.vercel.app/studio/structure",
+  "status": "all_18_edits_saved_as_drafts_and_verified_after_reload",
+  "editCount": 18,
+  "documentCount": 14,
+  "existingDraftsUpdated": 12,
+  "newDraftsCreated": 2,
+  "reservedDocumentsUntouched": [
+    "about-doefin",
+    "glossary-block-subsidy"
+  ],
+  "publishedDocumentsChanged": 0,
+  "verification": "Each current source was read through Studio Raw JSON. All expected text matched at the recorded paths. Each full saved draft matched its expected complete document, excluding only CMS system metadata; a reload confirmed persistence. All 14 published document IDs and revisions were checked through Studio published view and remained unchanged.",
+  "ignoredSystemFields": [
+    "_createdAt",
+    "_updatedAt",
+    "_rev",
+    "_system"
+  ],
+  "preservedFields": "All other fields, including slugs, stable section IDs, keys, references, review/publication dates and unrelated copy.",
+  "preflightCorrection": "The proposed collateral approval paragraph had incorrectly duplicated the definition. This was corrected to the intended approval/support warning before any CMS edit.",
+  "documents": [
+    {
+      "documentId": "docs-overview",
+      "status": "draft_verified_after_reload",
+      "edits": 2,
+      "draftId": "drafts.docs-overview",
+      "previousRevision": "e3178ffe-bef9-4c37-8248-053136d21dca",
+      "savedRevision": "0cb1e0fd-237b-4754-9306-c62771b52317",
+      "publishedBaseRevision": "Xd6iQy1NoBvyei09KrYBaP",
+      "sourceWasDraft": true,
+      "publishedRevisionVerified": "Xd6iQy1NoBvyei09KrYBaP"
+    },
+    {
+      "documentId": "docs-collateral-tokens",
+      "status": "draft_verified_after_reload",
+      "edits": 2,
+      "draftId": "drafts.docs-collateral-tokens",
+      "previousRevision": "2ce4e291-ed90-4732-b0f3-9607c1d66e97",
+      "savedRevision": "75ab8482-fc6c-45fd-a3e3-c8941c4da98f",
+      "publishedBaseRevision": "Xd6iQy1NoBvyei09KrYBaP",
+      "sourceWasDraft": true,
+      "publishedRevisionVerified": "Xd6iQy1NoBvyei09KrYBaP"
+    },
+    {
+      "documentId": "docs-managing-positions",
+      "status": "draft_verified_after_reload",
+      "edits": 1,
+      "draftId": "drafts.docs-managing-positions",
+      "previousRevision": "3b0d36c6-ade1-42b7-9b16-23131eb32959",
+      "savedRevision": "fa467ca1-2cc9-44a2-806b-fa061b15ec15",
+      "publishedBaseRevision": "Xd6iQy1NoBvyei09KrYBaP",
+      "sourceWasDraft": true,
+      "publishedRevisionVerified": "Xd6iQy1NoBvyei09KrYBaP"
+    },
+    {
+      "documentId": "docs-market-vs-limit-orders",
+      "status": "draft_verified_after_reload",
+      "edits": 1,
+      "draftId": "drafts.docs-market-vs-limit-orders",
+      "sourceWasDraft": false,
+      "previousRevision": "Xd6iQy1NoBvyei09KrYBaP",
+      "savedRevision": "ca102bfb-e71b-4256-b654-7dd1c0cb072c",
+      "publishedRevisionVerified": "Xd6iQy1NoBvyei09KrYBaP"
+    },
+    {
+      "documentId": "docs-order-management",
+      "status": "draft_verified_after_reload",
+      "edits": 1,
+      "draftId": "drafts.docs-order-management",
+      "sourceWasDraft": true,
+      "previousRevision": "043000c0-ec05-4f22-95a5-b1e4495532ec",
+      "savedRevision": "4519fcfe-18a7-4a42-9307-22d7c43de7b1",
+      "publishedRevisionVerified": "Xd6iQy1NoBvyei09KrYBaP"
+    },
+    {
+      "documentId": "docs-prices-and-probability",
+      "status": "draft_verified_after_reload",
+      "edits": 1,
+      "draftId": "drafts.docs-prices-and-probability",
+      "sourceWasDraft": true,
+      "previousRevision": "032fc38c-f460-425e-9dff-c0a7e5811e83",
+      "savedRevision": "0d6409b7-cfbf-4102-9556-169bccc7ccd9",
+      "publishedRevisionVerified": "Xd6iQy1NoBvyei09KrYBaP"
+    },
+    {
+      "documentId": "docs-redeeming-positions",
+      "status": "draft_verified_after_reload",
+      "edits": 1,
+      "draftId": "drafts.docs-redeeming-positions",
+      "sourceWasDraft": true,
+      "previousRevision": "513de25b-2d83-4b4c-85a1-1af841555285",
+      "savedRevision": "c85784c9-d47d-4b39-a3fa-0c8293452335",
+      "publishedRevisionVerified": "Xd6iQy1NoBvyei09KrYBaP"
+    },
+    {
+      "documentId": "docs-smart-contracts",
+      "status": "draft_verified_after_reload",
+      "edits": 1,
+      "draftId": "drafts.docs-smart-contracts",
+      "sourceWasDraft": true,
+      "previousRevision": "3ceff5b9-e6a8-429f-9e41-524e6a4eeba8",
+      "savedRevision": "400eb1e9-22a2-4b2e-aa08-cfb4c6ad64ff",
+      "publishedRevisionVerified": "Xd6iQy1NoBvyei09KsBY4N"
+    },
+    {
+      "documentId": "docs-withdrawing-funds",
+      "status": "draft_verified_after_reload",
+      "edits": 1,
+      "draftId": "drafts.docs-withdrawing-funds",
+      "sourceWasDraft": true,
+      "previousRevision": "7071b6cc-4444-46e4-97be-7461e5f32ece",
+      "savedRevision": "d79e98b5-389f-45e4-ab92-76bde9d1b741",
+      "publishedRevisionVerified": "Xd6iQy1NoBvyei09KrYBaP"
+    },
+    {
+      "documentId": "docs-methodology-and-evidence",
+      "status": "draft_verified_after_reload",
+      "edits": 1,
+      "draftId": "drafts.docs-methodology-and-evidence",
+      "sourceWasDraft": false,
+      "previousRevision": "Xd6iQy1NoBvyei09KrYBaP",
+      "savedRevision": "7b66b221-5418-4ce0-bc6a-b82f7769b32d",
+      "publishedRevisionVerified": "Xd6iQy1NoBvyei09KrYBaP"
+    },
+    {
+      "documentId": "research-methodology-difficulty-index",
+      "status": "draft_verified_after_reload",
+      "edits": 3,
+      "draftId": "drafts.research-methodology-difficulty-index",
+      "sourceWasDraft": true,
+      "previousRevision": "8e65db7c-368f-43ec-b886-20e37b1426bd",
+      "savedRevision": "0527c4be-dbf1-424f-baec-0482938494e9",
+      "publishedRevisionVerified": "K2YgGbfw6rouTgTCpeBcAt"
+    },
+    {
+      "documentId": "tool-guide-fleet-payback",
+      "status": "draft_verified_after_reload",
+      "edits": 1,
+      "draftId": "drafts.tool-guide-fleet-payback",
+      "sourceWasDraft": true,
+      "previousRevision": "2c11fc64-efcc-431f-a579-7dbb708ef269",
+      "savedRevision": "38010288-0ced-4642-8fed-059e0e2786ac",
+      "publishedRevisionVerified": "M1txyHgpxbDiwiAtPLZF5m"
+    },
+    {
+      "documentId": "tool-guide-difficulty-exposure",
+      "status": "draft_verified_after_reload",
+      "edits": 1,
+      "draftId": "drafts.tool-guide-difficulty-exposure",
+      "sourceWasDraft": true,
+      "previousRevision": "8933edd4-7607-4d35-affa-b9b1483915c9",
+      "savedRevision": "16d49305-ff7f-479b-9b89-95ce543674fd",
+      "publishedRevisionVerified": "M1txyHgpxbDiwiAtPLZF5m"
+    },
+    {
+      "documentId": "editorial-blog-reading-a-hashrate-chart-honestly",
+      "status": "draft_verified_after_reload",
+      "edits": 1,
+      "draftId": "drafts.editorial-blog-reading-a-hashrate-chart-honestly",
+      "sourceWasDraft": true,
+      "previousRevision": "7ed91fa7-6480-4ee0-bb4b-8f834f134993",
+      "savedRevision": "5b1ffa49-7b98-4cc9-b892-8a03bc2795d4",
+      "publishedRevisionVerified": "Xd6iQy1NoBvyei09Kq5IgV"
+    }
+  ]
+}

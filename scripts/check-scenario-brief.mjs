@@ -243,4 +243,55 @@ check('Copied scenario URLs contain numeric inputs only, never optional context'
   assert.deepEqual(restoreExposureScenario(new URL(url).searchParams), exposureDefaults)
 })
 
+check('The component clears all notes on cache restoration and removes its listener on unmount', () => {
+  const effects = [], states = []
+  const react = {
+    useState: initial => {
+      const slot = { value: initial }
+      states.push(slot)
+      return [slot.value, next => { slot.value = typeof next === 'function' ? next(slot.value) : next }]
+    },
+    useMemo: run => run(),
+    useEffect: run => effects.push(run),
+  }
+  const jsx = (type, props) => ({ type, props })
+  const { outputText } = ts.transpileModule(readFileSync('components/v3/ScenarioBrief.tsx', 'utf8'), {
+    compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, jsx: ts.JsxEmit.ReactJSX },
+  })
+  const module = { exports: {} }
+  new Function('require', 'module', 'exports', outputText)(name => {
+    if (name === 'react') return react
+    if (name === 'react/jsx-runtime') return { jsx, jsxs: jsx, Fragment: 'fragment' }
+    if (name === '@/lib/scenario-brief') return loadTs('lib/scenario-brief.ts')
+    if (name === '@/lib/site') return { site: { contactEmail: 'team@example.com' } }
+    if (name === './NewsletterDelivery') return { NewsletterDelivery: () => null }
+    throw Error(`Unexpected component dependency: ${name}`)
+  }, module, module.exports)
+  const previousWindow = globalThis.window
+  const browser = Object.assign(new EventTarget(), { location: { origin } })
+  globalThis.window = browser
+  const cleanups = []
+  try {
+    module.exports.ScenarioBrief({ inputs: exposureDefaults })
+    for (const effect of effects) cleanups.push(effect())
+    const notes = states.find(slot => slot.value && typeof slot.value === 'object' && 'preparedFor' in slot.value)
+    assert(notes, 'The real component must hold discussion context')
+    const privateNotes = { preparedFor: 'Private recipient', decision: 'Private decision', questions: 'Private question' }
+    notes.value = { ...privateNotes }
+    browser.dispatchEvent(Object.assign(new Event('pageshow'), { persisted: false }))
+    assert.deepEqual(notes.value, privateNotes, 'An ordinary pageshow must preserve current notes')
+    browser.dispatchEvent(Object.assign(new Event('pageshow'), { persisted: true }))
+    assert.deepEqual(notes.value, { preparedFor: '', decision: '', questions: '' })
+    for (const cleanup of cleanups) cleanup?.()
+    cleanups.length = 0
+    notes.value = { ...privateNotes }
+    browser.dispatchEvent(Object.assign(new Event('pageshow'), { persisted: true }))
+    assert.deepEqual(notes.value, privateNotes, 'Unmount must remove the listener')
+  } finally {
+    for (const cleanup of cleanups) cleanup?.()
+    if (previousWindow === undefined) delete globalThis.window
+    else globalThis.window = previousWindow
+  }
+})
+
 console.log(`Passed ${passed} scenario brief checks, including all ${2 ** keys.length} input-boundary combinations.`)

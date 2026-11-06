@@ -20,15 +20,15 @@ export default function Page() {
         <Prose
           paragraphs={[
             `${site.entity} is registered in ${site.registeredIn} and made available to professional investors only.`,
-            'Nothing published on this site constitutes investment advice, an offer, or an invitation to engage in investment activity.',
+            'Nothing published on this site constitutes investment advice, an offer or an invitation to engage in investment activity.',
           ]}
         />
       </div>
       <div className="mt-8">
         <Callout tone="caution" title="Awaiting legal drafting">
           <p>
-            This page exists so the site has no broken links and the layout can be reviewed. The
-            operative text must be drafted by counsel before launch.
+            This placeholder lets the page layout and links be reviewed. Counsel must draft the
+            final terms before launch.
           </p>
         </Callout>
       </div>

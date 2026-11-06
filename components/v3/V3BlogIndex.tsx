@@ -35,12 +35,12 @@ export async function V3BlogIndex({ topic }: { topic?: EditorialTopic } = {}) {
       slug: article.slug, title: article.title, summary: article.summary, tags: article.tags, topics: article.topics,
       minutes: minutes(article), reviewedAt: article.reviewedAt ?? null, reviewedLabel: article.reviewedAt ? dateShort(article.reviewedAt) : null, cover: editorialCoverFor(article.slug),
     }))} />
-    <p className="mt-5 text-xs leading-relaxed text-subtle">Educational articles. These explain assumptions and interpretation; they do not report measured market performance.</p>
+    <p className="mt-5 text-xs leading-relaxed text-subtle">These articles explain mining assumptions and how to read the data. They do not report measured market performance.</p>
     <section aria-labelledby="reading-next" className="mt-10 border-t border-white/10 pt-7 sm:mt-12">
       <div className="mb-5 flex flex-wrap items-baseline justify-between gap-3"><h2 id="reading-next" className="text-xl font-bold tracking-tight">Take the next step.</h2><Link href="/resources" className="inline-flex min-h-10 items-center gap-2 text-xs font-semibold text-highlight hover:underline">All resources <Arrow className="h-4 w-4" /></Link></div>
       <div className="grid gap-4 sm:grid-cols-3">{[
-        { label: 'Apply', title: 'Test your assumptions', text: 'Compare production, hosting costs and fleet payback.', href: '/tools' },
-        { label: 'Understand', title: 'Build the foundations', text: 'Learn how difficulty, hashprice and uncertainty connect.', href: '/academy' },
+        { label: 'Apply', title: 'Test your assumptions', text: 'Compare expected BTC production, hosting costs and fleet payback.', href: '/tools' },
+        { label: 'Understand', title: 'Start with the Academy', text: 'Learn how difficulty, hashprice and uncertainty connect.', href: '/academy' },
         { label: 'Look up', title: 'Find a definition', text: 'Plain explanations of the terms used in these articles.', href: '/glossary' },
       ].map(item => <Link key={item.href} href={item.href} className="group rounded-xl border border-white/[0.07] bg-surface/30 p-5 hover:border-brand/40"><p className="text-[10px] font-bold uppercase tracking-[0.12em] text-subtle">{item.label}</p><h3 className="mt-3 flex items-center justify-between gap-3 text-sm font-bold group-hover:text-highlight">{item.title}<Arrow className="h-4 w-4 text-highlight" /></h3><p className="mt-2 text-xs leading-relaxed text-subtle">{item.text}</p></Link>)}</div>
     </section>

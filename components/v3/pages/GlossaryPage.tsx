@@ -4,7 +4,7 @@ import { seo } from '@/lib/seo'
 export const metadata = seo({
   title: 'Bitcoin mining glossary',
   description:
-    'Every term in Bitcoin mining difficulty and hashrate economics, defined once, properly.',
+    'Short, factual definitions of the terms used in Bitcoin mining difficulty and hashrate economics.',
   path: '/glossary',
 })
 

@@ -20,7 +20,7 @@ export function ResearchEvidencePreview() {
       <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-subtle">One synthetic pair</p>
       <p className="tabular mt-3 text-xl font-bold tracking-tight text-highlight">|{pair.observed.toFixed(1)}% − {pair.forecast.toFixed(1)}%| = {error.toFixed(1)} pp</p>
       <p className="mt-2 text-xs leading-relaxed text-subtle">Absolute difference between example outcome and forecast. pp = percentage points.</p>
-      <p className="mt-3 text-[11px] leading-relaxed text-subtle">Sample prepared <time dateTime={sample.publishedAt}>{dateShort(sample.publishedAt)}</time>. Authored values, not captured forecasts.</p>
+      <p className="mt-3 text-[11px] leading-relaxed text-subtle">Sample prepared <time dateTime={sample.publishedAt}>{dateShort(sample.publishedAt)}</time>. Made-up values, not recorded forecasts.</p>
     </div>
   </article>
 }

@@ -70,16 +70,16 @@ export function HeroVisual() {
         </p>
         <p className={styles.comparison}>
           <span className={styles.label}>Difficulty at or above</span>
-          <strong className={styles.value}>137.2 T?</strong>
+          <strong className={styles.value}>137.2T?</strong>
         </p>
         <dl className={styles.outcomes}>
           <div className={styles.above}>
             <dt>At or above</dt>
-            <dd>YES wins</dd>
+            <dd>Yes wins</dd>
           </div>
           <div className={styles.below}>
             <dt>Below</dt>
-            <dd>NO wins</dd>
+            <dd>No wins</dd>
           </div>
         </dl>
       </div>

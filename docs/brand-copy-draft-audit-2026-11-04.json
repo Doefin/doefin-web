@@ -1,0 +1,336 @@
+{
+  "date": "2026-11-04",
+  "project": "yzvr33lo",
+  "dataset": "production",
+  "sourcePlan": "studio/rewrites/2026-10-29-v3-voice.json",
+  "method": "Fardin Chrome profile; Sanity Studio UI and Raw JSON inspector",
+  "publicationActions": 0,
+  "verifiedDrafts": 47,
+  "verifiedChangedStrings": 182,
+  "preservedDocuments": 2,
+  "verification": "Each staged draft matched the expected complete document after applying only the prepared changes. CMS system metadata was excluded from comparison; content, slugs, references, stable keys, anchors and editorial dates were preserved.",
+  "documents": [
+    {
+      "id": "docs-bitcoin-mining-difficulty",
+      "status": "draft_verified",
+      "changes": 4,
+      "draftId": "drafts.docs-bitcoin-mining-difficulty"
+    },
+    {
+      "id": "docs-collateral-tokens",
+      "status": "draft_verified",
+      "changes": 3,
+      "draftId": "drafts.docs-collateral-tokens"
+    },
+    {
+      "id": "docs-connecting-a-wallet",
+      "status": "draft_verified",
+      "changes": 3,
+      "draftId": "drafts.docs-connecting-a-wallet"
+    },
+    {
+      "id": "docs-getting-collateral",
+      "status": "draft_verified",
+      "changes": 2,
+      "draftId": "drafts.docs-getting-collateral"
+    },
+    {
+      "id": "docs-how-settlement-works",
+      "status": "draft_verified",
+      "changes": 6,
+      "draftId": "drafts.docs-how-settlement-works"
+    },
+    {
+      "id": "docs-key-terms",
+      "status": "draft_verified",
+      "changes": 4,
+      "draftId": "drafts.docs-key-terms"
+    },
+    {
+      "id": "docs-managing-positions",
+      "status": "draft_verified",
+      "changes": 5,
+      "draftId": "drafts.docs-managing-positions"
+    },
+    {
+      "id": "docs-order-management",
+      "status": "draft_verified",
+      "changes": 1,
+      "draftId": "drafts.docs-order-management"
+    },
+    {
+      "id": "docs-overview",
+      "status": "draft_verified",
+      "changes": 7,
+      "draftId": "drafts.docs-overview"
+    },
+    {
+      "id": "docs-prices-and-probability",
+      "status": "draft_verified",
+      "changes": 3,
+      "draftId": "drafts.docs-prices-and-probability"
+    },
+    {
+      "id": "docs-redeeming-positions",
+      "status": "draft_verified",
+      "changes": 3,
+      "draftId": "drafts.docs-redeeming-positions"
+    },
+    {
+      "id": "docs-risks-and-limitations",
+      "status": "draft_verified",
+      "changes": 10,
+      "draftId": "drafts.docs-risks-and-limitations"
+    },
+    {
+      "id": "docs-smart-contracts",
+      "status": "draft_verified",
+      "changes": 2,
+      "draftId": "drafts.docs-smart-contracts"
+    },
+    {
+      "id": "docs-what-doefin-settles-on",
+      "status": "draft_verified",
+      "changes": 1,
+      "draftId": "drafts.docs-what-doefin-settles-on"
+    },
+    {
+      "id": "docs-withdrawing-funds",
+      "status": "draft_verified",
+      "changes": 2,
+      "draftId": "drafts.docs-withdrawing-funds"
+    },
+    {
+      "id": "docs-your-first-trade",
+      "status": "draft_verified",
+      "changes": 3,
+      "draftId": "drafts.docs-your-first-trade"
+    },
+    {
+      "id": "about-doefin",
+      "status": "active_editor_preserved"
+    },
+    {
+      "id": "faq-exit-before-settlement",
+      "status": "draft_verified",
+      "changes": 1,
+      "draftId": "drafts.faq-exit-before-settlement"
+    },
+    {
+      "id": "faq-fees-and-costs",
+      "status": "draft_verified",
+      "changes": 1,
+      "draftId": "drafts.faq-fees-and-costs",
+      "followUpPlan": "studio/rewrites/2026-11-04-preserved-voice.json",
+      "previousStatus": "source_changed",
+      "auditCorrection": "Earlier source-conflict flag was incorrect. Fresh document-ID-checked reads matched the original before-values."
+    },
+    {
+      "id": "faq-market-settlement",
+      "status": "draft_verified",
+      "changes": 1,
+      "draftId": "drafts.faq-market-settlement"
+    },
+    {
+      "id": "faq-risks",
+      "status": "draft_verified",
+      "changes": 1,
+      "draftId": "drafts.faq-risks"
+    },
+    {
+      "id": "glossary-block-height",
+      "status": "draft_verified",
+      "changes": 1,
+      "draftId": "drafts.glossary-block-height"
+    },
+    {
+      "id": "glossary-block-subsidy",
+      "status": "existing_draft_preserved"
+    },
+    {
+      "id": "glossary-calibration",
+      "status": "draft_verified",
+      "changes": 5,
+      "draftId": "drafts.glossary-calibration"
+    },
+    {
+      "id": "glossary-confidence-interval",
+      "status": "draft_verified",
+      "changes": 4,
+      "draftId": "drafts.glossary-confidence-interval"
+    },
+    {
+      "id": "glossary-curtailment",
+      "status": "draft_verified",
+      "changes": 2,
+      "draftId": "drafts.glossary-curtailment"
+    },
+    {
+      "id": "glossary-difficulty-adjustment",
+      "status": "draft_verified",
+      "changes": 4,
+      "draftId": "drafts.glossary-difficulty-adjustment"
+    },
+    {
+      "id": "glossary-epoch",
+      "status": "draft_verified",
+      "changes": 4,
+      "draftId": "drafts.glossary-epoch"
+    },
+    {
+      "id": "glossary-exahash",
+      "status": "draft_verified",
+      "changes": 3,
+      "draftId": "drafts.glossary-exahash",
+      "followUpPlan": "studio/rewrites/2026-11-04-preserved-voice.json",
+      "previousStatus": "source_changed",
+      "approvedMergedDefinition": "One quintillion (10¹⁸) hashes per second, written EH/s: a 1 followed by 18 zeros. Used for network and large-fleet hashrate."
+    },
+    {
+      "id": "glossary-fpps",
+      "status": "draft_verified",
+      "changes": 2,
+      "draftId": "drafts.glossary-fpps"
+    },
+    {
+      "id": "glossary-halving",
+      "status": "draft_verified",
+      "changes": 3,
+      "draftId": "drafts.glossary-halving"
+    },
+    {
+      "id": "glossary-hashprice",
+      "status": "draft_verified",
+      "changes": 5,
+      "draftId": "drafts.glossary-hashprice",
+      "followUpPlan": "studio/rewrites/2026-11-04-preserved-voice.json",
+      "previousStatus": "source_changed",
+      "approvedMergedDefinition": "Expected mining revenue per unit of hashrate per day, set by difficulty, block subsidy and fees; BTC price also matters when expressed in USD."
+    },
+    {
+      "id": "glossary-hashrate",
+      "status": "draft_verified",
+      "changes": 4,
+      "draftId": "drafts.glossary-hashrate"
+    },
+    {
+      "id": "glossary-hosting",
+      "status": "draft_verified",
+      "changes": 1,
+      "draftId": "drafts.glossary-hosting"
+    },
+    {
+      "id": "glossary-mining-difficulty",
+      "status": "draft_verified",
+      "changes": 5,
+      "draftId": "drafts.glossary-mining-difficulty"
+    },
+    {
+      "id": "glossary-mining-pool",
+      "status": "draft_verified",
+      "changes": 1,
+      "draftId": "drafts.glossary-mining-pool"
+    },
+    {
+      "id": "glossary-pool-luck",
+      "status": "draft_verified",
+      "changes": 2,
+      "draftId": "drafts.glossary-pool-luck",
+      "followUpPlan": "studio/rewrites/2026-11-04-preserved-voice.json",
+      "previousStatus": "source_changed",
+      "auditCorrection": "Earlier source-conflict flag was incorrect. Fresh document-ID-checked reads matched the original before-values."
+    },
+    {
+      "id": "glossary-terahash",
+      "status": "draft_verified",
+      "changes": 3,
+      "draftId": "drafts.glossary-terahash"
+    },
+    {
+      "id": "glossary-transaction-fees",
+      "status": "draft_verified",
+      "changes": 1,
+      "draftId": "drafts.glossary-transaction-fees"
+    },
+    {
+      "id": "glossary-uptime",
+      "status": "draft_verified",
+      "changes": 1,
+      "draftId": "drafts.glossary-uptime",
+      "followUpPlan": "studio/rewrites/2026-11-04-preserved-voice.json",
+      "previousStatus": "source_changed",
+      "auditCorrection": "Earlier source-conflict flag was incorrect. Fresh document-ID-checked reads matched the original before-values."
+    },
+    {
+      "id": "editorial-academy-how-difficulty-adjustment-works",
+      "status": "draft_verified",
+      "changes": 6,
+      "draftId": "drafts.editorial-academy-how-difficulty-adjustment-works"
+    },
+    {
+      "id": "editorial-academy-what-hashprice-means",
+      "status": "draft_verified",
+      "changes": 1,
+      "draftId": "drafts.editorial-academy-what-hashprice-means"
+    },
+    {
+      "id": "editorial-blog-reading-a-hashrate-chart-honestly",
+      "status": "draft_verified",
+      "changes": 3,
+      "draftId": "drafts.editorial-blog-reading-a-hashrate-chart-honestly"
+    },
+    {
+      "id": "research-methodology-difficulty-index",
+      "status": "draft_verified",
+      "changes": 1,
+      "draftId": "drafts.research-methodology-difficulty-index"
+    },
+    {
+      "id": "research-report-difficulty-forecast-accuracy-2026",
+      "status": "draft_verified",
+      "changes": 1,
+      "draftId": "drafts.research-report-difficulty-forecast-accuracy-2026"
+    },
+    {
+      "id": "research-report-observed-difficulty-adjustments",
+      "status": "draft_verified",
+      "changes": 3,
+      "draftId": "drafts.research-report-observed-difficulty-adjustments"
+    },
+    {
+      "id": "tool-guide-difficulty-exposure",
+      "status": "draft_verified",
+      "changes": 25,
+      "draftId": "drafts.tool-guide-difficulty-exposure"
+    },
+    {
+      "id": "tool-guide-fleet-payback",
+      "status": "draft_verified",
+      "changes": 19,
+      "draftId": "drafts.tool-guide-fleet-payback"
+    },
+    {
+      "id": "tool-guide-hosting-effective-rate",
+      "status": "draft_verified",
+      "changes": 9,
+      "draftId": "drafts.tool-guide-hosting-effective-rate"
+    }
+  ],
+  "followUpPlan": "studio/rewrites/2026-11-04-preserved-voice.json",
+  "followUp": {
+    "date": "2026-11-04",
+    "authorization": "User approved the three clear documents and exact merged Exahash/Hashprice definitions; explicitly excluded About, the existing block-subsidy draft and publication.",
+    "verifiedAdditionalDrafts": 5,
+    "verifiedAdditionalChanges": 12,
+    "correctedEarlierFlags": [
+      "faq-fees-and-costs",
+      "glossary-pool-luck",
+      "glossary-uptime"
+    ],
+    "preservedForMatteo": [
+      "about-doefin",
+      "glossary-block-subsidy"
+    ],
+    "publicationActions": 0
+  }
+}

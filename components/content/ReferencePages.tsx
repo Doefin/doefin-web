@@ -42,7 +42,7 @@ export async function ReferenceGlossaryIndex({ schemaVersion = 'v3' }: { schemaV
       <PageHeader
         eyebrow="Glossary"
         title="Bitcoin mining glossary"
-        lede="Every term defined once, properly, on its own page. Short definitions first — they are what gets quoted."
+        lede="Each term on its own page, with its short definition first."
       />
       <dl className="mt-12 divide-y divide-white/[0.07] border-y border-white/[0.07]">
         {terms.map((t) => (

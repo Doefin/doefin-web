@@ -83,7 +83,7 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
               <InputSection wideFirst number="03" title="Difficulty range" description="Compare production around the same starting difficulty.">
                 <div><Slider id="diffT" label="Starting difficulty" unit="T" value={v.diffT} min={1} max={1000} step={0.01}
                     onChange={n => setV({ ...v, diffT: n })} />
-                  <p className="mt-2 text-xs leading-relaxed text-subtle">Your chosen model input. The 127.48 T sample default is not live difficulty.</p>
+                  <p className="mt-2 text-xs leading-relaxed text-subtle">Your chosen model input. The 127.48T sample default is not live difficulty.</p>
                 </div>
 <Slider id="low" label="Difficulty change · easier case" unit="%" value={v.low} min={-15} max={0} step={0.1}
                     onChange={(n) => setV({ ...v, low: n })} format={(n) => Math.abs(n).toFixed(1)}
@@ -115,7 +115,7 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
                 <div className="space-y-5">
                   {enhanced ? <div><Slider id="diffT" label="Starting difficulty" unit="T" value={v.diffT} min={1} max={1000} step={0.01}
                     onChange={n => setV({ ...v, diffT: n })} />
-                    <p className="mt-2 text-xs leading-relaxed text-subtle">Your chosen model input. The 127.48 T sample default is not live difficulty.</p>
+                    <p className="mt-2 text-xs leading-relaxed text-subtle">Your chosen model input. The 127.48T sample default is not live difficulty.</p>
                   </div> : null}
                   <Slider id="low" label="Best case: difficulty falls by" unit="%" value={v.low} min={-15} max={0} step={0.1}
                     onChange={(n) => setV({ ...v, low: n })} format={(n) => Math.abs(n).toFixed(1)}
@@ -146,9 +146,9 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
               </Hint>
             ) : null}
             <Readout>
-              For your selected {out.weeks}-week target-time horizon, the model gives {btc(out.base)} at starting difficulty.
-              At {v.high.toFixed(1)}% higher difficulty it gives {btc(out.atHigh)} instead —{' '}
-              <strong>{out.lossHigh.toFixed(3)} BTC less</strong>, around {usd(out.lossHigh * v.price)}.
+              Over {out.weeks} weeks of target block time, the model estimates {btc(out.base)} of expected production at starting difficulty.
+              At {v.high.toFixed(1)}% higher difficulty, it estimates {btc(out.atHigh)}:{' '}
+              <strong>{out.lossHigh.toFixed(3)} BTC less</strong> at the same hashrate, about {usd(out.lossHigh * v.price)}.
             </Readout>
             {!isV3 ? nextStep : null}
 

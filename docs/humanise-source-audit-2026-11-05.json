@@ -1,0 +1,877 @@
+{
+  "date": "2026-11-05",
+  "skill": "doefin-humanise",
+  "brandVersion": "0.2.0",
+  "brandCommit": "936bc5c25899ee237bb5a4ecaae54bc192038cf4",
+  "baseCommit": "a2426225dfad8179fa1450c6d286eb155ae8a3ef",
+  "changes": [
+    {
+      "file": "app/(public)/page.tsx",
+      "before": "This holds hashrate, uptime, block reward and other production assumptions constant. It is a sensitivity calculation, not a forecast or a suitable position size. Pool results, fees, power costs and BTC price require separate assumptions.",
+      "after": "The example keeps hashrate, uptime, block reward and other production assumptions unchanged. It shows the effect of a difficulty change, not a forecast or a suitable position size. Pool results, fees, power costs and BTC price need separate assumptions.",
+      "reason": "Put the reader action first; keep approved claims, figures and risk limits (habits 3-6).",
+      "line": 45
+    },
+    {
+      "file": "app/(public)/page.tsx",
+      "before": "Its cost, size and timing determine how it relates to a production shortfall.",
+      "after": "Whether it offsets a production shortfall, and by how much, depends on its cost, size and timing.",
+      "reason": "Put the reader action first; keep approved claims, figures and risk limits (habits 3-6).",
+      "line": 48
+    },
+    {
+      "file": "app/(public)/page.tsx",
+      "before": "Review account access and wallet signing.",
+      "after": "Check how to sign in and what your wallet will sign.",
+      "reason": "Put the reader action first; keep approved claims, figures and risk limits (habits 3-6).",
+      "line": 75
+    },
+    {
+      "file": "app/(public)/page.tsx",
+      "before": "Check what contract, deployment and audit evidence to request.",
+      "after": "Check which contract details, deployment records and audit evidence to request.",
+      "reason": "Put the reader action first; keep approved claims, figures and risk limits (habits 3-6).",
+      "line": 90
+    },
+    {
+      "file": "app/(public)/page.tsx",
+      "before": "Review full loss, liquidity, collateral and technical dependencies.",
+      "after": "Understand the risk of losing your full payment, limited liquidity, collateral and technical failures.",
+      "reason": "Put the reader action first; keep approved claims, figures and risk limits (habits 3-6).",
+      "line": 91
+    },
+    {
+      "file": "app/(public)/page.tsx",
+      "before": "Educational examples and synthetic research do not establish live forecasts, trading performance or an audit certification.",
+      "after": "These examples and synthetic research are for learning. They do not demonstrate live forecasts, trading performance or an audit certification.",
+      "reason": "Put the reader action first; keep approved claims, figures and risk limits (habits 3-6).",
+      "line": 94
+    },
+    {
+      "file": "app/(public)/resources/page.tsx",
+      "before": "Start with a question. Find the market mechanics, explore a mining scenario or look up a term. The deeper reading is here whenever you need it.",
+      "after": "Find out how a market works, compare a mining scenario or look up an unfamiliar term. Follow the guides when you need more detail.",
+      "reason": "Replace abstract navigation and research prose with direct explanations (E28, E30).",
+      "line": 32
+    },
+    {
+      "file": "app/(public)/resources/page.tsx",
+      "before": "Start with the contract’s underlying, observation block and binary outcome; use Docs for task-specific detail.",
+      "after": "See what the contract tracks, when difficulty is observed and how the outcome is decided. The docs cover individual app tasks.",
+      "reason": "Replace abstract navigation and research prose with direct explanations (E28, E30).",
+      "line": 44
+    },
+    {
+      "file": "app/(public)/resources/page.tsx",
+      "before": "Work through execution, collateral, evidence and the questions to discuss with your team.",
+      "after": "Review execution, collateral and the evidence your team needs before taking a position.",
+      "reason": "Replace abstract navigation and research prose with direct explanations (E28, E30).",
+      "line": 46
+    },
+    {
+      "file": "app/(public)/resources/page.tsx",
+      "before": "Use your own inputs and keep a scenario in its URL. Each tool has a written guide so you can inspect what goes into the result.",
+      "after": "Enter your own assumptions and save the page URL to keep them. Each tool has a guide explaining the inputs and results.",
+      "reason": "Replace abstract navigation and research prose with direct explanations (E28, E30).",
+      "line": 59
+    },
+    {
+      "file": "app/(public)/resources/page.tsx",
+      "before": "Explore a frozen capture of observed difficulty adjustments, inspect its provenance and reuse its dataset. Separate teaching exercises show how forecast-error arithmetic works.",
+      "after": "Explore the recorded difficulty adjustments, check their sources and download the data. Separate examples show how to calculate forecast errors.",
+      "reason": "Explain research evidence in ordinary language; retain its limits (habits 3, 10).",
+      "line": 114
+    },
+    {
+      "file": "app/(public)/resources/page.tsx",
+      "before": "The report on observed difficulty adjustments uses captured network data. Forecast comparisons and error exercises use authored synthetic values. Neither establishes live forecasts, measured estimator performance or a verified prediction track record.",
+      "after": "The difficulty-adjustment report uses recorded network data. The forecast comparisons and error exercises use made-up values for teaching. Neither shows live forecasts, measured forecasting performance or a verified prediction record.",
+      "reason": "Explain research evidence in ordinary language; retain its limits (habits 3, 10).",
+      "line": 115
+    },
+    {
+      "file": "app/(public)/resources/page.tsx",
+      "before": "Ask the team about the product or the evidence your review needs.",
+      "after": "Ask the team about the product or request the evidence you need to review it.",
+      "reason": "Explain research evidence in ordinary language; retain its limits (habits 3, 10).",
+      "line": 129
+    },
+    {
+      "file": "components/v3/InstitutionsPage.tsx",
+      "before": "The public material is free to explore. A capital decision needs your organisation’s own exposure, constraints and approval process.",
+      "after": "You can read the public material freely. Before committing capital, assess your organisation’s exposure and constraints, and follow its approval process.",
+      "reason": "Replace institutional abstractions with concrete tasks; keep mandate and risk limits (habits 2, 4, 5).",
+      "line": 35
+    },
+    {
+      "file": "components/v3/InstitutionsPage.tsx",
+      "before": "Which production period matters? What BTC production range changes your cash plan? Record your assumptions and compare scenarios before considering position size or funding.",
+      "after": "Choose the production period that matters to your cash plan. Record your assumptions and compare BTC production scenarios before considering position size or funding.",
+      "reason": "Replace institutional abstractions with concrete tasks; keep mandate and risk limits (habits 2, 4, 5).",
+      "line": 37
+    },
+    {
+      "file": "components/v3/InstitutionsPage.tsx",
+      "before": "Assess whether the instrument fits your thesis or borrower review. Production exposure and contract payout are separate calculations.",
+      "after": "Check whether the contract fits your investment thesis or assessment of a borrower. Calculate production exposure and contract payout separately.",
+      "reason": "Replace institutional abstractions with concrete tasks; keep mandate and risk limits (habits 2, 4, 5).",
+      "line": 38
+    },
+    {
+      "file": "components/v3/InstitutionsPage.tsx",
+      "before": "Make the review easy to forward.",
+      "after": "Share the assumptions with your team.",
+      "reason": "Replace institutional abstractions with concrete tasks; keep mandate and risk limits (habits 2, 4, 5).",
+      "line": 39
+    },
+    {
+      "file": "components/v3/InstitutionsPage.tsx",
+      "before": "Use the scenario brief to share your inputs, results and model limits. Add the intended decision and the open questions. Keep private discussion notes out of public links.",
+      "after": "Share your inputs, results and model limits in a scenario brief. Add the decision you are considering and any open questions. Keep private discussion notes out of public links.",
+      "reason": "Replace institutional abstractions with concrete tasks; keep mandate and risk limits (habits 2, 4, 5).",
+      "line": 39
+    },
+    {
+      "file": "components/v3/InstitutionsPage.tsx",
+      "before": "There is no fleet-size or capital threshold implied by this walkthrough. Your own mandate and review determine suitability.",
+      "after": "This walkthrough does not set a minimum fleet size or capital amount. Assess suitability against your own mandate and review process.",
+      "reason": "Replace institutional abstractions with concrete tasks; keep mandate and risk limits (habits 2, 4, 5).",
+      "line": 49
+    },
+    {
+      "file": "components/v3/InstitutionsPage.tsx",
+      "before": "A public snapshot helps you identify an instrument. Your mandate, execution and operational checks remain essential.",
+      "after": "Use the market snapshot to identify a contract, then check it against your mandate, execution needs and operating procedures.",
+      "reason": "Replace institutional abstractions with concrete tasks; keep mandate and risk limits (habits 2, 4, 5).",
+      "line": 57
+    },
+    {
+      "file": "components/v3/InstitutionsPage.tsx",
+      "before": "Bring the specific contract to your team.",
+      "after": "Review the selected contract with your team.",
+      "reason": "Replace institutional abstractions with concrete tasks; keep mandate and risk limits (habits 2, 4, 5).",
+      "line": 59
+    },
+    {
+      "file": "components/v3/InstitutionsExplorer.tsx",
+      "before": "Prices and contract selections are unavailable until a snapshot can be verified.",
+      "after": "Prices and contract selection will be available once fresh market data can be checked.",
+      "reason": "Make market states and quote limits easier to understand (habits 3, 4, 10).",
+      "line": 45
+    },
+    {
+      "file": "components/v3/InstitutionsExplorer.tsx",
+      "before": "Choose a threshold and observation block. Contracts without both reference prices are omitted.",
+      "after": "Choose a threshold and observation block. Only contracts with both Yes and No reference prices are shown.",
+      "reason": "Make market states and quote limits easier to understand (habits 3, 4, 10).",
+      "line": 48
+    },
+    {
+      "file": "components/v3/InstitutionsExplorer.tsx",
+      "before": "These are not size-specific quotes or forecasts. Fees and available depth affect execution.",
+      "after": "These prices are not forecasts or quotes for your order size. Fees and the available orders affect execution.",
+      "reason": "Make market states and quote limits easier to understand (habits 3, 4, 10).",
+      "line": 61
+    },
+    {
+      "file": "components/v3/InstitutionsExplorer.tsx",
+      "before": "Rechecks this exact contract before continuing. Enter size and review execution in the app.",
+      "after": "We check this contract again before you continue. Enter your amount and review execution in the app.",
+      "reason": "Make market states and quote limits easier to understand (habits 3, 4, 10).",
+      "line": 62
+    },
+    {
+      "file": "components/v3/InstitutionsExplorer.tsx",
+      "before": "This explorer does not show executable depth, provide a size-specific quote or place an order.",
+      "after": "This explorer does not show the orders available to fill your trade, quote for your order size or place an order.",
+      "reason": "Make market states and quote limits easier to understand (habits 3, 4, 10).",
+      "line": 67
+    },
+    {
+      "file": "components/v3/PublicMinersPlanner.tsx",
+      "before": "Market-linked estimates and app review are paused until a fresh snapshot is available.",
+      "after": "You need fresh market data to calculate a position or review it in the app.",
+      "reason": "Explain planner states and assumptions without implementation language (E21, E28).",
+      "line": 90
+    },
+    {
+      "file": "components/v3/PublicMinersPlanner.tsx",
+      "before": "The standalone calculator uses assumptions you enter and needs no market-data connection.",
+      "after": "You can still use the standalone calculator with your own assumptions, without a market-data connection.",
+      "reason": "Explain planner states and assumptions without implementation language (E21, E28).",
+      "line": 90
+    },
+    {
+      "file": "components/v3/PublicMinersPlanner.tsx",
+      "before": "Used to estimate production. Choose the market’s observation block in the next step.",
+      "after": "This sets the production period. You choose the market’s observation block in the next step.",
+      "reason": "Explain planner states and assumptions without implementation language (E21, E28).",
+      "line": 96
+    },
+    {
+      "file": "components/v3/PublicMinersPlanner.tsx",
+      "before": "Timing below assumes 10 minutes per block; your production horizon stays separate.",
+      "after": "The estimated timing below assumes 10 minutes per block. Your production period is a separate input.",
+      "reason": "Explain planner states and assumptions without implementation language (E21, E28).",
+      "line": 100
+    },
+    {
+      "file": "components/v3/PublicMinersPlanner.tsx",
+      "before": "Compare the position cost with the sized payout.",
+      "after": "Compare the position cost with the estimated payout.",
+      "reason": "Explain planner states and assumptions without implementation language (E21, E28).",
+      "line": 100
+    },
+    {
+      "file": "components/v3/PublicMinersPlanner.tsx",
+      "before": "cbBTC collateral only. Unpriced, ambiguous and past-observation contracts are excluded. These are market summaries, not executable quotes.",
+      "after": "Only cbBTC markets are shown. Markets with missing prices, conflicting details or an observation block already reached are excluded. These summaries are not executable quotes.",
+      "reason": "Explain planner states and assumptions without implementation language (E21, E28).",
+      "line": 100
+    },
+    {
+      "file": "components/v3/PublicMinersPlanner.tsx",
+      "before": "Constant hashrate, full uptime and the current subsidy are assumed. Production excludes electricity, operating costs and pool fees. Each epoch is approximately 14 days. The contract observes difficulty at one block, rather than your fleet’s production over time.",
+      "after": "The model assumes constant hashrate, full uptime and the current subsidy. Production figures exclude electricity, operating costs and pool fees. Each epoch is approximately 14 days. The contract checks difficulty at one block; it does not track your fleet’s production over time.",
+      "reason": "Explain planner states and assumptions without implementation language (E21, E28).",
+      "line": 105
+    },
+    {
+      "file": "components/v3/PublicMinersPlanner.tsx",
+      "before": "The app verifies this exact market and side. Enter your amount and review a fresh quote there. No order or budget is sent.",
+      "after": "The app checks the selected market and side. Enter your amount and review a fresh quote there. This page sends no order or budget.",
+      "reason": "Explain planner states and assumptions without implementation language (E21, E28).",
+      "line": 111
+    },
+    {
+      "file": "components/v3/pages/SettlementPage.tsx",
+      "before": "Your calculator result estimates a range of BTC production. A Doefin position answers a different question: is difficulty at or above a defined level at the observation block?",
+      "after": "The calculator compares BTC production under your assumptions. A Doefin position depends on whether difficulty is at or above a set level at the observation block.",
+      "reason": "Make the comparison easier to follow while retaining all payout and collateral caveats (habits 3, 4).",
+      "line": 14
+    },
+    {
+      "file": "components/v3/pages/SettlementPage.tsx",
+      "before": "Watch the level, the block and the side.",
+      "after": "Check the threshold, block and side.",
+      "reason": "Make the comparison easier to follow while retaining all payout and collateral caveats (habits 3, 4).",
+      "line": 17
+    },
+    {
+      "file": "components/v3/pages/SettlementPage.tsx",
+      "before": "The values illustrate the rule; they are not an available market or a quote.",
+      "after": "These values explain the rule. They are not an available market or a quote.",
+      "reason": "Make the comparison easier to follow while retaining all payout and collateral caveats (habits 3, 4).",
+      "line": 19
+    },
+    {
+      "file": "components/v3/pages/SettlementPage.tsx",
+      "before": "independent observation of the value does not remove smart-contract, token or execution risks.",
+      "after": "checking that value yourself does not remove smart-contract, token or execution risks.",
+      "reason": "Make the comparison easier to follow while retaining all payout and collateral caveats (habits 3, 4).",
+      "line": 36
+    },
+    {
+      "file": "components/v3/ResearchIndex.tsx",
+      "before": "A defined observation window",
+      "after": "The period being measured",
+      "reason": "Use plain descriptions of reproducible work and evidence (E30).",
+      "line": 41
+    },
+    {
+      "file": "components/v3/ResearchIndex.tsx",
+      "before": "Versioned public downloads and citation",
+      "after": "Which version to download and how to cite it",
+      "reason": "Use plain descriptions of reproducible work and evidence (E30).",
+      "line": 41
+    },
+    {
+      "file": "components/v3/ResearchIndex.tsx",
+      "before": "A reproducible evidence record",
+      "after": "Records you can use to check the result",
+      "reason": "Use plain descriptions of reproducible work and evidence (E30).",
+      "line": 41
+    },
+    {
+      "file": "components/v3/ResearchIndex.tsx",
+      "before": "Inspect the inputs, calculation and requirements for an uncertainty interval.",
+      "after": "Check the inputs, calculation and evidence needed to support an uncertainty range.",
+      "reason": "Use plain descriptions of reproducible work and evidence (E30).",
+      "line": 51
+    },
+    {
+      "file": "components/v3/ResearchIndex.tsx",
+      "before": "Read example difficulty, hashrate and dated records with their assumptions visible.",
+      "after": "Read the difficulty and hashrate examples alongside their dates and assumptions.",
+      "reason": "Use plain descriptions of reproducible work and evidence (E30).",
+      "line": 52
+    },
+    {
+      "file": "components/v3/V3Difficulty.tsx",
+      "before": "Read the current backend difficulty point estimate and its source limitations beside clearly labelled synthetic teaching examples.",
+      "after": "Check the current difficulty estimate, understand its limits and compare it with clearly labelled teaching examples.",
+      "reason": "Explain the actual data limitation without repeated backend terminology (habits 3, 6, 10).",
+      "line": 6
+    },
+    {
+      "file": "components/v3/V3Difficulty.tsx",
+      "before": "Inspect the backend point estimate and its source context, then distinguish it from the authored teaching examples.",
+      "after": "Check where the current estimate comes from and what it tells you. The teaching examples below are separate.",
+      "reason": "Explain the actual data limitation without repeated backend terminology (habits 3, 6, 10).",
+      "line": 11
+    },
+    {
+      "file": "components/v3/V3Difficulty.tsx",
+      "before": "Read the point estimate with its source context.",
+      "after": "Check the estimate and its source.",
+      "reason": "Explain the actual data limitation without repeated backend terminology (habits 3, 6, 10).",
+      "line": 13
+    },
+    {
+      "file": "components/v3/V3Difficulty.tsx",
+      "before": "These values come from the backend analytics response. Its contract does not publish a forecast interval or an immutable record of each difficulty adjustment.",
+      "after": "These values come from the analytics API. It provides no forecast range or fixed record for each difficulty adjustment.",
+      "reason": "Explain the actual data limitation without repeated backend terminology (habits 3, 6, 10).",
+      "line": 13
+    },
+    {
+      "file": "components/v3/V3Difficulty.tsx",
+      "before": "The current difficulty and next-adjustment point estimate describe the API response. The percentage is the backend’s relative change converted to percent. A range is unavailable because the endpoint does not publish interval endpoints.",
+      "after": "The panel shows current difficulty and the API’s estimate for the next adjustment. The relative change is converted to a percentage. No forecast range is shown because the API supplies no lower or upper limit.",
+      "reason": "Explain the actual data limitation without repeated backend terminology (habits 3, 6, 10).",
+      "line": 14
+    },
+    {
+      "file": "components/v3/V3Difficulty.tsx",
+      "before": "A synthetic sequence for learning.",
+      "after": "A sequence of teaching examples.",
+      "reason": "Explain the actual data limitation without repeated backend terminology (habits 3, 6, 10).",
+      "line": 16
+    },
+    {
+      "file": "components/v3/V3Difficulty.tsx",
+      "before": "The separate authored series is an illustration, not current network history or a measured forecast archive.",
+      "after": "These values were created for the example. They are not current network history or a record of measured forecasts.",
+      "reason": "Explain the actual data limitation without repeated backend terminology (habits 3, 6, 10).",
+      "line": 16
+    },
+    {
+      "file": "components/v3/V3Difficulty.tsx",
+      "before": "The current backend contract has no endpoint for timestamped forecast records, ranges and outcomes. Synthetic dated examples are not published records.",
+      "after": "The API does not provide timestamped forecast records with their ranges and outcomes. Dated teaching examples cannot replace those records.",
+      "reason": "Explain the actual data limitation without repeated backend terminology (habits 3, 6, 10).",
+      "line": 19
+    },
+    {
+      "file": "components/v3/V3Difficulty.tsx",
+      "before": "No page per difficulty adjustment is published without a backend record.",
+      "after": "There is no separate page for an adjustment without a source record.",
+      "reason": "Explain the actual data limitation without repeated backend terminology (habits 3, 6, 10).",
+      "line": 19
+    },
+    {
+      "file": "components/v3/V3Hashrate.tsx",
+      "before": "Read current backend hashrate windows with their source timestamp and freshness, beside a separate synthetic teaching illustration.",
+      "after": "Compare current hashrate estimates and check when their source was updated. A separate example explains how the values can move.",
+      "reason": "Replace repeated implementation phrasing with clear measurement explanations (E30).",
+      "line": 6
+    },
+    {
+      "file": "components/v3/V3Hashrate.tsx",
+      "before": "Read backend rolling windows and their timestamp, then separate them from an illustrative series.",
+      "after": "Compare the rolling estimates and check their timestamp. The example series below is separate from the current data.",
+      "reason": "Replace repeated implementation phrasing with clear measurement explanations (E30).",
+      "line": 11
+    },
+    {
+      "file": "components/v3/V3Hashrate.tsx",
+      "before": "A synthetic sequence for learning.",
+      "after": "A sequence of teaching examples.",
+      "reason": "Replace repeated implementation phrasing with clear measurement explanations (E30).",
+      "line": 16
+    },
+    {
+      "file": "components/v3/V3Hashrate.tsx",
+      "before": "This authored series illustrates how a rate can move. It is not current network history or a backend observation.",
+      "after": "These example values show how a rate can move. They are not current network history or observations from the API.",
+      "reason": "Replace repeated implementation phrasing with clear measurement explanations (E30).",
+      "line": 16
+    },
+    {
+      "file": "components/v3/V3DataIndex.tsx",
+      "before": "Current difficulty and hashrate come from the backend API. Forecast ranges and dated learning examples are synthetic and do not establish performance.",
+      "after": "Current difficulty and hashrate come from the API. The forecast ranges and dated examples use made-up values for learning; they do not demonstrate forecasting performance.",
+      "reason": "Keep live data and examples distinct in everyday wording (habits 3, 6, 10).",
+      "line": 27
+    },
+    {
+      "file": "components/v3/V3DataIndex.tsx",
+      "before": "The backend exposes a current point estimate, but no endpoint for published forecast records or their ranges and outcomes. No page per difficulty adjustment is linked without those records.",
+      "after": "The API supplies a current estimate, but no published forecast records with their ranges and outcomes. We need those records before linking a page for each difficulty adjustment.",
+      "reason": "Keep live data and examples distinct in everyday wording (habits 3, 6, 10).",
+      "line": 45
+    },
+    {
+      "file": "components/v3/V3DataIndex.tsx",
+      "before": "Published forecast records: 0 available from the current API contract. The dated rows below are a separate synthetic teaching illustration.",
+      "after": "Published forecast records available from the current API: 0. The dated rows below are made-up teaching examples.",
+      "reason": "Keep live data and examples distinct in everyday wording (habits 3, 6, 10).",
+      "line": 47
+    },
+    {
+      "file": "components/v3/V3DataIndex.tsx",
+      "before": "Three synthetic difficulty records. Forecast reference dates, forecast changes and authored outcomes; no measured history.",
+      "after": "Three made-up difficulty records with example dates, forecast changes and outcomes. They are not measured history.",
+      "reason": "Keep live data and examples distinct in everyday wording (habits 3, 6, 10).",
+      "line": 53
+    },
+    {
+      "file": "components/v3/V3DataIndex.tsx",
+      "before": "Research shows how to evaluate a forecast comparison and reproduce error calculations from a downloadable sample.",
+      "after": "The research guide explains how to compare forecasts and repeat the error calculations using a downloadable sample.",
+      "reason": "Keep live data and examples distinct in everyday wording (habits 3, 6, 10).",
+      "line": 70
+    },
+    {
+      "file": "components/v3/V3Scoreboard.tsx",
+      "before": "See what an average error summarises, what it hides, and which evidence you need before comparing forecasts.",
+      "after": "See what an average error tells you, what it hides and what to check before comparing forecasts.",
+      "reason": "Explain the statistical limits directly; retain every evidence qualification (habits 3, 4).",
+      "line": 24
+    },
+    {
+      "file": "components/v3/V3Scoreboard.tsx",
+      "before": "Scores and ranges use authored forecasts and outcomes. The separate observed-network report below is historical data, not scored forecasting performance.",
+      "after": "The scores and ranges use made-up forecasts and outcomes. The separate network report below uses historical data; it does not measure forecasting performance.",
+      "reason": "Explain the statistical limits directly; retain every evidence qualification (habits 3, 4).",
+      "line": 24
+    },
+    {
+      "file": "components/v3/V3Scoreboard.tsx",
+      "before": "An authored error profile",
+      "after": "An example error profile",
+      "reason": "Explain the statistical limits directly; retain every evidence qualification (habits 3, 4).",
+      "line": 28
+    },
+    {
+      "file": "components/v3/V3Scoreboard.tsx",
+      "before": "The synthetic error profile demonstrates a metric. The site has no measured comparison of Doefin and other estimators, and no evidence of a forecasting advantage.",
+      "after": "The made-up errors show how the metric works. The site has no measured comparison between Doefin and other estimators, or evidence that one forecasts better.",
+      "reason": "Explain the statistical limits directly; retain every evidence qualification (habits 3, 4).",
+      "line": 33
+    },
+    {
+      "file": "components/v3/V3Scoreboard.tsx",
+      "before": "The measured count and the synthetic sample count describe different things. Five authored rows do not become five observed epochs.",
+      "after": "Keep the count of measured observations separate from the example count. Five made-up rows are not five observed epochs.",
+      "reason": "Explain the statistical limits directly; retain every evidence qualification (habits 3, 4).",
+      "line": 33
+    },
+    {
+      "file": "components/v3/V3Scoreboard.tsx",
+      "before": "Accuracy is more than one small number. Read these measures together and keep their units explicit.",
+      "after": "Read these measures together. Check the units before comparing the numbers.",
+      "reason": "Explain the statistical limits directly; retain every evidence qualification (habits 3, 4).",
+      "line": 37
+    },
+    {
+      "file": "components/v3/V3Scoreboard.tsx",
+      "before": "That is one inclusion in an authored range.",
+      "after": "That is one outcome inside an example range.",
+      "reason": "Explain the statistical limits directly; retain every evidence qualification (habits 3, 4).",
+      "line": 41
+    },
+    {
+      "file": "components/v3/V3Scoreboard.tsx",
+      "before": "It does not establish that a claimed confidence level is calibrated. That requires a sufficiently broad, comparable set of recorded forecasts, evaluated against the stated level with interval widths visible.",
+      "after": "One outcome cannot show whether a stated confidence level is reliable. That needs a broad set of comparable, recorded forecasts, tested against the stated level with their range widths visible.",
+      "reason": "Explain the statistical limits directly; retain every evidence qualification (habits 3, 4).",
+      "line": 41
+    },
+    {
+      "file": "components/v3/ResearchArchiveSummary.tsx",
+      "before": "Frozen one-year source window; no claim of live coverage or independent node verification.",
+      "after": "The source covers a fixed one-year period. It provides no live coverage or evidence of an independent check against a Bitcoin node.",
+      "reason": "Explain research status without archival jargon (habits 3, 10).",
+      "line": 10
+    },
+    {
+      "file": "components/v3/ResearchArchiveSummary.tsx",
+      "before": "The prototype’s dated forecasts and scoreboard are illustrative. It has no captured provider predictions, independently timestamped publication receipts or market-listing receipts. Observed adjustments are not scored forecasts.",
+      "after": "The prototype’s dated forecasts and scoreboard are examples. There are no captured provider predictions or independently timestamped records of publication or market listings. Recorded adjustments alone cannot show how well a forecast performed.",
+      "reason": "Explain research status without archival jargon (habits 3, 10).",
+      "line": 16
+    },
+    {
+      "file": "components/v3/V3DocsIndex.tsx",
+      "before": "Understand the product, complete a task or look up a reference. Start where your question begins.",
+      "after": "Find out how the product works, follow an app task or look up a term. Choose the section that answers your question.",
+      "reason": "Make the reading path direct and avoid abstract navigation prose (E25).",
+      "line": 16
+    },
+    {
+      "file": "components/v3/V3DocsIndex.tsx",
+      "before": "The resource library connects mining fundamentals, calculators and worked examples. Look up a network term in the mining glossary, or compare expected BTC production with your own assumptions.",
+      "after": "The resource library brings together mining guides, calculators and worked examples. Look up an unfamiliar term in the glossary or compare expected BTC production using your own assumptions.",
+      "reason": "Make the reading path direct and avoid abstract navigation prose (E25).",
+      "line": 35
+    },
+    {
+      "file": "components/v3/V3BlogIndex.tsx",
+      "before": "Educational articles. These explain assumptions and interpretation; they do not report measured market performance.",
+      "after": "These articles explain mining assumptions and how to read the data. They do not report measured market performance.",
+      "reason": "Remove abstract educational boilerplate without changing the evidence status (habits 6, 10).",
+      "line": 38
+    },
+    {
+      "file": "components/v3/V3Learn.tsx",
+      "before": "Start with a 1 EH/s illustrative fleet. Hold time, fees and the block reward constant, change difficulty, and verify the resulting difference in expected BTC production. Replay the same inputs in the calculator.",
+      "after": "Start with an illustrative 1 EH/s fleet. Change difficulty while keeping time, fees and the block reward fixed, then check the difference in expected BTC production. Try the same inputs in the calculator.",
+      "reason": "Explain the task in a natural sequence while keeping the illustrative scope (E28).",
+      "line": 14
+    },
+    {
+      "file": "content/preview.ts",
+      "before": "Estimate production sensitivity over a fixed time window.",
+      "after": "Estimate how a difficulty change affects production over a fixed period.",
+      "reason": "Explain the model assumptions directly without changing them (E28, habit 3).",
+      "line": 11
+    },
+    {
+      "file": "content/preview.ts",
+      "before": "The model holds hashrate, average fees and the 3.125 BTC block subsidy constant. Each epoch represents approximately two weeks at the target block interval; it does not predict actual epoch duration. Difficulty changes are applied across the whole period. Uptime and pool fees are excluded.",
+      "after": "The model keeps hashrate, average fees and the 3.125 BTC block subsidy fixed. Each modelled epoch lasts approximately two weeks at the target block interval; actual epochs can differ. Each difficulty scenario applies for the whole period. Uptime and pool fees are excluded.",
+      "reason": "Explain the model assumptions directly without changing them (E28, habit 3).",
+      "line": 13
+    },
+    {
+      "file": "content/preview.ts",
+      "before": "Pool fees are expressed as an equivalent cost adjustment for comparison; they are not an electricity invoice.",
+      "after": "Pool fees are converted into an equivalent cost for comparison. That adjustment is not a charge on your electricity invoice.",
+      "reason": "Explain the model assumptions directly without changing them (E28, habit 3).",
+      "line": 19
+    },
+    {
+      "file": "content/preview.ts",
+      "before": "Separate operating cost, production sensitivity and contract settlement.",
+      "after": "Understand the difference between operating costs, changes in production and contract settlement.",
+      "reason": "Explain the model assumptions directly without changing them (E28, habit 3).",
+      "line": 20
+    },
+    {
+      "file": "content/preview.ts",
+      "before": "Use the comparison to investigate assumptions, not as a complete investment model.",
+      "after": "Use the comparison to test your assumptions. It is not a complete investment model.",
+      "reason": "Explain the model assumptions directly without changing them (E28, habit 3).",
+      "line": 25
+    },
+    {
+      "file": "content/preview.ts",
+      "before": "This isolates difficulty sensitivity instead of mixing several operational changes.",
+      "after": "You can then see the effect of difficulty without changing several assumptions at once.",
+      "reason": "Explain the model assumptions directly without changing them (E28, habit 3).",
+      "line": 41
+    },
+    {
+      "file": "content/preview.ts",
+      "before": "Compare a frozen forecast with the observed outcome under the same definition, keep missed predictions in the record and inspect the size and direction of the errors.",
+      "after": "Compare a forecast recorded in advance with the observed outcome, using the same definition for both. Keep missed predictions in the record and check how far each forecast was above or below the outcome.",
+      "reason": "Explain the model assumptions directly without changing them (E28, habit 3).",
+      "line": 57
+    },
+    {
+      "file": "content/preview.ts",
+      "before": "The table includes all five synthetic pairs. A useful report lets the reader inspect misses as easily as successes.",
+      "after": "The table includes all five made-up forecast/outcome pairs. Misses should be as easy to check as successes.",
+      "reason": "Explain the model assumptions directly without changing them (E28, habit 3).",
+      "line": 66
+    },
+    {
+      "file": "content/tool-micro.ts",
+      "before": "you own hosted machines and pay booked capacity during lost hours",
+      "after": "you own hosted machines and pay for booked capacity during lost hours",
+      "reason": "Use direct input guidance; preserve ranges, arithmetic and billing conditions (E28).",
+      "line": 34
+    },
+    {
+      "file": "content/tool-micro.ts",
+      "before": "Set distinct paid downtime and curtailment assumptions.",
+      "after": "Enter paid downtime and curtailment separately.",
+      "reason": "Use direct input guidance; preserve ranges, arithmetic and billing conditions (E28).",
+      "line": 39
+    },
+    {
+      "file": "content/tool-micro.ts",
+      "before": "Compare absolute final costs under consistent assumptions.",
+      "after": "Compare the final costs using the same assumptions.",
+      "reason": "Use direct input guidance; preserve ranges, arithmetic and billing conditions (E28).",
+      "line": 40
+    },
+    {
+      "file": "content/tool-micro.ts",
+      "before": "Lost hours that remain payable, separate from curtailment.",
+      "after": "Downtime you still pay for. Enter curtailment separately.",
+      "reason": "Use direct input guidance; preserve ranges, arithmetic and billing conditions (E28).",
+      "line": 63
+    },
+    {
+      "file": "content/tool-micro.ts",
+      "before": "A revenue percentage converted into an equivalent cost adjustment.",
+      "after": "The share of revenue paid to the pool, converted into an equivalent cost.",
+      "reason": "Use direct input guidance; preserve ranges, arithmetic and billing conditions (E28).",
+      "line": 75
+    },
+    {
+      "file": "content/tool-micro.ts",
+      "before": "Adjusted cost divided by the productive-hours fraction. It assumes booked capacity remains payable while idle.",
+      "after": "Adjusted cost divided by the share of productive hours. You are assumed to pay for booked capacity even while idle.",
+      "reason": "Use direct input guidance; preserve ranges, arithmetic and billing conditions (E28).",
+      "line": 91
+    },
+    {
+      "file": "content/tool-micro.ts",
+      "before": "Choose a modelled horizon and check starting difficulty.",
+      "after": "Choose the production period and check starting difficulty.",
+      "reason": "Use direct input guidance; preserve ranges, arithmetic and billing conditions (E28).",
+      "line": 149
+    },
+    {
+      "file": "content/tool-micro.ts",
+      "before": "Expected average fleet hashrate. One EH/s equals 1,000,000 TH/s.",
+      "after": "Your fleet’s expected average hashrate. One EH/s equals 1,000,000 TH/s.",
+      "reason": "Use direct input guidance; preserve ranges, arithmetic and billing conditions (E28).",
+      "line": 156
+    },
+    {
+      "file": "content/tool-micro.ts",
+      "before": "A fixed-duration comparison, using approximately two weeks per modelled epoch.",
+      "after": "The comparison period, using approximately two weeks per modelled epoch.",
+      "reason": "Use direct input guidance; preserve ranges, arithmetic and billing conditions (E28).",
+      "line": 162
+    },
+    {
+      "file": "content/tool-micro.ts",
+      "before": "Expected BTC production below the unchanged baseline in your harder scenario. No operating costs, contract payout or trade recommendation are included.",
+      "after": "How much less BTC the harder case produces than the unchanged-difficulty case. Excludes operating costs, contract payout and trade recommendations.",
+      "reason": "Use direct input guidance; preserve ranges, arithmetic and billing conditions (E28).",
+      "line": 198
+    },
+    {
+      "file": "content/tool-micro.ts",
+      "before": "The fixed subsidy, constant hashrate and target block timing omit subsidy changes, pool fees and operating costs.",
+      "after": "The model fixes subsidy, hashrate and target block timing. It excludes subsidy changes, pool fees and operating costs.",
+      "reason": "Use direct input guidance; preserve ranges, arithmetic and billing conditions (E28).",
+      "line": 254
+    },
+    {
+      "file": "content/tool-micro.ts",
+      "before": "Enter consistent fleet, efficiency, power and outlay assumptions.",
+      "after": "Enter fleet, efficiency, power and outlay figures for the same scenario.",
+      "reason": "Use direct input guidance; preserve ranges, arithmetic and billing conditions (E28).",
+      "line": 263
+    },
+    {
+      "file": "content/tool-micro.ts",
+      "before": "Compare all rows, final balances and omitted costs.",
+      "after": "Compare final balances across scenarios and check the costs left out.",
+      "reason": "Use direct input guidance; preserve ranges, arithmetic and billing conditions (E28).",
+      "line": 265
+    },
+    {
+      "file": "content/tool-micro.ts",
+      "before": "Invoices or a stated scenario amount. This page does not validate equipment prices.",
+      "after": "Use your invoices or a clearly stated example amount. This page does not check equipment prices.",
+      "reason": "Use direct input guidance; preserve ranges, arithmetic and billing conditions (E28).",
+      "line": 289
+    },
+    {
+      "file": "content/tool-micro.ts",
+      "before": "A compounded monthly assumption, first applied before month-one production.",
+      "after": "A monthly growth rate that compounds. The first increase applies before month-one production.",
+      "reason": "Use direct input guidance; preserve ranges, arithmetic and billing conditions (E28).",
+      "line": 300
+    },
+    {
+      "file": "content/tool-micro.ts",
+      "before": "Modelled revenue minus power cost and initial outlay. A negative balance cannot establish whether payback ever happens later.",
+      "after": "Revenue minus power cost and initial outlay in the model. A negative balance does not tell you whether payback could happen later.",
+      "reason": "Use direct input guidance; preserve ranges, arithmetic and billing conditions (E28).",
+      "line": 316
+    },
+    {
+      "file": "components/v3/DataDetail.tsx",
+      "before": "Figures, dates and outcomes are authored examples, not current network data or measured performance.",
+      "after": "The figures, dates and outcomes were created for these examples. They are not current network data or measured performance.",
+      "reason": "Say what synthetic data is without internal authorship terminology (habit 10).",
+      "line": 23
+    },
+    {
+      "file": "components/v3/ResearchEvidencePreview.tsx",
+      "before": "Authored values, not captured forecasts.",
+      "after": "Made-up values, not recorded forecasts.",
+      "reason": "Use ordinary words for made-up research inputs (habit 10).",
+      "line": 23
+    },
+    {
+      "file": "components/v3/V3ReportPage.tsx",
+      "before": "Inspect the findings, provenance and full dataset without signing up.",
+      "after": "Read the findings, check the sources and download the full dataset without signing up.",
+      "reason": "Make the reading action clear (habits 5, 10).",
+      "line": 35
+    },
+    {
+      "file": "components/v3/V3ReportPage.tsx",
+      "before": "Inspect exact source capture",
+      "after": "Check the original source records",
+      "reason": "Make the reading action clear (habits 5, 10).",
+      "line": 43
+    },
+    {
+      "file": "components/v3/NewsletterDelivery.tsx",
+      "before": "Inspect provenance &amp; publication status",
+      "after": "Check sources &amp; publication status",
+      "reason": "Replace research jargon and keep the demo/privacy boundaries (habit 10).",
+      "line": 42
+    },
+    {
+      "file": "components/v3/NewsletterDelivery.tsx",
+      "before": "This preview includes the calculator’s seven numerical inputs and three production cases. Discussion notes are excluded.",
+      "after": "This preview includes the calculator’s seven numerical inputs and three production cases. It leaves out your discussion notes.",
+      "reason": "Replace research jargon and keep the demo/privacy boundaries (habit 10).",
+      "line": 42
+    },
+    {
+      "file": "components/v3/NewsletterDelivery.tsx",
+      "before": "The address you entered was cleared. In a live service this would be a one-time requested email, separate from newsletter consent.",
+      "after": "The address you entered has been cleared. A live service would send this as a one-time requested email, without signing you up for the newsletter.",
+      "reason": "Replace research jargon and keep the demo/privacy boundaries (habit 10).",
+      "line": 43
+    },
+    {
+      "file": "components/v3/ScenarioBrief.tsx",
+      "before": "Your inputs and results, ready for a team review.",
+      "after": "Share your assumptions and results with your team.",
+      "reason": "Use direct sharing instructions while retaining privacy and download conditions (habits 5, 10).",
+      "line": 81
+    },
+    {
+      "file": "components/v3/ScenarioBrief.tsx",
+      "before": "Condensed inputs, results and approval questions",
+      "after": "A short version with inputs, results and approval questions",
+      "reason": "Use direct sharing instructions while retaining privacy and download conditions (habits 5, 10).",
+      "line": 106
+    },
+    {
+      "file": "components/v3/ScenarioBrief.tsx",
+      "before": "Context stays in this browser session and clears when you reload or leave this page. It is included in downloads and email drafts you choose to create, but never in the copied scenario link.",
+      "after": "Your notes stay in this browser session and clear when you reload or leave this page. Downloads and email drafts you create include them. The copied scenario link never includes them.",
+      "reason": "Use direct sharing instructions while retaining privacy and download conditions (habits 5, 10).",
+      "line": 131
+    },
+    {
+      "file": "lib/scenario-brief.ts",
+      "before": "Fixed duration: 2,016 target block intervals (about two weeks) per epoch. Each scenario holds difficulty constant for that duration.",
+      "after": "Each modelled epoch lasts 2,016 target block intervals, about two weeks. Difficulty stays fixed within each scenario for that period.",
+      "reason": "Clarify model assumptions in the shareable brief without changing them (habit 3, E28).",
+      "line": 5
+    },
+    {
+      "file": "lib/scenario-brief.ts",
+      "before": "Production differences are not a hedge size, contract payout, trading profit or recommendation. Contract terms and settlement need a separate assessment.",
+      "after": "A production difference is not a hedge size, contract payout, trading profit or recommendation. Assess the contract terms and settlement separately.",
+      "reason": "Clarify model assumptions in the shareable brief without changing them (habit 3, E28).",
+      "line": 12
+    },
+    {
+      "file": "lib/v3-publication.ts",
+      "before": "Inspect data provenance, examples and limitations.",
+      "after": "Check where the data comes from, with examples and limits.",
+      "reason": "Replace vague navigation descriptions with specific reading tasks (habit 5).",
+      "line": 20
+    },
+    {
+      "file": "lib/v3-publication.ts",
+      "before": "Follow a practical, reproducible walkthrough.",
+      "after": "Follow a worked example and check the calculation.",
+      "reason": "Replace vague navigation descriptions with specific reading tasks (habit 5).",
+      "line": 27
+    },
+    {
+      "file": "lib/v3-publication.ts",
+      "before": "Find the complete reference library.",
+      "after": "Find the guides, calculators and definitions.",
+      "reason": "Replace vague navigation descriptions with specific reading tasks (habit 5).",
+      "line": 32
+    },
+    {
+      "file": "components/v3/V3Privacy.tsx",
+      "before": "Forms demonstrate a journey. They do not create subscriptions or send email.",
+      "after": "You can try the forms, but they do not create subscriptions or send email.",
+      "reason": "Explain the prototype privacy behaviour directly; preserve every collection and sharing limit (habit 10).",
+      "line": 6
+    },
+    {
+      "file": "components/v3/V3Privacy.tsx",
+      "before": "A mail link opens your email application; sending from that application is your action.",
+      "after": "An email link opens your email application. You choose whether to send the message.",
+      "reason": "Explain the prototype privacy behaviour directly; preserve every collection and sharing limit (habit 10).",
+      "line": 10
+    },
+    {
+      "file": "components/v3/V3Privacy.tsx",
+      "before": "Those decisions must be reflected in both the implementation and the published notice before collecting personal data.",
+      "after": "The service and its published notice must reflect those decisions before any personal data is collected.",
+      "reason": "Explain the prototype privacy behaviour directly; preserve every collection and sharing limit (habit 10).",
+      "line": 11
+    },
+    {
+      "file": "components/v3/pages/TermsPage.tsx",
+      "before": "This page exists so the site has no broken links and the layout can be reviewed. The\n            operative text must be drafted by counsel before launch.",
+      "after": "This placeholder lets the page layout and links be reviewed. Counsel must draft the\n            final terms before launch.",
+      "reason": "Make the placeholder status clear without changing operative legal wording (habit 10).",
+      "line": 30
+    },
+    {
+      "file": "components/v3/V3ToolsIndex.tsx",
+      "before": "The fleet begins below zero by its upfront cost.",
+      "after": "The starting cash balance is minus the upfront cost.",
+      "reason": "Use familiar words for calculations while keeping all model limits (E28).",
+      "line": 125
+    },
+    {
+      "file": "components/v3/V3ToolsIndex.tsx",
+      "before": "Each calculator starts with illustrative inputs, not live data. Replace them with your own numbers; the page URL keeps the scenario so you can return to it or share it.",
+      "after": "Each calculator starts with example inputs, not live data. Enter your own numbers. The page URL saves the scenario so you can return to it or share it.",
+      "reason": "Use familiar words for calculations while keeping all model limits (E28).",
+      "line": 137
+    },
+    {
+      "file": "components/v3/V3Difficulty.tsx",
+      "before": "Any authored series below is a separate synthetic illustration.",
+      "after": "The series below uses made-up values as a separate teaching example.",
+      "reason": "Keep the live/example distinction in plain language (E30).",
+      "line": 11
+    },
+    {
+      "file": "components/v3/V3Hashrate.tsx",
+      "before": "The series below is a separate synthetic illustration.",
+      "after": "The series below uses made-up values as a separate teaching example.",
+      "reason": "Keep the live/example distinction in plain language (E30).",
+      "line": 11
+    },
+    {
+      "file": "app/(public)/newsletter/page.tsx",
+      "before": "Its source timestamps, calculation rules and dataset are public so you can inspect the observations yourself.",
+      "after": "You can check the observations using the published source timestamps, calculation rules and dataset.",
+      "reason": "Explain the evidence rules in ordinary reading language (habits 3, 10).",
+      "line": 15
+    },
+    {
+      "file": "app/(public)/newsletter/page.tsx",
+      "before": "Future live emails would include preference and unsubscribe controls. This sample has no active subscription or unsubscribe link. Research commentary is separate from a trading decision.",
+      "after": "A live email service would let you manage preferences and unsubscribe. This sample has no active subscription or unsubscribe link. Research commentary is separate from a trading decision.",
+      "reason": "Explain the evidence rules in ordinary reading language (habits 3, 10).",
+      "line": 15
+    }
+  ]
+}

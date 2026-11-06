@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
 import { site } from '@/lib/site'
 
-export const alt = `${site.name} — ${site.tagline}`
+export const alt = `${site.name}. ${site.tagline} through markets on mining difficulty.`
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -33,13 +33,13 @@ export default async function OgImage() {
 
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div style={{ color: '#E8ECF4', fontSize: 68, fontWeight: 800, lineHeight: 1.05, letterSpacing: -2 }}>
-            Every difficulty forecast
+            Trade and hedge
           </div>
           <div style={{ color: '#3475FE', fontSize: 68, fontWeight: 800, lineHeight: 1.05, letterSpacing: -2 }}>
-            is a bare number.
+            Bitcoin hashrate exposure.
           </div>
           <div style={{ color: '#838EA7', fontSize: 30, marginTop: 24, maxWidth: 900 }}>
-            We publish the error bar.
+            Through markets on Bitcoin mining difficulty.
           </div>
         </div>
 
