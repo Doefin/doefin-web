@@ -13,7 +13,7 @@
  */
 import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
-import { planVoiceDrafts } from './lib/voice-drafts.mjs'
+import { isListItemCutPath, planVoiceDrafts } from './lib/voice-drafts.mjs'
 import { sanityApiVersion, sanityDataset, sanityProjectId } from '../content/sanity/config.ts'
 
 const argv = process.argv.slice(2)
@@ -51,7 +51,7 @@ for (const row of rows) {
   assert(verdicts.has(row.verdict), `${row._id} ${row.path}: verdict ${row.verdict}`)
   if (row.verdict === 'Keep') assert.deepEqual(row.after, row.before, `${row._id} ${row.path}: Keep must not change the text`)
   if (row.verdict === 'Change') assert(typeof row.after === 'string' && row.after.trim() && row.after !== row.before, `${row._id} ${row.path}: Change needs new text`)
-  if (row.verdict === 'Cut') assert(/\]$|\]\.(definition|q|a)$/.test(row.path) && row.after === '', `${row._id} ${row.path}: only list items can be cut`)
+  if (row.verdict === 'Cut') assert(isListItemCutPath(row.path) && row.after === '', `${row._id} ${row.path}: only list items can be cut`)
 }
 const ids = [...new Set(rows.map(row => row._id))]
 let published

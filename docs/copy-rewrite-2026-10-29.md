@@ -31,6 +31,7 @@ The live-text comparison excludes `Keep` rows. It only checks that their prepare
 
 **What `write:voice-drafts` does:**
 - It creates one draft per changed document in one atomic request and never publishes anything. If an action is rejected, the transaction writes none of its drafts.
+- Draft creation checks that the draft is still absent and that the published revision has not changed since planning. Sanity copies that revision on the server before applying the edits in the same transaction. A concurrent editor draft or changed published revision rejects the entire batch; the writer does not retry a stale plan.
 - An editor reviews each draft in the Studio. To accept it, publish it; to keep the live text, discard it.
 - It skips any document whose live text has changed since the rewrite, or that already has a draft, and says which ones.
 - Writing requires `--only=<id>,<id>` with the approved document list.

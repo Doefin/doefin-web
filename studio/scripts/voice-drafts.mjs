@@ -13,20 +13,14 @@ if (args.includes('--apply') && (!only?.length || only.some(id => !id.trim()))) 
 const client = getCliClient({ apiVersion: '2025-02-19' })
 const c = client.config()
 if (!c.token || c.projectId !== 'yzvr33lo' || c.dataset !== 'production') throw new Error('Authenticated CLI access to yzvr33lo/production is required')
-const { planVoiceDrafts } = await import('../../scripts/lib/voice-drafts.mjs')
+const { planVoiceDrafts, writeVoiceDrafts } = await import('../../scripts/lib/voice-drafts.mjs')
 const rows = JSON.parse(await readFile(file, 'utf8')).filter(row => !only || only.includes(row._id))
 const ids = [...new Set(rows.map(row => row._id))]
 const raw = client.withConfig({ perspective: 'raw', useCdn: false })
 const published = await client.withConfig({ perspective: 'published', useCdn: false }).fetch('*[_id in $ids]', { ids }, { cache: 'no-store' })
 const draftIds = new Set(await raw.fetch('*[_id in $ids]._id', { ids: ids.map(id => `drafts.${id}`) }, { cache: 'no-store' }))
 const plan = planVoiceDrafts(rows, published, { draftIds })
-const written = []
-if (args.includes('--apply')) {
-  if (plan.drafts.length) {
-    await client.action(plan.drafts.map(draft => ({ actionType: 'sanity.action.document.edit', draftId: `drafts.${draft._id}`, publishedId: draft._id, patch: { set: draft.set } })))
-    written.push(...plan.drafts.map(draft => draft._id))
-  }
-}
+const written = args.includes('--apply') ? await writeVoiceDrafts(client, plan.drafts) : []
 console.log(JSON.stringify({
   project: 'yzvr33lo', dataset: 'production', file,
   drafts: plan.drafts.map(({ _id, _type, rows, set }) => ({ _id, _type, rows, fields: Object.keys(set) })),

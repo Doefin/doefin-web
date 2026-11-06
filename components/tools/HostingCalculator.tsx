@@ -172,12 +172,12 @@ export function HostingCalculator({ enhanced = false, nextStep }: {
             {out.upliftPct < 10 ? (
               <>
                 You lose about {out.lostHoursWeek.toFixed(0)} hours a week, so ${num(v.rate, 3)} becomes{' '}
-                <strong>${num(out.afterPool, 3)}</strong>. That is close to the quoted rate.
+                <strong>${num(out.afterPool, 3)}</strong> after management fees, power-factor charges and the pool fee. That is close to the quoted rate.
               </>
             ) : (
               <>
                 You pay for all 168 hours a week and your machines run in about{' '}
-                {(168 - out.lostHoursWeek).toFixed(0)} of them. With the pool fee, that turns ${num(v.rate, 3)} into{' '}
+                {(168 - out.lostHoursWeek).toFixed(0)} of them. After management fees, power-factor charges and the pool fee, ${num(v.rate, 3)} becomes{' '}
                 <strong>${num(out.afterPool, 3)}</strong>, {out.upliftPct.toFixed(0)}% above the quoted rate.
               </>
             )}

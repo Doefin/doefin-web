@@ -4,6 +4,8 @@
 
 export const WRITE_VERDICTS = new Set(['Change', 'Cut', 'Matteo'])
 const CUT = Symbol('cut')
+/** Only whole list items or the approved definition/FAQ fields may remove an item. */
+export const isListItemCutPath = path => /\]$|\]\.(definition|q|a)$/.test(path)
 
 export function parsePath(path) {
   const segments = []
@@ -55,7 +57,7 @@ const same = (a, b) => JSON.stringify(a) === JSON.stringify(b)
 /**
  * Plans one draft per document. A document is skipped, with a reason, when any of its
  * rows no longer matches the published text, or when an editor already has a draft.
- * Cutting a list item removes it; cutting a field of a keyed object removes the object.
+ * Cutting a list item removes it. Only definition/q/a fields may remove their keyed owner.
  */
 export function planVoiceDrafts(rows, published, { draftIds = new Set() } = {}) {
   const byId = new Map()
@@ -76,6 +78,11 @@ export function planVoiceDrafts(rows, published, { draftIds = new Set() } = {}) 
     for (const row of docRows) {
       const segments = parsePath(row.path)
       const cut = row.verdict === 'Cut' || (row.verdict === 'Matteo' && row.after === '')
+      if (cut && !isListItemCutPath(row.path)) {
+        conflicts.push(`${id}: cannot cut ${row.path}; only list items can be cut`)
+        blocked = true
+        break
+      }
       if (!cut) {
         if (assign(next, segments, row.after)) continue
         conflicts.push(`${id}: cannot set ${row.path}`)
@@ -105,7 +112,41 @@ export function planVoiceDrafts(rows, published, { draftIds = new Set() } = {}) 
     for (const field of new Set(docRows.map(row => parsePath(row.path)[0].field))) {
       if (!same(pruned[field], base[field])) set[field] = pruned[field]
     }
-    if (Object.keys(set).length) drafts.push({ _id: id, _type: base._type, set, rows: docRows.length })
+    if (Object.keys(set).length) drafts.push({ _id: id, _type: base._type, baseRevision: base._rev, set, rows: docRows.length })
   }
   return { drafts, conflicts }
+}
+
+/**
+ * Creates absent drafts from the server's revision-checked published documents, then
+ * edits them in the same transaction. An existing draft or stale base rejects the batch.
+ * See https://www.sanity.io/docs/content-lake/dispatch-actions and /docs/http-reference/actions.
+ */
+export function voiceDraftActions(drafts) {
+  return drafts.flatMap(draft => {
+    if (!draft.baseRevision) throw new Error(`${draft._id}: published revision is required before writing`)
+    return [
+      {
+        actionType: 'sanity.action.document.version.create',
+        publishedId: draft._id,
+        baseId: draft._id,
+        versionId: `drafts.${draft._id}`,
+        ifBaseRevisionId: draft.baseRevision,
+      },
+      {
+        actionType: 'sanity.action.document.edit',
+        publishedId: draft._id,
+        draftId: `drafts.${draft._id}`,
+        patch: { set: draft.set },
+      },
+    ]
+  })
+}
+
+/** Submits one atomic batch and reports IDs only after a successful response. */
+export async function writeVoiceDrafts(client, drafts) {
+  const actions = voiceDraftActions(drafts)
+  if (!actions.length) return []
+  await client.action(actions)
+  return drafts.map(draft => draft._id)
 }

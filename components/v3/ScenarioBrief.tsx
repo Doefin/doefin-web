@@ -41,6 +41,13 @@ export function ScenarioBrief({ inputs }: { inputs: ExposureInputs }) {
 
   useEffect(() => { setOrigin(window.location.origin) }, [])
   useEffect(() => { setPreparedAt(new Date().toISOString()) }, [brief.briefKey])
+  useEffect(() => {
+    const clearRestoredNotes = (event: PageTransitionEvent) => {
+      if (event.persisted) setContext({ preparedFor: '', decision: '', questions: '' })
+    }
+    window.addEventListener('pageshow', clearRestoredNotes)
+    return () => window.removeEventListener('pageshow', clearRestoredNotes)
+  }, [])
 
   async function copyScenario() {
     const url = scenarioUrl(inputs, window.location.origin)

@@ -21,7 +21,7 @@ export const navigationGroups: readonly NavigationGroup[] = [
     { label: 'Research', href: '/research', description: 'Read findings, methods and reproducible calculations.' },
     { label: 'Forecast evaluation', href: '/data/scoreboard', description: 'Compare errors and check the evidence status.' },
     { label: 'Methodology', href: '/methodology/difficulty-index', description: 'Understand how the difficulty estimate is constructed.' },
-    { label: 'Newsletter', href: '/newsletter', description: 'Get market updates, trading activity and network hashrate insights.' },
+    { label: 'Newsletter demo', href: '/newsletter', description: 'Preview newsletter preferences. No subscription is saved.' },
   ] },
   { label: 'Learn', items: [
     { label: 'Start learning', href: '/learn', description: 'Follow a worked example and check the calculation.' },
