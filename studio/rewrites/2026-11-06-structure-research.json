@@ -1,0 +1,241 @@
+[
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-0\"].heading",
+    "before": "Which inputs does a forecast use?",
+    "after": "How block timing informs a forecast",
+    "verdict": "Change",
+    "note": "Adds the missing mechanism before evaluation: observed pace informs projected duration, then projected difficulty. Uses the published mining-difficulty and difficulty-adjustment definitions, not a claimed Doefin algorithm. Keeps input capture, irregular blocks, extrapolation assumption and changing calendar date (habits 3, 7)."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-0\"].paragraphs",
+    "before": [
+      "A difficulty forecast can use current difficulty, the block where the next adjustment occurs and the time elapsed between observed Bitcoin blocks. The method needs to identify those blocks and when the inputs were recorded.",
+      "Blocks do not arrive at regular intervals. Extending the pace so far into the rest of the adjustment period requires an assumption about future block timing. It does not measure a future network value. The estimated calendar date can change too."
+    ],
+    "after": [
+      "Bitcoin adjusts difficulty every 2,016 blocks to target about ten minutes per block. Within its protocol limits, the adjustment scales current difficulty by the target duration divided by the measured duration. Faster blocks point towards a higher next difficulty; slower blocks point towards a lower one.",
+      "A simple forecast estimates the full period’s duration by extending the block pace observed so far. It uses that estimate in the adjustment rule to project difficulty. This needs current difficulty, the target block and the observed blocks’ heights and timestamps.",
+      "Blocks arrive irregularly, so the pace can change as more arrive. Extending the observed pace assumes it will continue through the remaining blocks. The projected difficulty and calendar date can therefore change; neither is a measured future value."
+    ],
+    "verdict": "Change",
+    "note": "Adds the missing mechanism before evaluation: observed pace informs projected duration, then projected difficulty. Uses the published mining-difficulty and difficulty-adjustment definitions, not a claimed Doefin algorithm. Keeps input capture, irregular blocks, extrapolation assumption and changing calendar date (habits 3, 7)."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-1\"].heading",
+    "before": "How can someone repeat the calculation?",
+    "after": "What makes the calculation reproducible?",
+    "verdict": "Change",
+    "note": "Makes repeatability the distinct job of this section. Retains every prior input/method requirement and distinguishes a percentage forecast, observed level and market-implied probability. Interval conventions are supported by the published difficulty-adjustment FAQ (habit 3)."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-1\"].paragraphs",
+    "before": [
+      "To repeat a forecast calculation, a reader needs the input block heights and timestamps, target adjustment height, formula, protocol constraints, rounding rules and method version.",
+      "A projected percentage change, an observed difficulty level and a probability implied by a market answer different questions. Report them separately."
+    ],
+    "after": [
+      "A published method must identify the input block heights and timestamps, capture time, target adjustment height and formula. It must also state protocol constraints, the block intervals counted, rounding rules and method version. These details let another reader repeat the calculation.",
+      "A projected percentage change, an observed difficulty level and a probability implied by a market answer different questions. Report them separately."
+    ],
+    "verdict": "Change",
+    "note": "Makes repeatability the distinct job of this section. Retains every prior input/method requirement and distinguishes a percentage forecast, observed level and market-implied probability. Interval conventions are supported by the published difficulty-adjustment FAQ (habit 3)."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-2\"].heading",
+    "before": "What supports the forecast range?",
+    "after": "What supports a forecast range?",
+    "verdict": "Change",
+    "note": "Keeps interval calculation, fitting/test separation, original forecast times, width and inclusion. Keeps all synthetic and unvalidated-confidence qualifications together rather than repeating them in the evidence section (habits 3, 6)."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-2\"].paragraphs",
+    "before": [
+      "Explain how the range was calculated, then test it against outcomes. Give the period used to fit the method, when each forecast was made and a separate test period that was not used to fit it. Report how wide the ranges were and how often they contained the outcome.",
+      "The ranges in this website’s examples use made-up values. They have not been fitted to data or tested against a stated confidence level. They do not establish how often outcomes will fall within a range or the probability that difficulty will change direction."
+    ],
+    "after": [
+      "A range needs its own evidence. Explain its calculation and the period used to fit the method. Test it on a separate period that was not used for fitting, retaining each forecast’s original publication time. Report both range width and the share of outcomes inside the ranges.",
+      "The ranges in this website’s examples use made-up values. They have not been fitted to data or tested against a stated confidence level. They show neither how often future outcomes will fall inside a range nor the probability that difficulty will change direction."
+    ],
+    "verdict": "Change",
+    "note": "Keeps interval calculation, fitting/test separation, original forecast times, width and inclusion. Keeps all synthetic and unvalidated-confidence qualifications together rather than repeating them in the evidence section (habits 3, 6)."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-3\"].paragraphs",
+    "before": [
+      "This page explains how to assess a forecast method. It does not document a verified live forecasting service, provide measured accuracy results or promise an archive that cannot be changed.",
+      "The historical adjustment report and public API provide captured network observations, separately from forecasts. The synthetic forecast report shows the error calculation. Measuring forecast accuracy still needs original predictions with timestamps, comparable forecast lead times, outcomes and corrections."
+    ],
+    "after": [
+      "This page explains how to assess a forecast method. It does not specify a verified Doefin forecasting algorithm or provide measured accuracy results. The historical report and API contain captured network observations; the synthetic report demonstrates error arithmetic.",
+      "Measured accuracy needs original timestamped predictions, comparable lead times, outcomes and corrections. The forecast archive has no published predictions. Its records do not establish independent publication times or prove that hosted files cannot change."
+    ],
+    "verdict": "Change",
+    "note": "Names the page’s evaluation scope honestly and puts current evidence status in one section. Preserves observations versus forecasts, no verified service/algorithm, no measured accuracy, corrections, comparable timing and no immutable archive promise (habits 3, 6, 7)."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "summary",
+    "before": "How to compare difficulty forecasts fairly, with a worked calculation using made-up values. The example does not measure any forecaster’s performance.",
+    "after": "Compare forecasts for the same adjustment and lead time, then assess their point errors and ranges. The linked calculation uses made-up values.",
+    "verdict": "Change",
+    "note": "Makes the summary a route through the guide. The synthetic qualification remains local; the detailed list of unavailable findings belongs only in the last section (habit 6)."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-0\"].paragraphs",
+    "before": [
+      "A fair comparison asks each forecast the same question: what will the difficulty change be at the same target block? Use the same definition of difficulty change and compare forecasts issued at the same time. A later forecast has information that an earlier one did not.",
+      "Keep each forecast as originally issued, together with its input block height, source, model version and definition of the outcome. Include failed and missing forecasts in the record. Selecting only successful predictions would change the comparison."
+    ],
+    "after": [
+      "Compare predictions of the same difficulty change at the same target block, issued at comparable times. A later forecast can use information that an earlier one did not have.",
+      "Keep each forecast as originally issued, with its stated range, input block height, source, model version and outcome definition. Record its publication time, including an independently verifiable capture when timing matters. Group forecasts by lead time. Record failed and missing forecasts, as well as the exclusion rules; selecting only successful predictions would change the comparison."
+    ],
+    "verdict": "Change",
+    "note": "Combines the complete comparison-record requirements here, including range, input height, target/time, source, version, outcome, independent capture, missing/failed forecasts and exclusions. These no longer need a second inventory in the observed report (habits 3, 6, 7)."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-1\"].heading",
+    "before": "Error and forecast ranges",
+    "after": "Point errors and ranges answer different questions",
+    "verdict": "Change",
+    "note": "Explains what each result teaches instead of repeating a parallel checklist. Preserves sample-only meaning, width/inclusion trade-off and independent-observation requirements for testing confidence (habits 3, 6)."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-1\"].paragraphs",
+    "before": [
+      "Absolute error is the size of the gap between a forecast and its outcome. Mean absolute error averages those gaps across the forecasts being tested. It describes that sample, not how the model will perform in another period.",
+      "A forecast range needs a separate test. How often did it contain the outcome, and how wide was it? A wide range can contain many outcomes while telling you little. Testing whether ranges match their stated confidence level needs enough independent observations over a clearly defined period."
+    ],
+    "after": [
+      "Absolute error is the size of the gap between a forecast and its outcome. Mean absolute error averages those gaps across the forecasts tested. A smaller mean means the point estimates were closer on average in that sample; it does not establish performance in another period.",
+      "Ranges answer a different question: how often did they contain the outcome? Read that share alongside their width, since a wide range can contain many outcomes while telling you little. Testing a stated confidence level needs enough independent observations over a defined period."
+    ],
+    "verdict": "Change",
+    "note": "Explains what each result teaches instead of repeating a parallel checklist. Preserves sample-only meaning, width/inclusion trade-off and independent-observation requirements for testing confidence (habits 3, 6)."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-2\"].paragraphs",
+    "before": [
+      "The linked example shows each step of the error calculation. Its forecasts and outcomes were made up for the exercise. They are not captured predictions, network observations or results for Doefin or another estimator.",
+      "This page has no verified comparison of public forecasters. It cannot establish a provider ranking, an accuracy advantage, a volatility estimate or which forecasters publish ranges."
+    ],
+    "after": [
+      "The linked example shows each step of the error calculation. Its forecasts and outcomes were made up for the exercise. They are neither captured predictions nor network observations, and they do not represent Doefin or another estimator.",
+      "No verified comparison of public forecasters is available here. The example establishes no provider ranking, accuracy advantage, volatility estimate or record of which forecasters publish ranges."
+    ],
+    "verdict": "Change",
+    "note": "Gives the final section one task: what this evidence does and does not establish. Preserves every unavailable-finding qualification (habits 3, 6)."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "summary",
+    "before": "A fixed snapshot of 25 difficulty adjustments, with the source data and calculations. These observations do not measure forecast performance.",
+    "after": "25 consecutive difficulty changes from a fixed mempool.space snapshot, with the original source response, calculation method and downloads.",
+    "verdict": "Change",
+    "note": "Leads with the concrete study and its supporting assets. Forecast-performance limits remain together in the final section rather than recurring in the summary and findings (habits 3, 6)."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-0\"].paragraphs",
+    "before": [
+      "The dataset records 25 consecutive difficulty changes between 2025-11-12 and 2026-10-16: 11 increases and 14 decreases. The mean absolute change was 3.75%. The minimum change was -11.16% and the maximum was 14.73%.",
+      "These figures describe network difficulty in this historical period. They do not measure forecast error, the reliability of forecast ranges, mining profit or a trading return. This small descriptive study does not show a forecasting advantage."
+    ],
+    "after": [
+      "The dataset records 25 consecutive difficulty changes between 2025-11-12 and 2026-10-16: 11 increases and 14 decreases. The mean absolute change was 3.75%. The minimum change was -11.16% and the maximum was 14.73%."
+    ],
+    "verdict": "Change",
+    "note": "Keeps every finding, figure, sign, unit and date exactly. Moves the distinct limitations from the second paragraph to the final scope section so the finding leads (habits 3, 6)."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-1\"].paragraphs",
+    "before": [
+      "The source is the mempool.space one-year difficulty-adjustment API, captured on 22 October 2026. To repeat the calculation, sort its 26 adjustment blocks by height and check that consecutive blocks are 2,016 blocks apart. Exclude the earliest: its preceding difficulty is outside the snapshot. For each remaining adjustment, calculate 100 × (new difficulty / previous difficulty − 1). Do not use the provider’s rounded adjustment ratio.",
+      "The mean absolute change averages the size of the 25 percentage changes, ignoring whether each is positive or negative. Calculations retain the provider’s full difficulty precision; rounding affects only the display. The citation manifest lists SHA-256 digests, which are file checksums, for the original response and CSV/JSON downloads. These let readers detect changes from this version."
+    ],
+    "after": [
+      "The source is the mempool.space one-year difficulty-adjustment API, captured on 22 October 2026. Sort its 26 adjustment blocks by height and check that consecutive blocks are 2,016 blocks apart. Exclude the earliest: its preceding difficulty is outside the snapshot. For each remaining adjustment, calculate 100 × (new difficulty / previous difficulty − 1). Do not use the provider’s rounded adjustment ratio.",
+      "The mean absolute change averages the size of the 25 percentage changes, ignoring whether each is positive or negative. Each change has equal weight. Calculations retain the provider’s full difficulty precision; rounding affects only the display."
+    ],
+    "verdict": "Change",
+    "note": "Keeps the source/date, 26-to-25 inclusion rule, spacing check, exact formula, rounded-ratio exclusion and full-precision rule. Makes equal weighting explicit from the unchanged source method. Moves checksum/version explanation to the provenance section (habits 3, 6, 7)."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-2\"].heading",
+    "before": "Where the data comes from",
+    "after": "Sources, version and citation",
+    "verdict": "Change",
+    "note": "Consolidates the source capture, same-provider check, defined rolling window, open access, stable ID/version, SHA-256 scope, DOI status and hosting/time limits in one place (habits 3, 6, 7)."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-2\"].paragraphs",
+    "before": [
+      "The downloads include the source response exactly as received, plus matching block details for the first and last retained observations. These checks use the same provider. They show consistency within that source, not independent verification against a Bitcoin node. The API’s rolling window determines which adjustments are included; the study does not select profitable periods.",
+      "All findings and downloads are available without email. Version 1.0.0 has a stable dataset identifier and a citation manifest. No DOI, a persistent research identifier, has been registered or deposited. An update requires a new version. Local file checksums do not prove an external publication time or guarantee that hosted files cannot change."
+    ],
+    "after": [
+      "The downloads include the source response exactly as received, plus matching block details for the first and last retained observations. These checks use the same provider. They show consistency within that source, not independent verification against a Bitcoin node. The API’s rolling window determines which adjustments are included; the study does not select profitable periods.",
+      "All findings and downloads are available without email. Version 1.0.0 has a stable dataset identifier and a citation manifest. The manifest lists SHA-256 digests, or file checksums, for the original response and CSV/JSON downloads. They detect changes from this version, but prove neither an external publication time nor that hosted files cannot change.",
+      "No DOI, a persistent research identifier, has been registered or deposited. An update requires a new version."
+    ],
+    "verdict": "Change",
+    "note": "Consolidates the source capture, same-provider check, defined rolling window, open access, stable ID/version, SHA-256 scope, DOI status and hosting/time limits in one place (habits 3, 6, 7)."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-3\"].heading",
+    "before": "Why these are not forecast results",
+    "after": "What these observations cannot establish",
+    "verdict": "Change",
+    "note": "Combines all limits on what the findings establish, including forecast error/ranges, advantage, profit/returns and retrospective timing proof. The complete provider-record checklist now lives in the linked comparison guide (habits 3, 6, 7)."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-3\"].paragraphs",
+    "before": [
+      "The forecast archive has zero published records. The dated forecasts and accuracy examples elsewhere on this site are labelled synthetic because they use made-up values. A historical difficulty adjustment is not a previously published prediction.",
+      "Scoring a provider requires its original prediction, input height, target, model version, stated range and a timestamped capture. Group forecasts by how far ahead they were made and record providers with missing forecasts. Proving publication before an outcome or market listing requires separate, independently verifiable records. This site cannot create that proof after the event."
+    ],
+    "after": [
+      "The forecast archive has zero published records. Dated forecasts and accuracy examples elsewhere on this site use made-up values. A historical adjustment is not a prediction published before its outcome.",
+      "These findings measure neither forecast error nor the reliability of forecast ranges. They establish no forecasting advantage, mining profit or trading return. The comparison guide explains which original records are needed to score forecasts.",
+      "Proof of publication before an outcome or market listing needs independently verifiable records. This site cannot create that proof after the event."
+    ],
+    "verdict": "Change",
+    "note": "Combines all limits on what the findings establish, including forecast error/ranges, advantage, profit/returns and retrospective timing proof. The complete provider-record checklist now lives in the linked comparison guide (habits 3, 6, 7)."
+  }
+]

@@ -1,0 +1,120 @@
+[
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "summary",
+    "before": "A difficulty-growth assumption changes expected production and fleet payback. Comparing several paths shows how much the result depends on that assumption.",
+    "after": "Higher difficulty reduces expected BTC production from the same fleet. With other assumptions unchanged, less revenue remains to recover the initial cost.",
+    "verdict": "Change",
+    "note": "States the production-to-payback mechanism early, rather than promising an explanation through a circular comparison (thinking habits 1 and 3, E06)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-0\"].heading",
+    "before": "An assumption is not a forecast",
+    "after": "Why higher difficulty reduces production",
+    "verdict": "Change",
+    "note": "Explains the mechanism before the comparison. Reuses the existing homepage production-only illustration, with difficulty held 10% higher for the entire same month and fixed hashrate, uptime and rewards. Distinguishes the level comparison from monthly compounding; no financial or position example (E06, E28)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-0\"].paragraphs",
+    "before": [
+      "A fixed difficulty-growth rate describes a scenario, with a stated period over which the growth is assumed to occur. It is an assumption, not measured historical data or a dated forecast of what the network will do."
+    ],
+    "after": [
+      "At the same fleet hashrate, higher difficulty means more work is needed to find a block. With uptime and block rewards unchanged, expected BTC production falls over the same period.",
+      "For an illustrative month, suppose the fleet is expected to produce 1 BTC at unchanged difficulty. If difficulty is 10% higher throughout that month, expected production is 1 ÷ 1.10 ≈ 0.909 BTC, about 9.1% less. Hashrate, uptime and block rewards stay the same. This compares two difficulty levels for one month; it is not a monthly growth rate."
+    ],
+    "verdict": "Change",
+    "note": "Explains the mechanism before the comparison. Reuses the existing homepage production-only illustration, with difficulty held 10% higher for the entire same month and fixed hashrate, uptime and rewards. Distinguishes the level comparison from monthly compounding; no financial or position example (E06, E28)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].heading",
+    "before": "How growth changes production and payback",
+    "after": "How growth changes payback",
+    "verdict": "Change",
+    "note": "Defines monthly compounding separately from the one-period illustration, then explains revenue, power cost, cumulative cash and payback using the actual PaybackModel.simulate implementation. Interprets the difference between paths instead of merely ordering a comparison; retains every original fixed input and scenario/forecast boundary (E28)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].paragraphs",
+    "before": [
+      "Changing the difficulty path changes the production and payback estimates for a fleet. To see the effect of that assumption, compare several paths while keeping power cost, uptime, capital cost and Bitcoin price constant. Otherwise, a difference in the result may come from another input."
+    ],
+    "after": [
+      "A fixed growth rate describes a scenario over a stated period. In the fleet payback model, the rate applies each month to the previous month’s difficulty, so growth compounds. It is an assumption, not measured historical data or a dated forecast of what the network will do.",
+      "At an unchanged Bitcoin price, less expected BTC production means less expected mining revenue. The model starts below zero by the amount spent on the fleet. It adds each month’s mining revenue after power costs. Payback is the first month the balance reaches zero or more.",
+      "Keep fleet hashrate, power cost, uptime, capital cost and Bitcoin price the same when comparing difficulty paths. A later payback date under faster growth shows that lower production leaves less cash to recover the same initial cost. The gap between the results shows how much the payback estimate depends on the growth assumption. It does not show which path will occur."
+    ],
+    "verdict": "Change",
+    "note": "Defines monthly compounding separately from the one-period illustration, then explains revenue, power cost, cumulative cash and payback using the actual PaybackModel.simulate implementation. Interprets the difference between paths instead of merely ordering a comparison; retains every original fixed input and scenario/forecast boundary (E28)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].heading",
+    "before": "What a calculator cannot decide",
+    "after": "What the comparison cannot decide",
+    "verdict": "Change",
+    "note": "Keeps the suitability/economics limit, objectives, timing, transaction costs, liquidity, operational constraints and exact no-measured-threshold statement. Adds the existing model’s finite-horizon interpretation rather than implying recovery is assured. No performance result or recommendation (thinking habit 4)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].paragraphs",
+    "before": [
+      "A simplified calculator shows how sensitive a result is to the assumptions. It cannot tell you whether a position suits your objectives or makes economic sense. That also depends on timing, transaction costs, available liquidity and operational constraints. This article provides no measured threshold at which an operation should hedge."
+    ],
+    "after": [
+      "If no month reaches a cash balance of zero or more, the model shows no payback within the chosen period. A negative ending balance can also follow an earlier recovery if later power costs exceed revenue. Read the first payback month and the full cash-balance path together. These are simplified estimates; actual production and costs can differ.",
+      "A sensitivity comparison cannot decide whether a difficulty position suits your objectives or makes economic sense. That also depends on timing, transaction costs, available liquidity and operational constraints. This article provides no measured threshold at which an operation should hedge."
+    ],
+    "verdict": "Change",
+    "note": "Independent review correction: the model records the first zero crossing, and later cash losses can reverse that recovery. Distinguishes no payback from a negative ending balance. Keeps finite-horizon limits and all suitability/economics qualifications."
+  },
+  {
+    "_id": "editorial-blog-reading-a-hashrate-chart-honestly",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].heading",
+    "before": "Why two charts can differ",
+    "after": "Why two chart windows can differ",
+    "verdict": "Change",
+    "note": "Extends the protected E30 explanation with a hypothetical, non-numerical comparison that shows how short and long windows react to the same blocks. Preserves irregular timing, timestamps, difficulty inputs and inability to infer a capacity change from a chart alone. The 144-block/time distinction is already approved in E29. No recent event or measured result is invented."
+  },
+  {
+    "_id": "editorial-blog-reading-a-hashrate-chart-honestly",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].paragraphs",
+    "before": [
+      "Blocks arrive irregularly, so estimates over short and long windows can differ. Comparing two charts also requires matching timestamps and difficulty inputs. A change on a chart alone does not establish that mining capacity has changed."
+    ],
+    "after": [
+      "Blocks arrive irregularly. Suppose two estimates use different windows ending at the same time. A run of faster blocks has more influence on the shorter window. The longer window includes more earlier blocks, so the same run has less influence.",
+      "The short-window estimate can therefore rise while the longer-window estimate changes little. That difference alone does not establish that more mining machines have joined the network. The longer window smooths recent variation, but is less responsive to a recent change.",
+      "Different timestamps or difficulty inputs can also account for a gap between charts. A 144-block window is not always 24 hours, because those blocks can arrive faster or slower. Matching the end time and units helps separate a difference in the calculation from a difference in the period being observed."
+    ],
+    "verdict": "Change",
+    "note": "Extends the protected E30 explanation with a hypothetical, non-numerical comparison that shows how short and long windows react to the same blocks. Preserves irregular timing, timestamps, difficulty inputs and inability to infer a capacity change from a chart alone. The 144-block/time distinction is already approved in E29. No recent event or measured result is invented."
+  },
+  {
+    "_id": "editorial-blog-reading-a-hashrate-chart-honestly",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].paragraphs",
+    "before": [
+      "An error band shows uncertainty under a set of assumptions. Its meaning depends on how it was calculated, so the method and assumptions need to accompany it. This article does not report measured band widths or identify a recent network movement as noise."
+    ],
+    "after": [
+      "The centre line gives one estimated hashrate. An error band shows uncertainty around that estimate under a set of assumptions. A wider band means the chart leaves more uncertainty about the level of hashrate, even if the line itself looks precise.",
+      "The method needs to explain what uncertainty the band includes. For example, a band describing variation from irregular block timing does not establish that the difficulty input or observation time is correct. Its width alone does not show that the estimate is accurate.",
+      "This article does not report measured band widths or identify a recent network movement as noise."
+    ],
+    "verdict": "Change",
+    "note": "Explains what the centre line leaves out and how to read the band, then uses a conditional methodological example to distinguish timing uncertainty from input correctness. Retains the exact local evidence limit. No confidence percentage, uncertainty number, recent network event or measured band is invented. E30 remains exact (thinking habit 3)."
+  }
+]

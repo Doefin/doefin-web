@@ -1,0 +1,101 @@
+{
+  "date": "2026-11-06",
+  "project": "yzvr33lo",
+  "dataset": "production",
+  "method": "Normal authenticated Sanity CLI; guarded atomic version-create/edit batch; fresh raw reread",
+  "status": "all_8_drafts_verified",
+  "documents": 8,
+  "textEdits": 59,
+  "publicationActions": 0,
+  "publishedDocumentsChanged": 0,
+  "protectedDocumentsExcluded": [
+    "about-doefin",
+    "glossary-block-subsidy"
+  ],
+  "shortDefinitionsChanged": 0,
+  "verification": "Every complete saved draft matches the current published document plus only its reviewed changes, excluding CMS system metadata. Every published revision and complete content value still matches the captured baseline.",
+  "records": [
+    {
+      "id": "research-methodology-difficulty-index",
+      "type": "researchMethodology",
+      "status": "draft_verified",
+      "draftId": "drafts.research-methodology-difficulty-index",
+      "draftRevision": "Mac7TZNCor7fzOhjXDipLr",
+      "publishedRevisionUnchanged": "k8hlzjuhoL42eLegpVdC8V",
+      "textEdits": 9,
+      "contentSha256": "d4a3cabca5700eefd7ad44a0cc6c472b32e2777b17cb9386400cf01a14c9675b"
+    },
+    {
+      "id": "research-report-difficulty-forecast-accuracy-2026",
+      "type": "researchReport",
+      "status": "draft_verified",
+      "draftId": "drafts.research-report-difficulty-forecast-accuracy-2026",
+      "draftRevision": "Mac7TZNCor7fzOhjXDipLr",
+      "publishedRevisionUnchanged": "k8hlzjuhoL42eLegpVdC8V",
+      "textEdits": 8,
+      "contentSha256": "8db0031f8893b71f695094ff23768b3632fa2d8a668b0ee943623b9e98171136"
+    },
+    {
+      "id": "research-report-observed-difficulty-adjustments",
+      "type": "researchReport",
+      "status": "draft_verified",
+      "draftId": "drafts.research-report-observed-difficulty-adjustments",
+      "draftRevision": "Mac7TZNCor7fzOhjXDipLr",
+      "publishedRevisionUnchanged": "k8hlzjuhoL42eLegpVdC8V",
+      "textEdits": 8,
+      "contentSha256": "31c96199d6ce13164ced2cc7bafa6051c35606c5d49a4f8e7cec42fafb335f20"
+    },
+    {
+      "id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+      "type": "editorialArticle",
+      "status": "draft_verified",
+      "draftId": "drafts.editorial-blog-what-a-static-growth-assumption-costs-you",
+      "draftRevision": "Mac7TZNCor7fzOhjXDipLr",
+      "publishedRevisionUnchanged": "k8hlzjuhoL42eLegpVdC8V",
+      "textEdits": 7,
+      "contentSha256": "5042c5523c788b76c42963e1a268c08b27b22871c2272e00abc6ede66a03a6c0"
+    },
+    {
+      "id": "editorial-blog-reading-a-hashrate-chart-honestly",
+      "type": "editorialArticle",
+      "status": "draft_verified",
+      "draftId": "drafts.editorial-blog-reading-a-hashrate-chart-honestly",
+      "draftRevision": "Mac7TZNCor7fzOhjXDipLr",
+      "publishedRevisionUnchanged": "k8hlzjuhoL42eLegpVdC8V",
+      "textEdits": 3,
+      "contentSha256": "4986af5d062a2e34ee62c84d17920564b05c8c998ca0bb93079a9f6219a2c78e"
+    },
+    {
+      "id": "tool-guide-difficulty-exposure",
+      "type": "toolGuide",
+      "status": "draft_verified",
+      "draftId": "drafts.tool-guide-difficulty-exposure",
+      "draftRevision": "Mac7TZNCor7fzOhjXDipLr",
+      "publishedRevisionUnchanged": "k8hlzjuhoL42eLegpVdC8V",
+      "textEdits": 10,
+      "contentSha256": "973b7a659c14815cbf78109f60f54ac69ad8c32093d89aced0ab01ffd4b948d1"
+    },
+    {
+      "id": "tool-guide-fleet-payback",
+      "type": "toolGuide",
+      "status": "draft_verified",
+      "draftId": "drafts.tool-guide-fleet-payback",
+      "draftRevision": "Mac7TZNCor7fzOhjXDipLr",
+      "publishedRevisionUnchanged": "k8hlzjuhoL42eLegpVdC8V",
+      "textEdits": 1,
+      "contentSha256": "7466f0fd2f4b043b506a7384f91f3d23f3069005744ec9c05df83b1c69d3d8ab"
+    },
+    {
+      "id": "tool-guide-hosting-effective-rate",
+      "type": "toolGuide",
+      "status": "draft_verified",
+      "draftId": "drafts.tool-guide-hosting-effective-rate",
+      "draftRevision": "Mac7TZNCor7fzOhjXDipLr",
+      "publishedRevisionUnchanged": "k8hlzjuhoL42eLegpVdC8V",
+      "textEdits": 13,
+      "contentSha256": "40559531839416cc81fed784a92cce0e25cb4c6bba8ae223bd79bd9d6620e87c"
+    }
+  ],
+  "protectedPublishedAndDraftSlotsVerifiedUnchanged": 4,
+  "protectedVerification": "Exact raw getDocuments comparison of About and Block subsidy, published and draft IDs, before and after the batch."
+}

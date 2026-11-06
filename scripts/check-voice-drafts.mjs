@@ -46,6 +46,13 @@ const snapshot = argv.find(a => a.startsWith('--snapshot='))?.slice(11)
 
 // 2. The rewrite file against published content.
 const rows = JSON.parse(await readFile(file, 'utf8'))
+// Structural reviews can replace a keyed list of prose objects, not just a
+// paragraph array. Scan every text field without treating CMS keys as copy.
+const prose = value => typeof value === 'string' ? [value]
+  : Array.isArray(value) ? value.flatMap(prose)
+    : value && typeof value === 'object'
+      ? Object.entries(value).filter(([key]) => !key.startsWith('_')).flatMap(([, child]) => prose(child))
+      : []
 const verdicts = new Set(['Keep', 'Change', 'Cut', 'Matteo'])
 for (const row of rows) {
   assert(verdicts.has(row.verdict), `${row._id} ${row.path}: verdict ${row.verdict}`)
@@ -71,7 +78,7 @@ const limits = { shortDef: 160, summary: 160, seoSummary: 160, metadataDescripti
 const problems = []
 for (const row of rows.filter(r => r.verdict === 'Change' || r.verdict === 'Matteo')) {
   const field = row.path.split('.').at(-1).replace(/\[.*$/, '')
-  for (const text of [row.after].flat()) {
+  for (const text of prose(row.after)) {
     if (limits[field] && text.length >= limits[field]) problems.push(`${row._id} ${row.path}: ${text.length} characters, limit ${limits[field]}`)
   }
 }
@@ -80,7 +87,7 @@ const rules = JSON.parse(await readFile('vendor/doefin-brand/tools/rules.json', 
   .map(r => ({ ...r, re: new RegExp(r.match, r.case_sensitive ? 'gu' : 'giu') }))
 const counts = { cut: 0, check: 0, style: 0 }
 for (const row of rows.filter(r => r.verdict === 'Change' || r.verdict === 'Matteo')) {
-  for (const text of [row.after].flat()) {
+  for (const text of prose(row.after)) {
     for (const rule of rules) {
       for (const m of text.matchAll(rule.re)) {
         counts[rule.kind]++

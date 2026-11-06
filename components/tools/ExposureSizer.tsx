@@ -52,7 +52,7 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
       <ToolShell
         preciseInputs={enhanced}
         onReset={() => sampleV(DEFAULTS)}
-        mobileResult={<span><strong>{btc(out.spreadBtc)}</strong> <small>spread · {out.weeks} weeks</small></span>}
+        mobileResult={<span><strong>{btc(out.spreadBtc)}</strong> <small>production difference · {out.weeks} weeks<br />Easier case minus harder case</small></span>}
         inputs={
           <>
             {presets.length ? (
@@ -132,13 +132,13 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
         summary={
           <>
             <h2 className="text-xs font-bold uppercase tracking-[0.12em] text-muted">
-              Your exposure
+              Production difference
             </h2>
             <p ref={measurement.resultRef} className="tabular mt-3 text-4xl font-extrabold tracking-[-0.03em] text-caution">
               {btc(out.spreadBtc)}
             </p>
             <p className="tabular mt-1 text-sm text-muted">
-              {usd(out.spreadUsd)} between the two cases, over {out.weeks} weeks
+              {usd(out.spreadUsd)} between the easier and harder cases, over {out.weeks} weeks
             </p>
             {resultHintFor(SLUG, 'Best case vs worst case') ? (
               <Hint label="What this means">

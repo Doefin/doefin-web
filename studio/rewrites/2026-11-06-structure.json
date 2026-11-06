@@ -1,0 +1,709 @@
+[
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-0\"].heading",
+    "before": "Which inputs does a forecast use?",
+    "after": "How block timing informs a forecast",
+    "verdict": "Change",
+    "note": "Adds the missing mechanism before evaluation: observed pace informs projected duration, then projected difficulty. Uses the published mining-difficulty and difficulty-adjustment definitions, not a claimed Doefin algorithm. Keeps input capture, irregular blocks, extrapolation assumption and changing calendar date (habits 3, 7)."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-0\"].paragraphs",
+    "before": [
+      "A difficulty forecast can use current difficulty, the block where the next adjustment occurs and the time elapsed between observed Bitcoin blocks. The method needs to identify those blocks and when the inputs were recorded.",
+      "Blocks do not arrive at regular intervals. Extending the pace so far into the rest of the adjustment period requires an assumption about future block timing. It does not measure a future network value. The estimated calendar date can change too."
+    ],
+    "after": [
+      "Bitcoin adjusts difficulty every 2,016 blocks to target about ten minutes per block. Within its protocol limits, the adjustment scales current difficulty by the target duration divided by the measured duration. Faster blocks point towards a higher next difficulty; slower blocks point towards a lower one.",
+      "A simple forecast estimates the full period’s duration by extending the block pace observed so far. It uses that estimate in the adjustment rule to project difficulty. This needs current difficulty, the target block and the observed blocks’ heights and timestamps.",
+      "Blocks arrive irregularly, so the pace can change as more arrive. Extending the observed pace assumes it will continue through the remaining blocks. The projected difficulty and calendar date can therefore change; neither is a measured future value."
+    ],
+    "verdict": "Matteo",
+    "note": "Adds the missing mechanism before evaluation: observed pace informs projected duration, then projected difficulty. Uses the published mining-difficulty and difficulty-adjustment definitions, not a claimed Doefin algorithm. Keeps input capture, irregular blocks, extrapolation assumption and changing calendar date (habits 3, 7)."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-1\"].heading",
+    "before": "How can someone repeat the calculation?",
+    "after": "What makes the calculation reproducible?",
+    "verdict": "Change",
+    "note": "Makes repeatability the distinct job of this section. Retains every prior input/method requirement and distinguishes a percentage forecast, observed level and market-implied probability. Interval conventions are supported by the published difficulty-adjustment FAQ (habit 3)."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-1\"].paragraphs[0]",
+    "before": "To repeat a forecast calculation, a reader needs the input block heights and timestamps, target adjustment height, formula, protocol constraints, rounding rules and method version.",
+    "after": "A published method must identify the input block heights and timestamps, capture time, target adjustment height and formula. It must also state protocol constraints, the block intervals counted, rounding rules and method version. These details let another reader repeat the calculation.",
+    "verdict": "Change",
+    "note": "Makes repeatability the distinct job of this section. Retains every prior input/method requirement and distinguishes a percentage forecast, observed level and market-implied probability. Interval conventions are supported by the published difficulty-adjustment FAQ (habit 3)."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-2\"].heading",
+    "before": "What supports the forecast range?",
+    "after": "What supports a forecast range?",
+    "verdict": "Change",
+    "note": "Keeps interval calculation, fitting/test separation, original forecast times, width and inclusion. Keeps all synthetic and unvalidated-confidence qualifications together rather than repeating them in the evidence section (habits 3, 6)."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-2\"].paragraphs[0]",
+    "before": "Explain how the range was calculated, then test it against outcomes. Give the period used to fit the method, when each forecast was made and a separate test period that was not used to fit it. Report how wide the ranges were and how often they contained the outcome.",
+    "after": "A range needs its own evidence. Explain its calculation and the period used to fit the method. Test it on a separate period that was not used for fitting, retaining each forecast’s original publication time. Report both range width and the share of outcomes inside the ranges.",
+    "verdict": "Change",
+    "note": "Keeps interval calculation, fitting/test separation, original forecast times, width and inclusion. Keeps all synthetic and unvalidated-confidence qualifications together rather than repeating them in the evidence section (habits 3, 6)."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-2\"].paragraphs[1]",
+    "before": "The ranges in this website’s examples use made-up values. They have not been fitted to data or tested against a stated confidence level. They do not establish how often outcomes will fall within a range or the probability that difficulty will change direction.",
+    "after": "The ranges in this website’s examples use made-up values. They have not been fitted to data or tested against a stated confidence level. They show neither how often future outcomes will fall inside a range nor the probability that difficulty will change direction.",
+    "verdict": "Change",
+    "note": "Keeps interval calculation, fitting/test separation, original forecast times, width and inclusion. Keeps all synthetic and unvalidated-confidence qualifications together rather than repeating them in the evidence section (habits 3, 6)."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-3\"].paragraphs[0]",
+    "before": "This page explains how to assess a forecast method. It does not document a verified live forecasting service, provide measured accuracy results or promise an archive that cannot be changed.",
+    "after": "This page explains how to assess a forecast method. It does not specify a verified Doefin forecasting algorithm or provide measured accuracy results. The historical report and API contain captured network observations; the synthetic report demonstrates error arithmetic.",
+    "verdict": "Change",
+    "note": "Names the page’s evaluation scope honestly and puts current evidence status in one section. Preserves observations versus forecasts, no verified service/algorithm, no measured accuracy, corrections, comparable timing and no immutable archive promise (habits 3, 6, 7)."
+  },
+  {
+    "_id": "research-methodology-difficulty-index",
+    "_type": "researchMethodology",
+    "path": "sections[_key==\"section-3\"].paragraphs[1]",
+    "before": "The historical adjustment report and public API provide captured network observations, separately from forecasts. The synthetic forecast report shows the error calculation. Measuring forecast accuracy still needs original predictions with timestamps, comparable forecast lead times, outcomes and corrections.",
+    "after": "Measured accuracy needs original timestamped predictions, comparable lead times, outcomes and corrections. The forecast archive has no published predictions. Its records do not establish independent publication times or prove that hosted files cannot change.",
+    "verdict": "Change",
+    "note": "Names the page’s evaluation scope honestly and puts current evidence status in one section. Preserves observations versus forecasts, no verified service/algorithm, no measured accuracy, corrections, comparable timing and no immutable archive promise (habits 3, 6, 7)."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "summary",
+    "before": "How to compare difficulty forecasts fairly, with a worked calculation using made-up values. The example does not measure any forecaster’s performance.",
+    "after": "Compare forecasts for the same adjustment and lead time, then assess their point errors and ranges. The linked calculation uses made-up values.",
+    "verdict": "Change",
+    "note": "Makes the summary a route through the guide. The synthetic qualification remains local; the detailed list of unavailable findings belongs only in the last section (habit 6)."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-0\"].paragraphs[0]",
+    "before": "A fair comparison asks each forecast the same question: what will the difficulty change be at the same target block? Use the same definition of difficulty change and compare forecasts issued at the same time. A later forecast has information that an earlier one did not.",
+    "after": "Compare predictions of the same difficulty change at the same target block, issued at comparable times. A later forecast can use information that an earlier one did not have.",
+    "verdict": "Change",
+    "note": "Combines the complete comparison-record requirements here, including range, input height, target/time, source, version, outcome, independent capture, missing/failed forecasts and exclusions. These no longer need a second inventory in the observed report (habits 3, 6, 7)."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-0\"].paragraphs[1]",
+    "before": "Keep each forecast as originally issued, together with its input block height, source, model version and definition of the outcome. Include failed and missing forecasts in the record. Selecting only successful predictions would change the comparison.",
+    "after": "Keep each forecast as originally issued, with its stated range, input block height, source, model version and outcome definition. Record its publication time, including an independently verifiable capture when timing matters. Group forecasts by lead time. Record failed and missing forecasts, as well as the exclusion rules; selecting only successful predictions would change the comparison.",
+    "verdict": "Change",
+    "note": "Combines the complete comparison-record requirements here, including range, input height, target/time, source, version, outcome, independent capture, missing/failed forecasts and exclusions. These no longer need a second inventory in the observed report (habits 3, 6, 7)."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-1\"].heading",
+    "before": "Error and forecast ranges",
+    "after": "Point errors and ranges answer different questions",
+    "verdict": "Change",
+    "note": "Explains what each result teaches instead of repeating a parallel checklist. Preserves sample-only meaning, width/inclusion trade-off and independent-observation requirements for testing confidence (habits 3, 6)."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-1\"].paragraphs[0]",
+    "before": "Absolute error is the size of the gap between a forecast and its outcome. Mean absolute error averages those gaps across the forecasts being tested. It describes that sample, not how the model will perform in another period.",
+    "after": "Absolute error is the size of the gap between a forecast and its outcome. Mean absolute error averages those gaps across the forecasts tested. A smaller mean means the point estimates were closer on average in that sample; it does not establish performance in another period.",
+    "verdict": "Change",
+    "note": "Explains what each result teaches instead of repeating a parallel checklist. Preserves sample-only meaning, width/inclusion trade-off and independent-observation requirements for testing confidence (habits 3, 6)."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-1\"].paragraphs[1]",
+    "before": "A forecast range needs a separate test. How often did it contain the outcome, and how wide was it? A wide range can contain many outcomes while telling you little. Testing whether ranges match their stated confidence level needs enough independent observations over a clearly defined period.",
+    "after": "Ranges answer a different question: how often did they contain the outcome? Read that share alongside their width, since a wide range can contain many outcomes while telling you little. Testing a stated confidence level needs enough independent observations over a defined period.",
+    "verdict": "Change",
+    "note": "Explains what each result teaches instead of repeating a parallel checklist. Preserves sample-only meaning, width/inclusion trade-off and independent-observation requirements for testing confidence (habits 3, 6)."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-2\"].paragraphs[0]",
+    "before": "The linked example shows each step of the error calculation. Its forecasts and outcomes were made up for the exercise. They are not captured predictions, network observations or results for Doefin or another estimator.",
+    "after": "The linked example shows each step of the error calculation. Its forecasts and outcomes were made up for the exercise. They are neither captured predictions nor network observations, and they do not represent Doefin or another estimator.",
+    "verdict": "Change",
+    "note": "Gives the final section one task: what this evidence does and does not establish. Preserves every unavailable-finding qualification (habits 3, 6)."
+  },
+  {
+    "_id": "research-report-difficulty-forecast-accuracy-2026",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-2\"].paragraphs[1]",
+    "before": "This page has no verified comparison of public forecasters. It cannot establish a provider ranking, an accuracy advantage, a volatility estimate or which forecasters publish ranges.",
+    "after": "No verified comparison of public forecasters is available here. The example establishes no provider ranking, accuracy advantage, volatility estimate or record of which forecasters publish ranges.",
+    "verdict": "Change",
+    "note": "Gives the final section one task: what this evidence does and does not establish. Preserves every unavailable-finding qualification (habits 3, 6)."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "summary",
+    "before": "A fixed snapshot of 25 difficulty adjustments, with the source data and calculations. These observations do not measure forecast performance.",
+    "after": "25 consecutive difficulty changes from a fixed mempool.space snapshot, with the original source response, calculation method and downloads.",
+    "verdict": "Change",
+    "note": "Leads with the concrete study and its supporting assets. Forecast-performance limits remain together in the final section rather than recurring in the summary and findings (habits 3, 6)."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-0\"].paragraphs",
+    "before": [
+      "The dataset records 25 consecutive difficulty changes between 2025-11-12 and 2026-10-16: 11 increases and 14 decreases. The mean absolute change was 3.75%. The minimum change was -11.16% and the maximum was 14.73%.",
+      "These figures describe network difficulty in this historical period. They do not measure forecast error, the reliability of forecast ranges, mining profit or a trading return. This small descriptive study does not show a forecasting advantage."
+    ],
+    "after": [
+      "The dataset records 25 consecutive difficulty changes between 2025-11-12 and 2026-10-16: 11 increases and 14 decreases. The mean absolute change was 3.75%. The minimum change was -11.16% and the maximum was 14.73%."
+    ],
+    "verdict": "Matteo",
+    "note": "Keeps every finding, figure, sign, unit and date exactly. Moves the distinct limitations from the second paragraph to the final scope section so the finding leads (habits 3, 6)."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-1\"].paragraphs[0]",
+    "before": "The source is the mempool.space one-year difficulty-adjustment API, captured on 22 October 2026. To repeat the calculation, sort its 26 adjustment blocks by height and check that consecutive blocks are 2,016 blocks apart. Exclude the earliest: its preceding difficulty is outside the snapshot. For each remaining adjustment, calculate 100 × (new difficulty / previous difficulty − 1). Do not use the provider’s rounded adjustment ratio.",
+    "after": "The source is the mempool.space one-year difficulty-adjustment API, captured on 22 October 2026. Sort its 26 adjustment blocks by height and check that consecutive blocks are 2,016 blocks apart. Exclude the earliest: its preceding difficulty is outside the snapshot. For each remaining adjustment, calculate 100 × (new difficulty / previous difficulty − 1). Do not use the provider’s rounded adjustment ratio.",
+    "verdict": "Change",
+    "note": "Keeps the source/date, 26-to-25 inclusion rule, spacing check, exact formula, rounded-ratio exclusion and full-precision rule. Makes equal weighting explicit from the unchanged source method. Moves checksum/version explanation to the provenance section (habits 3, 6, 7)."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-1\"].paragraphs[1]",
+    "before": "The mean absolute change averages the size of the 25 percentage changes, ignoring whether each is positive or negative. Calculations retain the provider’s full difficulty precision; rounding affects only the display. The citation manifest lists SHA-256 digests, which are file checksums, for the original response and CSV/JSON downloads. These let readers detect changes from this version.",
+    "after": "The mean absolute change averages the size of the 25 percentage changes, ignoring whether each is positive or negative. Each change has equal weight. Calculations retain the provider’s full difficulty precision; rounding affects only the display.",
+    "verdict": "Change",
+    "note": "Keeps the source/date, 26-to-25 inclusion rule, spacing check, exact formula, rounded-ratio exclusion and full-precision rule. Makes equal weighting explicit from the unchanged source method. Moves checksum/version explanation to the provenance section (habits 3, 6, 7)."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-2\"].heading",
+    "before": "Where the data comes from",
+    "after": "Sources, version and citation",
+    "verdict": "Change",
+    "note": "Consolidates the source capture, same-provider check, defined rolling window, open access, stable ID/version, SHA-256 scope, DOI status and hosting/time limits in one place (habits 3, 6, 7)."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-2\"].paragraphs",
+    "before": [
+      "The downloads include the source response exactly as received, plus matching block details for the first and last retained observations. These checks use the same provider. They show consistency within that source, not independent verification against a Bitcoin node. The API’s rolling window determines which adjustments are included; the study does not select profitable periods.",
+      "All findings and downloads are available without email. Version 1.0.0 has a stable dataset identifier and a citation manifest. No DOI, a persistent research identifier, has been registered or deposited. An update requires a new version. Local file checksums do not prove an external publication time or guarantee that hosted files cannot change."
+    ],
+    "after": [
+      "The downloads include the source response exactly as received, plus matching block details for the first and last retained observations. These checks use the same provider. They show consistency within that source, not independent verification against a Bitcoin node. The API’s rolling window determines which adjustments are included; the study does not select profitable periods.",
+      "All findings and downloads are available without email. Version 1.0.0 has a stable dataset identifier and a citation manifest. The manifest lists SHA-256 digests, or file checksums, for the original response and CSV/JSON downloads. They detect changes from this version, but prove neither an external publication time nor that hosted files cannot change.",
+      "No DOI, a persistent research identifier, has been registered or deposited. An update requires a new version."
+    ],
+    "verdict": "Matteo",
+    "note": "Consolidates the source capture, same-provider check, defined rolling window, open access, stable ID/version, SHA-256 scope, DOI status and hosting/time limits in one place (habits 3, 6, 7)."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-3\"].heading",
+    "before": "Why these are not forecast results",
+    "after": "What these observations cannot establish",
+    "verdict": "Change",
+    "note": "Combines all limits on what the findings establish, including forecast error/ranges, advantage, profit/returns and retrospective timing proof. The complete provider-record checklist now lives in the linked comparison guide (habits 3, 6, 7)."
+  },
+  {
+    "_id": "research-report-observed-difficulty-adjustments",
+    "_type": "researchReport",
+    "path": "sections[_key==\"section-3\"].paragraphs",
+    "before": [
+      "The forecast archive has zero published records. The dated forecasts and accuracy examples elsewhere on this site are labelled synthetic because they use made-up values. A historical difficulty adjustment is not a previously published prediction.",
+      "Scoring a provider requires its original prediction, input height, target, model version, stated range and a timestamped capture. Group forecasts by how far ahead they were made and record providers with missing forecasts. Proving publication before an outcome or market listing requires separate, independently verifiable records. This site cannot create that proof after the event."
+    ],
+    "after": [
+      "The forecast archive has zero published records. Dated forecasts and accuracy examples elsewhere on this site use made-up values. A historical adjustment is not a prediction published before its outcome.",
+      "These findings measure neither forecast error nor the reliability of forecast ranges. They establish no forecasting advantage, mining profit or trading return. The comparison guide explains which original records are needed to score forecasts.",
+      "Proof of publication before an outcome or market listing needs independently verifiable records. This site cannot create that proof after the event."
+    ],
+    "verdict": "Matteo",
+    "note": "Combines all limits on what the findings establish, including forecast error/ranges, advantage, profit/returns and retrospective timing proof. The complete provider-record checklist now lives in the linked comparison guide (habits 3, 6, 7)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "summary",
+    "before": "A difficulty-growth assumption changes expected production and fleet payback. Comparing several paths shows how much the result depends on that assumption.",
+    "after": "Higher difficulty reduces expected BTC production from the same fleet. With other assumptions unchanged, less revenue remains to recover the initial cost.",
+    "verdict": "Change",
+    "note": "States the production-to-payback mechanism early, rather than promising an explanation through a circular comparison (thinking habits 1 and 3, E06)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-0\"].heading",
+    "before": "An assumption is not a forecast",
+    "after": "Why higher difficulty reduces production",
+    "verdict": "Change",
+    "note": "Explains the mechanism before the comparison. Reuses the existing homepage production-only illustration, with difficulty held 10% higher for the entire same month and fixed hashrate, uptime and rewards. Distinguishes the level comparison from monthly compounding; no financial or position example (E06, E28)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-0\"].paragraphs",
+    "before": [
+      "A fixed difficulty-growth rate describes a scenario, with a stated period over which the growth is assumed to occur. It is an assumption, not measured historical data or a dated forecast of what the network will do."
+    ],
+    "after": [
+      "At the same fleet hashrate, higher difficulty means more work is needed to find a block. With uptime and block rewards unchanged, expected BTC production falls over the same period.",
+      "For an illustrative month, suppose the fleet is expected to produce 1 BTC at unchanged difficulty. If difficulty is 10% higher throughout that month, expected production is 1 ÷ 1.10 ≈ 0.909 BTC, about 9.1% less. Hashrate, uptime and block rewards stay the same. This compares two difficulty levels for one month; it is not a monthly growth rate."
+    ],
+    "verdict": "Matteo",
+    "note": "Explains the mechanism before the comparison. Reuses the existing homepage production-only illustration, with difficulty held 10% higher for the entire same month and fixed hashrate, uptime and rewards. Distinguishes the level comparison from monthly compounding; no financial or position example (E06, E28)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].heading",
+    "before": "How growth changes production and payback",
+    "after": "How growth changes payback",
+    "verdict": "Change",
+    "note": "Defines monthly compounding separately from the one-period illustration, then explains revenue, power cost, cumulative cash and payback using the actual PaybackModel.simulate implementation. Interprets the difference between paths instead of merely ordering a comparison; retains every original fixed input and scenario/forecast boundary (E28)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].paragraphs",
+    "before": [
+      "Changing the difficulty path changes the production and payback estimates for a fleet. To see the effect of that assumption, compare several paths while keeping power cost, uptime, capital cost and Bitcoin price constant. Otherwise, a difference in the result may come from another input."
+    ],
+    "after": [
+      "A fixed growth rate describes a scenario over a stated period. In the fleet payback model, the rate applies each month to the previous month’s difficulty, so growth compounds. It is an assumption, not measured historical data or a dated forecast of what the network will do.",
+      "At an unchanged Bitcoin price, less expected BTC production means less expected mining revenue. The model starts below zero by the amount spent on the fleet. It adds each month’s mining revenue after power costs. Payback is the first month the balance reaches zero or more.",
+      "Keep fleet hashrate, power cost, uptime, capital cost and Bitcoin price the same when comparing difficulty paths. A later payback date under faster growth shows that lower production leaves less cash to recover the same initial cost. The gap between the results shows how much the payback estimate depends on the growth assumption. It does not show which path will occur."
+    ],
+    "verdict": "Matteo",
+    "note": "Defines monthly compounding separately from the one-period illustration, then explains revenue, power cost, cumulative cash and payback using the actual PaybackModel.simulate implementation. Interprets the difference between paths instead of merely ordering a comparison; retains every original fixed input and scenario/forecast boundary (E28)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].heading",
+    "before": "What a calculator cannot decide",
+    "after": "What the comparison cannot decide",
+    "verdict": "Change",
+    "note": "Keeps the suitability/economics limit, objectives, timing, transaction costs, liquidity, operational constraints and exact no-measured-threshold statement. Adds the existing model’s finite-horizon interpretation rather than implying recovery is assured. No performance result or recommendation (thinking habit 4)."
+  },
+  {
+    "_id": "editorial-blog-what-a-static-growth-assumption-costs-you",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].paragraphs",
+    "before": [
+      "A simplified calculator shows how sensitive a result is to the assumptions. It cannot tell you whether a position suits your objectives or makes economic sense. That also depends on timing, transaction costs, available liquidity and operational constraints. This article provides no measured threshold at which an operation should hedge."
+    ],
+    "after": [
+      "If no month reaches a cash balance of zero or more, the model shows no payback within the chosen period. A negative ending balance can also follow an earlier recovery if later power costs exceed revenue. Read the first payback month and the full cash-balance path together. These are simplified estimates; actual production and costs can differ.",
+      "A sensitivity comparison cannot decide whether a difficulty position suits your objectives or makes economic sense. That also depends on timing, transaction costs, available liquidity and operational constraints. This article provides no measured threshold at which an operation should hedge."
+    ],
+    "verdict": "Matteo",
+    "note": "Independent review correction: the model records the first zero crossing, and later cash losses can reverse that recovery. Distinguishes no payback from a negative ending balance. Keeps finite-horizon limits and all suitability/economics qualifications."
+  },
+  {
+    "_id": "editorial-blog-reading-a-hashrate-chart-honestly",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].heading",
+    "before": "Why two charts can differ",
+    "after": "Why two chart windows can differ",
+    "verdict": "Change",
+    "note": "Extends the protected E30 explanation with a hypothetical, non-numerical comparison that shows how short and long windows react to the same blocks. Preserves irregular timing, timestamps, difficulty inputs and inability to infer a capacity change from a chart alone. The 144-block/time distinction is already approved in E29. No recent event or measured result is invented."
+  },
+  {
+    "_id": "editorial-blog-reading-a-hashrate-chart-honestly",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-1\"].paragraphs",
+    "before": [
+      "Blocks arrive irregularly, so estimates over short and long windows can differ. Comparing two charts also requires matching timestamps and difficulty inputs. A change on a chart alone does not establish that mining capacity has changed."
+    ],
+    "after": [
+      "Blocks arrive irregularly. Suppose two estimates use different windows ending at the same time. A run of faster blocks has more influence on the shorter window. The longer window includes more earlier blocks, so the same run has less influence.",
+      "The short-window estimate can therefore rise while the longer-window estimate changes little. That difference alone does not establish that more mining machines have joined the network. The longer window smooths recent variation, but is less responsive to a recent change.",
+      "Different timestamps or difficulty inputs can also account for a gap between charts. A 144-block window is not always 24 hours, because those blocks can arrive faster or slower. Matching the end time and units helps separate a difference in the calculation from a difference in the period being observed."
+    ],
+    "verdict": "Matteo",
+    "note": "Extends the protected E30 explanation with a hypothetical, non-numerical comparison that shows how short and long windows react to the same blocks. Preserves irregular timing, timestamps, difficulty inputs and inability to infer a capacity change from a chart alone. The 144-block/time distinction is already approved in E29. No recent event or measured result is invented."
+  },
+  {
+    "_id": "editorial-blog-reading-a-hashrate-chart-honestly",
+    "_type": "editorialArticle",
+    "path": "sections[_key==\"section-2\"].paragraphs",
+    "before": [
+      "An error band shows uncertainty under a set of assumptions. Its meaning depends on how it was calculated, so the method and assumptions need to accompany it. This article does not report measured band widths or identify a recent network movement as noise."
+    ],
+    "after": [
+      "The centre line gives one estimated hashrate. An error band shows uncertainty around that estimate under a set of assumptions. A wider band means the chart leaves more uncertainty about the level of hashrate, even if the line itself looks precise.",
+      "The method needs to explain what uncertainty the band includes. For example, a band describing variation from irregular block timing does not establish that the difficulty input or observation time is correct. Its width alone does not show that the estimate is accurate.",
+      "This article does not report measured band widths or identify a recent network movement as noise."
+    ],
+    "verdict": "Matteo",
+    "note": "Explains what the centre line leaves out and how to read the band, then uses a conditional methodological example to distinguish timing uncertainty from input correctness. Retains the exact local evidence limit. No confidence percentage, uncertainty number, recent network event or measured band is invented. E30 remains exact (thinking habit 3)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-0\"].typical",
+    "before": "The slider accepts 0.01–30 EH/s. This is an input limit, not a rule about who the calculator is for.",
+    "after": "The input accepts 0.01–30 EH/s. The illustrative default is 1 EH/s. These are input limits, not eligibility rules.",
+    "verdict": "Change",
+    "note": "Names the actual control bounds and illustrative default, not an observed typical value. Checked against ExposureSizer and lib/exposure; no input or formula change (E28)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-1\"].typical",
+    "before": "1–13 modelled epochs, approximately 2–26 weeks.",
+    "after": "The input accepts 1–13 modelled epochs, approximately 2–26 weeks. The illustrative default is four epochs, about eight weeks.",
+    "verdict": "Change",
+    "note": "Names the actual control bounds and illustrative default, not an observed typical value. Checked against ExposureSizer and lib/exposure; no input or formula change (E28)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-2\"].typical",
+    "before": "The sample is 0.05 BTC per block; the slider supports 0–0.5.",
+    "after": "The input accepts 0–0.5 BTC per block. The illustrative default is 0.05 BTC per block.",
+    "verdict": "Change",
+    "note": "Names the actual control bounds and illustrative default, not an observed typical value. Checked against ExposureSizer and lib/exposure; no input or formula change (E28)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-3\"].typical",
+    "before": "$20,000–$200,000 in $1,000 steps. The $64,000 default is illustrative.",
+    "after": "The input accepts $20,000–$200,000 per BTC. The illustrative default is $64,000 per BTC. Slider steps are $1,000.",
+    "verdict": "Change",
+    "note": "Names the actual control bounds and illustrative default, not an observed typical value. Checked against ExposureSizer and lib/exposure; no input or formula change (E28)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-4\"].typical",
+    "before": "0–15% lower difficulty. The sample 2.4% is not a forecast.",
+    "after": "The input accepts 0–15% lower difficulty. The illustrative default is 2.4% lower, not a forecast.",
+    "verdict": "Change",
+    "note": "Names the actual control bounds and illustrative default, not an observed typical value. Checked against ExposureSizer and lib/exposure; no input or formula change (E28)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-5\"].typical",
+    "before": "0–15% higher difficulty. This range cannot represent every possible future outcome.",
+    "after": "The input accepts 0–15% higher difficulty. The illustrative default is 7% higher. The limit does not cover every possible future change.",
+    "verdict": "Change",
+    "note": "Names the actual control bounds and illustrative default, not an observed typical value. Checked against ExposureSizer and lib/exposure; no input or formula change (E28)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-6\"].typical",
+    "before": "127.48T is a sample baseline, not the current network value.",
+    "after": "The input accepts 1T–1,000T. The illustrative default is 127.48T, not current network difficulty.",
+    "verdict": "Change",
+    "note": "Names the actual control bounds and illustrative default, not an observed typical value. Checked against ExposureSizer and lib/exposure; no input or formula change (E28)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-0\"].figure",
+    "before": "Your exposure",
+    "after": "Production difference",
+    "verdict": "Change",
+    "note": "Matches the revised calculator heading. The result is easier-case production minus harder-case production, not the loss from the starting case (E28)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-0\"].means",
+    "before": "The BTC difference between production in the easier and harder scenarios. With sample inputs it is about 2.525 BTC.",
+    "after": "Expected production in the easier case minus expected production in the harder case. With the sample inputs, the difference is about 2.525 BTC.",
+    "verdict": "Change",
+    "note": "Defines the arithmetic behind the new heading; retains the existing verified example amount and separate starting-case loss (E28)."
+  },
+  {
+    "_id": "tool-guide-difficulty-exposure",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-0\"].soWhat",
+    "before": "It includes both the upside from easier difficulty and the downside from harder difficulty. It is not the amount of BTC lost against the unchanged baseline.",
+    "after": "The difference includes both higher production in the easier case and lower production in the harder case. It is not the shortfall against unchanged difficulty.",
+    "verdict": "Change",
+    "note": "Retains both sides of the spread and the baseline distinction using ordinary language (E28)."
+  },
+  {
+    "_id": "tool-guide-fleet-payback",
+    "_type": "toolGuide",
+    "path": "inputs",
+    "before": [
+      {
+        "_key": "input-0",
+        "_type": "inputsEntry",
+        "label": "Fleet hashrate",
+        "means": "Combined modelled fleet hashrate in TH/s.",
+        "typical": "The slider supports 100–20,000 TH/s. The default 1,000 TH/s is illustrative.",
+        "whereToFind": "Use fleet specifications or an operating average for the same machines. Record whether that hashrate already allows for downtime."
+      },
+      {
+        "_key": "input-1",
+        "_type": "inputsEntry",
+        "label": "Efficiency",
+        "means": "Joules per terahash. Hashrate × efficiency determines modelled wall power.",
+        "typical": "The slider supports 12–40 J/TH. The default 15 J/TH is illustrative.",
+        "whereToFind": "Use a measurement or specification relevant to the same operating mode as your hashrate."
+      },
+      {
+        "_key": "input-2",
+        "_type": "inputsEntry",
+        "label": "All-in power cost",
+        "means": "The chosen cost per modelled kWh. No separate operating-cost input is added.",
+        "typical": "The slider supports $0.02–$0.15/kWh. The default $0.045 is not a quoted market rate.",
+        "whereToFind": "Use your billing terms. If you convert another cost to $/kWh, record the approximation and do not count it twice."
+      },
+      {
+        "_key": "input-3",
+        "_type": "inputsEntry",
+        "label": "What you paid up front",
+        "means": "The amount paid up front that the fleet needs to recover. Changing hashrate does not change this input.",
+        "typical": "The slider supports $5,000–$2,000,000. The default $20,000 is a sample.",
+        "whereToFind": "Use invoices or a stated scenario amount. The model does not validate equipment prices or purchase history."
+      },
+      {
+        "_key": "input-4",
+        "_type": "inputsEntry",
+        "label": "Bitcoin price",
+        "means": "A constant USD price used to value all modelled mined BTC.",
+        "typical": "The slider supports $20,000–$200,000. The $90,000 default is illustrative.",
+        "whereToFind": "Choose and record a scenario price. It does not predict a future price path."
+      },
+      {
+        "_key": "input-5",
+        "_type": "inputsEntry",
+        "label": "Difficulty growth guess",
+        "means": "The monthly difficulty increase, applied repeatedly. The first increase happens before the model calculates production for month one.",
+        "typical": "The central slider accepts 0–8% per month. The comparison rows subtract two percentage points, with a minimum of zero, or add three points.",
+        "whereToFind": "Choose a sensitivity assumption. Historical observations are not a guarantee of a future growth rate."
+      },
+      {
+        "_key": "input-6",
+        "_type": "inputsEntry",
+        "label": "Starting difficulty",
+        "means": "The starting network difficulty in trillions. It sets the starting point for calculating expected production.",
+        "typical": "The 127.48T default is illustrative, not current network data.",
+        "whereToFind": "Check a block-data source you trust and enter its value in Starting difficulty."
+      }
+    ],
+    "after": [
+      {
+        "_key": "input-0",
+        "_type": "inputsEntry",
+        "label": "Fleet hashrate",
+        "means": "Combined modelled fleet hashrate in TH/s.",
+        "typical": "The input accepts 100–20,000 TH/s. The illustrative default is 1,000 TH/s.",
+        "whereToFind": "Use fleet specifications or an operating average for the same machines. Record whether that hashrate already allows for downtime."
+      },
+      {
+        "_key": "input-1",
+        "_type": "inputsEntry",
+        "label": "Efficiency",
+        "means": "Joules per terahash. Hashrate × efficiency determines modelled wall power.",
+        "typical": "The input accepts 12–40 J/TH. The illustrative default is 15 J/TH.",
+        "whereToFind": "Use a measurement or specification relevant to the same operating mode as your hashrate."
+      },
+      {
+        "_key": "input-2",
+        "_type": "inputsEntry",
+        "label": "All-in power cost",
+        "means": "The chosen cost per modelled kWh. No separate operating-cost input is added.",
+        "typical": "The input accepts $0.02–$0.15/kWh. The illustrative default is $0.045/kWh, not a market quote.",
+        "whereToFind": "Use your billing terms. If you convert another cost to $/kWh, record the approximation and do not count it twice."
+      },
+      {
+        "_key": "input-3",
+        "_type": "inputsEntry",
+        "label": "What you paid up front",
+        "means": "The amount paid up front that the fleet needs to recover. Changing hashrate does not change this input.",
+        "typical": "The input accepts $5,000–$2,000,000. The illustrative default is $20,000.",
+        "whereToFind": "Use invoices or a stated scenario amount. The model does not validate equipment prices or purchase history."
+      },
+      {
+        "_key": "input-4",
+        "_type": "inputsEntry",
+        "label": "Bitcoin price",
+        "means": "A constant USD price used to value all modelled mined BTC.",
+        "typical": "The input accepts $20,000–$200,000 per BTC. The illustrative default is $90,000 per BTC.",
+        "whereToFind": "Choose and record a scenario price. It does not predict a future price path."
+      },
+      {
+        "_key": "input-5",
+        "_type": "inputsEntry",
+        "label": "Difficulty growth guess",
+        "means": "The monthly difficulty increase, applied repeatedly. The first increase happens before the model calculates production for month one.",
+        "typical": "The central input accepts 0–8% per month. Its illustrative default is 1.5%. The comparison subtracts two percentage points, with a minimum of zero, or adds three.",
+        "whereToFind": "Choose a sensitivity assumption. Historical observations are not a guarantee of a future growth rate."
+      },
+      {
+        "_key": "input-6",
+        "_type": "inputsEntry",
+        "label": "Starting difficulty",
+        "means": "The starting network difficulty in trillions. It sets the starting point for calculating expected production.",
+        "typical": "The input accepts 1T–1,000T. The illustrative default is 127.48T, not current network difficulty.",
+        "whereToFind": "Check a block-data source you trust and enter its value in Starting difficulty."
+      },
+      {
+        "_key": "input-7",
+        "_type": "inputsEntry",
+        "label": "Model horizon",
+        "means": "The number of months to calculate before the model ends. Each month has 30.4 modelled days.",
+        "whereToFind": "Choose the period over which you want to test recovery of the initial outlay. A result ending below zero does not establish what happens after that period.",
+        "typical": "The input accepts 2–120 months. The illustrative default is 48 months."
+      }
+    ],
+    "verdict": "Matteo",
+    "note": "Atomic array proposal: preserves the seven existing input keys/types and updates their limits/defaults from PaybackModel. Adds the missing Model horizon explanation as stable key input-7, inputsEntry. Array/object validation is required. No control, default or formula is changed (E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-0\"].typical",
+    "before": "The slider supports $0–$0.20/kWh. The $0.065 default is a sample, not a market benchmark.",
+    "after": "The input accepts $0–$0.20/kWh. The illustrative default is $0.065/kWh, not a market benchmark.",
+    "verdict": "Change",
+    "note": "Names HostingCalculator control bounds, units and illustrative defaults. Percentages refer to their actual bases; none is an observed typical range (E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-1\"].typical",
+    "before": "The sample is 5%; the supported range is 0–30%.",
+    "after": "The input accepts 0–30% of the advertised power rate. The illustrative default is 5%.",
+    "verdict": "Change",
+    "note": "Names HostingCalculator control bounds, units and illustrative defaults. Percentages refer to their actual bases; none is an observed typical range (E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-2\"].typical",
+    "before": "The sample is 3%; the supported range is 0–30%.",
+    "after": "The input accepts 0–30% of the advertised power rate. The illustrative default is 3%.",
+    "verdict": "Change",
+    "note": "Names HostingCalculator control bounds, units and illustrative defaults. Percentages refer to their actual bases; none is an observed typical range (E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-3\"].typical",
+    "before": "The sample is 4%; the supported range is 0–30%.",
+    "after": "The input accepts 0–30% of hours in the period. The illustrative default is 4%.",
+    "verdict": "Change",
+    "note": "Names HostingCalculator control bounds, units and illustrative defaults. Percentages refer to their actual bases; none is an observed typical range (E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-4\"].typical",
+    "before": "The sample is 6%; the supported range is 0–30%.",
+    "after": "The input accepts 0–30% of hours in the period. The illustrative default is 6%.",
+    "verdict": "Change",
+    "note": "Names HostingCalculator control bounds, units and illustrative defaults. Percentages refer to their actual bases; none is an observed typical range (E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "inputs[_key==\"input-5\"].typical",
+    "before": "The sample is 2%; the supported range is 0–30%.",
+    "after": "The input accepts 0–30% of revenue. The illustrative default is 2%.",
+    "verdict": "Change",
+    "note": "Names HostingCalculator control bounds, units and illustrative defaults. Percentages refer to their actual bases; none is an observed typical range (E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "whatItIs",
+    "before": "This calculator compares hosting costs per productive kWh. It adds management and power-factor percentages to the advertised rate, then divides by the share of hours when machines run. It then divides by one minus the pool-fee fraction. The result is an equivalent cost for comparison, not an actual invoice or profit calculation.",
+    "after": "This calculator converts a hosting rate into an equivalent cost per productive kWh. It adds separately billed fees to the rate. When stopped hours remain payable, the same cost is spread over fewer productive hours. The pool’s revenue deduction is then expressed as a cost adjustment.",
+    "verdict": "Change",
+    "note": "States what is calculated first, without repeating the full worked arithmetic in the introduction. The steps retain the additive fee rule, productive-hours divisor and pool divisor (E24, E25, E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "whoFor",
+    "before": "Use this if you own machines and pay for booked hosting capacity even when the machines are stopped. Hosting businesses can use it for machines they own. Energy-only billing, revenue-share contracts, demand-response income and unrelated hosting income need different models.",
+    "after": "Use this for machines you own when booked capacity remains payable during downtime or curtailment. Energy-only billing, revenue-share contracts, demand-response income and unrelated hosting income need different models.",
+    "verdict": "Change",
+    "note": "Keeps the paid-capacity condition and all excluded business models. Machines owned by a hosting business fit the same ownership condition without a separate role sentence (E24, E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "howToUse[4]",
+    "before": "Compare each step and the final rates using the same assumptions for both offers. A smaller percentage increase can still leave you with a higher final cost.",
+    "after": "Compare the final rates using the same billing assumptions for both offers.",
+    "verdict": "Matteo",
+    "note": "Keeps checking agreements, separate additive fee inputs, distinct paid lost hours, pool revenue deduction and public-URL warning. Moves the percentage-versus-final-rate interpretation to its result explanation, where it is needed (E24, E25)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-1\"].soWhat",
+    "before": "This shows how your inputs change the starting rate. It does not rate the provider’s honesty or quality.",
+    "after": "Compare the final $/kWh rates as well as the percentage increases. A lower percentage increase can still leave a higher final cost.",
+    "verdict": "Change",
+    "note": "Explains how to use the result. Removes the unrelated detour about judging provider honesty or quality while preserving the material comparison caveat (E24, E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "readingResults[_key==\"result-3\"].soWhat",
+    "before": "Use the working to check the arithmetic and compare assumptions. The model does not recommend a provider.",
+    "after": "The change at each step shows how much that adjustment adds to the starting rate.",
+    "verdict": "Change",
+    "note": "Explains the intermediate calculation instead of disclaiming a provider recommendation. Keeps the arithmetic and the equivalent-cost boundary elsewhere (E24, E28)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "mistakes[3]",
+    "before": "Treating the percentage uplift as a provider rating or comparing uplift percentages without comparing the absolute final rates.",
+    "after": "Comparing percentage increases without comparing the final rates in $/kWh.",
+    "verdict": "Matteo",
+    "note": "Retains the concrete comparison mistake and all other errors. Cuts the provider-rating detour (E24, E25)."
+  },
+  {
+    "_id": "tool-guide-hosting-effective-rate",
+    "_type": "toolGuide",
+    "path": "limits[4]",
+    "before": "The defaults and presets are illustrative. No market rates, provider ranking or safe decision threshold are established here.",
+    "after": "The defaults and presets are illustrative, not observed market rates. This comparison does not establish a decision threshold.",
+    "verdict": "Matteo",
+    "note": "Retains sample status, no market-rate claim and no decision threshold. Cuts the provider-ranking detour; paid-capacity, pool, additive-fee and profitability limits remain exact (E24, E28)."
+  }
+]
