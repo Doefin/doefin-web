@@ -7,5 +7,9 @@ export const aboutPage=defineType({name:'aboutPage',title:'About page',type:'doc
     defineField({name:'heading',type:'string',validation:r=>r.required().custom(nonBlank)}),
     defineField({name:'paragraphs',type:'array',of:[defineArrayMember({type:'text',rows:4,validation:r=>r.required().custom(nonBlank)})],validation:r=>r.required().min(1)}),
   ],preview:{select:{title:'heading',subtitle:'id'}}})],validation:r=>r.required().min(3).max(3)}),
-  defineField({name:'author',type:'reference',weak:true,to:[{type:'authorProfile'}],validation:r=>r.required().custom(v=>v&&typeof v==='object'&&'_weak'in v&&v._weak===true||'Use a weak reference to the reusable author profile.')}),
+  defineField({
+    name:'author',type:'reference',weak:true,to:[{type:'authorProfile'}],
+    options:{disableNew:true,filter:'_id in ["author-doefin-research", "drafts.author-doefin-research"]'},
+    validation:r=>r.required().custom(v=>v?._ref==='author-doefin-research'&&v._weak===true||'Choose Doefin Research for the About page.'),
+  }),
 ],preview:{prepare:()=>({title:'About Doefin'})}})

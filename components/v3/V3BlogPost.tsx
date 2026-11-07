@@ -6,7 +6,7 @@ import { allV3Editorial, type V3EditorialArticle } from '@/content'
 import { blockId } from '@/content/types'
 import { readingMinutes, dateLong } from '@/lib/format'
 import { articleTopicLabel, articleTopicPath, editorialCoverFor } from '@/lib/article-library'
-import { jsonLd, publisherRef } from '@/lib/seo'
+import { authorNode, jsonLd, publisherRef } from '@/lib/seo'
 import { site } from '@/lib/site'
 import { EditorialCover } from './EditorialCover'
 import { Arrow } from './Arrow'
@@ -23,7 +23,7 @@ export async function V3BlogPost({ article }: { article: V3EditorialArticle }) {
       : { href: '/tools', label: 'Apply the idea', title: 'Explore the mining tools', description: 'Work through a production, hosting or payback scenario.' }
   const contents = <nav aria-label="In this article"><ol className="space-y-1">{article.sections.map((section, index) => <li key={section.id}><a href={'#' + blockId({ heading: section.heading, id: section.id })} className="flex min-h-11 items-start gap-3 rounded py-2.5 text-xs leading-relaxed text-subtle hover:text-highlight"><span className="tabular text-[10px] text-highlight">{String(index + 1).padStart(2, '0')}</span>{section.heading}</a></li>)}</ol></nav>
   return <Container className="pb-14 pt-6 sm:pt-9 [overflow-wrap:anywhere]">
-    <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd({ '@context': 'https://schema.org', '@type': 'Article', headline: article.title, description: article.summary, publisher: publisherRef, mainEntityOfPage: site.url + '/blog/' + article.slug, datePublished: article.publishedAt }, 'v3')} />
+    <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd({ '@context': 'https://schema.org', '@type': 'Article', headline: article.title, description: article.summary, publisher: publisherRef, mainEntityOfPage: site.url + '/blog/' + article.slug, datePublished: article.publishedAt, author: article.author && authorNode(article.author) }, 'v3')} />
     <div className="hidden sm:block"><Breadcrumbs schemaVersion="v3" items={[{ name: 'Articles', href: '/blog' }, { name: article.title, href: '/blog/' + article.slug }]} /></div>
     <header className="mt-2 border-b border-white/10 pb-7 sm:mt-7 sm:pb-9">
       <Link href="/blog" className="mb-4 inline-flex min-h-9 items-center gap-2 rounded text-xs font-semibold text-highlight hover:underline"><span aria-hidden>←</span> All articles</Link>
@@ -31,7 +31,7 @@ export async function V3BlogPost({ article }: { article: V3EditorialArticle }) {
         <div><div className="flex flex-wrap items-center gap-x-4 gap-y-2">{article.topics.map(tag => <Link key={tag.slug} href={articleTopicPath(tag)} className="text-[11px] font-semibold text-highlight hover:underline">{articleTopicLabel(tag.label)}</Link>)}</div>
           <h1 className="mt-4 text-balance text-3xl font-extrabold leading-[1.15] tracking-[-0.035em] sm:text-[42px]">{article.title}</h1>
           <p className="mt-4 max-w-2xl text-base leading-[1.75] text-subtle">{article.summary}</p>
-          <p className="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-[11px] text-subtle"><span>Educational article</span><span className="tabular">{readingMinutes(paragraphs)} min read</span>{article.reviewedAt ? <span>Reviewed <time dateTime={article.reviewedAt}>{dateLong(article.reviewedAt)}</time></span> : null}</p>
+          <p className="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-[11px] text-subtle"><span>Educational article</span>{article.author && <span>By {article.author.name}</span>}<span className="tabular">{readingMinutes(paragraphs)} min read</span>{article.reviewedAt ? <span>Reviewed <time dateTime={article.reviewedAt}>{dateLong(article.reviewedAt)}</time></span> : null}</p>
         </div>
         <div className="h-[120px] overflow-hidden rounded-xl border border-white/[0.07] sm:h-[170px] lg:h-[240px]"><EditorialCover kind={editorialCoverFor(article.slug)} compact /></div>
       </div>

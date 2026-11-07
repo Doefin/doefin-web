@@ -1,11 +1,19 @@
 import { isEditorialAnchor } from '../editorial-contract'
-import type { EditorialTopic, V3EditorialArticle } from '../editorial-types'
+import { isSafeDocsHref } from '../docs-contract'
+import type { EditorialAuthor, EditorialTopic, V3EditorialArticle } from '../editorial-types'
 const text = (v: unknown): v is string => typeof v === 'string' && v.trim().length > 0
 const slug = (v: unknown): v is string => text(v) && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(v)
 const date = (v: unknown) => v === undefined || v === null || (text(v) && /^\d{4}-\d{2}-\d{2}$/.test(v) && !Number.isNaN(Date.parse(v)) && new Date(v).toISOString().slice(0, 10) === v)
 const publicId = (v: unknown) => text(v) && !/^(drafts|versions)\./.test(v)
 type Row = Record<string, unknown>
 export type EditorialSnapshot = { topics: EditorialTopic[]; articles: V3EditorialArticle[] }
+
+function parseAuthor(value: unknown): EditorialAuthor | undefined {
+  if (!value || typeof value !== 'object') return
+  const { _id, _type, slug: authorSlug, kind, name, url } = value as Row
+  if (!publicId(_id) || _type !== 'authorProfile' || !slug(authorSlug) || !text(name) || (kind !== 'person' && kind !== 'organization')) return
+  return { slug: authorSlug, kind, name, ...(isSafeDocsHref(url) ? { url } : {}) }
+}
 
 /** One published snapshot validates topic identity and every article reference. */
 export function parseEditorial(value: unknown): EditorialSnapshot {
@@ -43,7 +51,8 @@ export function parseEditorial(value: unknown): EditorialSnapshot {
       anchors.add(section.id)
       return { id: section.id, heading: section.heading, paragraphs: section.paragraphs as string[] }
     })
-    return { kind: row.kind as V3EditorialArticle['kind'], slug: row.slug, title: row.title, summary: row.summary, sortOrder: Number(row.sortOrder), topics, tags: topics.map(topic => topic.label), sections,
+    const author = parseAuthor(row.author)
+    return { kind: row.kind as V3EditorialArticle['kind'], slug: row.slug, title: row.title, ...(author ? { author } : {}), summary: row.summary, sortOrder: Number(row.sortOrder), topics, tags: topics.map(topic => topic.label), sections,
       ...(row.reviewedAt ? { reviewedAt: row.reviewedAt as string } : {}), ...(row.publishedAt ? { publishedAt: row.publishedAt as string } : {}), ...(row.reviewDateSource ? { reviewDateSource: String(row.reviewDateSource) } : {}) }
   }).sort((a: V3EditorialArticle, b: V3EditorialArticle) => a.sortOrder - b.sortOrder || a.slug.localeCompare(b.slug))
   return { topics: [...topicIds.values()], articles }

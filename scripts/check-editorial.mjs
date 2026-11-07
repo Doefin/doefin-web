@@ -3,7 +3,8 @@ import { loadTypescript } from './lib/load-typescript.mjs'
 import { editorialFixture } from './lib/editorial-fixture.mjs'
 import { editorialSeed, editorialAnchor } from './lib/editorial-migration.mjs'
 const contract = loadTypescript('content/editorial-contract.ts')
-const parser = loadTypescript('content/sanity/editorial-parse.ts', {'../editorial-contract': contract})
+const docsContract = loadTypescript('content/docs-contract.ts', {'./editorial-contract': contract})
+const parser = loadTypescript('content/sanity/editorial-parse.ts', {'../editorial-contract': contract, '../docs-contract': docsContract})
 const fixture = editorialFixture().editorial
 const view = parser.parseEditorial(fixture)
 assert.equal(view.topics.length, 4); assert.equal(view.articles.length, 5)
@@ -15,8 +16,14 @@ for (const [i, original] of editorialSeed.entries()) {
   assert.deepEqual(article.sections, original.sections.map(section => ({ id: editorialAnchor(section.heading), ...section })))
   assert.equal(article.reviewedAt, original.reviewedAt ?? '2026-10-19')
   assert(!article.publishedAt, 'No inferred publication date')
+  assert(!article.author, 'Existing records have no inferred byline')
 }
 const clone = () => JSON.parse(JSON.stringify(fixture))
+const credited = clone()
+credited.articles[0].author = { _id: 'author-example', _type: 'authorProfile', kind: 'person', slug: 'example', name: 'Example Person' }
+credited.articles[1].author = { _id: 'drafts.private-author', _type: 'authorProfile', kind: 'person', slug: 'private-author', name: 'Private Author' }
+assert.deepEqual(parser.parseEditorial(credited).articles[0].author, { kind: 'person', slug: 'example', name: 'Example Person' })
+assert.equal(parser.parseEditorial(credited).articles[1].author, undefined, 'An unpublished author does not appear on a public article')
 for (const mutate of [
   value => { value.articles[0].topics[0] = null },
   value => { value.topics[0]._id = 'drafts.private-topic' },

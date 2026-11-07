@@ -10,6 +10,11 @@ export const editorialArticle = defineType({
     defineField({ name: 'canonicalKind', type: 'string', hidden: true, readOnly: true }),
     defineField({ name: 'kind', type: 'string', options: { list: [{ title: 'Blog article', value: 'blog' }, { title: 'Academy lesson', value: 'academy' }] }, description: 'Part of the public URL. Once published, keep this kind unchanged.', validation: rule => rule.required().custom(validatePermanentKind) }),
     defineField({ name: 'title', type: 'string', validation: rule => rule.required().custom(nonBlank) }),
+    defineField({
+      name: 'author', title: 'Author', type: 'reference', to: [{ type: 'authorProfile' }],
+      description: 'Choose the name readers will see on the article.',
+      options: { disableNew: true },
+    }),
     defineField({ name: 'slug', type: 'slug', options: { source: 'title', maxLength: 96, isUnique: isUniqueContentSlug }, description: 'Permanent public URL. Blog tag and Academy guides are reserved route prefixes.', validation: rule => rule.required().custom(validatePermanentSlug) }),
     defineField({ name: 'summary', type: 'text', rows: 3, validation: rule => rule.required().custom(nonBlank) }),
     defineField({ name: 'sortOrder', type: 'number', initialValue: 1000, description: 'Library order; lower numbers first. Existing five articles retain their original order.', validation: rule => rule.required().integer().min(0) }),
