@@ -13,9 +13,9 @@ const formatDifficulty = (value: number) => `${(value / 10).toFixed(1)}T`
 export function MarketExample() {
   const id = useId()
   const [ready, setReady] = useState(false)
-  const [reading, setReading] = useState<number | null>(null)
-  const relation = reading === null ? undefined : reading < threshold ? 'below' : reading > threshold ? 'above' : 'equal'
-  const winner = relation === undefined ? undefined : relation === 'below' ? 'no' : 'yes'
+  const [reading, setReading] = useState(threshold)
+  const relation = reading < threshold ? 'below' : reading > threshold ? 'above' : 'equal'
+  const winner = relation === 'below' ? 'no' : 'yes'
   const thresholdLabel = formatDifficulty(threshold)
   const explanation = relation === 'equal' ? 'equals' : `is ${relation}`
 
@@ -59,8 +59,8 @@ export function MarketExample() {
         </div>
       </figure>
 
-      <div className={styles.tryReading} hidden={!ready}>
-        <fieldset className={styles.readings}>
+      <div className={styles.tryReading}>
+        <fieldset className={styles.readings} hidden={!ready}>
           <legend>Try a difficulty reading</legend>
           <div className={styles.choices}>
             {readings.map(value => (
@@ -80,9 +80,7 @@ export function MarketExample() {
           </div>
         </fieldset>
         <p className={styles.result} role="status" aria-atomic="true">
-          {reading === null
-            ? 'Pick a sample reading to see which side wins.'
-            : `${formatDifficulty(reading)} ${explanation} the threshold. The ${winner === 'yes' ? 'Yes' : 'No'} side wins.`}
+          {`${formatDifficulty(reading)} ${explanation} the threshold. The ${winner === 'yes' ? 'Yes' : 'No'} side wins.`}
         </p>
       </div>
 
