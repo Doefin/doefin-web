@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from '@/components/routing/SiteLink'
 import { Container } from '@/components/layout/Container'
 import { Arrow } from '@/components/v3/Arrow'
-import { HeroVisual } from '@/components/v3/HeroVisual'
+import { DifficultyHero } from '@/components/v3/DifficultyHero'
 import { LandingMotion } from '@/components/v3/LandingMotion'
 import { MarketExample } from '@/components/v3/MarketExample'
 import { ProductPreview } from '@/components/v3/ProductPreview'
@@ -20,21 +20,7 @@ export const metadata: Metadata = {
 
 export default function V3Home() {
   return <LandingMotion>
-    <section aria-labelledby="v3-title" className="v37-hero">
-      <Container className="v37-hero-grid">
-        <div className="v37-hero-copy">
-          <h1 id="v3-title">Trade and hedge<br /><span>Bitcoin hashrate exposure.</span></h1>
-          <p className="v37-lede">Miners can hedge the effect of rising <Link href="/glossary/mining-difficulty" className="underline decoration-white/30 underline-offset-4 hover:decoration-white">difficulty</Link> on expected Bitcoin production. Investors can trade their views on network hashrate through markets on Bitcoin mining difficulty.</p>
-          <div className="v37-actions"><Link href="/for/miners" data-v3-cta="planner" data-v3-placement="hero" className="v37-button">Plan difficulty exposure <Arrow /></Link><Link href="/learn/difficulty-exposure" data-v3-cta="tutorial" data-v3-placement="hero" className="v37-link">Follow a worked example <Arrow /></Link></div>
-          <p className="v37-risk">A losing position pays zero. You can lose the full amount paid for a position, plus applicable costs.</p>
-          <nav aria-label="Review before using Doefin" className="mt-2 flex flex-wrap gap-x-6 gap-y-1">
-            <Link href="/docs/smart-contracts" data-v3-cta="evidence" data-v3-placement="hero" className="v37-link">Review technical evidence <Arrow /></Link>
-            <Link href="/docs/risks-and-limitations" data-v3-cta="risk" data-v3-placement="hero" className="v37-link">Risks and limitations <Arrow /></Link>
-          </nav>
-        </div>
-        <HeroVisual />
-      </Container>
-    </section>
+    <DifficultyHero />
 
     <section id="production-scenario" aria-labelledby="production-title" className="v37-audience v37-section">
       <Container>
