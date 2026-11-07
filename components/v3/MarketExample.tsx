@@ -1,60 +1,106 @@
+'use client'
+
+import { useEffect, useId, useState } from 'react'
 import Link from '@/components/routing/SiteLink'
 import { Arrow } from './Arrow'
 import styles from './MarketExample.module.css'
 
-/** Hypothetical whole-position amounts, not a quote or a per-token payout. */
+// Use tenths of a trillion so the illustrative equality case compares exactly.
+const threshold = 1372
+const readings = [1371, threshold, 1373]
+const formatDifficulty = (value: number) => `${(value / 10).toFixed(1)}T`
+
 export function MarketExample() {
-  return <div className={styles.explainer}>
-    <div className={styles.intro}>
-      <p className={styles.kicker}>Illustrative purchase</p>
-      <p>Assume your Yes shares have a combined winning payout of <strong>100 units</strong>: shares held × the stated payout per share. All amounts are in the payment token, before fees.</p>
-    </div>
-    <div className={styles.story}>
-      <div className={styles.purchase}>
-        <span className={styles.position}>Example position <strong>Yes</strong></span>
-        <p className={styles.cost}><strong>60</strong><span>units paid</span></p>
-        <p className={styles.purchaseNote}>Separate from the chart. Held through resolution.</p>
+  const id = useId()
+  const [ready, setReady] = useState(false)
+  const [reading, setReading] = useState<number | null>(null)
+  const relation = reading === null ? undefined : reading < threshold ? 'below' : reading > threshold ? 'above' : 'equal'
+  const winner = relation === undefined ? undefined : relation === 'below' ? 'no' : 'yes'
+  const thresholdLabel = formatDifficulty(threshold)
+  const explanation = relation === 'equal' ? 'equals' : `is ${relation}`
+
+  useEffect(() => {
+    setReady(true)
+  }, [])
+
+  return (
+    <section className={styles.example} aria-labelledby={`${id}-title`}>
+      <div>
+        <p className={styles.eyebrow}>Settlement</p>
+        <h3 id={`${id}-title`} className={styles.title}>One block decides the winner</h3>
+        <p className={styles.intro}>Compare Bitcoin mining difficulty at the specified block with the market’s threshold.</p>
       </div>
-      <svg className={styles.branch} viewBox="0 0 140 350" fill="none" aria-hidden="true">
-        <path d="M0 175H42Q56 175 56 161V64Q56 50 70 50H138" />
-        <path d="M0 175H42Q56 175 56 189V286Q56 300 70 300H138" />
-        <circle cx="0" cy="175" r="4" />
-      </svg>
-      <div className={styles.endings}>
-        <p className={styles.observation}>Difficulty at Bitcoin block <strong>979,776</strong> · T = trillion</p>
-        <div className={styles.ending}>
-          <div className={styles.condition}>
-            <span className={styles.outcome}>Yes wins</span>
-            <p>At or above <strong>137.2T</strong></p>
+
+      <figure className={styles.rule} aria-labelledby={`${id}-block`}>
+        <figcaption className={styles.observation}>
+          <span id={`${id}-block`}>At Bitcoin block <strong>979,776</strong></span>
+          <span className={styles.tag}>Illustrative market</span>
+        </figcaption>
+        <div className={styles.comparison} data-relation={relation} data-winner={winner}>
+          <div className={styles.threshold}>
+            <span className={styles.label}>Difficulty threshold</span>
+            <strong>{thresholdLabel}</strong>
+            <p>T = trillion</p>
           </div>
-          <div className={styles.money}>
-            <p className={styles.payout}><strong>100</strong><span>Total payout</span></p>
-            <p className={styles.result}><strong>+40 profit</strong><span>before fees</span></p>
+          <div className={styles.scale} aria-hidden="true">
+            <span className={styles.tick} />
+            <span className={styles.marker} />
           </div>
-          <div className={styles.breakdown}>
-            <span className={styles.costShare}>60 cost</span>
-            <span className={styles.gainShare}>40 profit</span>
+          <div className={styles.outcomes}>
+            <div className={styles.outcome} data-side="no">
+              <p className={styles.condition}>Below {thresholdLabel}</p>
+              <h4>“No” wins</h4>
+            </div>
+            <div className={styles.outcome} data-side="yes">
+              <p className={styles.condition}>At or above {thresholdLabel}</p>
+              <h4>“Yes” wins</h4>
+            </div>
           </div>
         </div>
-        <div className={`${styles.ending} ${styles.losing}`}>
-          <div className={styles.condition}>
-            <span className={styles.outcome}>Yes loses</span>
-            <p>Below <strong>137.2T</strong></p>
+      </figure>
+
+      <div className={styles.tryReading} hidden={!ready}>
+        <fieldset className={styles.readings}>
+          <legend>Try a difficulty reading</legend>
+          <div className={styles.choices}>
+            {readings.map(value => (
+              <div key={value} className={styles.choice}>
+                <input
+                  className="sr-only"
+                  id={`${id}-reading-${value}`}
+                  name={`${id}-reading`}
+                  type="radio"
+                  value={value}
+                  checked={reading === value}
+                  onChange={() => setReading(value)}
+                />
+                <label htmlFor={`${id}-reading-${value}`}>{formatDifficulty(value)}</label>
+              </div>
+            ))}
           </div>
-          <div className={styles.money}>
-            <p className={styles.payout}><strong>0</strong><span>Total payout</span></p>
-            <p className={styles.result}><strong>60 loss</strong><span>before fees</span></p>
-          </div>
-          <p className={styles.lossNote}>Your 60-unit cost is not refunded.</p>
-        </div>
+        </fieldset>
+        <p className={styles.result} role="status" aria-atomic="true">
+          {reading === null
+            ? 'Pick a sample reading to see which side wins.'
+            : `${formatDifficulty(reading)} ${explanation} the threshold. The ${winner === 'yes' ? 'Yes' : 'No'} side wins.`}
+        </p>
       </div>
-    </div>
-    <div className={styles.takeaway}>
-      <p><strong>Bought No shares?</strong> They pay below 137.2T; at or above, they pay zero.</p>
-    </div>
-    <div className={styles.footer}>
-      <p>Earlier crossings do not count. Redeem winning shares after the market resolves. Check actual amounts and fees in the app.</p>
-      <Link href="/docs/how-settlement-works" className="v37-link">Settlement guide <Arrow /></Link>
-    </div>
-  </div>
+
+      <details className={styles.workedExample}>
+        <summary>See what a 60-unit Yes position pays</summary>
+        <div className={styles.exampleBody}>
+          <p>A trader pays 60 units for Yes shares and holds them through resolution. The amounts below are illustrative, in the same collateral token and before fees.</p>
+          <ul>
+            <li><strong>Yes wins:</strong> 100 units paid out. Subtract the 60-unit cost for a profit of 40 units.</li>
+            <li><strong>Yes loses:</strong> 0 units paid out. The loss is the full 60-unit cost.</li>
+          </ul>
+          <p>The winning payout is the number of shares held times the payout per share. Redeem winning shares after the market resolves. Check actual amounts and fees in the app.</p>
+        </div>
+      </details>
+      <div className={styles.footer}>
+        <p>Only the reading at the specified block counts. Earlier crossings do not count.</p>
+        <Link href="/docs/how-settlement-works">Settlement guide <Arrow className={styles.arrow} /></Link>
+      </div>
+    </section>
+  )
 }
