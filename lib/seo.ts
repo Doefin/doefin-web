@@ -39,17 +39,18 @@ export function authorNode(a: {
   slug: string
   kind: 'organization' | 'person'
   name: string
-  url: string
-  description: string
+  url?: string
+  description?: string
   metadataDescription?: string
   sameAs?: string[]
 }) {
+  const description = a.metadataDescription ?? a.description
   return {
     '@type': a.kind === 'person' ? 'Person' : 'Organization',
     '@id': `${site.url}/#${a.slug}`,
     name: a.name,
-    url: `${site.url}${versionedPath(a.url)}`,
-    description: a.metadataDescription ?? a.description,
+    ...(a.url ? { url: a.url.startsWith('/') ? `${site.url}${versionedPath(a.url)}` : a.url } : {}),
+    ...(description ? { description } : {}),
     ...(a.kind === 'person'
       ? { worksFor: { '@id': ID.org } }
       : { parentOrganization: { '@id': ID.org } }),

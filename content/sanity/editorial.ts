@@ -7,7 +7,7 @@ import type { V3EditorialArticle } from '../editorial-types'
 export const editorialQuery = `{
   "topics": *[_type == "topic"]{_id,_type,"slug":slug.current,label},
   "articles": *[_type == "editorialArticle"]{_id,_type,kind,"slug":slug.current,title,summary,sortOrder,reviewedAt,publishedAt,reviewDateSource,
-    sections[]{id,heading,paragraphs},topics[]->{_id,_type,"slug":slug.current,label}}
+    "author":author->{_id,_type,slug,kind,name,url},sections[]{id,heading,paragraphs},topics[]->{_id,_type,"slug":slug.current,label}}
 }`
 /** Published-only, origin API, per-render memoization, no fallback/cache. Optional
  * website preview remains glossary-only; editorial drafts are never requested. */

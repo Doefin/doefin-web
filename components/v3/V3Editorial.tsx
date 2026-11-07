@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from '@/components/routing/SiteLink'
 import { AutoLinkedProse } from '@/components/content/AutoLinkedProse'
 import { allGuides, allV3Editorial, getV3Editorial, getV3Topic, type V3EditorialArticle } from '@/content'
-import { seo, jsonLd, publisherRef } from '@/lib/seo'
+import { authorNode, seo, jsonLd, publisherRef } from '@/lib/seo'
 import { site } from '@/lib/site'
 import { dateLong } from '@/lib/format'
 import { ContentLinks, ContentPage } from './ContentPage'
@@ -43,8 +43,11 @@ function article(kind: Kind) {
       if (!item) notFound()
       if (kind === 'blog') return <V3BlogPost article={item} />
       return <div className="[overflow-wrap:anywhere]"><ContentPage title={item.title} summary={item.summary} eyebrow="Educational guide" crumbs={[{ name: label(kind), href: path(kind) }, { name: item.title, href: path(kind, item.slug) }]}>
-        <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd({ '@context': 'https://schema.org', '@type': 'Article', headline: item.title, description: item.summary, publisher: publisherRef, mainEntityOfPage: site.url + path(kind, item.slug), datePublished: item.publishedAt })} />
-        {item.reviewedAt && <p className="mb-8 text-xs text-subtle">Guide reviewed <time dateTime={item.reviewedAt}>{dateLong(item.reviewedAt)}</time></p>}
+        <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd({ '@context': 'https://schema.org', '@type': 'Article', headline: item.title, description: item.summary, publisher: publisherRef, mainEntityOfPage: site.url + path(kind, item.slug), datePublished: item.publishedAt, author: item.author && authorNode(item.author) })} />
+        {(item.author || item.reviewedAt) && <p className="mb-8 flex flex-wrap gap-x-4 gap-y-2 text-xs text-subtle">
+          {item.author && <span>By {item.author.name}</span>}
+          {item.reviewedAt && <span>Guide reviewed <time dateTime={item.reviewedAt}>{dateLong(item.reviewedAt)}</time></span>}
+        </p>}
         <AutoLinkedProse paragraphs={item.sections.flatMap(section => [{ heading: section.heading, id: section.id }, ...section.paragraphs])} />
         <ContentLinks links={[{ href: '/methodology/difficulty-index', label: 'Read how the forecast is calculated' }, { href: '/tools/difficulty-exposure', label: 'Compare your production scenarios' }, { href: '/data', label: 'Read the data examples' }]} />
       </ContentPage></div>
