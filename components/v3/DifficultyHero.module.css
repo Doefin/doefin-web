@@ -1,0 +1,350 @@
+.hero {
+  background: var(--df-bg);
+  color: var(--df-text);
+  border-bottom: 1px solid var(--df-line);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 575fr) minmax(0, 560fr);
+  align-items: start;
+  gap: clamp(24px, 3.52vw, 45px);
+  padding-block: 84px 33px;
+}
+
+.intro {
+  min-height: 395px;
+  padding: var(--df-space-2) var(--df-space-1) 0 0;
+  border-right: 1px solid var(--df-line);
+}
+
+.eyebrow {
+  color: var(--df-text-muted);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 1.45px;
+  text-transform: uppercase;
+}
+
+.intro h1 {
+  margin-top: 14px;
+  font-size: clamp(27px, 3.6vw, 46px);
+  font-weight: 800;
+  line-height: 1.125;
+  letter-spacing: -.0323em;
+}
+
+.intro h1 span { display: block; }
+
+.lede {
+  max-width: 40ch;
+  margin-top: var(--df-space-6);
+  color: var(--df-text-muted);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.actions {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 13px;
+  margin-top: 36px;
+}
+
+.primary, .markets, .play {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 700;
+  touch-action: manipulation;
+}
+
+.primary, .markets {
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.primary {
+  justify-content: center;
+  min-height: 48px;
+  min-width: 215px;
+  padding-inline: var(--df-space-4);
+  background: var(--df-action);
+  color: var(--df-on-action);
+  border-radius: var(--df-radius-md);
+}
+
+.primary:hover { background: var(--df-action-hover); }
+
+.markets { color: var(--df-link); }
+
+.markets span {
+  border-bottom: 1px solid var(--df-line-strong);
+  padding-bottom: 2px;
+}
+
+.markets:hover span { border-color: currentColor; }
+
+.scenario {
+  --plot-height: 50px;
+  /* The Doefin slant is 12 degrees: height × tan(12deg). */
+  --cut: 10.63px;
+  min-width: 0;
+  padding-top: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.scenarioHeading, .plotLabels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--df-space-2);
+}
+
+.scenarioHeading h2 {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 23px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 99px;
+  min-height: 23px;
+  padding-inline: var(--df-space-2);
+  border-radius: var(--df-radius-sm);
+  background: var(--df-caution);
+  color: var(--df-on-caution);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .7px;
+  text-transform: uppercase;
+}
+
+.plotLabels {
+  margin-top: 46px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.budget, .metricLabel, .assumptions, .staticResult, .risk { color: var(--df-text-muted); }
+
+.difficulty {
+  text-align: right;
+  transform: translateY(var(--label-offset));
+}
+
+.scenario[data-moving] .difficulty { color: var(--df-link); }
+
+.plot {
+  position: relative;
+  height: var(--plot-height);
+  margin-top: 19px;
+}
+
+.outline, .outline::after, .productionFill {
+  position: absolute;
+  clip-path: polygon(0 0, 100% 0, calc(100% - var(--cut)) 100%, 0 100%);
+}
+
+.outline {
+  inset: -1px;
+  background: var(--df-line-strong);
+}
+
+.outline::after {
+  content: '';
+  inset: 1px;
+  background: var(--df-bg);
+}
+
+.productionFill {
+  inset: 0 auto 0 0;
+  width: var(--output);
+  background: var(--df-text);
+}
+
+.cutEdge {
+  position: absolute;
+  left: var(--output);
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--df-link);
+  opacity: var(--edge-light);
+  transform: skewX(-12deg);
+  transform-origin: top;
+}
+
+.bracket {
+  position: absolute;
+  left: calc(var(--output) - var(--cut));
+  right: var(--cut);
+  top: calc(100% + 11px);
+  height: 1px;
+  background: var(--df-blue);
+  visibility: hidden;
+  opacity: var(--reveal);
+}
+
+.bracket::before, .bracket::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  width: 1px;
+  height: 9px;
+  background: var(--df-blue);
+}
+
+.bracket::before { left: 0; }
+.bracket::after { right: 0; }
+
+.metrics {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--df-space-3);
+  margin-top: 27px;
+}
+
+.metricValue {
+  display: flex;
+  align-items: baseline;
+  gap: 13px;
+  font-size: 97px;
+  font-weight: 800;
+  letter-spacing: -4px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.unit {
+  font-size: 31px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.metricLabel {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.expected .metricLabel { margin: 6px 0 0 4px; }
+
+.shortfall {
+  visibility: hidden;
+  padding: 15px 8px 0 0;
+  text-align: right;
+  opacity: var(--reveal);
+  transform: translateY(calc((1 - var(--reveal)) * 8px));
+}
+
+.scenario[data-shortfall] .bracket, .scenario[data-shortfall] .shortfall { visibility: visible; }
+
+.shortfallValue {
+  color: var(--df-blue);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 38px;
+  white-space: nowrap;
+}
+
+.shortfall .metricLabel { margin-top: 4px; font-size: 13px; }
+
+.assumptions {
+  margin-top: 28px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 19px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 10px;
+}
+
+.play {
+  justify-content: center;
+  min-width: 157px;
+  padding-inline: 14px;
+  border: 1px solid var(--df-line-strong);
+  border-radius: var(--df-radius-sm);
+  background: var(--df-bg);
+  color: var(--df-text);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.play:hover { background: var(--df-surface-alt); }
+
+.staticResult {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.risk {
+  border-top: 1px solid var(--df-line);
+  padding-block: 14px 21px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+@media (max-width: 900px) {
+  .grid { padding-top: 58px; }
+  .metricValue { font-size: clamp(60px, 8vw, 97px); }
+  .unit { font-size: 24px; }
+}
+
+@media (max-width: 740px) {
+  .grid { display: block; padding-block: 23px 12px; }
+  .intro { min-height: auto; padding: 0; border: 0; }
+  .eyebrow { font-size: 11px; line-height: 17px; letter-spacing: 1.1px; }
+
+  .intro h1 {
+    margin-top: 13px;
+    font-size: clamp(24px, 7.7vw, 30px);
+    line-height: 1.17;
+  }
+
+  .lede { margin-top: 20px; font-size: 14px; line-height: 22px; }
+  .actions { margin-top: 19px; gap: 2px; }
+  .primary { min-width: 204px; }
+
+  .scenario {
+    --plot-height: 36px;
+    --cut: 7.65px;
+    margin-top: var(--df-space-4);
+    padding-top: 14px;
+    border-top: 1px solid var(--df-line);
+  }
+
+  .scenarioHeading h2 { font-size: 15px; }
+  .plotLabels { margin-top: 27px; font-size: 12px; line-height: 18px; }
+  .plot { margin-top: 10px; }
+  .metrics { margin-top: 24px; }
+  .metricValue { gap: 10px; font-size: 63px; letter-spacing: -2.5px; }
+  .unit { font-size: 20px; }
+  .metricLabel { font-size: 12px; line-height: 18px; }
+  .expected .metricLabel { margin: 7px 0 0 3px; }
+  .shortfall { padding: 15px 0 0; }
+  .shortfallValue { font-size: 24px; line-height: 31px; }
+  .shortfall .metricLabel { font-size: 11px; }
+  .assumptions { margin-top: 11px; font-size: 12px; line-height: 18px; }
+  .controls { margin-top: 9px; }
+  .play { min-width: 147px; font-size: 12px; }
+  .risk { padding-block: 11px 14px; font-size: 11px; line-height: 17px; }
+}
+
+@media (max-width: 350px) {
+  .intro h1 { font-size: clamp(22px, 7.25vw, 25px); }
+}

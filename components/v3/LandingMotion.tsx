@@ -9,15 +9,6 @@ export function LandingMotion({ children }: { children: ReactNode }) {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)')
     if (media.matches || !('IntersectionObserver' in window)) return
     const animations: Animation[] = []
-    const hero = root.current?.querySelector<HTMLElement>('[data-hero-rule]')
-    const heroObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.intersectionRatio < 0.65 || media.matches || !hero) return
-        hero.dataset.motion = 'play'
-        heroObserver.disconnect()
-      })
-    }, { threshold: 0.65 })
-    if (hero) heroObserver.observe(hero)
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return
@@ -35,15 +26,11 @@ export function LandingMotion({ children }: { children: ReactNode }) {
     const stop = () => {
       if (!media.matches) return
       observer.disconnect()
-      heroObserver.disconnect()
-      if (hero) delete hero.dataset.motion
       animations.forEach(animation => animation.cancel())
     }
     media.addEventListener('change', stop)
     return () => {
       observer.disconnect()
-      heroObserver.disconnect()
-      if (hero) delete hero.dataset.motion
       animations.forEach(animation => animation.cancel())
       media.removeEventListener('change', stop)
     }
