@@ -10,7 +10,7 @@ import { HomeResources } from '@/components/v3/HomeResources'
 import { HomeFaq } from '@/components/v3/HomeFaq'
 import { ProductUpdates } from '@/components/v3/ProductUpdates'
 import { seo } from '@/lib/seo'
-import { site } from '@/lib/site'
+import { TradeWalkthrough } from '@/components/v3/TradeWalkthrough'
 import './home.css'
 
 export const metadata: Metadata = {
@@ -36,15 +36,7 @@ export default function V3Home() {
 
     <section id="how-it-works" aria-labelledby="mechanics-title" className="v37-mechanics v37-section">
       <Container>
-        <div className="v311-payout-heading" data-reveal><p className="v37-eyebrow">How it works</p><h2 id="mechanics-title" className="v37-heading"><span id="setup-title" className="scroll-mt-28">Choose a market. Fund your account. Place a trade.</span></h2><p className="v37-copy">All done in a few minutes.</p></div>
-        <ol id="get-started" className="mt-7 grid scroll-mt-28 gap-4 md:grid-cols-3" data-reveal>
-          {[
-            { title: 'Choose a Bitcoin difficulty market', text: ['Check the difficulty threshold and the block at which difficulty will be observed. Yes wins if difficulty at that block is at or above the threshold; No wins below it. Buy shares on the side that matches your view. These tokens represent your position.', 'Prices change as traders buy and sell.'], guides: [{ href: '/docs/your-first-trade', label: 'Review price, amount and order execution' }] },
-            { title: 'Fund your account and trade', text: ['Fund your account with the collateral token required by your market. For cbBTC markets, deposit cbBTC directly or convert native BTC using the integrated SwapKit service. Then choose your position and place your trade.', 'cbBTC is a wrapped Bitcoin asset; it is not native BTC.'], guides: [{ href: '/docs/connecting-a-wallet', label: 'Check sign-in and wallet signatures' }, { href: '/docs/getting-collateral', label: 'Check token, network, destination and costs' }] },
-            { title: 'Sell or redeem', text: ['Place a sell order before settlement, or hold until the market resolves. A sale depends on available buyers and price.', 'Each winning share in a cbBTC market redeems for 1 cbBTC. Check the displayed payout and collateral token for other markets. Losing shares pay nothing. Your profit or loss also depends on what you paid and any fees.'], guides: [{ href: '/docs/managing-positions', label: 'Read about managing positions' }] },
-          ].map((step, index) => <li key={step.title} className="rounded-panel border border-white/10 bg-surface/40 p-5"><p className="text-xs font-semibold text-subtle">Step {index + 1}</p><h3 className="mt-3 text-lg font-semibold text-body">{step.title}</h3>{step.text.map(line => <p key={line} className="mt-2 text-sm leading-relaxed text-subtle">{line}</p>)}<nav aria-label={step.title + ' guides'} className="mt-4 flex flex-col items-start gap-2">{step.guides.map(guide => <Link key={guide.href} href={guide.href} data-v3-cta="setup" data-v3-placement="setup" className="inline-flex min-h-11 items-center text-sm font-semibold text-highlight hover:underline">{guide.label} <Arrow /></Link>)}</nav></li>)}
-        </ol>
-        <p className="v37-note">Ready to inspect a market? <a href={site.appUrl} data-v3-cta="app" data-v3-placement="setup" className="font-semibold text-highlight underline underline-offset-4">Enter app</a>.</p>
+        <TradeWalkthrough />
         <div className="mt-7" data-reveal><MarketExample /></div>
         <details id="inside-the-product" className="mt-7 rounded-panel border border-white/15 bg-surface/40 p-5 sm:p-6" data-reveal>
           <summary id="product-title" className="min-h-11 scroll-mt-28 cursor-pointer text-base font-semibold text-highlight">View the app screenshot: 19 October 2026 · not live</summary>
