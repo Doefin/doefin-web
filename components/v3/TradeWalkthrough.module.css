@@ -1,0 +1,227 @@
+.journey {
+  --rule: color-mix(in srgb, var(--df-line-strong) 47%, var(--df-bg));
+  color: var(--df-text);
+  font-variant-numeric: tabular-nums;
+}
+.mast { margin-bottom: clamp(22px, 4vw, 48px); }
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--df-text-muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+.kicker::before { content: ''; width: 24px; height: 1px; background: var(--df-blue); }
+.title {
+  margin-top: 10px;
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 800;
+  letter-spacing: -.05em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+.steps {
+  list-style: none;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+.step {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  column-gap: clamp(14px, 2.6vw, 36px);
+  border-bottom: 1px solid var(--rule);
+}
+.index {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  align-self: stretch;
+  padding-top: 26px;
+  grid-row: 1 / span 2;
+}
+.index::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 50%;
+  width: 1px;
+  background: var(--rule);
+}
+.step:first-child .index::before { top: 35px; }
+.step:last-child .index::before { bottom: auto; height: 35px; }
+.index span {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--df-line-strong);
+  border-radius: 50%;
+  background: var(--df-bg);
+  color: var(--df-link);
+  font-size: 12px;
+  font-weight: 800;
+}
+.copy { align-self: start; padding-top: 24px; }
+.copy h3 {
+  font-size: clamp(22px, 2.45vw, 31px);
+  font-weight: 800;
+  letter-spacing: -.038em;
+  line-height: 1.12;
+}
+.copy p {
+  max-width: 46ch;
+  margin-top: 7px;
+  font-size: 14px;
+  color: var(--df-text-muted);
+}
+.mast {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+.motionToggle {
+  min-height: 44px;
+  padding-inline: 10px;
+  border: 1px solid var(--df-line-strong);
+  border-radius: var(--df-radius-sm);
+  background: transparent;
+  color: var(--df-text-muted);
+  font: 750 12px Manrope, system-ui, sans-serif;
+  cursor: pointer;
+}
+.motionToggle:hover, .motionToggle:focus-visible { color: var(--df-link); }
+.diagram {
+  display: block;
+  width: 100%;
+  max-width: 395px;
+  margin: 14px auto 0;
+  overflow: visible;
+}
+.diagram text { fill: var(--df-text-muted); font: 650 13px Manrope, sans-serif; }
+.diagram .key { fill: var(--df-text); font-size: 15px; font-weight: 800; }
+.diagram .line, .diagram .route {
+  fill: none;
+  stroke-width: 1.4;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.diagram .line { stroke: var(--df-line-strong); }
+.diagram .route { stroke: var(--df-link); }
+.diagram .dot { fill: var(--df-bg); stroke: var(--df-link); stroke-width: 1.4; }
+.diagram .joint { fill: var(--df-link); }
+.diagram .traceOverlay {
+  fill: none;
+  stroke: var(--df-link);
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .diagram [data-trace] { transition: opacity 140ms ease; }
+  .diagram[data-playing] [data-trace] { opacity: .32; }
+  @supports (interpolate-size: allow-keywords) and (transition-behavior: allow-discrete) and selector(details::details-content) {
+    .details { interpolate-size: allow-keywords; }
+    .details::details-content {
+      block-size: 0;
+      opacity: 0;
+      overflow: clip;
+      transition: block-size 260ms cubic-bezier(.22,1,.36,1),
+                  opacity 180ms ease,
+                  content-visibility 260ms allow-discrete;
+    }
+    .details[open]::details-content { block-size: auto; opacity: 1; }
+  }
+}
+.details {
+  grid-column: 2 / -1;
+  padding-bottom: 8px;
+}
+.details summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 750;
+  color: var(--df-link);
+  list-style: none;
+}
+.details summary::-webkit-details-marker { display: none; }
+.details summary::before { content: '+'; color: var(--df-link); font-size: 16px; font-weight: 600; }
+.details[open] summary::before { content: '−'; }
+.detailsBody { padding-block: 8px 10px; }
+.detailsBody p {
+  max-width: 76ch;
+  color: var(--df-text-muted);
+  font-size: 14px;
+}
+.detailsBody p + p { margin-top: 8px; }
+.detailsBody nav { display: flex; flex-wrap: wrap; column-gap: 24px; margin-top: 3px; }
+.detailsBody a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--df-link);
+  font-size: 13px;
+  font-weight: 750;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 20px;
+  flex-wrap: wrap;
+  padding-top: 14px;
+  color: var(--df-text-muted);
+  font-size: 13px;
+}
+.app {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 44px;
+  padding-inline: 14px;
+  border: 1px solid var(--df-line-strong);
+  border-radius: var(--df-radius-sm);
+  font-size: 14px;
+  font-weight: 750;
+  text-decoration: none;
+  color: var(--df-text);
+}
+.app:hover { background: var(--df-surface-alt); }
+.appArrow { width: 15px; height: 15px; }
+@media (min-width: 681px) {
+  .step figure { grid-area: 1 / 3; align-self: start; margin-block: 14px 0; }
+}
+@media (max-width: 680px) {
+  .step { grid-template-columns: 30px minmax(0, 1fr); column-gap: 10px; }
+  .index { grid-row: 1 / span 3; padding-top: 20px; }
+  .index span { width: 28px; height: 28px; font-size: 11px; }
+  .copy { padding-top: 20px; }
+  .copy p { margin-top: 5px; font-size: 13px; }
+  .step figure { grid-column: 2; }
+  .diagram { margin: 8px 0 0; }
+  .details { padding-block: 6px 5px; }
+}
+@media (forced-colors: active) {
+  .diagram text, .diagram .key { fill: CanvasText; }
+  .diagram .line, .diagram .route, .diagram .dot { stroke: CanvasText; }
+  .diagram .joint { fill: CanvasText; }
+  .diagram .traceOverlay { stroke: Highlight; }
+}
