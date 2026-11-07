@@ -50,9 +50,6 @@
 }
 .comparison {
   --point: 50%;
-  --no-color: var(--df-down);
-  --yes-color: var(--df-up);
-  --winner-color: var(--yes-color);
   position: relative;
   padding-top: clamp(16px, 3.5vw, 37px);
 }
@@ -76,15 +73,6 @@
   height: 18px;
   margin-top: 10px;
 }
-.scale::before, .scale::after {
-  position: absolute;
-  content: '';
-  top: 9px;
-  height: 2px;
-  width: 50%;
-}
-.scale::before { left: 0; background: var(--no-color); }
-.scale::after { right: 0; background: var(--yes-color); }
 .tick {
   position: absolute;
   top: 0;
@@ -92,7 +80,7 @@
   z-index: 1;
   width: 2px;
   height: 18px;
-  background: var(--df-link);
+  background: var(--df-line-strong);
   transform: translateX(-50%);
 }
 .marker {
@@ -104,12 +92,11 @@
   height: 14px;
   border: 2px solid var(--df-bg);
   border-radius: 50%;
-  background: var(--winner-color);
-  outline: 1px solid var(--winner-color);
+  background: var(--df-text);
+  outline: 1px solid var(--df-line-strong);
   transform: translate(-50%, -50%);
   transition: left 360ms cubic-bezier(.22,1,.36,1);
 }
-.comparison[data-winner="no"] { --winner-color: var(--no-color); }
 .comparison[data-relation="below"] { --point: 25%; }
 .comparison[data-relation="above"] { --point: 75%; }
 .outcomes {
@@ -123,8 +110,8 @@
 }
 .outcome + .outcome { border-left: 1px solid var(--rule); }
 .outcome .condition { color: var(--df-text-muted); font-size: clamp(12px, 1.5vw, 16px); }
-.outcome[data-side="no"] h4 { color: var(--no-color); }
-.outcome[data-side="yes"] h4 { color: var(--yes-color); }
+.outcome[data-side="no"] { --outcome-color: var(--df-down); }
+.outcome[data-side="yes"] { --outcome-color: var(--df-up); }
 .outcome h4 {
   margin-top: 3px;
   font-size: clamp(26px, 3.8vw, 46px);
@@ -133,8 +120,16 @@
   letter-spacing: -.045em;
 }
 .comparison[data-winner="no"] [data-side="no"], .comparison[data-winner="yes"] [data-side="yes"] {
-  background: var(--df-surface);
-  box-shadow: inset 0 -2px var(--winner-color);
+  background: linear-gradient(
+    155deg,
+    color-mix(in srgb, var(--outcome-color) 12%, transparent),
+    color-mix(in srgb, var(--df-text) 3%, transparent)
+  );
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--outcome-color) 24%, transparent);
+}
+.comparison[data-winner="no"] [data-side="no"] h4,
+.comparison[data-winner="yes"] [data-side="yes"] h4 {
+  color: var(--outcome-color);
 }
 .tryReading {
   display: flex;
@@ -215,6 +210,6 @@
 @media (prefers-reduced-motion: reduce) { .marker { transition: none; } }
 @media (forced-colors: active) {
   .choice input:checked + label { border: 2px solid Highlight; }
-  .marker, .tick, .scale::before, .scale::after { forced-color-adjust: none; background: CanvasText; }
+  .marker, .tick { forced-color-adjust: none; background: CanvasText; }
   .comparison[data-winner="no"] [data-side="no"], .comparison[data-winner="yes"] [data-side="yes"] { outline: 1px solid Highlight; outline-offset: -1px; }
 }
