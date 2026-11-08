@@ -5,6 +5,8 @@ import { Arrow } from '@/components/v3/Arrow'
 import { DifficultyHero } from '@/components/v3/DifficultyHero'
 import { LandingMotion } from '@/components/v3/LandingMotion'
 import { MarketExample } from '@/components/v3/MarketExample'
+import { ProductionWalkthrough } from '@/components/v3/ProductionWalkthrough'
+import productionStyles from '@/components/v3/ProductionWalkthrough.module.css'
 import { ProductPreview } from '@/components/v3/ProductPreview'
 import { HomeResources } from '@/components/v3/HomeResources'
 import { HomeFaq } from '@/components/v3/HomeFaq'
@@ -25,12 +27,21 @@ export default function V3Home() {
     <section id="production-scenario" aria-labelledby="production-title" className="v37-audience v37-section">
       <Container>
         <div id="who-its-for" className="scroll-mt-28" data-reveal><p className="v37-eyebrow">Start with production</p><h2 id="production-title" className="v37-heading"><span id="audience-title" className="scroll-mt-28">Rising difficulty reduces expected production.</span></h2></div>
-        <article className="v37-audience-card mt-7" data-reveal>
-          <p className="v37-copy">Illustrative scenario: at unchanged difficulty, your fixed hashrate is expected to produce 1 BTC over a given period. With difficulty 10% higher throughout that period, expected production falls to 1 ÷ 1.10 ≈ 0.909 BTC. That is about 0.091 BTC (9.09%) less.</p>
-          <p className="text-sm leading-relaxed text-subtle">Hashrate, uptime, block reward and other production assumptions stay the same in this example. It shows how difficulty affects expected production. It does not forecast production or tell you how large a position to buy. Pool results, fees, power costs and BTC price need separate assumptions.</p>
-          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1"><Link href="/tools/difficulty-exposure" data-v3-cta="calculator" data-v3-placement="scenario" className="v37-link">Try your numbers <Arrow /></Link><Link href="/product/settlement" data-v3-cta="settlement" data-v3-placement="scenario" className="v37-link">Compare production and contract payout <Arrow /></Link></div>
-        </article>
-        <p className="v37-note">A Doefin position pays a fixed amount or nothing, depending on difficulty at its observation block. Its cost, size and timing determine how much of a production shortfall it may offset. It does not cover every mining risk.</p>
+        <p className="v37-copy mt-3">The fleet and the period stay the same. Only difficulty changes.</p>
+        <ProductionWalkthrough />
+        <details className={productionStyles.details}>
+          <summary>See the assumptions and limits</summary>
+          <p>At unchanged difficulty, a fixed hashrate is expected to produce 1 BTC over the period. If difficulty is 10% higher throughout, expected production falls to 1 ÷ 1.10 ≈ 0.909 BTC. That is about 0.091 BTC (9.09%) less. The walkthrough divides the baseline into 1,000 units of 0.001 BTC and shows about 909 expected units after rounding.</p>
+          <p>Hashrate, uptime, block reward and other production assumptions stay the same in this example. It shows how difficulty affects expected production. It does not forecast production or tell you how large a position to buy. Pool results, fees, power costs and BTC price need separate assumptions.</p>
+        </details>
+        <details className={productionStyles.contract}>
+          <summary>How the contract payout differs</summary>
+          <p>A Doefin position pays a fixed amount or nothing, depending on difficulty at its observation block. Its cost, size and timing determine how much of a production shortfall it may offset. It does not cover every mining risk.</p>
+        </details>
+        <nav className={productionStyles.actions} aria-label="Production and settlement resources">
+          <Link href="/tools/difficulty-exposure" data-v3-cta="calculator" data-v3-placement="scenario" className={productionStyles.calculator}>Try your numbers</Link>
+          <Link href="/product/settlement" data-v3-cta="settlement" data-v3-placement="scenario" className="v37-link">Compare production and contract payout <Arrow /></Link>
+        </nav>
       </Container>
     </section>
 
