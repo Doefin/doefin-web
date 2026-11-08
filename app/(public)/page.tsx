@@ -4,7 +4,6 @@ import { Container } from '@/components/layout/Container'
 import { Arrow } from '@/components/v3/Arrow'
 import { DifficultyHero } from '@/components/v3/DifficultyHero'
 import { LandingMotion } from '@/components/v3/LandingMotion'
-import { MarketExample } from '@/components/v3/MarketExample'
 import { ProductionWalkthrough } from '@/components/v3/ProductionWalkthrough'
 import productionStyles from '@/components/v3/ProductionWalkthrough.module.css'
 import { ProductPreview } from '@/components/v3/ProductPreview'
@@ -48,7 +47,6 @@ export default function V3Home() {
     <section id="how-it-works" aria-labelledby="mechanics-title" className="v37-mechanics v37-section">
       <Container>
         <TradeWalkthrough />
-        <div className="mt-7" data-reveal><MarketExample /></div>
         <details id="inside-the-product" className="mt-7 rounded-panel border border-white/15 bg-surface/40 p-5 sm:p-6" data-reveal>
           <summary id="product-title" className="min-h-11 scroll-mt-28 cursor-pointer text-base font-semibold text-highlight">View the app screenshot: 19 October 2026 · not live</summary>
           <ProductPreview />
