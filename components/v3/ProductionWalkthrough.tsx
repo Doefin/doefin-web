@@ -19,7 +19,7 @@ const scenes: readonly Scene[] = [
     heading: 'Difficulty rises 10%',
     note: '1 BTC at unchanged difficulty',
     context: 'Same fleet and period',
-    duration: 5475,
+    duration: 6205,
     motion: 2355,
     description: 'The fleet expects 1 BTC at unchanged difficulty. If difficulty is 10% higher throughout the same period, each block takes 1.10 times as much expected work.',
   },
@@ -28,7 +28,7 @@ const scenes: readonly Scene[] = [
     heading: 'Break the estimate into units',
     note: '1 BTC = 1,000 units',
     context: '1 unit = 0.001 BTC',
-    duration: 4125,
+    duration: 4675,
     motion: 3000,
   },
   {
@@ -36,7 +36,7 @@ const scenes: readonly Scene[] = [
     heading: 'More work per block, fewer BTC',
     note: 'Divide by the difficulty factor',
     context: 'Units rounded to the nearest whole unit',
-    duration: 5175,
+    duration: 5865,
     motion: 3420,
     description: '1,000 baseline units divided by the 1.10 difficulty factor gives about 909 units of expected production. The grid highlights those 909 units.',
   },
@@ -45,7 +45,7 @@ const scenes: readonly Scene[] = [
     heading: '9.09% less expected BTC',
     note: 'From 1 BTC to about 0.909 BTC over the same period',
     context: '',
-    motion: 1875,
+    motion: 2051,
     description: 'At unchanged difficulty the fleet expects 1 BTC. With difficulty 10% higher, it expects about 0.909 BTC, a shortfall of about 0.091 BTC over the same period.',
   },
 ]
@@ -147,16 +147,16 @@ export function ProductionWalkthrough() {
             <path className={styles['excluded-units']} data-production-excluded d="M506 104H516V204H416V114H506Z"/>
           </g>
           <g className={styles['division-diagram']} aria-hidden="true" textAnchor="middle">
-            <g className={styles['math-part']} style={{ '--enter': '1380ms' } as CSSProperties}>
+            <g className={styles['math-part']} style={{ '--enter': '1564ms' } as CSSProperties}>
               <text className={styles.operand} x="84" y="143">1,000</text>
               <text x="84" y="178">Baseline units</text>
             </g>
-            <g className={styles['math-part']} style={{ '--enter': '1860ms' } as CSSProperties}>
+            <g className={styles['math-part']} style={{ '--enter': '2108ms' } as CSSProperties}>
               <text className={styles.operator} x="170" y="141">÷</text>
               <text className={styles.operand} x="258" y="143">1.10</text>
               <text x="258" y="178">Difficulty factor</text>
             </g>
-            <g className={styles['math-part']} style={{ '--enter': '2700ms' } as CSSProperties}>
+            <g className={styles['math-part']} style={{ '--enter': '3060ms' } as CSSProperties}>
               <text className={styles.operator} x="340" y="141">≈</text>
               <rect className={styles['answer-frame']} x="355" y="99" width="154" height="92" rx="9"/>
               <text className={`${styles.operand} ${styles.answer}`} x="432" y="143">909</text>
@@ -211,7 +211,7 @@ function setupPlayback(story: HTMLElement, descriptionId: string) {
   let visible = false
   let userPaused = false
   let due = 0
-  let remaining = 375
+  let remaining = 425
   let frozen: Animation[] = []
 
   function show(index: number, useMotion: boolean) {
