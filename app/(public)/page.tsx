@@ -27,7 +27,7 @@ export default function V3Home() {
     <section id="production-scenario" aria-labelledby="production-title" className="v37-audience v37-section">
       <Container>
         <div id="who-its-for" className="scroll-mt-28" data-reveal><p className="v37-eyebrow">Start with production</p><h2 id="production-title" className="v37-heading"><span id="audience-title" className="scroll-mt-28">Rising difficulty reduces expected production.</span></h2></div>
-        <p className="v37-copy mt-3">The fleet and the period stay the same. Only difficulty changes.</p>
+        <p className="v37-copy mt-3">In this example, the fleet and the period stay the same. Only difficulty changes.</p>
         <ProductionWalkthrough />
         <details className={productionStyles.details}>
           <summary>See the assumptions and limits</summary>

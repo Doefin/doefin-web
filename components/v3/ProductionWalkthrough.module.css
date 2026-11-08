@@ -7,7 +7,6 @@
 }
 .story-head {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   min-height: 54px;
@@ -16,15 +15,13 @@
   border-bottom: 1px solid var(--rule);
 }
 .story-head strong { font-size: 14px; }
-.head-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
-.tag, .chapter {
+.chapter {
   font-size: 11px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .09em;
 }
-.tag { padding: 3px 8px; border-radius: var(--df-radius-sm); background: var(--df-caution); color: var(--df-on-caution); }
-.play, .calculator {
+.playback, .calculator {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -36,8 +33,17 @@
   text-decoration: none;
   touch-action: manipulation;
 }
-.play { min-width: 120px; border: 1px solid var(--df-line-strong); background: transparent; color: var(--df-text); cursor: pointer; }
-.play:hover { background: var(--df-surface-alt); }
+.playback {
+  flex: 0 0 44px;
+  padding: 0;
+  border: 1px solid var(--df-line);
+  background: transparent;
+  color: var(--df-text-muted);
+  cursor: pointer;
+}
+.playback:hover { background: var(--df-surface-alt); color: var(--df-text); }
+.playback [data-resume-icon], .playback[data-paused] [data-pause-icon] { display: none; }
+.playback[data-paused] [data-resume-icon] { display: inline; }
 .calculator { background: var(--df-action); color: var(--df-on-action); }
 .calculator:hover { background: var(--df-action-hover); }
 .art {
@@ -271,7 +277,7 @@
   .steps button span { display: block; margin: 0; }
 }
 @media (max-width: 360px) {
-  .tag, .chapter { font-size: 10px; letter-spacing: .05em; }
+  .chapter { font-size: 10px; letter-spacing: .05em; }
   .art-top h3 { font-size: 18px; }
 }
 @media (prefers-reduced-motion: reduce) {

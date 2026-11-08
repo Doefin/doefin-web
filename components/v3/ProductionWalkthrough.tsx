@@ -50,6 +50,8 @@ const scenes: readonly Scene[] = [
   },
 ]
 
+const betweenWalkthroughs = 3000
+const minimumVisibility = 0.55
 const lastStep = scenes.length - 1
 const result = scenes[lastStep]
 const chapterNumber = (index: number) => String(index + 1).padStart(2, '0')
@@ -74,10 +76,12 @@ export function ProductionWalkthrough() {
     <article ref={root} className={styles.story} data-stage={lastStep} aria-label="From 1 BTC to about 0.909 BTC">
       <div className={styles['story-head']}>
         <strong>What happens to the 1 BTC estimate?</strong>
-        <div className={styles['head-actions']}>
-          <span className={styles.tag}>Illustrative scenario</span>
-          <button type="button" className={styles.play} data-production-play hidden>Play story</button>
-        </div>
+        <button type="button" className={styles.playback} data-production-play aria-label="Pause animation" hidden>
+          <svg aria-hidden="true" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+            <path data-pause-icon d="M7 4v12m6-12v12" />
+            <path data-resume-icon d="m7 4 9 6-9 6Z" />
+          </svg>
+        </button>
       </div>
       <nav className={styles.steps} data-production-steps aria-label="Production story steps" hidden>
         {scenes.map((scene, index) => (
@@ -90,7 +94,7 @@ export function ProductionWalkthrough() {
         <div data-production-caption className={styles['art-top']}>
           <div>
             <span className={styles.chapter} data-chapter>{chapterNumber(lastStep)} / {result.title}</span>
-            <h3 id={titleId} data-heading aria-live="polite">{result.heading}</h3>
+            <h3 id={titleId} data-heading>{result.heading}</h3>
           </div>
           <span className={styles['split-count']} data-split-count hidden>1,000 units</span>
         </div>
@@ -199,13 +203,15 @@ function setupPlayback(story: HTMLElement, descriptionId: string) {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
   const events = new AbortController()
   const { signal } = events
-  const supportsPlayback = typeof story.getAnimations === 'function'
+  const canvas = story.querySelector('[data-production-canvas]')!
+  const supportsPlayback = 'IntersectionObserver' in window && typeof story.getAnimations === 'function'
 
   let current = lastStep
   let timer: number | undefined
-  let mode: 'story' | 'step' = 'story'
+  let visible = false
+  let userPaused = false
   let due = 0
-  let remaining = 0
+  let remaining = 250
   let frozen: Animation[] = []
 
   function show(index: number, useMotion: boolean) {
@@ -253,81 +259,76 @@ function setupPlayback(story: HTMLElement, descriptionId: string) {
     timer = undefined
   }
 
-  function stop() {
-    clearTimer()
-    remaining = 0
-    for (const animation of frozen) animation.cancel()
-    frozen = []
-    play.textContent = current === lastStep ? 'Replay story' : 'Play story'
+  function canPlay() {
+    return supportsPlayback && visible && !userPaused && !reducedMotion.matches && !document.hidden
   }
 
-  function schedule(delay: number) {
-    due = performance.now() + delay
+  function syncPlayback() {
+    if (!canPlay()) {
+      if (timer === undefined) return
+      remaining = Math.max(0, due - performance.now())
+      clearTimer()
+      frozen = story.getAnimations({ subtree: true }).filter(animation => animation.playState === 'running')
+      for (const animation of frozen) animation.pause()
+      return
+    }
+
+    if (timer !== undefined) return
+    for (const animation of frozen) animation.play()
+    frozen = []
+    due = performance.now() + remaining
     timer = window.setTimeout(() => {
-      if (mode === 'story' && current < lastStep) advance(current + 1)
-      else stop()
-    }, delay)
+      timer = undefined
+      advance((current + 1) % scenes.length)
+    }, remaining)
   }
 
   function advance(index: number) {
-    const useMotion = supportsPlayback && !reducedMotion.matches
-    show(index, useMotion)
-    const scene = scenes[index]
-    const delay = (mode === 'story' && scene.duration) || (useMotion ? scene.motion : 0)
-    if (delay) schedule(delay)
-    else stop()
-  }
-
-  function pause() {
     clearTimer()
-    remaining = Math.max(1, due - performance.now())
-    frozen = supportsPlayback
-      ? story.getAnimations({ subtree: true }).filter(animation => animation.playState === 'running')
-      : []
-    for (const animation of frozen) animation.pause()
-    play.textContent = mode === 'story' ? 'Resume story' : 'Resume step'
+    for (const animation of frozen) animation.cancel()
+    frozen = []
+    show(index, canPlay())
+    const scene = scenes[index]
+    remaining = scene.duration ?? scene.motion + betweenWalkthroughs
+    syncPlayback()
   }
 
   play.addEventListener('click', () => {
-    if (timer !== undefined) {
-      pause()
-    } else if (remaining) {
-      play.textContent = mode === 'story' ? 'Pause story' : 'Pause step'
-      for (const animation of frozen) animation.play()
+    userPaused = !userPaused
+    play.toggleAttribute('data-paused', userPaused)
+    play.setAttribute('aria-label', userPaused ? 'Resume animation' : 'Pause animation')
+    syncPlayback()
+  }, { signal })
+
+  buttons.forEach((button, index) => button.addEventListener('click', () => advance(index), { signal }))
+
+  function updatePreference() {
+    play.hidden = !supportsPlayback || reducedMotion.matches
+    if (reducedMotion.matches) {
+      syncPlayback()
+      for (const animation of frozen) animation.cancel()
       frozen = []
-      schedule(remaining)
-      remaining = 0
+      story.removeAttribute('data-animate')
     } else {
-      mode = 'story'
-      play.textContent = 'Pause story'
-      advance(0)
+      syncPlayback()
     }
-  }, { signal })
+  }
 
-  buttons.forEach((button, index) => button.addEventListener('click', () => {
-    stop()
-    mode = 'step'
-    advance(index)
-    if (timer !== undefined) play.textContent = 'Pause step'
-  }, { signal }))
+  const observer = supportsPlayback ? new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting && entry.intersectionRatio >= minimumVisibility
+    syncPlayback()
+  }, { threshold: minimumVisibility }) : null
 
-  reducedMotion.addEventListener('change', () => {
-    if (!reducedMotion.matches) return
-    for (const animation of frozen) animation.cancel()
-    frozen = []
-    story.removeAttribute('data-animate')
-    if (mode === 'step') stop()
-  }, { signal })
-
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden && timer !== undefined) pause()
-  }, { signal })
-
-  play.hidden = false
+  reducedMotion.addEventListener('change', updatePreference, { signal })
+  document.addEventListener('visibilitychange', syncPlayback, { signal })
   steps.hidden = false
+  updatePreference()
+  observer?.observe(canvas)
 
   return () => {
+    observer?.disconnect()
     events.abort()
-    stop()
+    clearTimer()
+    for (const animation of frozen) animation.cancel()
   }
 }
