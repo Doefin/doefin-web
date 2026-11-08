@@ -78,7 +78,7 @@
 .coin-outline { fill: none; stroke: var(--df-line-strong); stroke-width: 1; }
 .coin-number { fill: var(--df-text); font: 800 63px var(--df-font-sans); letter-spacing: -.05em; }
 .story[data-stage="0"] .coin { opacity: 1; transform: var(--scenario-coin-pose); }
-.story[data-animate][data-stage="0"] .coin { animation: count-reveal 420ms ease-out both; }
+.story[data-animate][data-stage="0"] .coin { animation: count-reveal 630ms ease-out both; }
 .unit-groups, .division-diagram, .result-diagram { visibility: hidden; }
 .story:is([data-stage="1"], [data-stage="2"]) .unit-groups,
 .story[data-stage="2"] .division-diagram,
@@ -91,13 +91,13 @@
   transform-box: view-box;
   transform-origin: 0 0;
 }
-.story[data-animate][data-stage="1"] .coin { animation: coin-to-grid 830ms ease-in-out both; }
+.story[data-animate][data-stage="1"] .coin { animation: coin-to-grid 1245ms ease-in-out both; }
 .story[data-animate][data-stage="1"] .panel-body {
-  animation: unfold-panel 1110ms cubic-bezier(.24,.74,.25,1) both,
-             panel-surface 1760ms ease-in-out both;
+  animation: unfold-panel 1665ms cubic-bezier(.24,.74,.25,1) both,
+             panel-surface 2640ms ease-in-out both;
 }
 .story[data-animate][data-stage="1"] .panel-grid {
-  animation: count-reveal 640ms 1120ms cubic-bezier(.35,0,.25,1) both;
+  animation: count-reveal 960ms 1904ms cubic-bezier(.35,0,.25,1) both;
 }
 @keyframes coin-to-grid {
   0% { opacity: var(--coin-start, 0); transform: var(--coin-pose, none); }
@@ -118,14 +118,14 @@
   font-size: clamp(14px, 2vw, 22px);
   font-weight: 800;
 }
-.story[data-animate][data-stage="1"] .split-count { animation: count-reveal 240ms 1710ms ease-out both; }
+.story[data-animate][data-stage="1"] .split-count { animation: count-reveal 360ms 2907ms ease-out both; }
 @keyframes count-reveal { from { opacity: 0; } to { opacity: 1; } }
 @keyframes settle-caption {
   from { opacity: .48; }
   to { opacity: 1; }
 }
 .story[data-animate] :is(.art-top, .art-note).caption-enter {
-  animation: settle-caption 290ms ease-out both;
+  animation: settle-caption 435ms ease-out both;
 }
 .art-note {
   display: flex;
@@ -147,8 +147,8 @@
   transform: translateY(-59.16px) scale(.42);
 }
 .story[data-animate][data-stage="2"] .unit-groups {
-  animation: grid-handoff 340ms ease-out both,
-             move-to-calculation 960ms 170ms cubic-bezier(.52,0,.25,1) both;
+  animation: grid-handoff 510ms ease-out both,
+             move-to-calculation 1440ms 289ms cubic-bezier(.52,0,.25,1) both;
 }
 @keyframes grid-handoff { from { opacity: var(--grid-start, 0); } to { opacity: 1; } }
 @keyframes move-to-calculation {
@@ -175,7 +175,7 @@
 }
 .story[data-stage="2"] .excluded-units { visibility: visible; }
 .story[data-animate][data-stage="2"] .excluded-units {
-  animation: dim-excluded-units 960ms 1270ms ease-in-out both;
+  animation: dim-excluded-units 1440ms 2159ms ease-in-out both;
 }
 @keyframes dim-excluded-units {
   0% { fill-opacity: 0; stroke-opacity: 0; }
@@ -185,7 +185,7 @@
 .division-diagram .operator { fill: var(--df-text-muted); font-size: 31px; }
 .division-diagram .math-part { transform-box: fill-box; transform-origin: center; }
 .story[data-animate][data-stage="2"] .math-part {
-  animation: place-term 300ms var(--enter) cubic-bezier(.22,.7,.27,1) both;
+  animation: place-term 450ms var(--enter) cubic-bezier(.22,.7,.27,1) both;
 }
 @keyframes place-term {
   from { opacity: 0; transform: translateY(8px); }
@@ -197,21 +197,21 @@
 .result-measure, .hatch-line { fill: none; stroke: var(--df-line-strong); stroke-width: 1.5; }
 .result-diagram .result-value { fill: var(--df-text); font-weight: 800; }
 .result-diagram .result-fill { transform-box: fill-box; transform-origin: left; }
-.story[data-animate][data-stage="3"] .result-diagram { animation: count-reveal 300ms ease-out both; }
-.story[data-animate][data-stage="3"] .result-fill { animation: shorten-bar 700ms 330ms cubic-bezier(.28,.74,.28,1) both; }
-.story[data-animate][data-stage="3"] .gap-label { animation: count-reveal 320ms 880ms ease-out both; }
+.story[data-animate][data-stage="3"] .result-diagram { animation: count-reveal 450ms ease-out both; }
+.story[data-animate][data-stage="3"] .result-fill { animation: shorten-bar 1050ms 561ms cubic-bezier(.28,.74,.28,1) both; }
+.story[data-animate][data-stage="3"] .gap-label { animation: count-reveal 480ms 1496ms ease-out both; }
 @keyframes shorten-bar { from { transform: scaleX(1.1); } to { transform: scaleX(1); } }
 .story[data-animate][data-result-handoff] .unit-groups {
   visibility: visible;
-  animation: grid-to-bar 820ms cubic-bezier(.48,0,.22,1) both;
+  animation: grid-to-bar 1230ms cubic-bezier(.48,0,.22,1) both;
 }
 .story[data-animate][data-result-handoff] .excluded-units { visibility: visible; }
 .story[data-animate][data-result-handoff] .result-diagram {
-  animation: count-reveal 300ms 520ms ease-out both;
+  animation: count-reveal 450ms 884ms ease-out both;
 }
 .story[data-animate][data-result-handoff] .result-fill { animation: none; }
 .story[data-animate][data-result-handoff] .gap-label {
-  animation: count-reveal 330ms 850ms ease-out both;
+  animation: count-reveal 495ms 1445ms ease-out both;
 }
 @keyframes grid-to-bar {
   0% { transform: translateY(-59.16px) scale(.42); opacity: 1; visibility: visible; }
@@ -221,8 +221,8 @@
 }
 .difficulty-diagram { opacity: 0; }
 .story[data-stage="0"] .difficulty-diagram { opacity: 1; }
-.story[data-animate] .difficulty-diagram { transition: opacity 260ms ease-in-out; }
-.story[data-animate][data-stage="0"] .difficulty-diagram { transition-delay: 430ms; }
+.story[data-animate] .difficulty-diagram { transition: opacity 390ms ease-in-out; }
+.story[data-animate][data-stage="0"] .difficulty-diagram { transition-delay: 731ms; }
 .difficulty-diagram text { fill: var(--df-text-muted); font: 750 21px var(--df-font-sans); }
 .work-slot { fill: var(--df-chart-context); stroke: var(--df-line-strong); stroke-width: 1; }
 .difficulty-diagram .extra-slot { fill: var(--df-link); }
@@ -232,10 +232,10 @@
 .difficulty-diagram .ratio { fill: var(--df-text); font-size: 29px; font-weight: 800; }
 .difficulty-diagram .extra-work { transform-origin: left; transform-box: fill-box; }
 .story[data-animate][data-stage="0"] .extra-work {
-  animation: add-work 520ms 930ms cubic-bezier(.24,.74,.25,1) both;
+  animation: add-work 780ms 1581ms cubic-bezier(.24,.74,.25,1) both;
 }
 .story[data-animate][data-stage="0"] :is(.work-extra-label, .ratio) {
-  animation: show-ratio 280ms 1250ms ease-out both;
+  animation: show-ratio 420ms 2125ms ease-out both;
 }
 @keyframes add-work {
   from { opacity: .25; transform: scaleX(0); }
