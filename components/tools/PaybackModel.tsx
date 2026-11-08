@@ -4,6 +4,7 @@ import { useMemo } from 'react'
 import { CashPositionChart } from './CashPositionChart'
 import { useCalculatorMeasurement } from '@/components/v3/Measurement'
 import { useSiteVersion } from '@/components/routing/SiteVersionContext'
+import { fleetPaybackDefaults as DEFAULTS, simulateFleetPayback } from '@/lib/fleet-payback'
 import {
   Hint,
   InputSection,
@@ -13,7 +14,6 @@ import {
   SummaryRows,
   ToolShell,
   matchPreset,
-  networkEHFromDifficulty,
   useUrlState,
 } from './toolkit'
 import { hintFor, presetsFor, resultHintFor } from '@/content/tool-micro'
@@ -28,38 +28,6 @@ import { hintFor, presetsFor, resultHintFor } from '@/content/tool-micro'
  * Market inputs are illustrative until the data pipeline is connected.
  */
 const SLUG = 'fleet-payback'
-const DEFAULTS = {
-  th: 1000,        // fleet terahash — roughly five modern machines
-  jPerTh: 15,      // efficiency
-  power: 0.045,    // $/kWh all-in
-  capex: 20000,    // $ — calibrated to the fleet size above
-  price: 90000,    // BTC/USD
-  diffT: 127.48,
-  growth: 1.5,     // % per month, central
-  months: 48,
-}
-const SUBSIDY = 3.125
-const BLOCKS_DAY = 144
-
-function simulate(v: typeof DEFAULTS, monthlyGrowthPct: number) {
-  const net0 = networkEHFromDifficulty(v.diffT) * 1e6 // EH/s -> TH/s
-  const kWhDay = (v.th * v.jPerTh) / 1000 * 24
-  const powerDay = kWhDay * v.power
-  let cum = -v.capex
-  let paybackMonth: number | null = null
-  const series: { m: number; cum: number }[] = []
-
-  for (let m = 1; m <= v.months; m++) {
-    const net = net0 * Math.pow(1 + monthlyGrowthPct / 100, m)
-    const btcDay = (v.th / net) * BLOCKS_DAY * SUBSIDY
-    const revDay = btcDay * v.price
-    cum += (revDay - powerDay) * 30.4
-    series.push({ m, cum })
-    if (paybackMonth === null && cum >= 0) paybackMonth = m
-  }
-  return { paybackMonth, series, final: cum, powerDay }
-}
-
 const BOUNDS = { th: [100, 20000], jPerTh: [12, 40], power: [0.02, 0.15], capex: [5000, 2000000], price: [20000, 200000], diffT: [1, 1000], growth: [0, 8], months: [2, 120] } as const
 
 export function PaybackModel({ enhanced = false, nextStep }: { enhanced?: boolean; nextStep?: React.ReactNode }) {
@@ -68,9 +36,9 @@ export function PaybackModel({ enhanced = false, nextStep }: { enhanced?: boolea
   const presets = presetsFor(SLUG)
 
   const runs = useMemo(() => {
-    const low = simulate(v, Math.max(0, v.growth - 2))
-    const mid = simulate(v, v.growth)
-    const high = simulate(v, v.growth + 3)
+    const low = simulateFleetPayback(v, Math.max(0, v.growth - 2))
+    const mid = simulateFleetPayback(v, v.growth)
+    const high = simulateFleetPayback(v, v.growth + 3)
     return { low, mid, high }
   }, [v])
 
