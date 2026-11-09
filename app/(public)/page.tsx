@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from '@/components/routing/SiteLink'
 import { Container } from '@/components/layout/Container'
 import { Arrow } from '@/components/v3/Arrow'
-import { DifficultyHero } from '@/components/v3/DifficultyHero'
+import { MarketHero } from '@/components/v3/MarketHero'
 import { LandingMotion } from '@/components/v3/LandingMotion'
 import { ProductionWalkthrough } from '@/components/v3/ProductionWalkthrough'
 import productionStyles from '@/components/v3/ProductionWalkthrough.module.css'
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function V3Home() {
   return <LandingMotion>
-    <DifficultyHero />
+    <MarketHero />
 
     <section id="production-scenario" aria-labelledby="production-title" className="v37-audience v37-section">
       <Container>
