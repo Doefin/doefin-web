@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { Container } from '@/components/layout/Container'
 import { Logo } from '@/components/layout/Logo'
 import Link from '@/components/routing/SiteLink'
@@ -8,6 +8,11 @@ import { site } from '@/lib/site'
 import { navigationForPath, navigationShortcuts, type NavigationGroup, type NavigationItem } from '@/lib/v3-publication'
 import { Arrow } from './Arrow'
 import styles from './SiteHeader.module.css'
+
+const HOVER_OPEN_DELAY = 250
+const HOVER_CLOSE_DELAY = 300
+
+type OpenMenu = { id: string; source: 'hover' | 'press' }
 
 const icons: Record<string, string> = {
   product: 'M4 17h16M6 13V9m6 4V4m6 9V7',
@@ -34,7 +39,8 @@ function Chevron() {
 
 export function SiteHeader({ pathname, commentary }: { pathname: string; commentary: boolean }) {
   const groups = navigationForPath(pathname)
-  const [openGroup, setOpenGroup] = useState<string | null>(null)
+  const [openMenu, setOpenMenu] = useState<OpenMenu | null>(null)
+  const hoverTimer = useRef<number | undefined>(undefined)
   const [mobileOpen, setMobileOpen] = useState(false)
   const header = useRef<HTMLElement>(null)
   const desktopNavigation = useRef<HTMLElement>(null)
@@ -42,33 +48,71 @@ export function SiteHeader({ pathname, commentary }: { pathname: string; comment
   const mobileContent = useRef<HTMLDivElement>(null)
   const groupButtons = useRef<Record<string, HTMLButtonElement | null>>({})
 
-  useEffect(() => {
-    const desktop = window.matchMedia('(min-width: 1024px)')
-    const close = () => {
-      setOpenGroup(null)
-      setMobileOpen(false)
-    }
-    const onPointerDown = (event: PointerEvent) => {
-      const target = event.target as Node
-      if (!desktopNavigation.current?.contains(target)) setOpenGroup(null)
-      if (!header.current?.contains(target)) setMobileOpen(false)
-    }
-    desktop.addEventListener('change', close)
-    document.addEventListener('pointerdown', onPointerDown)
-    return () => {
-      desktop.removeEventListener('change', close)
-      document.removeEventListener('pointerdown', onPointerDown)
-    }
+  const cancelHover = useCallback(() => {
+    window.clearTimeout(hoverTimer.current)
   }, [])
 
-  useEffect(() => {
-    setOpenGroup(null)
+  const closeNavigation = useCallback(() => {
+    cancelHover()
+    setOpenMenu(null)
     setMobileOpen(false)
-  }, [pathname])
+  }, [cancelHover])
 
-  const closeNavigation = () => {
-    setOpenGroup(null)
-    setMobileOpen(false)
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 1024px)')
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target as Node
+      const outsideDesktop = !desktopNavigation.current?.contains(target)
+      if (outsideDesktop || event.pointerType !== 'mouse') cancelHover()
+      if (outsideDesktop) setOpenMenu(null)
+      if (!header.current?.contains(target)) setMobileOpen(false)
+    }
+    desktop.addEventListener('change', closeNavigation)
+    document.addEventListener('pointerdown', onPointerDown)
+    return () => {
+      cancelHover()
+      desktop.removeEventListener('change', closeNavigation)
+      document.removeEventListener('pointerdown', onPointerDown)
+    }
+  }, [cancelHover, closeNavigation])
+
+  useEffect(() => {
+    closeNavigation()
+  }, [pathname, closeNavigation])
+
+  useEffect(() => {
+    const dismissOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape' || event.defaultPrevented) return
+      cancelHover()
+      if (!openMenu) return
+      event.preventDefault()
+      setOpenMenu(null)
+      // A hover can open the menu while focus is elsewhere on the page.
+      if (document.getElementById('v3-navigation-' + openMenu.id)?.contains(document.activeElement)) {
+        groupButtons.current[openMenu.id]?.focus()
+      }
+    }
+    document.addEventListener('keydown', dismissOnEscape)
+    return () => document.removeEventListener('keydown', dismissOnEscape)
+  }, [cancelHover, openMenu])
+
+  const openOnHover = (id: string) => {
+    cancelHover()
+    if (openMenu?.id === id) return
+    hoverTimer.current = window.setTimeout(() => {
+      // Pointer movement must not hide a link someone is using with the keyboard.
+      if (!document.activeElement?.closest('[data-desktop-panel]')) {
+        setOpenMenu({ id, source: 'hover' })
+      }
+    }, HOVER_OPEN_DELAY)
+  }
+
+  const closeAfterHover = () => {
+    cancelHover()
+    hoverTimer.current = window.setTimeout(() => {
+      const hasPanelFocus = !!document.activeElement?.closest('[data-desktop-panel]')
+      setOpenMenu(menu => menu?.source === 'hover' && !hasPanelFocus ? null : menu)
+    }, HOVER_CLOSE_DELAY)
   }
 
   const current = (href: string) => pathname === href
@@ -106,16 +150,10 @@ export function SiteHeader({ pathname, commentary }: { pathname: string; comment
         if (mobileOpen && !event.currentTarget.contains(event.relatedTarget)) setMobileOpen(false)
       }}
       onKeyDown={event => {
-        if (event.key !== 'Escape') return
-        if (openGroup) {
-          event.preventDefault()
-          setOpenGroup(null)
-          groupButtons.current[openGroup]?.focus()
-        } else if (mobileOpen) {
-          event.preventDefault()
-          setMobileOpen(false)
-          mobileToggle.current?.focus()
-        }
+        if (event.key !== 'Escape' || !mobileOpen) return
+        event.preventDefault()
+        setMobileOpen(false)
+        mobileToggle.current?.focus()
       }}
     >
       <Container className={styles.bar}>
@@ -123,14 +161,23 @@ export function SiteHeader({ pathname, commentary }: { pathname: string; comment
         <nav ref={desktopNavigation} className={styles.desktop} aria-label="Main">
           <ul className={styles.triggers}>
             {groups.map(group => {
-              const expanded = openGroup === group.id
+              const expanded = openMenu?.id === group.id
               const panelId = 'v3-navigation-' + group.id
               return (
-                <li key={group.id} onBlur={event => {
-                  if (!event.currentTarget.contains(event.relatedTarget)) {
-                    setOpenGroup(value => value === group.id ? null : value)
-                  }
-                }}>
+                <li
+                  key={group.id}
+                  onPointerEnter={event => {
+                    if (event.pointerType === 'mouse') openOnHover(group.id)
+                  }}
+                  onPointerLeave={event => {
+                    if (event.pointerType === 'mouse') closeAfterHover()
+                  }}
+                  onBlur={event => {
+                    if (!event.currentTarget.contains(event.relatedTarget)) {
+                      setOpenMenu(menu => menu?.id === group.id ? null : menu)
+                    }
+                  }}
+                >
                   <button
                     ref={element => { groupButtons.current[group.id] = element }}
                     type="button"
@@ -138,11 +185,14 @@ export function SiteHeader({ pathname, commentary }: { pathname: string; comment
                     aria-expanded={expanded}
                     aria-controls={panelId}
                     data-active={group.sections.some(section => section.items.some(item => active(item.href))) || undefined}
-                    onClick={() => setOpenGroup(expanded ? null : group.id)}
+                    onClick={() => {
+                      cancelHover()
+                      setOpenMenu(expanded ? null : { id: group.id, source: 'press' })
+                    }}
                   >
                     {group.label}<Chevron />
                   </button>
-                  <div className={styles.panel} id={panelId} hidden={!expanded} inert={!expanded}>
+                  <div className={styles.panel} id={panelId} data-desktop-panel hidden={!expanded} inert={!expanded}>
                     <div className={styles.columns}>
                       {group.sections.map(section => (
                         <div key={section.label}>
