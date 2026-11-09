@@ -169,6 +169,7 @@ export function SiteHeader({ pathname, commentary }: { pathname: string; comment
             ref={mobileToggle}
             type="button"
             className={styles.mobileToggle}
+            aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'}
             aria-expanded={mobileOpen}
             aria-controls="v3-mobile-menu"
             onClick={() => {
@@ -179,7 +180,14 @@ export function SiteHeader({ pathname, commentary }: { pathname: string; comment
               setMobileOpen(!mobileOpen)
             }}
           >
-            {mobileOpen ? 'Close' : 'Menu'}
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path
+                d={mobileOpen ? 'm6 6 12 12M18 6 6 18' : 'M4 6h16M4 12h16M4 18h16'}
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
           </button>
         </div>
       </Container>
