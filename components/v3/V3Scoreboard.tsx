@@ -8,7 +8,7 @@ import { DataDetail, DataNext, DataSection, dataCopy } from './DataDetail'
 export const metadata = seo({ title: 'How to read forecast accuracy metrics', description: 'Follow one fictional model comparison from a forecast error to average error, range coverage and width, then inspect the evidence a measured comparison needs.', path: '/data/scoreboard' })
 
 export default function V3Scoreboard() {
-  return <DataDetail title="What does forecast accuracy tell you?" summary="Read average error alongside forecast ranges and sample size. Follow the same fictional models from one forecast to their summary scores." category="Accuracy" current="scoreboard" datasetNotice={<><strong className="font-semibold text-caution">Illustrative: synthetic forecasts and outcomes.</strong> The examples below use made-up values. They do not measure any provider’s performance.</>} crumbs={[{ name: 'Accuracy metrics', href: '/data/scoreboard' }]}>
+  return <DataDetail title="What does forecast accuracy tell you?" summary="Read average error alongside forecast ranges and sample size. Follow the same fictional models from one forecast to their summary scores." category="Accuracy" current="scoreboard" datasetNotice={"The forecasts and outcomes below use made-up values. They do not measure any provider’s performance."} crumbs={[{ name: 'Accuracy metrics', href: '/data/scoreboard' }]}>
     <IllustrativeComparison />
 
     <DataSection title="What a measured comparison needs.">

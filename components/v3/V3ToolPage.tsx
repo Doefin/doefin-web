@@ -29,9 +29,8 @@ export default async function V3ToolPage({ params }: { params: Promise<{ slug: s
   const guide = guides.find(row=>row.slug===slug)?.guide
   const active = tools.find(t => t.slug === slug)!
   return <GuidesPublicationProvider slugs={unavailable ? null : guides.map(row=>row.slug)}><Container className="pb-14 pt-8 sm:pt-10 [overflow-wrap:anywhere]">
-    <div className="mb-6 flex flex-wrap items-center justify-between gap-3 text-xs text-subtle">
+    <div className="mb-6 text-xs text-subtle">
       <Link href="/tools" className="py-1 hover:text-highlight">Tools <span aria-hidden> / </span><span className="text-body">Mining analysis</span></Link>
-      <span className="rounded-full border border-white/10 px-3 py-1.5">Sample inputs · 17 September 2026</span>
     </div>
     <div className="mb-7 max-w-3xl">
       <h1 className="text-balance text-3xl font-extrabold tracking-[-0.035em] sm:text-4xl">{active.name}</h1>
@@ -45,7 +44,7 @@ export default async function V3ToolPage({ params }: { params: Promise<{ slug: s
     </nav>
     <div className="mb-5 flex flex-wrap items-start justify-between gap-x-8 gap-y-3 border-l-2 border-brand pl-4 text-xs leading-relaxed text-subtle">
       <p className="max-w-xl"><strong className="font-semibold text-body">{tool.use}</strong><br />{tool.limit}</p>
-      <p className="sm:max-w-xs">Illustrative. Not live data.<br />Type a value and press Enter, or drag a slider. Your inputs are saved in the page URL.</p>
+      <p className="sm:max-w-xs">The default inputs are examples from <time dateTime="2026-09-17">17 September 2026</time>. Type a value and press Enter, or drag a slider. Your inputs are saved in the page URL.</p>
     </div>
     <PreviewCalculator slug={slug} />
     <details className="mt-7 rounded-panel border border-white/10 bg-surface/40 p-5">

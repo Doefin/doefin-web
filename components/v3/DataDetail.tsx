@@ -72,7 +72,7 @@ export function DataSeries({ metric }: { metric: 'difficultyT' | 'hashrateEH' })
   const title = `Synthetic ${isDifficulty ? 'difficulty' : 'implied hashrate'} series`
   return <div className="overflow-hidden rounded-panel border border-white/10 bg-surface/20">
     <figure className="p-5 sm:p-7">
-      <div className="flex flex-wrap items-start justify-between gap-3"><figcaption className="text-sm font-bold">{title}</figcaption><span className="tabular text-[10px] font-bold uppercase tracking-wider text-caution">Synthetic data · {networkSeries.length} points</span></div>
+      <figcaption className="text-sm font-bold">{title} <span className="tabular text-xs font-normal text-subtle">· {networkSeries.length} points</span></figcaption>
       <p className="tabular mt-3 text-xl font-bold tracking-tight text-highlight">{value(first[metric])} → {value(last[metric])}{gap}<span className="text-sm font-semibold">{unit}</span></p>
       <p className="mt-2 text-xs leading-relaxed text-subtle">{isDifficulty ? 'Difficulty changes in steps. The line follows the supplied example points.' : 'These values convert the example difficulty into hashrate using the ten-minute target. They are not independent hashrate observations.'} Vertical axis starts at zero.</p>
       <div className="mt-7 grid grid-cols-[3rem_minmax(0,1fr)] gap-3">

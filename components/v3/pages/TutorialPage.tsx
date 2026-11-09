@@ -26,7 +26,7 @@ export default function TutorialPreview() {
             <div className="flex items-start gap-4"><span className="tabular grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-brand/30 bg-brand/10 text-sm font-bold text-highlight">{i + 1}</span><h2 className={headingClass}>{step.title}</h2></div>
             <p className="mt-5 text-[17px] leading-[1.8] text-subtle">{step.body}</p>
             {i === 1 ? <figure className="mt-7 overflow-hidden rounded-panel border border-white/10 bg-surface">
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 px-5 py-4"><p className="text-xs font-bold text-body">Annotated calculator example</p><p className="text-xs text-caution">Illustrative. Not live data.</p></div>
+              <p className="border-b border-white/10 px-5 py-4 text-xs font-bold text-body">Annotated calculator example</p>
               <div className="grid gap-6 p-5 sm:grid-cols-2 sm:p-7">
                 <div><p className="mb-5 text-xs font-bold uppercase tracking-[0.1em] text-subtle">Inputs</p>{[
                   ['A', 'Hashrate', '1.00 EH/s'], ['B', 'Difficulty increase', '+10.0%'],

@@ -103,9 +103,6 @@ export function isCommentaryPath(pathname: string): boolean {
 export function navigationForPath(pathname: string): readonly NavigationGroup[] {
   return isCommentaryPath(pathname) ? navigationGroups.filter(group => group.id !== 'product') : navigationGroups
 }
-export function publicationUi(mode: PublicationMode = publicationMode) {
-  return { showVersionSelector: false, showPreviewLabel: mode === 'preview' }
-}
 
 /** Generates reviewable canonical destinations without changing current routes. */
 export function plannedCanonicalPath(href: string): string | null {

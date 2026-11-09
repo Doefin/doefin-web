@@ -23,7 +23,7 @@ export function ToolShell({ inputs, summary, mobileResult, onReset, preciseInput
         {inputs}
       </div>
       <aside className={styles.result} aria-label="Scenario results" data-results>
-        <div className="mb-6 flex items-center justify-between border-b border-white/10 pb-4 text-[11px] font-bold uppercase tracking-[0.12em] text-subtle"><span>Scenario analysis</span><span className="rounded-full border border-caution/30 bg-caution/5 px-2.5 py-1 text-caution">Illustrative</span></div>
+        <p className="mb-6 border-b border-white/10 pb-4 text-[11px] font-bold uppercase tracking-[0.12em] text-subtle">Scenario analysis</p>
         {summary}
       </aside>
     </div>

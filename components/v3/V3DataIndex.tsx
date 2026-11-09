@@ -48,7 +48,7 @@ export default async function V3DataIndex() {
       <details className="mt-5 rounded-panel border border-white/10 bg-surface/15">
         <summary className="cursor-pointer px-5 py-4 text-sm font-semibold text-highlight">Show {epochs.length} synthetic example rows (not published records)</summary>
       <div className="mt-6 overflow-hidden rounded-panel border border-white/10 bg-surface/15">
-        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-white/10 px-5 py-4 sm:px-6"><p className="text-xs font-semibold text-caution">Synthetic dated records</p><p className="text-xs text-subtle">Changes in % · dates belong to the examples</p></div>
+        <p className="border-b border-white/10 px-5 py-4 text-xs text-subtle sm:px-6">Changes in % · dates belong to the examples</p>
         <table className={`${styles.records} w-full text-left text-sm`}>
           <caption className="sr-only">Three made-up difficulty records with example dates, forecast changes and outcomes. They are not measured history.</caption>
           <thead className="bg-ink/25 text-[11px] uppercase tracking-wider text-subtle"><tr><th scope="col">Target block</th><th scope="col">Forecast date</th><th scope="col">Forecast</th><th scope="col">Outcome</th><th scope="col">Outcome date</th></tr></thead>

@@ -17,12 +17,11 @@ export function MarketHero() {
         </div>
         <figure className={styles.market} aria-labelledby="hero-market-caption">
           <figcaption id="hero-market-caption" className={styles.annotation}>
-            <p>This Bitcoin block supplies the difficulty reading that decides the market outcome.</p>
+            <p>In this example, the difficulty reading at this Bitcoin block decides the market outcome.</p>
             <dl className={styles.terms}>
               <div><dt>Bitcoin block</dt><dd>979,776</dd></div>
               <div><dt>Difficulty threshold</dt><dd>137.2T</dd></div>
             </dl>
-            <span className={styles.badge}>Illustrative · not live</span>
           </figcaption>
           <p className={styles.chainLabel}>Bitcoin blockchain</p>
           <div className={styles.chainViewport}>
