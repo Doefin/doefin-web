@@ -19,8 +19,8 @@ export default function SettlementPreview() {
           <p className="mt-5 text-[17px] leading-[1.75] text-subtle">Suppose a market asks whether difficulty will be at or above <strong className="tabular text-body">130T</strong> at a specified observation block. The table shows the outcome for the Yes side, which pays at or above the threshold.</p>
           <p className="mt-4 text-sm leading-relaxed text-subtle">These values explain the rule. They are not an available market or a quote. “Full payout” means the amount specified by the contract. To work out profit or loss, you also need what you paid and any fees.</p>
         </div>
-        <div className="min-w-0"><p className="mb-4 text-xs font-semibold text-caution">Illustrative. Not live data · 17 September 2026</p>
-          <DataTable caption="Example threshold: 130T · Yes side" head={['Observed difficulty', 'Threshold met?', 'Outcome']} rows={[
+        <div className="min-w-0">
+          <DataTable caption="Example threshold: 130T · Yes side · 17 September 2026" head={['Observed difficulty', 'Threshold met?', 'Outcome']} rows={[
             ['129T', 'No', 'No payout'], ['130T', 'Yes', 'Full payout'], ['135T', 'Yes', 'Full payout'],
           ]} />
           <p className="mt-4 text-xs leading-relaxed text-subtle">Difficulty is a dimensionless target ratio; T denotes one trillion. A larger move above the threshold does not increase the binary payout.</p>

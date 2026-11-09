@@ -52,14 +52,11 @@ export function TradeWalkthrough() {
   return (
     <div className={styles.journey}>
       <div className={styles.mast}>
-        <div className={styles.mastMeta}>
-          <p className={styles.kicker}>How it works</p>
-          <span className={styles.badge}>Illustrative trade</span>
-        </div>
+        <p className={styles.kicker}>How it works</p>
         <h2 id="mechanics-title" className={styles.title}>
           <span id="setup-title" className="scroll-mt-28">A difficulty trade in three steps</span>
         </h2>
-        <p className={styles.intro}>Follow one Yes position. See what changes as you choose the market, place the order and decide how to exit.</p>
+        <p className={styles.intro}>Follow an example Yes position. See what changes as you choose the market, place the order and decide how to exit.</p>
       </div>
 
       <dl className={styles.ticket} aria-label="Illustrative market">

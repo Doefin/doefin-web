@@ -35,8 +35,7 @@ export default function InstitutionsPage() {
           <Link href="/tools/difficulty-exposure" className={styles.textLink}>Compare production scenarios <Arrow /></Link>
         </div>
         <aside className="rounded-panel border border-white/10 p-5 sm:p-7" aria-label="Illustrative production example">
-          <p className="text-xs font-semibold text-caution">Illustrative production example</p>
-          <p className="mt-4">Suppose expected production is 1 BTC over a given period at unchanged difficulty. With difficulty 10% higher throughout that period, expected production falls to 1 ÷ 1.10 ≈ 0.909 BTC.</p>
+          <p>Suppose expected production is 1 BTC over a given period at unchanged difficulty. With difficulty 10% higher throughout that period, expected production falls to 1 ÷ 1.10 ≈ 0.909 BTC.</p>
           <p className="mt-4">Hashrate, uptime, block reward and other production assumptions stay the same. This is a production estimate, not a forecast or a position size.</p>
         </aside>
       </div>

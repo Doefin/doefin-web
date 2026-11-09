@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import { Container } from '@/components/layout/Container'
 import { Logo } from '@/components/layout/Logo'
 import { site } from '@/lib/site'
-import { commentaryPromotionFor, isCommentaryPath, publicationUi } from '@/lib/v3-publication'
+import { commentaryPromotionFor, isCommentaryPath } from '@/lib/v3-publication'
 import { CommentaryPromotion } from './CommentaryPromotion'
 import { SiteHeader } from './SiteHeader'
 
@@ -14,7 +14,6 @@ export function V3Chrome({ children }: { children: ReactNode }) {
   const pathname = usePathname()
   const isLanding = pathname === '/'
   const commentary = isCommentaryPath(pathname)
-  const publication = publicationUi()
   const footerGroups = commentary ? [
     { title: 'Learn', links: [['Academy & guides', '/academy'], ['Articles', '/blog'], ['Mining glossary', '/glossary'], ['Worked example', '/learn/difficulty-exposure']] },
     { title: 'Data & Research', links: [['Research', '/research'], ['Data', '/data'], ['Forecast evaluation', '/data/scoreboard'], ['Methodology', '/methodology/difficulty-index']] },
@@ -29,7 +28,6 @@ export function V3Chrome({ children }: { children: ReactNode }) {
   return <>
     <SiteHeader pathname={pathname} commentary={commentary} />
     <main id="main" className="flex-1">
-      {pathname !== '/' && publication.showPreviewLabel && <div className="border-b border-white/[0.07] bg-surface/20"><Container className="py-2.5"><p className="text-xs leading-relaxed text-subtle"><span className="font-semibold text-caution">V3 preview</span><span className="mx-2" aria-hidden="true">·</span>{commentary ? 'Educational and research material. Check the sources and evidence status on each page.' : pathname.startsWith('/for/') ? 'Read-only market data. Review execution and terms in the app.' : 'Examples are illustrative. Confirm current market terms in the app.'}</p></Container></div>}
       {children}
     </main>
     {commentary && <CommentaryPromotion promotion={commentaryPromotionFor(pathname)} />}

@@ -96,17 +96,6 @@
   color: var(--df-text);
   font-weight: 800;
 }
-.badge {
-  display: inline-block;
-  margin-top: 14px;
-  padding: 4px 8px;
-  border-radius: var(--df-radius-sm);
-  background: var(--df-caution);
-  color: var(--df-on-caution);
-  font-size: 11px;
-  font-weight: 800;
-  line-height: 1.5;
-}
 .chainViewport {
   position: relative;
   width: 100vw;
@@ -247,10 +236,6 @@
   }
   .terms div {
     margin-top: 0;
-  }
-  .badge {
-    margin-top: 10px;
-    font-size: 10px;
   }
   .chainViewport {
     width: 100%;

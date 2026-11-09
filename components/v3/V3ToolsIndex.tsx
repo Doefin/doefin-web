@@ -18,7 +18,6 @@ const choices = [
 ] as const
 
 const focus = 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-highlight'
-const sampleLabel = 'text-[10px] font-bold uppercase tracking-[0.12em] text-caution'
 const inputsLabel = 'text-[10px] font-bold uppercase tracking-[0.12em] text-subtle'
 
 function StartLink({ slug, children }: { slug: string; children: React.ReactNode }) {
@@ -72,7 +71,7 @@ export default async function V3ToolsIndex() {
         </div>
 
         <figure className="m-4 mt-0 flex min-w-0 flex-col rounded-2xl border border-white/10 bg-ink/55 p-5 sm:m-6 sm:mt-0 sm:p-6 lg:my-6 lg:ml-0">
-          <figcaption className="flex flex-wrap items-center justify-between gap-2"><span className="text-xs font-semibold text-body">From quote to effective rate</span><span className={sampleLabel}>Illustrative sample</span></figcaption>
+          <figcaption className="text-xs font-semibold text-body">From quote to effective rate</figcaption>
           <div className="my-6 grid min-w-0 grid-cols-[1fr_auto_1fr] items-start gap-2 sm:gap-4">
             <div className="min-w-0"><p className="mb-2 text-[11px] text-subtle">Advertised</p><p className="tabular whitespace-nowrap text-[22px] font-extrabold leading-none tracking-[-0.045em] min-[380px]:text-[28px] sm:text-[36px]">${hostingSample.rate.toFixed(3)}</p><p className="mt-2 text-[11px] text-subtle">per kWh</p></div>
             <Arrow className="mt-7 h-4 w-4 text-subtle sm:mt-8 sm:h-5 sm:w-5" />
@@ -99,7 +98,7 @@ export default async function V3ToolsIndex() {
         <p className="mt-3 text-xs leading-[1.8] text-subtle"><strong className="font-semibold text-body">You get</strong> production in each scenario and the BTC spread between them.</p>
 
         <figure className="mb-5 mt-6 rounded-xl border border-white/10 bg-ink/50 p-4 sm:p-5">
-          <figcaption className="flex flex-wrap items-center justify-between gap-2"><span className="text-xs font-semibold">Expected production for the same fleet and period</span><span className={sampleLabel}>Illustrative sample</span></figcaption>
+          <figcaption className="text-xs font-semibold">Expected production for the same fleet and period</figcaption>
           <div className="mt-5 space-y-4">
             {[{ label: 'Difficulty unchanged', value: example.base }, { label: `Difficulty +${exampleInputs.high}%`, value: example.atHigh }].map(row => <div key={row.label}><div className="mb-2 flex items-baseline justify-between gap-3"><p className="tabular text-[11px] text-subtle">{row.label}</p><p className="tabular text-sm font-bold">{row.value.toFixed(3)} <span className="text-[10px] font-medium text-subtle">BTC</span></p></div><div aria-hidden="true" className="h-2 rounded-full bg-active/50"><div className="h-2 rounded-full bg-chart" style={{ width: `${row.value / example.base * 100}%` }} /></div></div>)}
           </div>

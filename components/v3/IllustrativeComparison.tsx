@@ -11,8 +11,7 @@ export function IllustrativeComparison() {
   const scoredA = modelA.forecasts.filter((row): row is typeof row & { outcome: number } => row.outcome !== null)
   const example = scoredA[1]
   return <section className="my-9" aria-labelledby="illustrative-comparison-title">
-    <p className="text-[10px] font-bold uppercase tracking-wider text-caution">Illustrative · Fictional models and synthetic outcomes</p>
-    <h2 id="illustrative-comparison-title" className="mt-3 text-2xl font-bold">Read error and ranges together.</h2>
+    <h2 id="illustrative-comparison-title" className="text-2xl font-bold">Read error and ranges together.</h2>
     <p className={'mt-3 max-w-3xl ' + dataCopy}>These three invented models use the same two made-up outcomes and an assumed lead time of 1,008 blocks. A third target has no outcome. None represents Doefin or another actual estimator.</p>
 
     <section className={'mt-6 ' + dataPanel} aria-labelledby="sample-error-title">

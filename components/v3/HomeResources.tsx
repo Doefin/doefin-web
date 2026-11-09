@@ -12,12 +12,9 @@ export async function HomeResources() {
     <div className={styles.wrap}>
       <div className={styles.mast} data-reveal>
         <div>
-          <div className={styles.introMeta}>
-            <p className={styles.kicker}>Tools and learning</p>
-            <span className={styles.illustrative}>Illustrative examples</span>
-          </div>
+          <p className={styles.kicker}>Tools and learning</p>
           <h2 id="learning-title" className={styles.title}>Bitcoin mining data and calculators</h2>
-          <p className={styles.intro}>Change one input and see what moves.</p>
+          <p className={styles.intro}>Change one input in these examples and see what moves.</p>
         </div>
         <Link className={styles.all} href="/resources" data-v3-cta="resources" data-v3-placement="resources">Browse all resources <Arrow className={styles.arrow} /></Link>
       </div>

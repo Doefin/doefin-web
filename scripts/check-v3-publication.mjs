@@ -10,8 +10,6 @@ async function load(path) {
 const policy = await load('lib/v3-publication.ts')
 const glossary = await load('content/glossary.ts')
 assert.equal(policy.publicationMode, 'preview', 'Publication cutover must remain inactive')
-assert.deepEqual(policy.publicationUi(), { showVersionSelector: false, showPreviewLabel: true })
-assert.deepEqual(policy.publicationUi('canonical'), { showVersionSelector: false, showPreviewLabel: false })
 assert.deepEqual(policy.navigationGroups.map(group => group.label), ['Product', 'Tools', 'Data & research', 'Learn'])
 for (const path of ['/research', '/research/example', '/data/scoreboard', '/methodology/difficulty-index', '/learn', '/learn/difficulty-exposure', '/academy/guides/hosting-effective-rate', '/blog/tag/uncertainty', '/glossary/hashrate', '/glossary/?ref=a#b', '/newsletter', '/newsletter?ref=research#sample-issue']) {
   assert(policy.isCommentaryPath(path), path)
@@ -44,6 +42,7 @@ for (const path of ['/api/v3/market-snapshot', 'https://example.com/v3', '/v31/l
 assert.equal(glossary.glossary.length, 19)
 for (const term of glossary.glossary) assert(term.shortDef.length < 160, `${term.slug}: ${term.shortDef.length} characters`)
 const chrome = readFileSync('components/v3/Chrome.tsx', 'utf8')
+assert(!chrome.includes('V3 preview'), 'The shared layout must omit the preview banner')
 const header = readFileSync('components/v3/SiteHeader.tsx', 'utf8')
 assert(header.includes('!commentary && <a href={site.appUrl}'), 'Header app promotion must be conditional')
 assert(chrome.includes('For professional investors. You can lose the full amount paid for a position.'), 'Professional investor line and risk line must remain')

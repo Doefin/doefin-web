@@ -92,10 +92,7 @@ export function ScenarioBrief({ inputs }: { inputs: ExposureInputs }) {
 
     <div className="grid gap-6 px-5 pb-6 sm:px-7 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-8">
       <div className="min-w-0 rounded-xl border border-white/10 bg-ink/50 p-5 sm:p-6" aria-label="Brief snapshot">
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-4">
-          <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-subtle">Doefin / Mining analysis</span>
-          <span className="text-[10px] font-semibold text-caution">Illustrative</span>
-        </div>
+        <p className="border-b border-white/10 pb-4 text-[10px] font-bold uppercase tracking-[0.14em] text-subtle">Doefin / Mining analysis</p>
         <h3 className="mt-4 text-base font-bold tracking-tight">Difficulty &amp; fleet production</h3>
         <p className="tabular mt-1 text-xs leading-relaxed text-subtle">{inputs.eh} EH/s fleet <span aria-hidden>·</span> {brief.results.weeks}-week horizon</p>
         <div className="mt-5 border-l-2 border-brand pl-3">
