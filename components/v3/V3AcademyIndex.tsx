@@ -73,7 +73,7 @@ export async function V3AcademyIndex() {
       <p className="mt-4 text-xs leading-relaxed text-subtle">Suggested reading order. Start with any lesson if you already know the basics.</p>
     </section>
 
-    <section id="guides" aria-labelledby="guides-title" className="[overflow-wrap:anywhere] mt-10 scroll-mt-28 border-t border-white/10 pt-7 sm:mt-14 sm:pt-9">
+    <section id="guides" tabIndex={-1} aria-labelledby="guides-title" className="[overflow-wrap:anywhere] mt-10 scroll-mt-28 border-t border-white/10 pt-7 sm:mt-14 sm:pt-9">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-x-8 gap-y-3"><div><p className="text-[10px] font-bold uppercase tracking-[0.12em] text-highlight">Put it into practice</p><h2 id="guides-title" className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">Work through a mining calculation.</h2><p className="mt-3 max-w-2xl text-sm leading-relaxed text-subtle">Each guide explains the calculator inputs, works through an example and shows what the result means.</p></div><Link href="/tools" className="inline-flex min-h-10 items-center gap-2 text-xs font-semibold text-highlight hover:underline">All calculators <Arrow className="h-4 w-4" /></Link></div>
       <div className="overflow-hidden rounded-panel border border-white/10 bg-surface/30">
         {!guides.length && <p role="status" className="p-5 text-subtle">No calculator guides are currently published.</p>}

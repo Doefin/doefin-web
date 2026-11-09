@@ -12,7 +12,7 @@ const glossary = await load('content/glossary.ts')
 assert.equal(policy.publicationMode, 'preview', 'Publication cutover must remain inactive')
 assert.deepEqual(policy.publicationUi(), { showVersionSelector: false, showPreviewLabel: true })
 assert.deepEqual(policy.publicationUi('canonical'), { showVersionSelector: false, showPreviewLabel: false })
-assert.deepEqual(policy.navigationGroups.map(group => group.label), ['Product', 'Tools', 'Data & Research', 'Learn'])
+assert.deepEqual(policy.navigationGroups.map(group => group.label), ['Product', 'Tools', 'Data & research', 'Learn'])
 for (const path of ['/research', '/research/example', '/data/scoreboard', '/methodology/difficulty-index', '/learn', '/learn/difficulty-exposure', '/academy/guides/hosting-effective-rate', '/blog/tag/uncertainty', '/glossary/hashrate', '/glossary/?ref=a#b', '/newsletter', '/newsletter?ref=research#sample-issue']) {
   assert(policy.isCommentaryPath(path), path)
   assert(!policy.navigationForPath(path).some(group => group.label === 'Product'), `${path}: product acquisition navigation must be absent`)
@@ -22,8 +22,20 @@ for (const path of ['/', '/product', '/product/settlement', '/for/miners', '/for
   assert(!policy.isCommentaryPath(path), path)
   assert.equal(policy.navigationForPath(path).length, 4)
 }
-const destinations = policy.navigationGroups.flatMap(group => group.items.map(item => item.href))
-for (const destination of ['/docs', '/docs/smart-contracts', '/for/miners', '/for/institutions', '/tools', '/research', '/data', '/learn', '/academy', '/blog', '/glossary', '/resources']) assert(destinations.includes(destination), destination)
+const destinations = policy.navigationGroups.flatMap(group => group.sections.flatMap(section => section.items.map(item => item.href)))
+assert.deepEqual([...destinations].sort(), [
+  '/product', '/product/settlement', '/for/miners', '/for/institutions',
+  '/docs', '/docs/smart-contracts', '/docs/risks-and-limitations', '/about',
+  '/tools', '/tools/difficulty-exposure', '/tools/hosting-effective-rate', '/tools/fleet-payback',
+  '/data', '/data/difficulty', '/data/hashrate', '/data/scoreboard',
+  '/methodology/difficulty-index', '/research', '/newsletter',
+  '/learn', '/learn/difficulty-exposure', '/academy', '/academy#guides', '/blog', '/glossary', '/resources',
+].sort())
+for (const group of policy.navigationGroups) {
+  assert(group.sections.some(section => section.items.includes(group.feature.item)), group.label)
+}
+assert.deepEqual(policy.navigationShortcuts(true).map(item => item.href), ['/tools/difficulty-exposure'])
+assert.deepEqual(policy.navigationShortcuts(false).map(item => item.href), ['/product', '/tools/difficulty-exposure'])
 assert.equal(policy.plannedCanonicalPath('/v3'), '/')
 assert.equal(policy.plannedCanonicalPath('/v3/tools/difficulty-exposure?eh=2#result'), '/tools/difficulty-exposure?eh=2#result')
 assert.equal(policy.plannedCanonicalPath('/v1/glossary/hashrate'), '/glossary/hashrate')
@@ -32,7 +44,8 @@ for (const path of ['/api/v3/market-snapshot', 'https://example.com/v3', '/v31/l
 assert.equal(glossary.glossary.length, 19)
 for (const term of glossary.glossary) assert(term.shortDef.length < 160, `${term.slug}: ${term.shortDef.length} characters`)
 const chrome = readFileSync('components/v3/Chrome.tsx', 'utf8')
-assert(chrome.includes('!commentary && <a href={site.appUrl}'), 'Header app promotion must be conditional')
+const header = readFileSync('components/v3/SiteHeader.tsx', 'utf8')
+assert(header.includes('!commentary && <a href={site.appUrl}'), 'Header app promotion must be conditional')
 assert(chrome.includes('For professional investors. You can lose the full amount paid for a position.'), 'Professional investor line and risk line must remain')
 assert(chrome.includes('commentaryPromotionFor(pathname)'), 'Commentary templates must use the separate optional promotion layer')
 assert(!readFileSync('components/v3/V3Learn.tsx', 'utf8').includes('site.appUrl'), 'Learning index must remain educational')
