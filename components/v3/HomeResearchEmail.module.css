@@ -1,4 +1,23 @@
-.measure { max-width: 720px; }
+.measure { min-width: 0; max-width: 720px; }
+.art { display: none; }
+
+@media (min-width: 1024px) {
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 720px) minmax(260px, 1fr);
+    gap: clamp(32px, 4vw, 48px);
+  }
+
+  .art {
+    display: block;
+    width: 100%;
+    max-width: 288px;
+    align-self: start;
+    justify-self: center;
+    margin-top: clamp(160px, 17vw, 240px);
+  }
+}
+
 .eyebrow { display: flex; align-items: center; gap: 10px; }
 .eyebrow svg { flex: none; }
 .lede { margin-top: 16px; }
