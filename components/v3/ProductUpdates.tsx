@@ -1,7 +1,7 @@
-'use client'
-
-import { EnvelopeSimple } from '@phosphor-icons/react'
+import { EnvelopeSimple } from '@phosphor-icons/react/dist/ssr'
 import Link from '@/components/routing/SiteLink'
+import { dateLong } from '@/lib/format'
+import { researchCapture, researchSummary } from '@/lib/research-data'
 import { site } from '@/lib/site'
 import { Arrow } from './Arrow'
 import { NewsletterForm } from './NewsletterForm'
@@ -24,13 +24,28 @@ export function ProductUpdates() {
         <NewsletterForm homepage describedBy="research-email-note" />
       </section>
     </div>
-    <svg className={styles.art} viewBox="0 0 288 224" fill="none" aria-hidden="true">
-      <path d="m34 105 96-74a23 23 0 0 1 28 0l96 74v81a13 13 0 0 1-13 13H47a13 13 0 0 1-13-13Z" fill="var(--df-bg)" stroke="var(--df-line-strong)" />
-      <rect x="75" y="23" width="138" height="135" rx="9" fill="var(--df-surface-alt)" stroke="var(--df-line-strong)" />
-      <path d="M98 56h33" stroke="var(--df-link)" strokeWidth="2" strokeLinecap="round" />
-      <path d="M98 74h92m-92 17h68m-68 17h82" stroke="var(--df-line-strong)" strokeWidth="2" strokeLinecap="round" />
-      <path d="m34 105 98 55a24 24 0 0 0 24 0l98-55v81a13 13 0 0 1-13 13H47a13 13 0 0 1-13-13Z" fill="var(--df-surface)" stroke="var(--df-line-strong)" strokeLinejoin="round" />
-      <path d="m40 195 77-43m131 43-77-43" stroke="var(--df-line-strong)" />
-    </svg>
+    <figure className={styles.art} aria-labelledby="sample-issue-preview-title">
+      <figcaption className={styles.issue}>
+        <p className="v37-eyebrow">From the sample issue</p>
+        <p id="sample-issue-preview-title" className={styles.issueTitle}>Observed difficulty adjustments</p>
+        <p className={styles.issueDates}>
+          <time dateTime={researchSummary.firstDate}>{dateLong(researchSummary.firstDate)}</time> to{' '}
+          <time dateTime={researchSummary.lastDate}>{dateLong(researchSummary.lastDate)}</time>
+        </p>
+        <div className={styles.issueBar} aria-hidden="true">
+          <span style={{ flexGrow: researchSummary.increases }} />
+          <span style={{ flexGrow: researchSummary.decreases }} />
+        </div>
+        <div className={styles.issueCounts}>
+          <span><strong>{researchSummary.increases}</strong> increases</span>
+          <span><strong>{researchSummary.decreases}</strong> decreases</span>
+        </div>
+        <p className={styles.issueSource}>{researchCapture.sourcePublisher}, captured <time dateTime={researchCapture.capturedAt}>{dateLong(researchCapture.capturedAt)}</time></p>
+      </figcaption>
+      <svg className={styles.envelope} viewBox="0 0 288 76" fill="none" aria-hidden="true">
+        <path d="m1 1 127 38a55 55 0 0 0 32 0L287 1v61a13 13 0 0 1-13 13H14A13 13 0 0 1 1 62Z" fill="var(--df-surface)" stroke="var(--df-line-strong)" strokeLinejoin="round" />
+        <path d="m6 71 100-39m176 39L182 32" stroke="var(--df-line-strong)" />
+      </svg>
+    </figure>
   </div>
 }
