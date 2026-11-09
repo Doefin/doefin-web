@@ -1,4 +1,43 @@
-.measure { max-width: 720px; }
+.measure { min-width: 0; max-width: 720px; }
+.art { display: none; }
+
+@media (min-width: 1024px) {
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 720px) minmax(260px, 1fr);
+    gap: clamp(32px, 4vw, 48px);
+  }
+
+  .art {
+    display: block;
+    width: 100%;
+    max-width: 288px;
+    align-self: start;
+    justify-self: center;
+    margin-top: clamp(160px, 17vw, 240px);
+  }
+}
+
+.issue {
+  margin-inline: 14px;
+  padding: 18px 16px 30px;
+  border: 1px solid var(--df-line-strong);
+  border-radius: 12px;
+  background: var(--df-surface-alt);
+}
+
+.issueTitle { margin-top: 8px; font-size: 18px; font-weight: 600; line-height: 1.3; }
+.issueDates, .issueSource { color: var(--df-text-muted); font-size: 12px; line-height: 1.5; }
+.issueDates { margin-top: 6px; }
+.issueDates time, .issueSource time { white-space: nowrap; }
+.issueBar { display: flex; gap: 3px; height: 5px; margin-top: 15px; }
+.issueBar span { flex-basis: 0; border-radius: 2px; background: var(--df-chart-1); }
+.issueBar span + span { background: var(--df-chart-context); }
+.issueCounts { display: flex; justify-content: space-between; gap: 8px; margin-top: 7px; font-size: 12px; }
+.issueCounts strong { font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.issueSource { margin-top: 9px; }
+.envelope { position: relative; width: 100%; margin-top: -14px; }
+
 .eyebrow { display: flex; align-items: center; gap: 10px; }
 .eyebrow svg { flex: none; }
 .lede { margin-top: 16px; }
