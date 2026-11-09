@@ -2,36 +2,98 @@
 export type PublicationMode = 'preview' | 'canonical'
 export const publicationMode: PublicationMode = 'preview'
 
-export type NavigationItem = { label: string; href: string; description: string }
-export type NavigationGroup = { label: string; items: readonly NavigationItem[] }
+export type NavigationItem = { label: string; href: string }
+type NavigationSection = { label: string; items: readonly NavigationItem[] }
+type NavigationFeature = { kicker: string; title: string; description: string; item: NavigationItem }
+export type NavigationGroup = {
+  id: string
+  label: string
+  description: string
+  sections: readonly NavigationSection[]
+  feature: NavigationFeature
+}
+
+const marketOverview = { label: 'Difficulty markets overview', href: '/product' }
+const difficultyCalculator = { label: 'Difficulty exposure calculator', href: '/tools/difficulty-exposure' }
+const research = { label: 'Research', href: '/research' }
+const workedExample = { label: 'Worked production example', href: '/learn/difficulty-exposure' }
+
 export const navigationGroups: readonly NavigationGroup[] = [
-  { label: 'Product', items: [
-    { label: 'How it works', href: '/product', description: 'See how difficulty markets work and what they do not cover.' },
-    { label: 'For miners', href: '/for/miners', description: 'Estimate how rising difficulty affects expected BTC production and how a position could offset part of the exposure.' },
-    { label: 'For finance teams, funds & desks', href: '/for/institutions', description: 'Trade your view on Bitcoin network hashrate.' },
-    { label: 'Documentation', href: '/docs', description: 'Mechanics, app tasks, risks and key terms.' },
-    { label: 'Technical review', href: '/docs/smart-contracts', description: 'Inspect deployment and contract evidence.' },
-  ] },
-  { label: 'Tools', items: [
-    { label: 'All calculators', href: '/tools', description: 'Enter your own assumptions and compare mining scenarios.' },
-    { label: 'Difficulty exposure', href: '/tools/difficulty-exposure', description: 'Compare expected BTC production and prepare a team brief.' },
-  ] },
-  { label: 'Data & Research', items: [
-    { label: 'Data', href: '/data', description: 'Check where the data comes from, with examples and limits.' },
-    { label: 'Research', href: '/research', description: 'Read findings, methods and reproducible calculations.' },
-    { label: 'Forecast evaluation', href: '/data/scoreboard', description: 'Compare forecast errors and check which figures are examples.' },
-    { label: 'Methodology', href: '/methodology/difficulty-index', description: 'See how the difficulty estimate is calculated.' },
-    { label: 'Newsletter demo', href: '/newsletter', description: 'Preview newsletter preferences. No subscription is saved.' },
-  ] },
-  { label: 'Learn', items: [
-    { label: 'Start learning', href: '/learn', description: 'Follow a worked example and check the calculation.' },
-    { label: 'Worked example', href: '/learn/difficulty-exposure', description: 'Connect difficulty to expected BTC production.' },
-    { label: 'Academy', href: '/academy', description: 'Understand difficulty, hashprice and uncertainty.' },
-    { label: 'Articles', href: '/blog', description: 'Read about mining assumptions and data.' },
-    { label: 'Mining glossary', href: '/glossary', description: 'Look up mining and network terms.' },
-    { label: 'All resources', href: '/resources', description: 'Find the guides, calculators and definitions.' },
-  ] },
+  {
+    id: 'product',
+    label: 'Product',
+    description: 'Markets, settlement and documentation',
+    sections: [
+      { label: 'Markets', items: [
+        marketOverview,
+        { label: 'For miners', href: '/for/miners' },
+        { label: 'For funds and desks', href: '/for/institutions' },
+        { label: 'How settlement works', href: '/product/settlement' },
+      ] },
+      { label: 'Reference and company', items: [
+        { label: 'Documentation', href: '/docs' },
+        { label: 'Contract and audit evidence', href: '/docs/smart-contracts' },
+        { label: 'Risks and limitations', href: '/docs/risks-and-limitations' },
+        { label: 'About Doefin', href: '/about' },
+      ] },
+    ],
+    feature: { kicker: 'Start here', title: 'How difficulty markets work', description: 'Read the contract basics and what a position can cover.', item: marketOverview },
+  },
+  {
+    id: 'tools',
+    label: 'Tools',
+    description: 'Difficulty, hosting and fleet calculators',
+    sections: [
+      { label: 'Calculators', items: [
+        difficultyCalculator,
+        { label: 'Hosting costs calculator', href: '/tools/hosting-effective-rate' },
+        { label: 'Fleet payback calculator', href: '/tools/fleet-payback' },
+        { label: 'All calculators', href: '/tools' },
+      ] },
+    ],
+    feature: { kicker: 'Start with your fleet', title: 'Estimate BTC production', description: 'Compare expected production at different difficulty levels.', item: difficultyCalculator },
+  },
+  {
+    id: 'data',
+    label: 'Data & research',
+    description: 'Mining data, research and methods',
+    sections: [
+      { label: 'Data and methods', items: [
+        { label: 'Mining data', href: '/data' },
+        { label: 'Difficulty estimate', href: '/data/difficulty' },
+        { label: 'Network hashrate', href: '/data/hashrate' },
+        { label: 'Forecast evaluation', href: '/data/scoreboard' },
+        { label: 'Difficulty index methodology', href: '/methodology/difficulty-index' },
+      ] },
+      { label: 'Research and updates', items: [research, { label: 'Newsletter demo', href: '/newsletter' }] },
+    ],
+    feature: { kicker: 'Explore the evidence', title: 'Bitcoin mining research', description: 'Read the findings and the methods behind them.', item: research },
+  },
+  {
+    id: 'learn',
+    label: 'Learn',
+    description: 'Guides, articles and glossary',
+    sections: [
+      { label: 'Guides and examples', items: [
+        { label: 'Learning overview', href: '/learn' },
+        workedExample,
+        { label: 'Academy', href: '/academy' },
+        { label: 'Calculator guides', href: '/academy#guides' },
+      ] },
+      { label: 'Reference', items: [
+        { label: 'Articles', href: '/blog' },
+        { label: 'Mining glossary', href: '/glossary' },
+        { label: 'All resources', href: '/resources' },
+      ] },
+    ],
+    feature: { kicker: 'Start with an example', title: 'Expected BTC production', description: 'See what happens to expected production when difficulty changes.', item: workedExample },
+  },
 ]
+
+export function navigationShortcuts(commentary: boolean): readonly NavigationItem[] {
+  const calculator = { ...difficultyCalculator, label: 'Difficulty calculator' }
+  return commentary ? [calculator] : [{ ...marketOverview, label: 'Difficulty markets' }, calculator]
+}
 
 /** Research and educational commentary use a non-promotional shared template. */
 export function isCommentaryPath(pathname: string): boolean {
@@ -39,7 +101,7 @@ export function isCommentaryPath(pathname: string): boolean {
   return /^\/(?:research|data|methodology|learn|academy|blog|glossary|newsletter)(?:\/|$)/.test(path)
 }
 export function navigationForPath(pathname: string): readonly NavigationGroup[] {
-  return isCommentaryPath(pathname) ? navigationGroups.filter(group => group.label !== 'Product') : navigationGroups
+  return isCommentaryPath(pathname) ? navigationGroups.filter(group => group.id !== 'product') : navigationGroups
 }
 export function publicationUi(mode: PublicationMode = publicationMode) {
   return { showVersionSelector: false, showPreviewLabel: mode === 'preview' }
