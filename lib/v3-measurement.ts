@@ -1,8 +1,8 @@
 /** Local QA only. No identity, storage, transport, timestamps or free-text fields. */
 export const V3_MEASUREMENT_CHANNEL = 'doefin:v3:measurement'
 export const V3_JOURNEY_VERSION = 'miner-first-content-v1'
-export const ctas = ['planner', 'tutorial', 'calculator', 'app', 'risk', 'evidence', 'resources', 'contact', 'settlement', 'setup', 'institutions', 'hosting', 'payback', 'overview'] as const
-export const placements = ['hero', 'header', 'scenario', 'product', 'setup', 'trust', 'resources', 'faq', 'closing', 'footer', 'contextual'] as const
+export const ctas = ['planner', 'tutorial', 'calculator', 'app', 'risk', 'evidence', 'resources', 'contact', 'settlement', 'setup', 'institutions', 'hosting', 'payback', 'overview', 'newsletter'] as const
+export const placements = ['hero', 'header', 'scenario', 'product', 'setup', 'trust', 'resources', 'faq', 'closing', 'footer', 'contextual', 'how'] as const
 export const tools = ['difficulty-exposure', 'hosting-effective-rate', 'fleet-payback'] as const
 export type MeasurementPayloads = {
   page_view: { section: 'home' | 'product' | 'tools' | 'learn' | 'research' | 'data' | 'newsletter' | 'institutions' | 'other'; signal: 'route-render' }

@@ -1,21 +1,30 @@
 import { researchCapture, researchRows, researchSummary } from '@/lib/research-data'
 
-/** Frozen observations. The hashrate estimate uses the boundary timestamps, not a live measurement. */
-const periods = researchRows.slice(1).map((row, index) => {
-  const previous = researchRows[index]
-  const elapsed = row.timestamp - previous.timestamp
-  const averageEH = row.previousDifficulty * 2 ** 32 * 2016 / elapsed / 1e18
-  return { row, averageEH }
+const BLOCKS_PER_EPOCH = 2016
+// The raw capture includes the boundary before the first recorded adjustment.
+const sourceBoundaries: [timestamp: number, height: number, difficulty: number, ratio: number][] = JSON.parse(researchCapture.sourceRaw)
+const timestampByHeight = new Map(sourceBoundaries.map(([timestamp, height]) => [height, timestamp]))
+
+const periods = researchRows.map((row, index) => {
+  const previousTimestamp = timestampByHeight.get(row.height - BLOCKS_PER_EPOCH)
+  const averageEH = previousTimestamp === undefined || previousTimestamp >= row.timestamp
+    ? null
+    : row.previousDifficulty * 2 ** 32 * BLOCKS_PER_EPOCH / (row.timestamp - previousTimestamp) / 1e18
+  const x = 18 + index * 564 / Math.max(researchRows.length - 1, 1)
+  const date = row.date.slice(0, 10)
+  const change = `${row.changePct > 0 ? '+' : ''}${row.changePct.toFixed(2)}%`
+  return { row, averageEH, x, date, change }
 })
-const maxAbsolute = Math.max(...periods.map(period => Math.abs(period.row.changePct)))
-const minHashrate = Math.min(...periods.map(period => period.averageEH))
-const maxHashrate = Math.max(...periods.map(period => period.averageEH))
-const coords = periods.map(({ averageEH }, index) => {
-  const x = 18 + index * 24
-  const y = 122 - (averageEH - minHashrate) / (maxHashrate - minHashrate || 1) * 96
-  return [x, y] as const
-})
-const line = coords.map(([x, y], i) => `${i === 0 ? 'M' : 'L'}${x.toFixed(1)} ${y.toFixed(1)}`).join(' ')
+const maxAbsolute = Math.max(...periods.map(period => Math.abs(period.row.changePct))) || 1
+const estimates = periods.flatMap(period => period.averageEH === null ? [] : [{ ...period, averageEH: period.averageEH }])
+const rates = estimates.map(period => period.averageEH)
+const minHashrate = rates.length ? Math.min(...rates) : 0
+const maxHashrate = rates.length ? Math.max(...rates) : 0
+const points = estimates.map(period => ({
+  ...period,
+  y: 122 - (period.averageEH - minHashrate) / (maxHashrate - minHashrate || 1) * 96,
+}))
+const line = points.map(({ x, y }, i) => `${i === 0 ? 'M' : 'L'}${x.toFixed(1)} ${y.toFixed(1)}`).join(' ')
 
 export function LandingHistory() {
   return <section className="landing-market-context" id="mining-history" aria-labelledby="landing-market-title">
@@ -25,13 +34,12 @@ export function LandingHistory() {
     <div className="landing-history-grid">
       <figure className="landing-history-panel">
         <figcaption><strong>Difficulty adjustment (%)</strong><span>Each bar is one observed adjustment.</span></figcaption>
-        <svg viewBox="0 0 600 210" role="img" aria-label="Observed changes in Bitcoin mining difficulty across 24 recent adjustments, with both positive and negative bars." preserveAspectRatio="xMidYMid meet">
+        <svg viewBox="0 0 600 210" role="img" aria-label={`Observed changes in Bitcoin mining difficulty across ${periods.length} adjustments, with both positive and negative bars.`} preserveAspectRatio="xMidYMid meet">
           <path d="M0 105H600" stroke="var(--df-text-muted)" strokeWidth="1" opacity=".7" />
-          {periods.map(({ row }, index) => {
+          {periods.map(({ row, x, date, change }) => {
             const height = Math.abs(row.changePct) / maxAbsolute * 82
-            const x = 18 + index * 24
             const y = row.changePct >= 0 ? 105 - height : 105
-            return <rect key={row.height} x={x} y={y} width="15" height={height} rx="1" fill="var(--df-chart-1, var(--df-blue))"><title>{row.date.slice(0,10)}: {row.changePct > 0 ? '+' : ''}{row.changePct.toFixed(2)}%</title></rect>
+            return <rect key={row.height} x={x - 7.5} y={y} width="15" height={height} rx="1" fill="var(--df-chart-1, var(--df-blue))"><title>{`${date}: ${change}`}</title></rect>
           })}
           <text x="0" y="18" fontSize="12" fill="var(--df-text-muted)">Increase</text>
           <text x="0" y="198" fontSize="12" fill="var(--df-text-muted)">Decrease</text>
@@ -39,10 +47,10 @@ export function LandingHistory() {
       </figure>
       <figure className="landing-history-panel">
         <figcaption><strong>Estimated 2,016-block average hashrate (EH/s)</strong><span>Derived from difficulty and elapsed time, not machine measurements.</span></figcaption>
-        <svg viewBox="0 0 600 160" role="img" aria-label="Estimated average network hashrate across 24 complete 2016-block intervals." preserveAspectRatio="xMidYMid meet">
+        <svg viewBox="0 0 600 160" role="img" aria-label={`Estimated average network hashrate across ${points.length} complete 2,016-block intervals.`} preserveAspectRatio="xMidYMid meet">
           <path d="M0 122H600" stroke="var(--df-text-muted)" strokeWidth="1" opacity=".35" />
           <path d={line} fill="none" stroke="var(--df-chart-1, var(--df-blue))" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
-          {coords.map(([x, y], index) => <circle key={periods[index].row.height} cx={x} cy={y} r="2.5" fill="var(--df-blue)"><title>{periods[index].row.date.slice(0, 10)}: {periods[index].averageEH.toFixed(0)} EH/s</title></circle>)}
+          {points.map(({ row, x, y, date, averageEH }) => <circle key={row.height} cx={x} cy={y} r="2.5" fill="var(--df-blue)"><title>{`${date}: ${averageEH.toFixed(0)} EH/s`}</title></circle>)}
           <text x="0" y="15" fontSize="12" fill="var(--df-text-muted)">{maxHashrate.toFixed(0)} EH/s</text>
           <text x="0" y="147" fontSize="12" fill="var(--df-text-muted)">{minHashrate.toFixed(0)} EH/s</text>
         </svg>
@@ -54,7 +62,7 @@ export function LandingHistory() {
       <div className="landing-history-table-scroll">
         <table>
           <thead><tr><th scope="col">Adjustment date (UTC)</th><th scope="col">Difficulty change</th><th scope="col">Average hashrate estimate</th></tr></thead>
-          <tbody>{periods.map(({ row, averageEH }) => <tr key={row.height}><th scope="row"><time dateTime={row.date}>{row.date.slice(0, 10)}</time></th><td>{row.changePct > 0 ? '+' : ''}{row.changePct.toFixed(2)}%</td><td>{averageEH.toFixed(0)} EH/s</td></tr>)}</tbody>
+          <tbody>{periods.map(({ row, averageEH, date, change }) => <tr key={row.height}><th scope="row"><time dateTime={row.date}>{date}</time></th><td>{change}</td><td>{averageEH === null ? 'Unavailable' : `${averageEH.toFixed(0)} EH/s`}</td></tr>)}</tbody>
         </table>
       </div>
     </details>
