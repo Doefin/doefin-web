@@ -7,6 +7,7 @@ import { HomeFaq } from '@/components/v3/HomeFaq'
 import { seo } from '@/lib/seo'
 import { ApprovedLanding } from '@/components/v3/approved-landing/ApprovedLanding'
 import '@/components/v3/approved-landing/approved-landing.css'
+import '@/components/v3/approved-landing/difficulty-impact.css'
 import './home.css'
 
 export const metadata: Metadata = {

@@ -40,7 +40,8 @@ assert.ok(main, 'Homepage main content is missing')
 const sections = [...main.matchAll(/<section\b[^>]*\bclass="([^"]+)"/g)].map(([, classes]) => classes.split(' ')[0])
 assert.deepEqual(sections, [
   'hero', 'market-panel', 'benefits-section', 'audience-section', 'why-section',
-  'how-section', 'traction-section', 'trust-section', 'closing-section', 'v37-faq',
+  'how-section', 'landing-impact', 'landing-market-context', 'traction-section',
+  'trust-section', 'closing-section', 'v37-faq',
 ], 'The approved sections must render in order, with the FAQ last')
 assert.match(main, /<h1\b[^>]*id="hero-title"/)
 assert.match(main, /Illustrative quotes in cbBTC, not live prices/)
