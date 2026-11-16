@@ -1,6 +1,7 @@
 import { site } from '@/lib/site'
 import { ApprovedLandingMotion } from './ApprovedLandingMotion'
 import { DifficultyImpact } from './DifficultyImpact'
+import { LandingHistory } from './LandingHistory'
 
 export function ApprovedLanding() {
   return (
@@ -11,7 +12,7 @@ export function ApprovedLanding() {
       <Why />
       <How />
       <DifficultyImpact />
-      <MarketContext />
+      <LandingHistory />
       <Traction />
       <Trust />
       <Closing />
@@ -2272,17 +2273,6 @@ function How() {
       <div className="landing-how-action"><a className="button button-primary" href={site.appUrl} data-v3-cta="app" data-v3-placement="how">Explore markets →</a></div>
     </section>
   )
-}
-
-function MarketContext() {
-  return <section className="landing-market-context" aria-labelledby="landing-market-title">
-    <h2 id="landing-market-title">Difficulty changes. So does mining exposure.</h2>
-    <p>Bitcoin adjusts mining difficulty every 2,016 blocks. A change affects expected BTC production at the same miner hashrate, all else equal. Review difficulty adjustments and the network hashrate estimate before taking a position. Historical figures and their measurement dates are on the data pages.</p>
-    <div className="landing-market-links">
-      <a href="/data/difficulty">Review difficulty data →</a>
-      <a href="/data/hashrate">Review network hashrate →</a>
-    </div>
-  </section>
 }
 
 function Traction() {
