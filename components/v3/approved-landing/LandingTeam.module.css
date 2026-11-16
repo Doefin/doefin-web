@@ -2,22 +2,67 @@
   width: min(100%, 1360px);
   margin-inline: auto;
   padding: 0 clamp(22px, 5vw, 56px) var(--df-space-16);
+  scroll-margin-top: var(--df-space-24);
 }
 
-.section .heading {
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--df-space-3);
   margin-bottom: var(--df-space-6);
+}
+
+.heading {
   font-size: clamp(27px, 3vw, 36px);
   font-weight: 700;
   line-height: 1.22;
   letter-spacing: -0.04em;
 }
 
-.grid {
+.controls {
+  display: flex;
+  gap: var(--df-space-2);
+}
+
+.controls[hidden] {
+  display: none;
+}
+
+.control {
   display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--df-line);
+  border-radius: var(--df-radius-pill);
+  background: var(--df-surface);
+  color: var(--df-text);
+}
+
+.control:hover:not(:disabled) {
+  background: var(--df-surface-alt);
+}
+
+.control:disabled {
+  opacity: 0.45;
+}
+
+.viewport {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-color: var(--df-line-strong) transparent;
+}
+
+.track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 88%;
   list-style: none;
   gap: var(--df-space-3);
   margin: 0;
-  padding: 0;
+  padding: 0 0 var(--df-space-3);
 }
 
 .card {
@@ -29,6 +74,8 @@
   border: 1px solid var(--df-line);
   border-radius: var(--df-radius-panel);
   background: var(--df-surface);
+  scroll-snap-align: start;
+  grid-template-rows: auto 1fr;
 }
 
 .portrait {
@@ -57,9 +104,17 @@
   line-height: 1.4;
 }
 
+.card .description {
+  grid-column: 1 / -1;
+  align-self: start;
+  color: var(--df-text-muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
 @media (min-width: 38rem) {
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .track {
+    grid-auto-columns: calc((100% - var(--df-space-3)) / 2);
   }
 }
 
@@ -68,13 +123,14 @@
     padding-bottom: var(--df-space-24);
   }
 
-  .grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .track {
+    grid-auto-columns: calc((100% - 3 * var(--df-space-4)) / 4);
     gap: var(--df-space-4);
   }
 
   .card {
     grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr;
     justify-items: center;
     padding: var(--df-space-6);
     text-align: center;

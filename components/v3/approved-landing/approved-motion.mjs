@@ -1,11 +1,12 @@
-function initCarousel(root, scope) {
-  const carousel = root.querySelector('.trust-carousel')
+function initCarousel(root, scope, name) {
+  const carousel = root.querySelector(`.${name}-carousel`)
   if (!carousel) return
-  const viewport = carousel.querySelector('.trust-window')
-  const track = carousel.querySelector('.trust-track')
-  const navigation = carousel.querySelector('.trust-navigation')
-  const previous = carousel.querySelector('[data-trust-direction="-1"]')
-  const next = carousel.querySelector('[data-trust-direction="1"]')
+  const viewport = carousel.querySelector(`.${name}-window`)
+  const track = carousel.querySelector(`.${name}-track`)
+  const navigation = carousel.querySelector(`.${name}-navigation`)
+  const previous = carousel.querySelector(`[data-${name}-direction="-1"]`)
+  const next = carousel.querySelector(`[data-${name}-direction="1"]`)
+  if (!viewport || !track?.firstElementChild || !navigation || !previous || !next) return
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
   function update() {
     const end = viewport.scrollWidth - viewport.clientWidth
@@ -1696,7 +1697,8 @@ export function mountApprovedLandingMotion(root) {
     },
   }
 
-  initCarousel(root, scope)
+  initCarousel(root, scope, 'trust')
+  initCarousel(root, scope, 'team')
   initChart(root, scope)
   initAudience(root, scope)
   initReasons(root, scope)
