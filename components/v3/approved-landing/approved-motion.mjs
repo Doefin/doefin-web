@@ -1697,7 +1697,6 @@ export function mountApprovedLandingMotion(root) {
     },
   }
 
-  initCarousel(root, scope, 'trust')
   initCarousel(root, scope, 'team')
   initChart(root, scope)
   initAudience(root, scope)

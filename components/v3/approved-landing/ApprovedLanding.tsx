@@ -5,6 +5,7 @@ import { ApprovedLandingMotion } from './ApprovedLandingMotion'
 import { DifficultyImpactLoading, DifficultyImpactSection } from './DifficultyImpactSection'
 import { LandingHistory, LandingHistoryFallback } from './LandingHistory'
 import { LandingTeam } from './LandingTeam'
+import { LandingTrust } from './LandingTrust'
 
 export function ApprovedLanding() {
   return (
@@ -21,7 +22,7 @@ export function ApprovedLanding() {
         <DifficultyImpactSection />
       </Suspense>
       <Traction />
-      <Trust />
+      <LandingTrust />
       <LandingTeam />
       <Closing />
     </ApprovedLandingMotion>
@@ -2474,153 +2475,6 @@ function Traction() {
           </svg>
         </li>
       </ul>
-    </section>
-  )
-}
-
-function Trust() {
-  return (
-    <section
-      className="trust-section"
-      aria-labelledby="trust-users-heading trust-investors-heading"
-    >
-      <div
-        className="trust-carousel"
-        role="group"
-        aria-roledescription="carousel"
-        aria-label="Early users and investors"
-      >
-        <div className="trust-chips">
-          <h2 className="trust-chip" id="trust-users-heading">
-            Trusted by early users across miners, pools and traders
-          </h2>
-          <h2 className="trust-chip" id="trust-investors-heading">
-            Backed by investors
-          </h2>
-        </div>
-        <div
-          className="trust-window"
-          id="trust-window"
-          tabIndex={0}
-          aria-label="Company logos; scroll or use left and right arrow keys"
-        >
-          <ul className="trust-track" role="list">
-            <li className="trust-logo trust-further">
-              <a
-                className="trust-logo-link"
-                href="https://ventures.further.ae/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Further website (opens in a new tab)"
-                draggable="false"
-              >
-                <img
-                  src="/images/v3/approved-landing/further.svg"
-                  alt="FURTHER"
-                  width={149}
-                  height={28}
-                  draggable="false"
-                />
-              </a>
-            </li>
-            <li className="trust-logo trust-tether">
-              <a
-                className="trust-logo-link"
-                href="https://tether.to/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Tether website (opens in a new tab)"
-                draggable="false"
-              >
-                <img
-                  src="/images/v3/approved-landing/tether.svg"
-                  alt="tether"
-                  width={149}
-                  height={33}
-                  draggable="false"
-                />
-              </a>
-            </li>
-            <li className="trust-logo trust-braiins">
-              <a
-                className="trust-logo-link"
-                href="https://braiins.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Braiins website (opens in a new tab)"
-                draggable="false"
-              >
-                <img
-                  src="/images/v3/approved-landing/braiins.svg"
-                  alt="BRAIINS"
-                  width={149}
-                  height={25}
-                  draggable="false"
-                />
-              </a>
-            </li>
-            <li className="trust-logo trust-luxor">
-              <a
-                className="trust-logo-link"
-                href="https://luxor.tech/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Luxor website (opens in a new tab)"
-                draggable="false"
-              >
-                <img
-                  src="/images/v3/approved-landing/luxor.svg"
-                  alt="Luxor"
-                  width={144}
-                  height={31}
-                  draggable="false"
-                />
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div
-          className="trust-navigation"
-          role="group"
-          aria-label="Carousel controls"
-          hidden
-        >
-          <button
-            className="trust-arrow"
-            type="button"
-            data-trust-direction="-1"
-            aria-label="Previous logos"
-            aria-controls="trust-window"
-          >
-            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <path
-                d="M16 10H4m5-5-5 5 5 5"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-          <button
-            className="trust-arrow"
-            type="button"
-            data-trust-direction="1"
-            aria-label="Next logos"
-            aria-controls="trust-window"
-          >
-            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <path
-                d="M4 10h12m-5-5 5 5-5 5"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
     </section>
   )
 }
