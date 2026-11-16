@@ -1,7 +1,9 @@
+import { Gauge, ShieldWarning, Target } from '@phosphor-icons/react/dist/ssr'
+import { Suspense } from 'react'
 import { site } from '@/lib/site'
 import { ApprovedLandingMotion } from './ApprovedLandingMotion'
-import { DifficultyImpact } from './DifficultyImpact'
-import { LandingHistory } from './LandingHistory'
+import { DifficultyImpactLoading, DifficultyImpactSection } from './DifficultyImpactSection'
+import { LandingHistory, LandingHistoryFallback } from './LandingHistory'
 import { LandingTeam } from './LandingTeam'
 
 export function ApprovedLanding() {
@@ -12,8 +14,12 @@ export function ApprovedLanding() {
       <Audience />
       <Why />
       <How />
-      <DifficultyImpact />
-      <LandingHistory />
+      <Suspense fallback={<LandingHistoryFallback />}>
+        <LandingHistory />
+      </Suspense>
+      <Suspense fallback={<DifficultyImpactLoading />}>
+        <DifficultyImpactSection />
+      </Suspense>
       <Traction />
       <Trust />
       <LandingTeam />
@@ -700,11 +706,26 @@ function Audience() {
 
 function Why() {
   return (
-    <section className="why-section" aria-labelledby="why-heading">
+    <section id="why-doefin" className="why-section" aria-labelledby="why-heading">
       <h2 className="why-heading" id="why-heading">
         Why Doefin
       </h2>
-      <p className="landing-why-intro">Hashrate is the economic exposure; Bitcoin mining difficulty determines each market outcome. Every market uses a defined threshold and settlement block. That gives miners a public reference for hedging and gives professional investors a reference for trading a view. A difficulty position may offset some exposure, but it does not cover every mining risk.</p>
+      <div className="why-market-reference">
+        <dl className="why-market-terms">
+          <div>
+            <dt><Gauge aria-hidden="true" /> Hashrate</dt>
+            <dd>The economic exposure behind the market.</dd>
+          </div>
+          <div>
+            <dt><Target aria-hidden="true" /> Bitcoin mining difficulty</dt>
+            <dd>Determines each market outcome. Each market specifies a <strong>difficulty threshold</strong> and a <strong>settlement block</strong>.</dd>
+          </div>
+        </dl>
+        <div className="why-market-use">
+          <p>These market terms give <strong>miners</strong> a public reference for hedging and <strong>professional investors</strong> a reference for trading a view.</p>
+          <p className="why-market-risk"><ShieldWarning aria-hidden="true" /> <span>A difficulty position may offset some exposure, but it does not cover every mining risk.</span></p>
+        </div>
+      </div>
       <div className="why-layout">
         <article
           className="why-panel why-drivers"
