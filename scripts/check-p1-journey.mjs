@@ -41,7 +41,7 @@ const sections = [...main.matchAll(/<section\b[^>]*\bclass="([^"]+)"/g)].map(([,
 assert.deepEqual(sections, [
   'hero', 'market-panel', 'benefits-section', 'audience-section', 'why-section',
   'how-section', 'landing-impact', 'landing-market-context', 'traction-section',
-  'trust-section', 'closing-section', 'v37-faq',
+  'trust-section', 'team-section', 'closing-section', 'v37-faq',
 ], 'The approved sections must render in order, with the FAQ last')
 assert.match(main, /<h1\b[^>]*id="hero-title"/)
 assert.match(main, /Illustrative quotes in cbBTC, not live prices/)
