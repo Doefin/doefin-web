@@ -4,26 +4,25 @@ import { join } from 'node:path'
 
 const read = path => readFileSync(path, 'utf8')
 const home = read('app/(public)/page.tsx')
+const approvedLanding = read('components/v3/approved-landing/ApprovedLanding.tsx')
 const resources = read('app/(public)/resources/page.tsx')
 const chrome = read('components/v3/Chrome.tsx')
 const docs = read('content/v3-docs.ts')
 const routes = read('lib/v3-routes.ts')
-const source = home + resources + chrome + read('components/v3/HomeResources.tsx')
+const source = home + approvedLanding + resources + chrome
 const targets = [...new Set([...source.matchAll(/(?:href[=:]\s*["'])(\/docs[^"']*)/g)].map(match => match[1].split('#')[0]))]
 for (const target of targets.filter(path => path.startsWith('/docs/'))) {
   assert.ok(docs.includes(`slug: '${target.slice('/docs/'.length)}'`), `Missing V3 doc: ${target}`)
 }
 assert.match(routes, /staticRoute\('product', Product\)/, 'Retain the product introduction route')
 assert.match(resources, /href: '\/product'/, 'The product introduction must have a contextual resource entry')
-assert.ok(Math.abs((1 - 1 / 1.10) * 100 - 9.09) < 0.005, 'Production percentage must use reciprocal difficulty')
 assert.match(home, /robots: \{ index: false, follow: false \}/, 'Keep preview indexing policy')
 assert.match(read('components/content/Subscribe.tsx'), /version === 'v3'[\s\S]*?(?:demo|prototype)/i, 'Shared V3 subscription state must disclose demo delivery')
 assert.match(read('components/content/Subscribe.tsx'), /\/newsletter/, 'Shared subscription entry must reach the newsletter demo')
 // Check incoming cross-page homepage fragments, not only anchors emitted by home.
 const walk = dir => readdirSync(dir, { withFileTypes: true }).flatMap(entry => entry.isDirectory() ? walk(join(dir, entry.name)) : [join(dir, entry.name)])
 const inbound = new Set(walk('components/v3').filter(path => path.endsWith('.tsx')).flatMap(path => [...read(path).matchAll(/\/#([a-z][a-z0-9-]*)/g)].map(match => match[1])))
-for (const id of inbound) assert.ok(home.includes(`id="${id}"`), `Cross-page homepage fragment missing: #${id}`)
-for (const id of ['inside-the-product', 'who-its-for', 'product-title', 'audience-title']) assert.ok(home.includes(`id="${id}"`), `Preserve existing homepage bookmark: #${id}`)
+for (const id of inbound) assert.ok((home + approvedLanding).includes(`id="${id}"`), `Cross-page homepage fragment missing: #${id}`)
 console.log(`P1 incoming homepage fragment checks passed (${inbound.size} cross-page targets).`)
 console.log(`P1 source checks passed (${targets.length} distinct literal destinations).`)
 if (process.argv.includes('--source-only')) process.exit(0)
@@ -35,22 +34,19 @@ const fetchHtml = async path => {
   return response.text()
 }
 const html = await fetchHtml('/')
-const firstSection = html.match(/<section\b[^>]*aria-labelledby="v3-title"[\s\S]*?<\/section>/)?.[0]
-assert.ok(firstSection, 'Rendered homepage must have its hero section')
-for (const [href, label] of [
-  ['/for/miners', 'Plan difficulty exposure'],
-  ['/learn/difficulty-exposure', 'Follow a worked example'],
-  ['/docs/smart-contracts', 'Review technical evidence'],
-  ['/docs/risks-and-limitations', 'Risks and limitations'],
-]) {
-  assert.ok(firstSection.includes(`href="${href}"`), `Hero lacks ${href}`)
-  assert.ok(firstSection.includes(label), `Hero lacks named action: ${label}`)
-}
-assert.ok(firstSection.includes('A losing position pays zero.'), 'Full-loss qualification must remain beside hero actions')
-assert.match(html, /<summary[^>]*>[^<]*(?:app capture|app screenshot): 19 October 2026[^<]*not live<\/summary>/, 'Capture date and non-live label must be visible before expanding')
-for (const path of ['/docs/connecting-a-wallet', '/docs/getting-collateral', '/docs/your-first-trade', '/about', '/tools/hosting-effective-rate', '/tools/fleet-payback', '/for/institutions']) {
-  assert.ok(html.includes(`href="${path}"`), `Homepage lacks contextual ${path}`)
-}
+assert.match(html, /<header\b[\s\S]*?<main\b[\s\S]*?<\/main>[\s\S]*?<footer\b/, 'Homepage must retain its shared header and footer')
+const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1]
+assert.ok(main, 'Homepage main content is missing')
+const sections = [...main.matchAll(/<section\b[^>]*\bclass="([^"]+)"/g)].map(([, classes]) => classes.split(' ')[0])
+assert.deepEqual(sections, [
+  'hero', 'market-panel', 'benefits-section', 'audience-section', 'why-section',
+  'how-section', 'traction-section', 'trust-section', 'closing-section', 'v37-faq',
+], 'The approved sections must render in order, with the FAQ last')
+assert.match(main, /<h1\b[^>]*id="hero-title"/)
+assert.match(main, /Illustrative quotes in cbBTC, not live prices/)
+assert.match(main, /You can lose the full amount paid for a position\./)
+const faq = main.slice(main.indexOf('id="faq"'))
+assert.match(faq, /<details\b[\s\S]*?<summary\b/, 'Published FAQ questions must render as disclosures')
 const resourceHtml = await fetchHtml('/resources')
 assert.ok(resourceHtml.includes('href="/product"'), 'Rendered product intro link missing')
 assert.ok(resourceHtml.includes('id="updates"') && resourceHtml.includes('does not send emails or save personal details'), 'Resources update anchor/demo qualification missing')
