@@ -2,6 +2,7 @@ import { site } from '@/lib/site'
 import { ApprovedLandingMotion } from './ApprovedLandingMotion'
 import { DifficultyImpact } from './DifficultyImpact'
 import { LandingHistory } from './LandingHistory'
+import { LandingTeam } from './LandingTeam'
 
 export function ApprovedLanding() {
   return (
@@ -15,6 +16,7 @@ export function ApprovedLanding() {
       <LandingHistory />
       <Traction />
       <Trust />
+      <LandingTeam />
       <Closing />
     </ApprovedLandingMotion>
   )
