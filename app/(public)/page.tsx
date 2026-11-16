@@ -12,6 +12,7 @@ import './home.css'
 
 export const metadata: Metadata = {
   ...seo({ title: 'Trade and hedge Bitcoin hashrate exposure', description: 'Trade and hedge Bitcoin hashrate exposure through markets on mining difficulty. See how markets work and what to check before trading. For professional investors.', path: '/' }),
+  robots: { index: true, follow: true },
 }
 
 export default function V3Home() {
