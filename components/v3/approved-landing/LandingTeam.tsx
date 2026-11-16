@@ -22,6 +22,12 @@ const team = [
     portrait: 'fardin-vahdat.webp',
   },
   {
+    name: 'Dusan Sekulic',
+    role: 'Backend developer',
+    description: '15+ years in software engineering, specializing in Bitcoin infrastructure, blockchain protocols, and scalable backend systems. Extensive experience in Go, AWS, and distributed architectures across fintech, blockchain, and enterprise applications.',
+    portrait: 'dusan-sekulic.jpg',
+  },
+  {
     name: 'Eamonn Gashier',
     role: 'Derivatives consultant',
     description: 'Following 15 years in Derivatives trading started career in DeFi: Founder of Block Scholes. Member of the UCL Centre for Blockchchain Technologies.',
