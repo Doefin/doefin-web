@@ -1,5 +1,6 @@
 import { site } from '@/lib/site'
 import { ApprovedLandingMotion } from './ApprovedLandingMotion'
+import { DifficultyImpact } from './DifficultyImpact'
 
 export function ApprovedLanding() {
   return (
@@ -9,6 +10,8 @@ export function ApprovedLanding() {
       <Audience />
       <Why />
       <How />
+      <DifficultyImpact />
+      <MarketContext />
       <Traction />
       <Trust />
       <Closing />
@@ -332,6 +335,7 @@ function Audience() {
             Hedge exposure to rising difficulty or trade a view on network
             hashrate. A position does not cover every mining risk.
           </p>
+          <a className="landing-copy-link" href="/for/miners">See how →</a>
           <button
             className="audience-art-control"
             type="button"
@@ -534,6 +538,7 @@ function Audience() {
           <p className="audience-description">
             Trade Bitcoin difficulty as a measurable, Bitcoin-native underlying.
           </p>
+          <a className="landing-copy-link" href="/for/institutions">See how →</a>
           <button
             className="audience-art-control"
             type="button"
@@ -696,6 +701,7 @@ function Why() {
       <h2 className="why-heading" id="why-heading">
         Why Doefin
       </h2>
+      <p className="landing-why-intro">Hashrate is the economic exposure; Bitcoin mining difficulty determines each market outcome. Every market uses a defined threshold and settlement block. That gives miners a public reference for hedging and gives professional investors a reference for trading a view. A difficulty position may offset some exposure, but it does not cover every mining risk.</p>
       <div className="why-layout">
         <article
           className="why-panel why-drivers"
@@ -2263,8 +2269,20 @@ function How() {
           </p>
         </div>
       </div>
+      <div className="landing-how-action"><a className="button button-primary" href={site.appUrl} data-v3-cta="app" data-v3-placement="how">Explore markets →</a></div>
     </section>
   )
+}
+
+function MarketContext() {
+  return <section className="landing-market-context" aria-labelledby="landing-market-title">
+    <h2 id="landing-market-title">Difficulty changes. So does mining exposure.</h2>
+    <p>Bitcoin adjusts mining difficulty every 2,016 blocks. A change affects expected BTC production at the same miner hashrate, all else equal. Review difficulty adjustments and the network hashrate estimate before taking a position. Historical figures and their measurement dates are on the data pages.</p>
+    <div className="landing-market-links">
+      <a href="/data/difficulty">Review difficulty data →</a>
+      <a href="/data/hashrate">Review network hashrate →</a>
+    </div>
+  </section>
 }
 
 function Traction() {
@@ -2608,14 +2626,15 @@ function Closing() {
           Simple to understand. Practical to use. Built for professional
           investors, including mining operators and trading desks.
         </p>
+        <p className="landing-closing-newsletter">Read Bitcoin mining research and product updates. Newsletter delivery options are explained on the newsletter page.</p>
         <div className="closing-actions">
           <a
             className="button button-primary"
-            href={site.appUrl}
-            data-v3-cta="app"
+            href="/newsletter"
+            data-v3-cta="newsletter"
             data-v3-placement="closing"
           >
-            Enter app{' '}
+            Newsletter{' '}
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path
                 d="M4 12h15m-6-6 6 6-6 6"
