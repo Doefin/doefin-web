@@ -1219,6 +1219,7 @@
   width: min(100%, 1360px);
   margin: 0 auto;
   padding: 0 56px 96px;
+  scroll-margin-top: 100px;
   font-family: var(--df-font-sans);
   color: var(--text, #e8ecf4);
 }
@@ -1239,6 +1240,48 @@
   flex: 1;
   min-width: 24px;
   margin-top: 5px;
+}
+.approved-landing .why-market-reference {
+  margin-bottom: 24px;
+  border: 1px solid var(--df-line);
+  border-radius: var(--df-radius-panel);
+  background: var(--df-surface);
+}
+.approved-landing .why-market-terms {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+}
+.approved-landing .why-market-terms > div { padding: 20px 24px; }
+.approved-landing .why-market-terms > div + div { border-inline-start: 1px solid var(--df-line); }
+.approved-landing .why-market-terms dt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--df-text);
+  font-size: 17px;
+  font-weight: 700;
+}
+.approved-landing .why-market-terms svg,
+.approved-landing .why-market-risk svg { width: 20px; height: 20px; flex: none; }
+.approved-landing .why-market-terms svg { color: var(--df-link); }
+.approved-landing .why-market-terms dd { margin: 8px 0 0; }
+.approved-landing .why-market-terms dd,
+.approved-landing .why-market-use { color: var(--df-text-muted); font-size: 14px; line-height: 1.65; }
+.approved-landing .why-market-reference strong { color: var(--df-text); font-weight: 700; }
+.approved-landing .why-market-use { padding: 16px 24px 20px; border-top: 1px solid var(--df-line); }
+.approved-landing .why-market-use p { max-width: var(--df-measure); }
+.approved-landing .why-market-use .why-market-risk {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 13px;
+}
+@media (max-width: 600px) {
+  .approved-landing .why-market-terms { grid-template-columns: 1fr; }
+  .approved-landing .why-market-terms > div + div { border-inline-start: 0; border-top: 1px solid var(--df-line); }
+  .approved-landing :is(.why-market-terms > div, .why-market-use) { padding: 16px; }
 }
 .approved-landing .why-layout {
   display: grid;

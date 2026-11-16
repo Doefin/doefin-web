@@ -6,55 +6,49 @@ const team = [
   {
     name: 'Matteo Spinosa',
     role: 'Founder and CEO',
-    description: 'Spent 18 years in institutional finance and holds a finance degree from Bocconi University.',
+    description: '18 years of institutional and TradFi in tier 1 banks. Finance Degree at Bocconi University (Milan).',
     portrait: 'matteo-spinosa.webp',
-  },
-  {
-    name: 'Eamonn Gashier',
-    role: 'Derivatives consultant',
-    description: 'Founded Block Scholes after 15 years in derivatives trading.',
-    portrait: 'eamonn-gashier.webp',
   },
   {
     name: 'Reza Jahankohan',
     role: 'Software engineer',
-    description: 'Builds backend and blockchain software, with experience in fintech and security.',
+    description: 'Experienced software engineer with over 10 years of expertise, including 5 in blockchain; strong background in backend development across industries such as gaming, fintech, security, and AI.',
     portrait: 'reza-jahankohan.webp',
-  },
-  {
-    name: 'Dusan Sekulic',
-    role: 'Backend developer',
-    description: 'Develops and maintains the services behind Doefin.',
-    initials: 'DS',
   },
   {
     name: 'Fardin Vahdat',
     role: 'Frontend engineer',
-    description: 'Builds trading interfaces and connects them to wallets and smart contracts.',
+    description: '8+ years building Web3 interfaces. Focuses on wallet and smart contract integrations for DeFi, with an emphasis on performance and security.',
     portrait: 'fardin-vahdat.webp',
+  },
+  {
+    name: 'Eamonn Gashier',
+    role: 'Derivatives consultant',
+    description: 'Following 15 years in Derivatives trading started career in DeFi: Founder of Block Scholes. Member of the UCL Centre for Blockchchain Technologies.',
+    portrait: 'eamonn-gashier.webp',
   },
   {
     name: 'Raffaella Tenconi',
     role: 'Regulatory and policy adviser',
-    description: 'Economist with experience in digital finance. Holds a master’s degree from the London School of Economics.',
+    description: 'Member of the Bretton Woods Committee in the Digital Finance working group, 21 years experience as economist. Msc Global Market Economics at The London School of Economics.',
     portrait: 'raffaella-tenconi.webp',
   },
   {
     name: 'Block Scholes',
     role: 'Technology consultant',
-    description: 'Provides research, data and analytics for digital asset markets.',
+    description: 'Institutional-grade analytics, data & research platform.',
     portrait: 'block-scholes.webp',
   },
   {
     name: 'Ataf Ahmed',
     role: 'Adviser',
-    description: 'Has worked in private equity and asset management and holds a PhD from the University of Cambridge.',
+    description: 'CEO of Graphene Investments, a Web3, blockchain & crypto focused company. Experience in private equity and asset management. PhD from the University of Cambridge.',
     portrait: 'ataf-ahmed.webp',
   },
   {
     name: 'Dariia Vasylieva',
     role: 'Adviser',
-    description: 'Founded FD Capital and GetVision. Previously COO and CIO at First Stage Labs.',
+    description: 'Founder of FD Capital & GetVision. Co-Founder EWA Accelerator. Ex COO/CIO First Stage Labs (TON)',
     portrait: 'dariia-vasylieva.webp',
   },
 ]
@@ -77,19 +71,15 @@ export function LandingTeam() {
         <ul className={`team-track ${styles.track}`} role="list">
           {team.map(member => (
             <li className={styles.card} key={member.name}>
-              {member.portrait ? (
-                <Image
-                  alt=""
-                  className={styles.portrait}
-                  src={`/images/v3/team/${member.portrait}`}
-                  width={256}
-                  height={256}
-                  loading="lazy"
-                  unoptimized
-                />
-              ) : (
-                <span className={styles.portrait} aria-hidden="true">{member.initials}</span>
-              )}
+              <Image
+                alt=""
+                className={styles.portrait}
+                src={`/images/v3/team/${member.portrait}`}
+                width={256}
+                height={256}
+                loading="lazy"
+                unoptimized
+              />
               <div>
                 <h3 className={styles.name}>{member.name}</h3>
                 <p className={styles.role}>{member.role}</p>
