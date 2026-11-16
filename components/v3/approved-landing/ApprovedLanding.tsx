@@ -2616,7 +2616,7 @@ function Closing() {
           Simple to understand. Practical to use. Built for professional
           investors, including mining operators and trading desks.
         </p>
-        <p className="landing-closing-newsletter">Read Bitcoin mining research and product updates. Newsletter delivery options are explained on the newsletter page.</p>
+        <p className="landing-closing-newsletter">Read an example research email and try the preferences demo. This does not create a subscription.</p>
         <div className="closing-actions">
           <a
             className="button button-primary"
