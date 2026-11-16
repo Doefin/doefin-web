@@ -55,7 +55,12 @@ function article(kind: Kind) {
   }
 }
 
-export const V3Blog = { ...collection('blog'), default: V3BlogIndex }
+export const V3Blog = {
+  ...collection('blog'),
+  default: function Blog() {
+    return <V3BlogIndex />
+  },
+}
 export const V3Academy = { ...collection('academy'), default: V3AcademyIndex }
 export const V3Post = article('blog')
 export const V3Lesson = article('academy')
