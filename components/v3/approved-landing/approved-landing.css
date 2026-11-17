@@ -46,9 +46,9 @@
 }
 .approved-landing .hero {
   width: min(100%, 1360px);
-  min-height: 100svh;
+  min-height: 0;
   margin: 0 auto;
-  padding: 96px 56px;
+  padding: 48px 56px 32px;
   display: grid;
   grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
   align-items: center;
@@ -257,10 +257,7 @@
   font-weight: 600;
 }
 .approved-landing .market-table .strike-col {
-  width: 24%;
-}
-.approved-landing .market-table .change-col {
-  width: 15%;
+  width: 39%;
 }
 .approved-landing .market-table .yes-col {
   width: 22%;
@@ -363,6 +360,15 @@
   font-weight: 500;
   color: var(--muted);
 }
+.approved-landing .market-currency-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  color: var(--text);
+}
 .approved-landing .empty {
   color: #8e99af;
   font-size: 17px;
@@ -371,7 +377,7 @@
 @media (min-width: 1600px) {
   .approved-landing .hero {
     max-width: 1440px;
-    padding: 105px 64px;
+    padding: 48px 64px 32px;
     gap: 62px;
   }
   .approved-landing .visual {
@@ -675,10 +681,7 @@
     padding: 0 9px 8px;
   }
   .approved-landing .market-table .strike-col {
-    width: 25%;
-  }
-  .approved-landing .market-table .change-col {
-    width: 15%;
+    width: 40%;
   }
   .approved-landing .market-table .yes-col {
     width: 22%;
@@ -899,7 +902,7 @@
   }
 }
 
-/* Group difficulty columns with their shared heading. */
+/* Separate the difficulty threshold from the outcome quotes. */
 .approved-landing .market-table .context-row .strike-heading {
   vertical-align: bottom;
   padding-bottom: 12px;
@@ -912,14 +915,11 @@
   padding-top: 2px;
   padding-bottom: 12px;
 }
-.approved-landing .market-table tbody .change {
+.approved-landing .market-table tbody th {
   border-right: 1px solid #394258;
   padding-right: 14px;
 }
 .approved-landing .market-table .strike-col,
-.approved-landing .market-table .change-col {
-  background: rgba(255, 255, 255, 0.015);
-}
 .approved-landing .market-table .strike-heading .table-eyebrow {
   color: #d8deea;
 }
@@ -938,7 +938,7 @@
   .approved-landing .market-table .column-row th {
     padding-bottom: 10px;
   }
-  .approved-landing .market-table tbody .change {
+  .approved-landing .market-table tbody th {
     padding-right: 7px;
   }
 }
@@ -1676,7 +1676,7 @@
 }
 .approved-landing .how-flow {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 32px;
   list-style: none;
   margin: 0;
