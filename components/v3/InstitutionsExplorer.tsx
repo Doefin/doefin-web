@@ -41,8 +41,8 @@ export function InstitutionsExplorer() {
       <div className={styles.sourceStatus} aria-live="polite"><span>{loading ? 'Updating snapshot…' : stale ? 'Snapshot needs refreshing' : snapshot ? 'Snapshot from Doefin' : 'Market data unavailable'}</span>{snapshot && <time dateTime={snapshot.fetchedAt}>{new Date(snapshot.fetchedAt).toLocaleString('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'UTC' })} UTC</time>}<button type="button" onClick={retry} disabled={loading}>Refresh <span aria-hidden="true">↻</span></button></div>
     </div>
     {snapshot && <dl className={styles.networkStrip}><div><dt>Current network difficulty</dt><dd>{difficulty(snapshot.currentDifficultyTrillions)}<span>T</span></dd></div><div><dt>Current block</dt><dd>{integer(snapshot.currentBlock)}</dd></div><div><dt>Priced active contracts</dt><dd>{markets.length}</dd></div></dl>}
-    {error && <p className={styles.error} role="alert">{error} {snapshot ? 'The last snapshot is shown below. Refresh before continuing.' : 'Try refreshing to load available contracts.'}</p>}
-    {!snapshot && loading ? <div className={styles.empty} role="status"><span className={styles.eyebrow}>Fetching the public snapshot</span><h3>Loading active contracts…</h3><p>Observation blocks, thresholds and indicative prices will appear here.</p></div> : !snapshot ? <div className={styles.empty}><h3>We could not load market data.</h3><p>Try again to load prices and choose a market.</p><button onClick={retry} type="button" className={styles.textLink}>Try again <Arrow /></button></div> : <div className={styles.workspace}>
+    {error && snapshot && <p className={styles.error} role="alert">{error} {snapshot ? 'The last snapshot is shown below. Refresh before continuing.' : 'Try refreshing to load available contracts.'}</p>}
+    {!snapshot && loading ? <div className={styles.empty} role="status"><span className={styles.eyebrow}>Fetching the public snapshot</span><h3>Loading active contracts…</h3><p>Observation blocks, thresholds and indicative prices will appear here.</p></div> : !snapshot ? <div className={styles.empty} role="status"><h3>Market data is unavailable.</h3><p>Refresh to load prices and choose a contract. You can review the production example and checklist below while you wait.</p><button onClick={retry} type="button" className={styles.textLink}>Try again <Arrow /></button></div> : <div className={styles.workspace}>
       <div className={styles.marketBrowser}>
         <div className={styles.browserTop}><h3>Available contracts <span>{filtered.length}</span></h3><CollateralSelect value={currency} currencies={currencies} disabled={loading} onChange={value => { setCurrency(value); setSelection(null) }} /></div>
         <p className={styles.listHint}>Choose a market by its threshold and observation block. The list shows only markets with both Yes and No reference prices.</p>
@@ -64,6 +64,6 @@ export function InstitutionsExplorer() {
         </>}
       </article>
     </div>}
-    <div className={styles.executionBoundary}><span aria-hidden="true">↗</span><p><strong>Execution happens in the app.</strong> Review the current order book, fees, available size and market terms there. This explorer does not show which orders could fill your trade. It does not quote a price for your order size or place orders.</p></div>
+    <div className={styles.executionBoundary}><Arrow diagonal /><p><strong>Execution happens in the app.</strong> Review the current order book, fees, available size and market terms there. This explorer does not show which orders could fill your trade. It does not quote a price for your order size or place orders.</p></div>
   </section>
 }

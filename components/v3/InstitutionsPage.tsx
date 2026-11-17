@@ -15,9 +15,9 @@ export default function InstitutionsPage() {
       <div>
         <p className={styles.eyebrow}>For finance teams, funds &amp; desks</p>
         <h1 className={styles.title}>Trade your view on<br /><span>Bitcoin network hashrate.</span></h1>
-        <p className={styles.intro}>Take positions through markets on mining difficulty, with a defined threshold and observation block. Trading involves the risk of loss.</p>
-        <AudienceDisclosure summary="How difficulty determines the outcome"><p>The contract outcome follows difficulty, giving your hashrate view a publicly verifiable reference.</p></AudienceDisclosure>
-        <div className="mt-5 flex flex-wrap gap-x-7 gap-y-1"><a href="#market-explorer" className={styles.textLink}>Explore contracts <Arrow /></a><Link href="/docs/what-doefin-settles-on" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-subtle hover:text-body">Understand the instrument <Arrow /></Link></div>
+        <p className={styles.intro}>Take positions through markets on mining difficulty, with a defined threshold and observation block. The contract outcome follows difficulty, giving your hashrate view a publicly verifiable reference.</p>
+        <p className={styles.riskNote}>Trading involves the risk of loss.</p>
+        <div className="mt-5 flex flex-wrap gap-x-7 gap-y-1"><a href="#market-explorer" className={styles.primaryLink}>Explore contracts <Arrow /></a><Link href="/docs/what-doefin-settles-on" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-subtle hover:text-body">Understand the instrument <Arrow /></Link></div>
       </div>
       <aside className={styles.mandate} aria-label="Instrument at a glance">
         <span className={styles.eyebrow}>The instrument</span>
@@ -26,6 +26,8 @@ export default function InstitutionsPage() {
         <Link href="/docs/risks-and-limitations" className={styles.textLink}>Read risks and limitations <Arrow /></Link>
       </aside>
     </div>
+
+    <InstitutionsExplorer />
 
     <section id="finance-review" className={styles.diligence} aria-labelledby="finance-review-title">
       <div className={styles.sectionHeading}><div><p className={styles.eyebrow}>Production and position outcomes</p><h2 id="finance-review-title">Could a position offset lower production?</h2></div></div>
@@ -46,16 +48,34 @@ export default function InstitutionsPage() {
       </AudienceDisclosure>
     </section>
 
-    <InstitutionsExplorer />
-
     <section id="review-checklist" className={styles.diligence} aria-labelledby="desk-diligence-title">
       <div className={styles.sectionHeading}><div><p className={styles.eyebrow}>Before committing capital</p><h2 id="desk-diligence-title">Check the market against your requirements.</h2></div><p>Use the selected market’s terms alongside the documentation. Public material is freely available; it does not establish suitability or approval for your organisation.</p></div>
       <p className="mt-4 text-sm leading-relaxed text-subtle">You can lose the full amount paid for a position.</p>
-      <ol className="mt-6 grid list-decimal gap-x-10 gap-y-7 pl-5 text-sm leading-relaxed text-subtle md:grid-cols-2">
-        <li className="pl-1"><AudienceDisclosure summary="What decision are you making?"><p className="mt-2">Start with the decision your team needs to make. For a production comparison, check the fleet assumptions and period against your operating forecast. Record the model’s limits and the questions still open.</p><p className="mt-2">Share the inputs and results your team needs. Keep private discussion notes out of public links.</p><Link href="/tools/difficulty-exposure#scenario-brief" className={styles.textLink}>Prepare a scenario brief <Arrow /></Link></AudienceDisclosure></li>
-        <li className="pl-1"><AudienceDisclosure summary="What are the costs and outcomes?"><p className="mt-2">Check the threshold and observation block against your analysis. Read the settlement block, payout and redemption rules separately. Confirm the collateral token, how you will fund the position and the fees. Check what your team needs to report and how the position affects cash needs.</p><Link href="/docs/how-settlement-works" className={styles.textLink}>Read settlement and payout rules <Arrow /></Link></AudienceDisclosure></li>
-        <li className="pl-1"><AudienceDisclosure summary="Could you exit the position?"><p className="mt-2">Check market depth, whether your order could fill only in part and how you could exit. Limited liquidity can prevent a full exit before settlement. Review your wallet or custody controls, the smart contract deployments and the technical evidence.</p><p className="mt-2">Funding and payouts depend on the collateral token, smart contracts, networks and the settlement process.</p><div className="mt-2 flex flex-wrap gap-x-6"><Link href="/docs/market-vs-limit-orders" className={styles.textLink}>Read how orders execute <Arrow /></Link><Link href="/docs/smart-contracts" className={styles.textLink}>Inspect smart contracts <Arrow /></Link></div></AudienceDisclosure></li>
-        <li className="pl-1"><AudienceDisclosure summary="Who can approve the amount?"><p className="mt-2">Your authorised reviewers must confirm your organisation’s mandate and eligibility. They must resolve legal or accounting questions and approve the amount before you commit capital.</p><p className="mt-2">This walkthrough sets no minimum fleet size or capital amount. Assess suitability through your own review process.</p><div className="mt-2 flex flex-wrap gap-x-6"><Link href="/docs/risks-and-limitations" className={styles.textLink}>Read the limitations <Arrow /></Link><a href={`mailto:${site.contactEmail}?subject=Doefin%20finance%20and%20mandate%20review`} className={styles.textLink}>Discuss mandate questions <Arrow diagonal /></a></div></AudienceDisclosure></li>
+      <ol className={styles.reviewGrid} role="list">
+        <li className={styles.reviewCard}>
+          <span className={styles.reviewNumber} aria-hidden="true">01</span>
+          <h3>What decision are you making?</h3>
+          <p>Start with the decision your team needs to make.</p>
+          <AudienceDisclosure summary="Review planning details"><p className="mt-2">For a production comparison, check the fleet assumptions and period against your operating forecast. Record the model’s limits and the questions still open.</p><p className="mt-2">Share the inputs and results your team needs. Keep private discussion notes out of public links.</p><Link href="/tools/difficulty-exposure#scenario-brief" className={styles.textLink}>Prepare a scenario brief <Arrow /></Link></AudienceDisclosure>
+        </li>
+        <li className={styles.reviewCard}>
+          <span className={styles.reviewNumber} aria-hidden="true">02</span>
+          <h3>What are the costs and outcomes?</h3>
+          <p>Check the threshold and observation block against your analysis.</p>
+          <AudienceDisclosure summary="Review costs and settlement"><p className="mt-2">Read the settlement block, payout and redemption rules separately. Confirm the collateral token, how you will fund the position and the fees. Check what your team needs to report and how the position affects cash needs.</p><Link href="/docs/how-settlement-works" className={styles.textLink}>Read settlement and payout rules <Arrow /></Link></AudienceDisclosure>
+        </li>
+        <li className={styles.reviewCard}>
+          <span className={styles.reviewNumber} aria-hidden="true">03</span>
+          <h3>Could you exit the position?</h3>
+          <p>Check market depth, whether your order could fill only in part and how you could exit.</p>
+          <AudienceDisclosure summary="Review liquidity and custody"><p className="mt-2">Limited liquidity can prevent a full exit before settlement. Review your wallet or custody controls, the smart contract deployments and the technical evidence.</p><p className="mt-2">Funding and payouts depend on the collateral token, smart contracts, networks and the settlement process.</p><div className="mt-2 flex flex-wrap gap-x-6"><Link href="/docs/market-vs-limit-orders" className={styles.textLink}>Read how orders execute <Arrow /></Link><Link href="/docs/smart-contracts" className={styles.textLink}>Inspect smart contracts <Arrow /></Link></div></AudienceDisclosure>
+        </li>
+        <li className={styles.reviewCard}>
+          <span className={styles.reviewNumber} aria-hidden="true">04</span>
+          <h3>Who can approve the amount?</h3>
+          <p>Your authorised reviewers must confirm your organisation’s mandate and eligibility.</p>
+          <AudienceDisclosure summary="Review approval requirements"><p className="mt-2">They must resolve legal or accounting questions and approve the amount before you commit capital.</p><p className="mt-2">This walkthrough sets no minimum fleet size or capital amount. Assess suitability through your own review process.</p><div className="mt-2 flex flex-wrap gap-x-6"><Link href="/docs/risks-and-limitations" className={styles.textLink}>Read the limitations <Arrow /></Link><a href={`mailto:${site.contactEmail}?subject=Doefin%20finance%20and%20mandate%20review`} className={styles.textLink}>Discuss mandate questions <Arrow diagonal /></a></div></AudienceDisclosure>
+        </li>
       </ol>
       <div className={styles.reviewStrip}><div><h3>Have a question about a market?</h3><p>Contact the team with the market you are considering and the question you need answered.</p></div><a href={`mailto:${site.contactEmail}?subject=Doefin%20desk%20review`} className={styles.textLink}>Contact the team <Arrow diagonal /></a></div>
     </section>
