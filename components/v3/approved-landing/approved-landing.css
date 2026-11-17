@@ -77,6 +77,21 @@
   letter-spacing: -0.067em;
   margin-left: -2px;
 }
+
+/* The translated accent includes "de/do Bitcoin", so size it to the copy column. */
+.approved-landing .hero-copy:is(:lang(es), :lang(pt)) {
+  container-type: inline-size;
+}
+.approved-landing .hero-copy:is(:lang(es), :lang(pt)) h1 {
+  font-size: clamp(2rem, 10cqi, 4.5rem);
+}
+.approved-landing .hero-copy:is(:lang(es), :lang(pt)) h1 span {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.approved-landing .hero-copy:is(:lang(es), :lang(pt)) h1 .accent {
+  font-size: min(1.245em, 11.5cqi);
+}
 .approved-landing .lead {
   font-size: 20px;
   font-weight: 500;
@@ -2268,11 +2283,13 @@
 }
 .approved-landing .traction-fact {
   display: grid;
-  grid-template-rows: 20px 43px 20px;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(20px, auto) minmax(43px, auto) minmax(20px, auto);
   row-gap: 3px;
   margin: 0;
   letter-spacing: -0.015em;
   font-weight: 500;
+  overflow-wrap: anywhere;
 }
 .approved-landing .traction-prefix {
   grid-row: 1;
@@ -2288,7 +2305,6 @@
   line-height: 1.15;
   font-weight: 650;
   letter-spacing: -0.04em;
-  white-space: nowrap;
   font-variant-numeric: lining-nums tabular-nums;
 }
 .approved-landing .traction-suffix {

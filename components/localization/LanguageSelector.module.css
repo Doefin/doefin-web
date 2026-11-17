@@ -1,0 +1,99 @@
+.selector {
+  position: relative;
+  flex: none;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 9px;
+  border: 1px solid var(--df-line-strong);
+  border-radius: var(--df-radius-sm);
+  color: var(--df-text);
+  font-size: 13px;
+  font-weight: 800;
+  list-style: none;
+  cursor: pointer;
+}
+
+.trigger::-webkit-details-marker {
+  display: none;
+}
+
+.trigger > svg {
+  color: var(--df-text-muted);
+}
+
+.flag {
+  flex: none;
+  border-radius: 2px;
+}
+
+.selector[open] .trigger,
+.trigger:hover {
+  background: var(--df-surface-alt);
+}
+
+.selector[open] .chevron {
+  transform: rotate(180deg);
+}
+
+.panel {
+  position: absolute;
+  z-index: 2;
+  inset: calc(100% + 8px) 0 auto auto;
+  width: min(230px, 75vw);
+  padding: 6px;
+  border: 1px solid var(--df-line-strong);
+  border-radius: var(--df-radius-md);
+  background: var(--df-surface);
+  box-shadow: var(--df-shadow-float);
+}
+
+.panel > p {
+  padding: 6px 9px;
+  color: var(--df-text-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.panel a {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) 16px;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 4px 9px;
+  border-radius: var(--df-radius-sm);
+  color: var(--df-text);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.panel a:hover,
+.panel a[aria-current] {
+  background: var(--df-selected);
+}
+
+.panel a svg {
+  color: var(--df-link);
+}
+
+@media (max-width: 380px) {
+  .chevron {
+    display: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .selector {
+    position: static;
+  }
+
+  .panel {
+    right: 8px;
+  }
+}

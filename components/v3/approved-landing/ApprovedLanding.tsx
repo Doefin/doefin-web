@@ -1,3 +1,5 @@
+import type { LandingCopy } from '@/dictionaries'
+import type { Language } from '@/lib/languages'
 import { Gauge, ShieldWarning, Target } from '@phosphor-icons/react/dist/ssr'
 import { Suspense } from 'react'
 import { site } from '@/lib/site'
@@ -7,45 +9,44 @@ import { LandingHistory, LandingHistoryFallback } from './LandingHistory'
 import { LandingTeam } from './LandingTeam'
 import { LandingTrust } from './LandingTrust'
 
-export function ApprovedLanding() {
+export function ApprovedLanding({ copy, language }: { copy: LandingCopy; language: Language }) {
   return (
     <ApprovedLandingMotion>
-      <Hero />
-      <Benefits />
-      <Audience />
-      <Why />
-      <How />
-      <Suspense fallback={<LandingHistoryFallback />}>
-        <LandingHistory />
+      <Hero copy={copy} />
+      <Benefits copy={copy} />
+      <Audience copy={copy} />
+      <Why copy={copy} />
+      <How copy={copy} />
+      <Suspense fallback={<LandingHistoryFallback copy={copy} />}>
+        <LandingHistory copy={copy} language={language} />
       </Suspense>
-      <Suspense fallback={<DifficultyImpactLoading />}>
-        <DifficultyImpactSection />
+      <Suspense fallback={<DifficultyImpactLoading copy={copy} />}>
+        <DifficultyImpactSection copy={copy} language={language} />
       </Suspense>
-      <Traction />
-      <LandingTrust />
-      <LandingTeam />
-      <Closing />
+      <Traction copy={copy} />
+      <LandingTrust copy={copy} />
+      <LandingTeam copy={copy} />
+      <Closing copy={copy} />
     </ApprovedLandingMotion>
   )
 }
 
-function Hero() {
+function Hero({ copy }: { copy: LandingCopy }) {
   return (
     <section className="hero" aria-labelledby="hero-title">
       <div className="hero-copy">
         <h1 id="hero-title">
-          <span>Trade Bitcoin</span> <span className="accent">hashrate.</span>
+          <span>{copy.tradeBitcoin}</span> <span className="accent">{copy.hashrate}</span>
         </h1>
         <p className="lead">
-          A Bitcoin-native market for Bitcoin mining difficulty.
+          {copy.aBitcoinNativeMarketFor}
         </p>
         <p className="description">
           <span>
-            Miners can hedge the effect of rising difficulty on expected Bitcoin
-            production.
+            {copy.minersCanHedgeTheEffect}
           </span>{' '}
           <span>
-            Professional investors can trade views on network hashrate.
+            {copy.professionalInvestorsCanTradeViews}
           </span>
         </p>
         <div className="actions">
@@ -55,7 +56,7 @@ function Hero() {
             data-v3-cta="app"
             data-v3-placement="hero"
           >
-            Enter app{' '}
+            {copy.enterApp}{' '}
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path
                 d="M4 12h15m-6-6 6 6-6 6"
@@ -70,20 +71,20 @@ function Hero() {
             className="button button-secondary"
             href={`mailto:${site.contactEmail}`}
           >
-            Talk to us
+            {copy.talkToUs}
           </a>
         </div>
         <p className="hero-risk">
-          You can lose the full amount paid for a position.
+          {copy.youCanLoseTheFull}
         </p>
       </div>
       <div className="visual">
         <figure className="chart-panel" aria-labelledby="chart-title">
           <div className="chart-header">
-            <h2 id="chart-title">Bitcoin hashrate and price</h2>
-            <div className="chart-legend" aria-label="Chart series">
-              <span className="chart-key chart-key-hashrate">Hashrate</span>
-              <span className="chart-key chart-key-price">Bitcoin price</span>
+            <h2 id="chart-title">{copy.bitcoinHashrateAndPrice}</h2>
+            <div className="chart-legend" aria-label={copy.chartSeries}>
+              <span className="chart-key chart-key-hashrate">{copy.hashrate2}</span>
+              <span className="chart-key chart-key-price">{copy.bitcoinPrice}</span>
             </div>
           </div>
           <svg
@@ -91,7 +92,7 @@ function Hero() {
             viewBox="0 0 540 240"
             preserveAspectRatio="none"
             role="img"
-            aria-label="Illustrative lines for Bitcoin hashrate and price."
+            aria-label={copy.illustrativeLinesForBitcoinHashrate}
           >
             <defs>
               <clipPath id="hero-chart-reveal" clipPathUnits="userSpaceOnUse">
@@ -126,21 +127,20 @@ function Hero() {
             </g>
           </svg>
           <figcaption className="chart-source">
-            Illustrative chart, not live data
+            {copy.illustrativeChartNotLiveData}
           </figcaption>
         </figure>
         <section className="market-panel" aria-labelledby="market-title">
           <h2 className="market-title" id="market-title">
-            Will Bitcoin difficulty be at or above the threshold at the
-            observation block?
+            {copy.willBitcoinDifficultyBeAt}
           </h2>
           <div className="market-scroll">
             <table
               className="market-table"
-              aria-label="Illustrative Bitcoin difficulty market quotes"
+              aria-label={copy.illustrativeBitcoinDifficultyMarketQuotes}
             >
               <caption className="market-source">
-                Illustrative quotes in cbBTC, not live prices
+                {copy.illustrativeQuotesInCbbtcNot}
               </caption>
               <colgroup>
                 <col className="strike-col" />
@@ -160,30 +160,30 @@ function Hero() {
                     rowSpan={2}
                     scope="colgroup"
                   >
-                    <span className="table-eyebrow">DIFFICULTY THRESHOLD</span>
+                    <span className="table-eyebrow">{copy.difficultyThreshold}</span>
                     <span className="table-meta">
                       <strong className="strike-change" data-sign="negative">
                         -4%
                       </strong>{' '}
-                      vs. sample difficulty
+                      {copy.vsSampleDifficulty}
                     </span>
                   </th>
                   <th colSpan={3} className="block-meta" scope="colgroup">
                     <span className="table-eyebrow">
-                      BLOCK <strong className="block-number">929,776</strong>
+                      {copy.block}{' '}<strong className="block-number">929,776</strong>
                     </span>
                     <span className="table-meta">
-                      Example observation block
+                      {copy.exampleObservationBlock}
                     </span>
                   </th>
                 </tr>
                 <tr className="column-row">
                   <th className="yes-label" scope="col">
-                    Buy Yes
+                    {copy.buyYes}
                   </th>
-                  <th scope="col">Currency</th>
+                  <th scope="col">{copy.currency}</th>
                   <th className="no-label" scope="col">
-                    Buy No
+                    {copy.buyNo}
                   </th>
                 </tr>
               </thead>
@@ -227,9 +227,9 @@ function Hero() {
   )
 }
 
-function Benefits() {
+function Benefits({ copy }: { copy: LandingCopy }) {
   return (
-    <section className="benefits-section" aria-label="Benefits">
+    <section className="benefits-section" aria-label={copy.benefits}>
       <ul className="benefits-list" role="list">
         <li className="benefits-item">
           <svg
@@ -246,7 +246,7 @@ function Benefits() {
               strokeLinejoin="round"
             />
           </svg>
-          <span>Bitcoin difficulty settlement</span>
+          <span>{copy.bitcoinDifficultySettlement}</span>
         </li>
         <li className="benefits-item">
           <svg
@@ -264,7 +264,7 @@ function Benefits() {
               strokeLinejoin="round"
             />
           </svg>
-          <span>Collateralised positions</span>
+          <span>{copy.collateralisedPositions}</span>
         </li>
         <li className="benefits-item">
           <svg
@@ -291,7 +291,7 @@ function Benefits() {
             />
             <circle cx="14" cy="17" r="1.5" fill="currentColor" />
           </svg>
-          <span>Defined position payout</span>
+          <span>{copy.definedPositionPayout}</span>
         </li>
         <li className="benefits-item">
           <svg
@@ -316,14 +316,14 @@ function Benefits() {
               strokeLinejoin="round"
             />
           </svg>
-          <span>cbBTC market payouts</span>
+          <span>{copy.cbbtcMarketPayouts}</span>
         </li>
       </ul>
     </section>
   )
 }
 
-function Audience() {
+function Audience({ copy }: { copy: LandingCopy }) {
   return (
     <section
       id="who-its-for"
@@ -331,7 +331,7 @@ function Audience() {
       aria-labelledby="audience-heading"
     >
       <h2 className="audience-heading" id="audience-heading">
-        Who it is for
+        {copy.whoItIsFor}
       </h2>
       <div className="audience-grid">
         <article
@@ -339,18 +339,17 @@ function Audience() {
           aria-labelledby="audience-miners-title"
         >
           <h3 className="audience-title" id="audience-miners-title">
-            For miners
+            {copy.forMiners}
           </h3>
           <p className="audience-description">
-            Hedge exposure to rising difficulty or trade a view on network
-            hashrate. A position does not cover every mining risk.
+            {copy.hedgeExposureToRisingDifficulty}
           </p>
-          <a className="landing-copy-link" href="/for/miners">See how →</a>
+          <a className="landing-copy-link" href="/for/miners">{copy.seeHow}</a>
           <button
             className="audience-art-control"
             type="button"
             disabled
-            aria-label="Pause mining animation"
+            aria-label={copy.pauseMiningAnimation} data-pause-label={copy.pauseMiningAnimation} data-resume-label={copy.resumeMiningAnimation}
           >
             <svg
               className="audience-art audience-mining-art"
@@ -543,17 +542,17 @@ function Audience() {
           aria-labelledby="audience-traders-title"
         >
           <h3 className="audience-title" id="audience-traders-title">
-            For professional investors
+            {copy.forProfessionalInvestors}
           </h3>
           <p className="audience-description">
-            Trade Bitcoin difficulty as a measurable, Bitcoin-native underlying.
+            {copy.tradeBitcoinDifficultyAsA}
           </p>
-          <a className="landing-copy-link" href="/for/institutions">See how →</a>
+          <a className="landing-copy-link" href="/for/institutions">{copy.seeHow}</a>
           <button
             className="audience-art-control"
             type="button"
             disabled
-            aria-label="Pause market depth animation"
+            aria-label={copy.pauseMarketDepthAnimation} data-pause-label={copy.pauseMarketDepthAnimation} data-resume-label={copy.resumeMarketDepthAnimation}
           >
             <svg
               className="audience-art audience-market-art"
@@ -705,26 +704,26 @@ function Audience() {
   )
 }
 
-function Why() {
+function Why({ copy }: { copy: LandingCopy }) {
   return (
     <section id="why-doefin" className="why-section" aria-labelledby="why-heading">
       <h2 className="why-heading" id="why-heading">
-        Why Doefin
+        {copy.whyDoefin}
       </h2>
       <div className="why-market-reference">
         <dl className="why-market-terms">
           <div>
-            <dt><Gauge aria-hidden="true" /> Hashrate</dt>
-            <dd>The economic exposure behind the market.</dd>
+            <dt><Gauge aria-hidden="true" />{' '}{copy.hashrate2}</dt>
+            <dd>{copy.theEconomicExposureBehindThe}</dd>
           </div>
           <div>
-            <dt><Target aria-hidden="true" /> Bitcoin mining difficulty</dt>
-            <dd>Determines each market outcome. Each market specifies a <strong>difficulty threshold</strong> and a <strong>settlement block</strong>.</dd>
+            <dt><Target aria-hidden="true" />{' '}{copy.bitcoinMiningDifficulty}</dt>
+            <dd>{copy.determinesEachMarketOutcomeEach}</dd>
           </div>
         </dl>
         <div className="why-market-use">
-          <p>These market terms give <strong>miners</strong> a public reference for hedging and <strong>professional investors</strong> a reference for trading a view.</p>
-          <p className="why-market-risk"><ShieldWarning aria-hidden="true" /> <span>A difficulty position may offset some exposure, but it does not cover every mining risk.</span></p>
+          <p>{copy.theseMarketTermsGiveMiners}</p>
+          <p className="why-market-risk"><ShieldWarning aria-hidden="true" /> <span>{copy.aDifficultyPositionMayOffset}</span></p>
         </div>
       </div>
       <div className="why-layout">
@@ -734,19 +733,18 @@ function Why() {
         >
           <div className="why-driver-copy">
             <h3 className="why-title" id="why-drivers-title">
-              <span className="why-title-line">Hashrate has</span>{' '}
-              <span className="why-title-line">measurable drivers:</span>
+              <span className="why-title-line">{copy.hashrateHas}</span>{' '}
+              <span className="why-title-line">{copy.measurableDrivers}</span>
             </h3>
             <p className="why-description">
-              Bitcoin price, ASIC efficiency, energy costs, machine shipments,
-              regulation and curtailment.
+              {copy.bitcoinPriceAsicEfficiencyEnergy}
             </p>
           </div>
           <button
             className="why-art-control why-driver-visual"
             type="button"
             disabled
-            aria-label="Replay measurable drivers illustration"
+            aria-label={copy.replayMeasurableDriversIllustration}
           >
             <svg
               className="why-driver-art"
@@ -1065,18 +1063,17 @@ function Why() {
           aria-labelledby="why-views-title"
         >
           <h3 className="why-title" id="why-views-title">
-            <span className="why-title-line">A market for</span>{' '}
-            <span className="why-title-line">different views:</span>
+            <span className="why-title-line">{copy.aMarketFor}</span>{' '}
+            <span className="why-title-line">{copy.differentViews}</span>
           </h3>
           <p className="why-description">
-            Miners, traders and BTC investors can have different views on where
-            difficulty is heading.
+            {copy.minersTradersAndBtcInvestors}
           </p>
           <button
             className="why-art-control why-side-visual"
             type="button"
             disabled
-            aria-label="Replay different views illustration"
+            aria-label={copy.replayDifferentViewsIllustration}
           >
             <svg
               className="why-side-art"
@@ -1189,17 +1186,17 @@ function Why() {
           aria-labelledby="why-bitcoin-title"
         >
           <h3 className="why-title" id="why-bitcoin-title">
-            <span className="why-title-line">A Bitcoin-native</span>{' '}
-            <span className="why-title-line">underlying:</span>
+            <span className="why-title-line">{copy.aBitcoinNative}</span>{' '}
+            <span className="why-title-line">{copy.underlying}</span>
           </h3>
           <p className="why-description">
-            Difficulty is public, measurable and verified from Bitcoin itself.
+            {copy.difficultyIsPublicMeasurableAnd}
           </p>
           <button
             className="why-art-control why-side-visual"
             type="button"
             disabled
-            aria-label="Replay Bitcoin difficulty illustration"
+            aria-label={copy.replayBitcoinDifficultyIllustration}
           >
             <svg
               className="why-side-art"
@@ -1446,7 +1443,7 @@ function Why() {
   )
 }
 
-function How() {
+function How({ copy }: { copy: LandingCopy }) {
   return (
     <section
       id="how-it-works"
@@ -1454,7 +1451,7 @@ function How() {
       aria-labelledby="how-heading"
     >
       <h2 className="how-heading" id="how-heading">
-        How it works
+        {copy.howItWorks}
       </h2>
       <ol className="how-flow" role="list">
         <li className="how-step">
@@ -1462,7 +1459,7 @@ function How() {
             className="how-art-control"
             type="button"
             disabled
-            aria-label="Replay market selection illustration"
+            aria-label={copy.replayMarketSelectionIllustration}
           >
             <svg
               className="how-art"
@@ -1617,12 +1614,12 @@ function How() {
           <h3 className="how-step-title">
             <span className="how-number">1.</span>{' '}
             <span>
-              Choose a<br />
-              difficulty market
+              {copy.chooseA}<br />
+              {copy.difficultyMarket}
             </span>
           </h3>
           <p className="how-step-description">
-            Check the difficulty threshold and observation block.
+            {copy.checkTheDifficultyThresholdAnd}
           </p>
           <span className="how-handoff" aria-hidden="true">
             <i />
@@ -1633,7 +1630,7 @@ function How() {
             className="how-art-control"
             type="button"
             disabled
-            aria-label="Replay account funding illustration"
+            aria-label={copy.replayAccountFundingIllustration}
           >
             <svg
               className="how-art"
@@ -1771,13 +1768,13 @@ function How() {
           <h3 className="how-step-title">
             <span className="how-number">2.</span>{' '}
             <span>
-              Fund your
+              {copy.fundYour}
               <br />
-              account
+              {copy.account}
             </span>
           </h3>
           <p className="how-step-description">
-            Check the collateral token and network before funding.
+            {copy.checkTheCollateralTokenAnd}
           </p>
           <span className="how-handoff" aria-hidden="true">
             <i />
@@ -1788,7 +1785,7 @@ function How() {
             className="how-art-control"
             type="button"
             disabled
-            aria-label="Replay position choice illustration"
+            aria-label={copy.replayPositionChoiceIllustration}
           >
             <svg
               className="how-art"
@@ -1934,11 +1931,10 @@ function How() {
             </svg>
           </button>
           <h3 className="how-step-title">
-            <span className="how-number">3.</span> <span>Take a side</span>
+            <span className="how-number">3.</span> <span>{copy.takeASide}</span>
           </h3>
           <p className="how-step-description">
-            Choose the outcome and review the price, fees and available
-            liquidity.
+            {copy.chooseTheOutcomeAndReview}
           </p>
           <span className="how-handoff" aria-hidden="true">
             <i />
@@ -1949,7 +1945,7 @@ function How() {
             className="how-art-control"
             type="button"
             disabled
-            aria-label="Replay trade or settlement illustration"
+            aria-label={copy.replayTradeOrSettlementIllustration}
           >
             <svg
               className="how-art"
@@ -2236,11 +2232,10 @@ function How() {
             </svg>
           </button>
           <h3 className="how-step-title">
-            <span className="how-number">4.</span> <span>Trade or settle</span>
+            <span className="how-number">4.</span> <span>{copy.tradeOrSettle}</span>
           </h3>
           <p className="how-step-description">
-            Place a sell order before settlement, or hold until the market
-            resolves.
+            {copy.placeASellOrderBefore}
           </p>
         </li>
       </ol>
@@ -2268,8 +2263,7 @@ function How() {
             />
           </svg>
           <p>
-            <strong>Bitcoin difficulty settlement.</strong> Markets use observed
-            Bitcoin mining difficulty.
+            <strong>{copy.bitcoinDifficultySettlement2}</strong>{' '}{copy.marketsUseObservedBitcoinMining}
           </p>
         </div>
         <div className="how-foundation-item">
@@ -2289,27 +2283,26 @@ function How() {
             />
           </svg>
           <p>
-            <strong>Losing positions pay zero.</strong> Collateral and technical
-            risks still apply.
+            <strong>{copy.losingPositionsPayZero}</strong>{' '}{copy.collateralAndTechnicalRisksStill}
           </p>
         </div>
       </div>
-      <div className="landing-how-action"><a className="button button-primary" href={site.appUrl} data-v3-cta="app" data-v3-placement="how">Explore markets →</a></div>
+      <div className="landing-how-action"><a className="button button-primary" href={site.appUrl} data-v3-cta="app" data-v3-placement="how">{copy.exploreMarkets}</a></div>
     </section>
   )
 }
 
-function Traction() {
+function Traction({ copy }: { copy: LandingCopy }) {
   return (
     <section className="traction-section" aria-labelledby="traction-heading">
       <h2 className="traction-heading" id="traction-heading">
-        Traction
+        {copy.traction}
       </h2>
       <ul className="traction-grid" role="list">
         <li className="traction-item">
           <h3 className="traction-fact">
-            <span className="traction-prefix">Live since</span>{' '}
-            <span className="traction-value">Sep 2026</span>
+            <span className="traction-prefix">{copy.liveSince}</span>{' '}
+            <span className="traction-value">{copy.sep2026}</span>
           </h3>
           <svg
             className="traction-art"
@@ -2353,8 +2346,8 @@ function Traction() {
         </li>
         <li className="traction-item traction-liquidity">
           <h3 className="traction-fact">
-            <span className="traction-value">Order book</span>{' '}
-            <span className="traction-suffix">Check available liquidity</span>
+            <span className="traction-value">{copy.orderBook}</span>{' '}
+            <span className="traction-suffix">{copy.checkAvailableLiquidity}</span>
           </h3>
           <svg
             className="traction-art"
@@ -2416,8 +2409,8 @@ function Traction() {
         </li>
         <li className="traction-item">
           <h3 className="traction-fact">
-            <span className="traction-value">RFQs</span>{' '}
-            <span className="traction-suffix">for larger trades</span>
+            <span className="traction-value">{copy.rfqs}</span>{' '}
+            <span className="traction-suffix">{copy.forLargerTrades}</span>
           </h3>
           <svg
             className="traction-art"
@@ -2479,21 +2472,20 @@ function Traction() {
   )
 }
 
-function Closing() {
+function Closing({ copy }: { copy: LandingCopy }) {
   return (
     <section className="closing-section" aria-labelledby="closing-title">
       <div className="closing-content">
         <h2 className="closing-title" id="closing-title">
-          <span className="closing-title-line">Bitcoin Difficulty</span>{' '}
+          <span className="closing-title-line">{copy.bitcoinDifficulty}</span>{' '}
           <span className="closing-title-line">
-            is a new <span className="closing-title-accent">underlying.</span>
+            {copy.isANew}{' '}<span className="closing-title-accent">{copy.underlying2}</span>
           </span>
         </h2>
         <p className="closing-description">
-          Simple to understand. Practical to use. Built for professional
-          investors, including mining operators and trading desks.
+          {copy.simpleToUnderstandPracticalTo}
         </p>
-        <p className="landing-closing-newsletter">Read an example research email and try the preferences demo. This does not create a subscription.</p>
+        <p className="landing-closing-newsletter">{copy.readAnExampleResearchEmail}</p>
         <div className="closing-actions">
           <a
             className="button button-primary"
@@ -2501,7 +2493,7 @@ function Closing() {
             data-v3-cta="newsletter"
             data-v3-placement="closing"
           >
-            Newsletter{' '}
+            {copy.newsletter}{' '}
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path
                 d="M4 12h15m-6-6 6 6-6 6"
@@ -2516,7 +2508,7 @@ function Closing() {
             className="button button-secondary"
             href={`mailto:${site.contactEmail}`}
           >
-            Contact us
+            {copy.contactUs}
           </a>
         </div>
       </div>

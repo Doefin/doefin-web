@@ -1,0 +1,37 @@
+[
+  {
+    "id": "faq-funding-account",
+    "href": "/docs/getting-collateral",
+    "question": "¿Cómo ingreso fondos en mi cuenta?",
+    "answer": "Abre Fondos en la aplicación y sigue las instrucciones de depósito para el token y la red que elijas. Comprueba el destino y espera la confirmación antes de operar. Las opciones de financiación disponibles pueden tener distintas comisiones y condiciones.",
+    "label": "Leer la guía de depósitos"
+  },
+  {
+    "id": "faq-market-settlement",
+    "href": "/docs/how-settlement-works",
+    "question": "¿Cómo se liquida un mercado?",
+    "answer": "Cada mercado fija un umbral de dificultad y un bloque de observación. Una vez determinado el resultado, los tokens de posiciones ganadoras se pueden canjear por el pago indicado. Los tokens perdedores no pagan nada. El canje y la retirada son pasos distintos.",
+    "label": "Leer la guía de liquidación"
+  },
+  {
+    "id": "faq-exit-before-settlement",
+    "href": "/docs/managing-positions",
+    "question": "¿Puedo cerrar mi posición antes de la liquidación?",
+    "answer": "Puedes colocar una orden de venta para los tokens de posición que tengas. La venta depende de la liquidez y el precio disponibles, así que no se garantiza que puedas cerrar toda la posición. Cancelar una orden abierta no vende una posición existente.",
+    "label": "Leer sobre la gestión de posiciones"
+  },
+  {
+    "id": "faq-fees-and-costs",
+    "href": "/docs/market-vs-limit-orders",
+    "question": "¿Qué comisiones y costes debo revisar?",
+    "answer": "Antes de confirmar, revisa los costes indicados para tu orden y método de depósito. Las carteras, plataformas de intercambio y servicios de conversión pueden cobrar por separado. El precio de compra y los costes aplicables afectan a tu resultado, incluso si tu posición gana.",
+    "label": "Leer sobre órdenes y ejecución"
+  },
+  {
+    "id": "faq-risks",
+    "href": "/docs/risks-and-limitations",
+    "question": "¿Qué riesgos debo entender?",
+    "answer": "Una posición perdedora no paga nada. También importan la liquidez, las garantías y las dependencias técnicas. Una posición sobre la dificultad no cubre todos los riesgos de la minería: el precio de Bitcoin, los costes eléctricos y el tiempo de inactividad son factores distintos.",
+    "label": "Leer los riesgos y limitaciones"
+  }
+]
