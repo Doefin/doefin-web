@@ -54,3 +54,11 @@
 
 .reviewAction { background:theme('colors.brandAction') !important; color:white !important; }
 .reviewAction:hover { opacity:.9; }
+
+.feedNotice { margin-bottom: var(--df-space-6); padding: var(--df-space-4); border: 1px solid var(--df-line); border-radius: var(--df-radius-md); background: var(--df-bg); }
+.feedNotice > strong { color: var(--df-text); font-size: 14px; font-weight: 650; }
+.feedNotice > p { margin-top: var(--df-space-2); color: var(--df-text-muted); font-size: 13px; line-height: 1.7; }
+.recoveryLinks { display: flex; flex-wrap: wrap; gap: 0 var(--df-space-6); margin-top: var(--df-space-2); }
+.recoveryLinks a { display: inline-flex; align-items: center; gap: var(--df-space-2); min-height: 44px; color: var(--df-link); font-size: 13px; font-weight: 600; }
+.recoveryLinks a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.recoveryLinks a:focus-visible { outline: 2px solid var(--df-link); outline-offset: 3px; border-radius: var(--df-radius-sm); }

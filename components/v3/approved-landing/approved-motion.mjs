@@ -172,31 +172,32 @@ function initAudience(root, scope) {
   if (!section || typeof Element.prototype.animate !== 'function') return
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
-  const names = ['mining animation', 'market depth animation']
+  const names = { mining: 'mining animation', depth: 'market depth animation' }
   const states = []
   let pageActive = true
 
   section
     .querySelectorAll('.audience-panel .audience-art-control')
-    .forEach(function (wrapper, index) {
+    .forEach(function (wrapper) {
+      const illustration = wrapper.dataset.illustration
       const art = wrapper.firstElementChild
       const panel = wrapper.closest('.audience-panel')
       if (
         !art ||
         art.tagName.toLowerCase() !== 'svg' ||
         !panel ||
-        index >= names.length
+        !Object.hasOwn(names, illustration)
       )
         return
       const button = wrapper
       button.disabled = reduced.matches
-      button.setAttribute('aria-label', 'Pause ' + names[index])
+      button.setAttribute('aria-label', 'Pause ' + names[illustration])
       button.dataset.audienceState = 'idle'
       const state = {
         button: button,
         art: art,
         panel: panel,
-        index: index,
+        illustration: illustration,
         userPaused: false,
         running: false,
         initialized: false,
@@ -210,7 +211,7 @@ function initAudience(root, scope) {
         state.userPaused = !state.userPaused
         button.setAttribute(
           'aria-label',
-          (state.userPaused ? 'Resume ' : 'Pause ') + names[index],
+          (state.userPaused ? 'Resume ' : 'Pause ') + names[illustration],
         )
         sync(state)
       })
@@ -391,10 +392,10 @@ function initAudience(root, scope) {
     state.running = allowed(state)
     if (state.running && !state.initialized) {
       state.initialized = true
-      if (state.index === 0) createMinerLoops(state)
+      if (state.illustration === 'mining') createMinerLoops(state)
       else createBars(state)
     }
-    if (state.index === 0) {
+    if (state.illustration === 'mining') {
       state.loops.forEach(function (animation) {
         if (state.running && animation.playState !== 'running') animation.play()
         else if (!state.running && animation.playState !== 'paused')
@@ -488,11 +489,11 @@ function initReasons(root, scope) {
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)')
   const easeOut = 'cubic-bezier(.22, 1, .36, 1)'
   const easeTravel = 'cubic-bezier(.4, 0, .2, 1)'
-  const labels = [
-    'Replay measurable drivers illustration',
-    'Replay different market views illustration',
-    'Replay Bitcoin verification illustration',
-  ]
+  const labels = {
+    oracle: 'Replay Bitcoin oracle illustration',
+    collateral: 'Replay collateralised positions illustration',
+    bitcoin: 'Replay Bitcoin difficulty illustration',
+  }
   const states = []
   const entryTimers = new Set()
   let entryStarted = reduced.matches
@@ -500,25 +501,26 @@ function initReasons(root, scope) {
 
   section
     .querySelectorAll('.why-panel .why-art-control')
-    .forEach(function (wrapper, index) {
+    .forEach(function (wrapper) {
+      const illustration = wrapper.dataset.illustration
       const art = wrapper.firstElementChild
       const panel = wrapper.closest('.why-panel')
       if (
         !art ||
         art.tagName.toLowerCase() !== 'svg' ||
         !panel ||
-        index >= labels.length
+        !Object.hasOwn(labels, illustration)
       )
         return
       const button = wrapper
-      button.setAttribute('aria-label', labels[index])
+      button.setAttribute('aria-label', labels[illustration])
       button.disabled = reduced.matches
       button.dataset.whyState = 'idle'
       const state = {
         button: button,
         art: art,
         panel: panel,
-        index: index,
+        illustration: illustration,
         seen: reduced.matches,
         inView: false,
         entryQueued: false,
@@ -806,7 +808,7 @@ function initReasons(root, scope) {
       )
     }
 
-    if (state.index === 0) {
+    if (state.illustration === 'oracle') {
       // Inputs converge on the ASIC, then its output is measured on the plot.
       outlinePulse(find('input-btc-ring'), 600, 0, 0.8)
       revealStroke(find('price-signal'), 520, 0)
@@ -867,7 +869,7 @@ function initReasons(root, scope) {
         180,
         2320,
       )
-    } else if (state.index === 1) {
+    } else if (state.illustration === 'collateral') {
       revealStroke(find('history'), 650, 0)
       animate(find('origin'), [{ opacity: 0.35 }, { opacity: 1 }], 200, 650)
       outlinePulse(find('origin-ring'), 500, 600, 0.9)
@@ -887,7 +889,7 @@ function initReasons(root, scope) {
           'linear',
         )
       })
-    } else if (state.index === 2) {
+    } else if (state.illustration === 'bitcoin') {
       // The chain establishes the source, then measurement and verification resolve.
       ;[1, 2, 3].forEach(function (block, index) {
         const group = find('block-' + block)
@@ -1023,13 +1025,13 @@ function initWalkthrough(root, scope) {
   const easeOut = 'cubic-bezier(.22, 1, .36, 1)'
   const easeTravel = 'cubic-bezier(.4, 0, .2, 1)'
   const entryPace = 0.68
-  const handoffEnds = [1890, 1910, 2060]
-  const labels = [
-    'Replay market selection illustration',
-    'Replay account funding illustration',
-    'Replay position choice illustration',
-    'Replay trade or settlement illustration',
-  ]
+  const handoffEnds = { selection: 1890, funding: 1910, position: 2060, settlement: 0 }
+  const labels = {
+    selection: 'Replay market selection illustration',
+    funding: 'Replay account funding illustration',
+    position: 'Replay position choice illustration',
+    settlement: 'Replay trade or settlement illustration',
+  }
   const states = []
   const tourTimers = new Set()
   let tourStarted = reduced.matches
@@ -1037,18 +1039,19 @@ function initWalkthrough(root, scope) {
 
   section
     .querySelectorAll('.how-step .how-art-control')
-    .forEach(function (wrapper, index) {
+    .forEach(function (wrapper) {
+      const illustration = wrapper.dataset.illustration
       const art = wrapper.querySelector('.how-art')
-      if (!art || index >= labels.length) return
+      if (!art || !Object.hasOwn(labels, illustration)) return
       const button = wrapper
-      button.setAttribute('aria-label', labels[index])
+      button.setAttribute('aria-label', labels[illustration])
       button.disabled = reduced.matches
       button.dataset.motionState = 'idle'
       const state = {
         button: button,
         art: art,
         step: button.closest('.how-step'),
-        index: index,
+        illustration: illustration,
         seen: reduced.matches,
         inView: false,
         playing: false,
@@ -1166,7 +1169,7 @@ function initWalkthrough(root, scope) {
         tourTimers.delete(timer)
         if (!manualOwner && onScreen(state)) play(state, 'entry')
       }, nextStart)
-      nextStart += (handoffEnds[index] || 0) * entryPace
+      nextStart += (handoffEnds[state.illustration] || 0) * entryPace
       tourTimers.add(timer)
     })
   }
@@ -1366,7 +1369,7 @@ function initWalkthrough(root, scope) {
       )
     }
 
-    if (state.index === 0) {
+    if (state.illustration === 'selection') {
       timeline(find('cursor'), [
         { at: 0, transform: 'translate(24px, 24px)', opacity: 0 },
         { at: 180, transform: 'translate(18px, 14px)', opacity: 1 },
@@ -1397,7 +1400,7 @@ function initWalkthrough(root, scope) {
         1120,
       )
       handoff(1510)
-    } else if (state.index === 1) {
+    } else if (state.illustration === 'funding') {
       animate(
         find('receipt'),
         [
@@ -1441,7 +1444,7 @@ function initWalkthrough(root, scope) {
         1150,
       )
       handoff(1530)
-    } else if (state.index === 2) {
+    } else if (state.illustration === 'position') {
       timeline(find('above-card'), [
         { at: 0, transform: 'translateY(20px) scale(.9)', opacity: 0.35 },
         { at: 420, transform: 'translateY(0) scale(1)', opacity: 1 },
@@ -1486,7 +1489,7 @@ function initWalkthrough(root, scope) {
         easeTravel,
       )
       handoff(1680)
-    } else if (state.index === 3) {
+    } else if (state.illustration === 'settlement') {
       animate(find('source'), [{ opacity: 0.65 }, { opacity: 1 }], 340, 0)
       const tradePath = find('trade-trace')
       const settlePath = find('settle-trace')

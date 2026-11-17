@@ -25,7 +25,7 @@ const testimonials = [
 export function LandingTrust() {
   return (
     <section id="trust" className={styles.section} aria-labelledby="trust-investors-heading">
-      <h2 id="trust-investors-heading" className={styles.heading}>Backed by investors</h2>
+      <h2 id="trust-investors-heading" className={styles.heading}>Backed by</h2>
       <ul className={styles.logos} role="list">
         {investors.map(({ name, file, width, height }) => (
           <li key={name} className={styles.logo}>

@@ -1,4 +1,4 @@
-import { Gauge, ShieldWarning, Target } from '@phosphor-icons/react/dist/ssr'
+import { CurrencyBtc, Gauge, ShieldWarning, Target } from '@phosphor-icons/react/dist/ssr'
 import { Suspense } from 'react'
 import { site } from '@/lib/site'
 import { ApprovedLandingMotion } from './ApprovedLandingMotion'
@@ -11,7 +11,6 @@ export function ApprovedLanding() {
   return (
     <ApprovedLandingMotion>
       <Hero />
-      <Benefits />
       <Audience />
       <Why />
       <How />
@@ -21,7 +20,6 @@ export function ApprovedLanding() {
       <Suspense fallback={<DifficultyImpactLoading />}>
         <DifficultyImpactSection />
       </Suspense>
-      <Traction />
       <LandingTrust />
       <LandingTeam />
       <Closing />
@@ -41,11 +39,10 @@ function Hero() {
         </p>
         <p className="description">
           <span>
-            Miners can hedge the effect of rising difficulty on expected Bitcoin
-            production.
+            Investors can trade views on where network hashrate goes.
           </span>{' '}
           <span>
-            Professional investors can trade views on network hashrate.
+            Miners can hedge rising Bitcoin difficulty.
           </span>
         </p>
         <div className="actions">
@@ -68,7 +65,7 @@ function Hero() {
           </a>
           <a
             className="button button-secondary"
-            href={`mailto:${site.contactEmail}`}
+            href="mailto:info@doefin.com"
           >
             Talk to us
           </a>
@@ -144,7 +141,6 @@ function Hero() {
               </caption>
               <colgroup>
                 <col className="strike-col" />
-                <col className="change-col" />
               </colgroup>
               <colgroup>
                 <col className="yes-col" />
@@ -156,17 +152,10 @@ function Hero() {
                   <th
                     id="strike-heading"
                     className="strike-heading"
-                    colSpan={2}
                     rowSpan={2}
-                    scope="colgroup"
+                    scope="col"
                   >
                     <span className="table-eyebrow">DIFFICULTY THRESHOLD</span>
-                    <span className="table-meta">
-                      <strong className="strike-change" data-sign="negative">
-                        -4%
-                      </strong>{' '}
-                      vs. sample difficulty
-                    </span>
                   </th>
                   <th colSpan={3} className="block-meta" scope="colgroup">
                     <span className="table-eyebrow">
@@ -190,14 +179,13 @@ function Hero() {
               <tbody>
                 <tr>
                   <th scope="row">129.5T</th>
-                  <td className="change" data-sign="negative">
-                    -12.7%
-                  </td>
                   <td>
                     <span className="quote quote-yes">0.93</span>
                   </td>
                   <td>
-                    <span className="currency">cbBTC</span>
+                    <span className="market-currency-icon" role="img" aria-label="cbBTC (wrapped Bitcoin)">
+                      <CurrencyBtc size={24} aria-hidden="true" />
+                    </span>
                   </td>
                   <td>
                     <span className="quote quote-no">0.13</span>
@@ -205,14 +193,13 @@ function Hero() {
                 </tr>
                 <tr>
                   <th scope="row">137.2T</th>
-                  <td className="change" data-sign="negative">
-                    -7.5%
-                  </td>
                   <td>
                     <span className="quote quote-yes">0.75</span>
                   </td>
                   <td>
-                    <span className="currency">cbBTC</span>
+                    <span className="market-currency-icon" role="img" aria-label="cbBTC (wrapped Bitcoin)">
+                      <CurrencyBtc size={24} aria-hidden="true" />
+                    </span>
                   </td>
                   <td>
                     <span className="quote quote-no">0.30</span>
@@ -223,102 +210,6 @@ function Hero() {
           </div>
         </section>
       </div>
-    </section>
-  )
-}
-
-function Benefits() {
-  return (
-    <section className="benefits-section" aria-label="Benefits">
-      <ul className="benefits-list" role="list">
-        <li className="benefits-item">
-          <svg
-            className="benefits-icon"
-            viewBox="0 0 28 28"
-            fill="none"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path
-              d="m14 3 9 4v7c0 6-4 10-9 12-5-2-9-6-9-12V7l9-4Z"
-              stroke="currentColor"
-              strokeWidth="1.7"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <span>Bitcoin difficulty settlement</span>
-        </li>
-        <li className="benefits-item">
-          <svg
-            className="benefits-icon"
-            viewBox="0 0 28 28"
-            fill="none"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path
-              d="m14 3 11 6-11 6L3 9l11-6Zm-11 11 11 6 11-6M3 19l11 6 11-6"
-              stroke="currentColor"
-              strokeWidth="1.7"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <span>Collateralised positions</span>
-        </li>
-        <li className="benefits-item">
-          <svg
-            className="benefits-icon"
-            viewBox="0 0 28 28"
-            fill="none"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <rect
-              x="5"
-              y="12"
-              width={18}
-              height={13}
-              rx="2.5"
-              stroke="currentColor"
-              strokeWidth="1.7"
-            />
-            <path
-              d="M9 12V8a5 5 0 0 1 10 0v4m-5 5v4"
-              stroke="currentColor"
-              strokeWidth="1.7"
-              strokeLinecap="round"
-            />
-            <circle cx="14" cy="17" r="1.5" fill="currentColor" />
-          </svg>
-          <span>Defined position payout</span>
-        </li>
-        <li className="benefits-item">
-          <svg
-            className="benefits-icon"
-            viewBox="0 0 28 28"
-            fill="none"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <circle
-              cx="14"
-              cy="14"
-              r="11"
-              stroke="currentColor"
-              strokeWidth="1.7"
-            />
-            <path
-              d="M10 8h5.5c4.5 0 4.5 6 0 6H11m0 0h5c4.5 0 4.5 6 0 6h-6m1-12v12m2-15v3m3-3v3m-3 12v3m3-3v3"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <span>cbBTC market payouts</span>
-        </li>
-      </ul>
     </section>
   )
 }
@@ -335,6 +226,169 @@ function Audience() {
       </h2>
       <div className="audience-grid">
         <article
+          className="audience-panel audience-traders"
+          aria-labelledby="audience-traders-title"
+        >
+          <h3 className="audience-title" id="audience-traders-title">
+            For traders and investors
+          </h3>
+          <p className="audience-description">
+            Trade Bitcoin difficulty as a measurable, Bitcoin-native underlying.
+          </p>
+          <a className="landing-copy-link" href="/for/institutions">See how →</a>
+          <button
+            className="audience-art-control"
+            type="button"
+            disabled
+            data-illustration="depth"
+            aria-label="Pause market depth animation"
+          >
+            <svg
+              className="audience-art audience-market-art"
+              viewBox="0 0 208 184"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M16 39H192M16 61H192M16 83H192M16 105H192M16 127H192M16 149H192"
+                stroke="#28354C"
+                strokeWidth="1"
+              />
+              <g
+                fill="#6DCB91"
+                fillOpacity="1"
+                stroke="#23413C"
+                strokeOpacity="1"
+                strokeWidth="1.5"
+              >
+                <rect
+                  data-audience="depth-left-1"
+                  x="61"
+                  y="27"
+                  width={38}
+                  height={12}
+                  rx="3"
+                />
+                <rect
+                  data-audience="depth-left-2"
+                  x="43"
+                  y="49"
+                  width={56}
+                  height={12}
+                  rx="3"
+                />
+                <rect
+                  data-audience="depth-left-3"
+                  x="52"
+                  y="71"
+                  width={47}
+                  height={12}
+                  rx="3"
+                />
+                <rect
+                  data-audience="depth-left-4"
+                  x="30"
+                  y="93"
+                  width={69}
+                  height={12}
+                  rx="3"
+                />
+                <rect
+                  data-audience="depth-left-5"
+                  x="36"
+                  y="115"
+                  width={63}
+                  height={12}
+                  rx="3"
+                />
+                <rect
+                  data-audience="depth-left-6"
+                  x="17"
+                  y="137"
+                  width={82}
+                  height={12}
+                  rx="3"
+                />
+              </g>
+              <g
+                fill="#ED9077"
+                fillOpacity="1"
+                stroke="#46292C"
+                strokeOpacity="1"
+                strokeWidth="1.5"
+              >
+                <rect
+                  data-audience="depth-right-1"
+                  x="109"
+                  y="27"
+                  width={79}
+                  height={12}
+                  rx="3"
+                />
+                <rect
+                  data-audience="depth-right-2"
+                  x="109"
+                  y="49"
+                  width={59}
+                  height={12}
+                  rx="3"
+                />
+                <rect
+                  data-audience="depth-right-3"
+                  x="109"
+                  y="71"
+                  width={70}
+                  height={12}
+                  rx="3"
+                />
+                <rect
+                  data-audience="depth-right-4"
+                  x="109"
+                  y="93"
+                  width={44}
+                  height={12}
+                  rx="3"
+                />
+                <rect
+                  data-audience="depth-right-5"
+                  x="109"
+                  y="115"
+                  width={51}
+                  height={12}
+                  rx="3"
+                />
+                <rect
+                  data-audience="depth-right-6"
+                  x="109"
+                  y="137"
+                  width={31}
+                  height={12}
+                  rx="3"
+                />
+              </g>
+              <path
+                data-audience="depth-axis"
+                d="M104 18V158"
+                stroke="var(--df-chart-context)"
+                strokeWidth="1"
+              />
+              <path
+                d="M98 18H110M98 158H110M7 158H191M4 25v-7h9m176 0h9v7M4 148v7h9m176 0h9v-7"
+                stroke="var(--df-line-strong)"
+                strokeWidth="1"
+              />
+              <path
+                data-audience="depth-scan"
+                d="M100 18H108"
+                stroke="var(--df-text)"
+                strokeWidth="2"
+                strokeLinecap="round"
+                opacity="0"
+              />
+            </svg>
+          </button>
+        </article>
+        <article
           className="audience-panel audience-miners"
           aria-labelledby="audience-miners-title"
         >
@@ -342,14 +396,14 @@ function Audience() {
             For miners
           </h3>
           <p className="audience-description">
-            Hedge exposure to rising difficulty or trade a view on network
-            hashrate. A position does not cover every mining risk.
+            Hedge rising difficulty or trade your view on network hashrate.
           </p>
           <a className="landing-copy-link" href="/for/miners">See how →</a>
           <button
             className="audience-art-control"
             type="button"
             disabled
+            data-illustration="mining"
             aria-label="Pause mining animation"
           >
             <svg
@@ -538,168 +592,6 @@ function Audience() {
             </svg>
           </button>
         </article>
-        <article
-          className="audience-panel audience-traders"
-          aria-labelledby="audience-traders-title"
-        >
-          <h3 className="audience-title" id="audience-traders-title">
-            For professional investors
-          </h3>
-          <p className="audience-description">
-            Trade Bitcoin difficulty as a measurable, Bitcoin-native underlying.
-          </p>
-          <a className="landing-copy-link" href="/for/institutions">See how →</a>
-          <button
-            className="audience-art-control"
-            type="button"
-            disabled
-            aria-label="Pause market depth animation"
-          >
-            <svg
-              className="audience-art audience-market-art"
-              viewBox="0 0 208 184"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M16 39H192M16 61H192M16 83H192M16 105H192M16 127H192M16 149H192"
-                stroke="#28354C"
-                strokeWidth="1"
-              />
-              <g
-                fill="#6DCB91"
-                fillOpacity="1"
-                stroke="#23413C"
-                strokeOpacity="1"
-                strokeWidth="1.5"
-              >
-                <rect
-                  data-audience="depth-left-1"
-                  x="61"
-                  y="27"
-                  width={38}
-                  height={12}
-                  rx="3"
-                />
-                <rect
-                  data-audience="depth-left-2"
-                  x="43"
-                  y="49"
-                  width={56}
-                  height={12}
-                  rx="3"
-                />
-                <rect
-                  data-audience="depth-left-3"
-                  x="52"
-                  y="71"
-                  width={47}
-                  height={12}
-                  rx="3"
-                />
-                <rect
-                  data-audience="depth-left-4"
-                  x="30"
-                  y="93"
-                  width={69}
-                  height={12}
-                  rx="3"
-                />
-                <rect
-                  data-audience="depth-left-5"
-                  x="36"
-                  y="115"
-                  width={63}
-                  height={12}
-                  rx="3"
-                />
-                <rect
-                  data-audience="depth-left-6"
-                  x="17"
-                  y="137"
-                  width={82}
-                  height={12}
-                  rx="3"
-                />
-              </g>
-              <g
-                fill="#ED9077"
-                fillOpacity="1"
-                stroke="#46292C"
-                strokeOpacity="1"
-                strokeWidth="1.5"
-              >
-                <rect
-                  data-audience="depth-right-1"
-                  x="109"
-                  y="27"
-                  width={79}
-                  height={12}
-                  rx="3"
-                />
-                <rect
-                  data-audience="depth-right-2"
-                  x="109"
-                  y="49"
-                  width={59}
-                  height={12}
-                  rx="3"
-                />
-                <rect
-                  data-audience="depth-right-3"
-                  x="109"
-                  y="71"
-                  width={70}
-                  height={12}
-                  rx="3"
-                />
-                <rect
-                  data-audience="depth-right-4"
-                  x="109"
-                  y="93"
-                  width={44}
-                  height={12}
-                  rx="3"
-                />
-                <rect
-                  data-audience="depth-right-5"
-                  x="109"
-                  y="115"
-                  width={51}
-                  height={12}
-                  rx="3"
-                />
-                <rect
-                  data-audience="depth-right-6"
-                  x="109"
-                  y="137"
-                  width={31}
-                  height={12}
-                  rx="3"
-                />
-              </g>
-              <path
-                data-audience="depth-axis"
-                d="M104 18V158"
-                stroke="#8A99B3"
-                strokeWidth="1"
-              />
-              <path
-                d="M98 18H110M98 158H110M7 158H191M4 25v-7h9m176 0h9v7M4 148v7h9m176 0h9v-7"
-                stroke="#3D4B64"
-                strokeWidth="1"
-              />
-              <path
-                data-audience="depth-scan"
-                d="M100 18H108"
-                stroke="#CAD4E3"
-                strokeWidth="2"
-                strokeLinecap="round"
-                opacity="0"
-              />
-            </svg>
-          </button>
-        </article>
       </div>
     </section>
   )
@@ -734,19 +626,18 @@ function Why() {
         >
           <div className="why-driver-copy">
             <h3 className="why-title" id="why-drivers-title">
-              <span className="why-title-line">Hashrate has</span>{' '}
-              <span className="why-title-line">measurable drivers:</span>
+              Trustless Bitcoin oracle:
             </h3>
             <p className="why-description">
-              Bitcoin price, ASIC efficiency, energy costs, machine shipments,
-              regulation and curtailment.
+              Difficulty, block heights and timestamps verified directly from block headers.
             </p>
           </div>
           <button
             className="why-art-control why-driver-visual"
             type="button"
             disabled
-            aria-label="Replay measurable drivers illustration"
+            data-illustration="oracle"
+            aria-label="Replay Bitcoin oracle illustration"
           >
             <svg
               className="why-driver-art"
@@ -1064,19 +955,16 @@ function Why() {
           className="why-panel why-side-panel why-views"
           aria-labelledby="why-views-title"
         >
-          <h3 className="why-title" id="why-views-title">
-            <span className="why-title-line">A market for</span>{' '}
-            <span className="why-title-line">different views:</span>
-          </h3>
+          <h3 className="why-title" id="why-views-title">Fully collateralised:</h3>
           <p className="why-description">
-            Miners, traders and BTC investors can have different views on where
-            difficulty is heading.
+            Collateralisation limits trading-counterparty credit exposure. cbBTC issuer and custody risks remain.
           </p>
           <button
             className="why-art-control why-side-visual"
             type="button"
             disabled
-            aria-label="Replay different views illustration"
+            data-illustration="collateral"
+            aria-label="Replay collateralised positions illustration"
           >
             <svg
               className="why-side-art"
@@ -1192,13 +1080,11 @@ function Why() {
             <span className="why-title-line">A Bitcoin-native</span>{' '}
             <span className="why-title-line">underlying:</span>
           </h3>
-          <p className="why-description">
-            Difficulty is public, measurable and verified from Bitcoin itself.
-          </p>
           <button
             className="why-art-control why-side-visual"
             type="button"
             disabled
+            data-illustration="bitcoin"
             aria-label="Replay Bitcoin difficulty illustration"
           >
             <svg
@@ -1462,177 +1348,7 @@ function How() {
             className="how-art-control"
             type="button"
             disabled
-            aria-label="Replay market selection illustration"
-          >
-            <svg
-              className="how-art"
-              viewBox="20 10 220 160"
-              fill="none"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <g data-motion="scene">
-                <rect
-                  x="58"
-                  y="17"
-                  width={150}
-                  height={141}
-                  rx="12"
-                  fill="#10192A"
-                  stroke="#324562"
-                  data-motion="back"
-                />
-                <rect
-                  data-motion="frame"
-                  x="48"
-                  y="25"
-                  width={150}
-                  height={141}
-                  rx="12"
-                  fill="#172238"
-                  stroke="#7F94B5"
-                  strokeWidth="1.6"
-                />
-                <path
-                  d="M60 26h126a11 11 0 0 1 11 11v20H49V37a11 11 0 0 1 11-11Z"
-                  fill="#1D2B43"
-                />
-                <path d="M49 58h148" stroke="#3B4E6D" />
-                <path
-                  d="M65 42h44"
-                  stroke="#C1CDE0"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                />
-                <rect
-                  x="153"
-                  y="36"
-                  width={28}
-                  height={12}
-                  rx="4"
-                  fill="#2A405F"
-                />
-                <circle
-                  cx="68"
-                  cy="79"
-                  r="4"
-                  stroke="#7187A7"
-                  strokeWidth="1.2"
-                />
-                <path
-                  d="M84 79h43m24 0h25"
-                  stroke="#7890B1"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                />
-                <g data-motion="middle-placeholder">
-                  <circle
-                    cx="68"
-                    cy="110"
-                    r="4"
-                    fill="none"
-                    stroke="#7187A7"
-                    strokeWidth="1.2"
-                  />
-                  <path
-                    d="M84 110h43m24 0h25"
-                    stroke="#7890B1"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                  />
-                </g>
-                <g data-motion="selection-group">
-                  <rect
-                    data-motion="selection"
-                    x="57"
-                    y="96"
-                    width={132}
-                    height={28}
-                    rx="6"
-                    fill="#2C63D8"
-                    stroke="#5889F1"
-                    strokeWidth="1"
-                  />
-                  <path
-                    d="M65 98h116"
-                    stroke="#91B1FF"
-                    strokeOpacity=".22"
-                    strokeLinecap="round"
-                  />
-                  <circle
-                    cx="68"
-                    cy="110"
-                    r="4.5"
-                    stroke="#F0F4FF"
-                    strokeWidth="1.3"
-                  />
-                  <circle
-                    data-motion="radio"
-                    cx="68"
-                    cy="110"
-                    r="1.7"
-                    fill="#F0F4FF"
-                  />
-                  <path
-                    d="M84 110h43m24 0h25"
-                    stroke="#F0F4FF"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                  />
-                </g>
-                <circle
-                  cx="68"
-                  cy="141"
-                  r="4"
-                  stroke="#7187A7"
-                  strokeWidth="1.2"
-                />
-                <path
-                  d="M84 141h43m24 0h25"
-                  stroke="#7890B1"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                />
-                <path
-                  data-motion="cursor"
-                  d="m187 116 1 24 6-6 5 10 5-2-5-10 9-1-21-15Z"
-                  fill="#EDF2FC"
-                  stroke="#0A0F1C"
-                  strokeWidth="1.8"
-                  strokeLinejoin="round"
-                />
-                <circle
-                  data-motion="click-ring"
-                  cx="187"
-                  cy="116"
-                  r="6"
-                  fill="none"
-                  stroke="#B9D2FF"
-                  strokeWidth="1.5"
-                  opacity="0"
-                />
-              </g>
-            </svg>
-          </button>
-          <h3 className="how-step-title">
-            <span className="how-number">1.</span>{' '}
-            <span>
-              Choose a<br />
-              difficulty market
-            </span>
-          </h3>
-          <p className="how-step-description">
-            Check the difficulty threshold and observation block.
-          </p>
-          <span className="how-handoff" aria-hidden="true">
-            <i />
-          </span>
-        </li>
-        <li className="how-step">
-          <button
-            className="how-art-control"
-            type="button"
-            disabled
+            data-illustration="funding"
             aria-label="Replay account funding illustration"
           >
             <svg
@@ -1769,15 +1485,14 @@ function How() {
             </svg>
           </button>
           <h3 className="how-step-title">
-            <span className="how-number">2.</span>{' '}
+            <span className="how-number">1.</span>{' '}
             <span>
-              Fund your
-              <br />
-              account
+              Choose a<br />
+              difficulty market
             </span>
           </h3>
           <p className="how-step-description">
-            Check the collateral token and network before funding.
+            Buy Yes or No depending on where you expect Bitcoin difficulty to be at expiry.
           </p>
           <span className="how-handoff" aria-hidden="true">
             <i />
@@ -1788,6 +1503,7 @@ function How() {
             className="how-art-control"
             type="button"
             disabled
+            data-illustration="position"
             aria-label="Replay position choice illustration"
           >
             <svg
@@ -1934,11 +1650,15 @@ function How() {
             </svg>
           </button>
           <h3 className="how-step-title">
-            <span className="how-number">3.</span> <span>Take a side</span>
+            <span className="how-number">2.</span>{' '}
+            <span>
+              Fund your
+              <br />
+              account and trade
+            </span>
           </h3>
           <p className="how-step-description">
-            Choose the outcome and review the price, fees and available
-            liquidity.
+            Deposit cbBTC directly or convert native BTC using SwapKit (integrated).
           </p>
           <span className="how-handoff" aria-hidden="true">
             <i />
@@ -1949,6 +1669,7 @@ function How() {
             className="how-art-control"
             type="button"
             disabled
+            data-illustration="settlement"
             aria-label="Replay trade or settlement illustration"
           >
             <svg
@@ -2236,245 +1957,22 @@ function How() {
             </svg>
           </button>
           <h3 className="how-step-title">
-            <span className="how-number">4.</span> <span>Trade or settle</span>
+            <span className="how-number">3.</span> <span>Trade or settle</span>
           </h3>
           <p className="how-step-description">
-            Place a sell order before settlement, or hold until the market
-            resolves.
+            Sell before settlement or hold until the market resolves.
           </p>
         </li>
       </ol>
       <div className="how-foundation">
         <div className="how-foundation-item">
-          <svg
-            className="how-foundation-icon"
-            viewBox="0 0 34 38"
-            fill="none"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path
-              d="m17 3 12 5v9c0 8-5 13-12 17C10 30 5 25 5 17V8l12-5Z"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinejoin="round"
-            />
-            <path
-              d="m11 18 4 4 8-9"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <p>
-            <strong>Bitcoin difficulty settlement.</strong> Markets use observed
-            Bitcoin mining difficulty.
-          </p>
+          <p><strong>Illustrative payout example.</strong> Buy Yes at 0.20 cbBTC. If Yes wins, receive 1 cbBTC. Otherwise, lose the 0.20 cbBTC paid.</p>
         </div>
         <div className="how-foundation-item">
-          <svg
-            className="how-foundation-icon"
-            viewBox="0 0 34 38"
-            fill="none"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path
-              d="m17 6 13 7-13 7L4 13l13-7Zm-13 14 13 7 13-7M4 27l13 7 13-7"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <p>
-            <strong>Losing positions pay zero.</strong> Collateral and technical
-            risks still apply.
-          </p>
+          <p>The payout includes the amount paid and is before fees. Collateral and technical risks still apply.</p>
         </div>
       </div>
       <div className="landing-how-action"><a className="button button-primary" href={site.appUrl} data-v3-cta="app" data-v3-placement="how">Explore markets →</a></div>
-    </section>
-  )
-}
-
-function Traction() {
-  return (
-    <section className="traction-section" aria-labelledby="traction-heading">
-      <h2 className="traction-heading" id="traction-heading">
-        Traction
-      </h2>
-      <ul className="traction-grid" role="list">
-        <li className="traction-item">
-          <h3 className="traction-fact">
-            <span className="traction-prefix">Live since</span>{' '}
-            <span className="traction-value">Sep 2026</span>
-          </h3>
-          <svg
-            className="traction-art"
-            viewBox="0 0 80 80"
-            fill="none"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path
-              d="M15 20a6 6 0 0 1 6-6h38a6 6 0 0 1 6 6v42a6 6 0 0 1-6 6H21a6 6 0 0 1-6-6V20Z"
-              fill="#F7F9FC"
-              stroke="#7D899D"
-              strokeWidth="1.8"
-            />
-            <path
-              d="M21 15h38a5 5 0 0 1 5 5v12H16V20a5 5 0 0 1 5-5Z"
-              fill="#7D899D"
-            />
-            <path d="M15 32h50" stroke="#A5AFBF" strokeWidth="1.8" />
-            <path
-              d="M27 9v12m26-12v12"
-              stroke="#98A4B6"
-              strokeWidth="2.4"
-              strokeLinecap="round"
-            />
-            <path
-              d="M25 42h5m9 0h5m9 0h2M25 55h5m23 0h2"
-              stroke="#7D899D"
-              strokeWidth="2.4"
-              strokeLinecap="round"
-            />
-            <rect x="36" y="49" width={12} height={12} rx="3" fill="#3475FE" />
-            <path
-              d="m39 55 2 2 4-4"
-              stroke="#E8F0FF"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </li>
-        <li className="traction-item traction-liquidity">
-          <h3 className="traction-fact">
-            <span className="traction-value">Order book</span>{' '}
-            <span className="traction-suffix">Check available liquidity</span>
-          </h3>
-          <svg
-            className="traction-art"
-            viewBox="0 0 80 80"
-            fill="none"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path
-              d="M12 35A29 29 0 0 1 61 19"
-              stroke="#E8ECF4"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-            <path
-              d="M61 10v10h-10"
-              stroke="#E8ECF4"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M68 45A29 29 0 0 1 19 61"
-              stroke="#E8ECF4"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-            <path
-              d="M19 70V60h10"
-              stroke="#E8ECF4"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <circle
-              cx="33"
-              cy="34"
-              r="14"
-              fill="#203B64"
-              stroke="#8AA5CC"
-              strokeWidth="1.8"
-            />
-            <path
-              d="M27 26a10 10 0 0 1 12 0m-16 8a10 10 0 0 1 1-4"
-              stroke="#ADC2E0"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-            <circle
-              cx="46"
-              cy="46"
-              r="15"
-              fill="#3475FE"
-              stroke="#81ADFF"
-              strokeWidth="1.8"
-            />
-            <circle cx="46" cy="46" r="9" stroke="#C6DCFF" strokeWidth="1.6" />
-          </svg>
-        </li>
-        <li className="traction-item">
-          <h3 className="traction-fact">
-            <span className="traction-value">RFQs</span>{' '}
-            <span className="traction-suffix">for larger trades</span>
-          </h3>
-          <svg
-            className="traction-art"
-            viewBox="0 0 80 80"
-            fill="none"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path
-              d="M10 19h22l8 8v29H10V19Z"
-              fill="#203B64"
-              stroke="#8AA5CC"
-              strokeWidth="1.8"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M32 19v8h8"
-              stroke="#8AA5CC"
-              strokeWidth="1.8"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M17 35h13m-13 8h8"
-              stroke="#ADC2E0"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-            <path
-              d="M42 27h20l8 8v29H42V27Z"
-              fill="#16263F"
-              stroke="#8AA5CC"
-              strokeWidth="1.8"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M62 27v8h8"
-              stroke="#8AA5CC"
-              strokeWidth="1.8"
-              strokeLinejoin="round"
-            />
-            <rect x="48" y="41" width={16} height={6} rx="2" fill="#3475FE" />
-            <path
-              d="M49 54h9"
-              stroke="#ADC2E0"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-            <path
-              d="M29 10h26a6 6 0 0 1 6 6v3m-4-4 4 4 4-4M50 72H24a6 6 0 0 1-6-6v-3m-4 4 4-4 4 4"
-              stroke="#E8ECF4"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </li>
-      </ul>
     </section>
   )
 }
@@ -2484,16 +1982,12 @@ function Closing() {
     <section className="closing-section" aria-labelledby="closing-title">
       <div className="closing-content">
         <h2 className="closing-title" id="closing-title">
-          <span className="closing-title-line">Bitcoin Difficulty</span>{' '}
-          <span className="closing-title-line">
-            is a new <span className="closing-title-accent">underlying.</span>
-          </span>
+          Read a sample research email.
         </h2>
         <p className="closing-description">
-          Simple to understand. Practical to use. Built for professional
-          investors, including mining operators and trading desks.
+          Simple to understand. Practical to use.
         </p>
-        <p className="landing-closing-newsletter">Read an example research email and try the preferences demo. This does not create a subscription.</p>
+        <p className="landing-closing-newsletter">This demo does not create a subscription.</p>
         <div className="closing-actions">
           <a
             className="button button-primary"
@@ -2501,7 +1995,7 @@ function Closing() {
             data-v3-cta="newsletter"
             data-v3-placement="closing"
           >
-            Newsletter{' '}
+            Read sample email{' '}
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path
                 d="M4 12h15m-6-6 6 6-6 6"
