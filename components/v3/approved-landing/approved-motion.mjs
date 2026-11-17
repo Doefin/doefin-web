@@ -172,7 +172,6 @@ function initAudience(root, scope) {
   if (!section || typeof Element.prototype.animate !== 'function') return
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
-  const names = ['mining animation', 'market depth animation']
   const states = []
   let pageActive = true
 
@@ -184,13 +183,11 @@ function initAudience(root, scope) {
       if (
         !art ||
         art.tagName.toLowerCase() !== 'svg' ||
-        !panel ||
-        index >= names.length
+        !panel
       )
         return
       const button = wrapper
       button.disabled = reduced.matches
-      button.setAttribute('aria-label', 'Pause ' + names[index])
       button.dataset.audienceState = 'idle'
       const state = {
         button: button,
@@ -210,7 +207,7 @@ function initAudience(root, scope) {
         state.userPaused = !state.userPaused
         button.setAttribute(
           'aria-label',
-          (state.userPaused ? 'Resume ' : 'Pause ') + names[index],
+          state.userPaused ? button.dataset.resumeLabel : button.dataset.pauseLabel,
         )
         sync(state)
       })
@@ -488,11 +485,6 @@ function initReasons(root, scope) {
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)')
   const easeOut = 'cubic-bezier(.22, 1, .36, 1)'
   const easeTravel = 'cubic-bezier(.4, 0, .2, 1)'
-  const labels = [
-    'Replay measurable drivers illustration',
-    'Replay different market views illustration',
-    'Replay Bitcoin verification illustration',
-  ]
   const states = []
   const entryTimers = new Set()
   let entryStarted = reduced.matches
@@ -506,12 +498,10 @@ function initReasons(root, scope) {
       if (
         !art ||
         art.tagName.toLowerCase() !== 'svg' ||
-        !panel ||
-        index >= labels.length
+        !panel
       )
         return
       const button = wrapper
-      button.setAttribute('aria-label', labels[index])
       button.disabled = reduced.matches
       button.dataset.whyState = 'idle'
       const state = {
@@ -1024,12 +1014,6 @@ function initWalkthrough(root, scope) {
   const easeTravel = 'cubic-bezier(.4, 0, .2, 1)'
   const entryPace = 0.68
   const handoffEnds = [1890, 1910, 2060]
-  const labels = [
-    'Replay market selection illustration',
-    'Replay account funding illustration',
-    'Replay position choice illustration',
-    'Replay trade or settlement illustration',
-  ]
   const states = []
   const tourTimers = new Set()
   let tourStarted = reduced.matches
@@ -1039,9 +1023,8 @@ function initWalkthrough(root, scope) {
     .querySelectorAll('.how-step .how-art-control')
     .forEach(function (wrapper, index) {
       const art = wrapper.querySelector('.how-art')
-      if (!art || index >= labels.length) return
+      if (!art) return
       const button = wrapper
-      button.setAttribute('aria-label', labels[index])
       button.disabled = reduced.matches
       button.dataset.motionState = 'idle'
       const state = {

@@ -441,3 +441,27 @@
     transition: none;
   }
 }
+
+@media (max-width: 420px) {
+  .header[data-homepage] .bar {
+    padding-inline: 12px;
+  }
+
+  .header[data-homepage] .actions {
+    gap: 5px;
+  }
+
+  .header[data-homepage] .app {
+    padding-inline: 7px;
+    font-size: 12px;
+  }
+
+  .header[data-homepage] .app svg {
+    display: none;
+  }
+
+  .header[data-homepage] .mobileToggle {
+    min-width: 44px;
+    padding-inline: 0;
+  }
+}

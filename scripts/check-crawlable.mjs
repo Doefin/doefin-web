@@ -24,7 +24,11 @@ try {
 }
 
 const PAGES = [
-  ['/', 'Home'],
+  ['/', 'Home', 'en-GB'],
+  ['/en', 'English homepage', 'en-GB'],
+  ['/spn', 'Spanish homepage', 'es'],
+  ['/por', 'Portuguese homepage', 'pt-BR'],
+  ['/chin', 'Chinese homepage', 'zh-Hans'],
   ['/academy/guides/hosting-effective-rate', 'Calculator guide'],
   ['/docs', 'Docs index'],
   ['/docs/key-terms', 'Docs definitions'],
@@ -47,7 +51,7 @@ const text = (html) =>
     .trim()
 
 let failed = 0
-for (const [file, label] of PAGES) {
+for (const [file, label, language] of PAGES) {
   let html
   try {
     const response = await fetch(base + file)
@@ -58,7 +62,9 @@ for (const [file, label] of PAGES) {
     failed++
     continue
   }
-  const words = text(html).split(' ').filter(Boolean).length
+  const words = language === 'zh-Hans'
+    ? Array.from(new Intl.Segmenter(language, { granularity: 'word' }).segment(text(html))).filter(segment => segment.isWordLike).length
+    : text(html).split(' ').filter(Boolean).length
   const hasH1 = /<h1[\s>]/.test(html)
   const hasTitle = /<title>/.test(html)
   const hasCanonical = /rel="canonical"/.test(html)
@@ -68,6 +74,7 @@ for (const [file, label] of PAGES) {
   if (!hasH1) problems.push('no <h1>')
   if (!hasTitle) problems.push('no <title>')
   if (!hasCanonical) problems.push('no canonical')
+  if (language && !html.includes(`<html lang="${language}"`)) problems.push(`missing ${language} document language`)
 
   if (problems.length) {
     console.error(`FAIL  ${label.padEnd(22)} ${problems.join(', ')}`)

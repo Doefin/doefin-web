@@ -1,0 +1,37 @@
+[
+  {
+    "id": "faq-funding-account",
+    "href": "/docs/getting-collateral",
+    "question": "如何为账户充值？",
+    "answer": "在应用内打开「资金」，按所选代币和网络的充值指引操作。核对收款地址，等待确认后再交易。不同充值方式的费用和条件可能不同。",
+    "label": "阅读充值指南"
+  },
+  {
+    "id": "faq-market-settlement",
+    "href": "/docs/how-settlement-works",
+    "question": "市场如何结算？",
+    "answer": "每个市场都设有难度阈值和观测区块。结果确定后，获胜头寸代币可以按规定金额兑付，失败头寸代币的兑付金额为零。兑付与提现是两个独立步骤。",
+    "label": "阅读结算指南"
+  },
+  {
+    "id": "faq-exit-before-settlement",
+    "href": "/docs/managing-positions",
+    "question": "可以在结算前退出吗？",
+    "answer": "你可以对持有的头寸代币提交卖单。能否卖出取决于可用流动性和价格，因此无法保证完全退出。撤销未成交订单不会卖出已有头寸。",
+    "label": "阅读头寸管理指南"
+  },
+  {
+    "id": "faq-fees-and-costs",
+    "href": "/docs/market-vs-limit-orders",
+    "question": "需要查看哪些费用和成本？",
+    "answer": "确认前，请查看订单和充值方式所显示的费用。钱包、交易所和兑换服务可能另外收费。即使头寸获胜，买入价格和相关费用也会影响最终结果。",
+    "label": "阅读订单与执行指南"
+  },
+  {
+    "id": "faq-risks",
+    "href": "/docs/risks-and-limitations",
+    "question": "需要了解哪些风险？",
+    "answer": "失败头寸没有兑付金额。流动性、抵押品和技术依赖也会带来风险。难度头寸无法覆盖所有挖矿风险，比特币价格、电力成本和停机时间仍需分别考虑。",
+    "label": "阅读风险与限制"
+  }
+]
