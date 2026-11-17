@@ -1,6 +1,7 @@
 import { Gauge, ShieldWarning, Target } from '@phosphor-icons/react/dist/ssr'
 import { Suspense } from 'react'
 import { site } from '@/lib/site'
+import { AudienceDisclosure } from '../AudienceDisclosure'
 import { ApprovedLandingMotion } from './ApprovedLandingMotion'
 import { DifficultyImpactLoading, DifficultyImpactSection } from './DifficultyImpactSection'
 import { LandingHistory, LandingHistoryFallback } from './LandingHistory'
@@ -236,13 +237,7 @@ function Audience() {
             Trade Bitcoin difficulty as a measurable, Bitcoin-native underlying.
           </p>
           <a className="landing-copy-link" href="/for/institutions">See how →</a>
-          <button
-            className="audience-art-control"
-            type="button"
-            disabled
-            data-illustration="depth"
-            aria-label="Pause market depth animation"
-          >
+          <div className="audience-art-control">
             <svg
               className="audience-art audience-market-art"
               viewBox="0 0 208 184"
@@ -262,7 +257,6 @@ function Audience() {
                 strokeWidth="1.5"
               >
                 <rect
-                  data-audience="depth-left-1"
                   x="61"
                   y="27"
                   width={38}
@@ -270,7 +264,6 @@ function Audience() {
                   rx="3"
                 />
                 <rect
-                  data-audience="depth-left-2"
                   x="43"
                   y="49"
                   width={56}
@@ -278,7 +271,6 @@ function Audience() {
                   rx="3"
                 />
                 <rect
-                  data-audience="depth-left-3"
                   x="52"
                   y="71"
                   width={47}
@@ -286,7 +278,6 @@ function Audience() {
                   rx="3"
                 />
                 <rect
-                  data-audience="depth-left-4"
                   x="30"
                   y="93"
                   width={69}
@@ -294,7 +285,6 @@ function Audience() {
                   rx="3"
                 />
                 <rect
-                  data-audience="depth-left-5"
                   x="36"
                   y="115"
                   width={63}
@@ -302,7 +292,6 @@ function Audience() {
                   rx="3"
                 />
                 <rect
-                  data-audience="depth-left-6"
                   x="17"
                   y="137"
                   width={82}
@@ -318,7 +307,6 @@ function Audience() {
                 strokeWidth="1.5"
               >
                 <rect
-                  data-audience="depth-right-1"
                   x="109"
                   y="27"
                   width={79}
@@ -326,7 +314,6 @@ function Audience() {
                   rx="3"
                 />
                 <rect
-                  data-audience="depth-right-2"
                   x="109"
                   y="49"
                   width={59}
@@ -334,7 +321,6 @@ function Audience() {
                   rx="3"
                 />
                 <rect
-                  data-audience="depth-right-3"
                   x="109"
                   y="71"
                   width={70}
@@ -342,7 +328,6 @@ function Audience() {
                   rx="3"
                 />
                 <rect
-                  data-audience="depth-right-4"
                   x="109"
                   y="93"
                   width={44}
@@ -350,7 +335,6 @@ function Audience() {
                   rx="3"
                 />
                 <rect
-                  data-audience="depth-right-5"
                   x="109"
                   y="115"
                   width={51}
@@ -358,7 +342,6 @@ function Audience() {
                   rx="3"
                 />
                 <rect
-                  data-audience="depth-right-6"
                   x="109"
                   y="137"
                   width={31}
@@ -367,7 +350,6 @@ function Audience() {
                 />
               </g>
               <path
-                data-audience="depth-axis"
                 d="M104 18V158"
                 stroke="var(--df-chart-context)"
                 strokeWidth="1"
@@ -377,16 +359,8 @@ function Audience() {
                 stroke="var(--df-line-strong)"
                 strokeWidth="1"
               />
-              <path
-                data-audience="depth-scan"
-                d="M100 18H108"
-                stroke="var(--df-text)"
-                strokeWidth="2"
-                strokeLinecap="round"
-                opacity="0"
-              />
             </svg>
-          </button>
+          </div>
         </article>
         <article
           className="audience-panel audience-miners"
@@ -603,7 +577,10 @@ function Why() {
       <h2 className="why-heading" id="why-heading">
         Why Doefin
       </h2>
-      <div className="why-market-reference">
+      <AudienceDisclosure
+        className="why-market-reference"
+        summary="Hashrate and Bitcoin mining difficulty"
+      >
         <dl className="why-market-terms">
           <div>
             <dt><Gauge aria-hidden="true" /> Hashrate</dt>
@@ -618,7 +595,7 @@ function Why() {
           <p>These market terms give <strong>miners</strong> a public reference for hedging and <strong>professional investors</strong> a reference for trading a view.</p>
           <p className="why-market-risk"><ShieldWarning aria-hidden="true" /> <span>A difficulty position may offset some exposure, but it does not cover every mining risk.</span></p>
         </div>
-      </div>
+      </AudienceDisclosure>
       <div className="why-layout">
         <article
           className="why-panel why-drivers"
@@ -632,13 +609,7 @@ function Why() {
               Difficulty, block heights and timestamps verified directly from block headers.
             </p>
           </div>
-          <button
-            className="why-art-control why-driver-visual"
-            type="button"
-            disabled
-            data-illustration="oracle"
-            aria-label="Replay Bitcoin oracle illustration"
-          >
+          <div className="why-driver-visual">
             <svg
               className="why-driver-art"
               viewBox="0 0 560 230"
@@ -698,7 +669,6 @@ function Why() {
               <image href="/images/bitcoin.svg" x="53" y="57" width={40} height={40} aria-hidden="true" />
               <path d="M96 92h41" stroke="#344965" strokeWidth="1.1" />
               <path
-                data-why="price-signal"
                 d="m97 83 8-8 7 4 9-14 6 5 9-10"
                 stroke="#AEC2DE"
                 strokeWidth="1.8"
@@ -716,7 +686,6 @@ function Why() {
                 strokeWidth="1.2"
               />
               <rect
-                data-why="energy-frame"
                 x="43"
                 y="132"
                 width={108}
@@ -764,7 +733,6 @@ function Why() {
               />
               <g stroke="#C6DAFF" strokeWidth="1.3">
                 <rect
-                  data-why="core-1"
                   x="240"
                   y="87"
                   width={22}
@@ -772,7 +740,6 @@ function Why() {
                   rx="2"
                 />
                 <rect
-                  data-why="core-2"
                   x="274"
                   y="87"
                   width={22}
@@ -780,7 +747,6 @@ function Why() {
                   rx="2"
                 />
                 <rect
-                  data-why="core-3"
                   x="240"
                   y="122"
                   width={22}
@@ -788,7 +754,6 @@ function Why() {
                   rx="2"
                 />
                 <rect
-                  data-why="core-4"
                   x="274"
                   y="122"
                   width={22}
@@ -844,13 +809,11 @@ function Why() {
                 strokeLinecap="round"
               />
               <path
-                data-why="hashrate-area"
                 d="m386 148 12-8 11 4 12-18 10 5 13-16 11 6 13-12 12 6 13-17v65H386Z"
                 fill="#3475FE"
                 opacity=".09"
               />
               <path
-                data-why="hashrate-signal"
                 d="m386 148 12-8 11 4 12-18 10 5 13-16 11 6 13-12 12 6 13-17"
                 stroke="#7DAAFF"
                 strokeWidth="2.2"
@@ -858,7 +821,6 @@ function Why() {
                 strokeLinejoin="round"
               />
               <circle
-                data-why="hashrate-point"
                 cx="493"
                 cy="98"
                 r="3.4"
@@ -866,68 +828,8 @@ function Why() {
                 stroke="#A6C7FF"
                 strokeWidth="1.8"
               />
-              <path
-                data-why="input-btc-trace"
-                d="M152 73h23a12 12 0 0 1 12 12v18a12 12 0 0 0 12 12h13"
-                stroke="#C0D7FF"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-                opacity="0"
-              />
-              <path
-                data-why="input-energy-trace"
-                d="M152 159h23a12 12 0 0 0 12-12v-20a12 12 0 0 1 12-12h13"
-                stroke="#C0D7FF"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-                opacity="0"
-              />
-              <path
-                data-why="output-trace"
-                d="M324 115h42"
-                stroke="#C0D7FF"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-                opacity="0"
-              />
-              <circle
-                data-why="btc-packet"
-                cx="0"
-                cy="0"
-                r="2.5"
-                fill="#E2EDFF"
-                opacity="0"
-              />
-              <circle
-                data-why="energy-packet"
-                cx="0"
-                cy="0"
-                r="2.5"
-                fill="#E2EDFF"
-                opacity="0"
-              />
-              <circle
-                data-why="input-btc-ring"
-                cx="73"
-                cy="77"
-                r="22"
-                stroke="#F7931A"
-                strokeWidth="1.4"
-                opacity="0"
-              />
-              <rect
-                data-why="chip-outline"
-                x="212"
-                y="59"
-                width={112}
-                height={114}
-                rx="11"
-                stroke="#B3D0FF"
-                strokeWidth="1.8"
-                opacity="0"
-              />
             </svg>
-          </button>
+          </div>
         </article>
         <article
           className="why-panel why-side-panel why-views"
@@ -937,13 +839,7 @@ function Why() {
           <p className="why-description">
             Collateralisation limits trading-counterparty credit exposure. cbBTC issuer and custody risks remain.
           </p>
-          <button
-            className="why-art-control why-side-visual"
-            type="button"
-            disabled
-            data-illustration="collateral"
-            aria-label="Replay collateralised positions illustration"
-          >
+          <div className="why-side-visual">
             <svg
               className="why-side-art"
               viewBox="0 0 190 180"
@@ -990,7 +886,6 @@ function Why() {
                 strokeLinecap="round"
               />
               <path
-                data-why="history"
                 d="m30 126 13-13 13 6 15-21 17 8"
                 stroke="#AEC2DE"
                 strokeWidth="2.2"
@@ -998,7 +893,6 @@ function Why() {
                 strokeLinejoin="round"
               />
               <path
-                data-why="view-up"
                 d="M88 106C108 96 142 98 142 73"
                 stroke="#6DCB91"
                 strokeWidth="2.6"
@@ -1006,7 +900,6 @@ function Why() {
                 strokeLinejoin="round"
               />
               <path
-                data-why="view-up-head"
                 d="M135 80l7-7 7 7"
                 stroke="#6DCB91"
                 strokeWidth="2.6"
@@ -1014,7 +907,6 @@ function Why() {
                 strokeLinejoin="round"
               />
               <path
-                data-why="view-down"
                 d="M88 106C108 116 142 114 142 139"
                 stroke="#ED9077"
                 strokeWidth="2.6"
@@ -1022,7 +914,6 @@ function Why() {
                 strokeLinejoin="round"
               />
               <path
-                data-why="view-down-head"
                 d="M135 132l7 7 7-7"
                 stroke="#ED9077"
                 strokeWidth="2.6"
@@ -1031,24 +922,13 @@ function Why() {
               />
               <circle cx="88" cy="106" r="6.5" fill="#17263C" />
               <circle
-                data-why="origin"
                 cx="88"
                 cy="106"
                 r="3.8"
                 fill="#E0ECFF"
               />
-              <circle
-                data-why="origin-ring"
-                cx="88"
-                cy="106"
-                r="8"
-                fill="none"
-                stroke="#8FB4FF"
-                strokeWidth="1.5"
-                opacity="0"
-              />
             </svg>
-          </button>
+          </div>
         </article>
         <article
           className="why-panel why-side-panel why-bitcoin"
@@ -1058,13 +938,7 @@ function Why() {
             <span className="why-title-line">A Bitcoin-native</span>{' '}
             <span className="why-title-line">underlying:</span>
           </h3>
-          <button
-            className="why-art-control why-side-visual"
-            type="button"
-            disabled
-            data-illustration="bitcoin"
-            aria-label="Replay Bitcoin difficulty illustration"
-          >
+          <div className="why-side-visual">
             <svg
               className="why-side-art"
               viewBox="0 0 190 180"
@@ -1073,20 +947,18 @@ function Why() {
               focusable="false"
             >
               <path
-                data-why="block-link-1"
                 d="M57 43H75"
                 stroke="#8098BA"
                 strokeWidth="2.2"
                 strokeLinecap="round"
               />
               <path
-                data-why="block-link-2"
                 d="M115 43H133"
                 stroke="#8098BA"
                 strokeWidth="2.2"
                 strokeLinecap="round"
               />
-              <g data-why="block-1">
+              <g>
                 <rect
                   x="21"
                   y="20"
@@ -1114,7 +986,7 @@ function Why() {
                   <rect x="40" y="47" width={7} height={7} rx="1.2" />
                 </g>
               </g>
-              <g data-why="block-2">
+              <g>
                 <rect
                   x="79"
                   y="20"
@@ -1159,7 +1031,7 @@ function Why() {
                   </g>
                 </svg>
               </g>
-              <g data-why="block-3">
+              <g>
                 <rect
                   x="137"
                   y="20"
@@ -1188,7 +1060,6 @@ function Why() {
                 </g>
               </g>
               <path
-                data-why="output-connector"
                 d="M95 64V91"
                 stroke="#8AA5CC"
                 strokeWidth="1.8"
@@ -1201,9 +1072,8 @@ function Why() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
-              <g data-why="measurement">
+              <g>
                 <rect
-                  data-why="measurement-frame"
                   x="22"
                   y="102"
                   width={146}
@@ -1215,14 +1085,12 @@ function Why() {
                 />
                 <path d="M23 103H167V114H23Z" fill="#1E2F49" />
                 <path
-                  data-why="measurement-path"
                   d="M32 114H158"
                   stroke="#A8BEDC"
                   strokeWidth="1.8"
                   strokeLinecap="round"
                 />
                 <path
-                  data-why="measurement-ticks"
                   d="M32 114v18m16-18v10m16-10v18m16-18v10m31-10v10m16-10v18m16-18v10m15-10v18"
                   stroke="#8AA5CC"
                   strokeWidth="1.6"
@@ -1237,7 +1105,6 @@ function Why() {
                   fill="#3475FE"
                 />
                 <path
-                  data-why="measurement-marker"
                   d="M95 112v20"
                   stroke="#E0ECFF"
                   strokeWidth="2"
@@ -1250,9 +1117,8 @@ function Why() {
                   strokeLinecap="round"
                 />
               </g>
-              <g data-why="verification">
+              <g>
                 <circle
-                  data-why="verification-frame"
                   cx="153"
                   cy="151"
                   r="13"
@@ -1261,7 +1127,6 @@ function Why() {
                   strokeWidth="1.7"
                 />
                 <path
-                  data-why="verification-tick"
                   d="m147 151 4 4 8-9"
                   stroke="#A8C7FF"
                   strokeWidth="2.2"
@@ -1269,41 +1134,8 @@ function Why() {
                   strokeLinejoin="round"
                 />
               </g>
-              <path
-                data-why="block-links-trace"
-                d="M57 43H75M115 43H133"
-                stroke="#D0E1FC"
-                strokeWidth="2.6"
-                strokeLinecap="round"
-                opacity="0"
-              />
-              <path
-                data-why="output-trace"
-                d="M95 64V91"
-                stroke="#C0D7FF"
-                strokeWidth="2.4"
-                strokeLinecap="round"
-                opacity="0"
-              />
-              <path
-                data-why="measurement-trace"
-                d="M32 114H158"
-                stroke="#C0D7FF"
-                strokeWidth="2.4"
-                strokeLinecap="round"
-                opacity="0"
-              />
-              <path
-                data-why="verification-trace"
-                d="m147 151 4 4 8-9"
-                stroke="#E0ECFF"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                opacity="0"
-              />
             </svg>
-          </button>
+          </div>
         </article>
       </div>
     </section>
@@ -1322,13 +1154,7 @@ function How() {
       </h2>
       <ol className="how-flow" role="list">
         <li className="how-step">
-          <button
-            className="how-art-control"
-            type="button"
-            disabled
-            data-illustration="funding"
-            aria-label="Replay account funding illustration"
-          >
+          <div className="how-artwork">
             <svg
               className="how-art"
               viewBox="20 10 220 160"
@@ -1336,8 +1162,8 @@ function How() {
               aria-hidden="true"
               focusable="false"
             >
-              <g data-motion="scene">
-                <g data-motion="receipt">
+              <g>
+                <g>
                   <rect
                     x="112"
                     y="16"
@@ -1352,7 +1178,6 @@ function How() {
                     stroke="#526D92"
                     strokeWidth="1.5"
                     strokeLinecap="round"
-                    data-motion="receipt-lines"
                   />
                 </g>
                 <path
@@ -1362,13 +1187,12 @@ function How() {
                   strokeWidth="1.6"
                 />
                 <path
-                  data-motion="opening"
                   d="M49 70h86"
                   stroke="#4B6286"
                   strokeWidth="1.3"
                   strokeLinecap="round"
                 />
-                <g data-motion="coin">
+                <g>
                   <g transform="translate(64 25) scale(1.25)">
                     <g transform="translate(-289.60744,-341.50536)">
                       <g transform="matrix(0.61129216,0,0,0.61129216,170.80346,315.53734)">
@@ -1384,9 +1208,8 @@ function How() {
                     </g>
                   </g>
                 </g>
-                <g data-motion="wallet-front">
+                <g>
                   <rect
-                    data-motion="frame"
                     x="42"
                     y="79"
                     width={135}
@@ -1402,7 +1225,7 @@ function How() {
                     strokeOpacity=".18"
                     strokeLinecap="round"
                   />
-                  <g data-motion="latch">
+                  <g>
                     <rect
                       x="142"
                       y="106"
@@ -1431,37 +1254,15 @@ function How() {
                   />
                 </g>
                 <path
-                  data-motion="fund-route"
                   d="M211 62v34a24 24 0 0 1-24 24h-3m6-6-6 6 6 6"
                   stroke="#729FFF"
                   strokeWidth="1.8"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
-                <path
-                  data-motion="deposit-trail"
-                  d="M211 62v34a24 24 0 0 1-24 24h-3"
-                  fill="none"
-                  stroke="#C1D5FF"
-                  strokeWidth="2.3"
-                  strokeLinecap="round"
-                  opacity="0"
-                />
-                <rect
-                  data-motion="wallet-confirm"
-                  x="42"
-                  y="79"
-                  width={135}
-                  height={80}
-                  rx="12"
-                  fill="none"
-                  stroke="#82ADFF"
-                  strokeWidth="1.5"
-                  opacity="0"
-                />
               </g>
             </svg>
-          </button>
+          </div>
           <h3 className="how-step-title">
             <span className="how-number">1.</span>{' '}
             <span>
@@ -1472,18 +1273,9 @@ function How() {
           <p className="how-step-description">
             Buy Yes or No depending on where you expect Bitcoin difficulty to be at expiry.
           </p>
-          <span className="how-handoff" aria-hidden="true">
-            <i />
-          </span>
         </li>
         <li className="how-step">
-          <button
-            className="how-art-control"
-            type="button"
-            disabled
-            data-illustration="position"
-            aria-label="Replay position choice illustration"
-          >
+          <div className="how-artwork">
             <svg
               className="how-art"
               viewBox="20 10 220 160"
@@ -1491,7 +1283,7 @@ function How() {
               aria-hidden="true"
               focusable="false"
             >
-              <g data-motion="scene">
+              <g>
                 <rect
                   x="62"
                   y="17"
@@ -1500,10 +1292,8 @@ function How() {
                   rx="12"
                   fill="#10192A"
                   stroke="#324562"
-                  data-motion="back"
                 />
                 <rect
-                  data-motion="frame"
                   x="52"
                   y="25"
                   width={150}
@@ -1524,9 +1314,8 @@ function How() {
                   strokeLinecap="round"
                 />
                 <path d="M53 58h148" stroke="#3B4E6D" />
-                <g data-motion="above-card">
+                <g>
                   <rect
-                    data-motion="above"
                     x="63"
                     y="69"
                     width={128}
@@ -1536,7 +1325,6 @@ function How() {
                     stroke="#3D765F"
                   />
                   <path
-                    data-motion="above-arrow"
                     d="M83 93V79m-6 6 6-6 6 6"
                     stroke="#8BDCB4"
                     strokeWidth="2"
@@ -1564,9 +1352,8 @@ function How() {
                     strokeLinecap="round"
                   />
                 </g>
-                <g data-motion="below-card">
+                <g>
                   <rect
-                    data-motion="below"
                     x="63"
                     y="119"
                     width={128}
@@ -1576,7 +1363,6 @@ function How() {
                     stroke="#7B4D60"
                   />
                   <path
-                    data-motion="below-arrow"
                     d="M83 129v14m-6-6 6 6 6-6"
                     stroke="#F3A4AA"
                     strokeWidth="2"
@@ -1605,7 +1391,6 @@ function How() {
                   />
                 </g>
                 <path
-                  data-motion="threshold"
                   d="M33 111h188"
                   stroke="#879AB8"
                   strokeDasharray="3 5"
@@ -1615,18 +1400,9 @@ function How() {
                   stroke="#879AB8"
                   strokeLinecap="round"
                 />
-                <path
-                  data-motion="threshold-scan"
-                  d="M33 111h188"
-                  fill="none"
-                  stroke="#D3E1F8"
-                  strokeWidth="1.7"
-                  strokeLinecap="round"
-                  opacity="0"
-                />
               </g>
             </svg>
-          </button>
+          </div>
           <h3 className="how-step-title">
             <span className="how-number">2.</span>{' '}
             <span>
@@ -1638,18 +1414,9 @@ function How() {
           <p className="how-step-description">
             Deposit cbBTC directly or convert native BTC using SwapKit (integrated).
           </p>
-          <span className="how-handoff" aria-hidden="true">
-            <i />
-          </span>
         </li>
         <li className="how-step">
-          <button
-            className="how-art-control"
-            type="button"
-            disabled
-            data-illustration="settlement"
-            aria-label="Replay trade or settlement illustration"
-          >
+          <div className="how-artwork">
             <svg
               className="how-art"
               viewBox="20 10 220 160"
@@ -1657,8 +1424,8 @@ function How() {
               aria-hidden="true"
               focusable="false"
             >
-              <g data-motion="scene">
-                <g data-motion="source">
+              <g>
+                <g>
                   <rect
                     x="35"
                     y="41"
@@ -1669,7 +1436,6 @@ function How() {
                     stroke="#324562"
                   />
                   <rect
-                    data-motion="frame"
                     x="28"
                     y="48"
                     width={69}
@@ -1713,29 +1479,26 @@ function How() {
                   />
                 </g>
                 <path
-                  data-motion="trunk"
                   d="M97 94h16"
                   stroke="#6F8DB5"
                   strokeWidth="1.6"
                   strokeLinecap="round"
                 />
                 <path
-                  data-motion="route"
                   d="M113 94c8 0 13-5 13-13V65c0-8 5-13 13-13h6"
                   stroke="#6F8DB5"
                   strokeWidth="1.6"
                   strokeLinecap="round"
                 />
                 <path
-                  data-motion="route"
                   d="M113 94c8 0 13 5 13 13v15c0 8 5 13 13 13h5"
                   stroke="#6F8DB5"
                   strokeWidth="1.6"
                   strokeLinecap="round"
                 />
                 <circle cx="113" cy="94" r="2.5" fill="#A3BDDF" />
-                <g data-motion="trade">
-                  <g data-motion="trade-contract">
+                <g>
+                  <g>
                     <path
                       d="M150 29h12l10 10v31a5 5 0 0 1-5 5h-17a5 5 0 0 1-5-5V34a5 5 0 0 1 5-5Z"
                       fill="#1B2B45"
@@ -1762,7 +1525,6 @@ function How() {
                     />
                   </g>
                   <path
-                    data-motion="exchange-forward"
                     d="M178 38h19m-5-5 5 5-5 5"
                     stroke="#ED9077"
                     strokeWidth="2"
@@ -1770,14 +1532,13 @@ function How() {
                     strokeLinejoin="round"
                   />
                   <path
-                    data-motion="exchange-return"
                     d="M197 67h-19m5-5-5 5 5 5"
                     stroke="#6DCB91"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
-                  <g data-motion="trade-coin">
+                  <g>
                     <g transform="translate(200 35) scale(.85)">
                       <g transform="translate(-289.60744,-341.50536)">
                         <g transform="matrix(0.61129216,0,0,0.61129216,170.80346,315.53734)">
@@ -1793,27 +1554,9 @@ function How() {
                       </g>
                     </g>
                   </g>
-                  <path
-                    data-motion="exchange-forward-trace"
-                    d="M178 38h19m-5-5 5 5-5 5"
-                    stroke="#F0B7A7"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    opacity="0"
-                  />
-                  <path
-                    data-motion="exchange-return-trace"
-                    d="M197 67h-19m5-5-5 5 5 5"
-                    stroke="#A7DEBC"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    opacity="0"
-                  />
                 </g>
-                <g data-motion="settle">
-                  <g data-motion="settle-contract">
+                <g>
+                  <g>
                     <rect
                       x="178"
                       y="101"
@@ -1848,24 +1591,14 @@ function How() {
                       strokeWidth=".8"
                     />
                     <path
-                      data-motion="check"
                       d="m183 143 8 8 18-20"
                       stroke="#A9C6FF"
                       strokeWidth="2.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                    <path
-                      data-motion="check-trace"
-                      d="m183 143 8 8 18-20"
-                      stroke="#E0EBFF"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      opacity="0"
-                    />
                   </g>
-                  <g data-motion="expiry-hourglass">
+                  <g>
                     <path
                       d="M145 114h23v8c0 6-5 9-8 13 3 4 8 7 8 13v8h-23v-8c0-6 5-9 8-13-3-4-8-7-8-13v-8Z"
                       fill="#132139"
@@ -1874,22 +1607,12 @@ function How() {
                       strokeLinejoin="round"
                     />
                     <path
-                      data-motion="sand-top"
                       d="M149 120h15v3c0 3-5 6-7.5 9-2.5-3-7.5-6-7.5-9v-3Z"
                       fill="#729FFF"
                     />
                     <path
-                      data-motion="sand-bottom"
                       d="m156.5 143 7.5 7v2h-15v-2l7.5-7Z"
                       fill="#729FFF"
-                    />
-                    <path
-                      data-motion="sand-stream"
-                      d="M156.5 134v9"
-                      stroke="#B8D2FF"
-                      strokeWidth="1.4"
-                      strokeLinecap="round"
-                      opacity="0"
                     />
                     <path
                       d="M142 113h29m-29 44h29"
@@ -1899,41 +1622,9 @@ function How() {
                     />
                   </g>
                 </g>
-                <path
-                  data-motion="trade-trace"
-                  d="M97 94h16c8 0 13-5 13-13V65c0-8 5-13 13-13h6"
-                  stroke="#A5C5FF"
-                  strokeWidth="2.3"
-                  strokeLinecap="round"
-                  opacity="0"
-                />
-                <path
-                  data-motion="settle-trace"
-                  d="M97 94h16c8 0 13 5 13 13v15c0 8 5 13 13 13h5"
-                  stroke="#A5C5FF"
-                  strokeWidth="2.3"
-                  strokeLinecap="round"
-                  opacity="0"
-                />
-                <circle
-                  data-motion="packet-trade"
-                  cx="0"
-                  cy="0"
-                  r="2.7"
-                  fill="#DBE8FF"
-                  opacity="0"
-                />
-                <circle
-                  data-motion="packet-settle"
-                  cx="0"
-                  cy="0"
-                  r="2.7"
-                  fill="#DBE8FF"
-                  opacity="0"
-                />
               </g>
             </svg>
-          </button>
+          </div>
           <h3 className="how-step-title">
             <span className="how-number">3.</span> <span>Trade or settle</span>
           </h3>

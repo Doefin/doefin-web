@@ -99,33 +99,42 @@ function SliderHint({ hint }: { hint: InputHint }) {
 }
 
 export function Slider({
-  id, label, unit, value, min, max, step, onChange, format, hint,
+  id, label, unit, value, min, max, step, onChange, format, hint, trackHalf, normalizeValue,
 }: {
   id: string; label: string; unit: string; value: number
   min: number; max: number; step: number
   onChange: (n: number) => void
   format?: (n: number) => string
   hint?: InputHint
+  trackHalf?: 'left' | 'right'
+  normalizeValue?: (value: number) => number
 }) {
   const precise = useContext(PreciseInputs)
   const isV3 = useSiteVersion() === 'v3'
+  function commitExactValue(input: HTMLInputElement) {
+    const n = input.valueAsNumber
+    const clamped = Number.isFinite(n) ? Math.min(max, Math.max(min, n)) : value
+    const next = normalizeValue ? normalizeValue(clamped) : clamped
+    input.value = String(next)
+    onChange(next)
+  }
   if (isV3) return <div className={styles.field}>
     <label htmlFor={id} className="block text-xs font-semibold leading-relaxed text-subtle">{label}</label>
     <div className={styles.valueControl}>
       <input aria-label={label + ': exact value'} type="number" min={min} max={max} step={step}
-        key={value} defaultValue={value} onBlur={e => {
-          const n = e.target.valueAsNumber
-          const next = Number.isFinite(n) ? Math.min(max, Math.max(min, n)) : value
-          e.target.value = String(next)
-          onChange(next)
-        }} onKeyDown={e => { if (e.key === 'Enter') e.currentTarget.blur() }}
+        key={value} defaultValue={value} onBlur={e => commitExactValue(e.currentTarget)}
+        onKeyDown={e => { if (e.key === 'Enter') e.currentTarget.blur() }}
         className="tabular min-w-0 flex-1 bg-transparent py-2 text-2xl font-bold tracking-tight text-body" />
       <span className="max-w-[45%] text-right text-[11px] leading-snug text-subtle">{unit}</span>
     </div>
-    <input id={id} aria-label={label} type="range" min={min} max={max} step={step} value={value}
+    <input id={id} aria-label={label} aria-valuetext={trackHalf ? `${value}%` : undefined}
+      type="range" min={min} max={max} step={step} value={value} data-track-half={trackHalf}
       onChange={e => onChange(Number(e.target.value))} className={styles.range}
       style={{ '--fill': `${(value - min) / (max - min) * 100}%` } as React.CSSProperties} />
-    <div className="tabular flex justify-between gap-3 text-[10px] text-subtle"><span>{min.toLocaleString('en-US')}</span><span>{max.toLocaleString('en-US')}</span></div>
+    <div className={`tabular flex justify-between gap-3 text-[10px] text-subtle ${trackHalf ? styles.rangeHalfScale : ''}`}>
+      {trackHalf !== 'right' && <span>{min.toLocaleString('en-US')}{trackHalf && '%'}</span>}
+      <span>{max.toLocaleString('en-US')}{trackHalf && '%'}</span>
+    </div>
     {hint ? <details className={styles.guide}>
       <summary className="cursor-pointer text-[11px] font-semibold text-highlight">Input guide</summary>
       <div className="mt-2 space-y-2 text-xs leading-relaxed text-subtle"><p>{hint.means}</p><p><strong className="text-body">Where to find yours: </strong>{hint.whereToFind}</p><p><strong className="text-body">Sample and range: </strong>{hint.typical}</p></div>
@@ -146,12 +155,8 @@ export function Slider({
       />
       {precise ? <div className="mt-1 flex items-center gap-2 text-xs text-subtle">
         <input aria-label={label + ': exact value'} type="number" min={min} max={max} step={step}
-          key={value} defaultValue={value} onBlur={e => {
-            const n = e.target.valueAsNumber
-            const next = Number.isFinite(n) ? Math.min(max, Math.max(min, n)) : value
-            e.target.value = String(next)
-            onChange(next)
-          }} onKeyDown={e => { if (e.key === 'Enter') e.currentTarget.blur() }}
+          key={value} defaultValue={value} onBlur={e => commitExactValue(e.currentTarget)}
+          onKeyDown={e => { if (e.key === 'Enter') e.currentTarget.blur() }}
           className="tabular w-28 rounded-lg border border-white/15 bg-ink px-3 py-2 text-sm text-body" />
         <span>{unit}</span>
       </div> : null}
@@ -275,13 +280,17 @@ export function PreviewNote({ children }: { children: React.ReactNode }) {
 }
 
 /** Keeps tool state in the URL so a scenario can be pasted into a conversation. */
-export function useUrlState<T extends Record<string, number>>(defaults: T, bounds?: ToolBounds<T>) {
+export function useUrlState<T extends Record<string, number>>(
+  defaults: T,
+  bounds?: ToolBounds<T>,
+  normalize?: (values: T) => T,
+) {
   const [v, setV] = useState<T>(defaults)
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
     const { values, found } = readToolQuery(defaults, new URLSearchParams(window.location.search), bounds)
-    if (found) setV(values)
+    if (found) setV(normalize ? normalize(values) : values)
     setReady(true)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

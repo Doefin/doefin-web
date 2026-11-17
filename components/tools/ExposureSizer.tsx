@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
-import { calculateExposure, exposureBounds, exposureDefaults } from '@/lib/exposure'
+import { calculateExposure, exposureBounds, exposureDefaults, normalizeExposureInputs, snapDifficultyChange } from '@/lib/exposure'
 import { useCalculatorMeasurement } from '@/components/v3/Measurement'
 import { useSiteVersion } from '@/components/routing/SiteVersionContext'
 import { ScenarioBrief } from '@/components/v3/ScenarioBrief'
@@ -18,6 +18,7 @@ import {
   useUrlState,
 } from './toolkit'
 import { hintFor, presetsFor, resultHintFor } from '@/content/tool-micro'
+import styles from './workbench.module.css'
 
 /**
  * What a difficulty move is worth to a fleet.
@@ -33,7 +34,7 @@ const BOUNDS = exposureBounds
 
 export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boolean; nextStep?: React.ReactNode }) {
   const isV3 = useSiteVersion() === 'v3'
-  const [v, writeV] = useUrlState(DEFAULTS, enhanced || isV3 ? BOUNDS : undefined)
+  const [v, writeV] = useUrlState(DEFAULTS, enhanced || isV3 ? BOUNDS : undefined, normalizeExposureInputs)
   const presets = presetsFor(SLUG)
   const out = useMemo(() => calculateExposure(v), [v])
 
@@ -85,12 +86,14 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
                     onChange={n => setV({ ...v, diffT: n })} />
                   <p className="mt-2 text-xs leading-relaxed text-subtle">Your chosen model input. The 127.48T sample default is not live difficulty.</p>
                 </div>
-<Slider id="low" label="Difficulty change · easier case" unit="%" value={v.low} min={-15} max={0} step={0.1}
-                    onChange={(n) => setV({ ...v, low: n })} format={(n) => Math.abs(n).toFixed(1)}
-                hint={hintFor(SLUG, "Best case: difficulty falls by")} />
-<Slider id="high" label="Difficulty change · harder case" unit="%" value={v.high} min={0} max={15} step={0.1}
-                    onChange={(n) => setV({ ...v, high: n })} format={(n) => n.toFixed(1)}
-                hint={hintFor(SLUG, "Worst case: difficulty rises by")} />
+                <div className={styles.rangePair} role="group" aria-label="Difficulty change">
+                  <Slider id="low" label="Easier case" unit="%" value={v.low} min={-15} max={0} step={0.1}
+                    trackHalf="left" normalizeValue={snapDifficultyChange} onChange={n => setV({ ...v, low: n })}
+                    hint={hintFor(SLUG, "Best case: difficulty falls by")} />
+                  <Slider id="high" label="Harder case" unit="%" value={v.high} min={0} max={15} step={0.1}
+                    trackHalf="right" normalizeValue={snapDifficultyChange} onChange={n => setV({ ...v, high: n })}
+                    hint={hintFor(SLUG, "Worst case: difficulty rises by")} />
+                </div>
               </InputSection>
             </> : <>
             <h2 className="text-lg font-bold tracking-[-0.015em]">Your fleet</h2>
@@ -118,9 +121,11 @@ export function ExposureSizer({ enhanced = false, nextStep }: { enhanced?: boole
                     <p className="mt-2 text-xs leading-relaxed text-subtle">Your chosen model input. The 127.48T sample default is not live difficulty.</p>
                   </div> : null}
                   <Slider id="low" label="Best case: difficulty falls by" unit="%" value={v.low} min={-15} max={0} step={0.1}
+                    normalizeValue={snapDifficultyChange}
                     onChange={(n) => setV({ ...v, low: n })} format={(n) => Math.abs(n).toFixed(1)}
                 hint={hintFor(SLUG, "Best case: difficulty falls by")} />
                   <Slider id="high" label="Worst case: difficulty rises by" unit="%" value={v.high} min={0} max={15} step={0.1}
+                    normalizeValue={snapDifficultyChange}
                     onChange={(n) => setV({ ...v, high: n })} format={(n) => n.toFixed(1)}
                 hint={hintFor(SLUG, "Worst case: difficulty rises by")} />
                 </div>
