@@ -72,7 +72,7 @@ try{
  assert(!optional.includes('href="https://doefin.com/docs/smart-contracts'))
  assert(optional.includes('href="https://doefin.com/docs/key-terms?ref=a#underlying-and-market"'))
  assert(optional.includes('data-docs-fallback="missing"'))
- assert(optional.includes('data-docs-fallback="unavailable"'),'Outside shell retains safe unknown state')
+ assert(optional.includes('href="/docs/smart-contracts"'),'Unknown publication status preserves requested destination')
  assert(optional.includes('href="https://external.example/docs/smart-contracts?ref=a#missing-section"'))
  // A healthy validated full Docs snapshot is authoritative inside its layout,
  // even if the independent lightweight shell manifest fails or is malformed.
@@ -84,11 +84,11 @@ try{
   const article=overview.match(/<article id="docs-content"[^>]*>([\s\S]*?)<\/article>/)[1]
   assert(!article.includes('data-docs-fallback="unavailable"'))
   assert(article.includes('href="/docs/bitcoin-mining-difficulty"'))
-  assert(overview.includes('data-docs-fallback="unavailable"'),'Global shell remains unknown')
+  assert(overview.includes('href="/docs/smart-contracts"'),'Global shell keeps intended links when manifest is unavailable')
  }
  fixture=structuredClone(original);fixture.docsStatus=503;await save()
  await get('/docs',500);await get('/docs/overview',500);await get('/llms.txt',500)
- for(const path of ['/privacy','/product','/blog']){const body=dom(await get(path));assert(body.includes('data-docs-fallback="unavailable"'));assert(body.includes('Browse documentation'))}
+ for(const path of ['/privacy','/product','/blog']){const body=dom(await get(path));assert(body.includes('href="/docs/smart-contracts"'));assert(!body.includes('data-docs-fallback="unavailable"'))}
  fixture=structuredClone(original);fixture.docs[0].sections=null;await save()
  await get('/docs/overview',500);await get('/privacy');await get('/product')
  fixture=structuredClone(original);fixture.docs=[];await save();assert(dom(await get('/docs')).includes('No documentation is currently published'));await get('/docs/overview',404)
