@@ -1,7 +1,12 @@
+// The trading app (doefin-frontend). Amplify sets NEXT_PUBLIC_TRADING_APP_URL per
+// environment: https://app.doefin.com in production, https://app.staging.doefin.com in
+// staging. doefin.com itself is this site.
+const tradingAppOrigin = new URL(process.env.NEXT_PUBLIC_TRADING_APP_URL || 'https://app.doefin.com').origin
+
 export const site = {
   name: 'Doefin',
   url: 'https://doefin.com',
-  appUrl: 'https://www.doefin.com/app/markets',
+  appUrl: `${tradingAppOrigin}/app/markets`,
   tagline: 'Trade and hedge Bitcoin hashrate exposure',
   description:
     'Doefin provides markets for trading and hedging Bitcoin hashrate exposure. Documentation, calculators and illustrative examples on mining difficulty.',

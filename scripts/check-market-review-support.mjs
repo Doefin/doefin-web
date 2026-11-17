@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import { GET } from '../app/api/v3/market-review-support/route.ts'
 const original = globalThis.fetch
 let count=0
+const expectedUrl=`${new URL(process.env.NEXT_PUBLIC_TRADING_APP_URL || 'https://app.doefin.com').origin}/api/market-review-support`
 try {
   for (const test of [
     { response: () => Response.json({version:1}), expected:true },
@@ -10,7 +11,7 @@ try {
     { response: () => new Response('<html>legacy app</html>'), expected:false },
     { response: () => { throw new Error('offline') }, expected:false },
   ]) {
-    globalThis.fetch = async (url, options) => {assert.equal(url,'https://www.doefin.com/api/market-review-support');assert.equal(options.cache,'no-store');assert.deepEqual(options.headers,{Accept:'application/json'});return test.response()}
+    globalThis.fetch = async (url, options) => {assert.equal(url,expectedUrl);assert.equal(options.cache,'no-store');assert.deepEqual(options.headers,{Accept:'application/json'});return test.response()}
     const response=await GET()
     assert.equal(response.headers.get('cache-control'),'no-store')
     assert.deepEqual(await response.json(),{supported:test.expected})

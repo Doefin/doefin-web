@@ -24,7 +24,9 @@ export function marketIdentity(market: PublicMarket): string {
   return JSON.stringify([market.id, market.marketId, market.currency, market.targetBlock, market.settlementBlock, market.difficultyTrillions])
 }
 export function samePublicMarket(a: PublicMarket, b: PublicMarket): boolean { return marketIdentity(a) === marketIdentity(b) }
-export function marketReviewUrl(market: PublicMarket, side: MarketSide, origin = 'https://www.doefin.com'): string {
+/** The trading app the review handoff opens in (NEXT_PUBLIC_TRADING_APP_URL, set per environment). */
+export const tradingAppOrigin = new URL(process.env.NEXT_PUBLIC_TRADING_APP_URL || 'https://app.doefin.com').origin
+export function marketReviewUrl(market: PublicMarket, side: MarketSide, origin = tradingAppOrigin): string {
   if (side !== 'yes' && side !== 'no') throw new Error('Invalid market side.')
   const base = new URL(origin)
   if (base.protocol !== 'https:' && !(base.protocol === 'http:' && ['localhost', '127.0.0.1'].includes(base.hostname))) throw new Error('Invalid application origin.')
