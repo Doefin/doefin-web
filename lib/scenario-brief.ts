@@ -1,4 +1,4 @@
-import { calculateExposure, exposureBounds, exposureDefaults, type ExposureInputs } from './exposure'
+import { calculateExposure, exposureBounds, exposureDefaults, normalizeExposureInputs, type ExposureInputs } from './exposure'
 import { readToolQuery, toolQuery } from './tool-url-state'
 
 export const scenarioAssumptions = [
@@ -32,7 +32,7 @@ export function normalizeScenarioContext(context: Partial<ScenarioContext> = {})
 }
 
 export function restoreExposureScenario(query: URLSearchParams): ExposureInputs {
-  return readToolQuery(exposureDefaults, query, exposureBounds).values
+  return normalizeExposureInputs(readToolQuery(exposureDefaults, query, exposureBounds).values)
 }
 
 function checkedInputs(inputs: ExposureInputs): ExposureInputs {
@@ -43,7 +43,7 @@ function checkedInputs(inputs: ExposureInputs): ExposureInputs {
       throw new Error(`Scenario input ${key} is outside the calculator range`)
     }
   }
-  return copy
+  return normalizeExposureInputs(copy)
 }
 
 function safeWebUrl(value: string): string {
