@@ -1,3 +1,6 @@
+// The trading app (doefin-frontend), set per environment by Amplify.
+const tradingAppOrigin = new URL(process.env.NEXT_PUBLIC_TRADING_APP_URL || 'https://app.doefin.com').origin
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -8,6 +11,9 @@ const nextConfig = {
   skipTrailingSlashRedirect: true,
   async redirects() {
     return [
+      // Invite links (/?ref=CODE) were issued when doefin.com served the trading app,
+      // and the app's root reads the code. Next passes the query string through.
+      { source: '/', has: [{ type: 'query', key: 'ref' }], destination: `${tradingAppOrigin}/`, permanent: false },
       { source: '/v3', destination: '/', permanent: true },
       { source: '/v3/:path*', destination: '/:path*', permanent: true },
     ]
