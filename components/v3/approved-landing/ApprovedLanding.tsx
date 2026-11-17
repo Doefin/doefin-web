@@ -369,18 +369,18 @@ function Audience() {
               <path
                 data-audience="depth-axis"
                 d="M104 18V158"
-                stroke="#8A99B3"
+                stroke="var(--df-chart-context)"
                 strokeWidth="1"
               />
               <path
                 d="M98 18H110M98 158H110M7 158H191M4 25v-7h9m176 0h9v7M4 148v7h9m176 0h9v-7"
-                stroke="#3D4B64"
+                stroke="var(--df-line-strong)"
                 strokeWidth="1"
               />
               <path
                 data-audience="depth-scan"
                 d="M100 18H108"
-                stroke="#CAD4E3"
+                stroke="var(--df-text)"
                 strokeWidth="2"
                 strokeLinecap="round"
                 opacity="0"
@@ -957,7 +957,7 @@ function Why() {
         >
           <h3 className="why-title" id="why-views-title">Fully collateralised:</h3>
           <p className="why-description">
-            No counterparty credit risk.
+            Collateralisation limits trading-counterparty credit exposure. cbBTC issuer and custody risks remain.
           </p>
           <button
             className="why-art-control why-side-visual"
