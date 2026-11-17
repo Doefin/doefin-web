@@ -22,9 +22,11 @@ export default function SiteLink({ href, ...props }: ComponentProps<typeof NextL
           const [pathname, hash] = versionedPath(href.pathname, version).split('#')
           return { ...href, pathname, ...(hash ? { hash: '#' + hash } : {}) }
         })()
+  // An unavailable manifest cannot establish that a destination is missing.
+  // Keep its URL and label so a transient lookup failure does not reroute navigation.
   const guideState=toolGuideLinkState(destination,guideSlugs)
-  if(guideState === 'missing' || guideState === 'unavailable') return <NextLink href="/academy#guides" {...props} children="Browse calculator guides" aria-label={guideState === 'missing' ? 'Browse calculator guides (requested guide unavailable)' : 'Browse calculator guides (publication status temporarily unavailable)'} data-guides-fallback={guideState} />
+  if(guideState === 'missing') return <NextLink href="/academy#guides" {...props} children="Browse calculator guides" aria-label="Browse calculator guides (requested guide unavailable)" data-guides-fallback={guideState} />
   const state = docsLinkState(destination, docSlugs)
-  const fallback = state === 'missing' || state === 'unavailable'
-  return <NextLink href={fallback ? '/docs' : destination} {...props} {...(fallback ? {children:'Browse documentation', 'aria-label':state === 'unavailable' ? 'Browse documentation (guide status temporarily unavailable)' : 'Browse documentation (requested guide unavailable)', title:state === 'unavailable' ? 'Guide publication status is temporarily unavailable.' : 'This guide is not currently published.', 'data-docs-fallback':state} : {})} />
+  const fallback = state === 'missing'
+  return <NextLink href={fallback ? '/docs' : destination} {...props} {...(fallback ? {children:'Browse documentation', 'aria-label':'Browse documentation (requested guide unavailable)', title:'This guide is not currently published.', 'data-docs-fallback':state} : {})} />
 }

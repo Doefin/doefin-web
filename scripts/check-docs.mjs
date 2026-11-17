@@ -47,9 +47,11 @@ assert.equal(docsLinkState('/docs/overview',null),'unavailable');assert.equal(do
 // Exercise the actual SiteLink and actual NextLink server DOM, including URL
 // objects (the CMS field itself intentionally stores validated string URLs).
 let publication=[]
+let guidePublication
+const {toolGuideLinkState}=loadTypescript('lib/tool-guide-links.ts',{'./docs-links':loadTypescript('lib/docs-links.ts',{'./site':loadTypescript('lib/site.ts'),'./versioning':loadTypescript('lib/versioning.ts')})})
 const module={exports:{}}
 const componentCode=ts.transpileModule(readFileSync('components/routing/SiteLink.tsx','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText
-const dependencies={'@/lib/tool-guide-links':{toolGuideLinkState:()=>undefined},'./GuidesPublicationContext':{usePublishedGuides:()=>undefined},'next/link':{default:NextLink},'react/jsx-runtime':jsxRuntime,'@/lib/versioning':loadTypescript('lib/versioning.ts'),'./SiteVersionContext':{useSiteVersion:()=> 'v3'},'./DocsPublicationContext':{usePublishedDocs:()=>publication},'@/lib/docs-links':{docsLinkState}}
+const dependencies={'@/lib/tool-guide-links':{toolGuideLinkState},'./GuidesPublicationContext':{usePublishedGuides:()=>guidePublication},'next/link':{default:NextLink},'react/jsx-runtime':jsxRuntime,'@/lib/versioning':loadTypescript('lib/versioning.ts'),'./SiteVersionContext':{useSiteVersion:()=> 'v3'},'./DocsPublicationContext':{usePublishedDocs:()=>publication},'@/lib/docs-links':{docsLinkState}}
 new Function('require','module','exports',componentCode)(name=>{assert(Object.hasOwn(dependencies,name),name);return dependencies[name]},module,module.exports)
 const actualSiteLink=module.exports.default
 const destinations=[
@@ -66,10 +68,17 @@ for(const href of destinations){
  for(const [state,slugs] of [['published',['smart-contracts']],['missing',[]],['unavailable',null]]){
   publication=slugs;assert.equal(docsLinkState(href,slugs),state)
   const html=renderToStaticMarkup(React.createElement(actualSiteLink,{href,children:'Original guide label'}))
-  if(state==='published'){assert(html.includes('smart-contracts?ref=a#keep'));assert(html.includes('Original guide label'));assert(!html.includes('data-docs-fallback'))}
+  if(state==='published' || state==='unavailable'){assert(html.includes('smart-contracts?ref=a#keep'));assert(html.includes('Original guide label'));assert(!html.includes('data-docs-fallback'))}
   else {assert(html.includes('href="/docs"'));assert(html.includes(`data-docs-fallback="${state}"`));assert(html.includes('Browse documentation'));assert(html.includes('aria-label='))}
  }
 }
+for(const slugs of [undefined,null,['hosting-effective-rate'],[]]){
+ guidePublication=slugs
+ const html=renderToStaticMarkup(React.createElement(actualSiteLink,{href:'/academy/guides/hosting-effective-rate?ref=nav#settings',children:'Hosting guide'}))
+ if(Array.isArray(slugs)&&slugs.length===0){assert(html.includes('href="/academy#guides"'));assert(html.includes('Browse calculator guides'))}
+ else{assert(html.includes('/academy/guides/hosting-effective-rate?ref=nav#settings'));assert(html.includes('Hosting guide'));assert(!html.includes('data-guides-fallback'))}
+}
+guidePublication=undefined
 for(const href of ['https://external.example/docs/smart-contracts?ref=a#keep','https://doefin.com.evil.example/docs/smart-contracts',{protocol:'https:',hostname:'external.example',pathname:'/docs/smart-contracts',query:{ref:'a'},hash:'#keep'}]){
  publication=[];assert.equal(docsLinkState(href,publication),undefined)
  const html=renderToStaticMarkup(React.createElement(actualSiteLink,{href,children:'External guide'}));assert(html.includes('External guide'));assert(!html.includes('data-docs-fallback'))
