@@ -33,6 +33,8 @@ export function HowItWorksDemo() {
   const [deposit, setDeposit] = useState<DepositMethod | null>(null)
   const [depositForm, setDepositForm] = useState(false)
   const timers = useRef<ReturnType<typeof setTimeout>[]>([])
+  const amountInputRef = useRef<HTMLInputElement>(null)
+  const depositOptionsRef = useRef<HTMLDivElement>(null)
 
   function clearTimers() {
     timers.current.forEach(clearTimeout)
@@ -76,7 +78,18 @@ export function HowItWorksDemo() {
     clearTimers()
     setDeposit(method)
     setDepositForm(false)
-    if (method === 'extension') timers.current = [setTimeout(() => setDepositForm(true), 450)]
+    if (method === 'extension') {
+      timers.current = [setTimeout(() => {
+        setDepositForm(true)
+        amountInputRef.current?.focus()
+      }, 450)]
+    }
+  }
+
+  function cancelDeposit() {
+    clearTimers()
+    setDepositForm(false)
+    depositOptionsRef.current?.querySelector<HTMLButtonElement>('[data-method="extension"]')?.focus()
   }
 
   return (
@@ -104,18 +117,18 @@ export function HowItWorksDemo() {
 
         <li className={styles.step}>
           <div className={`${styles.stage} ${styles.depositStage}`} data-form-open={depositForm || undefined}>
-            <div className={styles.depositOptions} aria-hidden={depositForm}>
+            <div ref={depositOptionsRef} className={styles.depositOptions} aria-hidden={depositForm} inert={depositForm}>
               <p className={styles.panelTitle}>Deposit</p>
               <DepositOption method="transfer" title="Transfer Crypto" description="Any wallet · Show QR address" selected={deposit === 'transfer'} onClick={chooseDeposit} />
               <DepositOption method="bitcoin" title="Deposit Bitcoin" description="BTC to cbBTC on Base · Coming soon" selected={false} onClick={chooseDeposit} disabled />
               <DepositOption method="extension" title="From Extension" description="Connected wallet · Direct transfer" selected={deposit === 'extension'} onClick={chooseDeposit} />
             </div>
-            <div className={styles.depositForm} aria-hidden={!depositForm}>
+            <div className={styles.depositForm} aria-hidden={!depositForm} inert={!depositForm}>
               <p className={styles.panelTitle}>Deposit from extension</p>
               <label className={styles.amountLabel} htmlFor="how-deposit-amount">Amount · wallet balance: cbBTC</label>
-              <div className={styles.amountInput}><input id="how-deposit-amount" placeholder="0.0 cbBTC" inputMode="decimal" readOnly /><button type="button">Max</button></div>
+              <div className={styles.amountInput}><input ref={amountInputRef} id="how-deposit-amount" placeholder="0.0 cbBTC" inputMode="decimal" readOnly /><button type="button">Max</button></div>
               <p className={styles.gasHint}>You will pay a small network fee from your wallet.</p>
-              <div className={styles.formActions}><button type="button">Cancel</button><button type="button" disabled>Deposit</button></div>
+              <div className={styles.formActions}><button type="button" onClick={cancelDeposit}>Cancel</button><button type="button" disabled>Deposit</button></div>
             </div>
           </div>
           <div className={styles.copy}><span>02</span><h3>Fund your account and trade</h3><p>Deposit cbBTC directly or convert native BTC using SwapKit (integrated).</p></div>
@@ -138,7 +151,7 @@ export function HowItWorksDemo() {
 }
 
 function DepositOption({ method, title, description, selected, disabled, onClick }: { method: DepositMethod; title: string; description: string; selected: boolean; disabled?: boolean; onClick: (method: DepositMethod) => void }) {
-  return <button type="button" className={styles.depositOption} aria-pressed={selected} disabled={disabled} onClick={() => onClick(method)}><span className={styles.depositIcon}><DepositIcon method={method} /></span><span><strong>{title}</strong><small>{description}</small></span><span className={styles.chevron} aria-hidden="true">›</span></button>
+  return <button type="button" data-method={method} className={styles.depositOption} aria-pressed={selected} disabled={disabled} onClick={() => onClick(method)}><span className={styles.depositIcon}><DepositIcon method={method} /></span><span><strong>{title}</strong><small>{description}</small></span><span className={styles.chevron} aria-hidden="true">›</span></button>
 }
 
 function Outcome({ side, price, chance, active = false }: { side: 'Yes' | 'No'; price: string; chance: string; active?: boolean }) {
