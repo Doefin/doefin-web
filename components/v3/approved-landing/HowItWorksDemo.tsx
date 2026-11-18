@@ -126,7 +126,7 @@ export function HowItWorksDemo() {
             <div className={styles.depositForm} aria-hidden={!depositForm} inert={!depositForm}>
               <p className={styles.panelTitle}>Deposit from extension</p>
               <label className={styles.amountLabel} htmlFor="how-deposit-amount">Amount</label>
-              <div className={styles.amountInput}><input ref={amountInputRef} id="how-deposit-amount" placeholder="0.0 cbBTC" inputMode="decimal" readOnly /><button type="button">Max</button></div>
+              <div className={styles.amountInput}><input ref={amountInputRef} id="how-deposit-amount" value="0.5 cbBTC" inputMode="decimal" readOnly /><button type="button">Max</button></div>
               <p className={styles.gasHint}>You will pay a small network fee from your wallet.</p>
               <div className={styles.formActions}><button type="button" onClick={cancelDeposit}>Cancel</button><button type="button" disabled>Deposit</button></div>
             </div>
