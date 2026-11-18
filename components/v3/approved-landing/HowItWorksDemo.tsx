@@ -137,8 +137,8 @@ export function HowItWorksDemo() {
         <li className={styles.step}>
           <div className={`${styles.stage} ${styles.tradeStage}`}>
             <div className={styles.tradeBar}><div className={styles.orderToggle}><button type="button" aria-pressed="true">Market<span>Instant, best available price</span></button><button type="button">Limit<span>Set price, waits for a match</span></button></div></div>
-            <div className={styles.outcomes} role="group" aria-label="Trade outcome"><Outcome side="Yes" price="0.62" chance="62" active /><Outcome side="No" price="0.35" chance="35" /></div>
-            <div className={styles.orderForm}><div className={styles.orderLabel}><label htmlFor="how-sell-amount">How many shares do you want to sell?</label></div><div className={styles.orderInput}><input id="how-sell-amount" placeholder="0.00" inputMode="decimal" readOnly /><span>shares</span></div><button type="button" className={styles.sellButton}>Sell Yes</button></div>
+            <div className={styles.outcomes} role="group" aria-label="Trade outcome"><Outcome side="Yes" price="0.62" chance="62" active /><Outcome side="No" price="0.41" chance="41" /></div>
+            <div className={styles.orderForm}><div className={styles.orderLabel}><label htmlFor="how-sell-amount">How many shares do you want to sell?</label></div><div className={styles.orderInput}><input id="how-sell-amount" value="0.5" inputMode="decimal" readOnly /><span>shares</span></div><button type="button" className={styles.sellButton}>Sell Yes</button></div>
           </div>
           <div className={styles.copy}><span>03</span><h3>Trade or settle</h3><p>Sell before settlement or hold until the market resolves.</p></div>
         </li>
