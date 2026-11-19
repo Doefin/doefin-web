@@ -1,6 +1,17 @@
 export const exposureDefaults = { eh: 1, epochs: 4, diffT: 127.48, low: -2.4, high: 7, fees: 0.05, price: 64000 }
 export type ExposureInputs = typeof exposureDefaults
 export const exposureBounds = { eh: [0.01, 30], epochs: [1, 13], diffT: [1, 1000], low: [-15, 0], high: [0, 15], fees: [0, 0.5], price: [20000, 200000] } as const
+
+// Match the range inputs' 0.1% step, including ties toward the higher value.
+export function snapDifficultyChange(value: number): number {
+  const rounded = Math.round(value * 10) / 10
+  return rounded === 0 ? 0 : rounded
+}
+
+export function normalizeExposureInputs(inputs: ExposureInputs): ExposureInputs {
+  return { ...inputs, low: snapDifficultyChange(inputs.low), high: snapDifficultyChange(inputs.high) }
+}
+
 export const networkEHFromDifficulty = (diffT: number) => (diffT * 1e12 * 2 ** 32) / 600 / 1e18
 
 /** Fixed-duration sensitivity; time is expressed as 2016 target block intervals per epoch. */

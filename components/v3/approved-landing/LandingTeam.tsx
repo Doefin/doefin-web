@@ -6,13 +6,13 @@ const team = [
   {
     name: 'Matteo Spinosa',
     role: 'Founder and CEO',
-    description: '18 years of institutional and TradFi in tier 1 banks. Finance Degree at Bocconi University (Milan).',
+    description: '20 years in investment banking, specialising in derivatives structuring and financing. Previously at JPMorgan, Bank of America Merrill Lynch and Nomura.',
     portrait: 'matteo-spinosa.webp',
   },
   {
     name: 'Reza Jahankohan',
-    role: 'Software engineer',
-    description: 'Experienced software engineer with over 10 years of expertise, including 5 in blockchain; strong background in backend development across industries such as gaming, fintech, security, and AI.',
+    role: 'CTO',
+    description: 'Software engineer with 12 years of expertise. Background in blockchain and backend development across fintech, AI and gaming.',
     portrait: 'reza-jahankohan.webp',
   },
   {
@@ -24,38 +24,8 @@ const team = [
   {
     name: 'Dusan Sekulic',
     role: 'Backend developer',
-    description: '15+ years in software engineering, specializing in Bitcoin infrastructure, blockchain protocols, and scalable backend systems. Extensive experience in Go, AWS, and distributed architectures across fintech, blockchain, and enterprise applications.',
+    description: '15+ years in software engineering, specialising in Bitcoin infrastructure, blockchain protocols and scalable backend systems.',
     portrait: 'dusan-sekulic.jpg',
-  },
-  {
-    name: 'Eamonn Gashier',
-    role: 'Derivatives consultant',
-    description: 'Following 15 years in Derivatives trading started career in DeFi: Founder of Block Scholes. Member of the UCL Centre for Blockchchain Technologies.',
-    portrait: 'eamonn-gashier.webp',
-  },
-  {
-    name: 'Raffaella Tenconi',
-    role: 'Regulatory and policy adviser',
-    description: 'Member of the Bretton Woods Committee in the Digital Finance working group, 21 years experience as economist. Msc Global Market Economics at The London School of Economics.',
-    portrait: 'raffaella-tenconi.webp',
-  },
-  {
-    name: 'Block Scholes',
-    role: 'Technology consultant',
-    description: 'Institutional-grade analytics, data & research platform.',
-    portrait: 'block-scholes.webp',
-  },
-  {
-    name: 'Ataf Ahmed',
-    role: 'Adviser',
-    description: 'CEO of Graphene Investments, a Web3, blockchain & crypto focused company. Experience in private equity and asset management. PhD from the University of Cambridge.',
-    portrait: 'ataf-ahmed.webp',
-  },
-  {
-    name: 'Dariia Vasylieva',
-    role: 'Adviser',
-    description: 'Founder of FD Capital & GetVision. Co-Founder EWA Accelerator. Ex COO/CIO First Stage Labs (TON)',
-    portrait: 'dariia-vasylieva.webp',
   },
 ]
 

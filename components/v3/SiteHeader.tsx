@@ -147,7 +147,10 @@ export function SiteHeader({ pathname, commentary }: { pathname: string; comment
       className={styles.header}
       data-publication-surface={commentary ? 'commentary' : 'product'}
       onBlur={event => {
-        if (mobileOpen && !event.currentTarget.contains(event.relatedTarget)) setMobileOpen(false)
+        // Touch browsers can blur to null before dispatching a link click.
+        // Outside pointer presses already close the drawer; only a known
+        // keyboard focus destination should close it here.
+        if (mobileOpen && event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) setMobileOpen(false)
       }}
       onKeyDown={event => {
         if (event.key !== 'Escape' || !mobileOpen) return
@@ -173,7 +176,7 @@ export function SiteHeader({ pathname, commentary }: { pathname: string; comment
                     if (event.pointerType === 'mouse') closeAfterHover()
                   }}
                   onBlur={event => {
-                    if (!event.currentTarget.contains(event.relatedTarget)) {
+                    if (event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) {
                       setOpenMenu(menu => menu?.id === group.id ? null : menu)
                     }
                   }}

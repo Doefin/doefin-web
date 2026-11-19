@@ -1,8 +1,7 @@
-import { Archive, ArrowRight, CaretDown, ChartBar, ChartLine, Clock, DownloadSimple, Info, Table } from '@phosphor-icons/react/dist/ssr'
+import { Archive, ArrowRight, CaretDown, ChartBar, ChartLine, Clock, Info, Table } from '@phosphor-icons/react/dist/ssr'
 import { researchCapture, researchRows } from '@/lib/research-data'
 import { getLandingHistory, type HistoryPoint } from '@/lib/server/landing-history'
 import { HistoryChart } from './HistoryChart'
-import { directionOf } from './direction'
 
 const BLOCKS_PER_EPOCH = 2016
 const PLOT_LEFT = 62
@@ -63,7 +62,7 @@ export async function LandingHistory() {
 
 export function LandingHistoryFallback() {
   return <section className="landing-market-context" id="mining-history" aria-labelledby="landing-market-title">
-    <h2 id="landing-market-title">Difficulty moves in both directions</h2>
+    <h2 id="landing-market-title">Bitcoin hashrate moves. Trade your view.</h2>
     <p className="landing-history-intro" role="status">Loading Bitcoin block history</p>
   </section>
 }
@@ -99,16 +98,14 @@ function LandingHistoryContent({ source }: { source: Awaited<ReturnType<typeof g
   const rateTicks = [rateCeiling, (rateCeiling + rateFloor) / 2, rateFloor].map(rate => ({ y: rateY(rate), label: String(rate) }))
   const first = rows[0].date
   const last = rows[rows.length - 1].date
-  const csv = source ? 'height,date_utc,difficulty_change_percent,estimated_average_hashrate_eh_s\n' +
-    rows.map(row => [row.height, row.date, row.changePct, row.averageEH].join(',')).join('\n') + '\n' : null
 
   return <section className="landing-market-context" id="mining-history" aria-labelledby="landing-market-title">
     <p className="landing-impact-eyebrow landing-history-eyebrow"><Archive aria-hidden="true" /> {source ? 'Observed adjustments · Doefin API' : 'Observed adjustments · Frozen capture'}</p>
-    <h2 id="landing-market-title">Difficulty moves in both directions</h2>
+    <h2 id="landing-market-title">Bitcoin hashrate moves. Trade your view.</h2>
     <p className="landing-history-intro">{rows.length} recorded adjustments from <time dateTime={first}>{dateLabel.format(new Date(first))}</time> to <time dateTime={last}>{dateLabel.format(new Date(last))}</time>.</p>
     <dl className="landing-history-stats">
-      <div><dt>Increases</dt><dd className="landing-signed-value" data-direction="up">{changes.filter(change => change > 0).length}</dd></div>
-      <div><dt>Decreases</dt><dd className="landing-signed-value" data-direction="down">{changes.filter(change => change < 0).length}</dd></div>
+      <div><dt>Increases</dt><dd className="landing-signed-value">{changes.filter(change => change > 0).length}</dd></div>
+      <div><dt>Decreases</dt><dd className="landing-signed-value">{changes.filter(change => change < 0).length}</dd></div>
       <div><dt>Mean absolute change</dt><dd>{(changes.reduce((sum, change) => sum + Math.abs(change), 0) / changes.length).toFixed(2)}%</dd></div>
     </dl>
     <div className="landing-history-grid">
@@ -116,9 +113,9 @@ function LandingHistoryContent({ source }: { source: Awaited<ReturnType<typeof g
         <figcaption>
           <strong><ChartBar aria-hidden="true" /> Difficulty adjustments</strong>
           <span>
-            <span className="landing-signed-value" data-direction={directionOf(minChange)}>{percent(minChange)}</span>
+            <span className="landing-signed-value">{percent(minChange)}</span>
             {' to '}
-            <span className="landing-signed-value" data-direction={directionOf(maxChange)}>{percent(maxChange)}</span>
+            <span className="landing-signed-value">{percent(maxChange)}</span>
             {' across the period.'}
           </span>
         </figcaption>
@@ -146,7 +143,7 @@ function LandingHistoryContent({ source }: { source: Awaited<ReturnType<typeof g
     </div>
     <div className="landing-history-provenance">
       <div className="landing-history-source">
-        <span><Archive aria-hidden="true" /> <a href={source ? 'https://api.doefin.com/docs' : researchCapture.sourceUrl}>{source ? 'Doefin Bitcoin block history' : 'mempool.space difficulty archive'}</a></span>
+        {!source && <span>Source: <a href={researchCapture.sourceUrl}>mempool.space</a> · Single source</span>}
         <span><Clock aria-hidden="true" /> {source
           ? <>Retrieved{' '}<time dateTime={source.retrievedAt}>{dateLabel.format(new Date(source.retrievedAt))}, {source.retrievedAt.slice(11, 16)} UTC</time></>
           : <>Captured{' '}<time dateTime={researchCapture.capturedAt}>{dateLabel.format(new Date(researchCapture.capturedAt))}</time></>}
@@ -171,12 +168,11 @@ function LandingHistoryContent({ source }: { source: Awaited<ReturnType<typeof g
       <div className="landing-history-table-scroll" role="region" aria-label="Observed values and estimates table" tabIndex={0}>
         <table>
           <thead><tr><th scope="col">Adjustment date (UTC)</th><th scope="col">Difficulty change</th><th scope="col">Average hashrate estimate</th></tr></thead>
-          <tbody>{periods.map(({ row, date, change }) => <tr key={row.height}><th scope="row"><time dateTime={row.date}>{date}</time></th><td className="landing-signed-value" data-direction={directionOf(row.changePct)}>{change}</td><td>{row.averageEH === null ? 'Unavailable' : row.averageEH.toFixed(0) + ' EH/s'}</td></tr>)}</tbody>
+          <tbody>{periods.map(({ row, date, change }) => <tr key={row.height}><th scope="row"><time dateTime={row.date}>{date}</time></th><td className="landing-signed-value">{change}</td><td>{row.averageEH === null ? 'Unavailable' : row.averageEH.toFixed(0) + ' EH/s'}</td></tr>)}</tbody>
         </table>
       </div>
     </details>
     <div className="landing-market-links">
-      <a href={csv ? 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv) : '/api/v3/research/v1/dataset?format=csv'} download={csv ? 'doefin-mining-history.csv' : undefined}><DownloadSimple aria-hidden="true" /> Download source dataset</a>
       <a href="/data/difficulty">Review difficulty data <ArrowRight aria-hidden="true" /></a>
       <a href="/data/hashrate">Review network hashrate <ArrowRight aria-hidden="true" /></a>
     </div>

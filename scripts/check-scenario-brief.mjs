@@ -44,14 +44,19 @@ check('Default calculation reference and unchanged production', () => {
   assert(brief.scenarios[1].production.includes(out.base.toFixed(3)))
 })
 
-check('Custom inputs keep decimals and exactly match the calculator', () => {
-  const inputs = { eh: 2.345, epochs: 3, diffT: 141.123, low: -3.25, high: 8.75, fees: 0.123, price: 73456.789 }
-  const brief = createScenarioBrief(inputs, date, scenarioUrl(inputs, origin))
+check('Difficulty changes snap to slider precision and other custom inputs keep decimals', () => {
+  const raw = { eh: 2.345, epochs: 3, diffT: 141.123, low: -4.25, high: 8.35, fees: 0.123, price: 73456.789 }
+  const inputs = { ...raw, low: -4.2, high: 8.4 }
+  const brief = createScenarioBrief(raw, date, scenarioUrl(raw, origin))
   assert.deepEqual(brief.inputs, inputs)
   assert.deepEqual(brief.results, calculateExposure(inputs))
   assert.equal(brief.inputRows.find(row => row[0] === 'Bitcoin price')[1], '$73,456.789 / BTC')
   assert.equal(brief.inputRows.find(row => row[0] === 'Fleet hashrate')[1], '2.345 EH/s')
-  assert.deepEqual(restoreExposureScenario(new URL(brief.scenarioUrl).searchParams), inputs)
+  const saved = new URL(brief.scenarioUrl).searchParams
+  assert.equal(saved.get('low'), '-4.2')
+  assert.equal(saved.get('high'), '8.4')
+  assert.deepEqual(restoreExposureScenario(saved), inputs)
+  assert.deepEqual(restoreExposureScenario(new URLSearchParams(toolQuery(exposureDefaults, raw))), inputs)
 })
 
 check('Every boundary combination is finite and shareable without changing results', () => {

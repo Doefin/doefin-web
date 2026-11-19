@@ -31,7 +31,8 @@ export function contentPath(href: DocsHref): string | undefined {
   const path = new URL(pathname,canonical)
   return versionedPath(path.pathname + path.search + path.hash)
 }
-/** Missing or unknown individual guides have a clearly labeled hub fallback.
+/** Confirmed missing guides have a clearly labeled hub fallback.
+ * An unavailable publication lookup preserves the requested destination.
  * Published destinations remain untouched, including their original query/hash. */
 export function docsLinkState(href: DocsHref, slugs: readonly string[] | null | undefined): 'published' | 'missing' | 'unavailable' | undefined {
   const path = contentPath(href)

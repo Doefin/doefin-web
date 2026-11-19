@@ -47,7 +47,7 @@ try{
   fixture=structuredClone(original);fixture.guides=[];await save();assert(dom(await get('/academy')).includes('No calculator guides are currently published'));await get('/academy/guides/difficulty-exposure',404)
   fixture=structuredClone(original);fixture.guidesStatus=503;await save();await get('/academy/guides/hosting-effective-rate',500)
   assert(dom(await get('/tools/hosting-effective-rate')).includes('Calculator guides are temporarily unavailable'))
-  assert(dom(await get('/tools')).includes('data-guides-fallback="unavailable"'));await get('/product');await get('/docs/overview')
+  assert(dom(await get('/tools')).includes('href="/academy/guides/hosting-effective-rate"'));await get('/product');await get('/docs/overview')
   fixture=structuredClone(original);fixture.guides[0].article.publishedAt='2026-02-30';await save();await get('/academy/guides/hosting-effective-rate',500)
   fixture=structuredClone(original);await save();await get('/academy/guides/hosting-effective-rate');await get('/academy/guides/not-published',404)
   if(process.argv.includes('--checks')) {

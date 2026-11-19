@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, type PointerEvent, type ReactNode } from 'react'
-import { directionOf } from './direction'
 
 export type HistoryChartPoint = {
   x: number
@@ -33,7 +32,7 @@ export function HistoryChart({ title, points, children }: {
       <div className="landing-history-tooltip" role="status" aria-atomic="true">
         {active && <>
           <span>{active.date}</span>
-          <strong className="landing-signed-value" data-direction={active.change === undefined ? undefined : directionOf(active.change)}>
+          <strong className="landing-signed-value">
             {active.value}
           </strong>
           {active.change !== undefined && <span>{active.change > 0 ? 'Increase' : active.change < 0 ? 'Decrease' : 'No change'}</span>}
