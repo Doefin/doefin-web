@@ -6,7 +6,7 @@ const tradingAppOrigin = new URL(process.env.NEXT_PUBLIC_TRADING_APP_URL || 'htt
 export const site = {
   name: 'Doefin',
   url: 'https://doefin.com',
-  appUrl: `${tradingAppOrigin}/app/markets`,
+  appUrl: `${tradingAppOrigin}/markets`,
   tagline: 'Trade and hedge Bitcoin hashrate exposure',
   description:
     'Doefin provides markets for trading and hedging Bitcoin hashrate exposure. Documentation, calculators and illustrative examples on mining difficulty.',

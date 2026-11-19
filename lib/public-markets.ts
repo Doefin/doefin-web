@@ -30,7 +30,7 @@ export function marketReviewUrl(market: PublicMarket, side: MarketSide, origin =
   if (side !== 'yes' && side !== 'no') throw new Error('Invalid market side.')
   const base = new URL(origin)
   if (base.protocol !== 'https:' && !(base.protocol === 'http:' && ['localhost', '127.0.0.1'].includes(base.hostname))) throw new Error('Invalid application origin.')
-  const url = new URL(`/app/market-review/${encodeURIComponent(market.currency)}/${market.targetBlock}/${market.difficultyTrillions}`, base.origin)
+  const url = new URL(`/market-review/${encodeURIComponent(market.currency)}/${market.targetBlock}/${market.difficultyTrillions}`, base.origin)
   url.searchParams.set('marketId', String(market.marketId))
   url.searchParams.set('side', side)
   return url.href
