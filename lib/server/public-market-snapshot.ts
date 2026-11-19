@@ -1,7 +1,7 @@
 import { normalizePublicSnapshot } from '@/lib/public-markets'
 
 /** Fixed public GET endpoints: caller-controlled upstream URLs are never accepted. */
-const ORIGIN = 'https://www.doefin.com'
+const ORIGIN = new URL(process.env.NEXT_PUBLIC_TRADING_APP_URL || 'https://app.doefin.com').origin // the trading app, set per environment
 export class PublicMarketDataUnavailable extends Error {
   constructor(readonly status: number) { super(status === 451 ? 'Market data is unavailable in this location.' : 'The application data service is unavailable.') }
 }
