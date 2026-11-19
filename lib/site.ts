@@ -1,7 +1,7 @@
 // The trading app (doefin-frontend). Amplify sets NEXT_PUBLIC_TRADING_APP_URL per
 // environment: https://app.doefin.com in production, https://app.staging.doefin.com in
 // staging. doefin.com itself is this site.
-const tradingAppOrigin = new URL(process.env.NEXT_PUBLIC_TRADING_APP_URL || 'https://app.doefin.com').origin
+export const tradingAppOrigin = new URL(process.env.NEXT_PUBLIC_TRADING_APP_URL || 'https://app.doefin.com').origin
 
 export const site = {
   name: 'Doefin',
