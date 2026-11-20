@@ -1,5 +1,7 @@
 'use client'
 
+import type { LandingCopy } from '@/dictionaries'
+import { formatMessage, languages, type Language } from '@/lib/languages'
 import { ArrowRight, ArrowsClockwise, Calculator, CaretDown, ClockCounterClockwise, Pulse, SlidersHorizontal, WarningCircle } from '@phosphor-icons/react/dist/ssr'
 import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import {
@@ -27,26 +29,23 @@ function adjustmentLabel(value: number) {
   return (value < 0 ? '−' : value > 0 ? '+' : '') + Math.abs(value) + '%'
 }
 
-function retrievedLabel(value: string) {
+function retrievedLabel(value: string, locale: string) {
   const date = new Date(value)
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-  const time = [date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()]
-    .map(part => String(part).padStart(2, '0')).join(':')
-  return date.getUTCDate() + ' ' + months[date.getUTCMonth()] + ' ' + date.getUTCFullYear() + ', ' + time + ' UTC'
+  const day = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(date)
+  return day + ', ' + value.slice(11, 19) + ' UTC'
 }
 
-function ImpactLayout({ children }: { children: ReactNode }) {
+function ImpactLayout({ children, copy }: { children: ReactNode; copy: LandingCopy }) {
   return (
     <section className="landing-impact" id="difficulty-impact" aria-labelledby="impact-title">
       <div className="landing-impact-copy">
-        <p className="landing-impact-eyebrow">Difficulty &amp; production</p>
-        <h2 id="impact-title">How difficulty changes BTC production</h2>
+        <p className="landing-impact-eyebrow">{copy.difficultyProduction}</p>
+        <h2 id="impact-title">{copy.howDifficultyChangesBtcProduction}</h2>
         <p className="landing-impact-intro">
-          At the same miner hashrate, higher difficulty means less expected BTC
-          production, all else equal. Move the slider to see the effect.
+          {copy.atTheSameMinerHashrate}
         </p>
         <a className="landing-impact-link" href="/tools/difficulty-exposure">
-          Open the full difficulty calculator
+          {copy.openTheFullDifficultyCalculator}
           <ArrowRight aria-hidden="true" />
         </a>
       </div>
@@ -55,21 +54,24 @@ function ImpactLayout({ children }: { children: ReactNode }) {
   )
 }
 
-export function DifficultyImpactLoading() {
+export function DifficultyImpactLoading({ copy }: { copy: LandingCopy }) {
   return (
-    <ImpactLayout>
+    <ImpactLayout copy={copy}>
       <div className="landing-impact-empty" role="status" aria-busy="true">
-        <p className="landing-impact-empty-title">Loading the network baseline</p>
-        <p>Retrieving mining difficulty from the Doefin API.</p>
+        <p className="landing-impact-empty-title">{copy.loadingTheNetworkBaseline}</p>
+        <p>{copy.retrievingMiningDifficultyFromThe}</p>
       </div>
     </ImpactLayout>
   )
 }
 
-export function DifficultyImpact({ initialResult, initialNow }: {
+export function DifficultyImpact({ initialResult, initialNow, copy, language }: {
+  copy: LandingCopy
+  language: Language
   initialResult: DifficultyImpactResult
   initialNow: number
 }) {
+  const locale = languages[language].tag
   const [change, setChange] = useState(0)
   const [baseline, setBaseline] = useState<BaselineState>(() => initialResult.status === 'available'
     ? { snapshot: initialResult.snapshot, problem: null }
@@ -135,43 +137,43 @@ export function DifficultyImpact({ initialResult, initialNow }: {
   if (!snapshot || !scenario) {
     const restricted = baseline.problem === 'region-restricted'
     return (
-      <ImpactLayout>
+      <ImpactLayout copy={copy}>
         <div className="landing-impact-empty">
           <div role="status" aria-live="polite">
             <p className="landing-impact-empty-title">
               <WarningCircle className="landing-impact-icon" aria-hidden="true" />
-              {restricted ? 'Network data is unavailable here' : 'The network baseline is unavailable'}
+              {restricted ? copy.networkDataIsUnavailableHere : copy.theNetworkBaselineIsUnavailable}
             </p>
             <p>{restricted
-              ? 'The Doefin API does not provide this data in your region. Production estimates are unavailable.'
-              : 'The Doefin API could not provide a valid difficulty reading. Retry to calculate expected production.'}</p>
+              ? copy.theDoefinApiDoesNot
+              : copy.theDoefinApiCouldNot}</p>
           </div>
           <button className="landing-impact-refresh" type="button" onClick={() => { void refresh() }} disabled={refreshing}>
             <ArrowsClockwise className="landing-impact-icon" aria-hidden="true" />
-            {refreshing ? 'Retrying…' : 'Retry network data'}
+            {refreshing ? copy.retrying : copy.retryNetworkData}
           </button>
-          <p className="landing-impact-note">Source: Doefin API. No production estimate is shown without a network baseline.</p>
+          <p className="landing-impact-note">{copy.sourceDoefinApiNoProduction}</p>
         </div>
       </ImpactLayout>
     )
   }
 
   return (
-    <ImpactLayout>
+    <ImpactLayout copy={copy}>
       <div className="landing-impact-network" data-state={stale ? 'stale' : 'available'}>
         <div role="status" aria-live="polite">
           <p className="landing-impact-network-title">
             {stale ? <ClockCounterClockwise className="landing-impact-icon" aria-hidden="true" /> : <Pulse className="landing-impact-icon" aria-hidden="true" />}
-            {stale ? 'Last available baseline' : 'Network baseline'}
+            {stale ? copy.lastAvailableBaseline : copy.networkBaseline}
           </p>
-          <p>{(snapshot.difficulty / 1_000_000_000_000).toFixed(2)}T difficulty</p>
+          <p>{formatMessage(copy.tDifficulty, { value: (snapshot.difficulty / 1_000_000_000_000).toFixed(2) })}</p>
           {stale && <p>{baseline.problem
-            ? 'Refresh unavailable. The figures below use the last available reading.'
-            : 'Refresh to check the latest network baseline.'}</p>}
+            ? copy.refreshUnavailableTheFiguresBelow
+            : copy.refreshToCheckTheLatest}</p>}
         </div>
         <button className="landing-impact-refresh" type="button" onClick={() => { void refresh() }} disabled={refreshing}>
           <ArrowsClockwise className="landing-impact-icon" aria-hidden="true" />
-          {refreshing ? 'Refreshing…' : 'Refresh'}
+          {refreshing ? copy.refreshing : copy.refresh}
         </button>
       </div>
 
@@ -179,7 +181,7 @@ export function DifficultyImpact({ initialResult, initialNow }: {
         <div className="landing-impact-slider-head">
           <label htmlFor="landing-difficulty-slider">
             <SlidersHorizontal className="landing-impact-icon" aria-hidden="true" />
-            Difficulty adjustment
+            {copy.difficultyAdjustment}
           </label>
           <output className="landing-signed-value" data-direction={directionOf(change)} htmlFor="landing-difficulty-slider" aria-live="off">
             {adjustmentLabel(change)}
@@ -199,7 +201,7 @@ export function DifficultyImpact({ initialResult, initialNow }: {
             max={DIFFICULTY_IMPACT_MAX_CHANGE}
             step="1"
             value={change}
-            aria-valuetext={change === 0 ? 'No change from baseline' : Math.abs(change) + ' percent ' + (change > 0 ? 'increase' : 'decrease') + ' from baseline'}
+            aria-valuetext={change === 0 ? copy.noChangeFromBaseline : formatMessage(change > 0 ? copy.percentIncreaseFromBaseline : copy.percentDecreaseFromBaseline, { value: Math.abs(change) })}
             onChange={event => setChange(Number(event.target.value))}
           />
         </div>
@@ -210,57 +212,60 @@ export function DifficultyImpact({ initialResult, initialNow }: {
 
       <div className="landing-impact-result">
         <div className="landing-impact-result-heading">
-          <p>Expected BTC production</p>
-          <p className="landing-impact-status"><span>Estimate</span></p>
+          <p>{copy.expectedBtcProduction}</p>
+          <p className="landing-impact-status"><span>{copy.estimate}</span></p>
         </div>
         <div className="landing-impact-reading" aria-live="polite" aria-atomic="true">
           <p className="landing-impact-amount">{scenario.production.toFixed(6)} <span>BTC</span></p>
           <p className="landing-impact-change">
             <strong className="landing-signed-value" data-direction={directionOf(scenario.productionChange)}>
               {scenario.productionChange === 0
-                ? 'Same as baseline'
-                : `About ${Math.abs(scenario.productionChange).toFixed(1)}% ${scenario.productionChange > 0 ? 'more' : 'less'}`}
+                ? copy.sameAsBaseline
+                : formatMessage(scenario.productionChange > 0 ? copy.aboutMore : copy.aboutLess, { value: Math.abs(scenario.productionChange).toFixed(1) })}
             </strong>
-            {scenario.productionChange !== 0 && <span>than baseline</span>}
+            {scenario.productionChange !== 0 && <span>{copy.thanBaseline}</span>}
           </p>
         </div>
-        <div className="landing-impact-comparison" role="group" aria-label="Expected BTC production comparison">
+        <div className="landing-impact-comparison" role="group" aria-label={copy.expectedBtcProductionComparison}>
           <div className="landing-impact-comparison-row">
-            <div><span>Baseline</span><span>{scenario.baselineProduction.toFixed(6)} BTC</span></div>
+            <div><span>{copy.baseline}</span><span>{scenario.baselineProduction.toFixed(6)} BTC</span></div>
             <div className="landing-impact-bar" aria-hidden="true"><span style={{ transform: `scaleX(${scenario.maxProduction > 0 ? scenario.baselineProduction / scenario.maxProduction : 0})` }} /></div>
           </div>
           <div className="landing-impact-comparison-row landing-impact-comparison-selected">
-            <div><span>Selected scenario</span><span>{scenario.production.toFixed(6)} BTC</span></div>
+            <div><span>{copy.selectedScenario}</span><span>{scenario.production.toFixed(6)} BTC</span></div>
             <div className="landing-impact-bar" aria-hidden="true"><span style={{ transform: `scaleX(${scenario.maxProduction > 0 ? scenario.production / scenario.maxProduction : 0})` }} /></div>
           </div>
         </div>
         <p className="landing-impact-assumption">
-          Example miner: {DIFFICULTY_IMPACT_HASHRATE_PH} PH/s for {DIFFICULTY_IMPACT_PERIOD_HOURS} hours at 100% uptime.
-          Block subsidy only; transaction fees and pool fees excluded. Difficulty and subsidy stay fixed during each scenario.
+          {formatMessage(copy.exampleMinerPhSFor, { hashrate: DIFFICULTY_IMPACT_HASHRATE_PH, hours: DIFFICULTY_IMPACT_PERIOD_HOURS })}
         </p>
         <dl className="landing-impact-stats">
-          <div><dt>Scenario difficulty</dt><dd>{scenario.difficultyTrillions.toFixed(2)}T</dd></div>
-          <div><dt>Implied network hashrate</dt><dd>{scenario.impliedHashrateEh.toFixed(0)} <span>EH/s</span></dd></div>
+          <div><dt>{copy.scenarioDifficulty}</dt><dd>{scenario.difficultyTrillions.toFixed(2)}T</dd></div>
+          <div><dt>{copy.impliedNetworkHashrate}</dt><dd>{scenario.impliedHashrateEh.toFixed(0)} <span>EH/s</span></dd></div>
         </dl>
       </div>
 
       <div className="landing-impact-footer">
         <div className="landing-impact-source">
-          <p>Source: <a href="https://api.doefin.com/v1/block/analytics" target="_blank" rel="noreferrer">Doefin API</a> · Block {snapshot.blockHeight.toLocaleString('en-GB')}</p>
-          <p>Retrieved <time dateTime={snapshot.receivedAt}>{retrievedLabel(snapshot.receivedAt)}</time></p>
+          <p>{copy.source}{' '}<a href="https://api.doefin.com/v1/block/analytics" target="_blank" rel="noreferrer">{copy.doefinApi}</a>{' '}{copy.block2}{' '}{snapshot.blockHeight.toLocaleString(locale)}</p>
+          <p>{copy.retrieved}{' '}<time dateTime={snapshot.receivedAt}>{retrievedLabel(snapshot.receivedAt, locale)}</time></p>
         </div>
         <details className="landing-impact-details">
           <summary>
-            <span><Calculator className="landing-impact-icon" aria-hidden="true" /> Assumptions and calculation</span>
+            <span><Calculator className="landing-impact-icon" aria-hidden="true" />{' '}{copy.assumptionsAndCalculation}</span>
             <CaretDown className="landing-impact-caret" aria-hidden="true" />
           </summary>
           <div>
-            <p>Network baseline: {(snapshot.difficulty / 1_000_000_000_000).toFixed(2)}T difficulty at block {snapshot.blockHeight.toLocaleString('en-GB')}. The block subsidy is {snapshot.subsidyBtc} BTC per block, derived from this block height.</p>
-            <p>Expected BTC production = miner hashrate in hashes per second × period in seconds × block subsidy ÷ (difficulty × 2³²).</p>
-            <p>Implied network hashrate uses difficulty × 2³² ÷ 600 seconds. It is not a direct network measurement. Actual production varies.</p>
+            <p>{formatMessage(copy.networkBaselineTDifficultyAt, {
+              difficulty: (snapshot.difficulty / 1_000_000_000_000).toFixed(2),
+              height: snapshot.blockHeight.toLocaleString(locale),
+              subsidy: snapshot.subsidyBtc,
+            })}</p>
+            <p>{copy.expectedBtcProductionMinerHashrate}</p>
+            <p>{copy.impliedNetworkHashrateUsesDifficulty}</p>
           </div>
         </details>
-        <p className="landing-impact-note">This is not a forecast of trading returns.</p>
+        <p className="landing-impact-note">{copy.thisIsNotAForecast}</p>
       </div>
     </ImpactLayout>
   )

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { Manrope } from 'next/font/google'
 import { site } from '@/lib/site'
-import './globals.css'
+import { languages, type Language } from '@/lib/languages'
+import '@/app/globals.css'
 
 // Manrope is the brand typeface, carried over from the trading app.
 const manrope = Manrope({
@@ -17,14 +18,14 @@ const manrope = Manrope({
  * crawlers, and it also makes `export const metadata` impossible on every page
  * beneath it. See .claude/CLAUDE.md.
  */
-export const metadata: Metadata = {
+export const documentMetadata: Metadata = {
   metadataBase: new URL(site.url),
   robots: { index: false, follow: false },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export function SiteDocument({ children, language = 'en' }: { children: React.ReactNode; language?: Language }) {
   return (
-    <html lang="en-GB" className={manrope.variable}>
+    <html lang={languages[language].tag} className={manrope.variable}>
       <body>
         {children}
       </body>

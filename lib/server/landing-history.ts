@@ -2,6 +2,7 @@ import 'server-only'
 
 import { unstable_cache } from 'next/cache'
 import { getDifficultyImpactSnapshot } from './difficulty-impact'
+import { getHomepageFixture } from './homepage-fixture'
 
 const BLOCKS_PER_EPOCH = 2016
 const ADJUSTMENTS = 25
@@ -55,6 +56,8 @@ const readHistory = unstable_cache(async (origin: string, latestBoundary: number
 }, ['landing-history-v1'], { revalidate: 86_400 })
 
 export async function getLandingHistory() {
+  const fixture = await getHomepageFixture()
+  if (fixture) return { points: fixture.points, retrievedAt: fixture.retrievedAt }
   try {
     const tip = await getDifficultyImpactSnapshot()
     if (tip.status !== 'available') return null

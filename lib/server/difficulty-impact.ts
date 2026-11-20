@@ -2,6 +2,7 @@ import 'server-only'
 import { unstable_cache } from 'next/cache'
 import { getDifficultyAnalytics } from '../bitcoin-analytics'
 import { DIFFICULTY_IMPACT_REFRESH_MS, normalizeDifficultyImpactResult, type DifficultyImpactResult } from '../difficulty-impact'
+import { getHomepageFixture } from './homepage-fixture'
 
 type Failure = Exclude<DifficultyImpactResult, { status: 'available' }>
 class DifficultyImpactUnavailable extends Error {
@@ -22,6 +23,8 @@ const readCachedSnapshot = unstable_cache(
 )
 
 export async function getDifficultyImpactSnapshot(): Promise<DifficultyImpactResult> {
+  const fixture = await getHomepageFixture()
+  if (fixture) return { status: 'available', snapshot: fixture.snapshot }
   try {
     // The configured origin is part of the key, including local verification APIs.
     const origin = (process.env.DOFIN_API_BASE_URL || 'https://api.doefin.com').replace(/\/+$/, '')

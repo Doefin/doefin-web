@@ -1,3 +1,5 @@
+import type { LandingCopy } from '@/dictionaries'
+import { languages, type Language } from '@/lib/languages'
 import { Archive, ArrowRight, CaretDown, ChartBar, ChartLine, Clock, Info, Table } from '@phosphor-icons/react/dist/ssr'
 import { researchCapture, researchRows } from '@/lib/research-data'
 import { getLandingHistory, type HistoryPoint } from '@/lib/server/landing-history'
@@ -10,7 +12,6 @@ const PLOT_TOP = 14
 const PLOT_BOTTOM = 160
 const PLOT_MIDDLE = (PLOT_TOP + PLOT_BOTTOM) / 2
 const BAR_HALF_WIDTH = 6
-const dateLabel = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
 // The raw capture includes the boundary before the first recorded adjustment.
 const sourceBoundaries: [timestamp: number, height: number, difficulty: number, ratio: number][] = JSON.parse(researchCapture.sourceRaw)
 const timestampByHeight = new Map(sourceBoundaries.map(([timestamp, height]) => [height, timestamp]))
@@ -48,26 +49,27 @@ function ChartGrid({ ticks }: { ticks: { y: number; label: string; zero?: boolea
   ))
 }
 
-function DateRange({ first, last }: { first: string; last: string }) {
+function DateRange({ first, last, dateLabel }: { first: string; last: string; dateLabel: Intl.DateTimeFormat }) {
   return <div className="landing-history-dates">
     <time dateTime={first}>{dateLabel.format(new Date(first))}</time>
     <time dateTime={last}>{dateLabel.format(new Date(last))}</time>
   </div>
 }
 
-export async function LandingHistory() {
+export async function LandingHistory({ copy, language }: { copy: LandingCopy; language: Language }) {
   const live = await getLandingHistory()
-  return <LandingHistoryContent source={live} />
+  return <LandingHistoryContent source={live} copy={copy} language={language} />
 }
 
-export function LandingHistoryFallback() {
+export function LandingHistoryFallback({ copy }: { copy: LandingCopy }) {
   return <section className="landing-market-context" id="mining-history" aria-labelledby="landing-market-title">
-    <h2 id="landing-market-title">Bitcoin hashrate moves. Trade your view.</h2>
-    <p className="landing-history-intro" role="status">Loading Bitcoin block history</p>
+    <h2 id="landing-market-title">{copy.bitcoinHashrateMovesTradeYourView}</h2>
+    <p className="landing-history-intro" role="status">{copy.loadingBitcoinBlockHistory}</p>
   </section>
 }
 
-function LandingHistoryContent({ source }: { source: Awaited<ReturnType<typeof getLandingHistory>> }) {
+function LandingHistoryContent({ source, copy, language }: { source: Awaited<ReturnType<typeof getLandingHistory>>; copy: LandingCopy; language: Language }) {
+  const dateLabel = new Intl.DateTimeFormat(languages[language].tag, { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
   const rows = source?.points ?? frozenPoints
   const periods = rows.map((row, index) => {
     const x = PLOT_LEFT + (index + 0.5) * (PLOT_RIGHT - PLOT_LEFT) / rows.length
@@ -100,26 +102,26 @@ function LandingHistoryContent({ source }: { source: Awaited<ReturnType<typeof g
   const last = rows[rows.length - 1].date
 
   return <section className="landing-market-context" id="mining-history" aria-labelledby="landing-market-title">
-    <p className="landing-impact-eyebrow landing-history-eyebrow"><Archive aria-hidden="true" /> {source ? 'Observed adjustments · Doefin API' : 'Observed adjustments · Frozen capture'}</p>
-    <h2 id="landing-market-title">Bitcoin hashrate moves. Trade your view.</h2>
-    <p className="landing-history-intro">{rows.length} recorded adjustments from <time dateTime={first}>{dateLabel.format(new Date(first))}</time> to <time dateTime={last}>{dateLabel.format(new Date(last))}</time>.</p>
+    <p className="landing-impact-eyebrow landing-history-eyebrow"><Archive aria-hidden="true" /> {source ? copy.observedAdjustmentsDoefinApi : copy.observedAdjustmentsFrozenCapture}</p>
+    <h2 id="landing-market-title">{copy.bitcoinHashrateMovesTradeYourView}</h2>
+    <p className="landing-history-intro">{rows.length}{' '}{copy.recordedAdjustmentsFrom}{' '}<time dateTime={first}>{dateLabel.format(new Date(first))}</time>{' '}{copy.to}{' '}<time dateTime={last}>{dateLabel.format(new Date(last))}</time>.</p>
     <dl className="landing-history-stats">
-      <div><dt>Increases</dt><dd className="landing-signed-value">{changes.filter(change => change > 0).length}</dd></div>
-      <div><dt>Decreases</dt><dd className="landing-signed-value">{changes.filter(change => change < 0).length}</dd></div>
-      <div><dt>Mean absolute change</dt><dd>{(changes.reduce((sum, change) => sum + Math.abs(change), 0) / changes.length).toFixed(2)}%</dd></div>
+      <div><dt>{copy.increases}</dt><dd className="landing-signed-value">{changes.filter(change => change > 0).length}</dd></div>
+      <div><dt>{copy.decreases}</dt><dd className="landing-signed-value">{changes.filter(change => change < 0).length}</dd></div>
+      <div><dt>{copy.meanAbsoluteChange}</dt><dd>{(changes.reduce((sum, change) => sum + Math.abs(change), 0) / changes.length).toFixed(2)}%</dd></div>
     </dl>
     <div className="landing-history-grid">
       <figure className="landing-history-panel">
         <figcaption>
-          <strong><ChartBar aria-hidden="true" /> Difficulty adjustments</strong>
+          <strong><ChartBar aria-hidden="true" />{' '}{copy.difficultyAdjustments}</strong>
           <span>
             <span className="landing-signed-value">{percent(minChange)}</span>
-            {' to '}
+            {" " + copy.to + " "}
             <span className="landing-signed-value">{percent(maxChange)}</span>
-            {' across the period.'}
+            {" " + copy.acrossThePeriod}
           </span>
         </figcaption>
-        <HistoryChart title="Observed changes in Bitcoin mining difficulty." points={bars.map(({ x, tipY, date, change, row }) => ({ x, y: tipY, date, value: change, change: row.changePct }))}>
+        <HistoryChart copy={copy} title={copy.observedChangesInBitcoinMining} points={bars.map(({ x, tipY, date, change, row }) => ({ x, y: tipY, date, value: change, change: row.changePct }))}>
           <ChartGrid ticks={adjustmentTicks} />
           {bars.map(({ row, x, tipY }) => {
             if (row.changePct === 0) return null
@@ -129,52 +131,52 @@ function LandingHistoryContent({ source }: { source: Awaited<ReturnType<typeof g
             return <path key={row.height} className="landing-history-series" d={adjustmentBarPath(x, tipY)} />
           })}
         </HistoryChart>
-        <DateRange first={first} last={last} />
+        <DateRange dateLabel={dateLabel} first={first} last={last} />
       </figure>
       <figure className="landing-history-panel">
-        <figcaption><strong><ChartLine aria-hidden="true" /> Estimated network hashrate</strong><span>{minHashrate.toFixed(0)} to {maxHashrate.toFixed(0)} EH/s across 2,016-block averages.</span></figcaption>
-        <HistoryChart title="Estimated average network hashrate in EH/s." points={points.map(({ x, y, date, averageEH }) => ({ x, y, date, value: averageEH.toFixed(0) + ' EH/s' }))}>
+        <figcaption><strong><ChartLine aria-hidden="true" />{' '}{copy.estimatedNetworkHashrate}</strong><span>{minHashrate.toFixed(0)}{' '}{copy.to}{' '}{maxHashrate.toFixed(0)}{' '}{copy.ehSAcross2016}</span></figcaption>
+        <HistoryChart copy={copy} title={copy.estimatedAverageNetworkHashrateIn} points={points.map(({ x, y, date, averageEH }) => ({ x, y, date, value: averageEH.toFixed(0) + ' EH/s' }))}>
           <ChartGrid ticks={rateTicks} />
           <path className="landing-history-series-line" d={line} fill="none" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
           {points.map(({ row, x, y }) => <circle key={row.height} className="landing-history-series" cx={x} cy={y} r="2.8" />)}
         </HistoryChart>
-        <DateRange first={first} last={last} />
+        <DateRange dateLabel={dateLabel} first={first} last={last} />
       </figure>
     </div>
     <div className="landing-history-provenance">
       <div className="landing-history-source">
-        {!source && <span>Source: <a href={researchCapture.sourceUrl}>mempool.space</a> · Single source</span>}
+        {!source && <span>{copy.source} <a href={researchCapture.sourceUrl}>{copy.mempoolSpace}</a> · {copy.singleSource}</span>}
         <span><Clock aria-hidden="true" /> {source
-          ? <>Retrieved{' '}<time dateTime={source.retrievedAt}>{dateLabel.format(new Date(source.retrievedAt))}, {source.retrievedAt.slice(11, 16)} UTC</time></>
-          : <>Captured{' '}<time dateTime={researchCapture.capturedAt}>{dateLabel.format(new Date(researchCapture.capturedAt))}</time></>}
+          ? <>{copy.retrieved}{' '}<time dateTime={source.retrievedAt}>{dateLabel.format(new Date(source.retrievedAt))}, {source.retrievedAt.slice(11, 16)} UTC</time></>
+          : <>{copy.captured}{' '}<time dateTime={researchCapture.capturedAt}>{dateLabel.format(new Date(researchCapture.capturedAt))}</time></>}
         </span>
       </div>
       <details className="landing-history-details landing-history-method">
-        <summary><span><Info aria-hidden="true" /> How to read these charts</span><CaretDown className="landing-history-caret" aria-hidden="true" /></summary>
+        <summary><span><Info aria-hidden="true" />{' '}{copy.howToReadTheseCharts}</span><CaretDown className="landing-history-caret" aria-hidden="true" /></summary>
         <dl>
           <div>
-            <dt>Difficulty adjustments</dt>
-            <dd>{source ? 'Each adjustment appears after six subsequent blocks.' : 'This capture uses a single source without independent node verification.'} Past adjustments do not predict the next one.</dd>
+            <dt>{copy.difficultyAdjustments}</dt>
+            <dd>{source ? copy.eachAdjustmentAppearsAfterSix : copy.thisCaptureUsesASingle}{' '}{copy.pastAdjustmentsDoNotPredict}</dd>
           </div>
           <div>
-            <dt>Estimated network hashrate</dt>
-            <dd>Calculated from block data using the previous period’s difficulty × 2³² × 2,016 ÷ elapsed seconds. Block timestamps can differ from the actual times blocks were found.</dd>
+            <dt>{copy.estimatedNetworkHashrate}</dt>
+            <dd>{copy.calculatedFromBlockDataUsing}</dd>
           </div>
         </dl>
       </details>
     </div>
     <details className="landing-history-details">
-      <summary><span><Table aria-hidden="true" /> View data table</span><CaretDown className="landing-history-caret" aria-hidden="true" /></summary>
-      <div className="landing-history-table-scroll" role="region" aria-label="Observed values and estimates table" tabIndex={0}>
+      <summary><span><Table aria-hidden="true" />{' '}{copy.viewDataTable}</span><CaretDown className="landing-history-caret" aria-hidden="true" /></summary>
+      <div className="landing-history-table-scroll" role="region" aria-label={copy.observedValuesAndEstimatesTable} tabIndex={0}>
         <table>
-          <thead><tr><th scope="col">Adjustment date (UTC)</th><th scope="col">Difficulty change</th><th scope="col">Average hashrate estimate</th></tr></thead>
-          <tbody>{periods.map(({ row, date, change }) => <tr key={row.height}><th scope="row"><time dateTime={row.date}>{date}</time></th><td className="landing-signed-value">{change}</td><td>{row.averageEH === null ? 'Unavailable' : row.averageEH.toFixed(0) + ' EH/s'}</td></tr>)}</tbody>
+          <thead><tr><th scope="col">{copy.adjustmentDateUtc}</th><th scope="col">{copy.difficultyChange}</th><th scope="col">{copy.averageHashrateEstimate}</th></tr></thead>
+          <tbody>{periods.map(({ row, date, change }) => <tr key={row.height}><th scope="row"><time dateTime={row.date}>{date}</time></th><td className="landing-signed-value">{change}</td><td>{row.averageEH === null ? copy.unavailable : row.averageEH.toFixed(0) + ' EH/s'}</td></tr>)}</tbody>
         </table>
       </div>
     </details>
     <div className="landing-market-links">
-      <a href="/data/difficulty">Review difficulty data <ArrowRight aria-hidden="true" /></a>
-      <a href="/data/hashrate">Review network hashrate <ArrowRight aria-hidden="true" /></a>
+      <a href="/data/difficulty">{copy.reviewDifficultyData}{' '}<ArrowRight aria-hidden="true" /></a>
+      <a href="/data/hashrate">{copy.reviewNetworkHashrate}{' '}<ArrowRight aria-hidden="true" /></a>
     </div>
   </section>
 }

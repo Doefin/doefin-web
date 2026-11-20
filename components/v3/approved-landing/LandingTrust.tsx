@@ -1,3 +1,4 @@
+import type { LandingCopy } from '@/dictionaries'
 import Image from 'next/image'
 import styles from './LandingTrust.module.css'
 
@@ -9,23 +10,22 @@ const investors = [
   { name: 'Barefoot Mining', file: 'barefoot-mining.webp', width: 512, height: 91 },
 ]
 
-const testimonials = [
-  {
-    quote: 'The product is simple and intuitive. I can see the market, take a view on network hashrate and trade in a few clicks.',
-    name: 'Kevin Hojnik',
-    role: 'Head of BD at NiceHash',
-  },
-  {
-    quote: 'As a miner, I think about network difficulty every day. This tool gives me a way to hedge and trade that risk instead of just accepting it.',
-    name: 'Robert Luft',
-    role: 'Founder of Potentia Digital',
-  },
-]
-
-export function LandingTrust() {
+export function LandingTrust({ copy }: { copy: LandingCopy }) {
+  const testimonials = [
+    {
+      quote: copy.theProductIsSimpleAnd,
+      name: 'Kevin Hojnik',
+      role: copy.headOfBdAtNicehash,
+    },
+    {
+      quote: copy.asAMinerIThink,
+      name: 'Robert Luft',
+      role: copy.founderOfPotentiaDigital,
+    },
+  ]
   return (
     <section id="trust" className={styles.section} aria-labelledby="trust-investors-heading">
-      <h2 id="trust-investors-heading" className={styles.heading}>Backed by</h2>
+      <h2 id="trust-investors-heading" className={styles.heading}>{copy.backedBy}</h2>
       <ul className={styles.logos} role="list">
         {investors.map(({ name, file, width, height }) => (
           <li key={name} className={styles.logo}>
@@ -41,7 +41,7 @@ export function LandingTrust() {
         ))}
       </ul>
 
-      <h3 className={styles.subheading}>What users say</h3>
+      <h3 className={styles.subheading}>{copy.whatUsersSay}</h3>
       <div className={styles.quotes}>
         {testimonials.map(({ quote, name, role }) => (
           <figure key={name} className={styles.quote}>
@@ -49,6 +49,7 @@ export function LandingTrust() {
             <figcaption>
               <strong>{name}</strong>
               <span>{role}</span>
+              {copy.translatedQuote && <small>{copy.translatedQuote}</small>}
             </figcaption>
           </figure>
         ))}

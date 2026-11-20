@@ -1,5 +1,6 @@
 'use client'
 
+import type { LandingCopy } from '@/dictionaries'
 import { useState, type PointerEvent, type ReactNode } from 'react'
 
 export type HistoryChartPoint = {
@@ -10,7 +11,8 @@ export type HistoryChartPoint = {
   change?: number
 }
 
-export function HistoryChart({ title, points, children }: {
+export function HistoryChart({ title, points, children, copy }: {
+  copy: LandingCopy
   title: string
   points: HistoryChartPoint[]
   children: ReactNode
@@ -35,16 +37,16 @@ export function HistoryChart({ title, points, children }: {
           <strong className="landing-signed-value">
             {active.value}
           </strong>
-          {active.change !== undefined && <span>{active.change > 0 ? 'Increase' : active.change < 0 ? 'Decrease' : 'No change'}</span>}
+          {active.change !== undefined && <span>{active.change > 0 ? copy.increase : active.change < 0 ? copy.decrease : copy.noChange}</span>}
         </>}
       </div>
-      {!active && <span className="landing-history-hint" aria-hidden="true">Hover or tap to read a value</span>}
+      {!active && <span className="landing-history-hint" aria-hidden="true">{copy.hoverOrTapToRead}</span>}
     </div>
     <svg
       className="landing-history-chart"
       viewBox="0 0 480 174"
       role="img"
-      aria-label={title + ' Use left and right arrow keys to read values.'}
+      aria-label={title + " " + copy.useLeftAndRightArrow}
       tabIndex={0}
       onPointerDown={selectPoint}
       onPointerMove={event => { if (event.pointerType !== 'touch') selectPoint(event) }}

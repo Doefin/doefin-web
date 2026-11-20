@@ -105,6 +105,7 @@ await check('server cache stores only successes, separates origins and preserves
   let lastResult
   const server = loadTypescript('lib/server/difficulty-impact.ts', {
     'server-only': {},
+    './homepage-fixture': { getHomepageFixture: async () => null },
     '../difficulty-impact': impact,
     '../bitcoin-analytics': { getDifficultyAnalytics: async () => {
       upstreamCalls++

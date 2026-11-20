@@ -1,5 +1,7 @@
 'use client'
 
+import type { HowItWorksCopy } from '@/dictionaries'
+
 import { useEffect, useRef, useState } from 'react'
 import { site } from '@/lib/site'
 import styles from './HowItWorksDemo.module.css'
@@ -27,7 +29,7 @@ function DepositIcon({ method }: { method: DepositMethod }) {
   return <ExtensionIcon />
 }
 
-export function HowItWorksDemo() {
+export function HowItWorksDemo({ copy }: { copy: HowItWorksCopy }) {
   const [marketIndex, setMarketIndex] = useState<number | null>(null)
   const [marketSide, setMarketSide] = useState<'Yes' | 'No' | null>(null)
   const [deposit, setDeposit] = useState<DepositMethod | null>(null)
@@ -95,57 +97,57 @@ export function HowItWorksDemo() {
   return (
     <section id="how-it-works" className={styles.section} aria-labelledby="how-heading">
       <div className={styles.headingRow}>
-        <h2 id="how-heading">How it works</h2>
-        <button type="button" className={styles.replay} onClick={replay}>Replay</button>
+        <h2 id="how-heading">{copy.heading}</h2>
+        <button type="button" className={styles.replay} onClick={replay}>{copy.replay}</button>
       </div>
 
       <ol className={styles.steps}>
         <li className={styles.step}>
           <div className={`${styles.stage} ${styles.marketStage}`}>
-            <table className={styles.marketTable} aria-label="Illustrative Bitcoin difficulty markets">
-              <thead><tr><th scope="col">Difficulty threshold</th><th scope="col" className={styles.yesLabel}>Buy Yes</th><th scope="col">Currency</th><th scope="col" className={styles.noLabel}>Buy No</th></tr></thead>
+            <table className={styles.marketTable} aria-label={copy.illustrativeMarkets}>
+              <thead><tr><th scope="col">{copy.difficultyThreshold}</th><th scope="col" className={styles.yesLabel}>{copy.buyYes}</th><th scope="col">{copy.currency}</th><th scope="col" className={styles.noLabel}>{copy.buyNo}</th></tr></thead>
               <tbody>{markets.map((market, index) => <tr key={market.threshold} data-selected={marketIndex === index || undefined}>
                 <th scope="row">{market.threshold}</th>
                 <td><button type="button" className={styles.yesPrice} aria-pressed={marketIndex === index && marketSide === 'Yes'} onClick={() => chooseMarket(index, 'Yes')}>{market.yes}</button></td>
-                <td><span className={styles.coin} aria-label="Bitcoin">₿</span></td>
+                <td><span className={styles.coin} aria-label={copy.bitcoin}>₿</span></td>
                 <td><button type="button" className={styles.noPrice} aria-pressed={marketIndex === index && marketSide === 'No'} onClick={() => chooseMarket(index, 'No')}>{market.no}</button></td>
               </tr>)}</tbody>
             </table>
           </div>
-          <div className={styles.copy}><span>01</span><h3>Choose a difficulty market</h3><p>Buy Yes or No depending on where you expect Bitcoin difficulty to be at expiry.</p></div>
+          <div className={styles.copy}><span>01</span><h3>{copy.chooseMarket}</h3><p>{copy.chooseMarketDescription}</p></div>
         </li>
 
         <li className={styles.step}>
           <div className={`${styles.stage} ${styles.depositStage}`} data-form-open={depositForm || undefined}>
             <div ref={depositOptionsRef} className={styles.depositOptions} aria-hidden={depositForm} inert={depositForm}>
-              <p className={styles.panelTitle}>Deposit</p>
-              <DepositOption method="transfer" title="Transfer Crypto" description="Any wallet · Show QR address" selected={deposit === 'transfer'} onClick={chooseDeposit} />
-              <DepositOption method="bitcoin" title="Deposit Bitcoin" description="BTC to cbBTC on Base · Coming soon" selected={false} onClick={chooseDeposit} disabled />
-              <DepositOption method="extension" title="From Extension" description="Connected wallet · Direct transfer" selected={deposit === 'extension'} onClick={chooseDeposit} />
+              <p className={styles.panelTitle}>{copy.deposit}</p>
+              <DepositOption method="transfer" title={copy.transferCrypto} description={copy.anyWalletShowQr} selected={deposit === 'transfer'} onClick={chooseDeposit} />
+              <DepositOption method="bitcoin" title={copy.depositBitcoin} description={copy.btcToCbbtcComingSoon} selected={false} onClick={chooseDeposit} disabled />
+              <DepositOption method="extension" title={copy.fromExtension} description={copy.connectedWalletDirectTransfer} selected={deposit === 'extension'} onClick={chooseDeposit} />
             </div>
             <div className={styles.depositForm} aria-hidden={!depositForm} inert={!depositForm}>
-              <p className={styles.panelTitle}>Deposit from extension</p>
-              <label className={styles.amountLabel} htmlFor="how-deposit-amount">Amount</label>
-              <div className={styles.amountInput}><input ref={amountInputRef} id="how-deposit-amount" value="0.5 cbBTC" inputMode="decimal" readOnly /><button type="button">Max</button></div>
-              <p className={styles.gasHint}>You will pay a small network fee from your wallet.</p>
-              <div className={styles.formActions}><button type="button" onClick={cancelDeposit}>Cancel</button><button type="button" disabled>Deposit</button></div>
+              <p className={styles.panelTitle}>{copy.depositFromExtension}</p>
+              <label className={styles.amountLabel} htmlFor="how-deposit-amount">{copy.amount}</label>
+              <div className={styles.amountInput}><input ref={amountInputRef} id="how-deposit-amount" value="0.5 cbBTC" inputMode="decimal" readOnly /><button type="button">{copy.max}</button></div>
+              <p className={styles.gasHint}>{copy.gasHint}</p>
+              <div className={styles.formActions}><button type="button" onClick={cancelDeposit}>{copy.cancel}</button><button type="button" disabled>{copy.deposit}</button></div>
             </div>
           </div>
-          <div className={styles.copy}><span>02</span><h3>Fund your account and trade</h3><p>Deposit cbBTC directly or convert native BTC using SwapKit (integrated).</p></div>
+          <div className={styles.copy}><span>02</span><h3>{copy.fundAccountAndTrade}</h3><p>{copy.fundAccountDescription}</p></div>
         </li>
 
         <li className={styles.step}>
           <div className={`${styles.stage} ${styles.tradeStage}`}>
-            <div className={styles.tradeBar}><div className={styles.orderToggle}><button type="button" aria-pressed="true">Market<span>Instant, best available price</span></button><button type="button">Limit<span>Set price, waits for a match</span></button></div></div>
-            <div className={styles.outcomes} role="group" aria-label="Trade outcome"><Outcome side="Yes" price="0.62" chance="62" active /><Outcome side="No" price="0.41" chance="41" /></div>
-            <div className={styles.orderForm}><div className={styles.orderLabel}><label htmlFor="how-sell-amount">How many shares do you want to sell?</label></div><div className={styles.orderInput}><input id="how-sell-amount" value="0.5" inputMode="decimal" readOnly /><span>shares</span></div><button type="button" className={styles.sellButton}>Sell Yes</button></div>
+            <div className={styles.tradeBar}><div className={styles.orderToggle}><button type="button" aria-pressed="true">{copy.market}<span>{copy.marketDescription}</span></button><button type="button">{copy.limit}<span>{copy.limitDescription}</span></button></div></div>
+            <div className={styles.outcomes} role="group" aria-label={copy.tradeOutcome}><Outcome copy={copy} side="Yes" price="0.62" chance="62" active /><Outcome copy={copy} side="No" price="0.41" chance="41" /></div>
+            <div className={styles.orderForm}><div className={styles.orderLabel}><label htmlFor="how-sell-amount">{copy.howManySharesSell}</label></div><div className={styles.orderInput}><input id="how-sell-amount" value="0.5" inputMode="decimal" readOnly /><span>{copy.shares}</span></div><button type="button" className={styles.sellButton}>{copy.sellYes}</button></div>
           </div>
-          <div className={styles.copy}><span>03</span><h3>Trade or settle</h3><p>Sell before settlement or hold until the market resolves.</p></div>
+          <div className={styles.copy}><span>03</span><h3>{copy.tradeOrSettle}</h3><p>{copy.tradeOrSettleDescription}</p></div>
         </li>
       </ol>
 
-      <div className={styles.foundation}><p><strong>Illustrative payout example.</strong> Buy Yes at 0.20 cbBTC. If Yes wins, receive 1 cbBTC. Otherwise, lose the 0.20 cbBTC paid.</p><p>The payout includes the amount paid and is before fees. Collateral and technical risks still apply.</p></div>
-      <div className={styles.action}><a href={site.appUrl} data-v3-cta="app" data-v3-placement="how">Explore markets →</a></div>
+      <div className={styles.foundation}><p><strong>{copy.illustrativePayoutExample}</strong>{' '}{copy.payoutExample}</p><p>{copy.payoutIncludesBeforeFees}</p></div>
+      <div className={styles.action}><a href={site.appUrl} data-v3-cta="app" data-v3-placement="how">{copy.exploreMarkets}</a></div>
     </section>
   )
 }
@@ -154,6 +156,6 @@ function DepositOption({ method, title, description, selected, disabled, onClick
   return <button type="button" data-method={method} className={styles.depositOption} aria-pressed={selected} disabled={disabled} onClick={() => onClick(method)}><span className={styles.depositIcon}><DepositIcon method={method} /></span><span><strong>{title}</strong><small>{description}</small></span><span className={styles.chevron} aria-hidden="true">›</span></button>
 }
 
-function Outcome({ side, price, chance, active = false }: { side: 'Yes' | 'No'; price: string; chance: string; active?: boolean }) {
-  return <button type="button" className={styles.outcome} data-side={side.toLowerCase()} aria-pressed={active}><span><strong>Sell {side}{side === 'Yes' ? '↑' : '↓'}</strong><b>{price} <small>mUSDT</small></b></span><em>≈ {chance}% chance</em></button>
+function Outcome({ side, price, chance, active = false, copy }: { side: 'Yes' | 'No'; price: string; chance: string; active?: boolean; copy: HowItWorksCopy }) {
+  return <button type="button" className={styles.outcome} data-side={side.toLowerCase()} aria-pressed={active}><span><strong>{side === 'Yes' ? copy.sellYes : copy.sellNo}{side === 'Yes' ? '↑' : '↓'}</strong><b>{price} <small>mUSDT</small></b></span><em>{copy.chance.replace('{chance}', chance)}</em></button>
 }

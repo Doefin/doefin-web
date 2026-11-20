@@ -256,7 +256,7 @@ function initMinerAnimation(root, scope) {
     userPaused = !userPaused
     button.setAttribute(
       'aria-label',
-      userPaused ? 'Resume mining animation' : 'Pause mining animation',
+      userPaused ? button.dataset.resumeLabel : button.dataset.pauseLabel,
     )
     sync()
   })

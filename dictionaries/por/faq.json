@@ -1,0 +1,37 @@
+[
+  {
+    "id": "faq-funding-account",
+    "href": "/docs/getting-collateral",
+    "question": "Como deposito fundos na minha conta?",
+    "answer": "Abra Fundos no aplicativo e siga as instruções de depósito para o token e a rede escolhidos. Confira o destino e aguarde a confirmação antes de negociar. As opções disponíveis podem ter taxas e condições diferentes.",
+    "label": "Ler o guia de depósitos"
+  },
+  {
+    "id": "faq-market-settlement",
+    "href": "/docs/how-settlement-works",
+    "question": "Como um mercado é liquidado?",
+    "answer": "Cada mercado define um limite de dificuldade e um bloco de observação. Após a definição do resultado, os tokens de posições vencedoras podem ser resgatados pelo valor informado. Tokens perdedores não pagam nada. Resgate e saque são etapas distintas.",
+    "label": "Ler o guia de liquidação"
+  },
+  {
+    "id": "faq-exit-before-settlement",
+    "href": "/docs/managing-positions",
+    "question": "Posso sair da posição antes da liquidação?",
+    "answer": "Você pode enviar uma ordem de venda para os tokens de posição que possui. A venda depende da liquidez e do preço disponíveis, por isso não há garantia de saída completa. Cancelar uma ordem aberta não vende uma posição existente.",
+    "label": "Ler sobre o gerenciamento de posições"
+  },
+  {
+    "id": "faq-fees-and-costs",
+    "href": "/docs/market-vs-limit-orders",
+    "question": "Quais taxas e custos preciso conferir?",
+    "answer": "Antes de confirmar, confira os custos exibidos para sua ordem e forma de depósito. Carteiras, corretoras e serviços de conversão podem cobrar separadamente. O preço de compra e os custos aplicáveis afetam o resultado mesmo quando a posição vence.",
+    "label": "Ler sobre ordens e execução"
+  },
+  {
+    "id": "faq-risks",
+    "href": "/docs/risks-and-limitations",
+    "question": "Quais riscos preciso entender?",
+    "answer": "Uma posição perdedora não paga nada. Liquidez, garantias e dependências técnicas também importam. Uma posição em dificuldade não cobre todos os riscos da mineração: o preço do Bitcoin, os custos de energia e o tempo de inatividade são fatores separados.",
+    "label": "Ler os riscos e limitações"
+  }
+]
