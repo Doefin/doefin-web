@@ -1533,43 +1533,11 @@ function How({ copy }: { copy: HowItWorksCopy }) {
 
 function Closing({ copy }: { copy: LandingCopy }) {
   return (
-    <section className="closing-section" aria-labelledby="closing-title">
+    <section className="closing-section">
 
       <div className="closing-content">
 
-        <h2 className="closing-title" id="closing-title">
-          {copy.readASampleResearchEmail}
-        </h2>
-
-        <p className="closing-description">
-          {copy.simpleToUnderstandPracticalToUse}
-        </p>
-
-        <p className="landing-closing-newsletter">{copy.thisDemoDoesNotCreateA}</p>
-
         <div className="closing-actions">
-
-          <a
-            className="button button-primary"
-            href="/newsletter"
-            data-v3-cta="newsletter"
-            data-v3-placement="closing"
-          >
-            {copy.readSampleEmail}{' '}
-
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-
-              <path
-                d="M4 12h15m-6-6 6 6-6 6"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-
-            </svg>
-
-          </a>
 
           <a
             className="button button-secondary"
