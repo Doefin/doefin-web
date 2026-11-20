@@ -4,10 +4,10 @@ import { allHomeFaq } from '@/content/sanity/home-faq'
 import type { HomeFaqItem } from '@/content/sanity/home-faq-parse'
 
 /** Native disclosures keep every answer in the HTML and work without JavaScript. */
-export async function HomeFaq() {
+export async function HomeFaq({ localizedQuestions }: { localizedQuestions?: HomeFaqItem[] }) {
   let questions: HomeFaqItem[]
   let unavailable = false
-  try { questions = await allHomeFaq() } catch { questions = []; unavailable = true }
+  try { questions = localizedQuestions ?? await allHomeFaq() } catch { questions = []; unavailable = true }
   if (unavailable) return <p role="status" className="text-sm text-subtle">Answers are temporarily unavailable. Please try again later.</p>
   if (!questions.length) return <p className="text-sm text-subtle">No questions are currently published.</p>
   return <div className="divide-y divide-white/10 border-y border-white/10">

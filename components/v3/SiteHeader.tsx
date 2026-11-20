@@ -6,6 +6,9 @@ import { Logo } from '@/components/layout/Logo'
 import Link from '@/components/routing/SiteLink'
 import { site } from '@/lib/site'
 import { navigationForPath, navigationShortcuts, type NavigationGroup, type NavigationItem } from '@/lib/v3-publication'
+import { LanguageSelector } from '@/components/localization/LanguageSelector'
+import { languages, type Language } from '@/lib/languages'
+import type { ChromeLabels } from './Chrome'
 import { Arrow } from './Arrow'
 import styles from './SiteHeader.module.css'
 
@@ -37,7 +40,9 @@ function Chevron() {
   </svg>
 }
 
-export function SiteHeader({ pathname, commentary }: { pathname: string; commentary: boolean }) {
+export function SiteHeader({ pathname, commentary, isLanding, language, labels, translate }: {
+  pathname: string; commentary: boolean; isLanding: boolean; language: Language; labels: ChromeLabels; translate: (text: string) => string
+}) {
   const groups = navigationForPath(pathname)
   const [openMenu, setOpenMenu] = useState<OpenMenu | null>(null)
   const hoverTimer = useRef<number | undefined>(undefined)
@@ -131,7 +136,7 @@ export function SiteHeader({ pathname, commentary }: { pathname: string; comment
         if (hash && path === pathname) document.getElementById(hash)?.focus({ preventScroll: true })
       }}
     >
-      {item.label}{arrow && <Arrow />}
+      {translate(item.label)}{arrow && <Arrow />}
     </Link>
   )
 
@@ -145,6 +150,7 @@ export function SiteHeader({ pathname, commentary }: { pathname: string; comment
     <header
       ref={header}
       className={styles.header}
+      data-homepage={isLanding || undefined}
       data-publication-surface={commentary ? 'commentary' : 'product'}
       onBlur={event => {
         // Touch browsers can blur to null before dispatching a link click.
@@ -160,8 +166,8 @@ export function SiteHeader({ pathname, commentary }: { pathname: string; comment
       }}
     >
       <Container className={styles.bar}>
-        <Logo href="/" className="w-[88px] min-[375px]:w-[104px] lg:w-[110px]" />
-        <nav ref={desktopNavigation} className={styles.desktop} aria-label="Main">
+        <Logo href={language === 'en' ? '/' : languages[language].path} className="w-[88px] min-[375px]:w-[104px] lg:w-[110px]" />
+        <nav ref={desktopNavigation} className={styles.desktop} aria-label={labels.main}>
           <ul className={styles.triggers}>
             {groups.map(group => {
               const expanded = openMenu?.id === group.id
@@ -193,21 +199,21 @@ export function SiteHeader({ pathname, commentary }: { pathname: string; comment
                       setOpenMenu(expanded ? null : { id: group.id, source: 'press' })
                     }}
                   >
-                    {group.label}<Chevron />
+                    {translate(group.label)}<Chevron />
                   </button>
                   <div className={styles.panel} id={panelId} data-desktop-panel hidden={!expanded} inert={!expanded}>
                     <div className={styles.columns}>
                       {group.sections.map(section => (
-                        <div key={section.label}>
-                          <p className={styles.sectionLabel}>{section.label}</p>
+                        <div key={translate(section.label)}>
+                          <p className={styles.sectionLabel}>{translate(section.label)}</p>
                           {renderItems(section.items.filter(item => item.href !== group.feature.item.href))}
                         </div>
                       ))}
                     </div>
                     <div className={styles.feature}>
-                      <p className={styles.sectionLabel}>{group.feature.kicker}</p>
-                      <p className={styles.featureTitle}>{group.feature.title}</p>
-                      <p className={styles.featureDescription}>{group.feature.description}</p>
+                      <p className={styles.sectionLabel}>{translate(group.feature.kicker)}</p>
+                      <p className={styles.featureTitle}>{translate(group.feature.title)}</p>
+                      <p className={styles.featureDescription}>{translate(group.feature.description)}</p>
                       {renderLink(group.feature.item, true)}
                     </div>
                   </div>
@@ -217,12 +223,13 @@ export function SiteHeader({ pathname, commentary }: { pathname: string; comment
           </ul>
         </nav>
         <div className={styles.actions}>
-          {!commentary && <a href={site.appUrl} className={styles.app} data-v3-cta="app" data-v3-placement="header">Enter app <Arrow diagonal /></a>}
+          {isLanding && <LanguageSelector language={language} label={labels.language} />}
+          {!commentary && <a href={site.appUrl} className={styles.app} data-v3-cta="app" data-v3-placement="header">{labels.enterApp} <Arrow diagonal /></a>}
           <button
             ref={mobileToggle}
             type="button"
             className={styles.mobileToggle}
-            aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'}
+            aria-label={mobileOpen ? labels.closeNavigation : labels.openNavigation}
             aria-expanded={mobileOpen}
             aria-controls="v3-mobile-menu"
             onClick={() => {
@@ -242,9 +249,9 @@ export function SiteHeader({ pathname, commentary }: { pathname: string; comment
         </div>
       </Container>
 
-      <nav className={styles.mobile} id="v3-mobile-menu" aria-label="Main" hidden={!mobileOpen} inert={!mobileOpen}>
+      <nav className={styles.mobile} id="v3-mobile-menu" aria-label={labels.main} hidden={!mobileOpen} inert={!mobileOpen}>
         <div ref={mobileContent} className={styles.mobileContent}>
-          <MobileGroups commentary={commentary} groups={groups} renderLink={renderLink} renderItems={renderItems} />
+          <MobileGroups labels={labels} translate={translate} commentary={commentary} groups={groups} renderLink={renderLink} renderItems={renderItems} />
         </div>
       </nav>
     </header>
@@ -252,15 +259,17 @@ export function SiteHeader({ pathname, commentary }: { pathname: string; comment
 }
 
 function MobileGroups({
-  commentary, groups, renderLink, renderItems,
+  commentary, groups, renderLink, renderItems, labels, translate,
 }: {
   commentary: boolean
+  labels: ChromeLabels
+  translate: (text: string) => string
   groups: readonly NavigationGroup[]
   renderLink: (item: NavigationItem, arrow?: boolean) => ReactNode
   renderItems: (items: readonly NavigationItem[]) => ReactNode
 }) {
   return <>
-    <p className={styles.drawerTitle}>Browse Doefin</p>
+    <p className={styles.drawerTitle}>{labels.browseDoefin}</p>
     <div className={styles.shortcuts}>{navigationShortcuts(commentary).map(item => (
       <div key={item.href}>{renderLink(item, true)}</div>
     ))}</div>
@@ -274,19 +283,19 @@ function MobileGroups({
               </svg>
             </span>
             <span className={styles.groupLabel}>
-              <span>{group.label}</span><span>{group.description}</span>
+              <span>{translate(group.label)}</span><span>{translate(group.description)}</span>
             </span>
             <Chevron />
           </summary>
           <div className={styles.mobileLinks}>
-            {group.sections.map(section => <div key={section.label}>
-              {group.sections.length > 1 && <p className={styles.sectionLabel}>{section.label}</p>}
+            {group.sections.map(section => <div key={translate(section.label)}>
+              {group.sections.length > 1 && <p className={styles.sectionLabel}>{translate(section.label)}</p>}
               {renderItems(section.items)}
             </div>)}
           </div>
         </details>
       ))}
     </div>
-    {!commentary && <a className={styles.contact} href={'mailto:' + site.contactEmail}>Contact the team <Arrow diagonal /></a>}
+    {!commentary && <a className={styles.contact} href={'mailto:' + site.contactEmail}>{labels.contact} <Arrow diagonal /></a>}
   </>
 }
