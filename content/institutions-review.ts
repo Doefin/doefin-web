@@ -7,6 +7,7 @@ import type { InstitutionsReview } from './institutions-review-types'
  * scripts/migrate-institutions-review.mjs can recreate the initial document.
  */
 export const institutionsReviewSeed: InstitutionsReview = {
+  visible: true,
   eyebrow: 'Before committing capital',
   heading: 'Check the market against your requirements.',
   intro: 'Use the selected market’s terms alongside the documentation. Public material is freely available; it does not establish suitability or approval for your organisation.',

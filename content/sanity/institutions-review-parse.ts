@@ -21,7 +21,8 @@ export function parseInstitutionsReview(value: unknown): InstitutionsReview {
   if (!value || typeof value !== 'object') throw new Error('Sanity institutions review response is not an object')
   const data = value as Row
   if (data._id !== institutionsReviewId || data._type !== institutionsReviewType) throw new Error('Unexpected institutions review document')
-  if (!text(data.eyebrow) || !text(data.heading) || !text(data.intro) || !text(data.riskNote) ||
+  if (typeof data.visible !== 'boolean' ||
+    !text(data.eyebrow) || !text(data.heading) || !text(data.intro) || !text(data.riskNote) ||
     !text(data.stripHeading) || !text(data.stripText) || !text(data.stripLabel) || !text(data.stripSubject)) throw new Error('Sanity institutions review page is incomplete')
   if (!Array.isArray(data.cards) || data.cards.length !== institutionsReviewCardCount) throw new Error('Sanity institutions review cards are incomplete')
   const cards: InstitutionsReviewCard[] = data.cards.map((input: unknown) => {
@@ -36,6 +37,7 @@ export function parseInstitutionsReview(value: unknown): InstitutionsReview {
     }
   })
   return {
+    visible: data.visible as boolean,
     eyebrow: data.eyebrow as string, heading: data.heading as string, intro: data.intro as string, riskNote: data.riskNote as string,
     cards,
     stripHeading: data.stripHeading as string, stripText: data.stripText as string, stripLabel: data.stripLabel as string, stripSubject: data.stripSubject as string,

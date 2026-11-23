@@ -3,7 +3,7 @@ import { cache } from 'react'
 import { sanityApiVersion, sanityDataset, sanityProjectId } from './config'
 import { institutionsReviewId } from '../institutions-review-contract'
 import { parseInstitutionsReview } from './institutions-review-parse'
-export const institutionsReviewQuery = `*[_type == "institutionsPage" && _id == "${institutionsReviewId}"][0]{_id,_type,eyebrow,heading,intro,riskNote,cards[]{title,summary,disclosureSummary,disclosureParagraphs,links[]{label,href,contactSubject}},stripHeading,stripText,stripLabel,stripSubject}`
+export const institutionsReviewQuery = `*[_type == "institutionsPage" && _id == "${institutionsReviewId}"][0]{_id,_type,visible,eyebrow,heading,intro,riskNote,cards[]{title,summary,disclosureSummary,disclosureParagraphs,links[]{label,href,contactSubject}},stripHeading,stripText,stripLabel,stripSubject}`
 export const institutionsReviewSnapshot = cache(async () => {
   const url = new URL(`https://${sanityProjectId}.api.sanity.io/v${sanityApiVersion}/data/query/${sanityDataset}`)
   url.searchParams.set('query', institutionsReviewQuery); url.searchParams.set('perspective', 'published')

@@ -57,7 +57,7 @@ export default async function InstitutionsPage() {
       </AudienceDisclosure>
     </section>
 
-    <section id="review-checklist" className={styles.diligence} aria-labelledby="desk-diligence-title">
+    {review.visible && <section id="review-checklist" className={styles.diligence} aria-labelledby="desk-diligence-title">
       <div className={styles.sectionHeading}><div><p className={styles.eyebrow}>{review.eyebrow}</p><h2 id="desk-diligence-title">{review.heading}</h2></div><p>{review.intro}</p></div>
       <p className="mt-4 text-sm leading-relaxed text-subtle">{review.riskNote}</p>
       <ol className={styles.reviewGrid} role="list">
@@ -69,6 +69,6 @@ export default async function InstitutionsPage() {
         </li>)}
       </ol>
       <div className={styles.reviewStrip}><div><h3>{review.stripHeading}</h3><p>{review.stripText}</p></div><a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent(review.stripSubject)}`} className={styles.textLink}>{review.stripLabel} <Arrow diagonal /></a></div>
-    </section>
+    </section>}
   </Container>
 }

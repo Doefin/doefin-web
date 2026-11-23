@@ -10,6 +10,7 @@ const { institutionsReviewDocument, planInstitutionsReviewImport } = await impor
 const doc = institutionsReviewDocument()
 assert.equal(doc._id, contract.institutionsReviewId)
 assert.equal(doc._type, contract.institutionsReviewType)
+assert.equal(doc.visible, true)
 assert.equal(doc.cards.length, contract.institutionsReviewCardCount)
 assert.deepEqual(institutionsReviewDocument(), doc, 'Document generation must be deterministic')
 
@@ -30,6 +31,9 @@ assert(planInstitutionsReviewImport([{ _id: doc._id, _type: 'other' }]).conflict
 // The runtime reader rejects invalid or unsafe API content.
 assert.throws(() => parse(null), /not an object/)
 assert.throws(() => parse({ ...strip(doc), _id: 'other' }), /Unexpected/)
+const noVisible = structuredClone(strip(doc)); delete noVisible.visible
+assert.throws(() => parse(noVisible), /incomplete/)
+assert.throws(() => parse({ ...strip(doc), visible: 'yes' }), /incomplete/)
 assert.throws(() => parse({ ...strip(doc), cards: strip(doc).cards.slice(0, 3) }), /incomplete/)
 const badHref = structuredClone(strip(doc)); badHref.cards[0].links = [{ label: 'Bad', href: 'javascript:alert(1)' }]
 assert.throws(() => parse(badHref), /Unsafe/)

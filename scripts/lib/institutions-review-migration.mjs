@@ -10,7 +10,7 @@ const text = value => typeof value === 'string' && value.trim().length > 0
 export function institutionsReviewDocument(review = institutionsReviewSeed) {
   if (!review || typeof review !== 'object') throw new Error('Expected the institutions review seed')
   const fields = ['eyebrow', 'heading', 'intro', 'riskNote', 'stripHeading', 'stripText', 'stripLabel', 'stripSubject']
-  if (fields.some(field => !text(review[field]))) throw new Error('Invalid institutions review seed text')
+  if (typeof review.visible !== 'boolean' || fields.some(field => !text(review[field]))) throw new Error('Invalid institutions review seed content')
   if (!Array.isArray(review.cards) || review.cards.length !== contract.institutionsReviewCardCount) throw new Error('Expected the four source review cards')
   const cards = review.cards.map((card, index) => {
     if (!card || !text(card.title) || !text(card.summary) || !text(card.disclosureSummary) ||
@@ -24,7 +24,7 @@ export function institutionsReviewDocument(review = institutionsReviewSeed) {
     })
     return { _key: `card-${index}`, _type: 'reviewCard', title: card.title, summary: card.summary, disclosureSummary: card.disclosureSummary, disclosureParagraphs: [...card.disclosureParagraphs], links }
   })
-  return { _id: contract.institutionsReviewId, _type: 'institutionsPage', ...Object.fromEntries(fields.map(field => [field, review[field]])), cards }
+  return { _id: contract.institutionsReviewId, _type: 'institutionsPage', visible: review.visible, ...Object.fromEntries(fields.map(field => [field, review[field]])), cards }
 }
 
 const normalizedId = id => id.startsWith('drafts.') ? id.slice(7) : id.startsWith('versions.') ? id.split('.').slice(2).join('.') : id
@@ -48,7 +48,7 @@ export async function runInstitutionsReviewImport(client, { apply = false } = {}
   const config = client.config()
   if (!config.token || config.projectId !== 'yzvr33lo' || config.dataset !== 'production') throw new Error('Authenticated CLI access to yzvr33lo/production is required')
   const started = Date.now()
-  const snapshot = await client.withConfig({ perspective: 'raw', useCdn: false }).fetch('*[]{_id,_type,_rev,eyebrow,heading,intro,riskNote,cards,stripHeading,stripText,stripLabel,stripSubject}', {}, { perspective: 'raw', cache: 'no-store' })
+  const snapshot = await client.withConfig({ perspective: 'raw', useCdn: false }).fetch('*[]{_id,_type,_rev,visible,eyebrow,heading,intro,riskNote,cards,stripHeading,stripText,stripLabel,stripSubject}', {}, { perspective: 'raw', cache: 'no-store' })
   const plan = planInstitutionsReviewImport(snapshot)
   if (plan.conflicts.length) throw new Error(`Institutions review import blocked: ${plan.conflicts.join('; ')}`)
   if (plan.changed.length) throw new Error(`Existing institutions review record differs from source; preserve editor work: ${plan.changed.join(', ')}`)

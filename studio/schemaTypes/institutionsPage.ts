@@ -3,6 +3,7 @@ import { isSafeDocsHref } from '../../content/docs-contract'
 import { institutionsReviewCardCount } from '../../content/institutions-review-contract'
 const nonBlank=(v:unknown)=>typeof v==='string'&&v.trim().length>0||'Enter nonempty text.'
 export const institutionsPage=defineType({name:'institutionsPage',title:'Institutions page',type:'document',fields:[
+  defineField({name:'visible',title:'Show the review section',description:'Hide the section without unpublishing or deleting its content.',type:'boolean',initialValue:true,validation:r=>r.required()}),
   defineField({name:'eyebrow',title:'Review section eyebrow',type:'string',validation:r=>r.required().custom(nonBlank)}),
   defineField({name:'heading',title:'Review section heading',type:'string',validation:r=>r.required().custom(nonBlank)}),
   defineField({name:'intro',title:'Review section intro',type:'text',rows:3,validation:r=>r.required().custom(nonBlank)}),

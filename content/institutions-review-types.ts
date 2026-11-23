@@ -11,6 +11,7 @@ export type InstitutionsReviewCard = {
 }
 
 export type InstitutionsReview = {
+  visible: boolean
   eyebrow: string
   heading: string
   intro: string
