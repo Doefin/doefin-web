@@ -37,6 +37,8 @@
     "check:home-faq": "node scripts/check-home-faq.mjs",
     "about-authors:migrate": "node scripts/migrate-about-authors.mjs",
     "check:about-authors": "node scripts/check-about-authors.mjs",
+    "institutions:migrate": "node scripts/migrate-institutions-review.mjs",
+    "check:institutions": "node scripts/check-institutions-review.mjs",
     "check:research-methodology": "node scripts/check-research-methodology.mjs",
     "check:brand": "node scripts/check-brand.mjs",
     "check:voice-drafts": "node --experimental-strip-types --no-warnings scripts/check-voice-drafts.mjs",

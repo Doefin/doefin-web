@@ -22,6 +22,8 @@
     "reconcile:faqs": "sanity exec ./scripts/home-faq-import.mjs --with-user-token",
     "reconcile:about-authors": "sanity exec ./scripts/about-authors-import.mjs --with-user-token",
     "import:about-authors": "sanity exec ./scripts/about-authors-import.mjs --with-user-token -- --apply",
+    "reconcile:institutions": "sanity exec ./scripts/institutions-review-import.mjs --with-user-token",
+    "import:institutions": "sanity exec ./scripts/institutions-review-import.mjs --with-user-token -- --apply",
     "lifecycle:about-authors": "sanity exec ./scripts/about-authors-lifecycle.mjs --with-user-token -- --apply --editors-paused",
     "import:faqs": "sanity exec ./scripts/home-faq-import.mjs --with-user-token -- --apply",
     "reconcile:research": "sanity exec ./scripts/research-import.mjs --with-user-token",
