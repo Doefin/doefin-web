@@ -11,10 +11,10 @@ import styles from './audience.module.css'
 
 export const metadata = seo({ title: 'Doefin for finance teams, funds and trading desks', description: 'Trade your view on Bitcoin network hashrate through markets on mining difficulty. Inspect the contracts and prepare a review with your team.', path: '/for/institutions' })
 
-function renderReviewLink(link: InstitutionsReviewLink) {
+function renderReviewLink(link: InstitutionsReviewLink, index: number) {
   return 'href' in link && link.href !== undefined
-    ? <Link key={link.label} href={link.href} className={styles.textLink}>{link.label} <Arrow /></Link>
-    : <a key={link.label} href={`mailto:${site.contactEmail}?subject=${encodeURIComponent(link.contactSubject)}`} className={styles.textLink}>{link.label} <Arrow diagonal /></a>
+    ? <Link key={`link-${index}`} href={link.href} className={styles.textLink}>{link.label} <Arrow /></Link>
+    : <a key={`link-${index}`} href={`mailto:${site.contactEmail}?subject=${encodeURIComponent(link.contactSubject)}`} className={styles.textLink}>{link.label} <Arrow diagonal /></a>
 }
 
 export default async function InstitutionsPage() {
@@ -61,11 +61,11 @@ export default async function InstitutionsPage() {
       <div className={styles.sectionHeading}><div><p className={styles.eyebrow}>{review.eyebrow}</p><h2 id="desk-diligence-title">{review.heading}</h2></div><p>{review.intro}</p></div>
       <p className="mt-4 text-sm leading-relaxed text-subtle">{review.riskNote}</p>
       <ol className={styles.reviewGrid} role="list">
-        {review.cards.map((card, index) => <li className={styles.reviewCard} key={card.title}>
+        {review.cards.map((card, index) => <li className={styles.reviewCard} key={`card-${index}`}>
           <span className={styles.reviewNumber} aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
           <h3>{card.title}</h3>
           <p>{card.summary}</p>
-          <AudienceDisclosure summary={card.disclosureSummary}>{card.disclosureParagraphs.map(paragraph => <p className="mt-2" key={paragraph}>{paragraph}</p>)}{card.links.length === 1 ? renderReviewLink(card.links[0]) : <div className="mt-2 flex flex-wrap gap-x-6">{card.links.map(renderReviewLink)}</div>}</AudienceDisclosure>
+          <AudienceDisclosure summary={card.disclosureSummary}>{card.disclosureParagraphs.map((paragraph, paragraphIndex) => <p className="mt-2" key={`p-${paragraphIndex}`}>{paragraph}</p>)}{card.links.length === 1 ? renderReviewLink(card.links[0], 0) : <div className="mt-2 flex flex-wrap gap-x-6">{card.links.map(renderReviewLink)}</div>}</AudienceDisclosure>
         </li>)}
       </ol>
       <div className={styles.reviewStrip}><div><h3>{review.stripHeading}</h3><p>{review.stripText}</p></div><a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent(review.stripSubject)}`} className={styles.textLink}>{review.stripLabel} <Arrow diagonal /></a></div>

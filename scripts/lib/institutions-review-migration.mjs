@@ -28,7 +28,9 @@ export function institutionsReviewDocument(review = institutionsReviewSeed) {
 }
 
 const normalizedId = id => id.startsWith('drafts.') ? id.slice(7) : id.startsWith('versions.') ? id.split('.').slice(2).join('.') : id
-const stripKeys = value => Array.isArray(value) ? value.map(stripKeys) : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).filter(([key]) => !['_key', '_rev'].includes(key)).map(([key, v]) => [key, stripKeys(v)])) : value
+// Compare content, not storage layout: drop revision/array-key metadata and sort
+// object keys, because the API may return fields in projection or edit order.
+const normalize = value => Array.isArray(value) ? value.map(normalize) : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).filter(([key]) => !['_key', '_rev'].includes(key)).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0).map(([key, v]) => [key, normalize(v)])) : value
 
 export function planInstitutionsReviewImport(snapshot, expected = institutionsReviewDocument()) {
   if (!Array.isArray(snapshot) || snapshot.some(row => !row || !text(row._id) || !text(row._type))) throw new Error('Invalid authenticated raw snapshot')
@@ -38,7 +40,7 @@ export function planInstitutionsReviewImport(snapshot, expected = institutionsRe
   if (family.some(row => row._type !== expected._type)) conflicts.push(`${expected._id}: reserved ID occupied by another type`)
   if (!canonical && family.length) conflicts.push(`${expected._id}: draft/version-only editor work exists`)
   if (canonical) {
-    if (JSON.stringify(stripKeys(canonical)) !== JSON.stringify(stripKeys(expected))) changed.push(expected._id)
+    if (JSON.stringify(normalize(canonical)) !== JSON.stringify(normalize(expected))) changed.push(expected._id)
     if (family.some(row => row._id !== expected._id)) conflicts.push(`${expected._id}: draft/version family exists alongside canonical record`)
   } else if (!family.length) missing.push(expected)
   return { conflicts, changed, missing, unrelated: snapshot.filter(row => normalizedId(row._id) !== expected._id).length, snapshotRecords: snapshot.length }

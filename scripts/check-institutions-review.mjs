@@ -25,6 +25,10 @@ assert.equal(planInstitutionsReviewImport(raw).missing.length, 0)
 assert.equal(planInstitutionsReviewImport(raw).changed.length, 0)
 const edited = structuredClone(raw); edited[0].heading += ' Editor change.'
 assert(planInstitutionsReviewImport(edited).changed.includes(doc._id), 'Editor edits block reimport')
+// The API returns fields in projection order, which differs from builder key order;
+// the comparison must be order-insensitive so a fresh import reconciles cleanly.
+const { _id, _type, visible, eyebrow, heading, intro, riskNote, cards, stripHeading, stripText, stripLabel, stripSubject } = doc
+assert.equal(planInstitutionsReviewImport([{ _id, _type, _rev: 'fixture', visible, eyebrow, heading, intro, riskNote, cards, stripHeading, stripText, stripLabel, stripSubject }]).changed.length, 0, 'Projection field order must not read as an editor change')
 assert(planInstitutionsReviewImport([{ _id: 'drafts.' + doc._id, _type: 'institutionsPage' }]).conflicts.length)
 assert(planInstitutionsReviewImport([{ _id: doc._id, _type: 'other' }]).conflicts.length)
 

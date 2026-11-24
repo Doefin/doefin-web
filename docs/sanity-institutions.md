@@ -18,7 +18,9 @@ One document: `_id` `page-for-institutions`, `_type` `institutionsPage`. The `vi
 
 ## Read, failure and preview behavior
 
-Published updates appear on the next request after Sanity query-index propagation; no webhooks or new credentials are needed, matching the editorial milestone. Transport or malformed-content failures throw rather than silently rendering the seed. The page has no fallback: the document must exist and be published before the reviewed build serves traffic.
+Published updates appear on the next request after Sanity query-index propagation; no webhooks or new credentials are needed, matching the editorial milestone. Transport or malformed-content failures throw rather than silently rendering the seed. The page has no fallback: the document must exist and be published before the reviewed build serves traffic. Every request reads the published document (`no-store`), so a Sanity API outage takes the route down loudly rather than serving stale copy; this matches the About page boundary.
+
+Known limits: the Studio desk structure does not enforce the singleton, so an editor can create a second `institutionsPage` document that the site never reads — the migration preflight counts such records as unrelated; delete stray documents rather than editing them. Hiding the section also removes its `#review-checklist` anchor, so existing deep links to that anchor lose their target while the switch is off.
 
 ## Safe import and live gate
 
