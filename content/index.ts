@@ -59,6 +59,8 @@ export { authors, getAuthor } from './authors'
 export type { Author } from './authors'
 export { aboutAuthorsSnapshot, aboutAuthorsQuery } from './sanity/about-authors'
 export type { AboutContent, AboutSection } from './about-types'
+export { institutionsReviewSnapshot, institutionsReviewQuery } from './sanity/institutions-review'
+export type { InstitutionsReview, InstitutionsReviewCard, InstitutionsReviewLink } from './institutions-review-types'
 
 export { previewTools, getPreviewTool, getExposureTutorial, getForecastReport } from './preview'
 export type { PreviewTool, EvidenceRow } from './preview'

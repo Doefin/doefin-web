@@ -14,6 +14,7 @@ import { aboutPage } from './schemaTypes/aboutPage'
 import { authorProfile } from './schemaTypes/authorProfile'
 import { researchReport } from './schemaTypes/researchReport'
 import { researchMethodology } from './schemaTypes/researchMethodology'
+import { institutionsPage } from './schemaTypes/institutionsPage'
 
 export default defineConfig({
   name: 'doefin-marketing',
@@ -23,9 +24,9 @@ export default defineConfig({
   plugins: [structureTool()],
   releases: { enabled: false },
   scheduledDrafts: { enabled: false },
-  schema: { types: [glossaryTerm, topic, editorialArticle, docPage, toolGuide, faqItem, homeFaqPlacement, aboutPage, authorProfile, researchReport, researchMethodology] },
+  schema: { types: [glossaryTerm, topic, editorialArticle, docPage, toolGuide, faqItem, homeFaqPlacement, aboutPage, authorProfile, researchReport, researchMethodology, institutionsPage] },
   document: {
-    actions: (previous, context) => ['glossaryTerm', 'topic', 'editorialArticle', 'docPage', 'toolGuide', 'faqItem', 'homeFaqPlacement', 'aboutPage', 'authorProfile', 'researchReport', 'researchMethodology'].includes(context.schemaType)
+    actions: (previous, context) => ['glossaryTerm', 'topic', 'editorialArticle', 'docPage', 'toolGuide', 'faqItem', 'homeFaqPlacement', 'aboutPage', 'authorProfile', 'researchReport', 'researchMethodology', 'institutionsPage'].includes(context.schemaType)
       ? previous.filter(action => !['duplicate', 'restore'].includes(String(action.action))).map(action => ['glossaryTerm', 'topic', 'editorialArticle', 'docPage', 'toolGuide', 'researchReport', 'researchMethodology'].includes(context.schemaType) && action.action === 'publish' ? permanentSlugPublishAction(action, context) : action)
       : previous,
   },
